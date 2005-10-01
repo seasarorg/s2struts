@@ -1,0 +1,112 @@
+<project name="S2StrutsBackport175" default="dist" basedir=".">
+
+  <property file="project.properties"/>
+
+  <path id="lib.classpath">
+    <fileset dir="${lib}">
+      <include name="*"/>
+      <exclude name="${exculudejarfile}"/>
+    </fileset>
+    <fileset dir="${lib.parent}">
+      <include name="*"/>
+    </fileset>
+  </path>
+  <path id="classpath">
+	<path refid="lib.classpath" />
+	<pathelement path="${build.main}"/>
+	<pathelement path="${build.testcase}"/>
+  </path>
+
+  <target name="compile" depends="init">
+    <javac srcdir="${src.main}" destdir="${build.main}" debug="on" classpathref="classpath"/>
+    <javac srcdir="${src.testcase}" destdir="${build.testcase}" debug="on" classpathref="classpath"/>
+  	<antcall target="backport175"/>
+  	<antcall target="copy"/>
+  </target>
+
+	<target name="backport175">
+			<taskdef
+				name="annotationc"
+				classname="org.codehaus.backport175.compiler.task.AnnotationCTask"
+				classpathref="classpath"
+			/>
+
+		<annotationc verbose="true" destdir="${build.main}">
+			<src path="${src.main}"/>
+			<classpath path="${build.main}"/>
+			<fileset dir="${src.main}">
+				<include name="**/*.java"/>
+			</fileset>
+		</annotationc>
+		<annotationc verbose="true" destdir="${build.testcase}">
+			<src path="${src.testcase}"/>
+			<classpath path="${build.testcase}"/>
+			<fileset dir="${src.testcase}">
+				<include name="**/*.java"/>
+			</fileset>
+		</annotationc>
+	</target>
+
+
+  <target name="copy">
+    <copy todir="${build}" >
+      <fileset dir="${src}" >
+        <include name="**/*.properties" />
+        <include name="**/*.xml" />
+        <include name="**/*.dtd" />
+        <include name="**/*.dicon" />
+        <include name="**/*.jsp" />
+        <include name="**/*.html" />
+        <exclude name="build.xml" />
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="dist" depends="cleantargetjarfile,compile">
+    <jar jarfile="${lib}/${jarfile}" basedir="${build.main}" includes="${package}"/>
+  	<antcall target="copyToSetupdir"/>
+	<zip destfile="${setupDir}/${releasefile}" basedir="${setupDir}" includes="${projectDir}/" excludes="**/.DS_Store"/>
+  </target>
+
+  <target name="cleanbuild">
+    <delete dir="${build}" />
+  </target>
+	
+  <target name="copyToSetupdir">
+  	<copy todir="${setupDir}/${projectDir}">
+  	  <fileset dir=".">
+  		<exclude name="**/CVS/**" />
+ 	  	<exclude name="**/jcoverage.ser" />
+		<exclude name="${build}/**" />
+		<exclude name="target" />
+	    <exclude name="target/**" />
+      </fileset>
+	</copy>
+  </target>
+
+  <target name="removeClassFile">
+    <delete dir="${build.main}" />
+    <delete dir="${build.testcase}" />
+  </target>
+  
+  <target name="cleantargetjarfile">
+    <delete>
+      <fileset dir="${lib}" defaultexcludes="no" >
+        <include name="${exculudejarfile}" />
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="init" depends="cleanbuild">
+    <mkdir dir="${build.main}"/>
+    <mkdir dir="${build.testcase}"/>
+	<mkdir dir="${setupDir}" />
+	<delete>
+      <fileset dir="${setupDir}" defaultexcludes="no" >
+        <include name="S2StrutsBackport175-V*.zip" />
+      </fileset>
+	</delete>
+  </target>
+
+</project>
+

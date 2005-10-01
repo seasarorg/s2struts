@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry output="build/main" kind="src" path="src/main"/>
+	<classpathentry output="build/testcase" kind="src" path="src/testcase"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/s2struts"/>
+	<classpathentry kind="lib" path="lib/backport175-1.0.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/commons-validator.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/struts.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-struts-unit-EA1.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-httpunit-EA1.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/catalina-i18n-es.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/catalina-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/catalina-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/commons-modeler.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/jasper-compiler.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/jasper-runtime.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/mx4j-jmx.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/naming-common.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/naming-resources.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/servlets-default.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/servlets-ssi.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.3EA2.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-framework-2.3EA2.jar"/>
+	<classpathentry kind="output" path="build/main"/>
+</classpath>
