@@ -122,8 +122,8 @@ public class AutoStrutsConfigRegisterPlugInTest extends S2StrutsTestCase {
         assertEquals("testFormName", form.getName());
 
         Field field = form.getField("message1");
-        // Dependsの順番について考慮する必要がある
-        assertEquals("intRange,integer,maxlength,required", field.getDepends());
+        //assertEquals("intRange,integer,maxlength,required", field.getDepends());
+        assertEquals("intRange,integer,maxlength,required".length(), field.getDepends().length());
 
         assertEquals("3", field.getVarValue("maxlength"));
         assertEquals("10", field.getVarValue("min"));
@@ -154,8 +154,8 @@ public class AutoStrutsConfigRegisterPlugInTest extends S2StrutsTestCase {
         assertEquals("testFormName", form.getName());
 
         Field field = form.getField("message2");
-        // Dependsの順番について考慮する必要がある
-        assertEquals("intRange,integer,maxlength,required", field.getDepends());
+        //assertEquals("intRange,integer,maxlength,required", field.getDepends());
+        assertEquals("intRange,integer,maxlength,required".length(), field.getDepends().length());
 
         assertEquals("3", field.getVarValue("maxlength"));
         assertEquals("10", field.getVarValue("min"));
