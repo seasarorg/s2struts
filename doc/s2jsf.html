@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head>
+<title>Seasar - DI Container with AOP - </title>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META name="GENERATOR" content="IBM WebSphere Studio Homepage Builder Version 8.0.0.0 Trial for Windows">
+<META http-equiv="Content-Style-Type" content="text/css">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td width="235"><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td width="78"><a href="index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td width="101"><a href="http://sourceforge.jp/projects/seasar"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td width="110"><a href="download.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td width="113"><a href="document.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td width="109"><a href="resource.html"><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></a></td>
+<td width="34"><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="18"><img height="14" width="18" src="images/spacer.gif" alt=""></td><td width="744" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+<li><a href="#S2JSF">S2JSF概要</a></li>
+<li><a href="#S2JSFReference">S2JSFリファレンス</a>
+<ul>
+<li><a href="#SetUp">セットアップ</a></li>
+</ul>
+</ul>
+
+<a name="S2JSF"><h2>S2JSFの概要</h2></a>
+<p>これまでのJSPベースの開発では、HTMLでつくったモックを一度JSPに変更すると、アプリケーションサーバにデプロイしないとレイアウトを確認することも出来なくなります。また、JSPに変換する作業も単調で面倒なものです。S2JSFでは、もとのHTMLにわずかな属性やタグを追加するだけで、サーバサイドと連携できるようになります。また、アプリケーションサーバがなくてもプレビューすることが出来ます。サーバサイドのクラスもPOJOを使うことが出来るので、余分なことを覚える必要がなく、テストも簡単です。</p>
+<p>今回のEA1の目的は、S2JSFの感じをつかんでもらうことです。入力系のコンポーネントは、InputText(&lt;iniput type=&quot;text&quot;...&gt;)しか、機能しません。今後入力形のコンポーネントを随時増やしていきます。</p>
+<a name="S2JSFReference"><h2>S2JSFリファレンス</h2></a>
+<h3><a name="SetUp">セットアップ</a></h3>
+<p>Seasar2と同様にJDK1.4以上が必要です。S2JSFVx.x.x.zipを解凍してできたs2jsfディレクトリをEclipseで、
+｢ファイル→インポート→既存のプロジェクトをワークスペースへ｣でインポートしてください。 
+これで、私と全く同じ環境になります。Seasarは、バージョン2.1以降が必要です。</p>
+<p>サンプルはS2JSFExamleVx.x.x.jarとして別途用意されているので、ダウンロードして解凍してください。先程と同様に、Eclipseで、｢ファイル→インポート→既存のプロジェクトをワークスペースへ｣でインポートします。サンプルは、<a href="http://jakarta.apache.org/tomcat/">Tomcat5</a>、<a href="http://www.sysdeo.com/eclipse/tomcatPlugin.html">Tomcat Plugin</a>を使うことを前提にしています。もし、まだインストールしていない場合は、インストールしておいてください。</p>
+<p>Tomcatを起動し、ブラウザからhttp://localhost:8080/s2jsf-exampleにアクセスすると、S2JSFのサンプルを見ることが出来ます。</p>
+
+<!-- document end --><!-- don't edit start -->
+</td>
+<td width="18"><img height="16" width="18" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="18"><img height="30" width="18" src="images/spacer.gif" alt=""></td>
+<td width="744"><img height="30" width="744" src="images/spacer.gif" alt=""></td>
+<td width="18"><img height="16" width="18" src="images/spacer.gif" alt=""></td></tr><tr>
+<td width="18"><img height="14" width="18" src="images/spacer.gif" alt=""></td>
+<td width="744" class="copyright">&copy; Copyright The Seasar Project and the others 2004, all rights reserved.</td>
+<td width="18"><img height="16" width="18" src="images/spacer.gif" alt=""></td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="14">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="14">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>

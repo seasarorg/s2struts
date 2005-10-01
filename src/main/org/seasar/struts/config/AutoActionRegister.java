@@ -1,0 +1,180 @@
+package org.seasar.struts.config;
+
+import java.lang.reflect.Field;
+import java.util.Collection;
+import java.util.Iterator;
+
+import javax.servlet.ServletContext;
+
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.config.ActionConfig;
+import org.apache.struts.config.ForwardConfig;
+import org.apache.struts.config.ModuleConfig;
+import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.util.FieldUtil;
+import org.seasar.struts.config.rule.ZeroConfigActionRule;
+import org.seasar.struts.factory.AnnotationHandler;
+import org.seasar.struts.factory.AnnotationHandlerFactory;
+
+
+/**
+ * @author Katsuhiko Nagashima
+ */
+public class AutoActionRegister {
+
+    private AutoActionRegister() {
+    }
+
+    public static void regist(ServletContext servletContext, ModuleConfig config, Collection classes) {
+        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        classes = ClassComparator.sort(classes);
+        
+        for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
+            Class clazz = (Class) iterator.next();
+            StrutsActionConfig strutsAction = annHandler.createStrutsActionConfig(clazz);
+            if (strutsAction == null && isActionClass(clazz)) {
+                strutsAction = new NullStrutsActionConfig();
+            }
+            if (strutsAction != null) {
+                registAction(strutsAction, clazz, config, servletContext);
+            }
+        }
+    }
+    
+    private static boolean isActionClass(Class clazz) {
+        return clazz.getName().matches(configRule().getActionClassPattern());
+    }
+    
+    private static void registAction(StrutsActionConfig action, Class actionClass, ModuleConfig config,
+            ServletContext servletContext) {
+        String path = getPath(action, actionClass, config);
+        if (!hasActionConfig(config, path)) {
+            addActionConfig(servletContext, config, action, actionClass);
+        }
+    }
+
+    public static boolean hasActionConfig(ModuleConfig config, String path) {
+        ActionConfig[] actionConfigs = config.findActionConfigs();
+        for (int i = 0; i < actionConfigs.length; ++i) {
+            if (path.equals(actionConfigs[i].getPath())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void addActionConfig(ServletContext servletContext, ModuleConfig config, StrutsActionConfig action,
+            Class actionClass) {
+        ActionConfig actionConfig = new ActionMapping();
+        actionConfig.setAttribute(getAttribute(action, actionClass, config));
+        actionConfig.setForward(getForward(action, actionClass, config));
+        actionConfig.setInclude(getInclude(action, actionClass, config));
+        actionConfig.setInput(getInput(action, actionClass, config));
+        actionConfig.setModuleConfig(config);
+        actionConfig.setName(getName(action, actionClass, config));
+        actionConfig.setParameter(getParameter(action, actionClass, config));
+        actionConfig.setPath(getPath(action, actionClass, config));
+        actionConfig.setPrefix(getPrefix(action, actionClass, config));
+        actionConfig.setRoles(getRoles(action, actionClass, config));
+        actionConfig.setScope(getScope(action, actionClass, config));
+        actionConfig.setSuffix(getSuffix(action, actionClass, config));
+        actionConfig.setType(actionClass.getName());
+        actionConfig.setUnknown(getUnknown(action, actionClass, config));
+        actionConfig.setValidate(getValidate(action, actionClass, config));
+
+        addFowardConfig(servletContext, actionConfig, actionClass);
+
+        config.addActionConfig(actionConfig);
+    }
+
+    private static void addFowardConfig(ServletContext servletContext, ActionConfig actionConfig, Class actionClass) {
+        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        Field[] fields = actionClass.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            StrutsActionForwardConfig actionForward = annHandler.createStrutsActionForwardConfig(fields[i]);
+            if (actionForward != null) {
+                fields[i].setAccessible(true);
+                String name = FieldUtil.get(fields[i], actionClass).toString();
+                ForwardConfig forwardConfig = new ActionForward();
+                forwardConfig.setName(name);
+                forwardConfig.setPath(actionForward.path());
+                forwardConfig.setRedirect(actionForward.redirect());
+                actionConfig.addForwardConfig(forwardConfig);
+            }
+        }
+        if (actionClass.getName().matches(configRule().getActionClassPattern())) {
+            rule().addFowardConfig(actionClass, actionConfig, servletContext);
+        }
+    }
+
+    private static AutoStrutsConfigRule configRule() {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        return (AutoStrutsConfigRule) container.getComponent(AutoStrutsConfigRule.class);
+    }
+
+    private static ZeroConfigActionRule rule() {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        return (ZeroConfigActionRule) container.getComponent(ZeroConfigActionRule.class);
+    }
+
+    private static String getPath(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.path() == StrutsActionConfig.DEFAULT_PATH ? rule().getPath(actionClass, config) : action.path();
+    }
+
+    private static String getAttribute(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.attribute() == StrutsActionConfig.DEFAULT_ATTRIBUTE ? rule().getAttribute(actionClass, config) : action
+                .attribute();
+    }
+
+    private static String getForward(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.forward() == StrutsActionConfig.DEFAULT_FORWARD ? rule().getForward(actionClass, config) : action
+                .forward();
+    }
+
+    private static String getInclude(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.include() == StrutsActionConfig.DEFAULT_INCLUDE ? rule().getInclude(actionClass, config) : action
+                .include();
+    }
+
+    private static String getInput(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.input() == StrutsActionConfig.DEFAULT_INPUT ? rule().getInput(actionClass, config) : action.input();
+    }
+
+    private static String getName(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.name() == StrutsActionConfig.DEFAULT_NAME ? rule().getName(actionClass, config) : action.name();
+    }
+
+    private static String getParameter(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.parameter() == StrutsActionConfig.DEFAULT_PARAMETER ? rule().getParameter(actionClass, config) : action
+                .parameter();
+    }
+
+    private static String getPrefix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.prefix() == StrutsActionConfig.DEFAULT_PREFIX ? rule().getPrefix(actionClass, config) : action.prefix();
+    }
+
+    private static String getRoles(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.roles() == StrutsActionConfig.DEFAULT_ROLES ? rule().getRoles(actionClass, config) : action.roles();
+    }
+
+    private static String getScope(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.scope() == StrutsActionConfig.DEFAULT_SCOPE ? rule().getScope(actionClass, config) : action.scope();
+    }
+
+    private static String getSuffix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.suffix() == StrutsActionConfig.DEFAULT_SUFFIX ? rule().getSuffix(actionClass, config) : action.suffix();
+    }
+
+    private static boolean getUnknown(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.unknown() == StrutsActionConfig.DEFAULT_UNKNOWN ? rule().getUnknown(actionClass, config) : action
+                .unknown();
+    }
+
+    private static boolean getValidate(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.validate() == StrutsActionConfig.DEFAULT_VALIDATE ? rule().getValidate(actionClass, config) : action
+                .validate();
+    }
+
+}

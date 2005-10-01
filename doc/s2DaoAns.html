@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://sourceforge.jp/projects/seasar"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="download.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="document.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><a href="resource.html"><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></a></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+    <ul>
+        <li><a href="#JavaBeans_Ans">JavaBeansに関する問題の解説</a></li>
+        <li><a href="#Dao_Ans">Dao(Data Access Object)に関する問題の解説</a></li>
+        <li><a href="#diconFile_Ans">diconファイルに関する問題の解説</a></li>
+        <li><a href="#SQLFile_Ans">SQLファイルに関する問題の解説</a></li>
+        <li><a href="#SQLComment_Ans">SQLコメントに関する問題の解説</a></li>
+        <li><a href="#EntityManager_Ans">EntityManagerに関する問題</a></li>
+        <li><a href="#AutoUpdate_Ans">更新SQLの自動生成に関する問題の解説</a></li>
+        <li><a href="#BatchUpdate_Ans">バッチ更新に関する問題の解説</a></li>
+        <li><a href="#AutoSelect_Ans">検索SQLの自動生成に関する問題の解説</a></li>
+    </ul>
+    <h2><a name="s2DaoAns">S2DaoExerciseの解説</a></h2>
+    <h2><a name="JavaBeans_Ans">JavaBeansに関する問題の解説</a></h2>
+    <h3><a name="Table">問題1</a></h3>
+    <p><b>【解説】</b><br>JavaBeansとTableを関連付けるには、以下のように変数を宣言する必要があります。</p>
+    <p>-  public static final String TABLE = “<em>テーブル名</em>”;<br /><br />
+      1.は変数名に"JavaBeans名_Table"としても関連付けされることはありませんので間違いです。<br />
+      2.はテーブル名の定義箇所にテーブル名以外のEmployee_EMPのような宣言をしても関連付けされることはありませんので間違いです。<br />
+      4.は修飾子がprivateなので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Table">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Column">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <br />
+    <h3><a name="Column">問題2</a></h3>
+    <p><b>【解説】</b><br />JavaBeansのプロパティ名とテーブルにカラム名が異なる場合、以下のように変数を宣言して関連付ける必要があります。</p>
+    <p>-  public static final String <span class="italic">プロパティ名</span>_COLUMN = "<span class="italic">カラム名</span>";<br /><br />
+      1.はプロパティ名だけなので間違いです。<br />
+      2.は修飾子がprivateなので間違いです。<br />
+      4.は定数宣言に必要なstaticがないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Column">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#ColumnNothing">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <br />
+    <h3><a name="ColumnNothing">問題3</a></h3>
+    <p><b>【解説】</b><br />JavaBeansのプロパティ名とカラム名が同じ場合、変数の宣言をする必要はありません。ただしプロパティ名とカラム名が同じ場合でもプロパティ名_COLUMN = カラム名として関連付けることができます。<br /><br />
+      1.プロパティ名をプロパティ名_テーブル名としても間違いです。<br />
+      2.カラム名をはテーブル名_カラム名としても間違いです。<br />
+      4.カラム名をカラム名_COLUMNとしても間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#ColumnNothing">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Relno">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <br />
+    <h3><a name="Relno">問題4</a></h3>
+    <p><b>【解説】</b><br />N:1マッピングを使用するには、RELKEYS定数をそれぞれ宣言する必要があり、またRELNO定数は、N:1マッピングの連番になるので以下のように0から付けていく必要があります。</p>
+    <p>-  public static final int <span class="italic">プロパティ名</span>_RELNO = 0;</p>
+    <p>-  public static final int <span class="italic">プロパティ名</span>_RELNO = 1;<br /><br />
+      1.はRELNO定数は連番なので同じ番号を付けることできないので間違いです。<br />
+      3.RELNO定数はintで宣言するので間違いです。<br />
+      4.配列にして一つにまとめて宣言することはできないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Relno">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Relkeys">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="Relkeys">問題5</a></h3>
+    <p><b>【解説】</b><br />N:1マッピングのキーはRELKEYS定数で指定する場合、1側のテーブルのカラム名がN側のテーブルのカラム名に等しい場合は、1側のテーブルのカラム名を省略することができ、また1側のテーブルのカラム名がプライマリーキーの場合、RELKEYS定数を省略することができます。<br /><br />
+      1.はプロパティ名に_RELKEYSがついていないので間違いです。<br />
+      2.は"DEPTNUM,DEPTNO"となっており":"ではないく","になっているので間違いです。<br />
+      3.はカラム名_RELKEYSとしても間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Relkeys">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#N1Mapping">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="N1Mapping">問題6</a></h3>
+    <p><b>【解説】</b><br />N:1マッピングのキーはRELKEYS定数で指定します。また キーが複数ある場合には、カンマ( , )で区切って指定するのでRELKEYS定数は以下の形式になります。</p>
+    <p>-  public static final String <span class="italic">プロパティ名</span>_RELKEYS = "<span class="italic">N側のカラム名: 1側のカラム名,N側のカラム名: 1側のカラム名・・・</span>";<br /><br />
+      1.は"N側のカラム名: N側のカラム名,1側のカラム名:1側のカラム名"となっているの間違いです。<br />
+      3.は"N側のカラム名, 1側のカラム名:N側のカラム名,1側のカラム名"となっていて":"と","が逆になっているので間違いです。<br />
+      4.は1側のカラム名がN側のカラム名に等しい場合は、1側のカラム名を省略することができ、また1側のカラム名とN側のカラム名に等しく、1側のカラム名がプライマリーキーの場合、RELKEYS定数を省略することができまが、この場合どれも同じでないので省略はできません。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#N1Mapping">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Dao">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h2><a name="Dao_Ans">Dao(Data Access Object)に関する問題の解説</a></h2>
+    <h3><a name="Bean">問題1</a></h3>
+    <p><b>【解説】</b><br />DaoがどのJavaBeans(エンティティ)に関連付けられているのかはBEANアノテーションで指定します。指定する場合は以下の形式で定数を宣言します。</p>
+    <p>-  public static final Class BEAN = <span class="italic">JavaBeans名</span>.class;<br /><br />
+      2.はJavaBeans名.classのところにBEAN.classとなっており、BEANとするところがEmployeeになっているので間違いです。<br />
+      3.はString型で宣言しているので間違いです。<br />
+      4.はDaoとJavaBeans(エンティティ)を関連付ける場合は、省略できないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Bean">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Args">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="Args">問題2</a></h3>
+    <p><b>【解説】</b>ARGSアノテーションは以下の形式で宣言します。&quot;<span class="italic">テーブルのカラム名</span>&quot;にはメソッドの引数名ではなく、引数に対応するテーブルのカラム名を指定することに注意してください。また、引数が1つの場合、ARGSアノテーションは省略することが可能ですが、明示的に指定することを推奨します。テーブルのカラム名以外に、JavaBeansやDTOも指定することができます。</p>
+    <p>-  public static final String <span class="italic">メソッド名</span>_ARGS = "<span class="italic">テーブルのカラム名</span>";<br /><br />
+      1.はメソッドの引数名を指定しているので間違いです。<br />
+      3.は定数名がARGS_メソッド名となっているので間違いです。<br />
+      4.はテーブルのカラム名が定数名で、メソッド名_ARGSが定数値になっているので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Args">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#ManyArgs">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h3><a name="ManyArgs">問題3</a></h3>
+    <p><b>【解説】</b>引数が複数ある場合はカンマ区切りで宣言します。また、引数が1つの場合は省略可能ですが、複数ある場合は必ず宣言する必要があります。<br /><br />
+      1.はコロン区切りなので間違いです。<br />
+      3.はスペース区切りなので間違いです。<br />
+      4.は引数が複数ある場合は省略できなので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#ManyArgs">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Query">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h3><a name="Query">問題4</a></h3>
+    <p><b>【解説】</b>自動的に生成されるSELECT文にWHERE句やORDER BY句を追加するには、QUERYアノテーションを使用し、またバインド変数を使用するには以下のように宣言します。</p>
+    <p>-  public static final String <span class="italic">メソッド名</span>_QUERY = "<span class="italic">WHERE カラム名 = ? ORDER BY句</span>";<br /><br />
+      1.はバインド変数を?以外のメソッドの引数名にしてもメソッドの引数の値が代入されることはないので間違いです。<br />
+      2.はバインド変数の?を/* */で囲む必要はないので間違いです。<br />
+      4.はメソッドに引数があるのでQUERYアノテーションを省略することはできないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Query">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#QuerySQLComment">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="QuerySQLComment">問題5</a></h3>
+    <p><b>【解説】</b>QUERYアノテーションでSQLコメントを使用することができます。</p>
+    <p>この問題のQUERYアノテーションは引数deptnoがnullでない場合、deptnoが引数の値と一致するという条件を追加します。<br />
+      1.は?としてもSQLコメントではないので間違いです。<br />
+      2.はQUERYアノテーションの宣言ではないので間違いです。<br />
+      4.はQUERYアノテーションでSQLコメントは使用できるので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#QuerySQLComment">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefInsert">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="DefInsert">問題6</a></h3>
+    <p><b>【解説】</b><br />INSERT処理を行う場合のメソッド名は、insert,add,createではじまる必要があります。deptInsertはdeptからはじまるため、正しくありません。</p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefInsert">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefUpdate">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="DefUpdate">問題7</a></h3>
+    <p><b>【解説】</b><br />UPDATE処理を行う場合のメソッド名は、update,modify,storeではじまる必要があります。commitではじまるメソッド名はサポートされていないため、正しくありません。</p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefUpdate">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefDelete">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="DefDelete">問題8</a></h3>
+    <p><b>【解説】</b><br />DELETE処理を行う場合のメソッド名は、delete,removeではじまる必要があり、戻り値はvoidあるいはintでなければなりません。戻り値にString型は定義できないため、正しくありません。</p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefDelete">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#diconFile">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h2><a name="diconFile_Ans">diconファイルに関する問題の解説</a></h2>
+    <h3><a name="Interceptor">問題1</a></h3>
+    <p><b>【解説】</b><br />Dao機能で使用するInterceptorはorg.seasar.dao.interceptors.S2DaoInterceptorです。<br /><br />
+      1.はトレース処理をCrosscutting Concernとして扱うためのInterceptorなので間違いです。<br />
+      2.は例外処理をCrosscutting concernとして扱うためのInterceptorなので間違いです。<br />
+      3.はMockを使ったテストを簡単に行うためのInterceptorなので間違いです。<br />
+      1,2,3のInterceptorについては<a href="op.html#AOPInterceptor"/>S2AOPで用意されているInterceptor</a>を参照して下さい。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#Interceptor">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefDicon">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h3><a name="DefDicon">問題2</a></h3>
+    <p><b>【解説】</b><br />Dao機能を使用するにはorg.seasar.dao.interceptors.S2DaoInterceptorを登録したDaoに対してAOPを適用する必要があります。<br /><br />
+      1.はEmployeeDaoにアスペクトを適用していないので間違いです。<br />
+      2.は<aspect>タグではなく、<args>タグを使用しているので間違いです。<br />
+      3.はdao.diconをインクルードしていないので間違いです。<br />
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#DefDicon">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLFile">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h2><a name="SQLFile_Ans">SQLファイルに関する問題の解説</a></h2>
+    <h3><a name="SQLFileName">問題1</a></h3>
+    <p><b>【解説】</b><br />DaoのメソッドとSQLファイルを結び付けるには、以下のような規則で命名する必要があります。</p>
+    <p>-  <span class="italic">Daoのクラス名</span>_<span class="italic">メソッド名</span>.sql<br /><br />
+      1.は"メソッド名.sql"としても関連付けされることはありませんので間違いです。<br />
+      3.は"Dao名.sql"としても関連付けされることはありませんので間違いです。<br />
+      4.は"メソッド名_Dao名.sql"としても関連付けされることはありませんので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLFileName">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLCommentProblem">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h2><a name="SQLComment_Ans">SQLコメントに関する問題の解説</a></h2>
+    <h3><a name="SQLComment">問題1</a></h3>
+    <p><b>【解説】</b><br />Daoに定義したメソッドの引数の値をSQL文で使用する場合は、SQL文にバインド変数コメントを記述します。 バインド変数コメントの右側のリテラルに引数の値が自動的に置換され実行されます。 バインド変数コメントは、以下のように記述します。</p>
+    <p> -  /*<span class="italic">引数名</span>*/<span class="italic">リテラル</span><br /><br />
+      1.リテラルがコメントの中に入っているので間違いです。<br />
+      2.リテラルはコメントの後ろになるので間違いです。<br />
+      4.は(/*)の後ろにスペースが入っているので、普通のコメントとなり間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLComment">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLIf">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h3><a name="SQLIf">問題2</a></h3>
+    <p><b>【解説】</b><br />IFコメントでは、条件に応じて実行するSQL文を変えることが可能です。IFコメントは以下の形式で記述します。</p>
+    <p> -  /*IF <span class="italic">条件</span>*/ ... -- ELSE <span class="italic">条件</span> .../*END*/<br /><br />
+      1.問題のSQL文の最後にandが入っていないのでandを入れないと間違いです。<br />
+      2.andの位置が違うの間違いです。<br />
+      3.ELSEを/**/で囲んでいるので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLIf">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLBegin">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h3><a name="SQLBegin">問題3</a></h3>
+    <p><b>【解説】</b><br />BEGINコメントは、WHERE句内のすべてのELSEを含まないIFコメントがfalseになった場合に、WHERE句自体を出力したくない場合に使います。<br />
+      1,2.IFコメントがfalseの場合、WHERE句は出力されません。<br />
+      4.WHERE句が出力されないだけなので、間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#SQLBegin">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManager">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h2><a name="EntityManager_Ans">EntityManagerに関する問題の解説</a></h2>
+    <h3><a name="EntityManagerClass">問題1</a></h3>
+    <p><b>【解説】</b><br />EntityManagerを使用するには、以下のクラスを継承します。またインターフェース名が"Dao"で終わっているDAOインターフェースを実装します。</p>
+    <p>- org.seasar.dao.impl.AbstractDao<br /><br />
+      1.は継承と実装しているものが逆なので間違いです。<br />
+      3.はAbstractDaoを実装しているので間違いです。<br />
+      4.はAbstractDaoを継承していないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerClass">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerArgs">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="EntityManagerArgs">問題2</a></h3>
+    <p><b>【解説】</b><br>
+    Object型の引数が4つ以上になる場合は、Object型の配列を使用します。<br /><br />
+    1.findManyArgsメソッドは定義されていないので間違いです。<br />
+    2.Objectの引数は3つまでしか定義されていないので間違いです。<br />
+    4.4つ以上の引数を使用したい場合は、Object型の配列を使用します。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerArgs">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFind">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="EntityManagerFind">問題3</a></h3>
+    <p><b>【解説】</b><br>
+    戻り値をjava.util.Listで返すには、find()メソッドを使用します。<br /><br />
+    1,2,4.は定義されていないので間違いです。<br />
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFind">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFindArray">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="EntityManagerFindArray">問題4</a></h3>
+    <p><b>【解説】</b><br>
+    戻り値を配列で返すには、findArray()メソッドを使用します。<br /><br />
+    2,3,4.は定義されていないので間違いです。<br />
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFindArray">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFindBean">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="EntityManagerFindBean">問題5</a></h3>
+    <p><b>【解説】</b><br>
+    戻り値をJavaBeansで返すには、findBean()メソッドを使用します。<br /><br />
+    1,2,3.は定義されていないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFindBean">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFindObject">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    <h3><a name="EntityManagerFindObject">問題6</a></h3>
+    <p><b>【解説】</b><br>
+    戻り値をcount(*)の結果のような単独の値で返すには、findObject()メソッドを使用します。<br /><br />
+    1は戻り値をJavaBeansで返すときに使用するので間違いです。<br />
+    3,4.は定義されていないので間違いです。<br />
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#EntityManagerFindObject">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoUpdate">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h2><a name="AutoUpdate_Ans">更新SQLの自動生成に関する問題の解説</a></h2>
+    <h3><a name="AutoDef">問題1</a></h3>
+    <p><b>【解説】</b><br />更新SQL文の自動生成を行うためには、メソッド名を命名規則にあわせ、JavaBeansを1つ引数に持つメソッドを定義する必要があります。<br /><br />
+      1.はInsert,Update,Delete処理で定められている命名規則に従う必要があるので間違いです。<br />
+      2.は戻り値にはvoidあるいはintを指定する必要があるので間違いです。<br />
+      4.はSQLファイルを作成しなくてもSQL文を自動生成するので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoDef">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#BatchUpdateQue">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h2><a name="BatchUpdate_Ans">バッチ更新に関する問題の解説</a></h2>
+    <h3><a name="BatchUpdate">問題1</a></h3>
+    <p><b>【解説】</b><br />更新系のメソッドで引数をエンティティのクラスの配列またはListにすると自動的に更新用のSQL文を生成し、バッチ更新をすることができます。<br /><br />
+      2.は戻り値がエンティティのクラスの配列なので間違いです。<br />
+      3.は引数がMapなので間違いです。<br />
+      4.は引数が配列でないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#BatchUpdate">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoSelectQue">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+
+    <h2><a name="AutoSelect_Ans">検索SQLの自動生成に関する問題の解説</a></h2>
+    <h3><a name="AutoSelect">問題1</a></h3>
+    <p><b>【解説】</b><br />検索処理を行ないたい場合は、戻り値の型を指定します。戻り値の型がjava.util.Listを実装している場合、SELECT文でエンティティのリストを返します。 戻り値がエンティティ型の配列である場合、エンティティ配列を返します。戻り値の型がエンティティの型の場合、エンティティを返します。それ以外の場合、SELECT count(*) FROM empのように1行で1のカラムの値を返すというようにS2Daoは想定します。<br /><br />
+      1.はメソッド名にinsertが含んでいるので間違いです。<br />
+      2.は戻り値がStringなので間違いです。<br />
+      4.は戻り値がMapなので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoSelect">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoSelect2">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    
+    <h3><a name="AutoSelect2">問題2</a></h3>
+    <p><b>【解説】</b><br />メソッドのsignatueより、 S2Daoに自動的にSELECT文を生成させることもできます。ARGSアノテーションにカラム名を指定することで、引数の値によってWHERE句が変わるような動的なSQL文も自動生成できます。<br /><br />
+      1.は全件検索するSQL文を発行します。<br />
+      2.は引数の指定がないので間違いです。<br />
+      3.はprivateメソッドなので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoSelect2">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoSelect3">次の問題へ&gt;&gt;</a></b></td>
+        </tr>
+    </table>
+    
+    <h3><a name="AutoSelect3">問題3</a></h3>
+    <p><b>【解説】</b><br>メソッドのsignatueより、 S2Daoに自動的にSELECT文を生成させることもできます。ARGSアノテーションにカラム名を指定することで、引数の値によってWHERE句が変わるような動的なSQL文も自動生成できます。<br /><br />
+      1.は全件検索するSQL文を発行します。<br />
+      2.は引数の指定がないので間違いです。<br />
+      3.nullの設定ができないので間違いです。
+    </p>
+    <table border="0" cellspacing="3" cellpadding="3">
+        <tr> 
+            <td><b><A href="s2DaoExercise.html#AutoSelect3">&lt;&lt; 問題へ戻る</a></b></td>
+        </tr>
+    </table>
+
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td></tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Project and the others 2004, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
