@@ -1,0 +1,15 @@
+<project name="S2StrutsBlank" default="dist" basedir=".">
+
+  <property file="project.properties"/>
+
+  <property name="releaseFile" value="S2StrutsBlank-V${version}.zip" />
+  
+  <property name="projectDir" value="s2struts-blank" />
+
+  <target name="dist">
+    <zip destfile="../${releaseFile}"
+         basedir=".." includes="${projectDir} , ${projectDir}/**"
+         excludes="**/.DS_Store , ${projectDir}/work/**"/>
+  </target>
+
+</project>
