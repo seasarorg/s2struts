@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<include path="dao.dicon"/>
+	<include path="aop.dicon"/>
+
+	<component class="org.seasar.struts.examples.employee.dao.EmployeeDtoDao">
+		<aspect>aop.traceInterceptor</aspect>
+		<aspect>dao.interceptor</aspect>
+	</component>
+	
+	<component class="org.seasar.struts.examples.employee.dao.DepartmentDtoDao">
+		<aspect>aop.traceInterceptor</aspect>
+		<aspect>dao.interceptor</aspect>
+	</component>
+</components>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+<!-- ======================================== Form Bean Definitions -->
+
+    <form-beans>
+		<form-bean
+			name="calcForm"
+			type="org.seasar.struts.examples.form.CalculationForm"/>
+		<form-bean
+			name="strForm"
+			type="org.seasar.struts.examples.form.StringForm"/>
+    </form-beans>
+
+<!-- ================================= Global Exception Definitions -->
+
+    <global-exceptions>
+
+        <exception
+            key="errors.global.runtime"
+            type="java.lang.RuntimeException"
+            path="/pages/error.jsp"/>
+
+        <exception
+            key="errors.global.runtime.sql"
+            type="org.seasar.framework.exception.SQLRuntimeException"
+            path="/pages/error.jsp"/>
+
+    </global-exceptions>
+
+<!-- =================================== Global Forward Definitions -->
+
+    <global-forwards>
+
+        <forward
+            name="welcome"
+            path="/index.jsp"/>
+
+        <forward
+            name="addInput"
+            path="/pages/addInput.jsp"/>
+
+        <forward
+            name="globalStyle"
+            path="/css/global.css"/>
+
+        <forward
+            name="executeJs"
+            path="/js/execute.js"/>
+
+        <forward
+            name="error"
+            path="/pages/error.jsp"/>
+
+        <forward
+            name="employee"
+            path="/employeeSearch.do"/>
+
+    </global-forwards>
+
+<!-- =================================== Action Mapping Definitions -->
+
+    <action-mappings>
+        <action
+            path="/add"
+            type="org.seasar.struts.examples.add.AddAction"
+            name="calcForm"
+            scope="request"
+            validate="false"
+            input="/pages/addInput.jsp">
+            <forward name="success" path="/pages/result.jsp" />
+        </action>
+        <action
+            path="/subtract"
+            type="org.seasar.struts.action.ProxyAction"
+            name="calcForm"
+            scope="request"
+            validate="false"
+            input="/pages/subtractInput.jsp">
+            <forward name="success" path="/pages/result.jsp" />
+        </action>
+        <action
+            path="/multiply"
+            type="org.seasar.struts.examples.multiply.MultiplyAction"
+            name="calcForm"
+            scope="request"
+            validate="false"
+            input="/pages/multiplyInput.jsp">
+            <forward name="success" path="/pages/result.jsp" />
+        </action>
+        <action
+            path="/divide"
+            name="calcForm"
+            scope="request"
+            validate="false"
+            input="/pages/divideInput.jsp">
+            <forward name="success" path="/pages/result.jsp" />
+        </action>
+        <action
+            path="/echo"
+            type="org.seasar.struts.examples.echo.EchoAction"
+            name="strForm"
+            scope="request"
+            validate="false"
+            input="/pages/echoInput.jsp">
+            <forward name="success" path="/pages/strResult.jsp" />
+        </action>
+        <action
+            path="/changeCase"
+            type="org.seasar.struts.examples.changecase.ChangeCaseAction"
+            name="strForm"
+            scope="request"
+            validate="true"
+			parameter="command"
+            input="/pages/changeCaseInput.jsp">
+            <forward name="success" path="/pages/strResult.jsp" />
+        </action>
+    </action-mappings>
+    
+
+<!-- ===================================== Controller Configuration -->
+
+    <controller
+       processorClass="org.seasar.struts.processor.S2RequestProcessor"/>
+<!--
+	<controller
+       processorClass="org.apache.struts.action.RequestProcessor"/>
+-->
+
+<!-- ================================ Message Resources Definitions -->
+
+    <message-resources parameter="application"/>
+
+<!-- ======================================= Plug Ins Configuration -->
+
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+          property="pathnames"
+          value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+    
+    <plug-in className="org.seasar.struts.plugin.RegistActionClassPlugIn"/>
+
+    <plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn">
+        <set-property property="enableJar" value="false"/>
+        <set-property property="docRoot" value="/pages"/>
+    </plug-in>
+
+</struts-config>
+

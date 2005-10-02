@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<include path="s2struts.dicon"/>
+	<component class="org.seasar.struts.processor.S2RequestProcessor" instance="prototype">
+		<aspect pointcut="process">
+			<component class="org.seasar.struts.examples.interceptor.MeasureTimeInterceptor"/>
+		</aspect>
+		<aspect pointcut="processActionForm">
+			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
+		</aspect>
+	</component>
+</components>

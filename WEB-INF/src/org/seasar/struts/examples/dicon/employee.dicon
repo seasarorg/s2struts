@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<include path="org/seasar/struts/examples/dicon/alldao.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/allaop.dicon"/>
+
+<!-- auto registed -->
+    <!-- logic
+	<component class="org.seasar.framework.container.auto.FileSystemComponentAutoRegister">
+		<initMethod name="addClassPattern">
+			<arg>"org.seasar.struts.examples.employee.logic.impl"</arg>
+			<arg>".*LogicImpl"</arg>
+		</initMethod>
+		<initMethod name="registAll"></initMethod>
+	</component>
+	<component class="org.seasar.framework.container.auto.InterceptorAutoRegister">
+		<property name="interceptorName">"logicInterceptorChain"</property>
+		<initMethod name="addClassPattern">
+			<arg>"org.seasar.struts.examples.employee.logic.impl"</arg>
+			<arg>".*LogicImpl"</arg>
+		</initMethod>
+		<initMethod name="registAll"></initMethod>
+	</component>
+	-->
+	
+    <!-- action
+	<component class="org.seasar.framework.container.auto.FileSystemComponentAutoRegister">
+		<initMethod name="addClassPattern">
+			<arg>"org.seasar.struts.examples.employee.action.impl"</arg>
+			<arg>".*ActionImpl"</arg>
+		</initMethod>
+		<initMethod name="registAll"></initMethod>
+	</component>
+	<component class="org.seasar.framework.container.auto.InterceptorAutoRegister">
+		<property name="interceptorName">"actionInterceptorChain"</property>
+		<initMethod name="addClassPattern">
+			<arg>"org.seasar.struts.examples.employee.action.impl"</arg>
+			<arg>".*ActionImpl"</arg>
+		</initMethod>
+		<initMethod name="registAll"></initMethod>
+	</component>
+	-->
+
+<!-- single registed -->
+	<component class="org.seasar.struts.examples.employee.logic.impl.EmployeeLogicImpl">
+		<aspect>logicInterceptorChain</aspect>
+	</component>
+
+	<component class="org.seasar.struts.examples.employee.action.impl.EmployeeActionImpl" instance="request">
+		<aspect>actionInterceptorChain</aspect>
+	</component>
+
+	<component class="org.seasar.struts.examples.employee.action.impl.EmployeeSearchActionImpl" instance="request">
+		<aspect>actionInterceptorChain</aspect>
+	</component>
+
+	<component class="org.seasar.struts.examples.employee.action.impl.EmployeeListActionImpl" instance="request">
+		<aspect>actionInterceptorChain</aspect>
+	</component>
+	
+	<component class="org.seasar.struts.examples.employee.action.impl.EmployeeEditActionImpl" instance="request">
+		<aspect>actionInterceptorChain</aspect>
+	</component>
+
+	<component class="org.seasar.struts.examples.employee.action.impl.EmployeeEditConfirmActionImpl" instance="request">
+		<aspect>actionInterceptorChain</aspect>
+	</component>
+
+	<component class="org.seasar.struts.examples.employee.action.impl.EmployeeConfirmActionImpl" instance="request">
+		<aspect>actionInterceptorChain</aspect>
+	</component>
+
+	<component class="org.seasar.struts.examples.employee.action.impl.EmployeeStoreActionImpl" instance="request">
+		<aspect>actionInterceptorChain</aspect>
+	</component>
+
+</components>
