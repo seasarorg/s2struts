@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component class="org.seasar.struts.unit.TestService">
+		<aspect pointcut="service">MockInterceptor</aspect>
+	</component>
+	
+	<component name="MockInterceptor" class="org.seasar.framework.aop.interceptors.MockInterceptor">
+		<initMethod name="setReturnValue">
+			<arg>"service"</arg>
+			<arg>false</arg>
+		</initMethod>
+	</component>
+	
+</components>
