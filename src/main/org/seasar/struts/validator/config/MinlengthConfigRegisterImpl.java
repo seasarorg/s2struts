@@ -32,6 +32,10 @@ public class MinlengthConfigRegisterImpl implements ConfigRegister {
         var.setName(minlength.type());
         var.setValue(String.valueOf(minlength.value()));
         field.addVar(var);
+        var = new Var();
+        var.setName("charset");
+        var.setValue(minlength.charset());
+        field.addVar(var);
     }
 
 }

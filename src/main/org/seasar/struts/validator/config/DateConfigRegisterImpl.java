@@ -25,9 +25,10 @@ public class DateConfigRegisterImpl implements ConfigRegister {
         var.setName("datePattern");
         String datePattern = ((Date) annotation).pattern();
         if(datePattern != null) {
-            pattern = datePattern;
+            var.setValue(datePattern);
+        } else {
+            var.setValue(this.pattern);
         }
-        var.setValue(pattern);
         field.addVar(var);
     }
     

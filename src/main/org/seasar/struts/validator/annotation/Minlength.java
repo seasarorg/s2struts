@@ -12,4 +12,6 @@ public interface Minlength extends CommonValidator {
      * @org.codehaus.backport175.DefaultValue ("minlength")
      */
     String type();
+    
+    String charset();
 }

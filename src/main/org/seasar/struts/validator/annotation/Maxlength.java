@@ -12,4 +12,6 @@ public interface Maxlength extends CommonValidator {
      * @org.codehaus.backport175.DefaultValue ("maxlength")
      */
     String type();
+    
+    String charset();
 }

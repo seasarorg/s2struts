@@ -32,6 +32,11 @@ public class MaxlengthConfigRegisterImpl implements ConfigRegister {
         var.setName(maxlength.type());
         var.setValue(String.valueOf(maxlength.value()));
         field.addVar(var);
+        var = new Var();
+        var.setName("charset");
+        var.setValue(maxlength.charset());
+        field.addVar(var);
+        
     }
 
 }
