@@ -2,8 +2,8 @@ package org.seasar.struts.taglib.html;
 
 import javax.servlet.jsp.JspException;
 
+import org.seasar.framework.util.Base64Util;
 import org.seasar.framework.util.StringUtil;
-import org.seasar.struts.util.RandomUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -14,21 +14,21 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
 
     public int doEndTag() throws JspException {
         setMethodBindingExpression();
-        
+
         try {
             return super.doEndTag();
         } finally {
             release();
         }
     }
-    
+
     public void release() {
         super.release();
-        action = null;
+        this.action = null;
     }
 
     public String getAction() {
-        return action;
+        return this.action;
     }
 
     public void setAction(String action) {
@@ -36,10 +36,17 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
     }
 
     protected void setMethodBindingExpression() {
-        if (StringUtil.isEmpty(property)) {
-            property = RandomUtil.randomString();
+        if (StringUtil.isEmpty(super.property)) {
+            super.property = Base64Util.encode(this.action.getBytes());
         }
-        S2StrutsContextUtil.setMethodBindingExpression(property, null, action);
+        String val = super.value;
+        if(val == null) {
+            val = super.text;
+        }
+        if(val == null) {
+            val = super.getDefaultValue();
+        }
+        S2StrutsContextUtil.setMethodBindingExpression(super.property, val, this.action);
     }
 
 }

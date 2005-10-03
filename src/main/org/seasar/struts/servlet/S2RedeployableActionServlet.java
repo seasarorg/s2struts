@@ -34,8 +34,8 @@ public class S2RedeployableActionServlet extends RedeployableActionServlet {
      * @param config The module configuration for which to acquire and return a RequestProcessor.
      * @exception ServletException if we cannot instantiate a RequestProcessor instance
      */
-    protected synchronized RequestProcessor getRequestProcessor(ModuleConfig config) throws ServletException {
-        return getRequestProcessorFactory().getRequestProcessor(config, getServletContext(), this);
+    protected synchronized RequestProcessor getRequestProcessor(ModuleConfig moduleConfig) throws ServletException {
+        return getRequestProcessorFactory().getRequestProcessor(moduleConfig, getServletContext(), this);
     }
 
     /**

@@ -28,7 +28,7 @@ public class ValidateProcessorImpl implements ValidateProcessor {
             ActionMapping mapping, ExternalRequestProcessor requestProcessor) throws IOException, ServletException {
 
         String input = mapping.getInput();
-        if (input == null) {
+        if (input == null && S2StrutsContextUtil.getPath() != null) {
             ActionMapping newMapping = new ActionMapping();
 
             try {
@@ -46,13 +46,14 @@ public class ValidateProcessorImpl implements ValidateProcessor {
             mapping = newMapping;
         }
         
-        boolean valid = requestProcessor.processStrutsValidate(request, response, form, mapping);
+        boolean valid = requestProcessor.processValidate(request, response, form, mapping);
         if (valid && form instanceof InputValueForm) {
             ModuleConfig moduleConfig = requestProcessor.getModuleConfig();
             ActionServlet servlet = requestProcessor.getActionServlet();
             ActionForm instance = RequestUtils.createActionForm(request, mapping, moduleConfig, servlet);
+            requestProcessor.processPopulate(request, response, instance, mapping);
 
-            valid = requestProcessor.processStrutsValidate(request, response, form, mapping);
+            valid = requestProcessor.processValidate(request, response, instance, mapping);
         }
         
         return valid;

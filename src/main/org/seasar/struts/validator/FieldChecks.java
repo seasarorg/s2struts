@@ -31,11 +31,12 @@ public class FieldChecks extends org.apache.struts.validator.FieldChecks {
 
         String value = toString(bean, field);
 
-        if (value != null) {
+        if (!GenericValidator.isBlankOrNull(value)) {
             try {
                 int max = parseInt(field.getVarValue("maxbytelength"));
+                String charset = field.getVarValue("charset");
 
-                if (!GenericValidator.maxByteLength(value, max)) {
+                if (!GenericValidator.maxByteLength(value, max, charset)) {
                     addError(errors, field, validator, validatorAction, request);
                     return false;
                 }
@@ -68,8 +69,9 @@ public class FieldChecks extends org.apache.struts.validator.FieldChecks {
         if (!GenericValidator.isBlankOrNull(value)) {
             try {
                 int min = parseInt(field.getVarValue("minbytelength"));
+                String charset = field.getVarValue("charset");
 
-                if (!GenericValidator.minByteLength(value, min)) {
+                if (!GenericValidator.minByteLength(value, min, charset)) {
                     addError(errors, field, validator, validatorAction, request);
                     return false;
                 }

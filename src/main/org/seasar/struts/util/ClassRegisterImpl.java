@@ -23,16 +23,16 @@ public class ClassRegisterImpl implements ClassRegister {
     }
     
     public synchronized Class getClass(String type) {
-        Class clazz = (Class) classes.get(type);
+        Class clazz = (Class) this.classes.get(type);
         if (clazz == null) {
             clazz = ClassUtil.forName(type);
-            classes.put(type, clazz);
+            this.classes.put(type, clazz);
         }
         return clazz;
     }
 
     public synchronized void destroy() {
-        classes = null;
+        this.classes = null;
     }
 
 }

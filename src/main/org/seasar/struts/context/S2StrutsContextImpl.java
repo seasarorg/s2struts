@@ -21,7 +21,7 @@ public class S2StrutsContextImpl implements S2StrutsContext {
 
     public void clear(ContentsType type) {
         if (type == ContentsType.MethodBindingExpression) {
-            methodBindingExpressions = new HashMap();
+            this.methodBindingExpressions = new HashMap();
         }
     }
 
@@ -29,10 +29,10 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
 
         if (param != null) {
-            path = new String(Base64Util.decode(param));
+            this.path = new String(Base64Util.decode(param));
         }
 
-        return path;
+        return this.path;
     }
 
     public void setPath(String path) {
@@ -63,6 +63,6 @@ public class S2StrutsContextImpl implements S2StrutsContext {
 
     private static final HttpServletRequest getRequest() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (HttpServletRequest)container.getRequest();
+        return container.getRequest();
     }
 }

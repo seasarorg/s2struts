@@ -35,7 +35,7 @@ public class PageTag extends BaseTag {
         results.append("\"");
         results.append("/>");
 
-        TagUtils.getInstance().write(pageContext, results.toString());
+        TagUtils.getInstance().write(super.pageContext, results.toString());
 
         return SKIP_BODY;
     }

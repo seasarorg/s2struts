@@ -18,12 +18,12 @@ public class StringDynaActionFormClass extends DynaActionFormClass {
         super(config);
     }
 
-    protected void introspect(FormBeanConfig config) {
-        if (config == null) {
+    protected void introspect(FormBeanConfig formBeanConfig) {
+        if (formBeanConfig == null) {
             return;
         }
         try {
-            super.introspect(config);
+            super.introspect(formBeanConfig);
         } catch (Exception e) {
             // ignore
         }
@@ -33,8 +33,8 @@ public class StringDynaActionFormClass extends DynaActionFormClass {
         throw new UnsupportedOperationException();
     }
 
-    public DynaProperty getDynaProperty(String name) {
-        return new DynaProperty(name, String.class);
+    public DynaProperty getDynaProperty(String propertyName) {
+        return new DynaProperty(propertyName, String.class);
     }
 
     public DynaProperty[] getDynaProperties() {

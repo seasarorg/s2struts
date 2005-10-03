@@ -11,7 +11,7 @@ public class InitializeTag extends BaseTag {
     private String action;
 
     public String getAction() {
-        return action;
+        return this.action;
     }
 
     public void setAction(String action) {
@@ -19,7 +19,7 @@ public class InitializeTag extends BaseTag {
     }
     
     public int doStartTag() throws JspException {
-        InvokeUtil.invoke(action);
+        InvokeUtil.invoke(this.action);
         return SKIP_BODY;
     }
 

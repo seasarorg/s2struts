@@ -84,11 +84,7 @@ public interface ExternalRequestProcessor {
     boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form, ActionMapping mapping) throws IOException,
             ServletException;
 
-    /**
-     * @see org.apache.struts.action.RequestProcessor#processValidate(HttpServletRequest, HttpServletResponse,
-     *      ActionForm, ActionMapping)
-     */
-    boolean processStrutsValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+    boolean processS2Validate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws IOException, ServletException;
     
     /**

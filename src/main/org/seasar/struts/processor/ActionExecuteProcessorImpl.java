@@ -16,7 +16,6 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.MethodUtil;
-import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.exception.MethodNotFoundException;
 import org.seasar.struts.util.BindingUtil;
 import org.seasar.struts.util.ClassRegister;
@@ -40,12 +39,11 @@ public class ActionExecuteProcessorImpl implements ActionExecuteProcessor {
         
         String forward = (String) InvokeUtil.invoke(S2StrutsContextUtil.getMethodBindingExpression(), mapping);
         if (forward != null) {
-            S2StrutsContextUtil.clear(ContentsType.MethodBindingExpression);
             return mapping.findForward(forward);
         }
 
         String actionName = mapping.getType();
-        Class actionInterface = classRegister.getClass(actionName);
+        Class actionInterface = this.classRegister.getClass(actionName);
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ComponentDef componentDef = container.getComponentDef(actionInterface);
         BeanDesc beanDesc = new BeanDescImpl(componentDef.getComponentClass());

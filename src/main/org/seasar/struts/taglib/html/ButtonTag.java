@@ -15,7 +15,7 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
      * @return Returns the indexId.
      */
     public String getIndexId() {
-        return indexId;
+        return this.indexId;
     }
     /**
      * @param indexId The indexName to set.
@@ -33,36 +33,36 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
         // Generate an HTML element
         StringBuffer results = new StringBuffer();
         results.append("<button");
-        if (type != null) {
+        if (this.type != null) {
             results.append(" type=\"");
-            results.append(type);
+            results.append(this.type);
             results.append("\"");
         }
-        if (property != null) {
+        if (super.property != null) {
             results.append(" name=\"");
-            results.append(property);
-            if (indexed)
+            results.append(super.property);
+            if (this.indexed)
                 prepareIndex(results, null);
             results.append("\"");
         }
-        if (accesskey != null) {
+        if (super.accesskey != null) {
             results.append(" accesskey=\"");
-            results.append(accesskey);
+            results.append(super.accesskey);
             results.append("\"");
         }
-        if (tabindex != null) {
+        if (super.tabindex != null) {
             results.append(" tabindex=\"");
-            results.append(tabindex);
+            results.append(super.tabindex);
             results.append("\"");
         }
-        if (indexId != null) {
+        if (this.indexId != null) {
             results.append(" value=\"");
-            Object indexValue = super.pageContext.getAttribute(indexId);
+            Object indexValue = super.pageContext.getAttribute(this.indexId);
             results.append(IntegerConversionUtil.toPrimitiveInt(indexValue));
             results.append("\"");
         } else {
             results.append(" value=\"");
-            results.append(value);
+            results.append(super.value);
             results.append("\"");
         }
         results.append(prepareEventHandlers());
@@ -70,14 +70,14 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
         results.append(getElementClose());
 
         // Render this element to our writer
-        TagUtils.getInstance().write(pageContext, results.toString());
+        TagUtils.getInstance().write(super.pageContext, results.toString());
 
         // Evaluate the remainder of this page
         return (EVAL_BODY_INCLUDE);
 
     }
     public int doEndTag() throws JspException {
-        TagUtils.getInstance().write(pageContext, "</button>");
+        TagUtils.getInstance().write(super.pageContext, "</button>");
         return (EVAL_PAGE);
 
     }

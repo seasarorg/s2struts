@@ -153,7 +153,7 @@ public class ClassFinderImpl implements ClassFinder {
             return;
         }
         if (clazz.getName().matches(pattern)) {
-            classCollection.add(clazz);
+            this.classCollection.add(clazz);
         }
     }
 
@@ -174,10 +174,10 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public synchronized Collection getClassCollection() {
-        return classCollection;
+        return this.classCollection;
     }
 
     public synchronized void destroy() {
-        classCollection = new ArrayList();
+        this.classCollection = new ArrayList();
     }
 }

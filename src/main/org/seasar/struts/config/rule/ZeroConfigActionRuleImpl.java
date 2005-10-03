@@ -95,13 +95,13 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         }
 
         String path = null;
-        String[] viewExtention = configRule.getViewExtention();
+        String[] viewExtention = this.configRule.getViewExtention();
         for (int i = 0; i < viewExtention.length; i++) {
             String file = getPath(actionClass, null) + "." + viewExtention[i];
-            path = configRule.getDocRoot() + file;
+            path = this.configRule.getDocRoot() + file;
             String packageDir = "/" + actionClass.getPackage().getName().replace('.', '/');
 
-            path = getExistFilePath(configRule.getDocRoot(), packageDir, file, actionConfig, servletContext);
+            path = getExistFilePath(this.configRule.getDocRoot(), packageDir, file, actionConfig, servletContext);
             if (path != null) {
                 break;
             }
@@ -143,7 +143,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     }
 
     private boolean isLastExtention(String file) {
-        return file.endsWith(configRule.getViewExtention()[configRule.getViewExtention().length - 1]);
+        return file.endsWith(this.configRule.getViewExtention()[this.configRule.getViewExtention().length - 1]);
     }
 
     public void setAutoStrutsConfigPattern(AutoStrutsConfigRule configRule) {

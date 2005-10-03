@@ -2,9 +2,9 @@ package org.seasar.struts.taglib.html;
 
 import javax.servlet.jsp.JspException;
 
+import org.seasar.framework.util.Base64Util;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.framework.util.StringUtil;
-import org.seasar.struts.util.RandomUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -26,15 +26,15 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     
     public void release() {
         super.release();
-        indexId = null;
-        action = null;
+        this.indexId = null;
+        this.action = null;
     }
 
     /**
      * @return Returns the indexId.
      */
     public String getIndexId() {
-        return indexId;
+        return this.indexId;
     }
     
     /**
@@ -49,7 +49,7 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     }
 
     public String getAction() {
-        return action;
+        return this.action;
     }
 
     public void setAction(String action) {
@@ -57,27 +57,27 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     }
 
     protected void prepareIndex(StringBuffer handlers, String name) throws JspException {
-        if (indexId == null) {
+        if (this.indexId == null) {
             super.prepareIndex(handlers, name);
             return;
         }
-        Object value = super.pageContext.getAttribute(indexId);
+        Object index = super.pageContext.getAttribute(this.indexId);
         handlers.append("[");
-        handlers.append(IntegerConversionUtil.toPrimitiveInt(value));
+        handlers.append(IntegerConversionUtil.toPrimitiveInt(index));
         handlers.append("]");
     }
     
     protected void setMethodBindingExpression() {
-        if (StringUtil.isEmpty(property)) {
-            property = RandomUtil.randomString();
+        if (StringUtil.isEmpty(super.property)) {
+            super.property = Base64Util.encode(this.action.getBytes());
         }
-        String value = super.value;
-        if(value == null) {
-            value = super.text;
+        String val = super.value;
+        if(val == null) {
+            val = super.text;
         }
-        if(value == null) {
-            value = super.getDefaultValue();
+        if(val == null) {
+            val = super.getDefaultValue();
         }
-        S2StrutsContextUtil.setMethodBindingExpression(property, value, action);
+        S2StrutsContextUtil.setMethodBindingExpression(super.property, val, this.action);
     }
 }

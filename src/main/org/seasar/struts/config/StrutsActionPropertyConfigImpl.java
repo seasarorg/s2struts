@@ -17,7 +17,7 @@ public class StrutsActionPropertyConfigImpl implements StrutsActionPropertyConfi
     }
     
     public boolean isSessionScope() {
-        return Constants.SESSION.equalsIgnoreCase(scope);
+        return Constants.SESSION.equalsIgnoreCase(this.scope);
     }
     
 }

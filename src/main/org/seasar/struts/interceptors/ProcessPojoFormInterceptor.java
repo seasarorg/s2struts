@@ -172,12 +172,12 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
 
         // ------------------- Public Methods ----------------------------------
         
-        public void initBean(Object bean) {
-            this.bean = bean;
+        public void initBean(Object beanObject) {
+            this.bean = beanObject;
         }
 
         public DynaBean getDynaBean() {
-            return new WrapDynaBean(bean);
+            return new WrapDynaBean(this.bean);
         }
 
         public Object getInstance() {
@@ -186,7 +186,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
                 return ((WrapDynaBean) getDynaBean()).getInstance();
             }
 
-            return dynaBean;
+            return this.dynaBean;
 
         }
 
@@ -237,15 +237,15 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
             if ("page".equals(name)) {
 
                 if (value == null) {
-                    page = 0;
+                    this.page = 0;
                 } else if (value instanceof Integer) {
-                    page = ((Integer) value).intValue();
+                    this.page = ((Integer) value).intValue();
                 } else {
                     try {
-                        page = ((Integer) ConvertUtils.convert(
+                        this.page = ((Integer) ConvertUtils.convert(
                                 value.toString(), Integer.class)).intValue();
                     } catch (RuntimeException ignore) {
-                        page = 0;
+                        this.page = 0;
                     }
                 }
             }

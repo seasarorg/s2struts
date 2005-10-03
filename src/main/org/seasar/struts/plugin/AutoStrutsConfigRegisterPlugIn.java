@@ -56,24 +56,24 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
      */
     public void init(ActionServlet actionServlet, ModuleConfig config) throws ServletException {
         try {
-            classFinder.find(isEnableJar());
+            this.classFinder.find(isEnableJar());
 
             if (actionServlet != null) {
-                classFinder.find(actionServlet, isEnableJar());
+                this.classFinder.find(actionServlet, isEnableJar());
             }
 
             regist(actionServlet, config);
         } finally {
-            classFinder.destroy();
+            this.classFinder.destroy();
         }
     }
 
     private void regist(ActionServlet actionServlet, ModuleConfig config) {
-        AutoActionFormRegister.regist(config, classFinder.getClassCollection());
-        AutoActionRegister.regist(actionServlet.getServletContext(), config, classFinder.getClassCollection());
+        AutoActionFormRegister.regist(config, this.classFinder.getClassCollection());
+        AutoActionRegister.regist(actionServlet.getServletContext(), config, this.classFinder.getClassCollection());
 
         ValidatorResources resources = getValidatorResources(actionServlet, config);
-        AutoValidationRegister.regist(resources, config, classFinder.getClassCollection());
+        AutoValidationRegister.regist(resources, config, this.classFinder.getClassCollection());
     }
 
     private ValidatorResources getValidatorResources(ActionServlet actionServlet, ModuleConfig config) {
@@ -83,7 +83,7 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
     }
 
     public boolean isEnableJar() {
-        return enableJar;
+        return this.enableJar;
     }
 
     public void setEnableJar(boolean enableJar) {

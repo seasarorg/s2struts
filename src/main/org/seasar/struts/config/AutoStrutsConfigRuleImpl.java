@@ -17,7 +17,7 @@ public class AutoStrutsConfigRuleImpl implements AutoStrutsConfigRule {
     private String[] viewExtention = { "jsp", "html" };
 
     public String getActionClassPattern() {
-        return actionClassPattern;
+        return this.actionClassPattern;
     }
 
     public void setActionClassPattern(String actionClassPattern) {
@@ -25,7 +25,7 @@ public class AutoStrutsConfigRuleImpl implements AutoStrutsConfigRule {
     }
 
     public String getFormClassPattern() {
-        return formClassPattern;
+        return this.formClassPattern;
     }
 
     public void setFormClassPattern(String formClassPattern) {
@@ -33,7 +33,7 @@ public class AutoStrutsConfigRuleImpl implements AutoStrutsConfigRule {
     }
 
     public String getDocRoot() {
-        return docRoot;
+        return this.docRoot;
     }
 
     public void setDocRoot(String docRoot) {
@@ -41,7 +41,7 @@ public class AutoStrutsConfigRuleImpl implements AutoStrutsConfigRule {
     }
 
     public String[] getViewExtention() {
-        return viewExtention;
+        return this.viewExtention;
     }
 
     public void setViewExtention(String viewExtention) {

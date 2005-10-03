@@ -40,7 +40,7 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
      * @exception ServletException if a processing exception occurs
      */
     public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        acceptor.process(this, request, response, log);
+        this.acceptor.process(this, request, response, log);
     }
 
     public HttpServletRequest processMultipart(HttpServletRequest request) {
@@ -85,12 +85,12 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
         return super.processActionForm(request, response, mapping);
     }
 
-    public boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+    public boolean processS2Validate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws IOException, ServletException {
-        return validateProcessor.processValidate(request, response, form, mapping, this);
+        return this.validateProcessor.processValidate(request, response, form, mapping, this);
     }
     
-    public boolean processStrutsValidate(HttpServletRequest request,
+    public boolean processValidate(HttpServletRequest request,
             HttpServletResponse response,
             ActionForm form,
             ActionMapping mapping) throws IOException, ServletException {
@@ -138,33 +138,33 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
      */
     public Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
             throws IOException {
-        return actionFactory.processActionCreate(request, response, mapping, log, getInternal(), servlet);
+        return this.actionFactory.processActionCreate(request, response, mapping, log, getInternal(), this.servlet);
     }
 
     public Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
             throws IOException {
-        return actionFactory.getActionInstance(request, response, mapping, log, getInternal(), servlet);
+        return this.actionFactory.getActionInstance(request, response, mapping, log, getInternal(), this.servlet);
 
     }
 
     public ActionForward processActionExecute(HttpServletRequest request, HttpServletResponse response, Object action,
             ActionForm form, ActionMapping mapping) throws IOException, ServletException {
-        return executeProcessor.processActionExecute(request, response, action, form, mapping);
+        return this.executeProcessor.processActionExecute(request, response, action, form, mapping);
     }
     
     public ActionForm processInputValueFormCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) throws ServletException {
-        return inputValueFormCreator.create(request, response, mapping, this);
+        return this.inputValueFormCreator.create(request, response, mapping, this);
     }
 
     public void processInputValueFormDelete(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) {
-        inputValueFormCreator.delete(request, response, mapping);
+        this.inputValueFormCreator.delete(request, response, mapping);
     }
 
     /**
      * @return Returns the executeProcessor.
      */
     public ActionExecuteProcessor getExecuteProcessor() {
-        return executeProcessor;
+        return this.executeProcessor;
     }
 
     /**

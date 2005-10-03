@@ -20,7 +20,7 @@ public abstract class BaseTag implements Tag {
     }
 
     public Tag getParent() {
-        return parentTag;
+        return this.parentTag;
     }
 
     public int doStartTag() throws JspException {

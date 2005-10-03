@@ -29,21 +29,21 @@ public class InputValueForm extends BeanValidatorForm {
     }
 
     public synchronized Object get(String name) {
-        Object ret = map.get(name);
-        if (ret == null && !freeze) {
+        Object ret = this.map.get(name);
+        if (ret == null && !this.freeze) {
             ret = new InputValueForm();
-            map.put(name, ret);
+            this.map.put(name, ret);
         }
         return ret;
     }
 
     public synchronized void set(String name, Object value) {
-        map.put(name, value);
+        this.map.put(name, value);
     }
 
     public void freeze() {
         this.freeze = true;
-        for (Iterator ite = map.values().iterator(); ite.hasNext();) {
+        for (Iterator ite = this.map.values().iterator(); ite.hasNext();) {
             Object value = ite.next();
             if (value instanceof InputValueForm) {
                 ((InputValueForm)value).freeze();
