@@ -20,7 +20,7 @@ public class MessageFacadeImpl implements MessageFacade {
     }
 
     public void addError(String key, Object[] values) {
-        actionErrors.add(key, new ActionMessage(key, convertMaxArguments(values)));
+        this.actionErrors.add(key, new ActionMessage(key, convertMaxArguments(values)));
     }
 
     public void addError(String key) {
@@ -44,7 +44,7 @@ public class MessageFacadeImpl implements MessageFacade {
     }
 
     public void addMessage(String key, Object[] values) {
-        actionMessages.add(key, new ActionMessage(key, convertMaxArguments(values)));
+        this.actionMessages.add(key, new ActionMessage(key, convertMaxArguments(values)));
     }
 
     public void addMessage(String key) {

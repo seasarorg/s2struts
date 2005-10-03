@@ -27,7 +27,7 @@ public class ActionFactoryImpl implements ActionFactory {
 
     public Action getActionWithClassName(String className, ActionServlet servlet) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        Class clazz = classRegister.getClass(className);
+        Class clazz = this.classRegister.getClass(className);
         synchronized (container) {
             if (false == container.hasComponentDef(clazz)) {
                 container.register(clazz);
@@ -75,7 +75,7 @@ public class ActionFactoryImpl implements ActionFactory {
                 if (log.isDebugEnabled()) {
                     log.debug(" Looking for Action instance for class " + actionClassName);
                 }
-                Class componentKey = classRegister.getClass(actionClassName);
+                Class componentKey = this.classRegister.getClass(actionClassName);
                 actionInstance = container.getComponent(componentKey);
             }
         } catch (Exception e) {

@@ -31,19 +31,19 @@ public class IndexedPropertyDescImpl implements IndexedPropertyDesc {
 
         setupMethods();
 
-        this.propertyDesc = new PropertyDescImpl(propertyName, propertyType, readMethod, writeMethod, beanDesc);
+        this.propertyDesc = new PropertyDescImpl(propertyName, propertyType, this.readMethod, this.writeMethod, beanDesc);
     }
     private void setupMethods() {
-        String methodName = propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
+        String methodName = this.propertyName.substring(0, 1).toUpperCase() + this.propertyName.substring(1);
         Method[] getMethods = new Method[0];
         try {
-            getMethods = beanDesc.getMethods("get" + methodName);
+            getMethods = this.beanDesc.getMethods("get" + methodName);
         } catch (MethodNotFoundRuntimeException e) {
             // ignore
         }
         Method[] setMethods = new Method[0];
         try {
-            setMethods = beanDesc.getMethods("set" + methodName);
+            setMethods = this.beanDesc.getMethods("set" + methodName);
         } catch (MethodNotFoundRuntimeException e) {
             // ignore
         }
@@ -51,38 +51,38 @@ public class IndexedPropertyDescImpl implements IndexedPropertyDesc {
         for (int i = 0; i < getMethods.length; i++) {
             Class[] parameterTypes = getMethods[i].getParameterTypes();
             if (parameterTypes.length == 1 && parameterTypes[0].equals(Integer.TYPE)) {
-                readMethod = getMethods[i];
+                this.readMethod = getMethods[i];
             }
         }
         for (int i = 0; i < setMethods.length; i++) {
             Class[] parameterTypes = setMethods[i].getParameterTypes();
             if (parameterTypes.length == 2 && parameterTypes[0].equals(Integer.TYPE)
-                    && parameterTypes[1].equals(propertyType)) {
-                writeMethod = setMethods[i];
+                    && parameterTypes[1].equals(this.propertyType)) {
+                this.writeMethod = setMethods[i];
             }
         }
     }
     public void setValue(Object target, int index, Object value) {
         try {
-            MethodUtil.invoke(writeMethod, target, new Object[]{new Integer(index), convertIfNeed(value)});
+            MethodUtil.invoke(this.writeMethod, target, new Object[]{new Integer(index), convertIfNeed(value)});
         } catch (Throwable t) {
-            throw new IllegalPropertyRuntimeException(beanDesc.getBeanClass(), propertyName, t);
+            throw new IllegalPropertyRuntimeException(this.beanDesc.getBeanClass(), this.propertyName, t);
         }
     }
 
     public Object getValue(Object target, int index) {
-        return MethodUtil.invoke(readMethod, target, new Object[]{new Integer(index)});
+        return MethodUtil.invoke(this.readMethod, target, new Object[]{new Integer(index)});
     }
 
     public boolean hasReadMethod() {
-        return readMethod != null;
+        return this.readMethod != null;
     }
     public boolean hasWriteMethod() {
-        return writeMethod != null;
+        return this.writeMethod != null;
     }
 
     private Object convertIfNeed(Object arg) {
-        return propertyDesc.convertIfNeed(arg);
+        return this.propertyDesc.convertIfNeed(arg);
 
     }
 }
