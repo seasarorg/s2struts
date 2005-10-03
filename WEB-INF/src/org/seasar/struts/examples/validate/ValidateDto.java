@@ -138,8 +138,8 @@ public class ValidateDto implements Serializable {
     }
     
     /**
-     * @org.seasar.struts.validator.annotation.Minlength(value=3,type="minbytelength")
-     * @org.seasar.struts.validator.annotation.Maxlength(value=5,type="maxbytelength")
+     * @org.seasar.struts.validator.annotation.Minlength(value=3,type="minbytelength",charset="ISO8859_1")
+     * @org.seasar.struts.validator.annotation.Maxlength(value=5,type="maxbytelength",charset="ISO8859_1")
      * @org.seasar.struts.validator.annotation.Args(keys="Length2",resource=false)
      */
     public void setLength2(String length2) {
