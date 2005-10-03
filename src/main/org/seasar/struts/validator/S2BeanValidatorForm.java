@@ -17,7 +17,7 @@ public class S2BeanValidatorForm extends BeanValidatorForm {
     }
     
     public void initBean(Object bean) {
-        dynaBean = new WrapDynaBean(bean);
+        super.dynaBean = new WrapDynaBean(bean);
     }
     
 
