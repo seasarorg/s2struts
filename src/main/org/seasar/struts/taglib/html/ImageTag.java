@@ -39,14 +39,7 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
         if (StringUtil.isEmpty(super.property)) {
             super.property = Base64Util.encode(this.action.getBytes());
         }
-        String val = super.value;
-        if(val == null) {
-            val = super.text;
-        }
-        if(val == null) {
-            val = super.getDefaultValue();
-        }
-        S2StrutsContextUtil.setMethodBindingExpression(super.property, val, this.action);
+        S2StrutsContextUtil.setMethodBindingExpression(super.property, null, this.action);
     }
 
 }
