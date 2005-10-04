@@ -2,10 +2,12 @@ package org.seasar.struts.examples.mod;
 
 import java.io.Serializable;
 
+import org.seasar.struts.annotation.StrutsActionForm;
+
 /**
  * @author Katsuhiko Nagashima
- * @org.seasar.struts.annotation.StrutsActionForm(name="modForm")
  */
+@StrutsActionForm(name = "modForm")
 public class ModDto implements Serializable {
 
     private String arg1;
@@ -24,10 +26,10 @@ public class ModDto implements Serializable {
 
     public int getIntArg1() {
         try {
-			return Integer.parseInt(arg1);
-		} catch (NumberFormatException e) {
-			return 0;
-		}
+            return Integer.parseInt(arg1);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     public String getArg2() {
@@ -40,10 +42,10 @@ public class ModDto implements Serializable {
 
     public int getIntArg2() {
         try {
-			return Integer.parseInt(arg2);
-		} catch (NumberFormatException e) {
+            return Integer.parseInt(arg2);
+        } catch (NumberFormatException e) {
             return 0;
-		}
+        }
     }
 
     public int getResult() {

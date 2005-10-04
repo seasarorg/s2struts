@@ -1,5 +1,6 @@
 package org.seasar.struts.examples.employee.action.impl;
 
+import org.seasar.struts.annotation.ExportToSession;
 import org.seasar.struts.examples.common.Constants;
 import org.seasar.struts.examples.employee.action.EmployeeAction;
 import org.seasar.struts.examples.employee.dto.ProcessModeDto;
@@ -12,9 +13,7 @@ public class EmployeeActionImpl implements EmployeeAction {
 
     private ProcessModeDto processModeDto = new ProcessModeDto();
 
-    /**
-     * @org.seasar.struts.annotation.ExportToSession()
-     */
+    @ExportToSession
     public ProcessModeDto getProcessModeDto() {
         return processModeDto;
     }

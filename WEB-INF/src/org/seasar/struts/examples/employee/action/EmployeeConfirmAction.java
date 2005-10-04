@@ -1,14 +1,15 @@
 package org.seasar.struts.examples.employee.action;
 
+import org.seasar.struts.annotation.StrutsAction;
+import org.seasar.struts.annotation.StrutsActionForward;
+
 /**
  * @author Katsuhiko Nagashima
- * @org.seasar.struts.annotation.StrutsAction(name="employeeForm", validate=false)
  */
+@StrutsAction(name = "employeeForm", validate = false)
 public interface EmployeeConfirmAction {
 
-    /**
-     * @org.seasar.struts.annotation.StrutsActionForward(path="/pages/employee/employeeConfirm.jsp")
-     */
+    @StrutsActionForward(path = "/pages/employee/employeeConfirm.jsp")
     public String SUCCESS = "success";
 
     public String execute();

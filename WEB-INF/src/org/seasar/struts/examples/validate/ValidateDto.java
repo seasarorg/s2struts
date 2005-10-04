@@ -2,6 +2,22 @@ package org.seasar.struts.examples.validate;
 
 import java.io.Serializable;
 
+import org.seasar.struts.validator.annotation.Args;
+import org.seasar.struts.validator.annotation.ByteType;
+import org.seasar.struts.validator.annotation.CreditCard;
+import org.seasar.struts.validator.annotation.DateType;
+import org.seasar.struts.validator.annotation.DoubleType;
+import org.seasar.struts.validator.annotation.Email;
+import org.seasar.struts.validator.annotation.FloatType;
+import org.seasar.struts.validator.annotation.IntegerType;
+import org.seasar.struts.validator.annotation.LongType;
+import org.seasar.struts.validator.annotation.Mask;
+import org.seasar.struts.validator.annotation.Maxlength;
+import org.seasar.struts.validator.annotation.Minlength;
+import org.seasar.struts.validator.annotation.Range;
+import org.seasar.struts.validator.annotation.Required;
+import org.seasar.struts.validator.annotation.Url;
+
 /**
  * @author Satoshi Kimura
  */
@@ -40,10 +56,8 @@ public class ValidateDto implements Serializable {
         return byte_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Byte
-     * @org.seasar.struts.validator.annotation.Args(keys="Byte",resource=false)
-     */
+    @ByteType
+    @Args(keys="Byte",resource=false)
     public void setByte(String b) {
         byte_ = b;
     }
@@ -52,10 +66,8 @@ public class ValidateDto implements Serializable {
         return creditCard_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.CreditCard
-     * @org.seasar.struts.validator.annotation.Args(keys="CreditCard",resource=false)
-     */
+    @CreditCard
+    @Args(keys="CreditCard",resource=false)
     public void setCreditCard(String creditCard) {
         creditCard_ = creditCard;
     }
@@ -64,10 +76,8 @@ public class ValidateDto implements Serializable {
         return date_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Date
-     * @org.seasar.struts.validator.annotation.Args(keys="Date",resource=false)
-     */
+    @DateType
+    @Args(keys="Date",resource=false)
     public void setDate(String date) {
         date_ = date;
     }
@@ -76,10 +86,8 @@ public class ValidateDto implements Serializable {
         return double_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Double
-     * @org.seasar.struts.validator.annotation.Args(keys="Double",resource=false)
-     */
+    @DoubleType
+    @Args(keys="Double",resource=false)
     public void setDouble(String d) {
         double_ = d;
     }
@@ -88,10 +96,8 @@ public class ValidateDto implements Serializable {
         return email_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Email
-     * @org.seasar.struts.validator.annotation.Args(keys="Email",resource=false)
-     */
+    @Email
+    @Args(keys="Email",resource=false)
     public void setEmail(String email) {
         email_ = email;
     }
@@ -100,10 +106,8 @@ public class ValidateDto implements Serializable {
         return float_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Float
-     * @org.seasar.struts.validator.annotation.Args(keys="Float",resource=false)
-     */
+    @FloatType
+    @Args(keys="Float",resource=false)
     public void setFloat(String f) {
         float_ = f;
     }
@@ -112,10 +116,8 @@ public class ValidateDto implements Serializable {
         return integer_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Integer
-     * @org.seasar.struts.validator.annotation.Args(keys="Integer",resource=false)
-     */
+    @IntegerType
+    @Args(keys="Integer",resource=false)
     public void setInteger(String integer) {
         integer_ = integer;
     }
@@ -129,6 +131,9 @@ public class ValidateDto implements Serializable {
      * @org.seasar.struts.validator.annotation.Maxlength(value=5)
      * @org.seasar.struts.validator.annotation.Args(keys="Length",resource=false)
      */
+    @Minlength(3)
+    @Maxlength(5)
+    @Args(keys="Length",resource=false)
     public void setLength(String length) {
         length_ = length;
     }
@@ -137,11 +142,9 @@ public class ValidateDto implements Serializable {
         return length2_;
     }
     
-    /**
-     * @org.seasar.struts.validator.annotation.Minlength(value=3,type="minbytelength",charset="ISO8859_1")
-     * @org.seasar.struts.validator.annotation.Maxlength(value=5,type="maxbytelength",charset="ISO8859_1")
-     * @org.seasar.struts.validator.annotation.Args(keys="Length2",resource=false)
-     */
+    @Minlength(value=3,type="minbytelength",charset="ISO8859_1")
+    @Maxlength(value=5,type="maxbytelength",charset="ISO8859_1")
+    @Args(keys="Length2",resource=false)
     public void setLength2(String length2) {
         length2_ = length2;
     }
@@ -150,10 +153,8 @@ public class ValidateDto implements Serializable {
         return long_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Long
-     * @org.seasar.struts.validator.annotation.Args(keys="Long",resource=false)
-     */
+    @LongType
+    @Args(keys="Long",resource=false)
     public void setLong(String l) {
         long_ = l;
     }
@@ -162,10 +163,8 @@ public class ValidateDto implements Serializable {
         return range_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Range(min=5.0,max=10.1,type="floatRange")
-     * @org.seasar.struts.validator.annotation.Args(keys="Range",resource=false)
-     */
+    @Range(min=5.0,max=10.1,type="floatRange")
+    @Args(keys="Range",resource=false)
     public void setRange(String range) {
         range_ = range;
     }
@@ -174,10 +173,8 @@ public class ValidateDto implements Serializable {
         return required_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Required
-     * @org.seasar.struts.validator.annotation.Args(keys="validate.required")
-     */
+    @Required
+    @Args(keys="validate.required")
     public void setRequired(String required) {
         required_ = required;
     }
@@ -186,9 +183,7 @@ public class ValidateDto implements Serializable {
         return short_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Args(keys="Short",resource=false)
-     */
+    @Args(keys="Short",resource=false)
     public void setShort(short s) {
         short_ = s;
     }
@@ -197,10 +192,8 @@ public class ValidateDto implements Serializable {
         return url_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Url
-     * @org.seasar.struts.validator.annotation.Args(keys="URL",resource=false)
-     */
+    @Url
+    @Args(keys="URL",resource=false)
     public void setUrl(String url) {
         url_ = url;
     }
@@ -209,14 +202,12 @@ public class ValidateDto implements Serializable {
         return mix_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Required
-     * @org.seasar.struts.validator.annotation.Minlength(value=10)
-     * @org.seasar.struts.validator.annotation.Maxlength(value=15)
-     * @org.seasar.struts.validator.annotation.Mask(pattern="com$",messageKey="mustendcom")
-     * @org.seasar.struts.validator.annotation.Email
-     * @org.seasar.struts.validator.annotation.Args(keys="mixValue",resource=false)
-     */
+    @Required
+    @Minlength(10)
+    @Maxlength(15)
+    @Mask(pattern="com$",messageKey="mustendcom")
+    @Email
+    @Args(keys="mixValue",resource=false)
     public void setMix(String mix) {
         mix_ = mix;
     }

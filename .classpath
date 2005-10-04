@@ -6,14 +6,12 @@
 	<classpathentry kind="var" path="TOMCAT_HOME/common/lib/jasper-runtime.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/common/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/aopalliance.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/backport175-1.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-digester.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-fileupload.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-validator.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/jakarta-oro.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/jarjar-0.3.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/javassist.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/log4j-1.2.8.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/ognl-2.6.5.jar"/>
@@ -24,6 +22,6 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3EA2.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3EA2.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.0-EA3.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-backport175-1.2.0-EA3.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-tiger-1.2.0-EA3.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

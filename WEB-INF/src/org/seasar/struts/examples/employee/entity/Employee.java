@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import org.seasar.struts.examples.util.DateUtil;
 import org.seasar.struts.examples.util.StringUtil;
-
+import org.seasar.struts.validator.annotation.Args;
+import org.seasar.struts.validator.annotation.DateType;
+import org.seasar.struts.validator.annotation.IntegerType;
+import org.seasar.struts.validator.annotation.Required;
 
 public class Employee implements Serializable {
 
@@ -35,11 +38,9 @@ public class Employee implements Serializable {
         return this.empno;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Required
-     * @org.seasar.struts.validator.annotation.Integer
-     * @org.seasar.struts.validator.annotation.Args(keys="form.employee.no")
-     */
+    @Required
+    @IntegerType
+    @Args(keys = "form.employee.no")
     public void setEmpno(String empno) {
         this.empno = empno;
     }
@@ -48,10 +49,8 @@ public class Employee implements Serializable {
         return this.ename;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Required
-     * @org.seasar.struts.validator.annotation.Args(keys="form.employee.name")
-     */
+    @Required
+    @Args(keys = "form.employee.name")
     public void setEname(java.lang.String ename) {
         this.ename = ename;
     }
@@ -68,10 +67,8 @@ public class Employee implements Serializable {
         return StringUtil.toNumericString(this.mgr);
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Integer
-     * @org.seasar.struts.validator.annotation.Args(keys="form.employee.manager")
-     */
+    @IntegerType
+    @Args(keys = "form.employee.manager")
     public void setMgr(String mgr) {
         this.mgr = mgr;
     }
@@ -88,10 +85,8 @@ public class Employee implements Serializable {
         return hiredateDisplay;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Date
-     * @org.seasar.struts.validator.annotation.Args(keys="form.employee.hiredate")
-     */
+    @DateType
+    @Args(keys = "form.employee.hiredate")
     public void setHiredateDisplay(String hiredateDisplay) {
         this.hiredateDisplay = hiredateDisplay;
     }
@@ -100,10 +95,8 @@ public class Employee implements Serializable {
         return StringUtil.toNumericString(this.sal);
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Integer
-     * @org.seasar.struts.validator.annotation.Args(keys="form.employee.salary")
-     */
+    @IntegerType
+    @Args(keys = "form.employee.salary")
     public void setSal(String sal) {
         this.sal = sal;
     }
@@ -112,10 +105,8 @@ public class Employee implements Serializable {
         return StringUtil.toNumericString(this.comm);
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Integer
-     * @org.seasar.struts.validator.annotation.Args(keys="form.employee.commission")
-     */
+    @IntegerType
+    @Args(keys = "form.employee.commission")
     public void setComm(String comm) {
         this.comm = comm;
     }
@@ -124,10 +115,8 @@ public class Employee implements Serializable {
         return StringUtil.toNumericString(this.deptno);
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Required
-     * @org.seasar.struts.validator.annotation.Args(keys="form.department")
-     */
+    @Required
+    @Args(keys = "form.department")
     public void setDeptno(String deptno) {
         this.deptno = deptno;
     }

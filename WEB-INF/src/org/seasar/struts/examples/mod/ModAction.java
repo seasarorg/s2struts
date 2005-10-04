@@ -1,17 +1,16 @@
 package org.seasar.struts.examples.mod;
 
+import org.seasar.struts.annotation.ScopeType;
+import org.seasar.struts.annotation.StrutsAction;
+import org.seasar.struts.annotation.StrutsActionForward;
+
 /**
  * @author Katsuhiko Nagashima
- * @org.seasar.struts.annotation.StrutsAction(path="/mod", name="modForm",
- *                                                     scope="session",
- *                                                     validate=true,
- *                                                     input="/pages/modInput.jsp")
  */
+@StrutsAction(path = "/mod", name = "modForm", scope = ScopeType.SESSION, validate = true, input = "/pages/modInput.jsp")
 public interface ModAction {
 
-    /**
-     * @org.seasar.struts.annotation.StrutsActionForward(path="/pages/modResult.jsp")
-     */
+    @StrutsActionForward(path = "/pages/modResult.jsp")
     String SUCCESS = "success";
 
     String mod();
