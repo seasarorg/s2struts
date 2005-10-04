@@ -13,6 +13,7 @@ import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.log.Logger;
 import org.seasar.struts.config.rule.ZeroConfigActionFormRule;
 import org.seasar.struts.factory.AnnotationHandler;
 import org.seasar.struts.factory.AnnotationHandlerFactory;
@@ -23,6 +24,8 @@ import org.seasar.struts.validator.factory.ValidatorAnnotationHandlerFactory;
  * @author Katsuhiko Nagashima
  */
 public class AutoValidationRegister {
+
+    private static final Logger log = Logger.getLogger(AutoValidationRegister.class);
 
     private AutoValidationRegister() {
     }
@@ -43,6 +46,10 @@ public class AutoValidationRegister {
         return resources.getForm(Locale.getDefault(), formName) != null;
     }
 
+    private static boolean registedValidation(FormSet formSet, String formName) {
+        return formSet.getForm(formName) != null;
+    }
+
     // -- new config --
 
     private static void addValidation(ValidatorResources resources, ModuleConfig config, FormSet formSet,
@@ -55,10 +62,15 @@ public class AutoValidationRegister {
             if (registedValidation(resources, formNames[i])) {
                 continue;
             }
+            if (registedValidation(formSet, formNames[i])) {
+                continue;
+            }
 
             Form form = annHandler.createForm(formNames[i], formClass);
             if (form != null && form.getFields().size() != 0) {
                 formSet.addForm(form);
+
+                log.debug("auto regist " + form);
             }
         }
     }

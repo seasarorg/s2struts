@@ -53,31 +53,31 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     }
 
     public String getInput(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_INPUT;
+        return null;
     }
 
     public String getParameter(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_PARAMETER;
+        return null;
     }
 
     public String getAttribute(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_ATTRIBUTE;
+        return null;
     }
 
     public String getForward(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_FORWARD;
+        return null;
     }
 
     public String getInclude(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_INCLUDE;
+        return null;
     }
 
     public String getPrefix(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_PREFIX;
+        return null;
     }
 
     public String getSuffix(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_SUFFIX;
+        return null;
     }
 
     public boolean getUnknown(Class actionClass, ModuleConfig config) {
@@ -85,7 +85,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     }
 
     public String getRoles(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_ROLES;
+        return null;
     }
 
     public void addFowardConfig(Class actionClass, ActionConfig actionConfig, ServletContext servletContext) {

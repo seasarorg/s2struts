@@ -7,6 +7,7 @@ import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.log.Logger;
 import org.seasar.struts.config.rule.ZeroConfigActionFormRule;
 import org.seasar.struts.factory.AnnotationHandler;
 import org.seasar.struts.factory.AnnotationHandlerFactory;
@@ -15,6 +16,8 @@ import org.seasar.struts.factory.AnnotationHandlerFactory;
  * @author Katsuhiko Nagashima
  */
 public class AutoActionFormRegister {
+
+    private static final Logger log = Logger.getLogger(AutoActionFormRegister.class);
 
     private AutoActionFormRegister() {
     }
@@ -52,6 +55,8 @@ public class AutoActionFormRegister {
         formBeanConfig.setType(formClass.getName());
         formBeanConfig.setRestricted(getRestricted(form, formClass, config));
         config.addFormBeanConfig(formBeanConfig);
+        
+        log.debug("auto regist " + formBeanConfig);
     }
 
     private static ZeroConfigActionFormRule rule() {
@@ -65,7 +70,7 @@ public class AutoActionFormRegister {
     }
 
     private static String getName(StrutsActionFormConfig form, Class formClass, ModuleConfig config) {
-        return form.name() == StrutsActionFormConfig.DEFAULT_NAME ? rule().getName(formClass, config) : form.name();
+        return StrutsActionFormConfig.DEFAULT_NAME.equals(form.name()) ? rule().getName(formClass, config) : form.name();
     }
 
     private static boolean getRestricted(StrutsActionFormConfig form, Class formClass, ModuleConfig config) {

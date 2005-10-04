@@ -13,6 +13,7 @@ import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.FieldUtil;
 import org.seasar.struts.config.rule.ZeroConfigActionRule;
 import org.seasar.struts.factory.AnnotationHandler;
@@ -23,6 +24,8 @@ import org.seasar.struts.factory.AnnotationHandlerFactory;
  * @author Katsuhiko Nagashima
  */
 public class AutoActionRegister {
+    
+    private static final Logger log = Logger.getLogger(AutoActionRegister.class);
 
     private AutoActionRegister() {
     }
@@ -87,6 +90,14 @@ public class AutoActionRegister {
         addFowardConfig(servletContext, actionConfig, actionClass);
 
         config.addActionConfig(actionConfig);
+
+        if (log.isDebugEnabled()) {
+            log.debug("auto regist " + actionConfig);
+            ForwardConfig[] forwardConfigs = actionConfig.findForwardConfigs();
+            for (int i = 0; i < forwardConfigs.length; i++) {
+                log.debug("auto regist " + forwardConfigs[i]);
+            }
+        }
     }
 
     private static void addFowardConfig(ServletContext servletContext, ActionConfig actionConfig, Class actionClass) {
@@ -120,51 +131,51 @@ public class AutoActionRegister {
     }
 
     private static String getPath(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.path() == StrutsActionConfig.DEFAULT_PATH ? rule().getPath(actionClass, config) : action.path();
+        return StrutsActionConfig.DEFAULT_PATH.equals(action.path()) ? rule().getPath(actionClass, config) : action.path();
     }
 
     private static String getAttribute(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.attribute() == StrutsActionConfig.DEFAULT_ATTRIBUTE ? rule().getAttribute(actionClass, config) : action
+        return StrutsActionConfig.DEFAULT_ATTRIBUTE.equals(action.attribute()) ? rule().getAttribute(actionClass, config) : action
                 .attribute();
     }
 
     private static String getForward(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.forward() == StrutsActionConfig.DEFAULT_FORWARD ? rule().getForward(actionClass, config) : action
+        return StrutsActionConfig.DEFAULT_FORWARD.equals(action.forward()) ? rule().getForward(actionClass, config) : action
                 .forward();
     }
 
     private static String getInclude(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.include() == StrutsActionConfig.DEFAULT_INCLUDE ? rule().getInclude(actionClass, config) : action
+        return StrutsActionConfig.DEFAULT_INCLUDE.equals(action.include()) ? rule().getInclude(actionClass, config) : action
                 .include();
     }
 
     private static String getInput(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.input() == StrutsActionConfig.DEFAULT_INPUT ? rule().getInput(actionClass, config) : action.input();
+        return StrutsActionConfig.DEFAULT_INPUT.equals(action.input()) ? rule().getInput(actionClass, config) : action.input();
     }
 
     private static String getName(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.name() == StrutsActionConfig.DEFAULT_NAME ? rule().getName(actionClass, config) : action.name();
+        return StrutsActionConfig.DEFAULT_NAME.equals(action.name()) ? rule().getName(actionClass, config) : action.name();
     }
 
     private static String getParameter(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.parameter() == StrutsActionConfig.DEFAULT_PARAMETER ? rule().getParameter(actionClass, config) : action
+        return StrutsActionConfig.DEFAULT_PARAMETER.equals(action.parameter()) ? rule().getParameter(actionClass, config) : action
                 .parameter();
     }
 
     private static String getPrefix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.prefix() == StrutsActionConfig.DEFAULT_PREFIX ? rule().getPrefix(actionClass, config) : action.prefix();
+        return StrutsActionConfig.DEFAULT_PREFIX.equals(action.prefix()) ? rule().getPrefix(actionClass, config) : action.prefix();
     }
 
     private static String getRoles(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.roles() == StrutsActionConfig.DEFAULT_ROLES ? rule().getRoles(actionClass, config) : action.roles();
+        return StrutsActionConfig.DEFAULT_ROLES.equals(action.roles()) ? rule().getRoles(actionClass, config) : action.roles();
     }
 
     private static String getScope(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.scope() == StrutsActionConfig.DEFAULT_SCOPE ? rule().getScope(actionClass, config) : action.scope();
+        return StrutsActionConfig.DEFAULT_SCOPE.equals(action.scope()) ? rule().getScope(actionClass, config) : action.scope();
     }
 
     private static String getSuffix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.suffix() == StrutsActionConfig.DEFAULT_SUFFIX ? rule().getSuffix(actionClass, config) : action.suffix();
+        return StrutsActionConfig.DEFAULT_SUFFIX.equals(action.suffix()) ? rule().getSuffix(actionClass, config) : action.suffix();
     }
 
     private static boolean getUnknown(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
