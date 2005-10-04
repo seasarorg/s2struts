@@ -1,13 +1,18 @@
 package org.seasar.struts.annotation;
 
-
 /**
  * @author Katsuhiko Nagashima
  */
 public interface StrutsAction {
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String path();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String name();
 
     /**
@@ -20,18 +25,39 @@ public interface StrutsAction {
      */
     boolean validate();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String input();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String parameter();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String attribute();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String forward();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String include();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String prefix();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String suffix();
 
     /**
@@ -39,6 +65,9 @@ public interface StrutsAction {
      */
     boolean unknown();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String roles();
 
 }

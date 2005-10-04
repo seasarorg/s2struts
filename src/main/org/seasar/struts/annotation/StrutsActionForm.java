@@ -5,6 +5,9 @@ package org.seasar.struts.annotation;
  */
 public interface StrutsActionForm {
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String name();
 
     /**

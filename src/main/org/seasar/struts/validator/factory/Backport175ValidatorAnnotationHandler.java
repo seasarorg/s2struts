@@ -65,7 +65,9 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
         Method method = propDesc.getWriteMethod();
 
         Annotation[] annotations = Annotations.getAnnotations(method);
-        annotations = addTypeValidation(annotations, method);
+        // TODO 自動型検証は利用していないPropertyも検証してしまうため、
+        // 良い対策案が出るまで一時的にコメントアウトする
+        //annotations = addTypeValidation(annotations, method);
         if (annotations == null) {
             return null;
         }
