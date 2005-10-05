@@ -7,6 +7,7 @@ import org.seasar.struts.examples.util.StringUtil;
 import org.seasar.struts.validator.annotation.Args;
 import org.seasar.struts.validator.annotation.DateType;
 import org.seasar.struts.validator.annotation.IntegerType;
+import org.seasar.struts.validator.annotation.NoValidate;
 import org.seasar.struts.validator.annotation.Required;
 
 public class Employee implements Serializable {
@@ -77,6 +78,7 @@ public class Employee implements Serializable {
         return DateUtil.toDate(this.hiredateDisplay);
     }
 
+    @NoValidate
     public void setHiredate(java.util.Date hiredate) {
         this.hiredateDisplay = StringUtil.toString(hiredate);
     }

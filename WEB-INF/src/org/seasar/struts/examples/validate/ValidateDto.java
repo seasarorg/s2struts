@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 import org.seasar.struts.validator.annotation.Args;
 import org.seasar.struts.validator.annotation.ByteType;
-import org.seasar.struts.validator.annotation.CreditCard;
+import org.seasar.struts.validator.annotation.CreditCardType;
 import org.seasar.struts.validator.annotation.DateType;
 import org.seasar.struts.validator.annotation.DoubleType;
-import org.seasar.struts.validator.annotation.Email;
+import org.seasar.struts.validator.annotation.EmailType;
 import org.seasar.struts.validator.annotation.FloatType;
 import org.seasar.struts.validator.annotation.IntegerType;
 import org.seasar.struts.validator.annotation.LongType;
@@ -16,7 +16,7 @@ import org.seasar.struts.validator.annotation.Maxlength;
 import org.seasar.struts.validator.annotation.Minlength;
 import org.seasar.struts.validator.annotation.Range;
 import org.seasar.struts.validator.annotation.Required;
-import org.seasar.struts.validator.annotation.Url;
+import org.seasar.struts.validator.annotation.UrlType;
 
 /**
  * @author Satoshi Kimura
@@ -66,7 +66,7 @@ public class ValidateDto implements Serializable {
         return creditCard_;
     }
 
-    @CreditCard
+    @CreditCardType
     @Args(keys="CreditCard",resource=false)
     public void setCreditCard(String creditCard) {
         creditCard_ = creditCard;
@@ -96,7 +96,7 @@ public class ValidateDto implements Serializable {
         return email_;
     }
 
-    @Email
+    @EmailType
     @Args(keys="Email",resource=false)
     public void setEmail(String email) {
         email_ = email;
@@ -192,7 +192,7 @@ public class ValidateDto implements Serializable {
         return url_;
     }
 
-    @Url
+    @UrlType
     @Args(keys="URL",resource=false)
     public void setUrl(String url) {
         url_ = url;
@@ -206,7 +206,7 @@ public class ValidateDto implements Serializable {
     @Minlength(10)
     @Maxlength(15)
     @Mask(pattern="com$",messageKey="mustendcom")
-    @Email
+    @EmailType
     @Args(keys="mixValue",resource=false)
     public void setMix(String mix) {
         mix_ = mix;
