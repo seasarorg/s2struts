@@ -1,6 +1,5 @@
-package org.seasar.struts.plugin.action.impl;
+package org.seasar.struts.action;
 
-import org.seasar.struts.plugin.action.TestAction;
 
 /**
  * @author Satoshi Kimura

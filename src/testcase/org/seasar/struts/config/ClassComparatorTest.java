@@ -8,8 +8,8 @@ import junit.framework.TestCase;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
-import org.seasar.struts.plugin.action.TestAction;
-import org.seasar.struts.plugin.form.TestForm;
+import org.seasar.struts.action.TestAction;
+import org.seasar.struts.form.TestForm;
 
 /**
  * @author Satoshi Kimura

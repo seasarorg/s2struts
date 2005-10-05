@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="validator">
-	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
+	<component name="dateTypeConfigRegister"       class="org.seasar.struts.validator.config.DateTypeConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>
 	</component>
 	<component name="maskConfigRegister"           class="org.seasar.struts.validator.config.MaskConfigRegisterImpl"/>

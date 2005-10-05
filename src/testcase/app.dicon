@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
-<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
-	"http://www.seasar.org/dtd/components21.dtd">
-<components>
-	<include path="s2struts.dicon"/>
-	<include path="validator.dicon"/>
-</components>

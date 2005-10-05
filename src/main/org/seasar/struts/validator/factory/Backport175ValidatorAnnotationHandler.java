@@ -24,6 +24,7 @@ import org.seasar.struts.config.rule.CommonNamingRule;
 import org.seasar.struts.validator.annotation.Args;
 import org.seasar.struts.validator.annotation.CommonValidator;
 import org.seasar.struts.validator.annotation.Message;
+import org.seasar.struts.validator.annotation.NoValidate;
 import org.seasar.struts.validator.annotation.Validator;
 import org.seasar.struts.validator.annotation.ValidatorField;
 import org.seasar.struts.validator.config.ConfigRegister;
@@ -35,6 +36,8 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
 
     private Class DUMMY_CLASS = DummyClass.class;
 
+    private static final String VALIDATOR_TYPE_PREFIX_REGEX = "Type$";
+    
     public Form createForm(String formName, Class formClass) {
         Form form = new Form();
         form.setName(formName);
@@ -51,7 +54,6 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
     }
 
     private Field createField(PropertyDesc propDesc, Form form) {
-        Field field = new Field();
         if (!propDesc.hasWriteMethod()) {
             return null;
         }
@@ -63,11 +65,14 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
         }
 
         Method method = propDesc.getWriteMethod();
+        
+        Annotation noValidate = Annotations.getAnnotation(NoValidate.class, method);
+        if (noValidate != null) {
+            return null;
+        }
 
         Annotation[] annotations = Annotations.getAnnotations(method);
-        // TODO 自動型検証は利用していないPropertyも検証してしまうため、
-        // 良い対策案が出るまで一時的にコメントアウトする
-        //annotations = addTypeValidation(annotations, method);
+        annotations = addTypeValidation(annotations, method);
         if (annotations == null) {
             return null;
         }
@@ -77,6 +82,7 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
             return null;
         }
 
+        Field field = new Field();
         addMessage(field, method);
         addArgs(field, method);
         field.setDepends(depends);
@@ -98,19 +104,19 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
         list.addAll(Arrays.asList(annotations));
 
         if (paramType.equals(Byte.class) || paramType.equals(Byte.TYPE)) {
-            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.Byte.class, DUMMY_CLASS));
+            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.ByteType.class, DUMMY_CLASS));
         } else if (paramType.equals(Date.class) || paramType.equals(Timestamp.class)) {
-            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.Date.class, DUMMY_CLASS));
+            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.DateType.class, DUMMY_CLASS));
         } else if (paramType.equals(Double.class) || paramType.equals(Double.TYPE)) {
-            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.Double.class, DUMMY_CLASS));
+            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.DoubleType.class, DUMMY_CLASS));
         } else if (paramType.equals(Float.class) || paramType.equals(Float.TYPE)) {
-            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.Float.class, DUMMY_CLASS));
+            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.FloatType.class, DUMMY_CLASS));
         } else if (paramType.equals(Integer.class) || paramType.equals(Integer.TYPE)) {
-            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.Integer.class, DUMMY_CLASS));
+            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.IntegerType.class, DUMMY_CLASS));
         } else if (paramType.equals(Long.class) || paramType.equals(Long.TYPE)) {
-            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.Long.class, DUMMY_CLASS));
+            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.LongType.class, DUMMY_CLASS));
         } else if (paramType.equals(Short.class) || paramType.equals(Short.TYPE)) {
-            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.Short.class, DUMMY_CLASS));
+            list.add(0, Annotations.getAnnotation(org.seasar.struts.validator.annotation.ShortType.class, DUMMY_CLASS));
         }
 
         if (list.size() == 0) {
@@ -146,7 +152,8 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
                     depend = createValidatorFieldDepends((ValidatorField) validator);
                 } else {
                     if (depend == null) {
-                        depend = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(type));
+                        String validatorName = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(type));
+                        depend = validatorName.replaceFirst(VALIDATOR_TYPE_PREFIX_REGEX, "");
                     }
                 }
                 depends.append(depend);
@@ -219,13 +226,13 @@ public class Backport175ValidatorAnnotationHandler implements ValidatorAnnotatio
     }
 
     /**
-     * @org.seasar.struts.validator.annotation.Byte
-     * @org.seasar.struts.validator.annotation.Date
-     * @org.seasar.struts.validator.annotation.Double
-     * @org.seasar.struts.validator.annotation.Float
-     * @org.seasar.struts.validator.annotation.Integer
-     * @org.seasar.struts.validator.annotation.Long
-     * @org.seasar.struts.validator.annotation.Short
+     * @org.seasar.struts.validator.annotation.ByteType
+     * @org.seasar.struts.validator.annotation.DateType
+     * @org.seasar.struts.validator.annotation.DoubleType
+     * @org.seasar.struts.validator.annotation.FloatType
+     * @org.seasar.struts.validator.annotation.IntegerType
+     * @org.seasar.struts.validator.annotation.LongType
+     * @org.seasar.struts.validator.annotation.ShortType
      */
     private static class DummyClass {
 

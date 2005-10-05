@@ -6,32 +6,34 @@ import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Var;
 import org.codehaus.backport175.reader.Annotation;
 import org.codehaus.backport175.reader.Annotations;
-import org.seasar.struts.validator.annotation.Date;
+import org.seasar.struts.validator.annotation.DateType;
 
 /**
  * @author Satoshi Kimura
  */
-public class DateConfigRegisterImpl implements ConfigRegister {
+public class DateTypeConfigRegisterImpl implements ConfigRegister {
 
     private String pattern;
-    
+
     public void regist(Field field, Method method) {
-        Annotation annotation = Annotations.getAnnotation(Date.class, method);
-        if (annotation == null) {
-            return;
-        }
+        Annotation annotation = Annotations.getAnnotation(DateType.class, method);
 
         Var var = new Var();
         var.setName("datePattern");
-        String datePattern = ((Date) annotation).pattern();
-        if(datePattern != null) {
-            var.setValue(datePattern);
-        } else {
+        if (annotation == null) {
+            // auto validation
             var.setValue(this.pattern);
+        } else {
+            String datePattern = ((DateType) annotation).pattern();
+            if (datePattern != null) {
+                var.setValue(datePattern);
+            } else {
+                var.setValue(this.pattern);
+            }
         }
         field.addVar(var);
     }
-    
+
     public void setPattern(String pattern) {
         this.pattern = pattern;
     }

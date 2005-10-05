@@ -3,5 +3,6 @@ package org.seasar.struts.validator.annotation;
 /**
  * @author Satoshi Kimura
  */
-public interface Byte extends CommonValidator {
+public interface FloatType extends CommonValidator {
+
 }

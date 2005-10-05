@@ -3,7 +3,7 @@ package org.seasar.struts.validator.annotation;
 /**
  * @author Satoshi Kimura
  */
-public interface Url extends CommonValidator {
+public interface UrlType extends CommonValidator {
 
     /**
      * @org.codehaus.backport175.DefaultValue (false)
