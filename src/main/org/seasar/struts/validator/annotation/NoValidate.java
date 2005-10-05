@@ -8,11 +8,10 @@ import java.lang.annotation.Target;
 /**
  * 
  * @author Katsuhiko Nagashima
- * 
+ *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@ValidatorTarget
-public @interface CreditCard {
+public @interface NoValidate {
 
 }

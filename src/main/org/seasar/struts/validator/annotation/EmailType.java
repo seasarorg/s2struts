@@ -13,14 +13,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
-public @interface Url {
-
-    boolean allowallschemes() default false;
-
-    boolean allow2slashes() default false;
-
-    boolean nofragments() default false;
-
-    String schemes() default "http,https,ftp";
+public @interface EmailType {
 
 }

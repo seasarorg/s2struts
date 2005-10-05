@@ -12,10 +12,10 @@ import org.seasar.struts.annotation.StrutsActionForward;
         prefix = "testprefix", suffix = "testsuffix", roles = "testroles")
 public interface TestAction {
 
-    @StrutsActionForward(path="/test.jsp")
+    @StrutsActionForward(path = "/test.jsp")
     String SUCCESS = "success";
 
-    @StrutsActionForward(path="/fail.jsp", redirect=true)
+    @StrutsActionForward(path = "/fail.jsp", redirect = true)
     String FAIL = "fail";
 
     String CONST = "const";

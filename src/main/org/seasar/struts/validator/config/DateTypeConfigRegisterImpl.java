@@ -13,17 +13,19 @@ public class DateTypeConfigRegisterImpl implements ConfigRegister {
 
     public void regist(Field field, Method method) {
         DateType annotation = method.getAnnotation(DateType.class);
-        if (annotation == null) {
-            return;
-        }
 
         Var var = new Var();
         var.setName("datePattern");
-        String datePattern = annotation.pattern();
-        if (StringUtil.isEmpty(datePattern)) {
+        if (annotation == null) {
+            // auto validation
             var.setValue(this.pattern);
         } else {
-            var.setValue(datePattern);
+            String datePattern = annotation.pattern();
+            if (StringUtil.isEmpty(datePattern)) {
+                var.setValue(this.pattern);
+            } else {
+                var.setValue(datePattern);
+            }
         }
         field.addVar(var);
     }

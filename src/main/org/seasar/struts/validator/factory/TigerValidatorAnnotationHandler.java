@@ -23,6 +23,7 @@ import org.seasar.framework.util.MethodUtil;
 import org.seasar.struts.config.rule.CommonNamingRule;
 import org.seasar.struts.validator.annotation.Args;
 import org.seasar.struts.validator.annotation.Message;
+import org.seasar.struts.validator.annotation.NoValidate;
 import org.seasar.struts.validator.annotation.Validator;
 import org.seasar.struts.validator.annotation.ValidatorField;
 import org.seasar.struts.validator.annotation.ValidatorNameType;
@@ -58,7 +59,6 @@ public class TigerValidatorAnnotationHandler implements ValidatorAnnotationHandl
     }
 
     private Field createField(PropertyDesc propDesc, Form form) {
-        Field field = new Field();
         if (!propDesc.hasWriteMethod()) {
             return null;
         }
@@ -70,11 +70,14 @@ public class TigerValidatorAnnotationHandler implements ValidatorAnnotationHandl
         }
 
         Method method = propDesc.getWriteMethod();
+        
+        NoValidate noValidate = method.getAnnotation(NoValidate.class);
+        if (noValidate != null) {
+            return null;
+        }
 
         Annotation[] annotations = method.getAnnotations();
-        // TODO 自動型検証は利用していないPropertyも検証してしまうため、
-        // 良い対策案が出るまで一時的にコメントアウトする
-        //annotations = addTypeValidation(annotations, method);
+        annotations = addTypeValidation(annotations, method);
         if (annotations == null) {
             return null;
         }
@@ -84,6 +87,7 @@ public class TigerValidatorAnnotationHandler implements ValidatorAnnotationHandl
             return null;
         }
 
+        Field field = new Field();
         addMessage(field, method);
         addArgs(field, method);
         field.setDepends(depends);

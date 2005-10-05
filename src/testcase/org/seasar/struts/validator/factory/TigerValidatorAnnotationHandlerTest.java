@@ -54,9 +54,13 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     
     public void testAutoDate() {
         Field field = form.getField("autoDate");
-        //assertNotNull(field);
-        //assertEquals("date", field.getDepends());
-        //assertEquals("yyyy/MM/dd", field.getVarValue("datePattern"));
+        assertNotNull(field);
+        assertEquals("date", field.getDepends());
+        assertEquals("yyyy/MM/dd", field.getVarValue("datePattern"));
+    }
+    
+    public void testNoValidateDate() {
+        Field field = form.getField("noValidateDate");
         assertNull(field);
     }
     

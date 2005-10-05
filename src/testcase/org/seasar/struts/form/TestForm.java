@@ -4,13 +4,14 @@ import java.util.Date;
 
 import org.seasar.struts.annotation.StrutsActionForm;
 import org.seasar.struts.validator.annotation.Args;
-import org.seasar.struts.validator.annotation.CreditCard;
+import org.seasar.struts.validator.annotation.CreditCardType;
 import org.seasar.struts.validator.annotation.DateType;
-import org.seasar.struts.validator.annotation.Email;
+import org.seasar.struts.validator.annotation.EmailType;
 import org.seasar.struts.validator.annotation.IntegerType;
 import org.seasar.struts.validator.annotation.Mask;
 import org.seasar.struts.validator.annotation.Maxlength;
 import org.seasar.struts.validator.annotation.Minlength;
+import org.seasar.struts.validator.annotation.NoValidate;
 import org.seasar.struts.validator.annotation.Range;
 import org.seasar.struts.validator.annotation.Required;
 import org.seasar.struts.validator.annotation.Validator;
@@ -25,7 +26,7 @@ public class TestForm {
 
     public TestForm() {
     }
-    
+
     @Required
     @Args(keys = "Arg", resource = false)
     public void setArg(String arg) {
@@ -46,10 +47,11 @@ public class TestForm {
     public void setDate(String date) {
     }
 
-    @CreditCard
+    @CreditCardType
     @Args(keys = "CreditCard", resource = false)
     public void setCreditCard(String creditCard) {
     }
+
     @Minlength(3)
     @Maxlength(5)
     @Args(keys = "Length", resource = false)
@@ -71,13 +73,17 @@ public class TestForm {
     @Minlength(10)
     @Maxlength(15)
     @Mask(pattern = "com$", messageKey = "mustendcom")
-    @Email
+    @EmailType
     @Args(keys = "mixValue", resource = false)
     public void setMix(String mix) {
     }
 
     @Args(keys = "Date", resource = false)
     public void setAutoDate(Date date) {
+    }
+
+    @NoValidate
+    public void setNoValidateDate(Date data) {
     }
 
     @ValidatorField(validators = {
