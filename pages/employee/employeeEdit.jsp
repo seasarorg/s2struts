@@ -3,6 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
+
+<s2struts:init action="#{employeeEditInit.initialize}" />
 
 <logic:equal name="processModeDto" property="processMode" value="1">
     <bean:define id="title" value="title.employee.create" />
@@ -21,8 +24,8 @@
 <h2><bean:message name="title" /></h2>
 
 <html:errors />
-<html:form action="/employee" method="POST">
-<html:hidden property="method" value="goError" />
+<html:form action="/employeeEdit" method="POST">
+<s2struts:page />
 
 <logic:equal name="processModeDto" property="processMode" value="2">
     <html:hidden property="versionNo" />
@@ -91,12 +94,12 @@
 </tr>
 </table>
 
-<html:submit property="goConfirm" onclick="go(this);">
+<s2struts:submit action="#{employeeEdit.goConfirm}">
     <bean:message key="button.confirm" />
-</html:submit>
-<html:submit property="goPreviousFromEdit" onclick="go(this);">
+</s2struts:submit>
+<s2struts:submit action="#{employeeEdit.goPrevious}">
     <bean:message key="button.prev" />
-</html:submit>
+</s2struts:submit>
 
 </html:form>
 

@@ -2,13 +2,12 @@ package org.seasar.struts.examples.employee.action.impl;
 
 import java.util.List;
 
+import org.seasar.struts.action.MessageManager;
 import org.seasar.struts.examples.common.Constants;
 import org.seasar.struts.examples.employee.action.EmployeeEditAction;
 import org.seasar.struts.examples.employee.dto.EmployeeDto;
 import org.seasar.struts.examples.employee.dto.ProcessModeDto;
 import org.seasar.struts.examples.employee.logic.EmployeeLogic;
-import org.seasar.struts.examples.util.StringUtil;
-
 
 /**
  * @author Katsuhiko Nagashima
@@ -43,17 +42,25 @@ public class EmployeeEditActionImpl implements EmployeeEditAction {
         return departmentDtoList;
     }
 
-    public String execute() {
-        departmentDtoList = employeeLogic.getAllDepartments();
-        if (processModeDto.getProcessMode() == Constants.UPDATE_MODE) {
-            
-            // TODO ñ{ìñÇÕ if(!employeeForm.loaded()) {} ÇÃÇÊÇ§Ç»ä¥Ç∂Ç…ÇµÇΩÇ¢ÅB
-            if (StringUtil.isEmpty(employeeForm.getEname())) {
-                employeeForm = employeeLogic.getEmployeeDto(new Integer(
-                        employeeForm.getEmpno()));
-            }
+    public String goConfirm() {
+        if (processModeDto.getProcessMode() == Constants.CREATE_MODE
+                && employeeLogic.existEmployee(new Integer(employeeForm.getEmpno()))) {
+            MessageManager.addError("errors.employee.exist", employeeForm.getEmpno());
+            MessageManager.saveErrors();
+            return ERROR;
         }
-        return SUCCESS;
+        return CONFIRM;
+    }
+
+    public String goPrevious() {
+        switch (processModeDto.getProcessMode()) {
+        case Constants.CREATE_MODE:
+            return SEARCH;
+        case Constants.UPDATE_MODE:
+            return LIST;
+        default:
+            return null;
+        }
     }
 
 }

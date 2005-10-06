@@ -3,6 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
+
+<s2struts:init action="#{employeeConfirmInit.initialize}" />
 
 <logic:equal name="processModeDto" property="processMode" value="1">
     <bean:define id="title" value="title.employee.create" />
@@ -27,8 +30,7 @@
 <h2><bean:message name="title" /></h2>
 
 <html:errors />
-<html:form action="/employee" method="POST">
-<html:hidden property="method" value="goError" />
+<html:form action="/employeeConfirm" method="POST">
 
 <html:hidden property="versionNo" />
 <html:hidden property="empno" />
@@ -93,14 +95,15 @@
 </table>
 
 <logic:notEqual name="processModeDto" property="processMode" value="4">
-    <html:submit property="goStore" onclick="go(this);">
+    <s2struts:submit action="#{employeeConfirm.store}">
         <bean:message key="button.store" />
-    </html:submit>
+    </s2struts:submit>
 </logic:notEqual>
-<html:submit property="goPreviousFromConfirm" onclick="go(this);">
+<s2struts:submit action="#{employeeConfirm.goPrevious}">
     <bean:message key="button.prev" />
-</html:submit>
-	
+</s2struts:submit>
+
+
 </html:form>
 
     </tiles:put>

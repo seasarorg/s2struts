@@ -1,12 +1,11 @@
 package org.seasar.struts.examples.employee.action.impl;
 
-import java.util.List;
-
-import org.seasar.struts.action.MessageManager;
+import org.seasar.struts.annotation.ExportToSession;
+import org.seasar.struts.examples.common.Constants;
 import org.seasar.struts.examples.employee.action.EmployeeListAction;
-import org.seasar.struts.examples.employee.dto.EmployeeSearchDto;
+import org.seasar.struts.examples.employee.dto.EmployeeDto;
+import org.seasar.struts.examples.employee.dto.ProcessModeDto;
 import org.seasar.struts.examples.employee.logic.EmployeeLogic;
-
 
 /**
  * @author Katsuhiko Nagashima
@@ -15,30 +14,48 @@ public class EmployeeListActionImpl implements EmployeeListAction {
 
     private EmployeeLogic employeeLogic;
 
-    private EmployeeSearchDto employeeSearchForm;
+    private EmployeeDto employeeForm;
 
-    private List employeeDtoList;
+    private ProcessModeDto processModeDto = new ProcessModeDto();
 
     public void setEmployeeLogic(EmployeeLogic employeeLogic) {
         this.employeeLogic = employeeLogic;
-    } 
-
-    public void setEmployeeSearchForm(EmployeeSearchDto employeeSearchDto) {
-        this.employeeSearchForm = employeeSearchDto;
     }
 
-    public List getEmployeeDtoList() {
-        return employeeDtoList;
+    public EmployeeDto getEmployeeForm() {
+        return employeeForm;
     }
 
-    public String execute() {
-        employeeDtoList = employeeLogic.searchEmployeeDtoList(employeeSearchForm);
-        if (employeeDtoList.size() == 0) {
-            MessageManager.addError("errors.bad.criteria");
-            MessageManager.saveErrors();
-            return ERROR;
-        }
-        return SUCCESS;
+    public void setEmployeeForm(EmployeeDto employeeForm) {
+        this.employeeForm = employeeForm;
     }
-    
+
+    @ExportToSession
+    public ProcessModeDto getProcessModeDto() {
+        return processModeDto;
+    }
+
+    public String goEditForUpdate() {
+        loadEmployee();
+        processModeDto.setProcessMode(Constants.UPDATE_MODE);
+        return EDIT;
+    }
+
+    public String goDelete() {
+        loadEmployee();
+        processModeDto.setProcessMode(Constants.DELETE_MODE);
+        return CONFIRM;
+    }
+
+    public String goInquire() {
+        loadEmployee();
+        processModeDto.setProcessMode(Constants.REFER_MODE);
+        return CONFIRM;
+    }
+
+    private void loadEmployee() {
+        employeeForm = employeeLogic.getEmployeeDto(new Integer(employeeForm
+                .getEmpno()));
+    }
+
 }

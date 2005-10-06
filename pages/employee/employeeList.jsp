@@ -3,6 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
+
+<s2struts:init action="#{employeeListInit.initialize}" />
 
 <tiles:insert page="/pages/layout/layout.jsp">
     <tiles:put name="layoutTitle" type="string">
@@ -12,8 +15,7 @@
     <tiles:put name="body" type="string">
 
 <html:errors />
-<html:form action="/employee" method="POST">
-<html:hidden property="method" value="error" />
+<html:form action="/employeeList" method="POST">
 
 <table class="tablebg">
     <tr class="label">
@@ -55,15 +57,15 @@
             <bean:write name="employee" property="dname" />
         </td>
         <td>
-            <html:link page="/employee.do?method=goEditForUpdate"
+            <html:link page="/employeeList.do?method=goEditForUpdate"
                        paramId="empno" paramName="employee" paramProperty="empno">
                 <bean:message key="button.edit" />
             </html:link>
-            <html:link page="/employee.do?method=goDelete"
+            <html:link page="/employeeList.do?method=goDelete"
                        paramId="empno" paramName="employee" paramProperty="empno">
                 <bean:message key="button.delete" />
             </html:link>
-            <html:link page="/employee.do?method=goInquire"
+            <html:link page="/employeeList.do?method=goInquire"
                        paramId="empno" paramName="employee" paramProperty="empno">
                 <bean:message key="button.inquire" />
             </html:link>
@@ -72,7 +74,7 @@
     </logic:iterate>
 </table>
 
-<html:link page="/employee.do?method=goSearch">
+<html:link page="/pages/employee/employeeSearch.jsp">
     <bean:message key="button.prev" />
 </html:link>
 

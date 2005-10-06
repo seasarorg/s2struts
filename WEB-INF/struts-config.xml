@@ -59,7 +59,7 @@
 
         <forward
             name="employee"
-            path="/employeeSearch.do"/>
+            path="/pages/employee/employeeSearch.jsp"/>
 
     </global-forwards>
 

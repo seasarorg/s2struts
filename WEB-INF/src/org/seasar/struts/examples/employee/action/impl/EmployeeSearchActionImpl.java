@@ -1,9 +1,9 @@
 package org.seasar.struts.examples.employee.action.impl;
 
-import java.util.List;
-
+import org.seasar.struts.annotation.ExportToSession;
+import org.seasar.struts.examples.common.Constants;
 import org.seasar.struts.examples.employee.action.EmployeeSearchAction;
-import org.seasar.struts.examples.employee.logic.EmployeeLogic;
+import org.seasar.struts.examples.employee.dto.ProcessModeDto;
 
 
 /**
@@ -11,21 +11,20 @@ import org.seasar.struts.examples.employee.logic.EmployeeLogic;
  */
 public class EmployeeSearchActionImpl implements EmployeeSearchAction {
 
-    private EmployeeLogic employeeLogic;
+    private ProcessModeDto processModeDto = new ProcessModeDto();
 
-    private List departmentDtoList;
-
-    public void setEmployeeLogic(EmployeeLogic employeeLogic) {
-        this.employeeLogic = employeeLogic;
+    @ExportToSession
+    public ProcessModeDto getProcessModeDto() {
+        return this.processModeDto;
     }
     
-    public List getDepartmentDtoList() {
-        return departmentDtoList;
+    public String goList() {
+        return LIST;
     }
-
-    public String execute() {
-        departmentDtoList = employeeLogic.getAllDepartments();
-        return SUCCESS;
+    
+    public String goEditForCreate() {
+        this.processModeDto.setProcessMode(Constants.CREATE_MODE);
+        return EDIT;
     }
     
 }

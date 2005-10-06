@@ -3,6 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
+
+<s2struts:init action="#{employeeSearchInit.initialize}" />
 
 <tiles:insert page="/pages/layout/layout.jsp">
     <tiles:put name="layoutTitle" type="string">
@@ -13,7 +16,7 @@
 
 <html:errors />
 <html:form action="/employeeSearch" method="POST">
-<html:hidden property="method" value="goError" />
+<s2struts:page />
 
 <table class="tablebg">
 <tr>
@@ -68,12 +71,12 @@
 </tr>
 </table>
 
-<html:submit property="goEditForCreate" onclick="go(this, '/employee.do');">
+<s2struts:submit action="#{employeeSearch.goEditForCreate}">
     <bean:message key="button.create" />
-</html:submit>
-<html:submit property="goList" onclick="go(this, '/employee.do');">
+</s2struts:submit>
+<s2struts:submit action="#{employeeSearch.goList}">
     <bean:message key="button.search" />
-</html:submit>
+</s2struts:submit>
 
 </html:form>
 
