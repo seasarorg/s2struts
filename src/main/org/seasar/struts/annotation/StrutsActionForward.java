@@ -18,6 +18,6 @@ public @interface StrutsActionForward {
     
     String path();
 
-    boolean redirect() default StrutsActionForwardConfig.DEFALUT_REDIRECT;
+    boolean redirect() default StrutsActionForwardConfig.DEFAULT_REDIRECT;
 
 }
