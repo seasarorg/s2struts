@@ -6,6 +6,6 @@ package org.seasar.struts.config;
 public interface StrutsActionForwardConfig {
     String path();
 
-    boolean DEFALUT_REDIRECT = false;
+    boolean DEFAULT_REDIRECT = false;
     boolean redirect();
 }

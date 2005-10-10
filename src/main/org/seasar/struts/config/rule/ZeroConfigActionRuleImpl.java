@@ -114,7 +114,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         ForwardConfig forwardConfig = new ActionForward();
         forwardConfig.setName(Constants.SUCCESS);
         forwardConfig.setPath(path);
-        forwardConfig.setRedirect(StrutsActionForwardConfig.DEFALUT_REDIRECT);
+        forwardConfig.setRedirect(StrutsActionForwardConfig.DEFAULT_REDIRECT);
         actionConfig.addForwardConfig(forwardConfig);
     }
 
