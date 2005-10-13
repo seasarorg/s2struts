@@ -12,8 +12,9 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ControllerConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.ComponentDef;
-import org.seasar.framework.container.ContainerConstants;
+import org.seasar.framework.container.InstanceDef;
 import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.deployer.InstanceDefFactory;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.container.impl.ComponentDefImpl;
 import org.seasar.framework.util.ClassUtil;
@@ -55,7 +56,7 @@ public abstract class S2StrutsInitializer {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         regist(container, ActionFactory.class, ActionFactoryImpl.class);
         regist(container, ComponentNameCreator.class, ComponentNameCreatorImpl.class);
-        regist(container, MessageFacade.class, MessageFacadeImpl.class, ContainerConstants.INSTANCE_REQUEST);
+        regist(container, MessageFacade.class, MessageFacadeImpl.class, InstanceDefFactory.REQUEST);
         regist(container, AutoStrutsConfigRule.class, AutoStrutsConfigRuleImpl.class);
         regist(container, ZeroConfigActionRule.class, ZeroConfigActionRuleImpl.class);
         regist(container, ZeroConfigActionFormRule.class, ZeroConfigActionFormRuleImpl.class);
@@ -70,9 +71,9 @@ public abstract class S2StrutsInitializer {
         regist(container, interfaceClass, cd);
     }
 
-    private static void regist(S2Container container, Class interfaceClass, Class component, String instanceType) {
+    private static void regist(S2Container container, Class interfaceClass, Class component, InstanceDef instanceType) {
         ComponentDef cd = new ComponentDefImpl(component);
-        cd.setInstanceMode(instanceType);
+        cd.setInstanceDef(instanceType);
         regist(container, interfaceClass, cd);
     }
 
@@ -110,7 +111,7 @@ public abstract class S2StrutsInitializer {
                 if (actionClass.isInterface() == false) {
                     ComponentDef def = new ComponentDefImpl(actionClass);
                     if (actionClass.equals(ProxyAction.class) == false) {
-                        def.setInstanceMode(ContainerConstants.INSTANCE_PROTOTYPE);
+                        def.setInstanceDef(InstanceDefFactory.PROTOTYPE);
                     }
                     regist(container, actionClass, def);
                 }
@@ -151,7 +152,7 @@ public abstract class S2StrutsInitializer {
         String processorClassName = controllerConfig.getProcessorClass();
         Class processorClass = ClassUtil.forName(processorClassName);
         if (ExternalRequestProcessor.class.isAssignableFrom(processorClass)) {
-            regist(container, ExternalRequestProcessor.class, processorClass, ContainerConstants.INSTANCE_PROTOTYPE);
+            regist(container, ExternalRequestProcessor.class, processorClass, InstanceDefFactory.PROTOTYPE);
         }
     }
 
