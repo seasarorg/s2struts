@@ -5,7 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
 
-<s2struts:init action="#{employeeEditInit.initialize}" />
+<s2struts:init action="#{employeeEditInitAction.initialize}" />
 
 <logic:equal name="processModeDto" property="processMode" value="1">
     <bean:define id="title" value="title.employee.create" />
@@ -94,10 +94,10 @@
 </tr>
 </table>
 
-<s2struts:submit action="#{employeeEdit.goConfirm}">
+<s2struts:submit action="#{employeeEditAction.goConfirm}">
     <bean:message key="button.confirm" />
 </s2struts:submit>
-<s2struts:submit action="#{employeeEdit.goPrevious}">
+<s2struts:submit action="#{employeeEditAction.goPrevious}">
     <bean:message key="button.prev" />
 </s2struts:submit>
 

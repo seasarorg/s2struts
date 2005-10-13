@@ -5,6 +5,32 @@
 	<include path="dao.dicon"/>
 	<include path="aop.dicon"/>
 
+	<component name="daoInterceptorChain" class="org.seasar.framework.aop.interceptors.InterceptorChain">
+		<initMethod name="add"><arg>aop.traceInterceptor</arg></initMethod>
+		<initMethod name="add"><arg>dao.interceptor</arg></initMethod>
+	</component>
+
+    <!-- auto registration -->
+	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+		<property name="autoNaming">
+			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
+		</property>
+		<initMethod name="addClassPattern">
+			<arg>"org.seasar.struts.examples.employee.dao"</arg>
+			<arg>".*Dao"</arg>
+		</initMethod>
+		<initMethod name="registAll"></initMethod>
+	</component>
+	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
+		<property name="interceptor">daoInterceptorChain</property>
+		<initMethod name="addClassPattern">
+			<arg>"org.seasar.struts.examples.employee.dao"</arg>
+			<arg>".*Dao"</arg>
+		</initMethod>
+		<initMethod name="registAll"></initMethod>
+	</component>
+
+    <!-- manual registration
 	<component class="org.seasar.struts.examples.employee.dao.EmployeeDtoDao">
 		<aspect>aop.traceInterceptor</aspect>
 		<aspect>dao.interceptor</aspect>
@@ -14,4 +40,6 @@
 		<aspect>aop.traceInterceptor</aspect>
 		<aspect>dao.interceptor</aspect>
 	</component>
+    -->
+
 </components>

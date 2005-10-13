@@ -5,7 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
 
-<s2struts:init action="#{employeeConfirmInit.initialize}" />
+<s2struts:init action="#{employeeConfirmInitAction.initialize}" />
 
 <logic:equal name="processModeDto" property="processMode" value="1">
     <bean:define id="title" value="title.employee.create" />
@@ -95,11 +95,11 @@
 </table>
 
 <logic:notEqual name="processModeDto" property="processMode" value="4">
-    <s2struts:submit action="#{employeeConfirm.store}">
+    <s2struts:submit action="#{employeeConfirmAction.store}">
         <bean:message key="button.store" />
     </s2struts:submit>
 </logic:notEqual>
-<s2struts:submit action="#{employeeConfirm.goPrevious}">
+<s2struts:submit action="#{employeeConfirmAction.goPrevious}">
     <bean:message key="button.prev" />
 </s2struts:submit>
 

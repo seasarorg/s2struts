@@ -5,7 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
 
-<s2struts:init action="#{employeeListInit.initialize}" />
+<s2struts:init action="#{employeeListInitAction.initialize}" />
 
 <tiles:insert page="/pages/layout/layout.jsp">
     <tiles:put name="layoutTitle" type="string">

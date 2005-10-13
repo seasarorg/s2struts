@@ -5,7 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %>
 
-<s2struts:init action="#{employeeSearchInit.initialize}" />
+<s2struts:init action="#{employeeSearchInitAction.initialize}" />
 
 <tiles:insert page="/pages/layout/layout.jsp">
     <tiles:put name="layoutTitle" type="string">
@@ -71,10 +71,10 @@
 </tr>
 </table>
 
-<s2struts:submit action="#{employeeSearch.goEditForCreate}">
+<s2struts:submit action="#{employeeSearchAction.goEditForCreate}">
     <bean:message key="button.create" />
 </s2struts:submit>
-<s2struts:submit action="#{employeeSearch.goList}">
+<s2struts:submit action="#{employeeSearchAction.goList}">
     <bean:message key="button.search" />
 </s2struts:submit>
 
