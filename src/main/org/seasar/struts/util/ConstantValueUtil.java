@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.seasar.framework.util.StringUtil;
-import org.seasar.struts.exception.IllegalConstantValueException;
 
 /**
  * @author Katsuhiko Nagashima
@@ -29,14 +28,14 @@ public class ConstantValueUtil {
             String[] keyValue = StringUtil.split(keyValues[i], "=");
             if (keyValue.length == 1) {
                 if (defaultKey == null) {
-                    throw new IllegalConstantValueException("Value is " + parameters);
+                    throw new IllegalArgumentException(parameters);
                 } else {
                     result.put(defaultKey, keyValue[0].trim());
                 }
             } else if (keyValue.length == 2) {
                 result.put(keyValue[0].trim(), keyValue[1].trim());
             } else {
-                throw new IllegalConstantValueException("Value is " + parameters);
+                throw new IllegalArgumentException(parameters);
             }
         }
 

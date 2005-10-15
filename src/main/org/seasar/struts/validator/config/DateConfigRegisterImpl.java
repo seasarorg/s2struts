@@ -12,8 +12,8 @@ public class DateConfigRegisterImpl implements ConfigRegister {
 
     private String pattern;
 
-    public void regist(Field field, Map parameters) {
-        String datePattern = (String) parameters.get("pattern");
+    public void regist(Field field, Map parameter) {
+        String datePattern = (String) parameter.get("pattern");
 
         Var var = new Var();
         var.setName("datePattern");

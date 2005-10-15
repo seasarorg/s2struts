@@ -11,9 +11,9 @@ import org.apache.commons.validator.Var;
  */
 public abstract class AbstractBytelengthConfigRegister implements ConfigRegister {
 
-    public void regist(Field field, Map parameters) {
-        Object value = parameters.get("value");
-        String charset = (String) parameters.get("charset");
+    public void regist(Field field, Map parameter) {
+        Object value = parameter.get("value");
+        String charset = (String) parameter.get("charset");
         String type = getType();
 
         Arg arg = new Arg();

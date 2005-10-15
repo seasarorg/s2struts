@@ -8,5 +8,5 @@ import org.apache.commons.validator.Field;
  * @author Satoshi Kimura
  */
 public interface ConfigRegister {
-    void regist(Field field, Map parameters);
+    void regist(Field field, Map parameter);
 }

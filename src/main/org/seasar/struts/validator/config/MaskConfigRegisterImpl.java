@@ -11,9 +11,9 @@ import org.apache.commons.validator.Var;
  */
 public class MaskConfigRegisterImpl implements ConfigRegister {
 
-    public void regist(Field field, Map parameters) {
-        String pattern = (String) parameters.get("pattern");
-        String messageKey = (String) parameters.get("messageKey");
+    public void regist(Field field, Map parameter) {
+        String pattern = (String) parameter.get("pattern");
+        String messageKey = (String) parameter.get("messageKey");
         
         Var var = new Var();
         var.setName("mask");

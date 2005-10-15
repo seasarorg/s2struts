@@ -14,8 +14,8 @@ import org.seasar.framework.util.StringUtil;
  */
 public class ValidatorFieldConfigRegisterImpl implements ConfigRegister {
 
-    public void regist(Field field, Map parameters) {
-        addValidators(field, parameters);
+    public void regist(Field field, Map parameter) {
+        addValidators(field, parameter);
     }
 
     private void addValidators(Field field, Map validatorField) {
