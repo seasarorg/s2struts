@@ -1,9 +1,10 @@
 package org.seasar.struts.validator.annotation;
 
 /**
- * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
-public interface Maxlength extends CommonValidator {
+public interface Maxbytelength extends CommonValidator {
+
     int value();
     
     String charset();

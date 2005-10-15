@@ -55,18 +55,15 @@ public class TestForm {
     }
 
     /**
-     * @org.seasar.struts.validator.annotation.Minlength(value=3, type="minbytelength",
-     *                                                            charset="ISO8859_1")
-     * @org.seasar.struts.validator.annotation.Maxlength(value=5, type="maxbytelength",
-     *                                                            charset="ISO8859_1")
+     * @org.seasar.struts.validator.annotation.Minbytelength(value=3, charset="ISO8859_1")
+     * @org.seasar.struts.validator.annotation.Maxbytelength(value=5, charset="ISO8859_1")
      * @org.seasar.struts.validator.annotation.Args(keys="ByteLength", resource=false)
      */
     public void setByteLength(String byteLength) {
     }
 
     /**
-     * @org.seasar.struts.validator.annotation.Range(min=5.0, max=10.1,
-     *                                                        type="floatRange")
+     * @org.seasar.struts.validator.annotation.FloatRange(min=5.0F, max=10.1F)
      * @org.seasar.struts.validator.annotation.Args(keys="Range", resource=false)
      */
     public void setRange(String range) {
@@ -81,6 +78,12 @@ public class TestForm {
      * @org.seasar.struts.validator.annotation.Args(keys="mixValue", resource=false)
      */
     public void setMix(String mix) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.Args(keys="Integer", resource=false)
+     */
+    public void setAutoInteger(int integer) {
     }
 
     /**

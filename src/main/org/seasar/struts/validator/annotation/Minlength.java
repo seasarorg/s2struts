@@ -6,12 +6,5 @@ package org.seasar.struts.validator.annotation;
 public interface Minlength extends CommonValidator {
     int value();
 
-    /**
-     * "minlength" or "minbytelength".
-     * 
-     * @org.codehaus.backport175.DefaultValue ("minlength")
-     */
-    String type();
-    
     String charset();
 }

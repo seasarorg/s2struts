@@ -17,7 +17,7 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     private Form form;
     
     public void setUp() {
-        include("validator.dicon");
+        include("s2struts.dicon");
         
         annHandler = new Backport175ValidatorAnnotationHandler();
     }
@@ -50,6 +50,12 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertNotNull(field);
         assertEquals("date", field.getDepends());
         assertEquals("yyyyMMdd", field.getVarValue("datePattern"));
+    }
+    
+    public void testAutoInteger() {
+        Field field = form.getField("autoInteger");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
     }
     
     public void testAutoDate() {
@@ -140,5 +146,5 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("${var:min}", field.getArg("intRange", 1).getKey());
         assertEquals("${var:max}", field.getArg("intRange", 2).getKey());
     }
-
+    
 }
