@@ -74,8 +74,8 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
             if (CommonValidator.class.isAssignableFrom(type)) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
-                    Map parameters = Backport175AnnotationConverter.getInstance().toMap(annotations[i]);
-                    executeConfigRegister(field, validatorName, parameters);
+                    Map parameter = Backport175AnnotationConverter.getInstance().toMap(annotations[i]);
+                    executeConfigRegister(field, validatorName, parameter);
                 }
             }
         }
