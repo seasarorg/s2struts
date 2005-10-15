@@ -27,4 +27,17 @@
 		</aspect>
 	</component>
 	-->
+
+	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
+		<property name="pattern">"yyyy/MM/dd"</property>
+	</component>
+	<component name="maskConfigRegister"           class="org.seasar.struts.validator.config.MaskConfigRegisterImpl"/>
+	<component name="maxlengthConfigRegister"      class="org.seasar.struts.validator.config.MaxlengthConfigRegisterImpl"/>
+	<component name="minlengthConfigRegister"      class="org.seasar.struts.validator.config.MinlengthConfigRegisterImpl"/>
+	<component name="maxbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MaxbytelengthConfigRegisterImpl"/>
+	<component name="minbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MinbytelengthConfigRegisterImpl"/>
+	<component name="intRangeConfigRegister"       class="org.seasar.struts.validator.config.IntRangeConfigRegisterImpl"/>
+	<component name="floatRangeConfigRegister"     class="org.seasar.struts.validator.config.FloatRangeConfigRegisterImpl"/>
+	<component name="doubleRangeConfigRegister"    class="org.seasar.struts.validator.config.DoubleRangeConfigRegisterImpl"/>
+	<component name="validatorFieldConfigRegister" class="org.seasar.struts.validator.config.ValidatorFieldConfigRegisterImpl"/>
 </components>

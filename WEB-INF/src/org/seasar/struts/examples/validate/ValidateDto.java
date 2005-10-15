@@ -8,13 +8,15 @@ import org.seasar.struts.validator.annotation.CreditCardType;
 import org.seasar.struts.validator.annotation.DateType;
 import org.seasar.struts.validator.annotation.DoubleType;
 import org.seasar.struts.validator.annotation.EmailType;
+import org.seasar.struts.validator.annotation.FloatRange;
 import org.seasar.struts.validator.annotation.FloatType;
 import org.seasar.struts.validator.annotation.IntegerType;
 import org.seasar.struts.validator.annotation.LongType;
 import org.seasar.struts.validator.annotation.Mask;
+import org.seasar.struts.validator.annotation.Maxbytelength;
 import org.seasar.struts.validator.annotation.Maxlength;
+import org.seasar.struts.validator.annotation.Minbytelength;
 import org.seasar.struts.validator.annotation.Minlength;
-import org.seasar.struts.validator.annotation.Range;
 import org.seasar.struts.validator.annotation.Required;
 import org.seasar.struts.validator.annotation.UrlType;
 
@@ -37,7 +39,7 @@ public class ValidateDto implements Serializable {
     private String float_ = "a";
 
     private String integer_ = "1.1";
-    
+
     private String length2_ = "‚ ";
 
     private String long_ = "2.2";
@@ -57,7 +59,7 @@ public class ValidateDto implements Serializable {
     }
 
     @ByteType
-    @Args(keys="Byte",resource=false)
+    @Args(keys = "Byte", resource = false)
     public void setByte(String b) {
         byte_ = b;
     }
@@ -67,7 +69,7 @@ public class ValidateDto implements Serializable {
     }
 
     @CreditCardType
-    @Args(keys="CreditCard",resource=false)
+    @Args(keys = "CreditCard", resource = false)
     public void setCreditCard(String creditCard) {
         creditCard_ = creditCard;
     }
@@ -77,7 +79,7 @@ public class ValidateDto implements Serializable {
     }
 
     @DateType
-    @Args(keys="Date",resource=false)
+    @Args(keys = "Date", resource = false)
     public void setDate(String date) {
         date_ = date;
     }
@@ -87,7 +89,7 @@ public class ValidateDto implements Serializable {
     }
 
     @DoubleType
-    @Args(keys="Double",resource=false)
+    @Args(keys = "Double", resource = false)
     public void setDouble(String d) {
         double_ = d;
     }
@@ -97,7 +99,7 @@ public class ValidateDto implements Serializable {
     }
 
     @EmailType
-    @Args(keys="Email",resource=false)
+    @Args(keys = "Email", resource = false)
     public void setEmail(String email) {
         email_ = email;
     }
@@ -107,7 +109,7 @@ public class ValidateDto implements Serializable {
     }
 
     @FloatType
-    @Args(keys="Float",resource=false)
+    @Args(keys = "Float", resource = false)
     public void setFloat(String f) {
         float_ = f;
     }
@@ -117,7 +119,7 @@ public class ValidateDto implements Serializable {
     }
 
     @IntegerType
-    @Args(keys="Integer",resource=false)
+    @Args(keys = "Integer", resource = false)
     public void setInteger(String integer) {
         integer_ = integer;
     }
@@ -133,7 +135,7 @@ public class ValidateDto implements Serializable {
      */
     @Minlength(3)
     @Maxlength(5)
-    @Args(keys="Length",resource=false)
+    @Args(keys = "Length", resource = false)
     public void setLength(String length) {
         length_ = length;
     }
@@ -141,10 +143,10 @@ public class ValidateDto implements Serializable {
     public String getLength2() {
         return length2_;
     }
-    
-    @Minlength(value=3,type="minbytelength",charset="ISO8859_1")
-    @Maxlength(value=5,type="maxbytelength",charset="ISO8859_1")
-    @Args(keys="Length2",resource=false)
+
+    @Minbytelength(value = 3, charset = "ISO8859_1")
+    @Maxbytelength(value = 5, charset = "ISO8859_1")
+    @Args(keys = "Length2", resource = false)
     public void setLength2(String length2) {
         length2_ = length2;
     }
@@ -154,7 +156,7 @@ public class ValidateDto implements Serializable {
     }
 
     @LongType
-    @Args(keys="Long",resource=false)
+    @Args(keys = "Long", resource = false)
     public void setLong(String l) {
         long_ = l;
     }
@@ -163,8 +165,8 @@ public class ValidateDto implements Serializable {
         return range_;
     }
 
-    @Range(min=5.0,max=10.1,type="floatRange")
-    @Args(keys="Range",resource=false)
+    @FloatRange(min = 5.0F, max = 10.1F)
+    @Args(keys = "Range", resource = false)
     public void setRange(String range) {
         range_ = range;
     }
@@ -174,7 +176,7 @@ public class ValidateDto implements Serializable {
     }
 
     @Required
-    @Args(keys="validate.required")
+    @Args(keys = "validate.required")
     public void setRequired(String required) {
         required_ = required;
     }
@@ -183,7 +185,7 @@ public class ValidateDto implements Serializable {
         return short_;
     }
 
-    @Args(keys="Short",resource=false)
+    @Args(keys = "Short", resource = false)
     public void setShort(short s) {
         short_ = s;
     }
@@ -193,7 +195,7 @@ public class ValidateDto implements Serializable {
     }
 
     @UrlType
-    @Args(keys="URL",resource=false)
+    @Args(keys = "URL", resource = false)
     public void setUrl(String url) {
         url_ = url;
     }
@@ -205,9 +207,9 @@ public class ValidateDto implements Serializable {
     @Required
     @Minlength(10)
     @Maxlength(15)
-    @Mask(pattern="com$",messageKey="mustendcom")
+    @Mask(pattern = "com$", messageKey = "mustendcom")
     @EmailType
-    @Args(keys="mixValue",resource=false)
+    @Args(keys = "mixValue", resource = false)
     public void setMix(String mix) {
         mix_ = mix;
     }

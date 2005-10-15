@@ -3,7 +3,6 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<include path="s2struts.dicon"/>
-	<include path="validator.dicon"/>
 
 	<include path="org/seasar/struts/examples/dicon/Mod.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Add.dicon"/>
