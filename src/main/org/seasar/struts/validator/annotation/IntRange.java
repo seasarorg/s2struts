@@ -12,13 +12,11 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@ValidatorTarget(ValidatorNameType.TYPE_METHOD)
-public @interface Range {
+@ValidatorTarget
+public @interface IntRange {
+
+    int min();
     
-    String type() default "doubleRange";
-    
-    double min();
-    
-    double max();
+    int max();
 
 }

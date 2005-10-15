@@ -14,6 +14,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.ANNOTATION_TYPE)
 public @interface ValidatorTarget {
     
-    ValidatorNameType value() default ValidatorNameType.CLASS_NAME;
-
 }

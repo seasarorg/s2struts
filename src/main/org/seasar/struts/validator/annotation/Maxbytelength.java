@@ -8,13 +8,15 @@ import java.lang.annotation.Target;
 /**
  * 
  * @author Katsuhiko Nagashima
- * 
+ *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
-public @interface Minlength {
-    
+public @interface Maxbytelength {
+
     int value();
     
+    String charset() default "";
+
 }

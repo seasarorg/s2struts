@@ -13,8 +13,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
-public @interface Minlength {
-    
+public @interface Minbytelength {
+
     int value();
-    
+
+    String charset() default "";
+
 }

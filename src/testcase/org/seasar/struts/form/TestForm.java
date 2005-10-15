@@ -7,12 +7,14 @@ import org.seasar.struts.validator.annotation.Args;
 import org.seasar.struts.validator.annotation.CreditCardType;
 import org.seasar.struts.validator.annotation.DateType;
 import org.seasar.struts.validator.annotation.EmailType;
+import org.seasar.struts.validator.annotation.FloatRange;
 import org.seasar.struts.validator.annotation.IntegerType;
 import org.seasar.struts.validator.annotation.Mask;
+import org.seasar.struts.validator.annotation.Maxbytelength;
 import org.seasar.struts.validator.annotation.Maxlength;
+import org.seasar.struts.validator.annotation.Minbytelength;
 import org.seasar.struts.validator.annotation.Minlength;
 import org.seasar.struts.validator.annotation.NoValidate;
-import org.seasar.struts.validator.annotation.Range;
 import org.seasar.struts.validator.annotation.Required;
 import org.seasar.struts.validator.annotation.Validator;
 import org.seasar.struts.validator.annotation.ValidatorField;
@@ -31,7 +33,7 @@ public class TestForm {
     @Args(keys = "Arg", resource = false)
     public void setArg(String arg) {
     }
-
+    
     @Required
     @Args(keys = "Required", resource = false)
     public void setRequired(String required) {
@@ -58,13 +60,13 @@ public class TestForm {
     public void setLength(String length) {
     }
 
-    @Minlength(value = 3, type = "minbytelength", charset = "ISO8859_1")
-    @Maxlength(value = 5, type = "maxbytelength", charset = "ISO8859_1")
+    @Minbytelength(value = 3, charset = "ISO8859_1")
+    @Maxbytelength(value = 5, charset = "ISO8859_1")
     @Args(keys = "ByteLength", resource = false)
     public void setByteLength(String byteLength) {
     }
 
-    @Range(min = 5.0, max = 10.1, type = "floatRange")
+    @FloatRange(min = 5.0F, max = 10.1F)
     @Args(keys = "Range", resource = false)
     public void setRange(String range) {
     }
@@ -76,6 +78,10 @@ public class TestForm {
     @EmailType
     @Args(keys = "mixValue", resource = false)
     public void setMix(String mix) {
+    }
+
+    @Args(keys = "Integer", resource = false)
+    public void setAutoInteger(int integer) {
     }
 
     @Args(keys = "Date", resource = false)

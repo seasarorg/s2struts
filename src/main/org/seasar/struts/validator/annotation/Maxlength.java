@@ -12,13 +12,9 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@ValidatorTarget(ValidatorNameType.TYPE_METHOD)
+@ValidatorTarget
 public @interface Maxlength {
     
     int value();
     
-    String type() default "maxlength";
-
-    String charset() default "";
-
 }

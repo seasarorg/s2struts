@@ -1,8 +1,15 @@
 package org.seasar.struts.validator.factory;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.struts.annotation.StrutsActionForm;
 import org.seasar.struts.form.TestForm;
 
 /**
@@ -17,7 +24,7 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     private Form form;
     
     public void setUp() {
-        include("validator.dicon");
+        include("s2struts.dicon");
         
         annHandler = new TigerValidatorAnnotationHandler();
     }
@@ -50,6 +57,12 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         assertNotNull(field);
         assertEquals("date", field.getDepends());
         assertEquals("yyyyMMdd", field.getVarValue("datePattern"));
+    }
+    
+    public void testAutoInteger() {
+        Field field = form.getField("autoInteger");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
     }
     
     public void testAutoDate() {

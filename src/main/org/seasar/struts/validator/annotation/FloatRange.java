@@ -13,8 +13,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
-public @interface Minlength {
+public @interface FloatRange {
+
+    float min();
     
-    int value();
-    
+    float max();
+
 }
