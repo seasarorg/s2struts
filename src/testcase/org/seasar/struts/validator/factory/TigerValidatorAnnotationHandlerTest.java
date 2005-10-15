@@ -1,15 +1,8 @@
 package org.seasar.struts.validator.factory;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.annotation.StrutsActionForm;
 import org.seasar.struts.form.TestForm;
 
 /**

@@ -10,7 +10,6 @@ import org.apache.commons.validator.Form;
 import org.apache.commons.validator.Msg;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.validator.annotation.Args;
 import org.seasar.struts.validator.annotation.Message;
@@ -78,8 +77,8 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             if (commonValidator != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
-                    Map parameters = TigerAnnotationConverter.getInstance().toMap(annotations[i]);
-                    executeConfigRegister(field, validatorName, parameters);
+                    Map parameter = TigerAnnotationConverter.getInstance().toMap(annotations[i]);
+                    executeConfigRegister(field, validatorName, parameter);
                 }
             }
         }
