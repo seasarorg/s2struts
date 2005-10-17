@@ -21,8 +21,8 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/poi-2.5.1-final-20040804.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/struts.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-dao-1.0.28.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3RC1.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3RC1.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.0-EA3.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3RC2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3RC2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.0-EA4.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
