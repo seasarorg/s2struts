@@ -25,8 +25,10 @@
 		<initMethod name="registAll"></initMethod>
 	</component>
 	
-	<!--
 	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+		<property name="instanceDef">
+			@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+		</property>
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
@@ -44,13 +46,11 @@
 		</initMethod>
 		<initMethod name="registAll"></initMethod>
 	</component>
-	-->
 	
     <!-- manual registration
 	<component class="org.seasar.struts.examples.employee.logic.impl.EmployeeLogicImpl">
 		<aspect>logicInterceptorChain</aspect>
 	</component>
-    -->
 
 	<component name="employeeSearchInitAction" class="org.seasar.struts.examples.employee.action.impl.EmployeeSearchInitActionImpl" instance="request">
 		<aspect>actionInterceptorChain</aspect>
@@ -83,5 +83,6 @@
 	<component name="employeeConfirmAction" class="org.seasar.struts.examples.employee.action.impl.EmployeeConfirmActionImpl" instance="request">
 		<aspect>actionInterceptorChain</aspect>
 	</component>
+    -->
 
 </components>

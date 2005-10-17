@@ -19,9 +19,9 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/jta.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-dao-1.0.28.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.0-EA3.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3RC1.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3RC1.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-tiger-EA1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3RC2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3RC2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.0-EA4.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-tiger-EA2.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

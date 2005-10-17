@@ -20,14 +20,8 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>org.codehaus.backport175.ide.eclipse.core.project.BpAnnotationBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.codehaus.backport175.ide.eclipse.core.project.BpProjectNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.sysdeo.eclipse.tomcat.tomcatnature</nature>
 		<nature>org.seasar.kijimuna.core.nature</nature>
