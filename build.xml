@@ -85,6 +85,7 @@
   </target>
 
   <target name="init" depends="cleanbuild">
+    <delete dir="${setupDir}/${projectDir}" />
     <mkdir dir="${build.main}"/>
     <mkdir dir="${build.testcase}"/>
     <mkdir dir="${build.tld}"/>

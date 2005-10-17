@@ -29,7 +29,7 @@
 	<classpathentry kind="lib" path="lib/servlets-default.jar"/>
 	<classpathentry kind="lib" path="lib/servlets-ssi.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-util.jar"/>
-	<classpathentry kind="lib" path="lib/s2-extension-2.3RC1.jar"/>
-	<classpathentry kind="lib" path="lib/s2-framework-2.3RC1.jar"/>
+	<classpathentry kind="lib" path="lib/s2-extension-2.3RC2.jar"/>
+	<classpathentry kind="lib" path="lib/s2-framework-2.3RC2.jar"/>
 	<classpathentry kind="output" path="build/main"/>
 </classpath>

@@ -11,11 +11,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>de.tobject.findbugs.findbugsBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.seasar.kijimuna.core.builder</name>
 			<arguments>
 			</arguments>
@@ -25,16 +20,9 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>org.codehaus.backport175.ide.eclipse.core.project.BpAnnotationBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.codehaus.backport175.ide.eclipse.core.project.BpProjectNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>de.tobject.findbugs.findbugsNature</nature>
 		<nature>org.seasar.kijimuna.core.nature</nature>
 	</natures>
 </projectDescription>
