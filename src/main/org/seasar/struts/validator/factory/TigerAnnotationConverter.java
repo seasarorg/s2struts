@@ -23,10 +23,9 @@ public class TigerAnnotationConverter extends AbstractAnnotationConverter {
         List<Method> result = new ArrayList<Method>();
 
         Annotation annotation = (Annotation) obj;
-        Method[] methods = annotation.annotationType().getMethods();
-        for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getDeclaringClass() != Annotation.class) {
-                result.add(methods[i]);
+        for (Method method : annotation.annotationType().getMethods()) {
+            if (method.getDeclaringClass() != Annotation.class) {
+                result.add(method);
             }
         }
         

@@ -21,10 +21,10 @@ import org.seasar.struts.validator.annotation.ValidatorTarget;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotationHandler {
-    
+
     protected Field createField(Form form, BeanDesc beanDesc, PropertyDesc propDesc) {
         if (!propDesc.hasWriteMethod()) {
             return null;
@@ -40,7 +40,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (!hasAnnotation(method)) {
             return super.createField(form, beanDesc, propDesc);
         }
-        
+
         NoValidate noValidate = method.getAnnotation(NoValidate.class);
         if (noValidate != null) {
             return null;
@@ -61,7 +61,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
 
         return field;
     }
-    
+
     private boolean hasAnnotation(Method method) {
         Annotation[] annotations = method.getAnnotations();
         return (annotations.length != 0);
@@ -69,15 +69,15 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
 
     private void registConfig(Field field, Method method) {
         registAutoTypeValidatorConfig(field, method);
-        
-        Annotation[] annotations = method.getAnnotations();
-        for (int i = 0; i < annotations.length; i++) {
-            Class<?> type = annotations[i].annotationType();
-            ValidatorTarget commonValidator = type.getAnnotation(ValidatorTarget.class);
+
+        for (Annotation annotation : method.getAnnotations()) {
+            Class<?> type = annotation.annotationType();
+            ValidatorTarget commonValidator = type
+                    .getAnnotation(ValidatorTarget.class);
             if (commonValidator != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
-                    Map parameter = TigerAnnotationConverter.getInstance().toMap(annotations[i]);
+                    Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
                     executeConfigRegister(field, validatorName, parameter);
                 }
             }
@@ -91,13 +91,11 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (!StringUtil.isEmpty(autoTypeValidatorName)) {
             depends.append(autoTypeValidatorName).append(",");
         }
-        
-        Annotation[] annotations = method.getAnnotations();
-        for (int i = 0; i < annotations.length; i++) {
-            Annotation annotation = annotations[i];
-            Class<?> type = annotations[i].annotationType();
-            ValidatorTarget commonValidator = type.getAnnotation(ValidatorTarget.class);
-            if (commonValidator != null) {
+
+        for (Annotation annotation : method.getAnnotations()) {
+            Class<?> type = annotation.annotationType();
+            ValidatorTarget target = type.getAnnotation(ValidatorTarget.class);
+            if (target != null) {
                 String depend = "";
                 if (annotation instanceof ValidatorField) {
                     depend = createValidatorFieldDepends((ValidatorField) annotation);
@@ -114,12 +112,11 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         depends.setLength(depends.length() - 1);
         return depends.toString();
     }
-    
+
     private String createValidatorFieldDepends(ValidatorField validatorField) {
         StringBuffer result = new StringBuffer("");
         if (validatorField.validators() != null) {
-            for (int i = 0; i < validatorField.validators().length; i++) {
-                Validator val = validatorField.validators()[i];
+            for (Validator val : validatorField.validators()) {
                 result.append(val.name());
                 result.append(",");
             }
@@ -134,7 +131,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
 
     private void addArgs(Field field, Method method) {
         Annotation annotation = method.getAnnotation(Args.class);
-        String[] keys = {method.getName()};
+        String[] keys = { method.getName() };
         boolean resource = false;
         if (annotation != null) {
             Args args = (Args) annotation;
