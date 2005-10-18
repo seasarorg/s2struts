@@ -2,7 +2,8 @@ package org.seasar.struts.validator.annotation;
 
 /**
  * @author Satoshi Kimura
+ * @org.seasar.struts.validator.annotation.ValidatorTarget
  */
-public interface DoubleType extends CommonValidator {
+public interface DoubleType {
 
 }

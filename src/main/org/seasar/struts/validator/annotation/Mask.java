@@ -2,8 +2,9 @@ package org.seasar.struts.validator.annotation;
 
 /**
  * @author Satoshi Kimura
+ * @org.seasar.struts.validator.annotation.ValidatorTarget
  */
-public interface Mask extends CommonValidator {
+public interface Mask {
     String pattern();
 
     String messageKey();

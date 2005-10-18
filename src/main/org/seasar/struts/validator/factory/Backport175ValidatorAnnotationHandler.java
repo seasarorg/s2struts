@@ -13,7 +13,7 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.validator.annotation.Args;
-import org.seasar.struts.validator.annotation.CommonValidator;
+import org.seasar.struts.validator.annotation.ValidatorTarget;
 import org.seasar.struts.validator.annotation.Message;
 import org.seasar.struts.validator.annotation.NoValidate;
 import org.seasar.struts.validator.annotation.Validator;
@@ -71,7 +71,8 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         Annotation[] annotations = Annotations.getAnnotations(method);
         for (int i = 0; i < annotations.length; i++) {
             Class type = annotations[i].annotationType();
-            if (CommonValidator.class.isAssignableFrom(type)) {
+            Annotation target = Annotations.getAnnotation(ValidatorTarget.class, type);
+            if (target != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
                     Map parameter = Backport175AnnotationConverter.getInstance().toMap(annotations[i]);
@@ -92,11 +93,11 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         Annotation[] annotations = Annotations.getAnnotations(method);
         for (int i = 0; i < annotations.length; i++) {
             Class type = annotations[i].annotationType();
-            if (CommonValidator.class.isAssignableFrom(type)) {
-                CommonValidator validator = (CommonValidator) annotations[i];
+            Annotation target = Annotations.getAnnotation(ValidatorTarget.class, type);
+            if (target != null) {
                 String depend;
-                if (validator instanceof ValidatorField) {
-                    depend = createValidatorFieldDepends((ValidatorField) validator);
+                if (annotations[i] instanceof ValidatorField) {
+                    depend = createValidatorFieldDepends((ValidatorField) annotations[i]);
                 } else {
                     depend = getValidatorName(type);
                 }

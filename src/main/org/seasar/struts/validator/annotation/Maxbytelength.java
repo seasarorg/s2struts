@@ -2,8 +2,9 @@ package org.seasar.struts.validator.annotation;
 
 /**
  * @author Katsuhiko Nagashima
+ * @org.seasar.struts.validator.annotation.ValidatorTarget
  */
-public interface Maxbytelength extends CommonValidator {
+public interface Maxbytelength {
 
     int value();
     
