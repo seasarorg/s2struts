@@ -72,9 +72,8 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
 
         for (Annotation annotation : method.getAnnotations()) {
             Class<?> type = annotation.annotationType();
-            ValidatorTarget commonValidator = type
-                    .getAnnotation(ValidatorTarget.class);
-            if (commonValidator != null) {
+            ValidatorTarget target = type.getAnnotation(ValidatorTarget.class);
+            if (target != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
                     Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
