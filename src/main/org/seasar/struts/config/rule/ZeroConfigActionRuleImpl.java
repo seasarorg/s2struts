@@ -95,9 +95,9 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         }
 
         String path = null;
-        String[] viewExtention = this.configRule.getViewExtention();
-        for (int i = 0; i < viewExtention.length; i++) {
-            String file = getPath(actionClass, null) + "." + viewExtention[i];
+        String[] viewExtension = this.configRule.getViewExtension();
+        for (int i = 0; i < viewExtension.length; i++) {
+            String file = getPath(actionClass, null) + "." + viewExtension[i];
             path = this.configRule.getDocRoot() + file;
             String packageDir = "/" + actionClass.getPackage().getName().replace('.', '/');
 
@@ -124,7 +124,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         if (new File(servletContext.getRealPath(path)).exists()) {
             return path;
         } else if (StringUtil.isEmpty(packageDir)) {
-            if (isLastExtention(file) && actionConfig.findForwardConfigs().length == 0) {
+            if (isLastExtension(file) && actionConfig.findForwardConfigs().length == 0) {
                 String message = "View file was not found." + new File(path).getAbsolutePath();
                 logger.info(message);
                 //throw new IllegalStateException("View file was not found." + new File(path).getAbsolutePath());
@@ -142,8 +142,8 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         }
     }
 
-    private boolean isLastExtention(String file) {
-        return file.endsWith(this.configRule.getViewExtention()[this.configRule.getViewExtention().length - 1]);
+    private boolean isLastExtension(String file) {
+        return file.endsWith(this.configRule.getViewExtension()[this.configRule.getViewExtension().length - 1]);
     }
 
     public void setAutoStrutsConfigPattern(AutoStrutsConfigRule configRule) {

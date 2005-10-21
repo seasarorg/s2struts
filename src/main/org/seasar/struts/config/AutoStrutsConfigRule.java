@@ -16,7 +16,7 @@ public interface AutoStrutsConfigRule {
 
     void setDocRoot(String docRoot);
 
-    String[] getViewExtention();
+    String[] getViewExtension();
 
-    void setViewExtention(String viewExtention);
+    void setViewExtension(String viewExtension);
 }

@@ -26,7 +26,7 @@ import org.seasar.struts.util.ClassFinderImpl;
  *   <set-property property="actionClassPattern" value="foo.bar.action.*Action"/>
  *   <set-property property="formClassPattern" value="foo.bar.form.*Form"/>
  *   <set-property property="docRoot" value="/WEB-INF/jsp"/>
- *   <set-property property="viewExtention" value="jsp,html,view"/>
+ *   <set-property property="viewExtension" value="jsp,html,view"/>
  * </plug-in>
  * 
  * @author Satoshi Kimura
@@ -102,8 +102,8 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
         configRule().setDocRoot(docRoot);
     }
 
-    public void setViewExtention(String viewExtention) {
-        configRule().setViewExtention(viewExtention);
+    public void setViewExtension(String viewExtension) {
+        configRule().setViewExtension(viewExtension);
     }
 
     private static AutoStrutsConfigRule configRule() {

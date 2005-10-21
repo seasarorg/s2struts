@@ -14,7 +14,7 @@ public class AutoStrutsConfigRuleImpl implements AutoStrutsConfigRule {
 
     private String formClassPattern = "(.*Form$)|(.*Dto$)";
 
-    private String[] viewExtention = { "jsp", "html" };
+    private String[] viewExtension = { "jsp", "html" };
 
     public String getActionClassPattern() {
         return this.actionClassPattern;
@@ -40,16 +40,16 @@ public class AutoStrutsConfigRuleImpl implements AutoStrutsConfigRule {
         this.docRoot = docRoot.replaceFirst("/$", "");
     }
 
-    public String[] getViewExtention() {
-        return this.viewExtention;
+    public String[] getViewExtension() {
+        return this.viewExtension;
     }
 
-    public void setViewExtention(String viewExtention) {
-        StringTokenizer tokenizer = new StringTokenizer(viewExtention, ",");
+    public void setViewExtension(String viewExtension) {
+        StringTokenizer tokenizer = new StringTokenizer(viewExtension, ",");
         List list = new ArrayList();
         while (tokenizer.hasMoreElements()) {
             list.add(tokenizer.nextElement().toString().trim());
         }
-        this.viewExtention = (String[]) list.toArray(new String[list.size()]);
+        this.viewExtension = (String[]) list.toArray(new String[list.size()]);
     }
 }
