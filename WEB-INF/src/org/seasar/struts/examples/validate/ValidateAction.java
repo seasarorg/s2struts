@@ -1,7 +1,7 @@
 package org.seasar.struts.examples.validate;
 
-import org.seasar.struts.annotation.ScopeType;
-import org.seasar.struts.annotation.StrutsAction;
+import org.seasar.struts.annotation.tiger.ScopeType;
+import org.seasar.struts.annotation.tiger.StrutsAction;
 
 /**
  * @author Satoshi Kimura

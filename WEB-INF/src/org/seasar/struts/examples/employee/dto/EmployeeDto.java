@@ -1,6 +1,6 @@
 package org.seasar.struts.examples.employee.dto;
 
-import org.seasar.struts.annotation.StrutsActionForm;
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
 import org.seasar.struts.examples.employee.entity.Employee;
 
 /**

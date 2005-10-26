@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 import org.seasar.struts.examples.util.DateUtil;
 import org.seasar.struts.examples.util.StringUtil;
-import org.seasar.struts.validator.annotation.Args;
-import org.seasar.struts.validator.annotation.DateType;
-import org.seasar.struts.validator.annotation.IntegerType;
-import org.seasar.struts.validator.annotation.NoValidate;
-import org.seasar.struts.validator.annotation.Required;
+import org.seasar.struts.validator.annotation.tiger.Args;
+import org.seasar.struts.validator.annotation.tiger.DateType;
+import org.seasar.struts.validator.annotation.tiger.IntegerType;
+import org.seasar.struts.validator.annotation.tiger.NoValidate;
+import org.seasar.struts.validator.annotation.tiger.Required;
 
 public class Employee implements Serializable {
 

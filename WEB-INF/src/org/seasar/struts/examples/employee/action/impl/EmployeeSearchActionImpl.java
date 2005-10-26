@@ -1,6 +1,6 @@
 package org.seasar.struts.examples.employee.action.impl;
 
-import org.seasar.struts.annotation.ExportToSession;
+import org.seasar.struts.annotation.tiger.ExportToSession;
 import org.seasar.struts.examples.common.Constants;
 import org.seasar.struts.examples.employee.action.EmployeeSearchAction;
 import org.seasar.struts.examples.employee.dto.ProcessModeDto;

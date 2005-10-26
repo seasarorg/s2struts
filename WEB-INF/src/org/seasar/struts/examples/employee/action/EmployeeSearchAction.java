@@ -1,8 +1,8 @@
 package org.seasar.struts.examples.employee.action;
 
-import org.seasar.struts.annotation.ScopeType;
-import org.seasar.struts.annotation.StrutsAction;
-import org.seasar.struts.annotation.StrutsActionForward;
+import org.seasar.struts.annotation.tiger.ScopeType;
+import org.seasar.struts.annotation.tiger.StrutsAction;
+import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author Katsuhiko Nagashima
@@ -13,7 +13,7 @@ public interface EmployeeSearchAction {
     @StrutsActionForward(path = "/pages/employee/employeeList.jsp")
     public String LIST = "list";
 
-    @StrutsActionForward(path = "/pages/employee/employeeEdit.jsp")
+    @StrutsActionForward(path = "/pages/employee/employeeEdit.jsp", redirect = true)
     public String EDIT = "edit";
 
     public String goList();

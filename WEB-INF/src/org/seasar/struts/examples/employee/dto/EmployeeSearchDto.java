@@ -2,13 +2,13 @@ package org.seasar.struts.examples.employee.dto;
 
 import java.io.Serializable;
 
-import org.seasar.struts.annotation.StrutsActionForm;
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
 import org.seasar.struts.examples.util.DateUtil;
 import org.seasar.struts.examples.util.StringUtil;
-import org.seasar.struts.validator.annotation.Args;
-import org.seasar.struts.validator.annotation.DateType;
-import org.seasar.struts.validator.annotation.IntegerType;
-import org.seasar.struts.validator.annotation.NoValidate;
+import org.seasar.struts.validator.annotation.tiger.Args;
+import org.seasar.struts.validator.annotation.tiger.DateType;
+import org.seasar.struts.validator.annotation.tiger.IntegerType;
+import org.seasar.struts.validator.annotation.tiger.NoValidate;
 
 /**
  * @author Katsuhiko Nagashima

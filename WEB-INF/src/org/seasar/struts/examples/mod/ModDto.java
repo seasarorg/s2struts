@@ -2,7 +2,7 @@ package org.seasar.struts.examples.mod;
 
 import java.io.Serializable;
 
-import org.seasar.struts.annotation.StrutsActionForm;
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
 /**
  * @author Katsuhiko Nagashima

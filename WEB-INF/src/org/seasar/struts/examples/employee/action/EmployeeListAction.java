@@ -1,7 +1,7 @@
 package org.seasar.struts.examples.employee.action;
 
-import org.seasar.struts.annotation.StrutsAction;
-import org.seasar.struts.annotation.StrutsActionForward;
+import org.seasar.struts.annotation.tiger.StrutsAction;
+import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author Katsuhiko Nagashima
