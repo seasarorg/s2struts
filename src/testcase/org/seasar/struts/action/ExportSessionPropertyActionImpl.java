@@ -1,9 +1,9 @@
 package org.seasar.struts.action;
 
 import org.seasar.struts.Constants;
-import org.seasar.struts.annotation.Export;
-import org.seasar.struts.annotation.ExportToSession;
-import org.seasar.struts.annotation.ScopeType;
+import org.seasar.struts.annotation.tiger.Export;
+import org.seasar.struts.annotation.tiger.ExportToSession;
+import org.seasar.struts.annotation.tiger.ScopeType;
 
 /**
  * @author Katsuhiko Nagashima

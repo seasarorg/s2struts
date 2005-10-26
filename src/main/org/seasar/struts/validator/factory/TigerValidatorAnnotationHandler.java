@@ -11,12 +11,12 @@ import org.apache.commons.validator.Msg;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.util.StringUtil;
-import org.seasar.struts.validator.annotation.Args;
-import org.seasar.struts.validator.annotation.Message;
-import org.seasar.struts.validator.annotation.NoValidate;
-import org.seasar.struts.validator.annotation.Validator;
-import org.seasar.struts.validator.annotation.ValidatorField;
-import org.seasar.struts.validator.annotation.ValidatorTarget;
+import org.seasar.struts.validator.annotation.tiger.Args;
+import org.seasar.struts.validator.annotation.tiger.Message;
+import org.seasar.struts.validator.annotation.tiger.NoValidate;
+import org.seasar.struts.validator.annotation.tiger.Validator;
+import org.seasar.struts.validator.annotation.tiger.ValidatorField;
+import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
 
 /**
  * 

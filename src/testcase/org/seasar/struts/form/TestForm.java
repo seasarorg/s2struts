@@ -2,23 +2,23 @@ package org.seasar.struts.form;
 
 import java.util.Date;
 
-import org.seasar.struts.annotation.StrutsActionForm;
-import org.seasar.struts.validator.annotation.Args;
-import org.seasar.struts.validator.annotation.CreditCardType;
-import org.seasar.struts.validator.annotation.DateType;
-import org.seasar.struts.validator.annotation.EmailType;
-import org.seasar.struts.validator.annotation.FloatRange;
-import org.seasar.struts.validator.annotation.IntegerType;
-import org.seasar.struts.validator.annotation.Mask;
-import org.seasar.struts.validator.annotation.Maxbytelength;
-import org.seasar.struts.validator.annotation.Maxlength;
-import org.seasar.struts.validator.annotation.Minbytelength;
-import org.seasar.struts.validator.annotation.Minlength;
-import org.seasar.struts.validator.annotation.NoValidate;
-import org.seasar.struts.validator.annotation.Required;
-import org.seasar.struts.validator.annotation.Validator;
-import org.seasar.struts.validator.annotation.ValidatorField;
-import org.seasar.struts.validator.annotation.Variable;
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.validator.annotation.tiger.Args;
+import org.seasar.struts.validator.annotation.tiger.CreditCardType;
+import org.seasar.struts.validator.annotation.tiger.DateType;
+import org.seasar.struts.validator.annotation.tiger.EmailType;
+import org.seasar.struts.validator.annotation.tiger.FloatRange;
+import org.seasar.struts.validator.annotation.tiger.IntegerType;
+import org.seasar.struts.validator.annotation.tiger.Mask;
+import org.seasar.struts.validator.annotation.tiger.Maxbytelength;
+import org.seasar.struts.validator.annotation.tiger.Maxlength;
+import org.seasar.struts.validator.annotation.tiger.Minbytelength;
+import org.seasar.struts.validator.annotation.tiger.Minlength;
+import org.seasar.struts.validator.annotation.tiger.NoValidate;
+import org.seasar.struts.validator.annotation.tiger.Required;
+import org.seasar.struts.validator.annotation.tiger.Validator;
+import org.seasar.struts.validator.annotation.tiger.ValidatorField;
+import org.seasar.struts.validator.annotation.tiger.Variable;
 
 /**
  * @author Katsuhiko Nagashima
