@@ -2,7 +2,7 @@ package org.seasar.struts.action;
 
 /**
  * @author Katsuhiko Nagashima
- * @org.seasar.struts.annotation.StrutsAction(path="testpath", name="testname",
+ * @org.seasar.struts.annotation.backport175.StrutsAction(path="testpath", name="testname",
  *                                                             input="testinput",
  *                                                             parameter="testparameter",
  *                                                             attribute="testattribute",
@@ -15,12 +15,12 @@ package org.seasar.struts.action;
 public interface TestAction {
 
     /**
-     * @org.seasar.struts.annotation.StrutsActionForward(path="/test.jsp")
+     * @org.seasar.struts.annotation.backport175.StrutsActionForward(path="/test.jsp")
      */
     String SUCCESS = "success";
 
     /**
-     * @org.seasar.struts.annotation.StrutsActionForward(path="/fail.jsp", redirect=true)
+     * @org.seasar.struts.annotation.backport175.StrutsActionForward(path="/fail.jsp", redirect=true)
      */
     String FAIL = "fail";
 

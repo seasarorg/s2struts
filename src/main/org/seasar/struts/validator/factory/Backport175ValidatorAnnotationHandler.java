@@ -12,12 +12,12 @@ import org.codehaus.backport175.reader.Annotations;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.util.StringUtil;
-import org.seasar.struts.validator.annotation.Args;
-import org.seasar.struts.validator.annotation.ValidatorTarget;
-import org.seasar.struts.validator.annotation.Message;
-import org.seasar.struts.validator.annotation.NoValidate;
-import org.seasar.struts.validator.annotation.Validator;
-import org.seasar.struts.validator.annotation.ValidatorField;
+import org.seasar.struts.validator.annotation.backport175.Args;
+import org.seasar.struts.validator.annotation.backport175.Message;
+import org.seasar.struts.validator.annotation.backport175.NoValidate;
+import org.seasar.struts.validator.annotation.backport175.Validator;
+import org.seasar.struts.validator.annotation.backport175.ValidatorField;
+import org.seasar.struts.validator.annotation.backport175.ValidatorTarget;
 
 /**
  * @author Katsuhiko Nagashima

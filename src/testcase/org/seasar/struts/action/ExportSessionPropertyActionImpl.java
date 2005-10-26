@@ -27,7 +27,7 @@ public class ExportSessionPropertyActionImpl implements
     }
 
     /**
-     * @org.seasar.struts.annotation.Export(org.seasar.struts.Constants.SESSION)
+     * @org.seasar.struts.annotation.backport175.Export(org.seasar.struts.Constants.SESSION)
      */
     public String getBaz() {
         return baz;
@@ -46,7 +46,7 @@ public class ExportSessionPropertyActionImpl implements
     }
 
     /**
-     * @org.seasar.struts.annotation.ExportToSession()
+     * @org.seasar.struts.annotation.backport175.ExportToSession()
      */
     public String getQux() {
         return qux;
