@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:maya xmlns:m="http://maya.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="add.title"/>
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content"/>
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/add" focus="arg1" />
+    
+    <html:submit m:id="goCalc" ><bean:message key="calc"/></html:submit>
+
+</m:maya>

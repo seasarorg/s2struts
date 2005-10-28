@@ -7,10 +7,10 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsAction(path = "/modInput", name = "modForm", scope = ScopeType.SESSION, validate = false)
+@StrutsAction(name = "modForm", scope = ScopeType.SESSION, validate = false)
 public interface ModInputAction {
 
-    @StrutsActionForward(path = "/pages/modInput.jsp")
+    @StrutsActionForward(path = "/pages/modInput.html")
     String SUCCESS = "success";
 
     String input();

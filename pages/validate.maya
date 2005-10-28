@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:maya xmlns:m="http://maya.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="subtract.title"/>
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content"/>
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/validate">
+        <s2struts:page />
+        <m:doBody />
+    </html:form>
+    
+    <html:text m:id="required" property="required" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="byte" property="byte" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="short" property="short" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="integer" property="integer" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="long" property="long" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="float" property="float" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="double" property="double" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="length" property="length" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="length2" property="length2" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="range" property="range" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="date" property="date" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="email" property="email" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="url" property="url" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="creditCard" property="creditCard" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="mix" property="mix" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:submit m:id="goValidate" ><bean:message key="validate"/></html:submit>
+
+</m:maya>

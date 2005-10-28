@@ -24,12 +24,12 @@
         <exception
             key="errors.global.runtime"
             type="java.lang.RuntimeException"
-            path="/pages/error.jsp"/>
+            path="/pages/error.html"/>
 
         <exception
             key="errors.global.runtime.sql"
             type="org.seasar.framework.exception.SQLRuntimeException"
-            path="/pages/error.jsp"/>
+            path="/pages/error.html"/>
 
     </global-exceptions>
 
@@ -39,11 +39,11 @@
 
         <forward
             name="welcome"
-            path="/index.jsp"/>
+            path="/index.html"/>
 
         <forward
             name="addInput"
-            path="/pages/addInput.jsp"/>
+            path="/pages/addInput.html"/>
 
         <forward
             name="globalStyle"
@@ -55,11 +55,11 @@
 
         <forward
             name="error"
-            path="/pages/error.jsp"/>
+            path="/pages/error.html"/>
 
         <forward
             name="employee"
-            path="/pages/employee/employeeSearch.jsp"/>
+            path="/pages/employee/employeeSearch.html"/>
 
     </global-forwards>
 
@@ -72,8 +72,8 @@
             name="calcForm"
             scope="request"
             validate="false"
-            input="/pages/addInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
+            input="/pages/addInput.html">
+            <forward name="success" path="/pages/result.html" />
         </action>
         <action
             path="/subtract"
@@ -81,8 +81,8 @@
             name="calcForm"
             scope="request"
             validate="false"
-            input="/pages/subtractInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
+            input="/pages/subtractInput.html">
+            <forward name="success" path="/pages/result.html" />
         </action>
         <action
             path="/multiply"
@@ -90,16 +90,16 @@
             name="calcForm"
             scope="request"
             validate="false"
-            input="/pages/multiplyInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
+            input="/pages/multiplyInput.html">
+            <forward name="success" path="/pages/result.html" />
         </action>
         <action
             path="/divide"
             name="calcForm"
             scope="request"
             validate="false"
-            input="/pages/divideInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
+            input="/pages/divideInput.html">
+            <forward name="success" path="/pages/result.html" />
         </action>
         <action
             path="/echo"
@@ -107,8 +107,8 @@
             name="strForm"
             scope="request"
             validate="false"
-            input="/pages/echoInput.jsp">
-            <forward name="success" path="/pages/strResult.jsp" />
+            input="/pages/echoInput.html">
+            <forward name="success" path="/pages/strResult.html" />
         </action>
         <action
             path="/changeCase"
@@ -117,8 +117,8 @@
             scope="request"
             validate="true"
 			parameter="command"
-            input="/pages/changeCaseInput.jsp">
-            <forward name="success" path="/pages/strResult.jsp" />
+            input="/pages/changeCaseInput.html">
+            <forward name="success" path="/pages/strResult.html" />
         </action>
     </action-mappings>
     

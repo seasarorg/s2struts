@@ -9,10 +9,10 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 @StrutsAction(name = "employeeForm", parameter = "method", validate = false)
 public interface EmployeeListAction {
 
-    @StrutsActionForward(path = "/pages/employee/employeeEdit.jsp")
+    @StrutsActionForward(path = "/pages/employee/employeeEdit.html")
     public String EDIT = "edit";
 
-    @StrutsActionForward(path = "/pages/employee/employeeConfirm.jsp")
+    @StrutsActionForward(path = "/pages/employee/employeeConfirm.html")
     public String CONFIRM = "confirm";
 
     public String goEditForUpdate();

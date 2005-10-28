@@ -65,6 +65,12 @@
     <load-on-startup>2</load-on-startup>
   </servlet>
 
+  <servlet>
+    <servlet-name>MayaServlet</servlet-name>
+    <servlet-class>org.seasar.maya.impl.MayaServlet</servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>s2container</servlet-name>
     <url-pattern>/s2container</url-pattern>
@@ -76,10 +82,24 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>MayaServlet</servlet-name>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>MayaServlet</servlet-name>
+    <url-pattern>*.xml</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>MayaServlet</servlet-name>
+    <url-pattern>*.maya</url-pattern>
+  </servlet-mapping>
 
   <!-- The Usual Welcome File List -->
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

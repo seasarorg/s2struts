@@ -6,16 +6,16 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsAction(name = "employeeForm", input = "/pages/employee/employeeEdit.jsp")
+@StrutsAction(name = "employeeForm", input = "/pages/employee/employeeEdit.html")
 public interface EmployeeConfirmAction {
 
-    @StrutsActionForward(path = "/pages/employee/employeeEdit.jsp")
+    @StrutsActionForward(path = "/pages/employee/employeeEdit.html")
     public String EDIT = "edit";
 
-    @StrutsActionForward(path = "/pages/employee/employeeSearch.jsp", redirect = true)
+    @StrutsActionForward(path = "/pages/employee/employeeSearch.html", redirect = true)
     public String SEARCH = "search";
 
-    @StrutsActionForward(path = "/pages/employee/employeeList.jsp", redirect = true)
+    @StrutsActionForward(path = "/pages/employee/employeeList.html", redirect = true)
     public String LIST = "list";
 
     public String store();

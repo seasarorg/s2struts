@@ -9,16 +9,16 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 @StrutsAction(name = "employeeForm")
 public interface EmployeeEditAction {
     
-    @StrutsActionForward(path = "/pages/employee/employeeEdit.jsp")
+    @StrutsActionForward(path = "/pages/employee/employeeEdit.html")
     public String ERROR = "error";
 
-    @StrutsActionForward(path = "/pages/employee/employeeConfirm.jsp")
+    @StrutsActionForward(path = "/pages/employee/employeeConfirm.html")
     public String CONFIRM = "confirm";
 
-    @StrutsActionForward(path = "/pages/employee/employeeSearch.jsp", redirect = true)
+    @StrutsActionForward(path = "/pages/employee/employeeSearch.html", redirect = true)
     public String SEARCH = "search";
 
-    @StrutsActionForward(path = "/pages/employee/employeeList.jsp", redirect = true)
+    @StrutsActionForward(path = "/pages/employee/employeeList.html", redirect = true)
     public String LIST = "list";
 
     public String goConfirm();
