@@ -23,17 +23,19 @@
 <!-- document start -->
 <ul>
 	<li><a href="#Summary">S2StrutsŠT—v</a></li>
+	<li><a href="#Setup">“®ìŠÂ‹«‚ÆEclipseƒvƒƒWƒFƒNƒg‚ÌƒZƒbƒgƒAƒbƒv</a></li>
+	<li><a href="#Quickstart">ƒNƒCƒbƒNƒXƒ^[ƒg</a></li>
 	<li><a href="#Reference">S2StrutsƒŠƒtƒ@ƒŒƒ“ƒX</a></li>
 	<ul>
-		<li><a href="#Setup">“®ìŠÂ‹«‚ÆEclipseƒvƒƒWƒFƒNƒg‚ÌƒZƒbƒgƒAƒbƒv</a></li>
 		<li><a href="#Usage">Šî–{“I‚Èg‚¢•û</a></li>
 		<li><a href="#POJOAction">Action‚ğPOJO‚É‚µ‚½g‚¢•û</a></li>
 		<li><a href="#ProxyAction">ProxyActionƒNƒ‰ƒX‚Ìg‚¢•û</a></li>
 		<li><a href="#NoType">struts-config“à‚É‹Lq‚µ‚Ä‚¢‚éaction‚ÌAtype‘®«‚ğ‹Lq‚¹‚¸‚ÉActionƒNƒ‰ƒX‚ğw’è‚·‚é</a></li>
 		<li><a href="#Mapping">path‘®«‚ÆActionƒNƒ‰ƒX‚Ìƒ}ƒbƒsƒ“ƒO‚É‚Â‚¢‚Ä</a></li>
 		<li><a href="#Hint">“K—p‚Ö‚Ìƒqƒ“ƒg</a></li>
-		<li><a href="#Backport175">backport175‚ğg—p‚µ‚½struts-config‚Ìİ’è</a></li>
-		<li><a href="#Backport175Validation">backport175‚ğg—p‚µ‚½validation‚Ìİ’è</a></li>
+		<li><a href="#ZoroConfig">–³İ’èS2Struts</a></li>
+		<li><a href="#Annotation">Annotation‚ğg—p‚µ‚½struts-config‚Ìİ’è</a></li>
+		<li><a href="#AnnotationValidation">Annotation‚ğg—p‚µ‚½validation‚Ìİ’è</a></li>
 		<li><a href="#RequestProcessor">RequestProcessor‚ğƒRƒ“ƒ|[ƒlƒ“ƒg‚©‚çæ“¾‚·‚é</a></li>
 		<li><a href="#Message">ƒGƒ‰[ƒƒbƒZ[ƒW‚Ì•\¦‚ğ”CˆÓ‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚©‚çŠÇ—‚·‚é</a></li>
 		<li><a href="#TagLib">ƒ^ƒOƒ‰ƒCƒuƒ‰ƒŠ‚É‚Â‚¢‚Ä</a></li>
@@ -47,8 +49,7 @@ ActionƒNƒ‰ƒX‚Ì–ğŠ„‚Í“KØ‚ÈƒT[ƒrƒXƒRƒ“ƒ|[ƒlƒ“ƒg‚ğŒÄ‚Ño‚·‚¾‚¯‚É‚È‚è‚Ü‚·B
 ActionƒNƒ‰ƒX‚ÍƒRƒ“ƒgƒ[ƒ‰‚É“O‚·‚é‚±‚Æ‚ÅAƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“‘w‚ÆƒT[ƒrƒX‘w‚Ì–ğŠ„•ª’S‚à–¾Šm‚É‚È‚è‚Ü‚·B
 ‚Ü‚½AAction‚É‘Î‚µ‚Ä<a href="http://homepage3.nifty.com/seasar/aop.html">AOP</a>‚ğ“K—p‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·B
 </p>
-<h2><a name="Reference">S2StrutsƒŠƒtƒ@ƒŒƒ“ƒX</a></h2>
-<h3><a name="Setup">“®ìŠÂ‹«‚ÆEclipseƒvƒƒWƒFƒNƒg‚ÌƒZƒbƒgƒAƒbƒv</a></h3>
+<h2><a name="Setup">“®ìŠÂ‹«‚ÆEclipseƒvƒƒWƒFƒNƒg‚ÌƒZƒbƒgƒAƒbƒv</a></h2>
 <p>
 S2‚Æ“¯—l‚ÉJDK1.4ˆÈã‚ª•K—v‚Å‚·B
 </p><p>
@@ -59,7 +60,8 @@ S2StrutsVx.x.x.jar‚ğ‰ğ“€‚µ‚Ä‚Å‚«‚½s2strutsƒfƒBƒŒƒNƒgƒŠ‚ğEclipse‚ÌJavaƒvƒƒWƒFƒNƒ
 ƒTƒ“ƒvƒ‹‚ÍA
 <a href="http://jakarta.apache.org/tomcat/">Tomcat</a>‚Æ
 <a href="http://www.sysdeo.com/eclipse/tomcatPlugin.html">Tomcat Plugin</a>‚ğg‚¤‚±‚Æ‚ğ‘O’ñ‚É‚µ‚Ä‚¢‚Ü‚·B
-‚ ‚ç‚©‚¶‚ßƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä’u‚¢‚Ä‚­‚¾‚³‚¢B
+‚ ‚ç‚©‚¶‚ßƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚­‚¾‚³‚¢B
+</p><p>
 ƒTƒ“ƒvƒ‹‚ÍS2StrutsExamleVx.x.x.jar‚Æ‚µ‚Ä•Ê“r—pˆÓ‚³‚ê‚Ä‚¢‚é‚Ì‚ÅA
 ƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä‰ğ“€‚µ‚Ä‚­‚¾‚³‚¢BEclipse‚Ås2struts-example‚Æ‚¢‚¤–¼‘O‚ÅJavaƒvƒƒWƒFƒNƒg‚ğì¬‚µ‚Ü‚·B
 TomcatƒvƒƒWƒFƒNƒg‚Å‚Í‚È‚¢‚Ì‚Å‹C‚ğ‚Â‚¯‚Ä‚­‚¾‚³‚¢B‰ğ“€‚µ‚Ä‚Å‚«‚½s2struts-exampleƒfƒBƒŒƒNƒgƒŠ‚ğŠÛ‚²‚ÆƒCƒ“ƒ|[ƒg‚µ‚Ä‚­‚¾‚³‚¢B
@@ -67,12 +69,410 @@ TomcatƒvƒƒWƒFƒNƒg‚Å‚Í‚È‚¢‚Ì‚Å‹C‚ğ‚Â‚¯‚Ä‚­‚¾‚³‚¢B‰ğ“€‚µ‚Ä‚Å‚«‚½s2struts-example
 s2struts-exampleƒvƒƒWƒFƒNƒg‚ğ‰EƒNƒŠƒbƒN‚µ‚ÄƒvƒƒpƒeƒB-&gt;Tomcat‚ğ‘I‚Ñ‚Ü‚·BTomcatƒvƒƒWƒFƒNƒg‚Å‚ ‚é‚ğƒ`ƒFƒbƒN‚µA
 ƒAƒvƒŠƒP[ƒVƒ‡ƒ“URI‚ğ/s2struts-example‚Æ‚µ‚Ü‚·B‚±‚ê‚ÅATomcat‚ğÄ‹N“®‚µ‚ÄA
 ƒuƒ‰ƒEƒU‚©‚ç<a href="http://localhost:8080/s2struts-example/">http://localhost:8080/s2struts-example/</a>‚ÉƒAƒNƒZƒX‚·‚é‚Æ
-l‘¥‰‰Z‚ÌƒTƒ“ƒvƒ‹‚ğŒ©‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+s2struts‚ğg—p‚µ‚½ƒTƒ“ƒvƒ‹‚ğŒ©‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
 </p>
+<h2><a name="Quickstart">ƒNƒCƒbƒNƒXƒ^[ƒg</a></h2>
+<p>
+‘‘¬‚µ‚Ä‚İ‚Ü‚µ‚å‚¤B
+</p><p>
+ƒNƒCƒbƒNƒXƒ^[ƒg‚ÍA
+<a href="http://jakarta.apache.org/tomcat/">Tomcat</a>‚Æ
+<a href="http://www.sysdeo.com/eclipse/tomcatPlugin.html">Tomcat Plugin</a>‚ğg‚¤‚±‚Æ‚ğ‘O’ñ‚É‚µ‚Ä‚¢‚Ü‚·B
+‚ ‚ç‚©‚¶‚ßƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚­‚¾‚³‚¢B
+</p><p>
+S2Struts‚ğŠÈ’P‚É—˜—p‚·‚é‚½‚ß‚ÉS2StrutsBlankVx.x.x.zip‚ğg‚¢‚Ü‚·B
+S2StrutsBlankVx.x.x.zip‚ğ‰ğ“€‚µ‚Äs2struts-blankƒfƒBƒŒƒNƒgƒŠ‚ğEclipse‚ÌJavaƒvƒƒWƒFƒNƒg‚Æ‚µ‚ÄŠÛ‚²‚ÆƒCƒ“ƒ|[ƒg‚µ‚Ä‚­‚¾‚³‚¢B
+.classpath‚ğã‘‚«‚·‚é‚©•·‚©‚ê‚é‚Ì‚ÅA‘S‚ÄA‚Í‚¢‚Ìƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚µ‚ÄA‘S‚Ä‚ğæ‚è‚İ‚Ü‚·B
+s2struts-blankƒvƒƒWƒFƒNƒg‚ğ‰EƒNƒŠƒbƒN‚µ‚ÄƒvƒƒpƒeƒB-&gt;Tomcat‚ğ‘I‚Ñ‚Ü‚·B‚±‚ê‚Å€”õ‚Í‚Å‚«‚Ü‚µ‚½B
+</p>
+<p>
+‚Ü‚¸‚Íƒfƒ‚‰æ–Ê‚Æ‚È‚éHTML‚©‚çì¬‚µ‚Ü‚·Bs2struts-blank‚Ì’¼‰º‚ÉgreetingInput.htmlAgreeting.html‚ğì‚è‚Ü‚·B
+<h5>greetingInput.html</h5>
+<p>ŠÔ‘Ñ‚ğw’è‚·‚é‰æ–Ê‚Å‚·B</p>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form method="GET" action="greeting.html"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th&gt;time&lt;/th&gt;
+        &lt;td&gt;
+          &lt;select name="time"&gt;
+            &lt;option value="" selected&gt;Please select&lt;/option&gt;
+            &lt;option value="a.m."&gt;a.m.&lt;/option&gt;
+            &lt;option value="p.m."&gt;p.m.&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type="submit" value="greeting"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h5>greeting.html</h5>
+<p>ŠÔ‘Ñ‚²‚Æ‚Ì‚ ‚¢‚³‚Â‚ğ•\¦‚·‚é‰æ–Ê‚Å‚·B</p>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;td&gt;a.m.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;greeting&lt;/th&gt;
+      &lt;td&gt;Good morning&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;a href="greetingInput.html"&gt;back&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+ƒuƒ‰ƒEƒU‚ÅgreetingInput.html‚ğ•\¦‚·‚ê‚ÎA‚±‚ê‚©‚çì¬‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ì†Å‹‚ğ‚İ‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+</p>
+<p>
+‚±‚ê‚©‚çì‚é‚à‚Ì‚ÌƒCƒ[ƒW‚ª‚í‚«‚Ü‚µ‚½‚©H
+</p>
+<p>‚»‚ê‚Å‚ÍÀÛ‚É“®‚­‚à‚Ì‚É‚µ‚Ä‚¢‚«‚Ü‚·BÅ‰‚ÉƒCƒ“ƒ^[ƒtƒF[ƒX‚ğì‚è‚Ü‚·B‰æ–Ê‚Æ‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚Æ‚¢‚¤ˆÓ–¡‚ÅActionForm(DTO)‚àì‚è‚Ü‚·B</p>
+<h5>GreetingDto</h5>
+<p>POJO‚ÌDTO‚ğActionForm‚Æ‚µ‚Ä—˜—p‚µ‚Ü‚·B‰æ–Ê‚©‚ç‚í‚½‚Á‚Ä‚­‚é€–Ú‚ğ‚½‚¹‚Ü‚·B</p>
+<pre>
+package examples.dto;
+
+public class GreetingDto {
+    private String time = "";
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+}
+</pre>
+<h5>GreetingInputInitAction</h5>
+<p>greetingInput.html‚ğ•\¦‚·‚é‚½‚ß‚Ìî•ñ‚ğ’ñ‹Ÿ‚·‚éActionƒCƒ“ƒ^[ƒtƒF[ƒX‚Å‚·B</p>
+<pre>
+package examples.action;
+
+public interface GreetingInputInitAction {
+    String initialize();
+}
+</pre>
+<h5>GreetingAction</h5>
+<p>‚ ‚¢‚³‚Âˆ—‚ğs‚¤ActionƒCƒ“ƒ^[ƒtƒF[ƒX‚Å‚·B</p>
+<pre>
+package examples.action;
+
+public interface GreetingAction {
+    String SUCCESS = "success";
+    
+    String goGreeting();
+}
+</pre>
+<h5>GreetingService</h5>
+<p>Struts‚ÉˆË‘¶‚µ‚È‚¢ƒT[ƒrƒX‚ğ’ñ‹Ÿ‚·‚éƒCƒ“ƒ^[ƒtƒF[ƒX‚Å‚·B</p>
+<pre>
+package examples.service;
+
+import java.util.List;
+import examples.dto.GreetingDto;
+
+public interface GreetingService {
+    List getTimeList();
+
+    String getGreeting(GreetingDto dto);
+}
+</pre>
+<p>‚±‚ê‚Åˆê’Ê‚èƒCƒ“ƒ^[ƒtƒF[ƒX‚ğì‚é‚±‚Æ‚ª‚Å‚«‚Ü‚µ‚½BŸ‚ÍƒCƒ“ƒ^[ƒtƒF[ƒX‚ğÀ‘•‚µA•”•i‚ğì‚è‚Ü‚·B</p>
+
+<h5>GreetingInputInitActionImpl</h5>
+<p>
+setGreetingService‚ÍGreetingService‚ğƒCƒ“ƒWƒFƒNƒVƒ‡ƒ“‚·‚é‚½‚ß‚ÌSetter‚Å‚·B
+getTimeList‚Í‰æ–Ê‚Ö“n‚·‚½‚ß‚ÌGetter‚Å‚·B
+</p>
+<pre>
+package examples.action.impl;
+
+import java.util.List;
+import examples.action.GreetingInputInitAction;
+import examples.service.GreetingService;
+
+public class GreetingInputInitActionImpl implements GreetingInputInitAction {
+    private GreetingService service;
+    private List timeList;
+
+    public String initialize() {
+        timeList = service.getTimeList();
+        return null;
+    }
+    
+    public void setGreetingService(GreetingService service) {
+        this.service = service;
+    }
+
+    public List getTimeList() {
+        return timeList;
+    }
+}
+</pre>
+<h5>GreetingActionImpl</h5>
+<p>
+setGreetingService‚ÍGreetingService‚ğƒCƒ“ƒWƒFƒNƒVƒ‡ƒ“‚·‚é‚½‚ß‚ÌSetter‚Å‚·B
+setGreetingDto‚ÍActionForm‚ğ‰æ–Ê‚©‚çó‚¯æ‚é‚½‚ß‚ÌSetter‚ÅAgetGreetingDto‚ÍActionForm‚ğ‰æ–Ê‚Ö“n‚·‚½‚ß‚ÌGetter‚Å‚·B
+getGreeting‚Í‰æ–Ê‚Ö“n‚·‚½‚ß‚ÌGetter‚Å‚·B
+</p>
+<pre>
+package examples.action.impl;
+
+import examples.action.GreetingAction;
+import examples.dto.GreetingDto;
+import examples.service.GreetingService;
+
+public class GreetingActionImpl implements GreetingAction {
+    private GreetingService service;
+    private GreetingDto greetingDto;
+    private String greeting;
+
+    public String goGreeting() {
+        greeting = service.getGreeting(greetingDto);
+        return SUCCESS;
+    }
+
+    public void setGreetingService(GreetingService service) {
+        this.service = service;
+    }
+
+    public GreetingDto getGreetingDto() {
+        return greetingDto;
+    }
+
+    public void setGreetingDto(GreetingDto greetingDto) {
+        this.greetingDto = greetingDto;
+    }
+
+    public String getGreeting() {
+        return greeting;
+    }
+}
+</pre>
+<h5>GreetingServiceImpl</h5>
+<pre>
+package examples.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import examples.dto.GreetingDto;
+import examples.service.GreetingService;
+
+public class GreetingServiceImpl implements GreetingService {
+    private static final String AM = "a.m.";
+    private static final String PM = "p.m.";
+
+    public List getTimeList() {
+        List result = new ArrayList();
+        result.add(AM);
+        result.add(PM);
+        return result;
+    }
+
+    public String getGreeting(GreetingDto dto) {
+        if (AM.equals(dto.getTime())) {
+            return "Good morning";
+        }
+        if (PM.equals(dto.getTime())) {
+            return "Good evening";
+        }
+        return "";
+    }
+}
+</pre>
+<p>‚±‚ê‚Å‚·‚×‚Ä‚ÌÀ‘•‚ªI—¹‚µ•”•i‚ª‚»‚ë‚¢‚Ü‚µ‚½BŸ‚Í‚»‚ê‚¼‚ê‚Ì•”•i‚ğ‚Â‚È‚°‚éì‹Æ‚ğ‚µ‚Ü‚·B</p>
+<h5>greeting.dicon</h5>
+<p>Action‚ÆActionFormAService‚ğ‚Â‚È‚°‚é‚½‚ß‚Édiconƒtƒ@ƒCƒ‹‚ğexamples/dicon‚Ì’¼‰º‚Éì‚è‚Ü‚·B</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="aop.dicon"/&gt;
+
+  &lt;component name="actionInterceptorChain" class="org.seasar.framework.aop.interceptors.InterceptorChain"&gt;
+    &lt;initMethod name="add"&gt;&lt;arg&gt;aop.traceInterceptor&lt;/arg&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+
+  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"examples.service.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ServiceImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+  
+  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="instanceDef"&gt;
+      @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+    &lt;/property&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"examples.action.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component class="org.seasar.framework.container.autoregister.AspectAutoRegister"&gt;
+    &lt;property name="interceptor"&gt;actionInterceptorChain&lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"examples.action.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+
+&lt;/components&gt;
+</pre>
+<p>app.dicon‚Éinclude‚ğ’Ç‰Á‚µ‚Ägreeting.dicon‚ğ“Ç‚İ‚Ş‚æ‚¤‚É‚µ‚Ü‚·B</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="s2struts.dicon"/&gt;
+  <b><font color="red">&lt;include path="examples/dicon/greeting.dicon"/&gt;</font></b>
+&lt;/components&gt;
+</pre>
+<p>
+¡ŒãAV‚µ‚¢Action‚ğ’Ç‰Á‚µ‚Ä‚àgreeting.dicon‚ğ•ÏX‚·‚é•K—v‚Í‚ ‚è‚Ü‚¹‚ñB‚±‚ê‚ÍS2.3‚ª’ñ‹Ÿ‚·‚é<a href="http://s2container.seasar.org/ja/DIContainer.html#ComponentAutoRegister">ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì©“®“o˜^</a>‚ğ—˜—p‚µ‚Ä‚¢‚é‚©‚ç‚Å‚·B
+</p>
+<p>‰æ–Ê‚ÆActionAActionForm‚ğ‚Â‚È‚°‚é‚½‚ß‚ÉgreetingInput.htmlAgreeting.html‚ğC³‚µ‚Ä.mayaƒtƒ@ƒCƒ‹‚ğì‚è‚Ü‚·BMaya‚É‚Â‚¢‚Ä‚ÌÚ×‚Í<a href="http://maya.sandbox.seasar.org/">JavaServer Templates "Maya"</a>‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B</p>
+<h5>greetingInput.html</h5>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+<b><font color="red">&lt;div id="appBody"&gt;</font></b>
+  &lt;form method="GET" action="greeting.html" <b><font color="red">id="appForm"</font></b>&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th&gt;time&lt;/th&gt;
+        &lt;td&gt;
+          &lt;select name="time" <b><font color="red">id="time"</font></b>&gt;
+            &lt;option value="" selected&gt;Please select&lt;/option&gt;
+            &lt;option value="a.m."&gt;a.m.&lt;/option&gt;
+            &lt;option value="p.m."&gt;p.m.&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type="submit" value="greeting" <b><font color="red">id="goGreeting"</font></b>&gt;
+  &lt;/form&gt;
+<b><font color="red">&lt;/div&gt;</font></b>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h5>greetingInput.maya</h5>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;m:maya xmlns:m="http://maya.seasar.org"
+		xmlns:html="http://struts.apache.org/tags-html"
+		xmlns:bean="http://struts.apache.org/tags-bean"
+		xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+		m:noCache="true"&gt;
+
+	&lt;m:with id="appBody" replace="false"&gt;
+		&lt;s2struts:init action="#{greetingInputInitAction.initialize}"/&gt;
+		&lt;m:doBody /&gt;
+	&lt;/m:with&gt;
+
+	&lt;html:form m:id="appForm" action="/greeting" method="POST" /&gt;
+	&lt;html:select m:id="time" property="time"&gt;
+		&lt;html:option value=""&gt;Please select&lt;/html:option&gt;
+		&lt;html:options name="timeList" /&gt;
+	&lt;/html:select&gt;
+	&lt;html:submit m:id="goGreeting" &gt;greeting&lt;/html:submit&gt;
+
+&lt;/m:maya&gt;
+</pre>
+<h5>greeting.html</h5>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+<b><font color="red">&lt;div id="appBody"&gt;</font></b>
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;td&gt;<b><font color="red">&lt;span id="time"&gt;</font></b>a.m.<b><font color="red">&lt;/span&gt;</font></b>&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;greeting&lt;/th&gt;
+      &lt;td&gt;<b><font color="red">&lt;span id="greeting"&gt;</font></b>Good morning<b><font color="red">&lt;/span&gt;</font></b>&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;a href="greetingInput.html" <b><font color="red">id="goBack"</font></b>&gt;back&lt;/a&gt;
+<b><font color="red">&lt;/div&gt;</font></b>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h5>greeting.maya</h5>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;m:maya xmlns:m="http://maya.seasar.org"
+		xmlns:html="http://struts.apache.org/tags-html"
+		xmlns:bean="http://struts.apache.org/tags-bean"
+		xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+		m:noCache="true"&gt;
+
+	&lt;m:ignore id="appBody" /&gt;
+
+	&lt;bean:write m:id="time" name="greetingDto" property="time" /&gt;
+	&lt;bean:write m:id="greeting" name="greeting" /&gt;
+	&lt;html:link m:id="goBack" page="/greetingInput.html"&gt;back&lt;/html:link&gt;
+
+&lt;/m:maya&gt;
+</pre>
+<p>‚±‚ê‚Åì‹Æ‚ÍI—¹‚Å‚·B</p>
+<p>
+struts-config.xml‚ğ•ÒW‚µ‚Ä‚¢‚È‚¢‚Å‚·‚ª–â‘è‚È‚­“®ì‚µ‚Ü‚·B‹K–ñ‚É]‚¤‚±‚Æ‚É‚æ‚é–³İ’è‚ÌŒø‰Ê‚Å‚·B‹K–ñ‚É]‚¦‚È‚¢ê‡‚à‚ ‚é‚Æv‚¢‚Ü‚·B‚»‚Ìê‡‚ÍƒAƒmƒe[ƒVƒ‡ƒ“‚É‚æ‚è’¼Úw’è‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·B‹K–ñ‚ÆƒAƒmƒe[ƒVƒ‡ƒ“‚É‚Â‚¢‚Ä‚Í<a href="#ZoroConfig">–³İ’èS2Struts</a>‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+</p>
+<p>
+Tomcat‚ğÄ‹N“®‚µ‚ÄA
+ƒuƒ‰ƒEƒU‚©‚ç<a href="http://localhost:8080/s2struts-blank/greetingInput.html">http://localhost:8080/s2struts-blank/greetingInput.html</a>‚ÉƒAƒNƒZƒX‚µ‚ÄA“®ì‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B
+</p>
+<p>
+S2Struts‚Ì¢ŠE‚Í‚¢‚©‚ª‚Å‚µ‚½‚©H‚æ‚èÚ‚µ‚­’m‚è‚½‚¢ê‡‚ÍAˆÈ‰º‚ÌƒŠƒtƒ@ƒŒƒ“ƒX‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+</p>
+<h2><a name="Reference">S2StrutsƒŠƒtƒ@ƒŒƒ“ƒX</a></h2>
 <h3><a name="Usage">Šî–{“I‚Èg‚¢•û</a></h3>
 <p>
 ‚Ü‚¸AS2Container‚ğ‹N“®‚·‚é‚½‚ß‚ÉS2StrutsServlet‚ğweb.xml‚É“o˜^‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
-‚Ü‚½AS2ContainerFilter‚ğˆÈ‰º‚Ì‚æ‚¤‚Éİ’è‚µ‚Ä‰º‚³‚¢B
+‚Ü‚½AS2ContainerFilter‚ÆS2StrutsFilter‚ğˆÈ‰º‚Ì‚æ‚¤‚Éİ’è‚µ‚Ä‰º‚³‚¢B
 </p>
 <p>
 Ÿ‚ÉAorg.apache.struts.action.ActionServlet‚Ì‘Ö‚í‚è‚ÉAorg.seasar.struts.servlet.S2ActionServlet‚ğA
@@ -85,11 +485,22 @@ StrutsƒIƒŠƒWƒiƒ‹‚ÌƒT[ƒuƒŒƒbƒg‚ğg—p‚·‚éê‡‚ÍAstruts-config.xml‚Éorg.seasar.st
 
   <b>&lt;filter&gt;
     &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.seasar.framework.container.filter.S2ContainerFilter&lt;/filter-class&gt;
+    &lt;filter-class&gt;<font color="red">org.seasar.framework.container.filter.S2ContainerFilter</font>&lt;/filter-class&gt;
   &lt;/filter&gt;
+
+  &lt;filter&gt;
+    &lt;filter-name&gt;s2strutsfilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;<font color="red">org.seasar.struts.filter.S2StrutsFilter</font>&lt;/filter-class&gt;
+  &lt;/filter&gt;
+
   &lt;filter-mapping&gt;
     &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
-    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;url-pattern&gt;<font color="red">/*</font>&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;s2strutsfilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;<font color="red">/*</font>&lt;/url-pattern&gt;
   &lt;/filter-mapping&gt;</b>
 
   <b>&lt;servlet&gt;
@@ -120,30 +531,19 @@ StrutsƒIƒŠƒWƒiƒ‹‚ÌƒT[ƒuƒŒƒbƒg‚ğg—p‚·‚éê‡‚ÍAstruts-config.xml‚Éorg.seasar.st
   &lt;servlet-mapping&gt;
     &lt;servlet-name&gt;s2container&lt;/servlet-name&gt;
     &lt;url-pattern&gt;/s2container&lt;/url-pattern&gt;
-  &lt;/servlet-mapping&gt;<p> &lt;!-- Standard Action Servlet Mapping --&gt;<br />
+  &lt;/servlet-mapping&gt;
+
+  &lt;!-- Standard Action Servlet Mapping --&gt;
   &lt;servlet-mapping&gt;
     &lt;servlet-name&gt;action&lt;/servlet-name&gt;
     &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
-  &lt;/servlet-mapping&gt;</p><p> &lt;!-- The Usual Welcome File List --&gt;<br />
+  &lt;/servlet-mapping&gt;
+
+  &lt;!-- The Usual Welcome File List --&gt;
   &lt;welcome-file-list&gt;
     &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
-  &lt;/welcome-file-list&gt;</p><p> &lt;!-- Struts Tag Library Descriptors --&gt;<br />
-  &lt;taglib&gt;
-    &lt;taglib-uri&gt;/tags/struts-bean&lt;/taglib-uri&gt;
-    &lt;taglib-location&gt;/WEB-INF/struts-bean.tld&lt;/taglib-location&gt;
-  &lt;/taglib&gt;</p><p>  &lt;taglib&gt;
-    &lt;taglib-uri&gt;/tags/struts-html&lt;/taglib-uri&gt;
-    &lt;taglib-location&gt;/WEB-INF/struts-html.tld&lt;/taglib-location&gt;
-  &lt;/taglib&gt;</p><p>  &lt;taglib&gt;
-    &lt;taglib-uri&gt;/tags/struts-logic&lt;/taglib-uri&gt;
-    &lt;taglib-location&gt;/WEB-INF/struts-logic.tld&lt;/taglib-location&gt;
-  &lt;/taglib&gt;</p><p>  &lt;taglib&gt;
-    &lt;taglib-uri&gt;/tags/struts-nested&lt;/taglib-uri&gt;
-    &lt;taglib-location&gt;/WEB-INF/struts-nested.tld&lt;/taglib-location&gt;
-  &lt;/taglib&gt;</p><p>  &lt;taglib&gt;
-    &lt;taglib-uri&gt;/tags/struts-tiles&lt;/taglib-uri&gt;
-    &lt;taglib-location&gt;/WEB-INF/struts-tiles.tld&lt;/taglib-location&gt;
-  &lt;/taglib&gt;</p>
+  &lt;/welcome-file-list&gt;
+
 &lt;/web-app&gt;
 </pre>
 <p>Ÿ‚ÉAS2‚ÆStruts‚ğ˜A“®‚³‚¹‚é‚½‚ß‚ÉAS2—p‚ÌRequestProcessor‚ğstruts-config.xml‚É“o˜^‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
@@ -297,18 +697,17 @@ public final static String ƒvƒƒpƒeƒB–¼_EXPORT = org.seasar.struts.util.BindingU
 ‚ÆActionƒNƒ‰ƒX‚É‹Lq‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
 </p>
 <p>
-‚Ü‚½Abackport175‚É‚æ‚é‹Lq‚à‰Â”\‚Å‚·B‚»‚Ì‹Lq•û–@‚É‚Â‚¢‚Ä‚ÍAˆÈ‰º2’Ê‚è‚Ì•û–@‚ÅƒQƒbƒ^[ƒƒ\ƒbƒh‚É‘Î‚µƒAƒmƒe[ƒVƒ‡ƒ“‚ğ‹Lq‚·‚é–‚Å‰Â”\‚É‚È‚è‚Ü‚·B
+‚Ü‚½AƒAƒmƒe[ƒVƒ‡ƒ“‚É‚æ‚é‹Lq‚à‰Â”\‚Å‚·B‚»‚Ì‹Lq•û–@‚É‚Â‚¢‚Ä‚ÍAˆÈ‰º‚Ì•û–@‚ÅƒQƒbƒ^[ƒƒ\ƒbƒh‚É‘Î‚µƒAƒmƒe[ƒVƒ‡ƒ“‚ğ‹Lq‚·‚é–‚Å‰Â”\‚É‚È‚è‚Ü‚·B
 <pre>
-/**
- * @org.seasar.struts.action.ExportToSession()
- */
+@org.seasar.struts.action.ExportToSession()
 public String getFoo() {
     return foo;
 }
 </pre>
+ˆÈ‰º‚Ì‚æ‚¤‚ÉAbackport175‚É‚æ‚é‹Lq‚à‰Â”\‚Å‚·B
 <pre>
 /**
- * @org.seasar.struts.action.Export(org.seasar.struts.Constants.SESSION)
+ * @org.seasar.struts.action.ExportToSession()
  */
 public String getFoo() {
     return foo;
@@ -602,9 +1001,10 @@ ActionƒNƒ‰ƒX‚Ö‚ÌƒT[ƒrƒXƒNƒ‰ƒX‚È‚Ç‚Ì©“®“I‚ÈDI‚ª‰Â”\‚Èê‡<br>
     <td>ƒfƒƒŠƒbƒg</td>
   </tr>
   <tr>
-    <td>POJOAction</td>
+    <td>POJOAction<b>(„§)</b></td>
     <td>ƒeƒXƒ^ƒrƒŠƒeƒB[Œüã<br>ActionƒNƒ‰ƒX‚Ìƒ‚ƒbƒN‚ÌØ‚è‘Ö‚¦‚ª—eˆÕ‚É‚È‚é<br>S2JSF‚È‚Ç‚Ö‚ÌˆÚs‚à—eˆÕ‚É‚È‚é</td>
-    <td>ƒCƒ“ƒ^[ƒtƒF[ƒX‚ğ’è‹`‚µ‚½ƒtƒ@ƒCƒ‹‚ª‘‚¦‚é‰Â”\«‚ª‚ ‚é</td>
+    <td>ƒCƒ“ƒ^[ƒtƒF[ƒX‚ğ’è‹`‚µ‚½ƒtƒ@ƒCƒ‹‚ª‘‚¦‚é‰Â”\«‚ª‚ ‚é
+    (‚½‚¾‚µAThe Seasar Foundation‚Å‚ÍA‘¼‚©‚çƒAƒNƒZƒX‚³‚ê‚é‚Æ‚«‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚Í–¾¦“I‚Å‚ ‚é‚Ù‚¤‚ª•Ûç«‚Í‚‚­‚È‚é‚Æl‚¦‚Ä‚¢‚Ü‚·)</td>
   </tr>
   <tr>
     <td>Add‚Ì—á</td>
@@ -631,15 +1031,359 @@ ActionƒNƒ‰ƒX‚Ö‚ÌƒT[ƒrƒXƒNƒ‰ƒX‚È‚Ç‚Ì©“®“I‚ÈDI‚ª‰Â”\‚Èê‡<br>
 </table>
 <p></p>
 <p>
-<b>“Á‚É——R‚Ì‚È‚¢ê‡‚ÍAPOJOAction‚à‚µ‚­‚ÍAAdd‚Ì—á‚ğg—p‚·‚é–‚ğ„§‚µ‚Ü‚·B</b>
+<b>“Á‚É——R‚Ì‚È‚¢ê‡‚ÍAPOJOAction‚ğg—p‚·‚é–‚ğ„§‚µ‚Ü‚·B</b>
 </p>
 
-<h3><a name="Backport175">backport175‚ğg—p‚µ‚½struts-config‚Ìİ’è</a></h3>
-<pre>
-ƒhƒLƒ…ƒƒ“ƒgì¬’†...
+<h3><a name="ZoroConfig">–³İ’èS2Struts</a></h3>
+<p>
+S2Struts‚ğg—p‚·‚é‚ÆA‹K–ñ‚É]‚Á‚Ästruts-config‚ğ•âŠ®‚µ‚Ü‚·B‚±‚ê‚É‚æ‚èstruts-config‚É‚æ‚éİ’è‚ğÈ—ª‚·‚é–‚ª‰Â”\‚É‚È‚è‚Ü‚·B
+</p>
+<p>
+–³İ’èS2Struts‚Ì‹@”\‚ğ—˜—p‚·‚é‚½‚ß‚É‚ÍAstruts-config‚ÉRegistActionClassPlugIn‚ğ“o˜^‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
+</p>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.RegistActionClassPlugIn</font>&quot;&gt;
+    &lt;set-property property="enableJar" value="false"/&gt;
+    &lt;set-property property="actionClassPattern" value="foo.bar.action.*Action"/&gt;
+    &lt;set-property property="formClassPattern" value="foo.bar.form.*Form"/&gt;
+    &lt;set-property property="docRoot" value="/WEB-INF/jsp"/&gt;
+    &lt;set-property property="viewExtention" value="jsp,html,view"/&gt;
+  &lt;/plug-in&gt;</b>
+  ...
+&lt;/struts-config&gt;
 </pre>
+<p>
+ƒvƒ‰ƒOƒCƒ“‚ÌƒvƒƒpƒeƒB[‚É‚Í’l‚ğƒZƒbƒg‚·‚é‚±‚Æ‚ª‰Â”\‚Å‚·BŠeƒvƒƒpƒeƒB[‚Ìà–¾‚ÍˆÈ‰º‚É‚È‚è‚Ü‚·BŠeƒvƒƒpƒeƒB[‚Ì‹Lq‚ğÈ—ª‚µ‚½ê‡‚É‚ÍƒfƒtƒHƒ‹ƒg’l‚ªg—p‚³‚ê‚Ü‚·B
+</p>
+<table border="1">
+  <tr>
+    <td>ƒvƒƒpƒeƒB[</td>
+    <td>à–¾</td>
+    <td>ƒfƒtƒHƒ‹ƒg’l</td>
+  </tr>
+  <tr>
+    <td>enableJar</td>
+    <td>–³İ’èS2Struts‚ÉŠÜ‚ß‚éƒNƒ‰ƒX‚ğƒNƒ‰ƒXƒpƒX‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚éjarƒtƒ@ƒCƒ‹“à‚©‚ç‚àŒŸõ‚·‚é‚©w’è‚µ‚Ü‚·BŒŸõ‚·‚éê‡AtrueB</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>actionClassPattern</td>
+    <td>–³İ’èS2Struts‚Åactionƒ^ƒO‚Ì’l‚ğ“Á’è‚·‚é‚½‚ß‚ÌAction‚ÌƒNƒ‰ƒX–¼‚Ìƒpƒ^[ƒ“‚ğw’è‚µ‚Ü‚·B</td>
+    <td>.*Action$</td>
+  </tr>
+  <tr>
+    <td>formClassPattern</td>
+    <td>–³İ’èS2Struts‚Åform-beanƒ^ƒO‚Ì’l‚ğ“Á’è‚·‚é‚½‚ß‚ÌActionForm‚ÌƒNƒ‰ƒX–¼‚Ìƒpƒ^[ƒ“‚ğw’è‚µ‚Ü‚·B</td>
+    <td>(.*Form$)|(.*Dto$)</td>
+  </tr>
+  <tr>
+    <td>docRoot</td>
+    <td>Viewƒeƒ“ƒvƒŒ[ƒg‚Æ‚È‚éƒtƒ@ƒCƒ‹‚Ì’u‚«êŠ‚ÌƒgƒbƒvƒfƒBƒŒƒNƒgƒŠ‚ğw’è‚µ‚Ü‚·B</td>
+    <td>‚È‚µ</td>
+  </tr>
+  <tr>
+    <td>viewExtention</td>
+    <td>Viewƒeƒ“ƒvƒŒ[ƒg‚Æ‚È‚éƒtƒ@ƒCƒ‹‚ÌŠg’£q‚ğw’è‚µ‚Ü‚·B</td>
+    <td>jsp,html</td>
+  </tr>
+</table><br/>
+<p>
+–³İ’èS2Struts‚ÅÈ—ª‰Â”\‚È’l‚Íform-beanƒ^ƒO‚Ì‘®«A‚Ü‚½actionƒ^ƒO‚Æ‚»‚Ìactionƒ^ƒO“à‚Ìforwardƒ^ƒO‚Ì‘®«‚É‚È‚è‚Ü‚·B
+ƒfƒtƒHƒ‹ƒg‚Å’ñ‹Ÿ‚·‚é‹K–ñ‚É]‚Á‚½ê‡‚ÌŠe‘®«’l‚ª‚Ç‚Ì‚æ‚¤‚É‚È‚é‚Ì‚©ˆÈ‰º‚É‹Lq‚µ‚Ü‚·B
+</p>
+<h4>form-bean</h4>
+<p>
+ƒNƒ‰ƒX–¼‚ª"Form"‚ ‚é‚¢‚Í"Dto"‚Å‚µ‚Ä‚¢‚éƒNƒ‰ƒX‚ğŠî‚Éİ’è‚ğ•âŠ®‚µ‚Ü‚·B
+</p>
+<table border="1">
+  <tr>
+    <td>‘®«</td>
+    <td>ƒfƒtƒHƒ‹ƒg‚Ì‹K–ñ‚É‚æ‚é’l</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>ƒNƒ‰ƒX–¼</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>ƒNƒ‰ƒX–¼‚©‚çS2‚É“o˜^‚³‚ê‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğŒŸõ‚µAƒRƒ“ƒ|[ƒlƒ“ƒg–¼g—p‚µ‚Ü‚·B</td>
+  </tr>
+  <tr>
+    <td>restricted</td>
+    <td>false</td>
+  </tr>
+</table>
 
-<h3><a name="Backport175Validation">backport175‚ğg—p‚µ‚½validation‚Ìİ’è</a></h3>
+<h4>actionƒ^ƒO‚Ì‘®«’l</h4>
+<p>
+ƒNƒ‰ƒX–¼‚ª"Action"‚ÅI—¹‚µ‚Ä‚¢‚éƒNƒ‰ƒX‚ğŠî‚Éİ’è‚ğ•âŠ®‚µ‚Ü‚·B
+</p>
+<table border="1">
+  <tr>
+    <td>‘®«</td>
+    <td>ƒfƒtƒHƒ‹ƒg‚Ì‹K–ñ‚É‚æ‚é’l</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>ƒNƒ‰ƒX–¼</td>
+  </tr>
+  <tr>
+    <td>path</td>
+    <td>ƒNƒ‰ƒX–¼‚©‚çS2‚É“o˜^‚³‚ê‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğŒŸõ‚µAƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚Ìæ“ª‚É"/"‚ğ•t‰Á‚µ‚Ü‚·B<br/>
+    ƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ÌÅŒã‚ªŸ‚Ì’l‚Ìê‡‚É‚»‚Ì’l‚ğíœ‚µ‚Ü‚·B‚»‚Ì’l‚Æ‚ÍA"ActionImpl"A"Impl"A"Action"‚Ì3‚Â‚Å‚·B<br/>
+    ƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍAXXX‚É‚æ‚è¶¬‚³‚ê‚½’l‚ğƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚Æ‚µã‹L‚Ìİ’è‚ğ‚µ‚Ü‚·B
+    </td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>path‘®«‚Ìæ“ª‚Ì"/"‚ğíœ‚µ‚½’l‚ğİ’è‚µ‚Ü‚·B</td>
+  </tr>
+  <tr>
+    <td>scope</td>
+    <td>request</td>
+  </tr>
+  <tr>
+    <td>validate</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>input</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+  <tr>
+    <td>parameter</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+  <tr>
+    <td>attribute</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+  <tr>
+    <td>include</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+  <tr>
+    <td>prefix</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+  <tr>
+    <td>suffix</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+  <tr>
+    <td>unknown</td>
+    <td>İ’è‚µ‚È‚¢(false)</td>
+  </tr>
+  <tr>
+    <td>roles</td>
+    <td>İ’è‚µ‚È‚¢(null)</td>
+  </tr>
+</table>
+<h4>actionƒ^ƒO“à‚Ìforwardƒ^ƒO‚Ì‘®«’l</h4>
+ƒNƒ‰ƒX–¼‚ª"Action"‚ÅI—¹‚µ‚Ä‚¢‚éƒNƒ‰ƒX‚ğŠî‚Éİ’è‚ğ•âŠ®‚µ‚Ü‚·B
+<table border="1">
+  <tr>
+    <td>‘®«</td>
+    <td>ƒfƒtƒHƒ‹ƒg‚Ì‹K–ñ‚É‚æ‚é’l</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>success(•ÏX•s‰Â)</td>
+  </tr>
+  <tr>
+    <td>path</td>
+    <td>Ÿ‚Éà–¾‚·‚éè‡‚É‚æ‚èpath‚ğİ’è‚µ‚Ü‚·B<br/>
+    1.ƒpƒbƒP[ƒW–¼‚Ì"."‚ğ"/"‚É•ÏX‚µA‚»‚Ì’l‚ÆƒNƒ‰ƒX–¼‚ğ˜AŒ‹‚µ‚Ü‚·B<br/>
+    2.ƒNƒ‰ƒX–¼‚ÌÅŒã‚ªŸ‚Ì’l‚Ìê‡‚É‚»‚Ì’l‚ğíœ‚µ‚Ü‚·B‚»‚Ì’l‚Æ‚ÍA"ActionImpl"A"Impl"A"Action"‚Ì3‚Â‚Å‚·B˜AŒ‹‚·‚éÛ‚ÉƒNƒ‰ƒX–¼‚Ìæ“ª‚ğ¬•¶š‚É‚µ‚Ü‚·B<br/>
+    3.XXXdocRoot"/"‚ğæ“ª‚É•t‰Á‚µ‚Ü‚·B<br/>
+    4.".html"‚Æ".jsp"‚ğŠg’£q‚É‚µ‚½ƒtƒ@ƒCƒ‹ŒŸõ‚µAƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚ê‚Îpath‚Éİ’è‚µ‚Ü‚·B<br/>
+    5.ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍAƒpƒbƒP[ƒW‚É‚ ‚½‚é2”Ô–Ú‚Ì"/"‚Ì’¼‘O‚Ü‚Å‚ğíœ‚µ‚½•¶š—ñ‚ğg—p‚µã‹L"4"‚ğs‚¢‚Ü‚·B<br/>
+    6.ƒƒO‚ÉXXX‚Æo—Í‚µ‚Ü‚·B</td>
+  </tr>
+  <tr>
+    <td>redirect</td>
+    <td>İ’è‚µ‚È‚¢(false)</td>
+  </tr>
+</table>
+
+<h3><a name="Annotation">Annotation‚ğg—p‚µ‚½struts-config‚Ìİ’è</a></h3>
+<p>
+Tiger‚ğ—p‚¢‚½Annotation‚Ì‹Lq‚Æbackport175‚ğ—p‚¢‚½Annotation‚Ì‹Lq‚Ì2’Ê‚è‚Ì‹Lq‚ª‰Â”\‚Å‚·B‚±‚Ì2’Ê‚è‚ÌAnnotation‚ğ“¯‚Ég—p‚·‚é–‚Ío—ˆ‚Ü‚¹‚ñB
+‚»‚ê‚¼‚ê‚ğg—p‚·‚é‚½‚ß‚É‚ÍAˆÈ‰º‚Ì•\‚É¦‚µ‚½jarƒtƒ@ƒCƒ‹‚ª•K—v‚Å‚·B
+</p>
+<table border="1">
+  <tr>
+    <td>Annotation</td><td>•K—v‚Èjarƒtƒ@ƒCƒ‹(XXX‚Íƒo[ƒWƒ‡ƒ“)</td>
+  </tr>
+  <tr>
+    <td>Tiger</td><td>s2-struts-tiger-XXX.jar</td>
+  </tr>
+  <tr>
+    <td>backport175</td><td>s2-struts-backport175-XXX.jar</td>
+  </tr>
+</table><br/>
+<p>
+<a name="AnnotationAction"></a>ˆÈ‰º‚Ì‚æ‚¤‚ÉAction‚ÉƒAƒmƒe[ƒVƒ‡ƒ“‚ğ‹Lq‚·‚é‚±‚Æ‚É‚æ‚èstruts-config‚Ìİ’è‚ğs‚¤‚±‚Æ‚ªo—ˆ‚Ü‚·B
+</p>
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+<b><font color="red">@org.seasar.struts.annotation.StrutsAction(name="employeeForm", validate=false)</font></b>
+public interface EmployeeEditAction {
+
+	<b><font color="red">@org.seasar.struts.annotation.StrutsActionForward(path="/pages/employee/employeeEdit.jsp")</font></b>
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
+‚Ü‚½Abackport175‚ğg—p‚µ‚½Annotation‚Ì‹Lq‚Å‚ÍˆÈ‰º‚Ì‚æ‚¤‚É‚È‚è‚Ü‚·B
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+<b>/**
+ * <font color="red">@org.seasar.struts.annotation.StrutsAction(name="employeeForm", validate=false)</font>
+ */</b>
+public interface EmployeeEditAction {
+
+	<b>/**
+	 * <font color="red">@org.seasar.struts.annotation.StrutsActionForward(path="/pages/employee/employeeEdit.jsp")</font>
+	 */</b>
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
+‚±‚ê‚ç‚ÍAˆÈ‰º‚Ì‹Lq‚Æ“¯“™‚É‚È‚è‚Ü‚·B
+<pre>
+...
+&lt;action-mappings&gt;
+    ...
+    &lt;action
+        path="/employeeEdit"
+        type="org.seasar.struts.examples.employee.action.EmployeeEditAction"
+        name="employeeForm"
+        scope="request"
+        validate="false"&gt;
+        &lt;forward name="success" path="/pages/employee/employeeEdit.jsp" /&gt;
+    &lt;/action&gt;
+    ...
+</pre>
+<h4>org.seasar.struts.annotation.StrutsAction‚Åw’è‰Â”\‚È‘®«</h4>
+<table border="1">
+  <tr>
+    <td>‘®«</td><td>•K{</td>
+  </tr>
+  <tr>
+    <td>path</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>name</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>scope</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>validate</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>input</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>parameter</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>attribute</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>forward</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>include</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>prefix</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>suffix</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>unknown</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>roles</td><td><center>~</center></td>
+  </tr>
+</table>
+struts-config‚Ìactionƒ^ƒO‚Ì‘®«‚Æ‘Î‚É‚È‚è‚Ü‚·B‚Ü‚½AŠe‘®«‚ÌƒfƒtƒHƒ‹ƒg’l‚ÍA–³İ’èS2Struts‚Å’è‹`‚³‚ê‚é’l‚É‚È‚è‚Ü‚·B
+<h4>org.seasar.struts.annotation.StrutsActionForward‚Åw’è‰Â”\‚È‘®«</h4>
+<table border="1">
+  <tr>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td>
+  </tr>
+  <tr>
+    <td>path</td><td><center>›</center></td><td><center>-</center></td>
+  </tr>
+  <tr>
+    <td>redirect</td><td><center>~</center></td><td><center>false</center></td>
+  </tr>
+</table>
+struts-config‚Ìforwardƒ^ƒO‚Ì‘®«‚Æ‘Î‚É‚È‚è‚Ü‚·B’è”’l‚Åname‘®«‚ğw’è‚µ‚Ü‚·B
+<br/><br/>
+<p>
+<a name="AnnotationForm"></a>‚Ü‚½AˆÈ‰º‚Ì‚æ‚¤‚ÉForm(DTO)‚ÉƒAƒmƒe[ƒVƒ‡ƒ“‚ğ‹Lq‚·‚é‚±‚Æ‚É‚æ‚èstruts-config‚Ìİ’è‚ğs‚¤‚±‚Æ‚ªo—ˆ‚Ü‚·B
+</p>
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+<b><font color="red">@org.seasar.struts.annotation.StrutsActionForm(name="employeeForm")</font></b>
+public class EmployeeDto extends Employee {
+	...
+}
+</pre>
+‚Ü‚½Abackport175‚ğg—p‚µ‚½Annotation‚Ì‹Lq‚Å‚ÍˆÈ‰º‚Ì‚æ‚¤‚É‚È‚è‚Ü‚·B
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+<b>/**
+ * <font color="red">@org.seasar.struts.annotation.StrutsActionForm(name="employeeForm")</font>
+ */</b>
+public class EmployeeDto extends Employee {
+	...
+}
+</pre>
+‚±‚ê‚ç‚ÍAˆÈ‰º‚Ì‹Lq‚Æ“¯“™‚É‚È‚è‚Ü‚·B
+<pre>
+...
+&lt;form-beans&gt;
+    ...
+    &lt;form-bean
+        name="employeeForm"
+        type="org.seasar.struts.examples.employee.dto.EmployeeDto" /&gt;
+    ...
+</pre>
+<h4>org.seasar.struts.annotation.StrutsActionForm‚Åw’è‰Â”\‚È‘®«</h4>
+<table border="1">
+  <tr>
+    <td>‘®«</td><td>•K{</td>
+  </tr>
+  <tr>
+    <td>name</td><td><center>~</center></td>
+  </tr>
+  <tr>
+    <td>restricted</td><td><center>~</center></td>
+  </tr>
+</table>
+struts-config‚Ìform-beanƒ^ƒO‚Ì‘®«‚Æ‘Î‚É‚È‚è‚Ü‚·B‚Ü‚½AŠe‘®«‚ÌƒfƒtƒHƒ‹ƒg’l‚ÍA–³İ’èS2Struts‚Å’è‹`‚³‚ê‚é’l‚É‚È‚è‚Ü‚·B
+
+<h3><a name="AnnotationValidation">Annotation‚ğg—p‚µ‚½validation‚Ìİ’è</a></h3>
 <p>
 ˆÈ‰º‚Ì‚æ‚¤‚ÉActionForm‚ÌƒZƒbƒ^[ƒƒ\ƒbƒh‚ÉƒAƒmƒe[ƒVƒ‡ƒ“‚ğ‹Lq‚·‚é‚±‚Æ‚É‚æ‚èvalidation‚Ìİ’è‚ğs‚¤‚±‚Æ‚ªo—ˆ‚Ü‚·B
 </p>
@@ -648,13 +1392,29 @@ public class ValidateDto implements Serializable {
 
     private String value;
 
+    <b><font color="red">@org.seasar.struts.validator.annotation.Required
+    @org.seasar.struts.validator.annotation.Minlength(10)
+    @org.seasar.struts.validator.annotation.Maxlength(15)
+    @org.seasar.struts.validator.annotation.Mask(pattern="com$",messageKey="mustendcom")
+    @org.seasar.struts.validator.annotation.EmailType
+    @org.seasar.struts.validator.annotation.Args(keys="mixValue",resource=false)</font></b>
+    public void setvalue(String value) {
+        this.value = value;
+    }
+</pre>
+‚Ü‚½Abackport175‚ğg—p‚µ‚½Annotation‚Ì‹Lq‚Å‚ÍˆÈ‰º‚Ì‚æ‚¤‚É‚È‚è‚Ü‚·B
+<pre>
+public class ValidateDto implements Serializable {
+
+    private String value;
+
     <b>/**
-     * <font color="red">@org.seasar.struts.validator.Required</font>
-     * <font color="red">@org.seasar.struts.validator.Minlength(value=10)</font>
-     * <font color="red">@org.seasar.struts.validator.Maxlength(value=15)</font>
-     * <font color="red">@org.seasar.struts.validator.Mask(pattern="com$",messageKey="mustendcom")</font>
-     * <font color="red">@org.seasar.struts.validator.Email</font>
-     * <font color="red">@org.seasar.struts.validator.Args(keys="mixValue",resource=false)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.Required</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.Minlength(value=10)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.Maxlength(value=15)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.Mask(pattern="com$",messageKey="mustendcom")</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.Email</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.Args(keys="mixValue",resource=false)</font>
      */</b>
     public void setvalue(String value) {
         this.value = value;
@@ -664,17 +1424,17 @@ public class ValidateDto implements Serializable {
 S2Struts‚Å‚ÍAvalidationİ’è‚Ì‚½‚ß‚ÉŠeíƒAƒmƒe[ƒVƒ‡ƒ“‚ğ—pˆÓ‚µ‚Ä‚¢‚Ü‚·B
 org.seasar.struts.validator.ArgsˆÈŠO‚ÌƒAƒmƒe[ƒVƒ‡ƒ“‚ÍŠî–{“I‚ÈƒoƒŠƒf[ƒ^‚ğs‚¤‚½‚ß‚É—˜—p‚µ‚Ü‚·B
 </p>
-<h4>org.seasar.struts.validator.Args</h4>
+<h4>org.seasar.struts.validator.annotation.Args</h4>
 <p>
 ƒƒbƒZ[ƒW‚Åg—p‚³‚ê‚é’uŠ·ƒpƒ‰ƒ[ƒ^‚ğw’è‚µ‚Ü‚·B
 </p>
 <table border="1">
   <tr>
-    <td>ˆø”</td><td>•K{</td><td>Default</td><td>à–¾</td>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td><td>à–¾</td>
   </tr>
   <tr>
     <td>keys</td>
-	<td><center>›</center></td>
+	<td><center><center>›</center></center></td>
 	<td><center>-</center></td>
 	<td>ƒƒbƒZ[ƒW‚Åg—p‚³‚ê‚é’uŠ·ƒpƒ‰ƒ[ƒ^‚ğw’è‚µ‚Ü‚·B<br>
 	","‚Å‹æØ‚é‚±‚Æ‚É‚æ‚è•¡”w’è‚Å‚«‚Ü‚·B</td>
@@ -688,18 +1448,18 @@ org.seasar.struts.validator.ArgsˆÈŠO‚ÌƒAƒmƒe[ƒVƒ‡ƒ“‚ÍŠî–{“I‚ÈƒoƒŠƒf[ƒ^‚ğs‚¤‚½
 	false‚Ìê‡‚Íkeys‚Åw’è‚µ‚½’l‚ğ‚»‚Ì‚Ü‚Ü’uŠ·ƒpƒ‰ƒ[ƒ^‚Æ‚µ‚Ü‚·B</td>
   </tr>
 </table>
-<h4>org.seasar.struts.validator.Required</h4>
+<h4>org.seasar.struts.validator.annotation.Required</h4>
 <p>
 ’l‚É‹ó”’ˆÈŠO‚Ì•¶š‚ªŠÜ‚Ü‚ê‚Ä‚é‚©Šm”F‚µ‚Ü‚·B
 ˆø”‚Í‚ ‚è‚Ü‚¹‚ñB
 </p>
-<h4>org.seasar.struts.validator.Mask</h4>
+<h4>org.seasar.struts.validator.annotation.Mask</h4>
 <p>
-’l‚ªˆø”pattern‚Åw’è‚³‚ê‚½³‹K•\Œ»‚Æˆê’v‚·‚é‚©Šm”F‚µ‚Ü‚·B
+’l‚ªpattern‚Åw’è‚³‚ê‚½³‹K•\Œ»‚Æˆê’v‚·‚é‚©Šm”F‚µ‚Ü‚·B
 </p>
 <table border="1">
   <tr>
-    <td>ˆø”</td><td>•K{</td><td>Default</td><td>à–¾</td>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td><td>à–¾</td>
   </tr>
   <tr>
     <td>pattern</td>
@@ -722,18 +1482,18 @@ org.seasar.struts.validator.ArgsˆÈŠO‚ÌƒAƒmƒe[ƒVƒ‡ƒ“‚ÍŠî–{“I‚ÈƒoƒŠƒf[ƒ^‚ğs‚¤‚½
 	false‚Ìê‡‚Íkeys‚Åw’è‚µ‚½’l‚ğ‚»‚Ì‚Ü‚Ü’uŠ·ƒpƒ‰ƒ[ƒ^‚Æ‚µ‚Ü‚·B</td>
   </tr>
 </table>
-<h4>org.seasar.struts.validator.Range</h4>
+<h4>org.seasar.struts.validator.annotation.Range</h4>
 <p>
-’l‚ªˆø”min‚Æˆø”max‚Åw’è‚³‚ê‚½”ÍˆÍ“à‚Å‚ ‚é‚©Šm”F‚µ‚Ü‚·B
+’l‚ªmin‚Æmax‚Åw’è‚³‚ê‚½”ÍˆÍ“à‚Å‚ ‚é‚©Šm”F‚µ‚Ü‚·B
 </p>
 <table border="1">
   <tr>
-    <td>ˆø”</td><td>•K{</td><td>Default</td><td>à–¾</td>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td><td>à–¾</td>
   </tr>
   <tr>
     <td>type</td>
 	<td><center>~</center></td>
-	<td><center>"doubleRange"</center></td>
+	<td><center>doubleRange</center></td>
 	<td>’l‚ÌŒ^‚É‘Î‰‚·‚éŒŸØƒ^ƒCƒv‚ğw’è‚µ‚Ü‚·BˆÈ‰º‚ÌŒŸØƒ^ƒCƒv‚ğw’è‚Å‚«‚Ü‚·B<br>
 	intRange,floatRange,doubleRange</td>
   </tr>
@@ -750,18 +1510,18 @@ org.seasar.struts.validator.ArgsˆÈŠO‚ÌƒAƒmƒe[ƒVƒ‡ƒ“‚ÍŠî–{“I‚ÈƒoƒŠƒf[ƒ^‚ğs‚¤‚½
 	<td>’l”ÍˆÍ‚ÌÅ‘å’l‚ğw’è‚µ‚Ü‚·B</td>
   </tr>
 </table>
-<h4>org.seasar.struts.validator.Maxlength</h4>
+<h4>org.seasar.struts.validator.annotation.Maxlength</h4>
 <p>
-’l‚Ì’·‚³‚ªˆø”valueˆÈ‰º‚Å‚ ‚é‚©Šm”F‚µ‚Ü‚·B
+’l‚Ì’·‚³‚ªvalueˆÈ‰º‚Å‚ ‚é‚©Šm”F‚µ‚Ü‚·B
 </p>
 <table border="1">
   <tr>
-    <td>ˆø”</td><td>•K{</td><td>Default</td><td>à–¾</td>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td><td>à–¾</td>
   </tr>
   <tr>
     <td>type</td>
 	<td><center>~</center></td>
-	<td><center>"maxlength"</center></td>
+	<td><center>maxlength</center></td>
 	<td>’l‚Ì’·‚³‚ğ•¶š”–”‚ÍƒoƒCƒg”‚Ì‚Ç‚¿‚ç‚ÅŒŸØ‚·‚é‚©‚ğw’è‚µ‚Ü‚·B<br>
 	•¶š”‚ÅŒŸØ‚·‚éê‡‚Ímaxlength‚ğw’è‚µ‚Ü‚·B<br>
 	ƒoƒCƒg”‚ÅŒŸØ‚·‚éê‡‚Ímaxbytelength‚ğw’è‚µ‚Ü‚·B</td>
@@ -772,19 +1532,25 @@ org.seasar.struts.validator.ArgsˆÈŠO‚ÌƒAƒmƒe[ƒVƒ‡ƒ“‚ÍŠî–{“I‚ÈƒoƒŠƒf[ƒ^‚ğs‚¤‚½
 	<td><center>-</center></td>
 	<td>’l‚Ì’·‚³‚ÌãŒÀ’l‚ğw’è‚µ‚Ü‚·B</td>
   </tr>
+  <tr>
+    <td>charset</td>
+	<td><center>~</center></td>
+	<td><center>-</center></td>
+	<td>ƒoƒCƒg”‚ÅŒŸØ‚·‚éê‡‚Ì•¶šƒZƒbƒg‚ğw’è‚µ‚Ü‚·B<br/>w’è‚µ‚È‚¢ê‡‚ÍAƒvƒ‰ƒbƒgƒtƒH[ƒ€‚ÌƒfƒtƒHƒ‹ƒg•¶šƒZƒbƒg‚ğg—p‚µ‚Ü‚·B</td>
+  </tr>
 </table>
-<h4>org.seasar.struts.validator.Minlength</h4>
+<h4>org.seasar.struts.validator.annotation.Minlength</h4>
 <p>
-’l‚Ì’·‚³‚ªˆø”valueˆÈã‚Å‚ ‚é‚©Šm”F‚µ‚Ü‚·B
+’l‚Ì’·‚³‚ªvalueˆÈã‚Å‚ ‚é‚©Šm”F‚µ‚Ü‚·B
 </p>
 <table border="1">
   <tr>
-    <td>ˆø”</td><td>•K{</td><td>Default</td><td>à–¾</td>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td><td>à–¾</td>
   </tr>
   <tr>
     <td>type</td>
 	<td><center>~</center></td>
-	<td><center>"minlength"</center></td>
+	<td><center>minlength</center></td>
 	<td>’l‚Ì’·‚³‚ğ•¶š”–”‚ÍƒoƒCƒg”‚Ì‚Ç‚¿‚ç‚ÅŒŸØ‚·‚é‚©‚ğw’è‚µ‚Ü‚·B<br>
 	•¶š”‚ÅŒŸØ‚·‚éê‡‚Íminlength‚ğw’è‚µ‚Ü‚·B<br>
 	ƒoƒCƒg”‚ÅŒŸØ‚·‚éê‡‚Íminbytelength‚ğw’è‚µ‚Ü‚·B</td>
@@ -795,73 +1561,85 @@ org.seasar.struts.validator.ArgsˆÈŠO‚ÌƒAƒmƒe[ƒVƒ‡ƒ“‚ÍŠî–{“I‚ÈƒoƒŠƒf[ƒ^‚ğs‚¤‚½
 	<td><center>-</center></td>
 	<td>’l‚Ì’·‚³‚Ì‰ºŒÀ’l‚ğw’è‚µ‚Ü‚·B</td>
   </tr>
+  <tr>
+    <td>charset</td>
+	<td><center>~</center></td>
+	<td><center>-</center></td>
+	<td>ƒoƒCƒg”‚ÅŒŸØ‚·‚éê‡‚Ì•¶šƒZƒbƒg‚ğw’è‚µ‚Ü‚·B<br/>w’è‚µ‚È‚¢ê‡‚ÍAƒvƒ‰ƒbƒgƒtƒH[ƒ€‚ÌƒfƒtƒHƒ‹ƒg•¶šƒZƒbƒg‚ğg—p‚µ‚Ü‚·B</td>
+  </tr>
 </table>
-<h4>org.seasar.struts.validator.Byte, Short, Integer, Long, Float, Double</h4>
+<h4>org.seasar.struts.validator.ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</h4>
 <p>
 ’l‚ªŠY“–‚·‚éŒ^‚É•ÏŠ·‚Å‚«‚é‚©Šm”F‚µ‚Ü‚·B
-ˆø”‚Í‚ ‚è‚Ü‚¹‚ñB
+‘®«‚Í‚ ‚è‚Ü‚¹‚ñB
 </p>
-<h4>org.seasar.struts.validator.Date</h4>
+<h4>org.seasar.struts.validator.annotation.NoValidate</h4>
+<p>
+©“®“I‚ÉƒoƒŠƒf[ƒVƒ‡ƒ“‚ğs‚í‚È‚¢‚æ‚¤‚Éw’è‚µ‚Ü‚·B
+‘®«‚Í‚ ‚è‚Ü‚¹‚ñB
+</p>
+<h4>org.seasar.struts.validator.annotation.DateType</h4>
 <p>
 ’l‚ª—LŒø‚È“ú•t‚ğ•\‚·‚©Šm”F‚µ‚Ü‚·B
 </p>
 <table border="1">
   <tr>
-    <td>ˆø”</td><td>•K{</td><td>Default</td><td>à–¾</td>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td><td>à–¾</td>
   </tr>
   <tr>
     <td>pattern</td>
 	<td><center>~</center></td>
-	<td><center>-</center></td>
-	<td>“ú•t‚Ìƒpƒ^[ƒ“‚ğw’è‚µ‚Ü‚·B<br>
-	ƒfƒtƒHƒ‹ƒg’l‚ÍAs2struts.dion‚ÌdateConfigRegisterƒRƒ“ƒ|[ƒlƒ“ƒg’è‹`‚Éw’è‚µ‚½ƒpƒ^[ƒ“‚Æ‚È‚è‚Ü‚·B</td>
+	<td><center>s2struts.dion‚ÌdateConfigRegisterƒRƒ“ƒ|[ƒlƒ“ƒg’è‹`‚Éw’è‚µ‚½ƒpƒ^[ƒ“</center></td>
+	<td>“ú•t‚Ìƒpƒ^[ƒ“‚ğw’è‚µ‚Ü‚·B</td>
   </tr>
 </table>
-<h4>org.seasar.struts.validator.CreditCard</h4>
+<h4>org.seasar.struts.validator.annotation.CreditCardType</h4>
 <p>
 ’l‚ª—LŒø‚ÈƒNƒŒƒWƒbƒgƒJ[ƒh”Ô†‚Æ‚İ‚È‚³‚ê‚é‚©Šm”F‚µ‚Ü‚·B
-ˆø”‚Í‚ ‚è‚Ü‚¹‚ñB
+‘®«‚Í‚ ‚è‚Ü‚¹‚ñB
 </p>
-<h4>org.seasar.struts.validator.Email</h4>
+<h4>org.seasar.struts.validator.EmailType</h4>
 <p>
 ’l‚ª—LŒø‚ÈEƒ[ƒ‹ƒAƒhƒŒƒX‚Æ‚İ‚È‚³‚ê‚é‚©Šm”F‚µ‚Ü‚·B
-ˆø”‚Í‚ ‚è‚Ü‚¹‚ñB
+‘®«‚Í‚ ‚è‚Ü‚¹‚ñB
 </p>
-<!--
-<h4>org.seasar.struts.validator.Url</h4>
+<h4>org.seasar.struts.validator.annotation.UrlType</h4>
 <p>
 ’l‚ª—LŒø‚ÈURL‚Æ‚İ‚È‚³‚ê‚é‚©Šm”F‚µ‚Ü‚·B
 </p>
 <table border="1">
   <tr>
-    <td>ˆø”</td><td>•K{</td><td>Default</td><td>à–¾</td>
+    <td>‘®«</td><td>•K{</td><td>ƒfƒtƒHƒ‹ƒg’l</td><td>à–¾</td>
   </tr>
   <tr>
     <td>allowallschemes</td>
 	<td><center>~</center></td>
 	<td><center>false</center></td>
-	<td>HHH<br></td>
+	<td>scheme‚ğ‹–‰Â‚·‚é‚©‚Ç‚¤‚©‚ğw’è‚µ‚Ü‚·B<br/>true‚ğİ’è‚·‚é‚Æ‚·‚×‚Ä‚Ìscheme‚ª‹–‰Â‚³‚ê‚Ü‚·B<br></td>
   </tr>
   <tr>
     <td>allow2slashes</td>
 	<td><center>~</center></td>
 	<td><center>false</center></td>
-	<td>HHH<br></td>
+	<td>ƒ_ƒuƒ‹ƒXƒ‰ƒbƒVƒ…i//j‚ğ‹–‰Â‚·‚é‚©‚Ç‚¤‚©‚ğw’è‚µ‚Ü‚·B<br/>true‚ğİ’è‚·‚é‚Æ‹–‰Â‚³‚ê‚Ü‚·B<br></td>
   </tr>
   <tr>
     <td>nofragments</td>
 	<td><center>~</center></td>
 	<td><center>false</center></td>
-	<td>HHH<br></td>
+	<td>URL‚Ì•ªŠ„‚ğ‹–‰Â‚·‚é‚©‚Ç‚¤‚©‚ğw’è‚µ‚Ü‚·B<br/>false‚ğİ’è‚·‚é‚Æ‹–‰Â‚³‚ê‚Ü‚·B<br></td>
   </tr>
   <tr>
     <td>schemes</td>
 	<td><center>~</center></td>
-	<td><center>http, https, ftp</center></td>
-	<td>HHH<br></td>
+	<td><center>http,https,ftp</center></td>
+	<td>‹–‰Â‚·‚éscheme‚ğ,iƒJƒ“ƒ}j‹æØ‚è‚Åw’è‚µ‚Ü‚·B<br></td>
   </tr>
 </table>
--->
+<br/>
+<p>
+<a href="http://struts.apache.org/api/org/apache/struts/validator/FieldChecks.html" target="_blank">Ql</a>
+</p>
 
 <h3><a name="RequestProcessor">RequestProcessor‚ğƒRƒ“ƒ|[ƒlƒ“ƒg‚©‚çæ“¾‚·‚é</a></h3>
 <p>
@@ -941,14 +1719,15 @@ public class MessageActionImpl implements MessageAction {
 "‚Ù‚Ú"“¯ˆÓ‚Æ‹Lq‚µ‚½——R‚ÍAã‹L‚Å—˜—p‚·‚éƒŠƒ\[ƒX‚ÌƒL[examplemessage‚Ì’†‚ÉA{4}‚È‚Ç‚ªŠÜ‚Ü‚ê‚Ä‚¢‚½ê‡‚É‚»‚ê‚ğíœ‚·‚é‹@”\‚ªMessageManager‚É‚Í”õ‚í‚Á‚Ä‚¢‚éˆ×‚Å‚·B
 </p>
 <p>
-‚Ü‚½AMessageManager‚ÍAaddMessage()ƒƒ\ƒbƒh‚âAsaveMessages()ƒƒ\ƒbƒh‚à”õ‚¦‚Ä‚¢‚Ü‚·B
+‚Ü‚½AMessageManager‚ÍAƒƒbƒZ[ƒW‚ğŠÇ—‚·‚é‚½‚ß‚ÌaddMessage()ƒƒ\ƒbƒh‚âAsaveMessages()ƒƒ\ƒbƒh‚à”õ‚¦‚Ä‚¢‚Ü‚·B
+ˆø”‚È‚Ç‚ÍƒGƒ‰[ƒƒbƒZ[ƒW‚ğˆµ‚¤ê‡‚Æ“¯‚¶‚Å‚·B
 </p>
 <h3><a name="TagLib">ƒ^ƒOƒ‰ƒCƒuƒ‰ƒŠ‚É‚Â‚¢‚Ä</a></h3>
 <p>
 S2Struts‚Å‚ÍAButtonTag‚ÆSubmitTag‚ğ—pˆÓ‚µ‚Ä‚¢‚Ü‚·B
 ‚Ç‚¿‚ç‚àAStruts‚Ìƒ^ƒO‚ğŠg’£‚µ‚½Œ`‚Æ‚È‚Á‚Ä‚¢‚Ü‚·B
 </p>
-<h4>ButtonTag</h4>
+<h4>org.seasar.struts.taglib.html.ButtonTag(ƒ^ƒO–¼Fbutton)</h4>
 <p>
 <a href="http://struts.apache.org/userGuide/struts-html.html#button">http://struts.apache.org/userGuide/struts-html.html#button</a><br>
 ‚É‰Á‚¦‚ÄA’Ç‰Á‚É‚È‚Á‚½‘®«‚ÍAˆÈ‰º‚Å‚·B
@@ -976,7 +1755,7 @@ S2Struts‚Å‚ÍAButtonTag‚ÆSubmitTag‚ğ—pˆÓ‚µ‚Ä‚¢‚Ü‚·B
 	(•Ï”’l‚ªAInteger‚Ì32‚Å‚ ‚éê‡‚Ì•ÏŠ·‚³‚ê‚½html‚Ì—áF&lt;button ... value="32" ...&gt;)</td>
   </tr>
 </table>
-<h4>SubmitTag</h4>
+<h4>org.seasar.struts.taglib.html.SubmitTag(ƒ^ƒO–¼Fsubmit)</h4>
 <p>
 <a href="http://struts.apache.org/userGuide/struts-html.html#submit">http://struts.apache.org/userGuide/struts-html.html#submit</a><br>
 ‚É‰Á‚¦‚ÄA’Ç‰Á‚É‚È‚Á‚½‘®«‚ÍAˆÈ‰º‚Å‚·B
@@ -984,6 +1763,13 @@ S2Struts‚Å‚ÍAButtonTag‚ÆSubmitTag‚ğ—pˆÓ‚µ‚Ä‚¢‚Ü‚·B
 <table border="1">
   <tr>
     <td>‘®«–¼</td><td>•K{</td><td>rtexprvalue</td><td>à–¾</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+	<td><center>~</center></td>
+	<td><center>-</center></td>
+	<td>action="#{component.method}"‚Æ‹Lq‚·‚é‚±‚Æ‚É‚æ‚Á‚ÄAƒTƒuƒ~ƒbƒg‚ÉÀs‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Æƒƒ\ƒbƒh‚ğw’è‚·‚é–‚ª‰Â”\‚Å‚·B
+	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÍA‚±‚Ì‘®«‚Åw’è‚µ‚½–¼‘O‚ÅS2Container‚É“o˜^‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B</td>
   </tr>
   <tr>
     <td><center>indexId</center></td>
@@ -994,8 +1780,55 @@ S2Struts‚Å‚ÍAButtonTag‚ÆSubmitTag‚ğ—pˆÓ‚µ‚Ä‚¢‚Ü‚·B
 	(•Ï”’l‚ªAInteger‚Ì32‚Å‚ ‚éê‡‚Ì•ÏŠ·‚³‚ê‚½html‚Ì—áF&lt;... foo[32]="bar"...&gt;)</td>
   </tr>
 </table>
+<h4>org.seasar.struts.taglib.html.ImageTag(ƒ^ƒO–¼Fimage)</h4>
 <p>
+<a href="http://struts.apache.org/userGuide/struts-html.html#image">http://struts.apache.org/userGuide/struts-html.html#image</a><br>
+‚É‰Á‚¦‚ÄA’Ç‰Á‚É‚È‚Á‚½‘®«‚ÍAˆÈ‰º‚Å‚·B
 </p>
+<table border="1">
+  <tr>
+    <td>‘®«–¼</td><td>•K{</td><td>rtexprvalue</td><td>à–¾</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+	<td><center>~</center></td>
+	<td><center>-</center></td>
+	<td>action="#{component.method}"‚Æ‹Lq‚·‚é‚±‚Æ‚É‚æ‚Á‚ÄAƒTƒuƒ~ƒbƒg‚ÉÀs‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Æƒƒ\ƒbƒh‚ğw’è‚·‚é–‚ª‰Â”\‚Å‚·B
+	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÍA‚±‚Ì‘®«‚Åw’è‚µ‚½–¼‘O‚ÅS2Container‚É“o˜^‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B</td>
+  </tr>
+</table>
+<h4>org.seasar.struts.taglib.html.PageTag(ƒ^ƒO–¼Fpage)</h4>
+<p>
+‚±‚Ìƒ^ƒO‚ğJSP‚É‹Lq‚·‚é‚±‚Æ‚É‚æ‚Á‚ÄAstruts-config‚Ìinput‘®«‚Ì–³İ’è‰»(ƒGƒ‰[‚É©‰æ–Ê‚ğÄ•\¦)‚·‚é‚±‚Æ‚ª‰Â”\‚É‚È‚è‚Ü‚·B
+formƒ^ƒO‚Ì’†‚É‹Lq‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B•¡”‚Ìform‚ª‘¶İ‚·‚éê‡‚É‚ÍA‚»‚ê‚¼‚ê‚É‹Lq‚ª•K—v‚Å‚·B
+</p>
+<table border="1">
+  <tr>
+    <td>‘®«–¼</td><td>•K{</td><td>rtexprvalue</td><td>à–¾</td>
+  </tr>
+  <tr>
+    <td><center>-</center></td>
+	<td><center>-</center></td>
+	<td><center>-</center></td>
+	<td>‘®«‚Í‚ ‚è‚Ü‚¹‚ñB</td>
+  </tr>
+</table>
+<h4>org.seasar.struts.taglib.InitializeTag(ƒ^ƒO–¼Finit)</h4>
+<p>
+‚±‚Ìƒ^ƒO‚ğg—p‚·‚é‚Æ‰æ–Ê‚Ì‰Šú‰»ˆ—‚ğs‚¤–‚ª‰Â”\‚Å‚·Baction‘®«‚É‹Lq‚µ‚½MethodBinding‚ğAJSP‚ğ•\¦‚·‚é‚ÉÀs‚µ‚Ü‚·B
+</p>
+<table border="1">
+  <tr>
+    <td>‘®«–¼</td><td>•K{</td><td>rtexprvalue</td><td>à–¾</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+	<td><center>~</center></td>
+	<td><center>-</center></td>
+	<td>action="#{component.method}"‚Æ‹Lq‚·‚é‚±‚Æ‚É‚æ‚Á‚ÄAJSP‚ğ•\¦‚·‚é‚ÉÀs‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Æƒƒ\ƒbƒh‚ğw’è‚·‚é–‚ª‰Â”\‚Å‚·B
+	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÍA‚±‚Ì‘®«‚Åw’è‚µ‚½–¼‘O‚ÅS2Container‚É“o˜^‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B</td>
+  </tr>
+</table>
 
 <!-- document end -->
 <!-- don't edit start -->
