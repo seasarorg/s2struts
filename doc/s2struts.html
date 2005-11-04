@@ -58,7 +58,7 @@ S2Strutsを使うと、S2と<a href="http://struts.apache.org/">Struts</a>が簡単に連動
 Actionクラスにサービスコンポーネントが自動的に設定されるので、
 Actionクラスの役割は適切なサービスコンポーネントを呼び出すだけになります。
 Actionクラスはコントローラに徹することで、プレゼンテーション層とサービス層の役割分担も明確になります。
-また、Actionに対して<a href="http://homepage3.nifty.com/seasar/aop.html">AOP</a>を適用することもできます。
+また、Actionに対して<a href="aop.html">AOP</a>を適用することもできます。
 </p>
 <h2><a name="Setup">セットアップ</a></h2>
 <p>
@@ -391,7 +391,7 @@ public class GreetingServiceImpl implements GreetingService {
 &lt;/components&gt;
 </pre>
 <p>
-今後、新しいActionを追加してもgreeting.diconを変更する必要はありません。これはS2が提供する<a href="http://s2container.seasar.org/ja/DIContainer.html#ComponentAutoRegister">コンポーネントの自動登録</a>を利用しているからです。
+今後、新しいActionを追加してもgreeting.diconを変更する必要はありません。これはS2が提供する<a href="DIContainer.html#ComponentAutoRegister">コンポーネントの自動登録</a>を利用しているからです。
 </p>
 <p>
 最後の作業として、画面とAction、ActionFormをつなげるためにgreetingInput.html、greeting.htmlを修正し、対応するmayaファイルを作ります。
@@ -626,7 +626,7 @@ S2RequestProcessorとS2TilesRequestProcessorを用意しています。
 <p>
 連動させたいActionクラスはコンポーネント定義に登録する必要があります。
 Actionクラスを個別に登録することもできますが、個別に登録を行うとActionクラスを追加するたびにコンポーネント定義ファイルを修正しなければなりません。
-その問題を避けるため、<a href="http://s2container.seasar.org/ja/DIContainer.html#ComponentAutoRegister">コンポーネントの自動登録</a>を利用することを推薦します。
+その問題を避けるため、<a href="DIContainer.html#ComponentAutoRegister">コンポーネントの自動登録</a>を利用することを推薦します。
 </p>
 <h4>employee.dicon</h4>
 <pre>
@@ -660,7 +660,7 @@ Actionクラスを個別に登録することもできますが、個別に登録を行うとActionクラスを追
 &lt;/components&gt;
 </pre>
 <p>
-また、このコンポーネント定義ファイルはアプリケーション全体の定義である<a href="#app.dicon">app.dicon</a>に登録する必要があります。
+また、このコンポーネント定義ファイルはアプリケーション全体の定義である<a href="DIContainer.html#app.dicon">app.dicon</a>に登録する必要があります。
 </p>
 <h4><a name="app.dicon"></a>app.dicon</h4>
 <pre>
@@ -675,9 +675,9 @@ Actionクラスを個別に登録することもできますが、個別に登録を行うとActionクラスを追
 </p>
 <p>
 インターフェースに対するセッターメソッドを定義しておけば、
-自動的に<a href="http://s2container.seasar.org/ja/DIContainer.html#SetterInjection">セッター・インジェクション</a>が行われます。
+自動的に<a href="DIContainer.html#SetterInjection">セッター・インジェクション</a>が行われます。
 また、インターフェースのみが引数のコンストラクタを定義している場合は、
-自動的に、<a href="http://s2container.seasar.org/ja/DIContainer.html#ConstructorInjection">コンストラクタ・インジェクション</a>が行われます。
+自動的に、<a href="DIContainer.html#ConstructorInjection">コンストラクタ・インジェクション</a>が行われます。
 </p>
 <p>サービスコンポーネントを受け取るためにActionクラスはコンストラクタもしくはセッターメソッドを定義しておきます。
 execute()メソッドでは、サービスに処理を委譲するのみとなるので、非常にすっきりしたコードになっていることが分かると思います。</p>
