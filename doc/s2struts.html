@@ -721,7 +721,7 @@ public class AddAction extends Action {
 }</pre>
 <h3><a name="NoRegist">コンポートネント定義に登録を行わないActionとS2の連動</a></h3>
 <p>
-RegistActionClassPlugInをstruts-config.xmlに登録する事により、S2と連動するActionを明示的にコンポーネント定義に登録しておく必要はありません。
+RegistActionClassPlugInをstruts-config.xmlに登録するか、または、S2ActionServletをweb.xmlに登録することにより、S2と連動するActionを明示的にコンポーネント定義に登録しておく必要はありません。
 ただし、Actionに対して<a href="DIContainer.html#Aop">AOPの適用</a>や
 <a href="DIContainer.html#MethodInjection">メソッド・インジェクション</a>を行うことはできません。
 </p>
@@ -731,6 +731,18 @@ RegistActionClassPlugInをstruts-config.xmlに登録する事により、S2と連動するAction
   <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.RegistActionClassPlugIn</font>&quot;/&gt;</b>
   ...
 &lt;/struts-config&gt;
+</pre>
+<h4>web.xml</h4>
+<pre>&lt;web-app&gt;
+  ...
+  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;<b>org.seasar.struts.S2ActionServlet</b>&lt;/servlet-class&gt;
+    ...
+  &lt;/servlet&gt;
+  ...
+&lt;/web-app&gt;
 </pre>
 <h3><a name="POJOAction">ActionをPOJOにした使い方</a></h3>
 <p>
