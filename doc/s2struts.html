@@ -28,7 +28,6 @@
 	<li><a href="#Reference">S2Strutsリファレンス</a></li>
 	<ul>
 		<li><a href="#Usage">基本的な使い方</a></li>
-		<li><a href="#NoRegist">コンポートネント定義に登録を行わないActionとS2の連動</a></li>
 		<li><a href="#POJOAction">ActionをPOJOにした使い方</a></li>
 		<li><a href="#ProxyAction">ProxyActionクラスの使い方</a></li>
 		<li><a href="#NoType">struts-config内に記述しているactionの、type属性を記述せずにActionクラスを指定する</a></li>
@@ -345,7 +344,8 @@ public class GreetingServiceImpl implements GreetingService {
     &lt;initMethod name="add"&gt;&lt;arg&gt;aop.traceInterceptor&lt;/arg&gt;&lt;/initMethod&gt;
   &lt;/component&gt;
 
-  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
     &lt;property name="autoNaming"&gt;
       &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
     &lt;/property&gt;
@@ -356,7 +356,8 @@ public class GreetingServiceImpl implements GreetingService {
     &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
   &lt;/component&gt;
   
-  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
     &lt;property name="instanceDef"&gt;
       @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
     &lt;/property&gt;
@@ -549,7 +550,9 @@ S2Strutsをより詳しく知りたい場合は、以下のリファレンスを参照してください。
 
   <b>&lt;filter&gt;
     &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
-    &lt;filter-class&gt;<font color="red">org.seasar.framework.container.filter.S2ContainerFilter</font>&lt;/filter-class&gt;
+    &lt;filter-class&gt;
+      <font color="red">org.seasar.framework.container.filter.S2ContainerFilter</font>
+    &lt;/filter-class&gt;
   &lt;/filter&gt;
 
   &lt;filter&gt;
@@ -569,7 +572,9 @@ S2Strutsをより詳しく知りたい場合は、以下のリファレンスを参照してください。
 
   <b>&lt;servlet&gt;
     &lt;servlet-name&gt;s2container&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;<font color="red">org.seasar.framework.container.servlet.S2ContainerServlet</font>&lt;/servlet-class&gt;
+    &lt;servlet-class&gt;
+      <font color="red">org.seasar.framework.container.servlet.S2ContainerServlet</font>
+    &lt;/servlet-class&gt;
     &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
   &lt;/servlet&gt;</b>
 
@@ -635,7 +640,8 @@ Actionクラスを個別に登録することもできますが、個別に登録を行うとActionクラスを追
   "http://www.seasar.org/dtd/components21.dtd"&gt;
 &lt;components&gt;
   ・・・
-  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
     &lt;property name="instanceDef"&gt;
       @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
     &lt;/property&gt;
@@ -719,31 +725,7 @@ public class AddAction extends Action {
         return (mapping.findForward("success"));
     }
 }</pre>
-<h3><a name="NoRegist">コンポートネント定義に登録を行わないActionとS2の連動</a></h3>
-<p>
-RegistActionClassPlugInをstruts-config.xmlに登録するか、または、S2ActionServletをweb.xmlに登録することにより、S2と連動するActionを明示的にコンポーネント定義に登録しておく必要はありません。
-ただし、Actionに対して<a href="DIContainer.html#Aop">AOPの適用</a>や
-<a href="DIContainer.html#MethodInjection">メソッド・インジェクション</a>を行うことはできません。
-</p>
-<h4>struts-config.xml</h4>
-<pre>&lt;struts-config&gt;
-  ...
-  <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.RegistActionClassPlugIn</font>&quot;/&gt;</b>
-  ...
-&lt;/struts-config&gt;
-</pre>
-<h4>web.xml</h4>
-<pre>&lt;web-app&gt;
-  ...
-  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
-  &lt;servlet&gt;
-    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;<b>org.seasar.struts.S2ActionServlet</b>&lt;/servlet-class&gt;
-    ...
-  &lt;/servlet&gt;
-  ...
-&lt;/web-app&gt;
-</pre>
+
 <h3><a name="POJOAction">ActionをPOJOにした使い方</a></h3>
 <p>
 org.apache.struts.action.Actionを継承しないPOJOをActionとして使用する事が出来ます。
@@ -1437,7 +1419,8 @@ public interface EmployeeEditAction {
 package org.seasar.struts.examples.employee.action;
 
 <b>/**
- * <font color="red">@org.seasar.struts.annotation.backport175.StrutsAction(name="employeeForm", validate=false)</font>
+ * <font color="red">@org.seasar.struts.annotation.backport175.StrutsAction(</font>
+ *   <font color="red">name="employeeForm", validate=false)</font>
  */</b>
 public interface EmployeeEditAction {
 
@@ -1603,9 +1586,11 @@ public class ValidateDto implements Serializable {
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Required</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Minlength(value=10)</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Maxlength(value=15)</font>
-     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Mask(pattern="com$",messageKey="mustendcom")</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Mask(</font>
+     *    <font color="red">pattern="com$",messageKey="mustendcom")</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Email</font>
-     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Args(keys="mixValue",resource=false)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Args(</font>
+     *    <font color="red">keys="mixValue",resource=false)</font>
      */</b>
     public void setvalue(String value) {
         this.value = value;
