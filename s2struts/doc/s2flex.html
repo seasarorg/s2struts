@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>S2Flex</title><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onMouseOver="swap(1)" onMouseOut="restore(1)"></a></td>
+<td><a href="http://sourceforge.jp/projects/seasar"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onMouseOver="swap(2)" onMouseOut="restore(2)"></a></td>
+<td><a href="download.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onMouseOver="swap(3)" onMouseOut="restore(3)"></a></td>
+<td><a href="document.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onMouseOver="swap(4)" onMouseOut="restore(4)"></a></td>
+<td><a href="resource.html"><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onMouseOver="swap(5)" onMouseOut="restore(5)"></a></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+<li><a href="#S2Flex">S2Flexとは</a></li>
+<li><a href="#Setup">セットアップ</a></li>
+<li><a href="#JavaBeans">JavaBeansとActionScriptのクラスとのマッピング</a></li>
+<li><a href="#Message">メッセージの多言語対応</a></li>
+<li><a href="#Example">Example</a></li>
+</ul>
+
+<h2><a name="S2Flex">S2Flexとは</a></h2>
+<p>S2Flexを使うと、S2Container上に登録されているコンポーネントのメソッドをFlexから簡単に呼び出せるようになります。</p>
+<h2><a name="Setup">セットアップ</a></h2>
+<p>Seasar2と同様にJDK1.4以上が必要です。S2FlexVx.x.x.zipを解凍してできたs2flexディレクトリをEclipseで、｢ファイル→インポート→既存のプロジェクトをワークスペースへ｣でインポートしてください。 S2Flexのソースを確認できます。flashgateway.jarがないので、エラーになりますが、これは、Flexのjarファイルを勝手に配布できないためです。コンパイルするためには、Flexに含まれているflashgateway.jarをs2flex/libにインポートしてください。</p>
+<p> Flex1.5が対象です。<a href="http://www.macromedia.com/jp/software/flex/trial/">ここ</a>から試用版をダウンロードできます。サンプルは、<a href="http://jakarta.apache.org/tomcat/">Tomcat</a>、<a href="http://www.sysdeo.com/eclipse/tomcatPlugin.html">Tomcat Plugin</a>を使うことを前提にしているので、Flexは、JRun統合モードではなく、Macromedia Flexモードでインストールしてください。このドキュメントでは、Flexをインストールしたディレクトリを$FLEX_HOMEと呼ぶことにします。 </p>
+<p>サンプルはS2FlexExamleVx.x.x.jarとして別途用意されているので、ダウンロードして解凍してください。先程と同様に、Eclipseで、｢ファイル→インポート→既存のプロジェクトをワークスペースへ｣でインポートします。次に、Flexの環境を整えます。$FLEX_HOME/flex.warを適当なディレクトリで解凍(jar xf flex.war)してください。解凍してできたWEB-INFディレクトリをs2flex-example/WEB-INFにまるごと、インポートします。S2Containerを起動するために、web.xmlに次の内容を書き込みます。</p>
+<pre>&lt;servlet&gt;<br>    &lt;servlet-name&gt;s2servlet&lt;/servlet-name&gt;<br>    &lt;display-name&gt;Seasar2 Servlet&lt;/display-name&gt;<br>    &lt;servlet-class&gt;org.seasar.framework.container.servlet.S2ContainerServlet&lt;/servlet-class&gt;<br>    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;<br>&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;<br>    &lt;servlet-name&gt;s2servlet&lt;/servlet-name&gt;<br>    &lt;url-pattern&gt;/s2servlet&lt;/url-pattern&gt;<br>&lt;/servlet-mapping&gt;
+</pre>
+<p>FlexのAMFGatewayがS2Container上のコンポーネントのメソッドを呼び出せるようにするために、s2flex-example/WEB-INF/flex/gateway-config.xmlにSeasar2用のアダブタを追加します。</p>
+<pre>&lt;service-adapters&gt;<br>    &lt;adapter type=&quot;stateless-class&quot;&gt;org.seasar.flex.S2Adapter&lt;/adapter&gt;
+    ...<br>&lt;/service-adapters&gt;</pre>
+<p>アプリケーションでlog4jによるロギングを可能にするために、WEB-INF/flex/jarsにあるcommons-loging.jarをWEB-INF/libに移動します。</p>
+
+<h2><a name="JavaBeans">JavaBeansとActionScriptのクラスとのマッピング</a></h2>
+<p>JavaBeansとActionScriptのクラスをマッピングしてJavaとFlexで相互にデータをやり取りできます。例として次のような足し算のデータをやり取りするようなJavaBeansを定義します。</p>
+<pre>
+package examples.flex;
+
+import java.io.Serializable;
+
+public class AddDto implements Serializable {
+
+    private int arg1;
+    private int arg2;
+    private int result;
+
+    public int getArg1() {
+        return arg1;
+    }
+    
+    public void setArg1(int arg1) {
+        this.arg1 = arg1;
+    }
+    
+    public int getArg2() {
+        return arg2;
+    }
+    
+    public void setArg2(int arg2) {
+        this.arg2 = arg2;
+    }
+    
+    public int getResult() {
+        return result;
+    }
+    
+    public void setResult(int result) {
+        this.result = result;
+    }
+}
+</pre>
+<p>これに対応するActionScriptのクラスを作成します。</p>
+<pre>
+class examples.flex.AddDto {
+    var _remoteClass:String;
+    var arg1:Number;
+    var arg2:Number;
+    var result:Number;
+    
+    function AddDto() {
+        _remoteClass = "examples.flex.AddDto";
+    }
+}
+</pre>
+<p>ポイントは、次の通りです。</p>
+<ul>
+<li>ActionScriptのクラス名とJavaの完全クラス限定名をあわせること</li>
+<li>_remoteClassというプロパティを定義すること</li>
+<li>コンストラクタで_remoteClassにクラス名を代入すること</li>
+<li>プロパティはvarで直接宣言すること</li>
+<li>MXMLファイルをルートにして、パッケージごとにディレクトリを切ること。例えば、examples.flex.AddDtoというクラスは、examples/flex/AddDto.asに置くことになります。あるいは、WEB-INF/flex/user_classesをルートにして、パッケージごとにディレクトリをきることも出来ます。通常は、user_classesを使った方がいいでしょう。MXMLファイルの位置に左右されずに利用できるためです。</li>
+</ul>
+<p>後は、Flex側でvarでクラス名指定で変数を宣言するか、次のようにクラス名をタグ名として宣言します。xmlns属性でパッケージ名を指定します。</p>
+<pre>&lt;AddDto id=&quot;addDto2&quot; xmlns=&quot;examples.flex.*&quot;/&gt;
+
+</pre>
+
+<h2><a name="Message">メッセージの多言語対応</a></h2>
+<p>Javaでは、プロパティファイルにロケールごとにメッセージを用意して簡単に多言語に対応することが出来ますが、そのプロパティファイルをFlexから利用する機能がS2Flexには用意されています。例えば、次のようなプロパティファイルをWEB-INF/classes直下に用意したとします。</p>
+<h4>FLXMessages_ja.properties</h4>
+<pre>EFLX0001=({0})は入力必須です<br>EFLX0002=バリデーションエラーです。エラーを修正してもう一度入力してください。</pre>
+<h4>FLXMessages.properties</h4>
+<pre>EFLX0001=({0}) is mandatory<br>EFLX0002=Please enter valid data in the fields with errors and try again.</pre>
+
+<p>Eclipseで日本語でプロパティを扱うためには、<a href="http://propedit.sourceforge.jp/">プロパティエディタ</a>を使うと便利です。次にこのプロパティファイルをFlex側から利用するためのコンポーネントをdiconファイルに登録します。</p>
+<pre>&lt;component name=&quot;messageLogic&quot; class=&quot;org.seasar.flex.message.MessageLogicImpl&quot;/&gt;
+</pre>
+<p>また、このコンポーネントをFlexから利用するためには、WEB-INF/flex/flex-config.xmlへの登録も必要です。</p>
+<pre>&lt;object name=&quot;messageLogic&quot;&gt;<br>    &lt;use-custom-authentication&gt;false&lt;/use-custom-authentication&gt;<br>    &lt;source&gt;messageLogic&lt;/source&gt;<br>    &lt;type&gt;stateless-class&lt;/type&gt;<br>    &lt;encoding&gt;AMF&lt;/encoding&gt;<br>    &lt;allow-unnamed-access&gt;false&lt;/allow-unnamed-access&gt;
+&lt;/object&gt;
+</pre>
+<p>Java側の準備ができました。次は、Flex側を準備します。最初に、s2flex/as2/orgディレクトリをWEB-INF/flex/user_classesに丸ごとコピーします。次に、messageLogicを呼び出すためにRemoteObjectタグを定義します。サーバサイドから戻り値が戻ってきたときの処理として、processMessageManager()を呼び出します。event.resultには、MessageManagerオブジェクトが入ってきます。</p>
+<pre>&lt;mx:RemoteObject id=&quot;messageLogic&quot; named=&quot;messageLogic&quot;<br>    fault=&quot;alert(event.fault.faultstring, 'Error')&quot;
+    result=&quot;processMessageManager(event.result)&quot;&gt;<br>&lt;/mx:RemoteObject&gt;
+</pre>
+<p>messageLogicは、アプリケーションの起動時に呼び出します。</p>
+<pre>&lt;mx:Application xmlns:mx=&quot;http://www.macromedia.com/2003/mxml&quot; initialize=&quot;initApp()&quot;&gt;
+</pre>
+<pre>import org.seasar.flex.message.*;
+function initApp() {
+    messageLogic.getMessageManager(&quot;FLXMessages&quot;, &quot;ja&quot;);
+}</pre>
+<p>processMessageManager()では、取得したMessageManagerオブジェクトをMessageManagerクラスのstatic変数(instance)に格納しています。</p>
+<pre>
+import org.seasar.flex.message.*;
+
+class org.seasar.flex.message.MessageManager {
+	static var instance:MessageManager;
+    ...
+}</pre>
+<pre>function processMessageManager(messageManager:MessageManager) {<br>	MessageManager.instance = messageManager;<br>}
+</pre>
+<p>いよいよ、Validatorを作ります。今回作るのは、必須チェックを行うValidatorです。Validatorは、mx.validators.Validatorを継承して、doValidation(value)を実装します。valueには入力された値が入っています。エラーが起きた場合は、Validator#validationError()でエラーメッセージを出力します。MessageManagerオブジェクトは、MessageManager.instanceで参照することが出来ます。後は、getMessage(メッセージコード, 引数の配列)を呼び出すだけです。</p>
+<pre>import org.seasar.flex.message.*;
+class RequiredFieldValidator extends mx.validators.Validator {
+    var fieldName:String;
+
+
+    function doValidation(value) : Void {
+        if (value == undefined || value == &quot;&quot;) {
+            var args:Array = new Array();
+            args[0] = fieldName;
+            validationError(&quot;required&quot;, MessageManager.instance.getMessage(&quot;EFLX0001&quot;, args));
+        }
+    }
+}
+</pre>
+<p>このサンプルは、s2flex-example/validationに格納されています。ブラウザから、http://localhost:8080/s2flex-example/validation/ValidationApp.mxmlにアクセスしてください。何も入力せずにvalidateボタンをクリックするとエラーのメッセージが表示され、次のようにTextInputにバルーンでメッセージが表示されます。<img src="images/s2flex-picture1.gif"/></p>
+<h2><a name="Example">Example</a></h2>
+<p>それでは、さっそく足し算するサンプルを作ってみましょう。Javaのインターフェースと実装を用意します。</p>
+<h3>examples.flex.AddLogic</h3>
+<pre>
+package examples.flex;
+
+public interface AddLogic {
+
+    public int calculate(int arg1, int arg2);
+
+    public AddDto calculate2(AddDto addDto);
+}
+</pre>
+<h3>examples.flex.AddLogicImpl</h3>
+<pre>
+package examples.flex;
+
+public class AddLogicImpl implements AddLogic {
+
+    public int calculate(int arg1, int arg2) {
+        return arg1 + arg2;
+    }
+
+    public AddDto calculate2(AddDto addDto) {
+        return addDto.setResult(addDto.getArg1() + addDto.getArg2());
+    }
+}
+</pre>
+<p>コンポーネントをdiconファイルに登録します。</p>
+<h3>examples/flex/flex.dicon</h3>
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;Shift_JIS&quot;?&gt;<br>&lt;!DOCTYPE components PUBLIC &quot;-//SEASAR//DTD S2Container//EN&quot;<br>&quot;http://www.seasar.org/dtd/components.dtd&quot;&gt;<br>&lt;components&gt;
+    &lt;component name=&quot;addLogic&quot; class=&quot;examples.flex.AddLogicImpl&quot;/&gt;<br>&lt;/components&gt;
+</pre>
+<h3>app.dicon</h3>
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;Shift_JIS&quot;?&gt;<br>&lt;!DOCTYPE components PUBLIC &quot;-//SEASAR//DTD S2Container//EN&quot;<br>&quot;http://www.seasar.org/dtd/components.dtd&quot;&gt;<br>&lt;components&gt;
+    &lt;include path=&quot;examples/flex/flex.dicon&quot;/&gt;<br>&lt;/components&gt;
+</pre>
+<p>登録したコンポーネントをFlexから呼び出せるようにs2flex-example/WEB-INF/flex/flex-config.xmlのflex-config/remote-objects/whitelistに次のエントリを追加します。</p>
+<pre>&lt;named&gt;<br>    &lt;object name=&quot;addLogic&quot;&gt;<br>        &lt;use-custom-authentication&gt;false&lt;/use-custom-authentication&gt;<br>        &lt;source&gt;addLogic&lt;/source&gt;<br>        &lt;type&gt;stateless-class&lt;/type&gt;<br>        &lt;encoding&gt;AMF&lt;/encoding&gt;<br>        &lt;allow-unnamed-access&gt;false&lt;/allow-unnamed-access&gt;<br>    &lt;/object&gt;
+&lt;/named&gt;
+</pre>
+<p>objectタグで、コンポーネントを指定します。sourceタグで指定するのが、S2Containerで定義したコンポーネント名です。name属性は、source属性とあわせたほうが分かりやすいでしょう。コンポーネントを追加する場合は、objectタグを追加します。Flex1.0を使う場合、上記の内容を書き込んだファイルが、s2flex-example/WEB-INF/flex/flex-config-s2flex.xmlにあらかじめ用意されているので、flex-config.xmlに上書きコピーします。Flex1.5を使う場合、同様にflex-config-s2flex15.xmlをコピーします。</p>
+<p>最後は、Flexのアプリケーションのソースです。Add.mxml,Add2.xmlファイルをプロジェクトのルートにおきます。</p>
+<h3>Add.mxml</h3>
+<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;mx:Application xmlns:mx=&quot;http://www.macromedia.com/2003/mxml&quot;&gt;
+    &lt;mx:RemoteObject id=&quot;addLogic&quot; named=&quot;addLogic&quot;
+        fault=&quot;alert(event.fault.faultstring, 'Error')&quot;&gt;
+    &lt;/mx:RemoteObject&gt;<br>
+    &lt;mx:HBox&gt;
+        &lt;mx:TextInput id=&quot;arg1&quot; width=&quot;100&quot;/&gt;
+        &lt;mx:Label text=&quot;+&quot;/&gt;
+        &lt;mx:TextInput id=&quot;arg2&quot; width=&quot;100&quot;/&gt;
+        &lt;mx:Label text=&quot;=&quot;/&gt;
+        &lt;mx:Label id=&quot;result&quot; text=&quot;{addLogic.calculate.result}&quot; width=&quot;20&quot;/&gt;
+        &lt;mx:Button label=&quot;calculate&quot;
+            click=&quot;addLogic.calculate(Number(arg1.text), Number(arg2.text))&quot;/&gt;
+    &lt;/mx:HBox&gt;
+&lt;/mx:Application&gt;
+</pre>
+<p>RemoteObjectタグで、Javaのコンポーネントを指定します。named属性にflex-config.xmlのobjectタグのname属性で指定した値を記述します。id属性は、named属性とあわせたほうが分かりやすいでしょう。後は、ActionScriptの中から、コンポーネント名.メソッド名(...)で呼び出すことができます。{addLogic.calculate.result}のようにして、calculateメソッドの呼び出し結果をLabelのvalueに自動的に設定できます。</p>
+<p>これで、完成です。Tomcatを再起動して、ブラウザから、http://localhost:8080/s2flex-example/Add.mxmlにアクセスしてください。</p>
+<p>次はJavaBeansを使うときの例です。</p>
+<h3>Add2.mxml</h3>
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;mx:Application xmlns:mx=&quot;http://www.macromedia.com/2003/mxml&quot;&gt;
+    &lt;mx:RemoteObject id=&quot;addLogic&quot; named=&quot;addLogic&quot;
+        fault=&quot;alert(event.fault.faultstring, 'Error')&quot;&gt;
+    &lt;/mx:RemoteObject&gt;<br>
+    &lt;AddDto id=&quot;addDto2&quot; xmlns=&quot;examples.flex.*&quot;&gt;
+        &lt;arg1&gt;{Number(arg1.text)}&lt;/arg1&gt;
+        &lt;arg2&gt;{Number(arg2.text)}&lt;/arg2&gt;
+    &lt;/AddDto&gt;<br>
+    &lt;mx:HBox&gt;
+        &lt;mx:TextInput id=&quot;arg1&quot; width=&quot;100&quot;/&gt;
+        &lt;mx:Label text=&quot;+&quot;/&gt;
+        &lt;mx:TextInput id=&quot;arg2&quot; width=&quot;100&quot;/&gt;
+        &lt;mx:Label text=&quot;=&quot;/&gt;
+        &lt;mx:Label id=&quot;result&quot; text=&quot;{addLogic.calculate2.result.result}&quot; width=&quot;20&quot;/&gt;
+        &lt;mx:Button label=&quot;calculate2&quot; click=&quot;addLogic.calculate2(addDto2)&quot;/&gt;
+    &lt;/mx:HBox&gt;
+&lt;/mx:Application&gt;
+</pre>
+<p>ブラウザから、http://localhost:8080/s2flex-example/Add2.mxmlにアクセスしてください。</p>
+<!-- document end --><!-- don't edit start --></td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td></tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Project and the others 2004, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>

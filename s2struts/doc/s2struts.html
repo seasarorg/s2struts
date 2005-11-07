@@ -1,0 +1,1956 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+	<li><a href="#Summary">S2Struts概要</a></li>
+	<li><a href="#Setup">セットアップ</a></li>
+	<li><a href="#Quickstart">クイックスタート</a></li>
+	<li><a href="#Reference">S2Strutsリファレンス</a></li>
+	<ul>
+		<li><a href="#Usage">基本的な使い方</a></li>
+		<li><a href="#POJOAction">ActionをPOJOにした使い方</a></li>
+		<li><a href="#ProxyAction">ProxyActionクラスの使い方</a></li>
+		<li><a href="#NoType">struts-config内に記述しているactionの、type属性を記述せずにActionクラスを指定する</a></li>
+		<li><a href="#Mapping">path属性とActionクラスのマッピングについて</a></li>
+		<li><a href="#Hint">適用へのヒント</a></li>
+		<li><a href="#RequestProcessor">RequestProcessorをコンポーネントから取得する</a></li>
+		<li><a href="#Message">エラーメッセージの表示を任意のコンポーネントから管理する</a></li>
+	</ul>
+	<li><a href="#ZeroConfigReference">無設定S2Strutsリファレンス</a></li>
+	<ul>
+		<li><a href="#ZoroConfig">無設定S2Struts</a></li>
+		<li><a href="#Annotation">アノテーションを使用したstruts-configの設定</a></li>
+		<li><a href="#AnnotationValidation">アノテーションを使用したvalidationの設定</a></li>
+	</ul>
+	<li><a href="#TagLibReference">S2Strutsタグライブラリリファレンス</a></li>
+	<ul>
+		<li><a href="#TagLibButton">buttonタグ</a></li>
+		<li><a href="#TagLibSubmit">submitタグ</a></li>
+		<li><a href="#TagLibImage">imageタグ</a></li>
+		<li><a href="#TagLibPage">pageタグ</a></li>
+		<li><a href="#TagLibInit">initタグ</a></li>
+	</ul>
+</ul>
+<h2><a name="Summary">S2Struts概要</a></h2>
+<p>
+S2Strutsを使うと、S2と<a href="http://struts.apache.org/">Struts</a>が簡単に連動するようになります。
+Actionクラスにサービスコンポーネントが自動的に設定されるので、
+Actionクラスの役割は適切なサービスコンポーネントを呼び出すだけになります。
+Actionクラスはコントローラに徹することで、プレゼンテーション層とサービス層の役割分担も明確になります。
+また、Actionに対して<a href="aop.html">AOP</a>を適用することもできます。
+</p>
+<h2><a name="Setup">セットアップ</a></h2>
+<p>
+S2と同様にJDK1.4 or JDK1.5が必要です。稼動確認は、Eclipse3.1で行っています。
+</p><p>
+S2StrutsVx.x.x.jarを解凍してできたs2strutsディレクトリをEclipseのJavaプロジェクトとして丸ごとインポートしてください。
+.classpathを上書きするか聞かれるので、全て、はいのボタンをクリックして、全てを取り込みます。
+これで、私と全く同じ開発環境になります。
+</p><p>
+サンプルは、
+<a href="http://jakarta.apache.org/tomcat/">Tomcat</a>と
+<a href="http://www.sysdeo.com/eclipse/tomcatPlugin.html">Tomcat Plugin</a>を使うことを前提にしています。
+あらかじめインストールしてください。
+</p><p>
+サンプルはS2StrutsExamleVx.x.x.jarとして別途用意されているので、
+ダウンロードして解凍してください。Eclipseでs2struts-exampleという名前でJavaプロジェクトを作成します。
+Tomcatプロジェクトではないので気をつけてください。解凍してできたs2struts-exampleディレクトリを丸ごとインポートしてください。
+.classpathを上書きするか聞かれるので、全て、はいのボタンをクリックして、全てを取り込みます。
+s2struts-exampleプロジェクトを右クリックしてプロパティ-&gt;Tomcatを選びます。Tomcatプロジェクトであるをチェックし、
+アプリケーションURIを/s2struts-exampleとします。これで、Tomcatを再起動して、
+ブラウザから<a href="http://localhost:8080/s2struts-example/">http://localhost:8080/s2struts-example/</a>にアクセスすると
+s2strutsを使用したサンプルを見ることができます。
+</p>
+<h2><a name="Quickstart">クイックスタート</a></h2>
+<p>
+早速試してみましょう。
+</p>
+<p>
+クイックスタートは、
+<a href="http://jakarta.apache.org/tomcat/">Tomcat</a>と
+<a href="http://www.sysdeo.com/eclipse/tomcatPlugin.html">Tomcat Plugin</a>を使うことを前提にしています。
+あらかじめインストールしてください。
+</p>
+<p>
+S2Strutsを簡単に利用するためにS2StrutsBlankVx.x.x.zipを使います。
+S2StrutsBlankVx.x.x.zipを解凍してs2struts-blankディレクトリをEclipseのJavaプロジェクトとして丸ごとインポートしてください。
+.classpathを上書きするか聞かれるので、全て、はいのボタンをクリックして、全てを取り込みます。
+s2struts-blankプロジェクトを右クリックしてプロパティ-&gt;Tomcatを選びます。これで準備はできました。
+</p>
+<p>
+まずはデモ画面となるHTMLから作成します。s2struts-blank直下にgreetingInput.html、greeting.htmlを作ります。
+<h4>greetingInput.html</h4>
+<p>時間帯を指定する画面です。</p>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form method="GET" action="greeting.html"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th&gt;time&lt;/th&gt;
+        &lt;td&gt;
+          &lt;select name="time"&gt;
+            &lt;option value="" selected&gt;Please select&lt;/option&gt;
+            &lt;option value="a.m."&gt;a.m.&lt;/option&gt;
+            &lt;option value="p.m."&gt;p.m.&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type="submit" value="greeting"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h4>greeting.html</h4>
+<p>時間帯ごとのあいさつを表示する画面です。</p>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;td&gt;a.m.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;greeting&lt;/th&gt;
+      &lt;td&gt;Good morning&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;a href="greetingInput.html"&gt;back&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+ブラウザでgreetingInput.htmlを表示すれば、これから作成するアプリケーションの紙芝居をみることができます。
+</p>
+<p>
+作るもののイメージがわきましたか？
+</p>
+<p>
+それでは実際に動くものにしていきます。作業手順は次のようになります。
+</p>
+<ul>
+<li>インターフェースを作る</li>
+<li>インターフェースを実装し部品を作る</li>
+<li>それぞれの部品をつなげる</li>
+</ul>
+<p>
+今回はActionをPOJOで作り、ビューには<a href="http://maya.sandbox.seasar.org/">Maya</a>を利用します。
+S2StrutsではActionをPOJOとする場合、インターフェースと実装をわける必要があります。
+詳しくは<a href="#POJOAction">「ActionをPOJOにした使い方」</a>を参照してください。
+</p>
+<p>
+最初にGreetingInputInitAction、GreetingAction、GreetingServiceインターフェースを作ります。
+画面とのインターフェースという意味でActionForm(DTO)となるGreetingDtoも作ります。
+</p>
+<h4>GreetingDto</h4>
+<p>POJOのDTOをActionFormとして利用します。画面からわたってくる項目を持たせます。</p>
+<pre>
+package examples.dto;
+
+public class GreetingDto {
+    private String time = "";
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+}
+</pre>
+<h4>GreetingInputInitAction</h4>
+<p>greetingInput.htmlを表示するために必要となる情報を提供するActionインターフェースです。</p>
+<pre>
+package examples.action;
+
+public interface GreetingInputInitAction {
+    String initialize();
+}
+</pre>
+<h4>GreetingAction</h4>
+<p>あいさつ処理を行うActionインターフェースです。</p>
+<pre>
+package examples.action;
+
+public interface GreetingAction {
+    String SUCCESS = "success";
+    
+    String goGreeting();
+}
+</pre>
+<h4>GreetingService</h4>
+<p>Strutsなどのプレゼンテーション層フレームワークに依存しないサービスを提供するインターフェースです。</p>
+<pre>
+package examples.service;
+
+import java.util.List;
+import examples.dto.GreetingDto;
+
+public interface GreetingService {
+    List getTimeList();
+
+    String getGreeting(GreetingDto dto);
+}
+</pre>
+<p>これで一通りインターフェースを作ることができました。次はインターフェースを実装し部品を作ります。</p>
+
+<h4>GreetingInputInitActionImpl</h4>
+<p>
+setGreetingServiceはGreetingServiceをインジェクションするためのセッターメソッドです。
+getTimeListは画面へ情報を渡すためのゲッターメソッドです。
+</p>
+<pre>
+package examples.action.impl;
+
+import java.util.List;
+import examples.action.GreetingInputInitAction;
+import examples.service.GreetingService;
+
+public class GreetingInputInitActionImpl implements GreetingInputInitAction {
+    private GreetingService service;
+    private List timeList;
+
+    public String initialize() {
+        timeList = service.getTimeList();
+        return null;
+    }
+    
+    public void setGreetingService(GreetingService service) {
+        this.service = service;
+    }
+
+    public List getTimeList() {
+        return timeList;
+    }
+}
+</pre>
+<h4>GreetingActionImpl</h4>
+<p>
+setGreetingServiceはGreetingServiceをインジェクションするためのセッターメソッドです。
+setGreetingDtoはActionFormを画面から受け取るためのセッターメソッドで、getGreetingDtoはActionFormを画面へ渡すためのゲッターメソッドです。
+getGreetingは画面へ情報を渡すためのゲッターメソッドです。
+</p>
+<pre>
+package examples.action.impl;
+
+import examples.action.GreetingAction;
+import examples.dto.GreetingDto;
+import examples.service.GreetingService;
+
+public class GreetingActionImpl implements GreetingAction {
+    private GreetingService service;
+    private GreetingDto greetingDto;
+    private String greeting;
+
+    public String goGreeting() {
+        greeting = service.getGreeting(greetingDto);
+        return SUCCESS;
+    }
+
+    public void setGreetingService(GreetingService service) {
+        this.service = service;
+    }
+
+    public GreetingDto getGreetingDto() {
+        return greetingDto;
+    }
+
+    public void setGreetingDto(GreetingDto greetingDto) {
+        this.greetingDto = greetingDto;
+    }
+
+    public String getGreeting() {
+        return greeting;
+    }
+}
+</pre>
+<h4>GreetingServiceImpl</h4>
+<p></p>
+<pre>
+package examples.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import examples.dto.GreetingDto;
+import examples.service.GreetingService;
+
+public class GreetingServiceImpl implements GreetingService {
+    private static final String AM = "a.m.";
+    private static final String PM = "p.m.";
+
+    public List getTimeList() {
+        List result = new ArrayList();
+        result.add(AM);
+        result.add(PM);
+        return result;
+    }
+
+    public String getGreeting(GreetingDto dto) {
+        if (AM.equals(dto.getTime())) {
+            return "Good morning";
+        }
+        if (PM.equals(dto.getTime())) {
+            return "Good evening";
+        }
+        return "";
+    }
+}
+</pre>
+<p>これですべての実装が終了し部品がそろいました。次はそれぞれの部品をつなげる作業をします。</p>
+<h4>greeting.dicon</h4>
+<p>ActionとServiceをつなげるためにgreeting.diconをexamples/diconの直下に作ります。</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="aop.dicon"/&gt;
+
+  &lt;component name="actionInterceptorChain"
+      class="org.seasar.framework.aop.interceptors.InterceptorChain"&gt;
+    &lt;initMethod name="add"&gt;&lt;arg&gt;aop.traceInterceptor&lt;/arg&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"examples.service.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ServiceImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+  
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="instanceDef"&gt;
+      @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+    &lt;/property&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"examples.action.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component class="org.seasar.framework.container.autoregister.AspectAutoRegister"&gt;
+    &lt;property name="interceptor"&gt;actionInterceptorChain&lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"examples.action.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+
+&lt;/components&gt;
+</pre>
+<p>app.diconにincludeを追加してgreeting.diconを読み込むようにします。</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="s2struts.dicon"/&gt;
+  <b><font color="red">&lt;include path="examples/dicon/greeting.dicon"/&gt;</font></b>
+&lt;/components&gt;
+</pre>
+<p>
+今後、新しいActionを追加してもgreeting.diconを変更する必要はありません。これはS2が提供する<a href="DIContainer.html#ComponentAutoRegister">コンポーネントの自動登録</a>を利用しているからです。
+</p>
+<p>
+最後の作業として、画面とAction、ActionFormをつなげるためにgreetingInput.html、greeting.htmlを修正し、対応するmayaファイルを作ります。
+Mayaについての詳細は<a href="http://maya.sandbox.seasar.org/">「JavaServer Templates "Maya"」</a>を参照してください。
+</p>
+<h4>greetingInput.html</h4>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+<b><font color="red">&lt;div id="appBody"&gt;</font></b>
+  &lt;form method="GET" action="greeting.html" <b><font color="red">id="appForm"</font></b>&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th&gt;time&lt;/th&gt;
+        &lt;td&gt;
+          &lt;select name="time" <b><font color="red">id="time"</font></b>&gt;
+            &lt;option value="" selected&gt;Please select&lt;/option&gt;
+            &lt;option value="a.m."&gt;a.m.&lt;/option&gt;
+            &lt;option value="p.m."&gt;p.m.&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type="submit" value="greeting" <b><font color="red">id="goGreeting"</font></b>&gt;
+  &lt;/form&gt;
+<b><font color="red">&lt;/div&gt;</font></b>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h4>greetingInput.maya</h4>
+<p>S2Strutsが用意している<a href="#TagLibInit">initタグ</a>を使用してGreetingInputInitAction#initialize()を呼び出します。</p>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;m:maya xmlns:m="http://maya.seasar.org"
+		xmlns:html="http://struts.apache.org/tags-html"
+		xmlns:bean="http://struts.apache.org/tags-bean"
+		xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+		m:noCache="true"&gt;
+
+	&lt;m:with id="appBody" replace="false"&gt;
+		&lt;s2struts:init action="#{greetingInputInitAction.initialize}"/&gt;
+		&lt;m:doBody /&gt;
+	&lt;/m:with&gt;
+
+	&lt;html:form m:id="appForm" action="/greeting" method="POST" /&gt;
+	&lt;html:select m:id="time" property="time"&gt;
+		&lt;html:option value=""&gt;Please select&lt;/html:option&gt;
+		&lt;html:options name="timeList" /&gt;
+	&lt;/html:select&gt;
+	&lt;html:submit m:id="goGreeting" &gt;greeting&lt;/html:submit&gt;
+
+&lt;/m:maya&gt;
+</pre>
+<h4>greeting.html</h4>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+<b><font color="red">&lt;div id="appBody"&gt;</font></b>
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;td&gt;<b><font color="red">&lt;span id="time"&gt;</font></b>a.m.<b><font color="red">&lt;/span&gt;</font></b>&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;greeting&lt;/th&gt;
+      &lt;td&gt;<b><font color="red">&lt;span id="greeting"&gt;</font></b>Good morning<b><font color="red">&lt;/span&gt;</font></b>&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;a href="greetingInput.html" <b><font color="red">id="goBack"</font></b>&gt;back&lt;/a&gt;
+<b><font color="red">&lt;/div&gt;</font></b>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h4>greeting.maya</h4>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;m:maya xmlns:m="http://maya.seasar.org"
+		xmlns:html="http://struts.apache.org/tags-html"
+		xmlns:bean="http://struts.apache.org/tags-bean"
+		xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+		m:noCache="true"&gt;
+
+	&lt;m:ignore id="appBody" /&gt;
+
+	&lt;bean:write m:id="time" name="greetingDto" property="time" /&gt;
+	&lt;bean:write m:id="greeting" name="greeting" /&gt;
+	&lt;html:link m:id="goBack" page="/greetingInput.html"&gt;back&lt;/html:link&gt;
+
+&lt;/m:maya&gt;
+</pre>
+<p>これで作業は終了です。</p>
+<p>
+Tomcatを再起動して、
+ブラウザから<a href="http://localhost:8080/s2struts-blank/greetingInput.html">http://localhost:8080/s2struts-blank/greetingInput.html</a>にアクセスし動作を確認してください。
+</p>
+<p>
+struts-config.xmlを編集していないですが動作します。
+なぜなら、実行時にS2Strutsが規約に従いstruts-config情報を生成しているからです。
+GreetingDtoとGreetingActionを作った時点で以下のstruts-configの記述と同等の作業を行ったことになります。
+</p>
+<pre>
+...
+&lt;form-beans&gt;
+    ...
+    &lt;form-bean
+        name="greetingDto"
+        type="examples.dto.GreetingDto" /&gt;
+    ...
+&lt;/form-beans&gt;
+...
+&lt;action-mappings&gt;
+    ...
+    &lt;action
+        path="/greeting"
+        type="examples.action.GreetingAction"
+        name="greetingDto"
+        scope="request"
+        validate="true"&gt;
+        &lt;forward name="success" path="/greeting.html" /&gt;
+    &lt;/action&gt;
+    ...
+&lt;/action-mappings&gt;
+...
+</pre>
+<p>
+今回は規約に従うことができたので設定は不要でしたが、規約に従えない場合もあります。
+その場合はアノテーションを使用して直接指定することができます。
+規約とアノテーションについては<a href="#ZoroConfig">「無設定S2Struts」</a>を参照してください。
+</p>
+<p>
+S2Strutsの世界はいかがでしたか？
+POJOのActionはテストしやすそうに見えませんか？
+もうアプリケーションの規模といっしょに大きくなっていくstruts-config.xmlに悩む必要はありません。
+S2Strutsをより詳しく知りたい場合は、以下のリファレンスを参照してください。
+</p>
+<h2><a name="Reference">S2Strutsリファレンス</a></h2>
+<h3><a name="Usage">基本的な使い方</a></h3>
+<p>
+まず、S2Containerを起動するためにS2ContainerServletをweb.xmlに登録する必要があります。
+また、S2ContainerFilterとS2StrutsFilterを以下のように設定して下さい。
+</p>
+<h4>web.xml</h4>
+<pre>&lt;web-app&gt;
+  &lt;display-name&gt;Struts Application&lt;/display-name&gt;
+
+  <b>&lt;filter&gt;
+    &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+    &lt;filter-class&gt;
+      <font color="red">org.seasar.framework.container.filter.S2ContainerFilter</font>
+    &lt;/filter-class&gt;
+  &lt;/filter&gt;
+
+  &lt;filter&gt;
+    &lt;filter-name&gt;s2strutsfilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;<font color="red">org.seasar.struts.filter.S2StrutsFilter</font>&lt;/filter-class&gt;
+  &lt;/filter&gt;
+
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;<font color="red">/*</font>&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;s2strutsfilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;<font color="red">/*</font>&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;</b>
+
+  <b>&lt;servlet&gt;
+    &lt;servlet-name&gt;s2container&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;
+      <font color="red">org.seasar.framework.container.servlet.S2ContainerServlet</font>
+    &lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;</b>
+
+  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;config&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;debug&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;detail&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;s2container&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/s2container&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+  &lt;!-- Standard Action Servlet Mapping --&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+  &lt;!-- The Usual Welcome File List --&gt;
+  &lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+
+&lt;/web-app&gt;
+</pre>
+<p>
+次に、S2とStrutsを連動させるためにS2用のRequestProcessorをstruts-config.xmlに登録する必要があります。
+S2RequestProcessorとS2TilesRequestProcessorを用意しています。
+これらはそれぞれStrutsのRequestProcessorとTilesRequestProcessorに相当します。
+</p>
+<h4>struts-config.xml</h4>
+<pre>
+&lt;struts-config&gt;
+  ...
+  <b>&lt;controller processorClass=&quot;<font color="red">org.seasar.struts.processor.S2RequestProcessor</font>&quot;/&gt;</b>
+  ...
+&lt;/struts-config&gt;
+</pre>
+<p>
+連動させたいActionクラスはコンポーネント定義に登録する必要があります。
+Actionクラスを個別に登録することもできますが、個別に登録を行うとActionクラスを追加するたびにコンポーネント定義ファイルを修正しなければなりません。
+その問題を避けるため、<a href="DIContainer.html#ComponentAutoRegister">コンポーネントの自動登録</a>を利用することを推薦します。
+</p>
+<h4>employee.dicon</h4>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  ・・・
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="instanceDef"&gt;
+      @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+    &lt;/property&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.employee.action.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component class="org.seasar.framework.container.autoregister.AspectAutoRegister"&gt;
+    &lt;property name="interceptor"&gt;actionInterceptorChain&lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.employee.action.impl"&lt;/arg&gt;
+      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="registAll"&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+  ・・・
+&lt;/components&gt;
+</pre>
+<p>
+また、このコンポーネント定義ファイルはアプリケーション全体の定義である<a href="DIContainer.html#app.dicon">app.dicon</a>に登録する必要があります。
+</p>
+<h4><a name="app.dicon"></a>app.dicon</h4>
+<pre>
+&lt;components&gt;
+  ...
+  &lt;include path=&quot;org/seasar/struts/examples/employee.dicon&quot;/&gt;
+  ...
+&lt;/components&gt;
+</pre>
+<p>
+これでRequestProcessorにより生成される全てのActionクラスがS2と連動するようになります。
+</p>
+<p>
+インターフェースに対するセッターメソッドを定義しておけば、
+自動的に<a href="DIContainer.html#SetterInjection">セッター・インジェクション</a>が行われます。
+また、インターフェースのみが引数のコンストラクタを定義している場合は、
+自動的に、<a href="DIContainer.html#ConstructorInjection">コンストラクタ・インジェクション</a>が行われます。
+</p>
+<p>サービスコンポーネントを受け取るためにActionクラスはコンストラクタもしくはセッターメソッドを定義しておきます。
+execute()メソッドでは、サービスに処理を委譲するのみとなるので、非常にすっきりしたコードになっていることが分かると思います。</p>
+<h4>Add.dicon</h4>
+<pre>
+&lt;components&gt;
+  &lt;component class=&quot;org.seasar.struts.examples.AddServiceImpl&quot;/&gt;
+&lt;/components&gt;
+</pre>
+<h4>AddAction</h4>
+<pre>
+package org.seasar.struts.examples;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+public class AddAction extends Action {
+
+    private AddService addService_;
+
+    public AddAction(AddService addService) {
+        addService_ = addService;
+    }
+
+    public ActionForward execute(
+        ActionMapping mapping,
+        ActionForm form,
+        HttpServletRequest request,
+        HttpServletResponse response) {
+
+        CalculationForm calForm = (CalculationForm) form;
+        int result = addService_.add(calForm.getArg1(), calForm.getArg2());
+        calForm.setResult(result);
+        return (mapping.findForward("success"));
+    }
+}</pre>
+
+<h3><a name="POJOAction">ActionをPOJOにした使い方</a></h3>
+<p>
+org.apache.struts.action.Actionを継承しないPOJOをActionとして使用する事が出来ます。
+</p>
+<p>
+以下のように、インターフェースと、実装クラスを作成し実装クラスは、コンポーネント定義ファイルに定義して下さい。
+アクションメソッドの戻り値は、Stringとして、forward名を返すようにして下さい。
+そして、struts-configには、インターフェースをactionタグのtype属性に指定して下さい。
+<h4>EchoAction</h4>
+<pre>public interface EchoAction {
+	String echo();
+}</pre>
+<h4>EchoActionImpl</h4>
+<pre>public class EchoActionImpl implements EchoAction {
+    private StringForm strForm;
+    
+    public EchoActionImpl() {
+    }
+
+    public String echo() {
+        strForm.setResult(strForm.getInput());
+        
+        return FowardNameConstants.SUCCESS;
+    }
+
+    public StringForm getStrForm() {
+        return strForm;
+    }
+    public void setStrForm(StringForm strForm) {
+        this.strForm = strForm;
+    }
+}</pre>
+<p>
+POJOアクションクラスに、セッターメソッドがある場合、HttpServletRequestまたは、HttpSessionの値が、自動バインディングされます。<br>
+(1)HttpServletRequest#getParameter(プロパティー名)<br>
+(2)HttpServletRequest#getAttribute(プロパティー名)<br>
+(3)HttpSession#getAttribute(プロパティー名)<br>
+の優先順位で値を参照します。
+</p>
+<p>
+また、パラメーターに[]が付き、foo[0]=fooVal0,foo[1]=fooVal1のようなパラメーターを受け取った場合には、<br>
+<pre>
+setFoo(int index, Object value);
+</pre>
+のように、第一引数にint、第二引数に値を持ったインデックス付きのセッターメソッドが自動バインディングの対象になります。
+</p>
+<p>
+また、getterメソッドがある場合も同様に、HttpServletRequestまたは、HttpSessionに値を自動バインディングします。<br>
+(1)基本的に、HttpServletRequest#setAttribute(プロパティー名,プロパティー値)を行います。<br>
+(2)HttpSession#setAttribute(プロパティー名,プロパティー値)を行いたい場合は、定数アノテーションにて、
+<pre>
+public final static String プロパティ名_EXPORT = org.seasar.struts.util.BindingUtil.SESSION;
+</pre>
+とActionクラスに記述する必要があります。
+</p>
+<p>
+また、アノテーションによる記述も可能です。その記述方法については、以下の方法でゲッターメソッドに対しアノテーションを記述する事で可能になります。
+<pre>
+@ExportToSession()
+public String getFoo() {
+    return foo;
+}
+</pre>
+以下のように、backport175による記述も可能です。
+<pre>
+/**
+ * @org.seasar.struts.action.backport175.ExportToSession()
+ */
+public String getFoo() {
+    return foo;
+}
+</pre>
+</p>
+<h4>Echo.dicon</h4>
+<pre>
+&lt;components&gt;
+	&lt;component class=&quot;org.seasar.struts.examples.echo.EchoActionImpl&quot; instance=&quot;request&quot;/&gt;
+&lt;/components&gt;
+</pre>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;/echo&quot;
+      type=&quot;<b>org.seasar.struts.examples.echo.EchoAction</b>&quot;
+      name=&quot;strForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;false&quot;
+      input=&quot;/pages/echoInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/strResult.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<p>
+実装クラスのプロパティーは、web.xmlにS2ContainerFilterを登録しておく事によって、リクエストまたは、セッションとActionに対し、相互に自動バインディングされます。
+リクエストとセッションのどちらにバインディングされるかは、コンポーネント定義ファイルのinstance属性により決定されます。ActionFormに関しては、struts-config.xmlに定義したscope属性により決定します。
+</p>
+<p>
+また、インターフェースのメソッドが複数存在する場合には、org.apache.struts.actions.DispatchActionを使用する場合と同様に、
+struts-config.xmlのactionタグにparameter属性の追加と、JSPのサブミットボタンに対し、name属性とvalue属性の２つの属性で、メソッドを指定して下さい。
+<h4>ChangeCaseAction</h4>
+<pre>
+public interface ChangeCaseAction {
+    String toLowerCase();
+
+    String toUpperCase();
+}
+</pre>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;/changeCase&quot;
+      type=&quot;org.seasar.struts.examples.changecase.ChangeCaseAction&quot;
+      name=&quot;strForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;true&quot;
+      <b>parameter=&quot;command&quot;</b>
+      input=&quot;/pages/changeCaseInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/strResult.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>changeCaseInput.jsp</h4>
+<pre>
+...
+&lt;html:submit property=&quot;<b>command</b>&quot;&gt;&lt;bean:message key=&quot;<b>toLowerCase</b>&quot;/&gt;&lt;/html:submit&gt;
+&lt;p&gt;
+&lt;html:submit property=&quot;<b>command</b>&quot;&gt;&lt;bean:message key=&quot;<b>toUpperCase</b>&quot;/&gt;&lt;/html:submit&gt;
+...
+</pre>
+<p>
+HTMLに変換されると以下のようになります。
+</p>
+<pre>
+&lt;input type=&quot;submit&quot; name=&quot;<b>command</b>&quot; value=&quot;<b>toLowerCase</b>&quot;&gt;
+&lt;p>
+&lt;input type=&quot;submit&quot; name=&quot;<b>command</b>&quot; value=&quot;<b>toUpperCase</b>&quot;&gt;
+</pre>
+</p>
+<h3><a name="ProxyAction">ProxyActionクラスの使い方</a></h3>
+<p>
+また、ProxyActionクラスを使用して、コンポーネント定義ファイルに記述したActionを呼び出し、処理を委譲する事もできます。
+これにより、struts-configとコンポーネント定義ファイルに同じクラス名を定義/同期する必要がなくなります。
+<b>struts-config内に記述しているactionのpath属性と、コンポーネント定義ファイルに定義したcomponentのname属性が一致している必要があります。</b>
+詳細は、<a href="#Mapping">「path属性とActionクラスのマッピングについて」</a>を参照してください。
+</p>
+また、ProxyActionクラスのみに関しては、struts-configに、S2用のRequestProcessorを登録しなくとも、S2と連動する事ができます。
+ただし、他のActionクラスもS2と連動させたい場合には、前述のように、S2用のRequestProcessorをstruts-config.xmlに登録する必要があります。
+これは、特定のActionクラスのみを、S2と連動する為に有効である事を意味します。
+<p>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;<b>/subtract</b>&quot;
+      type=&quot;org.seasar.struts.action.ProxyAction&quot;
+      name=&quot;calcForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;false&quot;
+      input=&quot;/pages/subtractInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/result.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>Subtract.dicon</h4>
+<pre>
+&lt;components&gt;
+  &lt;component name=&quot;<b>/subtract</b>&quot; class=&quot;org.seasar.struts.examples.SubtractAction&quot;/&gt;
+  &lt;component class=&quot;org.seasar.struts.examples.SubtractServiceImpl&quot;/&gt;
+&lt;/components&gt;
+</pre>
+</p>
+<h3><a name="NoType">struts-config内に記述しているactionの、type属性を記述せずにActionクラスを指定する</a></h3>
+<p>
+ProxyActionクラスの使い方と同様に、struts-config内に記述しているactionのpath属性と、
+コンポーネント定義ファイルに定義したcomponentのname属性を一致させる事によりtype属性を記述せずにActionクラスを呼び出す事が出来ます。
+詳細は、<a href="#Mapping">「path属性とActionクラスのマッピングについて」</a>を参照してください。
+この手法を利用する為には条件があります。それは、type属性、forward属性、include属性の3つの属性が無い事です。
+これにより、struts-configとコンポーネント定義ファイルに同じクラス名を定義/同期する必要がなくなります。
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;<b>/divide</b>&quot;
+      name=&quot;calcForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;false&quot;
+      input=&quot;/pages/divideInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/result.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>Divide.dicon</h4>
+<pre>
+&lt;components&gt;
+  &lt;component name=&quot;<b>/divide</b>&quot; class=&quot;org.seasar.struts.examples.DivideAction&quot;/&gt;
+  &lt;component class=&quot;org.seasar.struts.examples.DivideServiceImpl&quot;/&gt;
+&lt;/components&gt;
+</pre>
+</p>
+<h3><a name="Mapping">path属性とActionクラスのマッピングについて</a></h3>
+<p>
+ここでは、前述の<a href="#ProxyAction">「ProxyActionクラスの使い方」</a>と、
+<a href="#NoType">「struts-config内に記述しているactionの、type属性を記述せずにActionクラスを指定する」</a>で行った、
+path属性とActionクラスのマッピングについての、詳細情報を記述します。
+</p><p>
+以下の、web.xml、struts-config、そして、コンポーネント定義ファイルが存在するとします。
+<h4>web.xml</h4>
+<pre>&lt;web-app&gt;
+  ...
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;<b>config</b>&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;<b>config<font color="red">/foo</font></b>&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config-foo.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    ...
+  &lt;/servlet&gt;
+  ...
+&lt;/web-app&gt;
+</pre>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action <b>path=&quot;<font color="red">/bar</font>&quot;</b>
+      ...
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>struts-config-foo.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action <b>path=&quot;<font color="red">/baz</font>&quot;</b>
+      ...
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>コンポーネント定義ファイル</h4>
+<pre>
+&lt;components&gt;
+  &lt;component <b>name=&quot;<font color="red">/bar</font>&quot;</b> class=&quot;BarAction&quot;/&gt;
+  &lt;component <b>name=&quot;<font color="red">/foo/baz</font>&quot;</b> class=&quot;BazAction&quot;/&gt;
+&lt;/components&gt;
+</pre>
+</p><p>
+デフォルトのモジュール（struts-config.xmlで動作するモジュール）であれば、struts-config内に記述しているactionタグのpath属性と、
+コンポーネント定義ファイル内に記述しているcomponentタグのname属性でマッピングを行います。下記のサブモジュールの(2)のパターンになります。
+</p><p>
+サブモジュール（この例では、struts-config-foo.xmlで動作するモジュール）であれば、マッピング方法が２つ存在します。
+<ul>
+(1)モジュール(prefix)名（<b><font color="red">/foo</font></b>）+path属性（<b><font color="red">/baz</font></b>）=name属性（<b><font color="red">/foo/baz</font></b>）<br>
+(2)path属性（<b><font color="red">/baz</font></b>）=name属性（<b><font color="red">/baz</font></b>）
+</ul>
+コンポーネントを取得する優先順位は、(1)、(2)の順になります。つまり、名前が/foo/bazであるコンポーネントが見つからなければ、名前が/bazであるコンポーネントを取得します。
+</p>
+<p>
+また、org.seasar.struts.ComponentNameCreatorをimplementsしたクラスを作成し、app.diconから登録する事で、上記のデフォルトのマッピング方法を替える事が出来ます。</p>
+
+<h3><a name="Hint">適用へのヒント</a></h3>
+<p>サポートする機能<br>
+(1)自動的なDIのサポート<br>
+　<a href="DIContainer.html#SetterInjection">セッター・インジェクション</a>、
+<a href="DIContainer.html#ConstructorInjection">コンストラクタ・インジェクション</a>を利用しての、
+Actionクラスへのサービスクラスなどの自動的なDIが可能な場合<br>
+(2)インスタンス変数を使いたい場合<br>
+　コンポーネントのinstance属性をprototypeとして、Actionクラスのインスタンス変数を使いたい場合<br>
+(3)AOPを適用したい場合<br>
+　Actionから、DAOを直接利用した場面で、Actionのメソッドにトランザクションをかけたい場合など<br>
+(4)明示的な、DIが必要な場合<br>
+　<a href="DIContainer.html#MethodInjection">メソッド・インジェクション</a>を利用したい場合や、
+<a href="DIContainer.html#SetterInjection">セッター・インジェクション</a>/<a href="DIContainer.html#ConstructorInjection">コンストラクタ・インジェクション</a>にて
+コンテナによる自動的なDIが出来ない場合<br>
+</p>
+<table border="1">
+  <tr>
+    <td><br></td>
+    <td>POJOAction</td>
+    <td>Addの例</td>
+    <td>Multiplyの例</td>
+    <td>Subtract(ProxyAction)の例</td>
+    <td>Divideの例</td>
+  </tr>
+  <tr>
+    <td>(1)自動的なDIのサポート</td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+  </tr>
+  <tr>
+    <td>(2)インスタンス変数を使いたい場合</td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+  </tr>
+  <tr>
+    <td>(3)AOPを適用したい場合</td>
+    <td><center>○</center></td>
+    <td><center>×</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+  </tr>
+  <tr>
+    <td>(4)明示的な、DIが必要な場合</td>
+    <td><center>○</center></td>
+    <td><center>×</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+    <td><center>○</center></td>
+  </tr>
+</table>
+<p></p>
+<p>メリット・デメリット</p>
+<table border="1">
+  <tr>
+    <td><br></td>
+    <td>メリット</td>
+    <td>デメリット</td>
+  </tr>
+  <tr>
+    <td>POJOAction<b>(推奨)</b></td>
+    <td>テスタビリティー向上<br>Actionクラスのモックの切り替えが容易になる<br>S2JSFなどへの移行も容易になる</td>
+    <td>インターフェースを定義したファイルが増える可能性がある
+    (ただし、The Seasar Foundationでは、他からアクセスされるときのインターフェースは明示的であるほうが保守性は高くなると考えています)</td>
+  </tr>
+  <tr>
+    <td>Addの例</td>
+    <td>Actionクラスをコンポーネント定義ファイルに記述する必要がない</td>
+    <td>サポートする機能が少ない</td>
+  </tr>
+  <tr>
+    <td>Multiplyの例</td>
+    <td><br><center>―</center><br>(S2コンテナの機能を利用した例)</td>
+    <td>struts-configとコンポーネント定義ファイルに記述したActionのクラス名を同期する必要あり<br>(リファクタリング時、要注意)</td>
+  </tr>
+  <tr>
+    <td>Subtract(ProxyAction)の例</td>
+    <td>ActionMappingの情報(デフォルトは、パス名)から、コンポーネントを検索するため、
+	    struts-configとコンポーネント定義ファイルに書いてあるActionのクラス名を同期する必要なし<br>
+		クラスが継承関係にあるAction同士をコンテナに登録する事が可能</td>
+    <td>ActionMappingの情報と、コンポーネント名を同期する必要あり</td>
+  </tr>
+  <tr>
+    <td>Divideの例</td>
+    <td>同上。struts-configに、type属性(Actionのクラス名)を記述する必要がないので、記述量は減る</td>
+    <td>同上。ただし、Struts的には、間違ったstruts-configの記述の仕方のため、struts-configを記述するツールとの連携が取れない可能性がある</td>
+  </tr>
+</table>
+<p></p>
+<p>
+<b>特に理由のない場合は、POJOActionを使用する事を推奨します。</b>
+</p>
+
+<h3><a name="RequestProcessor">RequestProcessorをコンポーネントから取得する</a></h3>
+<p>
+Actionクラスに共通のアスペクトを適用するのと同様の事が、RequestProcessorをコンポーネントから取得することによって可能になります。
+また、アスペクトの適用以外にも他のコンポーネントと同様の使い方もすることが出来ます。
+</p>
+<p>
+まず、S2ActionServletをweb.xmlに登録する必要があります。
+web.xmlに記述するサーブレットをorg.apache.struts.action.ActionServletではなく、
+org.seasar.struts.S2ActionServletもしくは、org.seasar.struts.S2RedeployableActionServletと記述してください。
+（S2ActionServletは、ActionServletを継承、S2RedeployableActionServletは、RedeployableActionServletを継承したサーブレットとなっています。）
+</p>
+<h4>web.xml</h4>
+<pre>&lt;web-app&gt;
+  ...
+  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;<b>org.seasar.struts.S2ActionServlet</b>&lt;/servlet-class&gt;
+    ...
+  &lt;/servlet&gt;
+  ...
+&lt;/web-app&gt;
+</pre>
+<p>
+今回の例では、S2RequestProcessorにMeasureTimeInterceptorというアスペクトを適用することで、
+各リクエストの処理時間を測定し標準出力しています。
+</p>
+
+<h4><a name="RequestProcessor.dicon"></a>RequestProcessor.dicon</h4>
+<pre>
+&lt;components&gt;
+  &lt;include path=&quot;s2struts.dicon&quot;/&gt;
+  &lt;component class=&quot;org.seasar.struts.S2RequestProcessor&quot;&gt;
+    &lt;aspect pointcut=&quot;process&quot;&gt;
+      &lt;component class=&quot;org.seasar.struts.examples.MeasureTimeInterceptor&quot;&gt;
+    &lt;/aspect&gt;
+  &lt;/component&gt;
+&lt;/components&gt;
+</pre>
+
+<h3><a name="Message">エラーメッセージの表示を任意のコンポーネントから管理する</a></h3>
+<p>
+org.seasar.struts.action.MessageManagerクラスを利用すると任意のコンポーネントからエラーメッセージの表示を管理する事が可能になります。
+<p>
+<h4>MessageActionImpl.java</h4>
+<pre>
+public class MessageActionImpl implements MessageAction {
+
+    public String execute() {
+        MessageManager.addError("examplemessage");
+        MessageManager.addError("examplemessage", "foo");
+        MessageManager.addError("examplemessage", "bar", "baz", "qux");
+        MessageManager.saveErrors();
+
+        return FowardNameConstants.SUCCESS;
+    }
+
+}
+</pre>
+<p>
+これは、StrutsのActionクラスで実装する以下のコードとほぼ同意です。
+</p>
+<pre>
+        ActionMessages errors = new ActionMessages();
+        errors.add("examplemessage",new ActionMessage("examplemessage"));
+        errors.add("examplemessage",new ActionMessage("examplemessage", "foo"));
+        errors.add("examplemessage",new ActionMessage("examplemessage", "bar", "baz", "qux"));
+        if(!errors.isEmpty()) {
+            saveErrors(request,errors);
+        }
+</pre>
+<p>
+"ほぼ"同意と記述した理由は、上記で利用するリソースのキーexamplemessageの中に、{4}などが含まれていた場合にそれを削除する機能がMessageManagerには備わっている為です。
+</p>
+<p>
+また、MessageManagerは、メッセージを管理するためのaddMessage()メソッドや、saveMessages()メソッドも備えています。
+引数などはエラーメッセージを扱う場合と同じです。
+</p>
+
+<h2><a name="ZeroConfigReference">無設定S2Strutsリファレンス</a></h2>
+<p>
+S2Strutsを使用すると、規約に従ってstruts-configを自動的に補完します（<a href="#ZoroConfig">無設定S2Struts</a>）。
+<a href="#Annotation">アノテーション</a>を使ってstruts-configを指定した内容で補完することも可能です。
+これによりstruts-configによる設定を省略する事が可能になります。
+</p>
+<h3><a name="ZoroConfig">無設定S2Struts</a></h3>
+<p>
+無設定S2Strutsの機能を利用するためには、struts-configにRegistActionClassPlugInを登録する必要があります。
+</p>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.RegistActionClassPlugIn</font>&quot;&gt;
+    &lt;set-property property="enableJar" value="false"/&gt;
+    &lt;set-property property="actionClassPattern" value="foo.bar.action.*Action"/&gt;
+    &lt;set-property property="formClassPattern" value="foo.bar.form.*Form"/&gt;
+    &lt;set-property property="docRoot" value="/WEB-INF/jsp"/&gt;
+    &lt;set-property property="viewExtension" value="jsp,html,view"/&gt;
+  &lt;/plug-in&gt;</b>
+  ...
+&lt;/struts-config&gt;
+</pre>
+<p>
+プラグインのプロパティーには値をセットすることが可能です。各プロパティーの説明は以下になります。各プロパティーの記述を省略した場合にはデフォルト値が使用されます。
+</p>
+<table border="1">
+  <tr>
+    <td>プロパティー</td>
+    <td>説明</td>
+    <td>デフォルト値</td>
+  </tr>
+  <tr>
+    <td>enableJar</td>
+    <td>無設定S2Strutsに含めるクラスをクラスパスに含まれているjarファイル内からも検索するか指定します。検索する場合、true。</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>actionClassPattern</td>
+    <td>無設定S2Strutsでactionタグの値を特定するためのActionのクラス名のパターンを指定します。</td>
+    <td>.*Action$</td>
+  </tr>
+  <tr>
+    <td>formClassPattern</td>
+    <td>無設定S2Strutsでform-beanタグの値を特定するためのActionFormのクラス名のパターンを指定します。</td>
+    <td>(.*Form$)|(.*Dto$)</td>
+  </tr>
+  <tr>
+    <td>docRoot</td>
+    <td>Viewテンプレートとなるファイルの置き場所のトップディレクトリを指定します。</td>
+    <td>なし</td>
+  </tr>
+  <tr>
+    <td>viewExtension</td>
+    <td>Viewテンプレートとなるファイルの拡張子を指定します。</td>
+    <td>jsp,html</td>
+  </tr>
+</table><br/>
+<p>
+無設定S2Strutsで省略可能な値はform-beanタグの属性、またactionタグとそのactionタグ内のforwardタグの属性になります。
+デフォルトで提供する規約に従った場合の各属性値がどのようになるのか以下に記述します。
+</p>
+<h4>form-beanタグの属性値</h4>
+<p>
+クラス名が"Form"あるいは"Dto"でしているクラスを基に設定を補完します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td>
+    <td>デフォルトの規約による値</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>クラス名</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>クラス名からS2に登録されたコンポーネントを検索し、コンポーネント名使用します。</td>
+  </tr>
+  <tr>
+    <td>restricted</td>
+    <td>false</td>
+  </tr>
+</table>
+
+<h4>actionタグの属性値</h4>
+<p>
+クラス名が"Action"で終了しているクラスを基に設定を補完します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td>
+    <td>デフォルトの規約による値</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>クラス名</td>
+  </tr>
+  <tr>
+    <td>path</td>
+    <td>クラス名からS2に登録されたコンポーネントを検索し、コンポーネント名の先頭に"/"を付加します。<br/>
+    コンポーネント名の最後が次の値の場合にその値を削除します。その値とは、"ActionImpl"、"Impl"、"Action"の3つです。<br/>
+    コンポーネント名が見つからない場合は、XXXにより生成された値をコンポーネント名とし上記の設定をします。
+    </td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>path属性の先頭の"/"を削除した値を設定します。</td>
+  </tr>
+  <tr>
+    <td>scope</td>
+    <td>request</td>
+  </tr>
+  <tr>
+    <td>validate</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>input</td>
+    <td>設定しない(null)</td>
+  </tr>
+  <tr>
+    <td>parameter</td>
+    <td>設定しない(null)</td>
+  </tr>
+  <tr>
+    <td>attribute</td>
+    <td>設定しない(null)</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>設定しない(null)</td>
+  </tr>
+  <tr>
+    <td>include</td>
+    <td>設定しない(null)</td>
+  </tr>
+  <tr>
+    <td>prefix</td>
+    <td>設定しない(null)</td>
+  </tr>
+  <tr>
+    <td>suffix</td>
+    <td>設定しない(null)</td>
+  </tr>
+  <tr>
+    <td>unknown</td>
+    <td>設定しない(false)</td>
+  </tr>
+  <tr>
+    <td>roles</td>
+    <td>設定しない(null)</td>
+  </tr>
+</table>
+<h4>actionタグ内のforwardタグの属性値</h4>
+クラス名が"Action"で終了しているクラスを基に設定を補完します。
+<table border="1">
+  <tr>
+    <td>属性</td>
+    <td>デフォルトの規約による値</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>success(変更不可)</td>
+  </tr>
+  <tr>
+    <td>path</td>
+    <td>次に説明する手順によりpathを設定します。<br/>
+    1.パッケージ名の"."を"/"に変更し、その値とクラス名を連結します。<br/>
+    2.クラス名の最後が次の値の場合にその値を削除します。その値とは、"ActionImpl"、"Impl"、"Action"の3つです。連結する際にクラス名の先頭を小文字にします。<br/>
+    3.XXXdocRoot"/"を先頭に付加します。<br/>
+    4.".html"と".jsp"を拡張子にしたファイル検索し、ファイルが存在すればpathに設定します。<br/>
+    5.ファイルが見つからない場合は、パッケージにあたる2番目の"/"の直前までを削除した文字列を使用し上記"4"を行います。<br/>
+    6.ログにXXXと出力します。</td>
+  </tr>
+  <tr>
+    <td>redirect</td>
+    <td>設定しない(false)</td>
+  </tr>
+</table>
+
+<h3><a name="Annotation">アノテーションを使用したstruts-configの設定</a></h3>
+<p>
+Tigerを用いたアノテーションの記述とbackport175を用いたアノテーションの記述の2通りの記述が可能です。この2通りのアノテーションを同時に使用する事は出来ません。
+それぞれを使用するためには、以下の表に示したjarファイルが必要です。
+</p>
+<table border="1">
+  <tr>
+    <td>Annotation</td><td>必要なjarファイル(XXXはバージョン)</td>
+  </tr>
+  <tr>
+    <td>Tiger</td><td>s2-struts-tiger-XXX.jar</td>
+  </tr>
+  <tr>
+    <td>backport175</td><td>s2-struts-backport175-XXX.jar</td>
+  </tr>
+</table><br/>
+<p>
+<a name="AnnotationAction"></a>以下のようにActionにアノテーションを記述することによりstruts-configの設定を行うことが出来ます。
+</p>
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+import org.seasar.struts.annotation.tiger.StrutsAction;
+import org.seasar.struts.annotation.tiger.StrutsActionForward;
+
+<b><font color="red">@StrutsAction(name="employeeForm", validate=false)</font></b>
+public interface EmployeeEditAction {
+
+	<b><font color="red">@StrutsActionForward(path="/pages/employee/employeeEdit.jsp")</font></b>
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
+また、backport175を使用したアノテーションの記述では以下のようになります。
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+<b>/**
+ * <font color="red">@org.seasar.struts.annotation.backport175.StrutsAction(</font>
+ *   <font color="red">name="employeeForm", validate=false)</font>
+ */</b>
+public interface EmployeeEditAction {
+
+	<b>/**
+	 * <font color="red">@org.seasar.struts.annotation.backport175.StrutsActionForward(</font>
+	 *         <font color="red">path="/pages/employee/employeeEdit.jsp")</font>
+	 */</b>
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
+これらは、以下の記述と同等になります。
+<pre>
+...
+&lt;action-mappings&gt;
+    ...
+    &lt;action
+        path="/employeeEdit"
+        type="org.seasar.struts.examples.employee.action.EmployeeEditAction"
+        name="employeeForm"
+        scope="request"
+        validate="false"&gt;
+        &lt;forward name="success" path="/pages/employee/employeeEdit.jsp" /&gt;
+    &lt;/action&gt;
+    ...
+</pre>
+<h4>StrutsActionで指定可能な属性</h4>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td>
+  </tr>
+  <tr>
+    <td>path</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>name</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>scope</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>validate</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>input</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>parameter</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>attribute</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>forward</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>include</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>prefix</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>suffix</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>unknown</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>roles</td><td><center>×</center></td>
+  </tr>
+</table>
+struts-configのactionタグの属性と対になります。また、各属性のデフォルト値は、無設定S2Strutsで定義される値になります。
+<h4>StrutsActionForwardで指定可能な属性</h4>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td>
+  </tr>
+  <tr>
+    <td>path</td><td><center>○</center></td><td><center>-</center></td>
+  </tr>
+  <tr>
+    <td>redirect</td><td><center>×</center></td><td><center>false</center></td>
+  </tr>
+</table>
+struts-configのforwardタグの属性と対になります。定数値でname属性を指定します。
+<br/><br/>
+<p>
+<a name="AnnotationForm"></a>また、以下のようにForm(DTO)にアノテーションを記述することによりstruts-configの設定を行うことが出来ます。
+</p>
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
+
+<b><font color="red">@StrutsActionForm(name="employeeForm")</font></b>
+public class EmployeeDto extends Employee {
+	...
+}
+</pre>
+また、backport175を使用したアノテーションの記述では以下のようになります。
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+<b>/**
+ * <font color="red">@org.seasar.struts.annotation.backport175.StrutsActionForm(name="employeeForm")</font>
+ */</b>
+public class EmployeeDto extends Employee {
+	...
+}
+</pre>
+これらは、以下の記述と同等になります。
+<pre>
+...
+&lt;form-beans&gt;
+    ...
+    &lt;form-bean
+        name="employeeForm"
+        type="org.seasar.struts.examples.employee.dto.EmployeeDto" /&gt;
+    ...
+</pre>
+<h4>StrutsActionFormで指定可能な属性</h4>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td>
+  </tr>
+  <tr>
+    <td>name</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>restricted</td><td><center>×</center></td>
+  </tr>
+</table>
+struts-configのform-beanタグの属性と対になります。また、各属性のデフォルト値は、無設定S2Strutsで定義される値になります。
+
+<h3><a name="AnnotationValidation">アノテーションを使用したvalidationの設定</a></h3>
+<p>
+以下のようにActionFormのセッターメソッドにアノテーションを記述することによりvalidationの設定を行うことが出来ます。
+</p>
+<pre>
+public class ValidateDto implements Serializable {
+
+    private String value;
+
+    <b><font color="red">@Required
+    @Minlength(10)
+    @Maxlength(15)
+    @Mask(pattern="com$",messageKey="mustendcom")
+    @EmailType
+    @Args(keys="mixValue",resource=false)</font></b>
+    public void setvalue(String value) {
+        this.value = value;
+    }
+</pre>
+また、backport175を使用したアノテーションの記述では以下のようになります。
+<pre>
+public class ValidateDto implements Serializable {
+
+    private String value;
+
+    <b>/**
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Required</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Minlength(value=10)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Maxlength(value=15)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Mask(</font>
+     *    <font color="red">pattern="com$",messageKey="mustendcom")</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Email</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Args(</font>
+     *    <font color="red">keys="mixValue",resource=false)</font>
+     */</b>
+    public void setvalue(String value) {
+        this.value = value;
+    }
+}</pre>
+<p>
+S2Strutsでは、validation設定のために各種アノテーションを用意しています。
+Args以外のアノテーションは基本的なバリデータを行うために利用します。
+</p>
+<h4>Args</h4>
+<p>
+メッセージで使用される置換パラメータを指定します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>keys</td>
+	<td><center><center>○</center></center></td>
+	<td><center>-</center></td>
+	<td>メッセージで使用される置換パラメータを指定します。<br>
+	","で区切ることにより複数指定できます。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+	<td><center>×</center></td>
+	<td><center>true</center></td>
+	<td>keysで指定した値をリソースキーとして利用するかを指定します。<br>
+	trueの場合はリソースキーとして利用し該当する値を置換パラメータとします。<br>
+	falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
+  </tr>
+</table>
+<h4>Required</h4>
+<p>
+値に空白以外の文字が含まれてるか確認します。
+引数はありません。
+</p>
+<h4>Mask</h4>
+<p>
+値がpatternで指定された正規表現と一致するか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+	<td><center>○</center></td>
+	<td><center>-</center></td>
+	<td>正規表現を指定します。</td>
+  </tr>
+  <tr>
+    <td>messageKey</td>
+	<td><center>×</center></td>
+	<td><center>-</center></td>
+	<td>メッセージを取得するキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+	<td><center>×</center></td>
+	<td><center>true</center></td>
+	<td>keysで指定した値をリソースキーとして利用するかを指定します。<br>
+	trueの場合はリソースキーとして利用し該当する値を置換パラメータとします。<br>
+	falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
+  </tr>
+</table>
+<h4>IntRange, FloatRange, DoubleRange</h4>
+<p>
+値がminとmaxで指定された範囲内であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>min</td>
+	<td><center>○</center></td>
+	<td><center>-</center></td>
+	<td>値範囲の最小値を指定します。</td>
+  </tr>
+  <tr>
+    <td>max</td>
+	<td><center>○</center></td>
+	<td><center>-</center></td>
+	<td>値範囲の最大値を指定します。</td>
+  </tr>
+</table>
+<h4>Maxlength</h4>
+<p>
+値の文字数がvalue以下であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+	<td><center>○</center></td>
+	<td><center>-</center></td>
+	<td>値の長さの上限値を指定します。</td>
+  </tr>
+</table>
+<h4>Minlength</h4>
+<p>
+値の文字数がvalue以上であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>value</td>
+	<td><center>○</center></td>
+	<td><center>-</center></td>
+	<td>値の長さの下限値を指定します。</td>
+  </tr>
+</table>
+<h4>Maxbytelength</h4>
+<p>
+値のバイト数がvalue以下であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+	<td><center>○</center></td>
+	<td><center>-</center></td>
+	<td>値の長さの上限値を指定します。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+	<td><center>×</center></td>
+	<td><center>-</center></td>
+	<td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
+  </tr>
+</table>
+<h4>Minbytelength</h4>
+<p>
+値のバイト数がvalue以上であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+	<td><center>○</center></td>
+	<td><center>-</center></td>
+	<td>値の長さの下限値を指定します。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+	<td><center>×</center></td>
+	<td><center>-</center></td>
+	<td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
+  </tr>
+</table>
+<h4>ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</h4>
+<p>
+値が該当する型に変換できるか確認します。
+属性はありません。
+</p>
+<h4>DateType</h4>
+<p>
+値が有効な日付を表すか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+	<td><center>×</center></td>
+	<td><center>s2struts.dionのdateConfigRegisterコンポーネント定義時に指定したパターン</center></td>
+	<td>日付のパターンを指定します。</td>
+  </tr>
+</table>
+<h4>CreditCardType</h4>
+<p>
+値が有効なクレジットカード番号とみなされるか確認します。
+属性はありません。
+</p>
+<h4>EmailType</h4>
+<p>
+値が有効なEメールアドレスとみなされるか確認します。
+属性はありません。
+</p>
+<h4>UrlType</h4>
+<p>
+値が有効なURLとみなされるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>allowallschemes</td>
+	<td><center>×</center></td>
+	<td><center>false</center></td>
+	<td>schemeを許可するかどうかを指定します。<br/>trueを設定するとすべてのschemeが許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>allow2slashes</td>
+	<td><center>×</center></td>
+	<td><center>false</center></td>
+	<td>ダブルスラッシュ（//）を許可するかどうかを指定します。<br/>trueを設定すると許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>nofragments</td>
+	<td><center>×</center></td>
+	<td><center>false</center></td>
+	<td>URLの分割を許可するかどうかを指定します。<br/>falseを設定すると許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>schemes</td>
+	<td><center>×</center></td>
+	<td><center>http,https,ftp</center></td>
+	<td>許可するschemeを,（カンマ）区切りで指定します。<br></td>
+  </tr>
+</table>
+<h4>NoValidate</h4>
+<p>
+自動的にバリデーションを行わないように指定します。
+属性はありません。
+</p>
+<p>
+<a href="http://struts.apache.org/api/org/apache/struts/validator/FieldChecks.html" target="_blank">参考</a>
+</p>
+
+<h2><a name="TagLibReference">S2Strutsタグライブラリリファレンス</a></h2>
+<p>
+S2Strutsでは、ButtonTagとSubmitTagを用意しています。
+どちらも、Strutsのタグを拡張した形となっています。
+</p>
+<h3><a name="TagLibButton">buttonタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.ButtonTag(タグ名：button)</h4>
+<p>
+<a href="http://struts.apache.org/userGuide/struts-html.html#button">http://struts.apache.org/userGuide/struts-html.html#button</a><br>
+に加えて、追加になった属性は、以下です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>type</td>
+	<td><center>×</center></td>
+	<td><center>false</center></td>
+	<td>以下の値で、ボタンの種別を指定します。<br>
+	  "button"：通常のボタン。<br>
+	  "submit"：実行ボタン。<br>
+	  "reset"：リセットボタン。<br>
+	  HTML4.01 では submit が規定値と定義されていますが、<br>IE6.0 や Netscape の実装では規定値は button のようです。</td>
+  </tr>
+  <tr>
+    <td><center>indexId</center></td>
+	<td><center>×</center></td>
+	<td><center>false</center></td>
+	<td>logic:iterateタグのid属性などで指定した変数名を指定します。<br>
+	buttonのvalue属性の値に、その変数の値が設定されます。<br>
+	(変数値が、Integerの32である場合の変換されたhtmlの例：&lt;button ... value="32" ...&gt;)</td>
+  </tr>
+</table>
+<h3><a name="TagLibSubmit">submitタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.SubmitTag(タグ名：submit)</h4>
+<p>
+<a href="http://struts.apache.org/userGuide/struts-html.html#submit">http://struts.apache.org/userGuide/struts-html.html#submit</a><br>
+に加えて、追加になった属性は、以下です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+	<td><center>×</center></td>
+	<td><center>-</center></td>
+	<td>action="#{component.method}"と記述することによって、サブミット時に実行するコンポーネントとメソッドを指定する事が可能です。
+	コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
+  </tr>
+  <tr>
+    <td><center>indexId</center></td>
+	<td><center>×</center></td>
+	<td><center>false</center></td>
+	<td>logic:iterateタグのid属性などで指定した変数名を指定します。<br>
+	propertyName[変数値]の様に変換されます。<br>
+	(変数値が、Integerの32である場合の変換されたhtmlの例：&lt;... foo[32]="bar"...&gt;)</td>
+  </tr>
+</table>
+<h3><a name="TagLibImage">imageタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.ImageTag(タグ名：image)</h4>
+<p>
+<a href="http://struts.apache.org/userGuide/struts-html.html#image">http://struts.apache.org/userGuide/struts-html.html#image</a><br>
+に加えて、追加になった属性は、以下です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+	<td><center>×</center></td>
+	<td><center>-</center></td>
+	<td>action="#{component.method}"と記述することによって、サブミット時に実行するコンポーネントとメソッドを指定する事が可能です。
+	コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
+  </tr>
+</table>
+<h3><a name="TagLibPage">pageタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.PageTag(タグ名：page)</h4>
+<p>
+このタグをJSPに記述することによって、struts-configのinput属性の無設定化(エラー時に自画面を再表示)することが可能になります。
+formタグの中に記述する必要があります。複数のformが存在する場合には、それぞれに記述が必要です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>-</center></td>
+	<td><center>-</center></td>
+	<td><center>-</center></td>
+	<td>属性はありません。</td>
+  </tr>
+</table>
+<h3><a name="TagLibInit">initタグ</a></h3>
+<h4>org.seasar.struts.taglib.InitializeTag(タグ名：init)</h4>
+<p>
+このタグを使用すると画面の初期化処理を行う事が可能です。action属性に記述したMethodBindingを、JSPを表示する時に実行します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+	<td><center>×</center></td>
+	<td><center>-</center></td>
+	<td>action="#{component.method}"と記述することによって、JSPを表示する時に実行するコンポーネントとメソッドを指定する事が可能です。
+	コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
+  </tr>
+</table>
+
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Foundation and the others 2004-2005, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
