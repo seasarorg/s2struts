@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component name="HttpServletResponseDelegator" class="org.seasar.httpunit.mock.HttpServletResponseDelegator"/>
+	
+	<component name="HttpServletResponse" class="org.seasar.httpunit.mock.MockHttpServletResponse">
+		<aspect pointcut=".*">HttpServletResponseMockObjectInterceptor</aspect>
+	</component>
+
+	<component name="HttpServletResponseMockObjectInterceptor" class="org.seasar.httpunit.mock.MockObjectInterceptor">
+		<initMethod name="setDelegateTarget">
+			<arg>HttpServletResponseDelegator</arg>
+		</initMethod>
+		<initMethod name="setReturnValue">
+			<arg>"getWriter"</arg>
+			<arg>new java.io.PrintWriter(new java.io.StringWriter())</arg>
+		</initMethod>
+		<initMethod name="setReturnValue">
+			<arg>"getOutputStream"</arg>
+			<arg>new org.apache.catalina.ssi.ByteArrayServletOutputStream()</arg>
+		</initMethod>
+	</component>
+</components>

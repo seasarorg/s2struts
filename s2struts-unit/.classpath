@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry output="build/main" kind="src" path="src/main"/>
+	<classpathentry output="build/testcase" kind="src" path="src/testcase"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/struts.jar"/>
+	<classpathentry kind="lib" path="lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib/asm.jar"/>
+	<classpathentry kind="lib" path="lib/cglib-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-modeler.jar"/>
+	<classpathentry kind="lib" path="lib/s2-struts-1.0.11.jar"/>
+	<classpathentry kind="lib" path="lib/catalina-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="lib/catalina-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="lib/catalina-i18n-es.jar"/>
+	<classpathentry kind="lib" path="lib/s2-framework-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/s2-extension-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester.jar"/>
+	<classpathentry kind="lib" path="lib/catalina.jar"/>
+	<classpathentry kind="lib" path="lib/mx4j-jmx.jar"/>
+	<classpathentry kind="lib" path="lib/naming-resources.jar"/>
+	<classpathentry kind="lib" path="lib/ognl-2.6.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/naming-common.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jasper-compiler.jar"/>
+	<classpathentry kind="lib" path="lib/jasper-runtime.jar"/>
+	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="lib/servlets-ssi.jar"/>
+	<classpathentry kind="lib" path="lib/servlets-default.jar"/>
+	<classpathentry kind="output" path="build"/>
+</classpath>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component name="HttpSession" class="org.seasar.httpunit.mock.MockHttpSession" instance="prototype">
+		<aspect pointcut=".*">HttpSessionValidChecker</aspect>
+		<aspect pointcut=".*">HttpSessionMockObjectInterceptor</aspect>
+	</component>
+
+	<component name="HttpSessionValidChecker" class="org.seasar.httpunit.mock.HttpSessionValidChecker">
+		<initMethod name="setMockObjectInterceptor">
+			<arg>HttpSessionMockObjectInterceptor</arg>
+		</initMethod>
+	</component>
+
+	<component name="HttpSessionDelegator" class="org.seasar.httpunit.mock.HttpSessionDelegator"/>
+
+	<component name="HttpSessionMockObjectInterceptor" class="org.seasar.httpunit.mock.MockObjectInterceptor">
+		<initMethod name="setDelegateTarget">
+			<arg>HttpSessionDelegator</arg>
+		</initMethod>
+		<initMethod name="setReturnValue">
+			<arg>"getCreationTime"</arg>
+			<arg>520009200000L</arg>
+		</initMethod>
+		<initMethod name="setReturnValue">
+			<arg>"getId"</arg>
+			<arg>"sessionId"</arg>
+		</initMethod>
+		<initMethod name="setReturnValue">
+			<arg>"isValid"</arg>
+			<arg>false</arg>
+		</initMethod>
+	</component>
+
+	<component name="ServletContext" class="javax.servlet.ServletContext">
+		<aspect pointcut=".*">new org.seasar.httpunit.mock.MockObjectInterceptor()</aspect>
+	</component>
+</components>
