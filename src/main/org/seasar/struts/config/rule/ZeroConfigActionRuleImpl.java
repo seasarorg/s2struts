@@ -4,11 +4,14 @@ import java.io.File;
 
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.framework.container.ComponentDef;
+import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.Constants;
@@ -25,13 +28,12 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     private AutoStrutsConfigRule configRule;
 
     public String getPath(Class actionClass, ModuleConfig config) {
-        String path = ClassUtil.getShortClassName(actionClass);
-        return "/" + CommonNamingRule.decapitalizeName(path).replaceFirst("Action$", "");
+        String pathName = getActionPathName(actionClass);
+        return "/" + pathName;
     }
 
     public String getName(Class actionClass, ModuleConfig config) {
-        String name = ClassUtil.getShortClassName(actionClass);
-        name = CommonNamingRule.decapitalizeName(name).replaceFirst("Action$", "");
+        String name = getActionPathName(actionClass);
         String formName = name + "Form";
         String dtoName = name + "Dto";
         if (config.findFormBeanConfig(formName) != null) {
@@ -42,6 +44,30 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             return name;
         }
         return StrutsActionConfig.DEFAULT_NAME;
+    }
+    
+    protected String getActionPathName(Class actionClass) {
+        String result = getActionComponentName(actionClass);
+        if (result == null) {
+            result = getActionClassName(actionClass);
+        }
+        
+        result = result.replaceFirst("Impl$", "");
+        result = result.replaceFirst("Action$", "");
+        return result;
+    }
+    
+    protected String getActionComponentName(Class actionClass) {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        ComponentDef componentDef = container.getComponentDef(actionClass);
+        if (componentDef == null) {
+            return null;
+        }
+        return componentDef.getComponentName();
+    }
+    
+    protected String getActionClassName(Class actionClass) {
+        return ClassUtil.getShortClassName(actionClass);
     }
 
     public String getScope(Class actionClass, ModuleConfig config) {
