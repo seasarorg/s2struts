@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<include path="s2struts.dicon"/>
+
+	<include path="org/seasar/struts/examples/dicon/Mod.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Add.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Subtract.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Multiply.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Divide.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Echo.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/ChangeCase.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Message.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Validate.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/RequestProcessor.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/employee.dicon"/>
+</components>

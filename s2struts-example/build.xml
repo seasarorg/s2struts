@@ -1,0 +1,15 @@
+<project name="S2StrutsExample" default="dist" basedir=".">
+
+  <property file="project.properties"/>
+
+  <property name="releaseFile" value="S2StrutsExample-V${version}.zip" />
+  
+  <property name="projectDir" value="s2struts-example" />
+
+  <target name="dist">
+    <zip destfile="../${releaseFile}"
+         basedir=".." includes="${projectDir} , ${projectDir}/**"
+         excludes="**/.DS_Store , ${projectDir}/work/**"/>
+  </target>
+
+</project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:maya xmlns:m="http://maya.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="changeCase.title"/>
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content"/>
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/changeCase" focus="input" />
+    
+    <html:submit m:id="goLower" property="command"><bean:message key="toLowerCase"/></html:submit>
+
+    <html:submit m:id="goUpper" property="command"><bean:message key="toUpperCase"/></html:submit>
+
+    <s2struts:submit m:id="goMethodBindingSubmitLower" action="#{changeCaseAction.toLowerCase}"><bean:message key="toLowerCase"/></s2struts:submit>
+
+    <s2struts:submit m:id="goMethodBindingSubmitUpper" action="#{changeCaseAction.toUpperCase}"><bean:message key="toUpperCase"/></s2struts:submit>
+
+    <s2struts:image m:id="goMethodBindingImageLower" src="${contextPath}/images/toLowerCase.jpg" action="#{changeCaseAction.toLowerCase}"/>
+
+    <s2struts:image m:id="goMethodBindingImageUpper" src="${contextPath}/images/toUpperCase.jpg" action="#{changeCaseAction.toUpperCase}"/>
+
+</m:maya>

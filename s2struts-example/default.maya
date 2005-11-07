@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<m:maya xmlns:m="http://maya.seasar.org">
+
+    <m:beforeRender><![CDATA[
+        var contextPath = request.getContextPath();
+        var println = function(value) {
+            if (value != null) {
+                java.lang.System.out.println(value);
+            } else {
+                java.lang.System.out.println("" + value);
+            }
+        };
+
+        load("debug.js");
+    ]]></m:beforeRender>
+
+</m:maya>

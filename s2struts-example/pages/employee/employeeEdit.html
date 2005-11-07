@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Windows-31j">
+  <link href="../../css/global.css" rel="stylesheet" type="text/css"></link>
+  <script type="text/javascript" src="../../js/execute.js"></script>
+  <title id="pageTitle">
+    Edit - Employee Management Demo
+  </title>
+</head>
+<body>
+
+<div id="appBody">
+  <div id="errorMessage"></div>
+  <form method="GET" action="employeeConfirm.html" id="appForm">
+    <table class="tablebg">
+      <tr>
+        <td class="label"><span id="labelEmpno">EmployeeNo</span></td>
+        <td>
+          <span class="right" id="empno">7369</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label"><span id="labelEname">EmployeeName</span></td>
+        <td>
+          <input type="text" name="ename" value="SMITH" class="text" id="ename">
+        </td>
+      </tr>
+      <tr>
+        <td class="label"><span id="labelJob">Job</span></td>
+        <td>
+          <input type="text" name="job" value="CLERK" class="text" id="job">
+        </td>
+      </tr>
+      <tr>
+        <td class="label"><span id="labelMgr">Manager</span></td>
+        <td>
+          <input type="text" name="mgr" value="7902" class="number" id="mgr">
+        </td>
+      </tr>
+      <tr>
+        <td class="label"><span id="labelHiredate">HireDate</span></td>
+        <td>
+          <input type="text" name="hiredateDisplay" value="1980/12/19" class="date" id="hiredate">
+        </td>
+      </tr>
+      <tr>
+        <td class="label"><span id="labelSal">Salary</span></td>
+        <td>
+          <input type="text" name="sal" value="800" class="number" id="sal">
+        </td>
+      </tr>
+      <tr>
+        <td class="label"><span id="labelComm">Commission</span></td>
+        <td>
+          <input type="text" name="comm" value="" class="number" id="comm">
+        </td>
+      </tr>
+      <tr>
+        <td class="label"><span id="labelDeptno">Department</span></td>
+        <td>
+          <select name="deptno" id="deptno">
+            <option value="">Please select</option>
+            <option value="10">ACCOUNTING</option>
+            <option value="20" selected>RESEARCH</option>
+            <option value="30">SALES</option>
+            <option value="40">OPERATIONS</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+
+    <input type="submit" value="confirm" id="goConfirm">
+    <input type="submit" value="previous" id="goPrevious">
+  </form>
+</div>
+
+</body>
+</html>
