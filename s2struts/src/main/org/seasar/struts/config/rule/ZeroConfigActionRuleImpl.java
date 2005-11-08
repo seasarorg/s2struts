@@ -60,6 +60,10 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     
     private String getActionComponentName(Class actionClass) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
+        if (!container.hasComponentDef(actionClass)) {
+            return null;
+        }
+        
         ComponentDef componentDef = container.getComponentDef(actionClass);
         if (componentDef == null) {
             return null;
