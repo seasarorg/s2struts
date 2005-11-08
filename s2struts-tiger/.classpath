@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="/s2struts/lib/commons-validator.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/struts.jar"/>
-	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.3RC2.jar"/>
-	<classpathentry kind="lib" path="/s2struts/lib/s2-framework-2.3RC2.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.3.0.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-framework-2.3.0.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
