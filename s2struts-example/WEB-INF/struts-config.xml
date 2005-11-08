@@ -144,8 +144,6 @@
           value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
     </plug-in>
     
-    <plug-in className="org.seasar.struts.plugin.RegistActionClassPlugIn"/>
-
     <plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn">
         <set-property property="enableJar" value="false"/>
         <set-property property="docRoot" value="/pages"/>

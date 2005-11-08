@@ -2,5 +2,5 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
-	<component class="org.seasar.struts.examples.echo.EchoActionImpl" instance="request"/>
+	<component name="echoAction" class="org.seasar.struts.examples.echo.EchoActionImpl" instance="request"/>
 </components>

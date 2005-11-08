@@ -42,7 +42,7 @@
 
   <servlet>
     <servlet-name>s2container</servlet-name>
-    <servlet-class>org.seasar.struts.servlet.S2StrutsServlet</servlet-class>
+    <servlet-class>org.seasar.framework.container.servlet.S2ContainerServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   
