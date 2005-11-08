@@ -28,12 +28,11 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     private AutoStrutsConfigRule configRule;
 
     public String getPath(Class actionClass, ModuleConfig config) {
-        String pathName = getActionPathName(actionClass);
-        return "/" + pathName;
+        return getActionPathName(actionClass, config);
     }
 
     public String getName(Class actionClass, ModuleConfig config) {
-        String name = getActionPathName(actionClass);
+        String name = getActionPathName(actionClass, config).substring(1);
         String formName = name + "Form";
         String dtoName = name + "Dto";
         if (config.findFormBeanConfig(formName) != null) {
@@ -46,18 +45,20 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         return StrutsActionConfig.DEFAULT_NAME;
     }
     
-    protected String getActionPathName(Class actionClass) {
+    private String getActionPathName(Class actionClass, ModuleConfig config) {
         String result = getActionComponentName(actionClass);
         if (result == null) {
-            result = getActionClassName(actionClass);
+            result = ClassUtil.getShortClassName(actionClass);
+        } else if (isPathComponentName(result)) {
+            return toPathComponentName(result, config);
         }
         
         result = result.replaceFirst("Impl$", "");
         result = result.replaceFirst("Action$", "");
-        return result;
+        return "/" + result;
     }
     
-    protected String getActionComponentName(Class actionClass) {
+    private String getActionComponentName(Class actionClass) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ComponentDef componentDef = container.getComponentDef(actionClass);
         if (componentDef == null) {
@@ -66,10 +67,14 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         return componentDef.getComponentName();
     }
     
-    protected String getActionClassName(Class actionClass) {
-        return ClassUtil.getShortClassName(actionClass);
+    private boolean isPathComponentName(String componentName) {
+        return componentName.startsWith("/");
     }
 
+    private String toPathComponentName(String componentName, ModuleConfig config) {
+        return config.getPrefix() + componentName;
+    }
+    
     public String getScope(Class actionClass, ModuleConfig config) {
         return StrutsActionConfig.DEFAULT_SCOPE;
     }
