@@ -49,6 +49,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         String result = getActionComponentName(actionClass);
         if (result == null) {
             result = ClassUtil.getShortClassName(actionClass);
+            result = CommonNamingRule.decapitalizeName(result);
         } else if (isPathComponentName(result)) {
             return toPathComponentName(result, config);
         }
