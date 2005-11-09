@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+	<!-- 表題 -->
+<ul>
+	<li><a href="#Outline">S2StrutsUnit概要</a></li>
+	<li><a href="#Reference">S2StrutsUnitリファレンス</a></li>
+	<ul>
+		<li><a href="#S2StrutsUnitMake">S2StrutsUnitを使ったテストクラスの作成方法</a></li>
+		<li><a href="#S2StrutsUnitFunction">S2StrutsUnitの機能</a></li>
+		<li><a href="#S2StrutsTestCase">S2StrutsTestCase</a></li>
+	</ul>
+	<li><a href="#Example">Example</a></li>
+	<ul>
+		<li><a href="#BasicExample">基本的なActionクラスのテスト</a></li>
+		<li><a href="#ActionFormExample">ActionFormを使用したActionクラスのテスト</a></li>
+		<li><a href="#MappingDispatchActionExample">MappingDispatchActionクラスのテスト</a></li>
+		<li><a href="#LoadWebContextTestExample">コンテキストを読み込んでのテスト</a></li>
+	</ul>
+</ul>
+	<!--  概要  -->
+	<h2><a name=Outline>S2StrutsUnit概要</a></h2>
+    <p>
+	S2StrutsUnitは、以下の特徴を持っています。
+	</p>
+	<ul>
+		<li>ServletAPIを利用したUnitTest機能</li>
+		<p>
+		S2Unitと同様にServlerAPIのモックオブジェクトを利用してのテストが可能です。
+		S2Unitとの違いは、ServletAPIからの戻り値をあらかじめ、コンポーネント定義ファイルに記述しておく事が可能な点です。
+		</p>
+		<li>StrutsのActionのサブクラスをテストする機能</li>
+		<p>
+		Actionクラスをテストする事が、簡単に出来るようになります。
+		Requestなどの値を参照する場合、ActionFormを参照する場合、MappingDispatchActionをテストする場合、
+		リクエストのパスでテストする場合、それぞれで、必要なパラメータをメソッドの引数に渡すのみで、テスト可能となっています。
+		</p>
+	</ul>
+
+    <!--  リファレンス  -->
+	<h2><a name=Reference>S2StrutsUnitリファレンス</a></h2>
+	<h3><a name=S2StrutsUnitMake>S2StrutsUnitを使ったテストクラスの作成方法</a></h3>
+	<p>
+	テストクラスは、org.seasar.struts.unit.S2StrutsTestCaseを継承して作成します。
+	またS2StrutsTestCaseはS2TestCaseを拡張したクラスなので、
+	テストメソッド等の使用方法はS2TestCaseやJUnitと同様です。
+	</p>
+	<h3><a name=S2StrutsUnitFunction>S2StrutsUnitの機能</a></h3>
+	<p>
+	S2Strutsを使った開発のテストを簡単に行えるように以下の機能があります。
+	</p>
+	<dl>
+   		<dt style="text-indent:1em;"><b>・Actionを指定してのActionの実行</b></dt>
+   		<dd>Actionクラスの実行を行う場合、ActionのインスタンスをS2StrutsTestCase#execute(Action)の引数に渡すのみで、
+		サービスなどがインジェクションされたActionクラスを実行可能です。</dd>
+   		<dd>また、Actionクラスのインスタンスを生成せずに同様の動作をするS2StrutsTestCase#execute(Class)というメソッドもあります。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+   	</dl>
+	<dl>
+   		<dt style="text-indent:1em;"><b>・ActionとActionFormを指定してのActionの実行</b></dt>
+   		<dd>Actionクラスの実行を行う場合、ActionとActionFormのインスタンスをS2StrutsTestCase#execute(Action,ActionForm)の引数に渡すのみで、
+		サービスなどがインジェクションされたActionクラスを実行可能です。</dd>
+   		<dd>また、Actionクラスのインスタンスを生成せずに同様の動作をするS2StrutsTestCase#execute(Class,ActionForm)というメソッドもあります。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+   	</dl>
+	<dl>
+   		<dt style="text-indent:1em;"><b>・MappingDispatchActionの実行</b></dt>
+   		<dd>MappingDispatchActionクラスの実行を行う場合、ActionとActionFormのインスタンスとメソッド名をS2StrutsTestCase#execute(Action,ActionForm,String)の引数に渡すのみで、
+		サービスなどがインジェクションされたActionクラスを実行可能です。また、ActionFormを使用しない場合に対応した、S2StrutsTestCase#execute(Action,String)というメソッドが用意されています。</dd>
+   		<dd>また、Actionクラスのインスタンスを生成せずに同様の動作をするS2StrutsTestCase#execute(Class,ActionForm,String)というメソッドもあります。また、S2StrutsTestCase#execute(Class,String)というメソッドが用意されています。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+   	</dl>
+	<dl>
+   		<dt style="text-indent:1em;"><b>・パスを指定しての実行</b></dt>
+   		<dd>パスを指定して、Actionの実行を行う場合、パスをS2StrutsTestCase#execute(String)の引数に渡すのみで、パスに対応したActionが生成され、
+		サービスなどがインジェクションされたActionクラスを実行可能です。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+		<dd>パスを指定して実行を行う場合、下記の、コンテキストの読み込みを行う必要があります。</dd>
+   	</dl>
+	<dl>
+   		<dt style="text-indent:1em;"><b>・コンテキストの読み込み</b></dt>
+   		<dd>パスを指定して、web.xmlや、そこに記述されている、struts-config.xmlなどの読み込みが可能です。
+		読み込みに使用するメソッドは、setDocBase(String)です。引数で指定したパスの直下に、WEB-INFディレクトリが存在する必要があります。</dd>
+		<dd>引数のパスは、リソースから検索します。また、S2TestCase#include(String)と同様に、フルパスとテストクラスからの相対パスの両方が指定可能です。</dd>
+   	</dl>
+
+
+    <!--  Example  -->
+	<h2><a name=Example>Example</a></h2>
+
+	<h3><a name="BasicExample">基本的なActionクラスのテスト</a></h3>
+    <ul>
+		<li type="circle">S2StrutsTestCaseを継承します。</li>
+		<li type="circle">setUp()で、HttpServletAPIのモックを定義したコンポーネント定義ファイルとs2struts.diconをインクルードします。</li>
+		<li type="circle">setUpExecuteTrue()で、Actionと、Serviceのコンポーネントを定義したファイルをインクルードしています。</li>
+		<li type="circle">testExecuteTrue()のexecute(TestAction.class)で、TestActionを実行しています。</li>
+		<li type="circle">Forward先(executeメソッドの戻り値)や、ActionMessages(getActionMessages()で取得)、ActionErrors(getActionErrors()で取得)などを確認します。</li>
+    </ul>
+
+	<pre>
+public class TestActionTest extends S2StrutsTestCase {
+
+    public TestActionTest(String name) {
+        super(name);
+    }
+
+    protected void setUp() {
+        include("HttpMockObject.dicon");
+        include("s2struts.dicon");
+    }
+
+    public void setUpExecuteTrue() {
+        include("TestServiceReturnTrue.dicon");
+    }
+
+    public void testExecuteTrue() throws Exception {
+        String actual = execute(TestAction.class);
+
+        assertEquals("success", actual);
+
+        String[] values = {"val1", "val2", "val3", "val4", "val5"};
+        ActionMessages expectedMessages = new ActionMessages();
+        expectedMessages.add("message", new ActionMessage("messageKey", values));
+        assertEquals(expectedMessages, getActionMessages());
+    }
+}
+	</pre>
+
+	<h3><a name="ActionFormExample">ActionFormを使用したActionクラスのテスト</a></h3>
+    <ul>
+		<li type="circle">ActionFormのインスタンスを生成し、そのインスタンスにテストに使用する値を設定し、Actionを実行します。</li>
+    </ul>
+
+	<pre>
+public class FormTestActionTest extends S2StrutsTestCase {
+
+    ...
+
+    public void testGetValueFromForm() throws Exception {
+        TestActionForm form = new TestActionForm();
+        form.setVal("foo");
+
+        String actual = execute(FormTestAction.class, form);
+
+        assertEquals("foo", actual);
+    }
+}
+	</pre>
+
+	<h3><a name="MappingDispatchActionExample">MappingDispatchActionクラスのテスト</a></h3>
+    <ul>
+		<li type="circle">foo(ActionMapping, ActionForm, HttpServletRequest, HttpServletResponse)というメソッドをテストする場合は、executeメソッドの引数に"foo"を渡します。</li>
+    </ul>
+
+	<pre>
+public class MappingDispatchActionTest extends S2StrutsTestCase {
+
+    ...
+
+    public void testFooMethod() throws Exception {
+        String actual = execute(DispatchTestAction.class, "foo");
+        assertEquals("success", actual);
+    }
+}
+	</pre>
+
+	<h3><a name="LoadWebContextTestExample">コンテキストを読み込んでのテスト</a></h3>
+    <ul>
+		<li type="circle">setUp()で、コンテキストの存在するディレクトリをsetDocBase(String)で指定します。</li>
+		<li type="circle">実際に実行されたActionのインスタンスは、getExecutedAction()で取得する事が出来ます。</li>
+		<li type="circle">実際に実行されたActionFormのインスタンスは、getExecutedActionForm()で取得する事が出来ます。</li>
+    </ul>
+
+	<pre>
+public class LoadWebContextTest extends S2StrutsTestCase {
+
+    ....
+
+    protected void setUp() {
+        ...
+        setDocBase("org/seasar/struts/unit");
+    }
+
+    public void testExecuteString() throws Exception {
+        String actual = execute("/login?id=id&amp;pass=pass");
+
+        assertEquals("success", actual);
+        assertEquals(LoginAction.class, getExecutedAction().getClass());
+        assertNull(getExecutedActionForm());
+    }
+}
+	</pre>
+
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Foundation and the others 2004-2005, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
