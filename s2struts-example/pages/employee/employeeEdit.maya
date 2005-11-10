@@ -33,7 +33,7 @@
     <bean:message m:id="labelEmpno" key="form.employee.no" />
     <m:with id="empno">
         <m:if test="${ processModeDto.processMode == 1 }">
-            <html:text m:id="empno" property="empno" styleClass="number" errorStyleClass="number-error" />
+            <html:text property="empno" styleClass="number" errorStyleClass="number-error" />
         </m:if>
         <m:if test="${ processModeDto.processMode == 2 }">
             <html:hidden property="versionNo" />
