@@ -6,9 +6,6 @@
 	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="messageFacade"                class="org.seasar.struts.action.MessageFacadeImpl" instance="request"/>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.S2StrutsContextImpl" instance="session"/>
-	<component name="autoStrutsConfigRule"         class="org.seasar.struts.config.AutoStrutsConfigRuleImpl"/>
-	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
-	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
 	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
 	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
 	<component name="executeProcessor"             class="org.seasar.struts.processor.ActionExecuteProcessorImpl"/>
@@ -27,6 +24,11 @@
 		</aspect>
 	</component>
 	-->
+
+    <!-- ZeroConfig Components  -->
+	<component name="autoStrutsConfigRule"         class="org.seasar.struts.config.AutoStrutsConfigRuleImpl"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
 
 	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>
