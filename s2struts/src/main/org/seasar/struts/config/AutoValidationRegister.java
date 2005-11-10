@@ -15,8 +15,8 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.log.Logger;
 import org.seasar.struts.config.rule.ZeroConfigActionFormRule;
-import org.seasar.struts.factory.AnnotationHandler;
-import org.seasar.struts.factory.AnnotationHandlerFactory;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandlerFactory;
 import org.seasar.struts.validator.factory.ValidatorAnnotationHandler;
 import org.seasar.struts.validator.factory.ValidatorAnnotationHandlerFactory;
 
@@ -85,7 +85,7 @@ public class AutoValidationRegister {
             }
         }
         
-        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         StrutsActionFormConfig strutsActionFormConfig = annHandler.createStrutsActionFormConfig(formClass);
         if (strutsActionFormConfig != null) {
             name = strutsActionFormConfig.name();

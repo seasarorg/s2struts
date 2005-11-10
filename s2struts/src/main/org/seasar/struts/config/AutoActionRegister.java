@@ -16,8 +16,8 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.FieldUtil;
 import org.seasar.struts.config.rule.ZeroConfigActionRule;
-import org.seasar.struts.factory.AnnotationHandler;
-import org.seasar.struts.factory.AnnotationHandlerFactory;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandlerFactory;
 
 
 /**
@@ -31,7 +31,7 @@ public class AutoActionRegister {
     }
 
     public static void regist(ServletContext servletContext, ModuleConfig config, Collection classes) {
-        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         classes = ClassComparator.sort(classes);
         
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
@@ -101,7 +101,7 @@ public class AutoActionRegister {
     }
 
     private static void addFowardConfig(ServletContext servletContext, ActionConfig actionConfig, Class actionClass) {
-        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         Field[] fields = actionClass.getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             StrutsActionForwardConfig actionForward = annHandler.createStrutsActionForwardConfig(fields[i]);

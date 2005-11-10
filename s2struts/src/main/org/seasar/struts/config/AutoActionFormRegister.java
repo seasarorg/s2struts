@@ -9,8 +9,8 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.log.Logger;
 import org.seasar.struts.config.rule.ZeroConfigActionFormRule;
-import org.seasar.struts.factory.AnnotationHandler;
-import org.seasar.struts.factory.AnnotationHandlerFactory;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandlerFactory;
 
 /**
  * @author Katsuhiko Nagashima
@@ -23,7 +23,7 @@ public class AutoActionFormRegister {
     }
 
     public static void regist(ModuleConfig config, Collection classes) {
-        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         classes = ClassComparator.sort(classes);
         
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
