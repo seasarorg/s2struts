@@ -1,23 +1,15 @@
 package org.seasar.struts.factory;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
-import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.struts.Constants;
-import org.seasar.struts.annotation.tiger.Export;
-import org.seasar.struts.annotation.tiger.ExportToSession;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.config.StrutsActionPropertyConfig;
-import org.seasar.struts.config.StrutsActionPropertyConfigImpl;
 
-public class TigerAnnotationHandler extends ConstantAnnotationHandler {
+public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnnotationHandler {
 
     public StrutsActionConfig createStrutsActionConfig(Class clazz) {
         Class<?> actionClass = clazz;
@@ -116,19 +108,6 @@ public class TigerAnnotationHandler extends ConstantAnnotationHandler {
             }
             
         };
-    }
-
-    public StrutsActionPropertyConfig createStrutsActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc) {
-        Method readMehod = propertyDesc.getReadMethod();
-        ExportToSession toSession = readMehod.getAnnotation(ExportToSession.class);
-        if (toSession != null) {
-            return new StrutsActionPropertyConfigImpl(Constants.SESSION);
-        }
-        Export export = readMehod.getAnnotation(Export.class);
-        if (export != null) {
-            return new StrutsActionPropertyConfigImpl(export.value().getScopeMode());
-        }
-        return super.createStrutsActionPropertyConfig(beanDesc, propertyDesc);
     }
 
 }
