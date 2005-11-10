@@ -1,27 +1,19 @@
 package org.seasar.struts.factory;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 import org.codehaus.backport175.reader.Annotations;
-import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.struts.Constants;
-import org.seasar.struts.annotation.backport175.Export;
-import org.seasar.struts.annotation.backport175.ExportToSession;
 import org.seasar.struts.annotation.backport175.StrutsAction;
 import org.seasar.struts.annotation.backport175.StrutsActionForm;
 import org.seasar.struts.annotation.backport175.StrutsActionForward;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.config.StrutsActionPropertyConfig;
-import org.seasar.struts.config.StrutsActionPropertyConfigImpl;
 
 /**
  * @author Katsuhiko Nagashima
  */
-public class Backport175AnnotationHandler extends ConstantAnnotationHandler {
+public class Backport175StrutsConfigAnnotationHandler extends ConstantStrutsConfigAnnotationHandler {
 
     public StrutsActionConfig createStrutsActionConfig(Class clazz) {
         final StrutsAction config = (StrutsAction) Annotations.getAnnotation(StrutsAction.class, clazz);
@@ -120,17 +112,4 @@ public class Backport175AnnotationHandler extends ConstantAnnotationHandler {
         };
     }
 
-    public StrutsActionPropertyConfig createStrutsActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc) {
-        Method readMehod = propertyDesc.getReadMethod();
-        ExportToSession toSession = (ExportToSession) Annotations.getAnnotation(ExportToSession.class, readMehod);
-        if (toSession != null) {
-            return new StrutsActionPropertyConfigImpl(Constants.SESSION);
-        }
-        Export export = (Export) Annotations.getAnnotation(Export.class, readMehod);
-        if (export != null) {
-            return new StrutsActionPropertyConfigImpl(export.value());
-        }
-        return super.createStrutsActionPropertyConfig(beanDesc, propertyDesc);
-    }
-    
 }
