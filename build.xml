@@ -64,6 +64,7 @@
       <fileset dir="${docsrcdir}">
         <exclude name="**/.svn/**" />
         <exclude name=".project" />
+        <exclude name="**/download/**" />
         <exclude name="eclipse" />
         <exclude name="eclipse/**" />
       </fileset>
