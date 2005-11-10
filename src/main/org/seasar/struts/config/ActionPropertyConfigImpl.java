@@ -5,14 +5,14 @@ import org.seasar.struts.Constants;
 /**
  * @author Katsuhiko Nagashima
  */
-public class StrutsActionPropertyConfigImpl implements StrutsActionPropertyConfig {
+public class ActionPropertyConfigImpl implements ActionPropertyConfig {
     
     private String scope;
     
-    public StrutsActionPropertyConfigImpl() {
+    public ActionPropertyConfigImpl() {
     }
     
-    public StrutsActionPropertyConfigImpl(String scope) {
+    public ActionPropertyConfigImpl(String scope) {
         this.scope = scope;
     }
     

@@ -4,28 +4,23 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.util.BooleanConversionUtil;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.config.StrutsActionPropertyConfig;
-import org.seasar.struts.config.StrutsActionPropertyConfigImpl;
 import org.seasar.struts.util.ConstantValueUtil;
 
 /**
  * @author Katsuhiko Nagashima
  */
-public class ConstantAnnotationHandler implements AnnotationHandler {
+public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnotationHandler {
 
     private static final String ACTION = "ACTION";
     
     private static final String FORM = "FORM";
 
     private static final String FORWARD_SUFFIX = "_FORWARD";
-
-    private static final String EXPORT_SUFFIX = "_EXPORT";
 
     public StrutsActionConfig createStrutsActionConfig(Class clazz) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(clazz);
@@ -196,15 +191,6 @@ public class ConstantAnnotationHandler implements AnnotationHandler {
             }
             
         };
-    }
-
-    public StrutsActionPropertyConfig createStrutsActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc) {
-        String fieldName = propertyDesc.getPropertyName() + EXPORT_SUFFIX;
-        if (!beanDesc.hasField(fieldName)) {
-            return new StrutsActionPropertyConfigImpl();
-        }
-        String value = (String) beanDesc.getFieldValue(fieldName, null);
-        return new StrutsActionPropertyConfigImpl(value);
     }
 
 }

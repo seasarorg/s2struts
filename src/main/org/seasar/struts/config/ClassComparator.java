@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-import org.seasar.struts.factory.AnnotationHandler;
-import org.seasar.struts.factory.AnnotationHandlerFactory;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandlerFactory;
 
 
 /**
@@ -18,7 +18,7 @@ class ClassComparator implements Comparator {
         Class clazz1 = (Class) o1;
         Class clazz2 = (Class) o2;
 
-        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         Object annotation1 = annHandler.createStrutsActionFormConfig(clazz1);
         Object annotation2 = annHandler.createStrutsActionFormConfig(clazz2);
         if (annotation1 == null) {
