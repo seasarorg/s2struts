@@ -1129,65 +1129,6 @@ path属性とActionクラスのマッピングについての、詳細情報を記述します。
 また、org.seasar.struts.ComponentNameCreatorをimplementsしたクラスを作成し、app.diconから登録する事で、上記のデフォルトのマッピング方法を替える事が出来ます。</p>
 
 <h3><a name="Hint">適用へのヒント</a></h3>
-<!-- Addの例がなくなったため、サポートする機能は同じになり比較する意味がなくなった。
-<p>サポートする機能<br>
-(1)自動的なDIのサポート<br>
-　<a href="http://s2container.seasar.org/ja/DIContainer.html#SetterInjection">セッター・インジェクション</a>、
-<a href="http://s2container.seasar.org/ja/DIContainer.html#ConstructorInjection">コンストラクタ・インジェクション</a>を利用しての、
-Actionクラスへのサービスクラスなどの自動的なDIが可能な場合<br>
-(2)インスタンス変数を使いたい場合<br>
-　コンポーネントのinstance属性をprototypeとして、Actionクラスのインスタンス変数を使いたい場合<br>
-(3)AOPを適用したい場合<br>
-　Actionから、DAOを直接利用した場面で、Actionのメソッドにトランザクションをかけたい場合など<br>
-(4)明示的な、DIが必要な場合<br>
-　<a href="http://s2container.seasar.org/ja/DIContainer.html#MethodInjection">メソッド・インジェクション</a>を利用したい場合や、
-<a href="http://s2container.seasar.org/ja/DIContainer.html#SetterInjection">セッター・インジェクション</a>/<a href="http://s2container.seasar.org/ja/DIContainer.html#ConstructorInjection">コンストラクタ・インジェクション</a>にて
-コンテナによる自動的なDIが出来ない場合<br>
-</p>
-<table border="1">
-  <tr>
-    <td><br></td>
-    <td>POJOAction</td>
-    <td>Addの例</td>
-    <td>Multiplyの例</td>
-    <td>Subtract(ProxyAction)の例</td>
-    <td>Divideの例</td>
-  </tr>
-  <tr>
-    <td>(1)自動的なDIのサポート</td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-  </tr>
-  <tr>
-    <td>(2)インスタンス変数を使いたい場合</td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-  </tr>
-  <tr>
-    <td>(3)AOPを適用したい場合</td>
-    <td><center>○</center></td>
-    <td><center>×</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-  </tr>
-  <tr>
-    <td>(4)明示的な、DIが必要な場合</td>
-    <td><center>○</center></td>
-    <td><center>×</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-    <td><center>○</center></td>
-  </tr>
-</table>
-<p></p>
--->
 <p>メリット・デメリット</p>
 <table border="1">
   <tr>
