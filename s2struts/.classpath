@@ -16,19 +16,6 @@
 	<classpathentry kind="lib" path="lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="lib/commons-validator.jar"/>
-	<classpathentry kind="lib" path="lib/catalina.jar"/>
-	<classpathentry kind="lib" path="lib/catalina-i18n-es.jar"/>
-	<classpathentry kind="lib" path="lib/catalina-i18n-fr.jar"/>
-	<classpathentry kind="lib" path="lib/catalina-i18n-ja.jar"/>
-	<classpathentry kind="lib" path="lib/commons-modeler.jar"/>
-	<classpathentry kind="lib" path="lib/jasper-compiler.jar"/>
-	<classpathentry kind="lib" path="lib/jasper-runtime.jar"/>
-	<classpathentry kind="lib" path="lib/mx4j-jmx.jar"/>
-	<classpathentry kind="lib" path="lib/naming-common.jar"/>
-	<classpathentry kind="lib" path="lib/naming-resources.jar"/>
-	<classpathentry kind="lib" path="lib/servlets-default.jar"/>
-	<classpathentry kind="lib" path="lib/servlets-ssi.jar"/>
-	<classpathentry kind="lib" path="lib/tomcat-util.jar"/>
 	<classpathentry kind="lib" path="lib/s2-extension-2.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/s2-framework-2.3.0.jar"/>
 	<classpathentry kind="output" path="build/main"/>
