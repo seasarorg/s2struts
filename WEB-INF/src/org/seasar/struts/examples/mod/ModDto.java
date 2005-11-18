@@ -17,13 +17,12 @@ package org.seasar.struts.examples.mod;
 
 import java.io.Serializable;
 
-import org.seasar.struts.annotation.tiger.StrutsActionForm;
-
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsActionForm(name = "modForm")
 public class ModDto implements Serializable {
+    
+    public static final String FORM = "name=modForm";
 
     private String arg1;
 
