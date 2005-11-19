@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components namespace="s2struts">
+	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
+	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
+	<component name="messageFacade"                class="org.seasar.struts.action.MessageFacadeImpl" instance="request"/>
+	<component name="s2strutsContext"              class="org.seasar.struts.context.S2StrutsContextImpl" instance="session"/>
+	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
+	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
+	<component name="executeProcessor"             class="org.seasar.struts.processor.ActionExecuteProcessorImpl"/>
+	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
+	<component name="validateProcessor"            class="org.seasar.struts.processor.ValidateProcessorImpl"/>
+	<component name="inputValueFormProcessor"      class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
+	<component name="requestProcessor"             class="org.seasar.struts.processor.S2RequestProcessor" instance="prototype">
+		<aspect pointcut="processActionForm">
+			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
+		</aspect>
+	</component>
+	<!--
+	<component name="tilesRequestProcessor"        class="org.seasar.struts.processor.S2TilesRequestProcessor" instance="prototype">
+		<aspect pointcut="processActionForm">
+			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
+		</aspect>
+	</component>
+	-->
+
+    <!-- ZeroConfig Components  -->
+	<component name="autoStrutsConfigRule"         class="org.seasar.struts.config.AutoStrutsConfigRuleImpl"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
+
+	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
+		<property name="pattern">"yyyy/MM/dd"</property>
+	</component>
+	<component name="maskConfigRegister"           class="org.seasar.struts.validator.config.MaskConfigRegisterImpl"/>
+	<component name="maxlengthConfigRegister"      class="org.seasar.struts.validator.config.MaxlengthConfigRegisterImpl"/>
+	<component name="minlengthConfigRegister"      class="org.seasar.struts.validator.config.MinlengthConfigRegisterImpl"/>
+	<component name="maxbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MaxbytelengthConfigRegisterImpl"/>
+	<component name="minbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MinbytelengthConfigRegisterImpl"/>
+	<component name="intRangeConfigRegister"       class="org.seasar.struts.validator.config.IntRangeConfigRegisterImpl"/>
+	<component name="floatRangeConfigRegister"     class="org.seasar.struts.validator.config.FloatRangeConfigRegisterImpl"/>
+	<component name="doubleRangeConfigRegister"    class="org.seasar.struts.validator.config.DoubleRangeConfigRegisterImpl"/>
+	<component name="validatorFieldConfigRegister" class="org.seasar.struts.validator.config.ValidatorFieldConfigRegisterImpl"/>
+</components>

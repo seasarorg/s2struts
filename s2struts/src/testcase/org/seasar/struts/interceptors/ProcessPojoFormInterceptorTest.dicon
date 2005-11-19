@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<component name="actionFactory"           class="org.seasar.struts.action.ActionFactoryImpl"/>
+	<component name="componentNameCreator"    class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
+	<component name="classRegister"           class="org.seasar.struts.util.ClassRegisterImpl"/>
+	<component name="acceptor"                class="org.seasar.struts.processor.AcceptorImpl"/>
+	<component name="executeProcessor"        class="org.seasar.struts.processor.ActionExecuteProcessorImpl"/>
+	<component name="requestProcessorFactory" class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
+	<component name="validateProcessor"       class="org.seasar.struts.processor.ValidateProcessorImpl"/>
+	<component name="inputValueFormProcessor" class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
+    <component class="org.seasar.struts.processor.S2RequestProcessor">
+        <aspect pointcut="processActionForm">
+            <component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
+        </aspect>
+    </component>
+</components>
