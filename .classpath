@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry output="target/test-classes" kind="src" path="src/test/java"/>
-	<classpathentry output="target/test-classes" kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" path="s2-httpunit/src/main/java"/>
+	<classpathentry kind="src" path="s2-httpunit/src/main/resources"/>
+	<classpathentry output="s2-httpunit/target/test-classes" kind="src" path="s2-httpunit/src/test/java"/>
+	<classpathentry output="s2-httpunit/target/test-classes" kind="src" path="s2-httpunit/src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/struts.jar"/>
