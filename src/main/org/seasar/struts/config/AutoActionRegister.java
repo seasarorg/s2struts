@@ -1,3 +1,18 @@
+/*
+ * Copyright 2004-2005 the Seasar Foundation and the Others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 package org.seasar.struts.config;
 
 import java.lang.reflect.Field;
@@ -16,9 +31,8 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.FieldUtil;
 import org.seasar.struts.config.rule.ZeroConfigActionRule;
-import org.seasar.struts.factory.AnnotationHandler;
-import org.seasar.struts.factory.AnnotationHandlerFactory;
-
+import org.seasar.struts.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.factory.StrutsConfigAnnotationHandlerFactory;
 
 /**
  * @author Katsuhiko Nagashima
@@ -31,7 +45,7 @@ public class AutoActionRegister {
     }
 
     public static void regist(ServletContext servletContext, ModuleConfig config, Collection classes) {
-        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         classes = ClassComparator.sort(classes);
         
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
@@ -101,7 +115,7 @@ public class AutoActionRegister {
     }
 
     private static void addFowardConfig(ServletContext servletContext, ActionConfig actionConfig, Class actionClass) {
-        AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         Field[] fields = actionClass.getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             StrutsActionForwardConfig actionForward = annHandler.createStrutsActionForwardConfig(fields[i]);

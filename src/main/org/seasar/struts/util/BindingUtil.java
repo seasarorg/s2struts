@@ -1,3 +1,18 @@
+/*
+ * Copyright 2004-2005 the Seasar Foundation and the Others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 package org.seasar.struts.util;
 
 import java.util.Enumeration;
@@ -13,9 +28,9 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.struts.beans.IndexedPropertyDesc;
 import org.seasar.struts.beans.impl.IndexedPropertyDescImpl;
-import org.seasar.struts.config.StrutsActionPropertyConfig;
-import org.seasar.struts.factory.AnnotationHandler;
-import org.seasar.struts.factory.AnnotationHandlerFactory;
+import org.seasar.struts.config.ActionPropertyConfig;
+import org.seasar.struts.factory.ActionAnnotationHandler;
+import org.seasar.struts.factory.ActionAnnotationHandlerFactory;
 
 /**
  * @author Satoshi Kimura
@@ -136,8 +151,8 @@ public class BindingUtil {
                 value = BeanValidatorFormUtil.toBeanValidatorForm(container.getRequest(), propertyName, value);
             }
             
-            AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
-            StrutsActionPropertyConfig propertyConfig = annHandler.createStrutsActionPropertyConfig(beanDesc, propertyDesc);
+            ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
+            ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
             if (propertyConfig.isSessionScope()) {
                 container.getSession().setAttribute(propertyName, value);
             } else {
