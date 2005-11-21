@@ -77,15 +77,18 @@ public class AcceptorImpl implements Acceptor {
         }
 
         // Validate Form for this request
-        ActionForm form = processor.processInputValueFormCreate(request, response, mapping);
+        //ActionForm form = processor.processInputValueFormCreate(request, response, mapping);
+        //if (!processor.processS2Validate(request, response, form, mapping)) {
+        //    return;
+        //}
+        //processor.processInputValueFormDelete(request, response, mapping);
+        
+        // Process any ActionForm bean related to this request
+        ActionForm form = processor.processActionForm(request, response, mapping);
+        processor.processPopulate(request, response, form, mapping);
         if (!processor.processS2Validate(request, response, form, mapping)) {
             return;
         }
-        processor.processInputValueFormDelete(request, response, mapping);
-        
-        // Process any ActionForm bean related to this request
-        form = processor.processActionForm(request, response, mapping);
-        processor.processPopulate(request, response, form, mapping);
 
         // Process a forward or include specified by this mapping
         if (!processor.processForward(request, response, mapping)) {
