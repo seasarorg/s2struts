@@ -13,6 +13,7 @@
 	<include path="org/seasar/struts/examples/dicon/ChangeCase.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Message.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Validate.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Upload.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/RequestProcessor.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/employee.dicon"/>
 </components>

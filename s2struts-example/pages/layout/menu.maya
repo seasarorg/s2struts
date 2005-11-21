@@ -15,6 +15,7 @@
     <html:link m:id="changeCasePage" page="/pages/changeCaseInput.html"><bean:message key="changeCase.title"/></html:link>
     <html:link m:id="messagePage" page="/message.do"><bean:message key="message.title"/></html:link>
     <html:link m:id="validatePage" page="/pages/validate.html"><bean:message key="validate.title"/></html:link>
+    <html:link m:id="uploadPage" page="/pages/uploadInput.html"><bean:message key="upload.title"/></html:link>
     <html:link m:id="employeePage" forward="employee"><bean:message key="title.employee" /></html:link>
 
 </m:maya>
