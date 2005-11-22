@@ -15,7 +15,7 @@ import org.seasar.struts.action.POJOAction;
 import org.seasar.struts.action.POJOActionImpl;
 import org.seasar.struts.action.ReturnNullPOJOAction;
 import org.seasar.struts.action.ReturnNullPOJOActionImpl;
-import org.seasar.struts.unit.mock.MockActionMapping;
+import org.seasar.struts.mock.MockActionMapping;
 
 /**
  * @author Satoshi Kimura

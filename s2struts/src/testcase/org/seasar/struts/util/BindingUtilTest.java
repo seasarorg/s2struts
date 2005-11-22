@@ -7,7 +7,7 @@ import org.seasar.framework.beans.impl.BeanDescImpl;
 import org.seasar.struts.action.ExportPOJOActionImpl;
 import org.seasar.struts.action.ExportPOJOForm;
 import org.seasar.struts.action.POJOActionImpl;
-import org.seasar.struts.unit.mock.MockActionMapping;
+import org.seasar.struts.mock.MockActionMapping;
 
 /**
  * @author Satoshi Kimura

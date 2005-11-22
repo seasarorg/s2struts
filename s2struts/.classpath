@@ -5,8 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/struts.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="lib/s2-struts-unit-EA1.jar"/>
-	<classpathentry kind="lib" path="lib/s2-httpunit-EA1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/ognl-2.6.5.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
