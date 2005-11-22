@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:maya xmlns:m="http://maya.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="indexed.title"/>
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content"/>
+    
+    <html:errors m:id="errorMessage" />
+
+    <bean:write m:id="child_0_value" name="indexedDto" property="child[0].value"/>
+    <bean:write m:id="child_1_value" name="indexedDto" property="child[1].value"/>
+    <bean:write m:id="child_2_value" name="indexedDto" property="child[2].value"/>
+    
+    <bean:write m:id="array_0" name="indexedDto" property="array[0]"/>
+    <bean:write m:id="array_1" name="indexedDto" property="array[1]"/>
+    <bean:write m:id="array_2" name="indexedDto" property="array[2]"/>
+
+    <bean:write m:id="map_0" name="indexedDto" property="map(0)"/>
+    <bean:write m:id="map_1" name="indexedDto" property="map(1)"/>
+    <bean:write m:id="map_2" name="indexedDto" property="map(2)"/>
+
+    <bean:write m:id="values_0" name="indexedDto" property="values[0]"/>
+    <bean:write m:id="values_1" name="indexedDto" property="values[1]"/>
+    <bean:write m:id="values_2" name="indexedDto" property="values[2]"/>
+
+</m:maya>

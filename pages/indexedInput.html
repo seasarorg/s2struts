@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Windows-31j">
+  <link href="../../css/global.css" rel="stylesheet" type="text/css"></link>
+  <script type="text/javascript" src="../../js/execute.js"></script>
+  <title id="pageTitle">
+    S2Struts Indexed Example Demo
+  </title>
+</head>
+<body>
+
+<div id="appBody">
+  <div id="errorMessage"></div>
+
+  <form method="GET" action="indexed.html" id="appForm">
+    <table border="1">
+      <tr>
+        <th>child</th>
+        <td><input type="text" name="child[0].value" class="text" id="child_0_value" /></td>
+        <td><input type="text" name="child[1].value" class="text" id="child_1_value" /></td>
+        <td><input type="text" name="child[2].value" class="text" id="child_2_value" /></td>
+      </tr>
+      <tr>
+        <th>array</th>
+        <td><input type="text" name="array[0]" class="text" id="array_0" /></td>
+        <td><input type="text" name="array[1]" class="text" id="array_1" /></td>
+        <td><input type="text" name="array[2]" class="text" id="array_2" /></td>
+      </tr>
+      <tr>
+        <th>map</th>
+        <td><input type="text" name="map(0)" class="text" id="map_0" /></td>
+        <td><input type="text" name="map(1)" class="text" id="map_1" /></td>
+        <td><input type="text" name="map(2)" class="text" id="map_2" /></td>
+      </tr>
+      <tr>
+        <th>list</th>
+        <td><input type="text" name="values[0]" class="text" id="values_0" /></td>
+        <td><input type="text" name="values[1]" class="text" id="values_1" /></td>
+        <td><input type="text" name="values[2]" class="text" id="values_2" /></td>
+      </tr>
+    </table>
+    <input type="submit" value="submit" id="goIndexed">
+  </form>
+</div>
+
+</body>
+</html>

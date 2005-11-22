@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:maya xmlns:m="http://maya.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="indexed.title"/>
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content"/>
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/indexed" method="POST" />
+    
+    <html:text m:id="child_0_value" property="child[0].value" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="child_1_value" property="child[1].value" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="child_2_value" property="child[2].value" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="array_0" property="array[0]" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="array_1" property="array[1]" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="array_2" property="array[2]" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="map_0" property="map(0)" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="map_1" property="map(1)" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="map_2" property="map(2)" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:text m:id="values_0" property="values[0]" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="values_1" property="values[1]" styleClass="text" errorStyleClass="text-error"/>
+    <html:text m:id="values_2" property="values[2]" styleClass="text" errorStyleClass="text-error"/>
+
+    <html:submit m:id="goIndexed">submit</html:submit>
+
+</m:maya>
