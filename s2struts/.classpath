@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry output="build/main" kind="src" path="src/main"/>
-	<classpathentry output="build/testcase" kind="src" path="src/testcase"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry output="target/test-classes" kind="src" path="src/test/java"/>
+	<classpathentry output="target/test-classes" kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/struts.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
@@ -16,5 +18,5 @@
 	<classpathentry kind="lib" path="lib/commons-validator.jar"/>
 	<classpathentry kind="lib" path="lib/s2-extension-2.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/s2-framework-2.3.0.jar"/>
-	<classpathentry kind="output" path="build/main"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
