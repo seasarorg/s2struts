@@ -59,9 +59,8 @@ public class RequestProcessorWrapper extends RequestProcessor {
 
     protected void processForwardConfig(HttpServletRequest request, HttpServletResponse response, ForwardConfig forward)
             throws IOException, ServletException {
-        Class[] parameterTypes = {HttpServletRequest.class, HttpServletResponse.class, ForwardConfig.class};
-        Object[] args = {request, response, forward};
-        MethodUtil.invoke(requestProcessor, "processForwardConfig", parameterTypes, args);
+
+        // empty
     }
 
     protected ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response,
@@ -176,30 +175,27 @@ public class RequestProcessorWrapper extends RequestProcessor {
 
     protected void internalModuleRelativeForward(String uri, HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        Class[] parameterTypes = {String.class, HttpServletRequest.class, HttpServletResponse.class};
-        Object[] args = {uri, request, response};
-        MethodUtil.invoke(requestProcessor, "internalModuleRelativeForward", parameterTypes, args);
+
+        // empty
     }
 
     protected void internalModuleRelativeInclude(String uri, HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        Class[] parameterTypes = {String.class, HttpServletRequest.class, HttpServletResponse.class};
-        Object[] args = {uri, request, response};
-        MethodUtil.invoke(requestProcessor, "internalModuleRelativeInclude", parameterTypes, args);
+
+        // empty
+
     }
 
     protected void doForward(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletException {
-        Class[] parameterTypes = {String.class, HttpServletRequest.class, HttpServletResponse.class};
-        Object[] args = {uri, request, response};
-        MethodUtil.invoke(requestProcessor, "doForward", parameterTypes, args);
+
+        // empty
     }
 
     protected void doInclude(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletException {
-        Class[] parameterTypes = {String.class, HttpServletRequest.class, HttpServletResponse.class};
-        Object[] args = {uri, request, response};
-        MethodUtil.invoke(requestProcessor, "doInclude", parameterTypes, args);
+
+        // empty
     }
 
     protected MessageResources getInternal() {

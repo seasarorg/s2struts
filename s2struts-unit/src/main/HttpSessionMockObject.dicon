@@ -13,7 +13,13 @@
 		</initMethod>
 	</component>
 
-	<component name="HttpSessionDelegator" class="org.seasar.httpunit.mock.HttpSessionDelegator"/>
+	<component name="HttpSessionDelegator" class="org.seasar.httpunit.mock.HttpSessionDelegator">
+		<property name="servletContext">
+			<component class="javax.servlet.ServletContext">
+				<aspect pointcut=".*">new org.seasar.httpunit.mock.MockObjectInterceptor()</aspect>
+			</component>
+		</property>
+	</component>
 
 	<component name="HttpSessionMockObjectInterceptor" class="org.seasar.httpunit.mock.MockObjectInterceptor">
 		<initMethod name="setDelegateTarget">
@@ -33,7 +39,4 @@
 		</initMethod>
 	</component>
 
-	<component name="ServletContext" class="javax.servlet.ServletContext">
-		<aspect pointcut=".*">new org.seasar.httpunit.mock.MockObjectInterceptor()</aspect>
-	</component>
 </components>

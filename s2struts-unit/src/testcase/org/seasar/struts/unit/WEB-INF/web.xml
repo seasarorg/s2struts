@@ -17,14 +17,14 @@
 
   <servlet>
     <servlet-name>s2container</servlet-name>
-    <servlet-class>org.seasar.struts.S2StrutsServlet</servlet-class>
+    <servlet-class>org.seasar.framework.container.servlet.S2ContainerServlet</servlet-class>
     <load-on-startup/>
   </servlet>
   
   <!-- Standard Action Servlet Configuration (with debugging) -->
   <servlet>
     <servlet-name>action</servlet-name>
-    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+    <servlet-class>org.seasar.struts.servlet.S2ActionServlet</servlet-class>
     <init-param>
       <param-name>config</param-name>
       <param-value>/WEB-INF/struts-config.xml</param-value>

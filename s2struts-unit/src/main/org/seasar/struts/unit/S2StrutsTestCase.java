@@ -14,9 +14,10 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.RequestProcessor;
-import org.seasar.extension.mock.servlet.MockHttpServletRequest;
+import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.mock.servlet.MockHttpServletRequest;
 import org.seasar.httpunit.S2HttpTestCase;
-import org.seasar.struts.ActionUtil;
 import org.seasar.struts.unit.mock.MockActionMapping;
 
 /**
@@ -35,7 +36,12 @@ public class S2StrutsTestCase extends S2HttpTestCase {
     }
 
     protected Action createAction(Class actionClass) {
-        return ActionUtil.createActionWithClassName(actionClass.getName());
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        if (false == container.hasComponentDef(actionClass)) {
+            container.register(actionClass);
+        }
+        Action action = (Action) container.getComponent(actionClass);
+        return action;
     }
 
     protected String execute(String path) throws Exception {

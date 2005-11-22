@@ -43,10 +43,6 @@
 
     <form-beans>
 
-		<form-bean
-            name="calcForm"
-            type="org.seasar.struts.examples.CalculationForm"/>
-            
     <!-- sample form bean descriptor for an ActionForm
         <form-bean
             name="inputForm"
@@ -98,10 +94,6 @@
 
     <global-forwards>
 
-        <forward
-            name="addInput"
-            path="/pages/addInput.jsp"/>
-
     </global-forwards>
 
 
@@ -113,49 +105,6 @@
 
 
     <action-mappings>
-
-        <action
-            path="/add"
-            type="org.seasar.struts.examples.AddAction"
-            name="calcForm"
-            scope="request"
-            validate="false"
-            input="/pages/addInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
-        </action>
-        <action
-            path="/subtract"
-            type="org.seasar.struts.ProxyAction"
-            name="calcForm"
-            scope="request"
-            validate="false"
-            input="/pages/subtractInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
-        </action>
-        <action
-            path="/multiply"
-            type="org.seasar.struts.examples.MultiplyAction"
-            name="calcForm"
-            scope="request"
-            validate="false"
-            input="/pages/multiplyInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
-        </action>
-        <action
-            path="/divide"
-            name="calcForm"
-            scope="request"
-            validate="false"
-            input="/pages/divideInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
-        </action>
-        <!-- test actions -->
-        <action
-            path="/login"
-            type="org.seasar.struts.unit.LoginAction"
-            input="/pages/divideInput.jsp">
-            <forward name="success" path="/pages/result.jsp" />
-        </action>
 
     <!-- sample input and input submit actions
 
@@ -185,7 +134,7 @@
 
 
     <controller
-       processorClass="org.seasar.struts.S2RequestProcessor"/>
+       processorClass="org.seasar.struts.processor.S2RequestProcessor"/>
 <!--
 	<controller
        processorClass="org.apache.struts.action.RequestProcessor"/>

@@ -3,4 +3,5 @@
 "http://www.seasar.org/dtd/components.dtd">
 <components>
 	<component class="org.seasar.struts.unit.MockLoginService"/>
+	<component class="org.seasar.struts.unit.LoginAction"/>
 </components>

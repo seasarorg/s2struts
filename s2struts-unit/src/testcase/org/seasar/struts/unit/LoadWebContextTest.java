@@ -11,6 +11,7 @@ public class LoadWebContextTest extends S2StrutsTestCase {
 
     protected void setUp() {
         include("HttpMockObject.dicon");
+        include("LoginTest.dicon");
         setDocBase("org/seasar/struts/unit");
     }
 

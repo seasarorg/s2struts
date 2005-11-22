@@ -210,10 +210,9 @@ public class S2HttpTestCase extends S2TestCase {
 
     protected void setDocBase(String docBase) {
         String docBasePath = convertDocBasePath(docBase);
+        SingletonS2ContainerFactory.init();
         setContext(createServletContext(docBasePath));
         getContainer().setServletContext(this.servletContext);
-        SingletonS2ContainerFactory.setServletContext(this.servletContext);
-        SingletonS2ContainerFactory.init();
         loadOnStartup();
     }
 

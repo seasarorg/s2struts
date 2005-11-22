@@ -2,5 +2,6 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
 "http://www.seasar.org/dtd/components.dtd">
 <components>
+	<include path="s2struts.dicon"/>
 	<include path="org/seasar/struts/unit/LoginTest.dicon"/>
 </components>
