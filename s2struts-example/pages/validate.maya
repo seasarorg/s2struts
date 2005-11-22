@@ -7,7 +7,7 @@
         m:extends="/pages/layout/layout.html">
 
     <m:doRender id="pageTitle" name="title">
-        <bean:message key="subtract.title"/>
+        <bean:message key="validate.title"/>
     </m:doRender>
     
     <m:doRender id="appBody" name="content"/>
