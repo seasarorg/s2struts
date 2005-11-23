@@ -12,6 +12,22 @@
   <description></description>
   <url>http://s2struts.seasar.org/</url>
   <inceptionYear>2004</inceptionYear>
+  <mailingLists>
+    <mailingList>
+      <name>Seasar-user</name>
+      <subscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-user</subscribe>
+      <unsubscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-user</unsubscribe>
+      <post>seasar-user@lists.sourceforge.jp</post>
+      <archive>http://lists.sourceforge.jp/mailman/archives/seasar-user/</archive>
+    </mailingList>
+    <mailingList>
+      <name>Seasar-dev</name>
+      <subscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-dev</subscribe>
+      <unsubscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-dev</unsubscribe>
+      <post>seasar-user@lists.sourceforge.jp</post>
+      <archive>http://lists.sourceforge.jp/mailman/archives/seasar-dev/</archive>
+    </mailingList>
+  </mailingLists>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
