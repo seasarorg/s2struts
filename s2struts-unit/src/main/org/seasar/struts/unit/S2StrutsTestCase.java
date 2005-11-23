@@ -23,7 +23,7 @@ import org.seasar.struts.unit.mock.MockActionMapping;
 /**
  * @author Satoshi Kimura
  */
-public class S2StrutsTestCase extends S2HttpTestCase {
+public abstract class S2StrutsTestCase extends S2HttpTestCase {
     private String actionServletName;
     private RequestProcessorWrapper requestProcessorWrapper;
 

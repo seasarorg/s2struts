@@ -33,7 +33,7 @@ import org.seasar.httpunit.mock.MockObjectInterceptorMapping;
 /**
  * @author Satoshi Kimura
  */
-public class S2HttpTestCase extends S2TestCase {
+public abstract class S2HttpTestCase extends S2TestCase {
     private boolean useS2MockObject;
     private StandardContext context;
     private MockHttpServletRequest request;
