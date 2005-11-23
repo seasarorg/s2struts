@@ -43,11 +43,11 @@ public class AutoActionFormRegister {
         
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
             Class clazz = (Class) iterator.next();
-            StrutsActionFormConfig strutsActionForm = annHandler.createStrutsActionFormConfig(clazz);
-            if (strutsActionForm == null && isActionFormClass(clazz)) {
-                strutsActionForm = new NullStrutsActionFormConfig();
-            }
-            if (strutsActionForm != null) {
+            if (isActionFormClass(clazz)) {
+                StrutsActionFormConfig strutsActionForm = annHandler.createStrutsActionFormConfig(clazz);
+                if (strutsActionForm == null) {
+                    strutsActionForm = new NullStrutsActionFormConfig();
+                }
                 registActionForm(strutsActionForm, clazz, config);
             }
         }

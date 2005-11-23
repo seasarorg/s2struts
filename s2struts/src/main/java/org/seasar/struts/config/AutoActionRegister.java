@@ -50,11 +50,11 @@ public class AutoActionRegister {
         
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
             Class clazz = (Class) iterator.next();
-            StrutsActionConfig strutsAction = annHandler.createStrutsActionConfig(clazz);
-            if (strutsAction == null && isActionClass(clazz)) {
-                strutsAction = new NullStrutsActionConfig();
-            }
-            if (strutsAction != null) {
+            if (isActionClass(clazz)) {
+                StrutsActionConfig strutsAction = annHandler.createStrutsActionConfig(clazz);
+                if (strutsAction == null) {
+                    strutsAction = new NullStrutsActionConfig();
+                }
                 registAction(strutsAction, clazz, config, servletContext);
             }
         }
