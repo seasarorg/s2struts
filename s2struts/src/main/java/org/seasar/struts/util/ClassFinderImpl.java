@@ -26,7 +26,7 @@ import java.util.jar.JarFile;
 
 import javax.servlet.GenericServlet;
 
-import org.apache.log4j.Logger;
+import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.ClassUtil;
 
 /**
