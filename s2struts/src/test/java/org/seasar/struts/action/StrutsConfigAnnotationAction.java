@@ -3,7 +3,7 @@ package org.seasar.struts.action;
 /**
  * @author Katsuhiko Nagashima
  */
-public interface TestAction {
+public interface StrutsConfigAnnotationAction {
 
     String ACTION = "path=testpath, name=testname, input=testinput, parameter=testparameter"
             + ", attribute=testattribute, forward=testforward, include=testinclude"

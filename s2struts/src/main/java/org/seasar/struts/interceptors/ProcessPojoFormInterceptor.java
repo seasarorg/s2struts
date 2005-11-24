@@ -36,8 +36,8 @@ import org.apache.struts.util.RequestUtils;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.Constants;
+import org.seasar.struts.form.S2BeanValidatorForm;
 import org.seasar.struts.processor.ExternalRequestProcessor;
-import org.seasar.struts.validator.S2BeanValidatorForm;
 
 /**
  * <component class="org.seasar.struts.processor.S2RequestProcessor">

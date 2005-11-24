@@ -42,6 +42,10 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (!beanDesc.hasField(ACTION)) {
             return null;
         }
+        if (clazz != beanDesc.getField(ACTION).getDeclaringClass()) {
+            return null;
+        }
+        
         String value = (String) beanDesc.getFieldValue(ACTION, null);
         final Map parameters = ConstantValueUtil.toMap(value);
 
@@ -184,6 +188,10 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (!beanDesc.hasField(FORM)) {
             return null;
         }
+        if (clazz != beanDesc.getField(FORM).getDeclaringClass()) {
+            return null;
+        }
+        
         String value = (String) beanDesc.getFieldValue(FORM, null);
         final Map parameters = ConstantValueUtil.toMap(value, "name");
         

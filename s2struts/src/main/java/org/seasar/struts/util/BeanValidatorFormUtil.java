@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.WrapDynaBean;
 import org.apache.struts.validator.BeanValidatorForm;
-import org.seasar.struts.validator.S2BeanValidatorForm;
+import org.seasar.struts.form.S2BeanValidatorForm;
 
 /**
  * @author Katsuhiko Nagashima
