@@ -5,11 +5,11 @@ import java.util.Date;
 /**
  * @author Katsuhiko Nagashima
  */
-public class TestForm {
+public class ValidatorAnnotationForm {
     
     public static final String FORM = "testFormName";
 
-    public TestForm() {
+    public ValidatorAnnotationForm() {
     }
 
     public static final String arg_VALIDATOR = "required";
