@@ -3,7 +3,7 @@ package org.seasar.struts.validator.factory;
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.form.TestForm;
+import org.seasar.struts.form.ValidatorAnnotationForm;
 
 /**
  * 
@@ -23,7 +23,7 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     }
     
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", TestForm.class);
+        form = annHandler.createForm("testForm", ValidatorAnnotationForm.class);
     }
 
     public void testArg() {
@@ -31,6 +31,17 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertNotNull(field);
         assertEquals("Arg", field.getArg(0).getKey());
         assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testArgs() {
+        Field field = form.getField("args");
+        assertNotNull(field);
+        assertEquals("Arg0", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+        assertEquals("Arg1", field.getArg(1).getKey());
+        assertEquals(false, field.getArg(1).isResource());
+        assertEquals("Arg2", field.getArg(2).getKey());
+        assertEquals(false, field.getArg(2).isResource());
     }
     
     public void testRequired() {

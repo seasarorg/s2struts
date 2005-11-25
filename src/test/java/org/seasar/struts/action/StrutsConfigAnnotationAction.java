@@ -12,7 +12,7 @@ package org.seasar.struts.action;
  *                                                             suffix="testsuffix",
  *                                                             roles="testroles")
  */
-public interface TestAction {
+public interface StrutsConfigAnnotationAction {
 
     /**
      * @org.seasar.struts.annotation.backport175.StrutsActionForward(path="/test.jsp")
