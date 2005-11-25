@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.Globals;
 import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.seasar.extension.unit.S2TestCase;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class MessageManagerTest extends S2TestCase {
     public MessageManagerTest(String name) {
@@ -33,164 +35,332 @@ public class MessageManagerTest extends S2TestCase {
     }
 
     /*
-     * Class under test for void addError(String, Object[])
+     * Class under test for void addError(String, String, Object[])
      */
     public void testAddErrorStringObjectArray() {
-        MessageManager.addError("key1", new Object[] {"a1", "b1"});
-        MessageManager.addError("key2", new Object[] {"a2", "b2"});
+        MessageManager.addError("property", "key1", new Object[] {"a1", "b1"});
+        MessageManager.addError("property", "key2", new Object[] {"a2", "b2"});
         MessageManager.saveErrors();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
-
+    
     /*
-     * Class under test for void addError(String, Object)
+     * Class under test for void addError(String, String, Object)
      */
     public void testAddErrorStringObject() {
-        MessageManager.addError("key1", "a1");
-        MessageManager.addError("key2", "a2");
+        MessageManager.addError("property", "key1", "a1");
+        MessageManager.addError("property", "key2", "a2");
         MessageManager.saveErrors();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "", "", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addError(String, Object, Object)
+     * Class under test for void addError(String, String, Object, Object)
      */
     public void testAddErrorStringObjectObject() {
-        MessageManager.addError("key1", "a1", "b1");
-        MessageManager.addError("key2", "a2", "b2");
+        MessageManager.addError("property", "key1", "a1", "b1");
+        MessageManager.addError("property", "key2", "a2", "b2");
         MessageManager.saveErrors();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addError(String, Object, Object, Object)
+     * Class under test for void addError(String, String, Object, Object, Object)
      */
     public void testAddErrorStringObjectObjectObject() {
-        MessageManager.addError("key1", "a1", "b1", "c1");
-        MessageManager.addError("key2", "a2", "b2", "c2");
+        MessageManager.addError("property", "key1", "a1", "b1", "c1");
+        MessageManager.addError("property", "key2", "a2", "b2", "c2");
         MessageManager.saveErrors();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1", "c1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2", "c2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addError(String, Object, Object, Object, Object)
+     * Class under test for void addError(String, String, Object, Object, Object, Object)
      */
     public void testAddErrorStringObjectObjectObjectObject() {
-        MessageManager.addError("key1", "a1", "b1", "c1", "d1");
-        MessageManager.addError("key2", "a2", "b2", "c2", "d2");
+        MessageManager.addError("property", "key1", "a1", "b1", "c1", "d1");
+        MessageManager.addError("property", "key2", "a2", "b2", "c2", "d2");
         MessageManager.saveErrors();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "d1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "d2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "d1", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "d2", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    // -----------------------------------------------------------------------
+    
+    /*
+     * Class under test for void addGlobalError(String, Object[])
+     */
+    public void testAddGlobalErrorStringObjectArray() {
+        MessageManager.addGlobalError("key1", new Object[] {"a1", "b1"});
+        MessageManager.addGlobalError("key2", new Object[] {"a2", "b2"});
+        MessageManager.saveErrors();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+    
+    /*
+     * Class under test for void addGlobalError(String, Object)
+     */
+    public void testAddGlobalErrorStringObject() {
+        MessageManager.addGlobalError("key1", "a1");
+        MessageManager.addGlobalError("key2", "a2");
+        MessageManager.saveErrors();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addMessage(String, Object[])
+     * Class under test for void addGlobalError(String, Object, Object)
+     */
+    public void testAddGlobalErrorStringObjectObject() {
+        MessageManager.addGlobalError("key1", "a1", "b1");
+        MessageManager.addGlobalError("key2", "a2", "b2");
+        MessageManager.saveErrors();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    /*
+     * Class under test for void addGlobalError(String, Object, Object, Object)
+     */
+    public void testAddGlobalErrorStringObjectObjectObject() {
+        MessageManager.addGlobalError("key1", "a1", "b1", "c1");
+        MessageManager.addGlobalError("key2", "a2", "b2", "c2");
+        MessageManager.saveErrors();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "", "", "", "", "", "", ""}));
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    /*
+     * Class under test for void addGlobalError(String, Object, Object, Object, Object)
+     */
+    public void testAddGlobalErrorStringObjectObjectObjectObject() {
+        MessageManager.addGlobalError("key1", "a1", "b1", "c1", "d1");
+        MessageManager.addGlobalError("key2", "a2", "b2", "c2", "d2");
+        MessageManager.saveErrors();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "d1", "", "", "", "", "", ""}));
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "d2", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    // -----------------------------------------------------------------------
+
+    /*
+     * Class under test for void addMessage(String, String, Object[])
      */
     public void testAddMessageStringObjectArray() {
-        MessageManager.addMessage("key1", new Object[] {"a1", "b1"});
-        MessageManager.addMessage("key2", new Object[] {"a2", "b2"});
+        MessageManager.addMessage("property", "key1", new Object[] {"a1", "b1"});
+        MessageManager.addMessage("property", "key2", new Object[] {"a2", "b2"});
         MessageManager.saveMessages();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addMessage(String, Object)
+     * Class under test for void addMessage(String, String, Object)
      */
     public void testAddMessageStringObject() {
-        MessageManager.addMessage("key1", "a1");
-        MessageManager.addMessage("key2", "a2");
+        MessageManager.addMessage("property", "key1", "a1");
+        MessageManager.addMessage("property", "key2", "a2");
         MessageManager.saveMessages();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "", "", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addMessage(String, Object, Object)
+     * Class under test for void addMessage(String, String, Object, Object)
      */
     public void testAddMessageStringObjectObject() {
-        MessageManager.addMessage("key1", "a1", "b1");
-        MessageManager.addMessage("key2", "a2", "b2");
+        MessageManager.addMessage("property", "key1", "a1", "b1");
+        MessageManager.addMessage("property", "key2", "a2", "b2");
         MessageManager.saveMessages();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addMessage(String, Object, Object, Object)
+     * Class under test for void addMessage(String, String, Object, Object, Object)
      */
     public void testAddMessageStringObjectObjectObject() {
-        MessageManager.addMessage("key1", "a1", "b1", "c1");
-        MessageManager.addMessage("key2", "a2", "b2", "c2");
+        MessageManager.addMessage("property", "key1", "a1", "b1", "c1");
+        MessageManager.addMessage("property", "key2", "a2", "b2", "c2");
         MessageManager.saveMessages();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1", "c1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2", "c2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
 
     /*
-     * Class under test for void addMessage(String, Object, Object, Object, Object)
+     * Class under test for void addMessage(String, String, Object, Object, Object, Object)
      */
     public void testAddMessageStringObjectObjectObjectObject() {
-        MessageManager.addMessage("key1", "a1", "b1", "c1", "d1");
-        MessageManager.addMessage("key2", "a2", "b2", "c2", "d2");
+        MessageManager.addMessage("property", "key1", "a1", "b1", "c1", "d1");
+        MessageManager.addMessage("property", "key2", "a2", "b2", "c2", "d2");
         MessageManager.saveMessages();
         ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
 
         ActionMessages expected = new ActionMessages();
-        expected.add("key1", new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "d1"}));
-        expected.add("key2", new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "d2"}));
+        expected.add("property", new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "d1", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "d2", "", "", "", "", "", ""}));
 
-        assertEquals(expected, result);
+        assertEquals(expected.toString(), result.toString());
     }
+
+    // -----------------------------------------------------------------------
+
+    /*
+     * Class under test for void addGlobalMessage(String, Object[])
+     */
+    public void testAddGlobalMessageStringObjectArray() {
+        MessageManager.addGlobalMessage("key1", new Object[] {"a1", "b1"});
+        MessageManager.addGlobalMessage("key2", new Object[] {"a2", "b2"});
+        MessageManager.saveMessages();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    /*
+     * Class under test for void addGlobalMessage(String, Object)
+     */
+    public void testAddGlobalMessageStringObject() {
+        MessageManager.addGlobalMessage("key1", "a1");
+        MessageManager.addGlobalMessage("key2", "a2");
+        MessageManager.saveMessages();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    /*
+     * Class under test for void addGlobalMessage(String, Object, Object)
+     */
+    public void testAddGlobalMessageStringObjectObject() {
+        MessageManager.addGlobalMessage("key1", "a1", "b1");
+        MessageManager.addGlobalMessage("key2", "a2", "b2");
+        MessageManager.saveMessages();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    /*
+     * Class under test for void addGlobalMessage(String, Object, Object, Object)
+     */
+    public void testAddGlobalMessageStringObjectObjectObject() {
+        MessageManager.addGlobalMessage("key1", "a1", "b1", "c1");
+        MessageManager.addGlobalMessage("key2", "a2", "b2", "c2");
+        MessageManager.saveMessages();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "", "", "", "", "", "", ""}));
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    /*
+     * Class under test for void addGlobalMessage(String, Object, Object, Object, Object)
+     */
+    public void testAddGlobalMessageStringObjectObjectObjectObject() {
+        MessageManager.addGlobalMessage("key1", "a1", "b1", "c1", "d1");
+        MessageManager.addGlobalMessage("key2", "a2", "b2", "c2", "d2");
+        MessageManager.saveMessages();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "c1", "d1", "", "", "", "", "", ""}));
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "c2", "d2", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    // -----------------------------------------------------------------------
 
     public void testAddErrors() {
         ActionMessages errors = null;
@@ -333,7 +503,7 @@ public class MessageManagerTest extends S2TestCase {
      * Class under test for void saveErrorsInSession()
      */
     public void testSaveErrorsInSession() {
-        MessageManager.addError("key1", new Object[] {"a1"});
+        MessageManager.addGlobalError("key1", new Object[] {"a1"});
         MessageManager.saveErrorsInSession();
 
         ActionMessages result = (ActionMessages) getRequest().getSession().getAttribute(Globals.ERROR_KEY);
@@ -379,7 +549,7 @@ public class MessageManagerTest extends S2TestCase {
      * Class under test for void saveMessagesInSession()
      */
     public void testSaveMessagesInSession() {
-        MessageManager.addMessage("key1", new Object[] {"a1"});
+        MessageManager.addGlobalMessage("key1", new Object[] {"a1"});
         MessageManager.saveMessagesInSession();
 
         ActionMessages result = (ActionMessages) getRequest().getSession().getAttribute(Globals.MESSAGE_KEY);

@@ -26,6 +26,7 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class MessageFacadeImpl implements MessageFacade {
     private ActionMessages actionMessages = new ActionMessages();
@@ -34,52 +35,100 @@ public class MessageFacadeImpl implements MessageFacade {
     public MessageFacadeImpl() {
     }
 
-    public void addError(String key, Object[] values) {
-        this.actionErrors.add(key, new ActionMessage(key, convertMaxArguments(values)));
+    public void addError(String property, String key, Object[] values) {
+        this.actionErrors.add(property, new ActionMessage(key, convertMaxArguments(values)));
     }
 
-    public void addError(String key) {
-        addError(key, null);
+    public void addError(String property, String key) {
+        addError(property, key, new Object[] {});
     }
 
-    public void addError(String key, Object value0) {
-        addError(key, new Object[] {value0});
+    public void addError(String property, String key, Object value0) {
+        addError(property, key, new Object[] {value0});
     }
 
-    public void addError(String key, Object value0, Object value1) {
-        addError(key, new Object[] {value0, value1});
+    public void addError(String property, String key, Object value0, Object value1) {
+        addError(property, key, new Object[] {value0, value1});
     }
 
-    public void addError(String key, Object value0, Object value1, Object value2) {
-        addError(key, new Object[] {value0, value1, value2});
+    public void addError(String property, String key, Object value0, Object value1, Object value2) {
+        addError(property, key, new Object[] {value0, value1, value2});
     }
 
-    public void addError(String key, Object value0, Object value1, Object value2, Object value3) {
-        addError(key, new Object[] {value0, value1, value2, value3});
+    public void addError(String property, String key, Object value0, Object value1, Object value2, Object value3) {
+        addError(property, key, new Object[] {value0, value1, value2, value3});
     }
 
-    public void addMessage(String key, Object[] values) {
-        this.actionMessages.add(key, new ActionMessage(key, convertMaxArguments(values)));
+    public void addGlobalError(String key, Object[] values) {
+        this.actionErrors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage(key, convertMaxArguments(values)));
     }
 
-    public void addMessage(String key) {
-        addMessage(key, null);
+    public void addGlobalError(String key) {
+        addGlobalError(key, new Object[] {});
     }
 
-    public void addMessage(String key, Object value0) {
-        addMessage(key, new Object[] {value0});
+    public void addGlobalError(String key, Object value0) {
+        addGlobalError(key, new Object[] {value0});
     }
 
-    public void addMessage(String key, Object value0, Object value1) {
-        addMessage(key, new Object[] {value0, value1});
+    public void addGlobalError(String key, Object value0, Object value1) {
+        addGlobalError(key, new Object[] {value0, value1});
     }
 
-    public void addMessage(String key, Object value0, Object value1, Object value2) {
-        addMessage(key, new Object[] {value0, value1, value2});
+    public void addGlobalError(String key, Object value0, Object value1, Object value2) {
+        addGlobalError(key, new Object[] {value0, value1, value2});
     }
 
-    public void addMessage(String key, Object value0, Object value1, Object value2, Object value3) {
-        addMessage(key, new Object[] {value0, value1, value2, value3});
+    public void addGlobalError(String key, Object value0, Object value1, Object value2, Object value3) {
+        addGlobalError(key, new Object[] {value0, value1, value2, value3});
+    }
+
+    public void addMessage(String property, String key, Object[] values) {
+        this.actionMessages.add(property, new ActionMessage(key, convertMaxArguments(values)));
+    }
+
+    public void addMessage(String property, String key) {
+        addMessage(property, key, new Object[] {});
+    }
+
+    public void addMessage(String property, String key, Object value0) {
+        addMessage(property, key, new Object[] {value0});
+    }
+
+    public void addMessage(String property, String key, Object value0, Object value1) {
+        addMessage(property, key, new Object[] {value0, value1});
+    }
+
+    public void addMessage(String property, String key, Object value0, Object value1, Object value2) {
+        addMessage(property, key, new Object[] {value0, value1, value2});
+    }
+
+    public void addMessage(String property, String key, Object value0, Object value1, Object value2, Object value3) {
+        addMessage(property, key, new Object[] {value0, value1, value2, value3});
+    }
+
+    public void addGlobalMessage(String key, Object[] values) {
+        this.actionMessages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(key, convertMaxArguments(values)));
+    }
+
+    public void addGlobalMessage(String key) {
+        addGlobalMessage(key, new Object[] {});
+    }
+
+    public void addGlobalMessage(String key, Object value0) {
+        addGlobalMessage(key, new Object[] {value0});
+    }
+
+    public void addGlobalMessage(String key, Object value0, Object value1) {
+        addGlobalMessage(key, new Object[] {value0, value1});
+    }
+
+    public void addGlobalMessage(String key, Object value0, Object value1, Object value2) {
+        addGlobalMessage(key, new Object[] {value0, value1, value2});
+    }
+
+    public void addGlobalMessage(String key, Object value0, Object value1, Object value2, Object value3) {
+        addGlobalMessage(key, new Object[] {value0, value1, value2, value3});
     }
 
     public void addErrors(ActionMessages errors) {
