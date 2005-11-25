@@ -5,7 +5,6 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.struts.action.ActionAnnotationActionImpl;
-import org.seasar.struts.action.ExportSessionPropertyActionImpl;
 import org.seasar.struts.config.ActionPropertyConfig;
 
 public class TigerActionAnnotationHandlerTest extends S2TestCase {
