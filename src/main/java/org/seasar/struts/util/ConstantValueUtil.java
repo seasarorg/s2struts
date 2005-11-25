@@ -45,16 +45,20 @@ public class ConstantValueUtil {
                 if (defaultKey == null) {
                     throw new IllegalArgumentException(parameters);
                 } else {
-                    result.put(defaultKey, keyValue[0].trim());
+                    result.put(defaultKey, convertValue(keyValue[0].trim()));
                 }
             } else if (keyValue.length == 2) {
-                result.put(keyValue[0].trim(), keyValue[1].trim());
+                result.put(keyValue[0].trim(), convertValue(keyValue[1].trim()));
             } else {
                 throw new IllegalArgumentException(parameters);
             }
         }
 
         return result;
+    }
+
+    private static String convertValue(String value) {
+        return value.replace('\n', ',');
     }
 
 }

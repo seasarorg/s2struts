@@ -33,28 +33,9 @@ import org.seasar.framework.container.deployer.InstanceDefFactory;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.container.impl.ComponentDefImpl;
 import org.seasar.framework.util.ClassUtil;
-import org.seasar.struts.action.ActionFactory;
-import org.seasar.struts.action.ActionFactoryImpl;
-import org.seasar.struts.action.ComponentNameCreator;
-import org.seasar.struts.action.ComponentNameCreatorImpl;
-import org.seasar.struts.action.MessageFacade;
-import org.seasar.struts.action.MessageFacadeImpl;
 import org.seasar.struts.action.ProxyAction;
-import org.seasar.struts.config.AutoStrutsConfigRule;
-import org.seasar.struts.config.AutoStrutsConfigRuleImpl;
-import org.seasar.struts.config.rule.ZeroConfigActionFormRule;
-import org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl;
-import org.seasar.struts.config.rule.ZeroConfigActionRule;
-import org.seasar.struts.config.rule.ZeroConfigActionRuleImpl;
-import org.seasar.struts.processor.Acceptor;
-import org.seasar.struts.processor.AcceptorImpl;
-import org.seasar.struts.processor.ActionExecuteProcessor;
-import org.seasar.struts.processor.ActionExecuteProcessorImpl;
 import org.seasar.struts.processor.ExternalRequestProcessor;
-import org.seasar.struts.processor.RequestProcessorFactory;
-import org.seasar.struts.processor.RequestProcessorFactoryImpl;
 import org.seasar.struts.util.ClassRegister;
-import org.seasar.struts.util.ClassRegisterImpl;
 
 /**
  * initialize for use S2Struts.
@@ -63,28 +44,6 @@ import org.seasar.struts.util.ClassRegisterImpl;
  */
 public abstract class S2StrutsInitializer {
     private static Log log = LogFactory.getLog(S2StrutsInitializer.class);
-
-    /**
-     * regist component to {@link S2Container}, for use S2Struts.
-     */
-    public static void init() {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
-        regist(container, ActionFactory.class, ActionFactoryImpl.class);
-        regist(container, ComponentNameCreator.class, ComponentNameCreatorImpl.class);
-        regist(container, MessageFacade.class, MessageFacadeImpl.class, InstanceDefFactory.REQUEST);
-        regist(container, AutoStrutsConfigRule.class, AutoStrutsConfigRuleImpl.class);
-        regist(container, ZeroConfigActionRule.class, ZeroConfigActionRuleImpl.class);
-        regist(container, ZeroConfigActionFormRule.class, ZeroConfigActionFormRuleImpl.class);
-        regist(container, ClassRegister.class, ClassRegisterImpl.class);
-        regist(container, Acceptor.class, AcceptorImpl.class);
-        regist(container, ActionExecuteProcessor.class, ActionExecuteProcessorImpl.class);
-        regist(container, RequestProcessorFactory.class, RequestProcessorFactoryImpl.class);
-    }
-
-    private static void regist(S2Container container, Class interfaceClass, Class component) {
-        ComponentDef cd = new ComponentDefImpl(component);
-        regist(container, interfaceClass, cd);
-    }
 
     private static void regist(S2Container container, Class interfaceClass, Class component, InstanceDef instanceType) {
         ComponentDef cd = new ComponentDefImpl(component);

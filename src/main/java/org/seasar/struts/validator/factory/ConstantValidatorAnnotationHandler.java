@@ -38,7 +38,7 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
 
     private static final String VALIDATOR_SUFFIX = "_VALIDATOR";
 
-    private static final String ARG_SUFFIX = "_VALIDATOR_ARG";
+    private static final String ARGS_SUFFIX = "_VALIDATOR_ARGS";
 
     private static final String MESSAGE_SUFFIX = "_VALIDATOR_MESSAGE";
 
@@ -70,7 +70,7 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
 
         Field field = new Field();
         addMessage(field, beanDesc, propDesc);
-        addArg(field, beanDesc, propDesc);
+        addArgs(field, beanDesc, propDesc);
         field.setDepends(depends);
         field.setProperty(propDesc.getPropertyName());
         registConfig(field, method, parameters);
@@ -159,26 +159,28 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         return depends.toString();
     }
 
-    private void addArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
-        String fieldName = propDesc.getPropertyName() + ARG_SUFFIX;
-        if (!beanDesc.hasField(fieldName)) {
-            return;
+    private void addArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        String[] keys = { propDesc.getPropertyName() };
+        boolean resource = false;
+        
+        String fieldName = propDesc.getPropertyName() + ARGS_SUFFIX;
+        if (beanDesc.hasField(fieldName)) {
+            String value = (String) beanDesc.getFieldValue(fieldName, null);
+            Map parameter = ConstantValueUtil.toMap(value, "keys");
+            keys = toArrays((String) parameter.get("keys"));
+            String resourceStr = (String) parameter.get("resource");
+            if (!StringUtil.isEmpty(resourceStr)) {
+                resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
+            }
         }
-        String value = (String) beanDesc.getFieldValue(fieldName, null);
-        Map parameter = ConstantValueUtil.toMap(value, "key");
 
-        String key = (String) parameter.get("key");
-        String resourceStr = (String) parameter.get("resource");
-        boolean resource = true;
-        if (!StringUtil.isEmpty(resourceStr)) {
-            resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
+        for (int i = 0; i < keys.length; i++) {
+            Arg arg = new Arg();
+            arg.setKey(keys[i]);
+            arg.setResource(resource);
+            arg.setPosition(i);
+            field.addArg(arg);
         }
-
-        Arg arg = new Arg();
-        arg.setKey(key);
-        arg.setResource(resource);
-        arg.setPosition(0);
-        field.addArg(arg);
     }
 
     private void addMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
