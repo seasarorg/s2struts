@@ -24,14 +24,19 @@ import org.seasar.struts.validator.annotation.tiger.Variable;
  * @author Katsuhiko Nagashima
  */
 @StrutsActionForm(name = "testFormName")
-public class TestForm {
+public class ValidatorAnnotationForm {
 
-    public TestForm() {
+    public ValidatorAnnotationForm() {
     }
 
     @Required
     @Args(keys = "Arg", resource = false)
     public void setArg(String arg) {
+    }
+    
+    @Required
+    @Args(keys = "Arg0, Arg1, Arg2", resource = false)
+    public void setArgs(String args) {
     }
     
     @Required

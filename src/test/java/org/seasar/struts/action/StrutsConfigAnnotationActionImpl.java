@@ -4,9 +4,9 @@ package org.seasar.struts.action;
 /**
  * @author Satoshi Kimura
  */
-public class TestActionImpl implements TestAction {
+public class StrutsConfigAnnotationActionImpl implements StrutsConfigAnnotationAction {
 
-    public TestActionImpl() {
+    public StrutsConfigAnnotationActionImpl() {
     }
 
     public String exe() {
