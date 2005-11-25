@@ -19,31 +19,57 @@ import org.apache.struts.action.ActionMessages;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface MessageFacade {
-    void addError(String key, Object[] values);
 
-    void addError(String key);
+    void addError(String property, String key, Object[] values);
     
-    void addError(String key, Object value0);
-
-    void addError(String key, Object value0, Object value1);
-
-    void addError(String key, Object value0, Object value1, Object value2);
-
-    void addError(String key, Object value0, Object value1, Object value2, Object value3);
-
-    void addMessage(String key, Object[] values);
-
-    void addMessage(String key);
+    void addError(String property, String key);
     
-    void addMessage(String key, Object value0);
+    void addError(String property, String key, Object value0);
+    
+    void addError(String property, String key, Object value0, Object value1);
+    
+    void addError(String property, String key, Object value0, Object value1, Object value2);
 
-    void addMessage(String key, Object value0, Object value1);
+    void addError(String property, String key, Object value0, Object value1, Object value2, Object value3);
 
-    void addMessage(String key, Object value0, Object value1, Object value2);
+    void addGlobalError(String key, Object[] values);
 
-    void addMessage(String key, Object value0, Object value1, Object value2, Object value3);
+    void addGlobalError(String key);
+    
+    void addGlobalError(String key, Object value0);
+
+    void addGlobalError(String key, Object value0, Object value1);
+
+    void addGlobalError(String key, Object value0, Object value1, Object value2);
+
+    void addGlobalError(String key, Object value0, Object value1, Object value2, Object value3);
+
+    void addMessage(String property, String key, Object[] values);
+
+    void addMessage(String property, String key);
+    
+    void addMessage(String property, String key, Object value0);
+
+    void addMessage(String property, String key, Object value0, Object value1);
+
+    void addMessage(String property, String key, Object value0, Object value1, Object value2);
+
+    void addMessage(String property, String key, Object value0, Object value1, Object value2, Object value3);
+
+    void addGlobalMessage(String key, Object[] values);
+
+    void addGlobalMessage(String key);
+    
+    void addGlobalMessage(String key, Object value0);
+
+    void addGlobalMessage(String key, Object value0, Object value1);
+
+    void addGlobalMessage(String key, Object value0, Object value1, Object value2);
+
+    void addGlobalMessage(String key, Object value0, Object value1, Object value2, Object value3);
 
     void addErrors(ActionMessages errors);
 
