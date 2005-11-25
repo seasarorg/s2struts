@@ -10,7 +10,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
         parameter = "testparameter", attribute = "testattribute",
         forward = "testforward", include = "testinclude",
         prefix = "testprefix", suffix = "testsuffix", roles = "testroles")
-public interface TestAction {
+public interface StrutsConfigAnnotationAction {
 
     @StrutsActionForward(path = "/test.jsp")
     String SUCCESS = "success";

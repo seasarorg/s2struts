@@ -3,11 +3,14 @@ package org.seasar.struts.factory;
 import java.lang.reflect.Field;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.action.TestAction;
+import org.seasar.struts.action.StrutsConfigAnnotationAction;
+import org.seasar.struts.action.StrutsConfigAnnotationActionImpl;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.form.TestForm;
+import org.seasar.struts.form.NoStrutsConfigAnnotationForm;
+import org.seasar.struts.form.StrutsConfigAnnotationForm;
+import org.seasar.struts.form.ValidatorAnnotationForm;
 
 /**
  * 
@@ -23,7 +26,7 @@ public class TigerStrutsConfigAnnotationHandlerTest extends S2TestCase {
     }
     
     public void testCreateStrutsActionConfig() {
-        StrutsActionConfig config = annHandler.createStrutsActionConfig(TestAction.class);
+        StrutsActionConfig config = annHandler.createStrutsActionConfig(StrutsConfigAnnotationAction.class);
         assertNotNull(config);
         assertEquals("testpath", config.path());
         assertEquals("testname", config.name());
@@ -40,19 +43,35 @@ public class TigerStrutsConfigAnnotationHandlerTest extends S2TestCase {
         assertEquals(false, config.unknown());
     }
     
+    public void testNotCreateStrutsActionConfig() {
+        StrutsActionConfig config = annHandler.createStrutsActionConfig(StrutsConfigAnnotationActionImpl.class);
+        assertNull(config);
+    }
+    
     public void testCreateStrutsActionForwardConfig() throws Exception {
-        Field field = TestAction.class.getField("SUCCESS");
+        Field field = StrutsConfigAnnotationAction.class.getField("SUCCESS");
         StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
         assertNotNull(config);
         assertEquals("/test.jsp", config.path());
         assertEquals(false, config.redirect());
     }
     
+    public void testNotCreateStrutsActionForwardConfig() throws Exception {
+        Field field = StrutsConfigAnnotationAction.class.getField("CONST");
+        StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
+        assertNull(config);
+    }
+    
     public void testCreateActionFormConfig() {
-        StrutsActionFormConfig config = annHandler.createStrutsActionFormConfig(TestForm.class);
+        StrutsActionFormConfig config = annHandler.createStrutsActionFormConfig(StrutsConfigAnnotationForm.class);
         assertNotNull(config);
         assertEquals("testFormName", config.name());
         assertEquals(false, config.restricted());
+    }
+
+    public void testNotCreateActionFormConfig() {
+        StrutsActionFormConfig config = annHandler.createStrutsActionFormConfig(NoStrutsConfigAnnotationForm.class);
+        assertNull(config);
     }
 
 }
