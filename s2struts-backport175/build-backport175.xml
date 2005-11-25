@@ -1,0 +1,40 @@
+<project name="s2-backport175-annotationc" basedir=".">
+
+	<target
+		name="main-annotationc"
+		depends="_setup"
+	>
+		<annotationc
+			verbose="${annotationc.verbose}"
+		>
+			<src path="${basedir}/src/main/java"/>
+			<classpath path="${basedir}/target/classes"/>
+		</annotationc>
+	</target>
+
+	<target
+		name="test-annotationc"
+		depends="_setup"
+	>
+		<annotationc
+			verbose="${annotationc.verbose}"
+		>
+			<src path="${basedir}/src/test/java"/>
+			<classpath path="${basedir}/target/test-classes"/>
+		</annotationc>
+	</target>
+
+	<target
+		name="_setup"
+	>
+		<path id="backport175.class.path">
+			<path refid="maven.dependency.classpath"/>
+		</path>
+		<taskdef
+			name="annotationc" 
+			classname="org.codehaus.backport175.compiler.task.AnnotationCTask"
+			classpathref="backport175.class.path"
+		/>
+	</target>
+
+</project>
