@@ -6,9 +6,9 @@ import java.util.Date;
  * @author Katsuhiko Nagashima
  * @org.seasar.struts.annotation.backport175.StrutsActionForm(name="testFormName")
  */
-public class TestForm {
+public class ValidatorAnnotationForm {
 
-    public TestForm() {
+    public ValidatorAnnotationForm() {
     }
 
     /**
@@ -16,6 +16,13 @@ public class TestForm {
      * @org.seasar.struts.validator.annotation.backport175.Args(keys="Arg", resource=false)
      */
     public void setArg(String arg) {
+    }
+    
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Required
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Arg0, Arg1, Arg2", resource=false)
+     */
+    public void setArgs(String args) {
     }
 
     /**
