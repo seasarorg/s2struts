@@ -1,103 +1,29 @@
 <project name="S2Struts" default="dist" basedir=".">
+	<property name="ver" value="1.2.0-RC2"/>
 
-  <property file="project.properties"/>
-
-  <path id="lib.classpath">
-    <fileset id="" dir="${lib}">
-      <include name="*"/>
-    </fileset>
-  </path>
-  <path id="classpath">
-	<path refid="lib.classpath" />
-	<pathelement path="${build.main}"/>
-	<pathelement path="${build.testcase}"/>
-  </path>
-
-  <target name="compile" depends="init">
-    <javac srcdir="${src.main}" destdir="${build.main}" debug="on" classpathref="classpath"/>
-    <javac srcdir="${src.testcase}" destdir="${build.testcase}" debug="on" classpathref="classpath"/>
-  	<antcall target="copy"/>
-  </target>
-
-  <target name="copy">
-    <copy todir="${build}" >
-      <fileset dir="${src}" >
-        <include name="**/*.properties" />
-        <include name="**/*.xml" />
-        <include name="**/*.dtd" />
-        <include name="**/*.dicon" />
-        <include name="**/*.jsp" />
-        <include name="**/*.html" />
-        <exclude name="build.xml" />
-      </fileset>
-    </copy>
-    <copy todir="${build.tld}" >
-      <fileset dir="${tld}" />
-    </copy>
-  </target>
-  
-  <target name="dist" depends="cleantargetjarfile,compile">
-    <jar jarfile="${lib}/${jarfile}" basedir="${build.main}" includes="${package}"/>
-  	<antcall target="copyToSetupdir"/>
-	<zip destfile="${setupDir}/${releasefile}" basedir="${setupDir}" includes="${projectDir}/" excludes="**/.DS_Store"/>
-  </target>
-
-  <target name="cleanbuild">
-    <delete dir="${build}" />
-  </target>
-	
-  <target name="copyToSetupdir">
-  	<copy todir="${setupDir}/${projectDir}">
-  	  <fileset dir=".">
-  		<exclude name="**/CVS/**" />
- 	  	<exclude name="**/jcoverage.ser" />
-		<exclude name="${build}/**" />
-		<exclude name="target" />
-	    <exclude name="target/**" />
-      </fileset>
-	</copy>
-  	<antcall target="copyDocs"/>
-  </target>
-
-  <target name="copyDocs">
-    <copy todir="${docdestdir}" overwrite="true">
-      <fileset dir="${docsrcdir}">
-        <exclude name="**/.svn/**" />
-        <exclude name=".project" />
-        <exclude name="**/download/**" />
-        <exclude name="eclipse" />
-        <exclude name="eclipse/**" />
-      </fileset>
-    </copy>
-  </target>
-	
-  <target name="removeClassFile">
-    <delete dir="${build.main}" />
-    <delete dir="${build.testcase}" />
-  </target>
-  
-  <target name="cleantargetjarfile">
-    <delete>
-      <fileset dir="${lib}" defaultexcludes="no" >
-        <include name="s2-struts*.jar" />
-        <exclude name="s2-struts-unit*.jar" />
-      </fileset>
-    </delete>
-  </target>
-
-  <target name="init" depends="cleanbuild">
-    <delete dir="${setupDir}/${projectDir}" />
-    <mkdir dir="${build.main}"/>
-    <mkdir dir="${build.testcase}"/>
-    <mkdir dir="${build.tld}"/>
-	<mkdir dir="${setupDir}" />
-	<mkdir dir="${docdestdir}" />
-	<delete>
-      <fileset dir="${setupDir}" defaultexcludes="no" >
-        <include name="S2Struts-V*.zip" />
-      </fileset>
-	</delete>
-  </target>
+	<target name="dist">
+		<mkdir dir="target"/>
+		<zip zipfile="target/S2Struts-V${ver}.zip">
+			<zipfileset prefix="s2struts" dir=".">
+				<exclude name="**/target/**"/>
+				<exclude name="**/.settings/**"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts/lib" dir="target">
+				<include name="s2-struts-${ver}.jar"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts/resources" dir="src/main/resources">
+				<include name="s2struts.dicon"/>
+				<include name="**/*.tld"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts/resources" dir="src/test/resources">
+				<include name="app.dicon"/>
+				<include name="log4j.properties"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts/doc" dir="../s2struts-www">
+				<exclude name="**/download/**"/>
+				<exclude name=".project"/>
+			</zipfileset>
+		</zip>
+	</target>
 
 </project>
-
