@@ -66,8 +66,8 @@
   </servlet>
 
   <servlet>
-    <servlet-name>MayaServlet</servlet-name>
-    <servlet-class>org.seasar.maya.impl.MayaServlet</servlet-class>
+    <servlet-name>MayaaServlet</servlet-name>
+    <servlet-class>org.seasar.mayaa.impl.MayaaServlet</servlet-class>
     <load-on-startup>3</load-on-startup>
   </servlet>
 
@@ -83,17 +83,17 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>MayaServlet</servlet-name>
+    <servlet-name>MayaaServlet</servlet-name>
     <url-pattern>*.html</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>MayaServlet</servlet-name>
+    <servlet-name>MayaaServlet</servlet-name>
     <url-pattern>*.xml</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>MayaServlet</servlet-name>
+    <servlet-name>MayaaServlet</servlet-name>
     <url-pattern>*.maya</url-pattern>
   </servlet-mapping>
 
