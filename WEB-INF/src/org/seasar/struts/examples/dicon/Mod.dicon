@@ -10,7 +10,6 @@
 			<arg>"org.seasar.struts.examples.mod"</arg>
 			<arg>".*ServiceImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	
 	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
@@ -24,6 +23,5 @@
 			<arg>"org.seasar.struts.examples.mod"</arg>
 			<arg>".*ActionImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 </components>

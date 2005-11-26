@@ -14,7 +14,6 @@
 			<arg>"org.seasar.struts.examples.indexed"</arg>
 			<arg>".*ActionImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
@@ -23,6 +22,5 @@
 			<arg>"org.seasar.struts.examples.indexed"</arg>
 			<arg>".*ActionImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 </components>

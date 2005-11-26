@@ -14,7 +14,6 @@
 			<arg>"org.seasar.struts.examples.employee.logic.impl"</arg>
 			<arg>".*LogicImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 		<property name="interceptor">logicInterceptorChain</property>
@@ -22,7 +21,6 @@
 			<arg>"org.seasar.struts.examples.employee.logic.impl"</arg>
 			<arg>".*LogicImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	
 	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
@@ -36,7 +34,6 @@
 			<arg>"org.seasar.struts.examples.employee.action.impl"</arg>
 			<arg>".*ActionImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 		<property name="interceptor">actionInterceptorChain</property>
@@ -44,7 +41,6 @@
 			<arg>"org.seasar.struts.examples.employee.action.impl"</arg>
 			<arg>".*ActionImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	
     <!-- manual registration

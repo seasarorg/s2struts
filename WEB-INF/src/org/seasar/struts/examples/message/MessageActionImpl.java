@@ -24,9 +24,9 @@ import org.seasar.struts.examples.FowardNameConstants;
 public class MessageActionImpl implements MessageAction {
 
     public String execute() {
-        MessageManager.addError("examplemessage");
-        MessageManager.addError("examplemessage", "foo");
-        MessageManager.addError("examplemessage", "bar", "baz", "qux");
+        MessageManager.addGlobalError("examplemessage");
+        MessageManager.addGlobalError("examplemessage", "foo");
+        MessageManager.addError("property", "examplemessage", "bar", "baz", "qux");
         MessageManager.saveErrors();
 
         return FowardNameConstants.SUCCESS;

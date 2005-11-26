@@ -19,7 +19,6 @@
 			<arg>"org.seasar.struts.examples.employee.dao"</arg>
 			<arg>".*Dao"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 		<property name="interceptor">daoInterceptorChain</property>
@@ -27,7 +26,6 @@
 			<arg>"org.seasar.struts.examples.employee.dao"</arg>
 			<arg>".*Dao"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 
     <!-- manual registration
