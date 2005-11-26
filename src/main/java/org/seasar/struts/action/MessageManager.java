@@ -78,6 +78,10 @@ public class MessageManager {
     public static void addMessage(String property, String key, Object[] values) {
         getMessageFacade().addMessage(property, key, values);
     }
+    
+    public static void addMessage(String property, String key) {
+        getMessageFacade().addMessage(property, key);
+    }
 
     public static void addMessage(String property, String key, Object value0) {
         getMessageFacade().addMessage(property, key, value0);
@@ -98,6 +102,10 @@ public class MessageManager {
 
     public static void addGlobalMessage(String key, Object[] values) {
         getMessageFacade().addGlobalMessage(key, values);
+    }
+    
+    public static void addGlobalMessage(String key) {
+        getMessageFacade().addGlobalMessage(key);
     }
 
     public static void addGlobalMessage(String key, Object value0) {

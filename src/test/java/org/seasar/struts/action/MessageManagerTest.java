@@ -50,6 +50,19 @@ public class MessageManagerTest extends S2TestCase {
         assertEquals(expected.toString(), result.toString());
     }
     
+    public void testAddErrorStringNoObject() {
+        MessageManager.addError("property", "key1");
+        MessageManager.addError("property", "key2");
+        MessageManager.saveErrors();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add("property", new ActionMessage("key1", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+    
     /*
      * Class under test for void addError(String, String, Object)
      */
@@ -128,6 +141,19 @@ public class MessageManagerTest extends S2TestCase {
         ActionMessages expected = new ActionMessages();
         expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
         expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+    
+    public void testAddGlobalErrorNoObject() {
+        MessageManager.addGlobalError("key1");
+        MessageManager.addGlobalError("key2");
+        MessageManager.saveErrors();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.ERROR_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
 
         assertEquals(expected.toString(), result.toString());
     }
@@ -214,6 +240,19 @@ public class MessageManagerTest extends S2TestCase {
         assertEquals(expected.toString(), result.toString());
     }
 
+    public void testAddMessageNoObject() {
+        MessageManager.addMessage("property", "key1");
+        MessageManager.addMessage("property", "key2");
+        MessageManager.saveMessages();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add("property", new ActionMessage("key1", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
+        expected.add("property", new ActionMessage("key2", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
     /*
      * Class under test for void addMessage(String, String, Object)
      */
@@ -292,6 +331,19 @@ public class MessageManagerTest extends S2TestCase {
         ActionMessages expected = new ActionMessages();
         expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"a1", "b1", "", "", "", "", "", "", "", ""}));
         expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"a2", "b2", "", "", "", "", "", "", "", ""}));
+
+        assertEquals(expected.toString(), result.toString());
+    }
+
+    public void testAddGlobalMessageNoObject() {
+        MessageManager.addGlobalMessage("key1");
+        MessageManager.addGlobalMessage("key2");
+        MessageManager.saveMessages();
+        ActionMessages result = (ActionMessages) getRequest().getAttribute(Globals.MESSAGE_KEY);
+
+        ActionMessages expected = new ActionMessages();
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key1", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
+        expected.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("key2", new Object[] {"", "", "", "", "", "", "", "", "", ""}));
 
         assertEquals(expected.toString(), result.toString());
     }
