@@ -12,7 +12,6 @@
 			<arg>"org.seasar.struts.examples.multiply"</arg>
 			<arg>".*ServiceImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	
 	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
@@ -26,7 +25,6 @@
 			<arg>"org.seasar.struts.examples.multiply"</arg>
 			<arg>".*Action"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 		<property name="interceptor">traceInterceptor</property>
@@ -34,6 +32,5 @@
 			<arg>"org.seasar.struts.examples.multiply"</arg>
 			<arg>".*Action"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 </components>

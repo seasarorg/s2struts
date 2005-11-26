@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
-<m:maya xmlns:m="http://maya.seasar.org"
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
         xmlns:html="http://struts.apache.org/tags-html"
         xmlns:bean="http://struts.apache.org/tags-bean"
         m:noCache="true"
         m:extends="/pages/layout/layout.html">
 
     <m:doRender id="pageTitle" name="title">
-        <bean:message key="result.title"/>
+        <bean:message key="multiply.title"/>
     </m:doRender>
     
     <m:doRender id="appBody" name="content"/>
     
-    <div m:id="resultMessage">
-        <bean:message key="result"/>:<bean:write name="strForm" property="result"/>
-    </div>
+    <html:errors m:id="errorMessage" />
 
-</m:maya>
+    <html:form m:id="appForm" action="/multiply" focus="arg1" />
+    
+    <html:submit m:id="goCalc" ><bean:message key="calc"/></html:submit>
+
+</m:mayaa>

@@ -13,6 +13,5 @@
 			<arg>"org.seasar.struts.examples.upload"</arg>
 			<arg>".*ActionImpl"</arg>
 		</initMethod>
-		<initMethod name="registAll"></initMethod>
 	</component>
 </components>

@@ -45,7 +45,7 @@ public class EmployeeListInitActionImpl implements EmployeeListInitAction {
     public String initialize() {
         employeeDtoList = employeeLogic.searchEmployeeDtoList(employeeSearchForm);
         if (employeeDtoList.size() == 0) {
-            MessageManager.addError("errors.bad.criteria");
+            MessageManager.addGlobalError("errors.bad.criteria");
             MessageManager.saveErrors();
         }
         return null;

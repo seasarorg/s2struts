@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
-<m:maya xmlns:m="http://maya.seasar.org"
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
         xmlns:html="http://struts.apache.org/tags-html"
         xmlns:bean="http://struts.apache.org/tags-bean"
         m:noCache="true">
@@ -19,4 +19,4 @@
     <html:link m:id="indexedPage" page="/pages/indexedInput.html"><bean:message key="indexed.title"/></html:link>
     <html:link m:id="employeePage" forward="employee"><bean:message key="title.employee" /></html:link>
 
-</m:maya>
+</m:mayaa>
