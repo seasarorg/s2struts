@@ -16,7 +16,8 @@
 	<classpathentry kind="lib" path="lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="lib/commons-validator-1.1.4.jar"/>
-	<classpathentry kind="lib" path="lib/s2-extension-2.3.0.jar"/>
-	<classpathentry kind="lib" path="lib/s2-framework-2.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/s2-extension-2.3.3.jar"/>
+	<classpathentry kind="lib" path="lib/s2-framework-2.3.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
