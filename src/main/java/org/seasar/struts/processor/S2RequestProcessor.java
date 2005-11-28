@@ -29,6 +29,7 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.RequestProcessor;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.action.ActionFactory;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
@@ -59,7 +60,9 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
     }
 
     public HttpServletRequest processMultipart(HttpServletRequest request) {
-        return super.processMultipart(request);
+        HttpServletRequest result = super.processMultipart(request);
+        SingletonS2ContainerFactory.getContainer().setRequest(result);
+        return result;
     }
 
     public String processPath(HttpServletRequest request, HttpServletResponse response) throws IOException {
