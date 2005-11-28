@@ -3,6 +3,7 @@ package org.seasar.struts.examples.upload;
 import java.io.Serializable;
 
 import org.apache.struts.upload.FormFile;
+import org.seasar.struts.validator.annotation.tiger.Required;
 
 public class UploadDto implements Serializable {
 
@@ -16,6 +17,7 @@ public class UploadDto implements Serializable {
         return theText;
     }
 
+    @Required
     public void setTheText(String theText) {
         this.theText = theText;
     }
@@ -24,6 +26,7 @@ public class UploadDto implements Serializable {
         return theFile;
     }
 
+    @Required
     public void setTheFile(FormFile theFile) {
         this.theFile = theFile;
     }
