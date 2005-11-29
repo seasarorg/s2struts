@@ -37,7 +37,7 @@ public class AutoActionFormRegister {
     private AutoActionFormRegister() {
     }
 
-    public static void regist(ModuleConfig config, Collection classes) {
+    public static void register(ModuleConfig config, Collection classes) {
         StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         classes = ClassComparator.sort(classes);
         
@@ -48,7 +48,7 @@ public class AutoActionFormRegister {
                 strutsActionForm = new NullStrutsActionFormConfig();
             }
             if (strutsActionForm != null) {
-                registActionForm(strutsActionForm, clazz, config);
+                registerActionForm(strutsActionForm, clazz, config);
             }
         }
     }
@@ -57,21 +57,21 @@ public class AutoActionFormRegister {
         return clazz.getName().matches(configRule().getFormClassPattern());
     }
 
-    private static void registActionForm(StrutsActionFormConfig form, Class formClass, ModuleConfig config) {
+    private static void registerActionForm(StrutsActionFormConfig form, Class formClass, ModuleConfig config) {
         String name = getName(form, formClass, config);
         if (config.findFormBeanConfig(name) == null) {
-            regist(config, form, formClass);
+            register(config, form, formClass);
         }
     }
 
-    private static void regist(ModuleConfig config, StrutsActionFormConfig form, Class formClass) {
+    private static void register(ModuleConfig config, StrutsActionFormConfig form, Class formClass) {
         FormBeanConfig formBeanConfig = new FormBeanConfig();
         formBeanConfig.setName(getName(form, formClass, config));
         formBeanConfig.setType(formClass.getName());
         formBeanConfig.setRestricted(getRestricted(form, formClass, config));
         config.addFormBeanConfig(formBeanConfig);
         
-        log.debug("auto regist " + formBeanConfig);
+        log.debug("auto register " + formBeanConfig);
     }
 
     private static ZeroConfigActionFormRule rule() {

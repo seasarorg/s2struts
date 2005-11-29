@@ -29,11 +29,11 @@ public class ClassRegisterImpl implements ClassRegister {
     public ClassRegisterImpl() {
     }
 
-    public void regist(String type) {
+    public void register(String type) {
         getClass(type);
     }
     
-    public void regist(Class clazz) {
+    public void register(Class clazz) {
         getClass(clazz.getName());
     }
     

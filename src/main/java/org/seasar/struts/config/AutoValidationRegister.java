@@ -45,7 +45,7 @@ public class AutoValidationRegister {
     private AutoValidationRegister() {
     }
 
-    public static void regist(ValidatorResources resources, ModuleConfig config, Collection classes) {
+    public static void register(ValidatorResources resources, ModuleConfig config, Collection classes) {
         FormSet formSet = new FormSet();
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
             Class clazz = (Class) iterator.next();
@@ -57,11 +57,11 @@ public class AutoValidationRegister {
         }
     }
 
-    private static boolean registedValidation(ValidatorResources resources, String formName) {
+    private static boolean registeredValidation(ValidatorResources resources, String formName) {
         return resources.getForm(Locale.getDefault(), formName) != null;
     }
 
-    private static boolean registedValidation(FormSet formSet, String formName) {
+    private static boolean registeredValidation(FormSet formSet, String formName) {
         return formSet.getForm(formName) != null;
     }
 
@@ -74,10 +74,10 @@ public class AutoValidationRegister {
         String[] formNames = getFormNames(formClass, config);
 
         for (int i = 0; i < formNames.length; i++) {
-            if (registedValidation(resources, formNames[i])) {
+            if (registeredValidation(resources, formNames[i])) {
                 continue;
             }
-            if (registedValidation(formSet, formNames[i])) {
+            if (registeredValidation(formSet, formNames[i])) {
                 continue;
             }
 
@@ -85,7 +85,7 @@ public class AutoValidationRegister {
             if (form != null && form.getFields().size() != 0) {
                 formSet.addForm(form);
 
-                log.debug("auto regist " + form);
+                log.debug("auto register " + form);
             }
         }
     }

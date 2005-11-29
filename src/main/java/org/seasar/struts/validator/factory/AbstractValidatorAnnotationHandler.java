@@ -83,7 +83,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         return null;
     }
 
-    protected void registAutoTypeValidatorConfig(Field field, Method method) {
+    protected void registerAutoTypeValidatorConfig(Field field, Method method) {
         String autoTypeValidatorName = getAutoTypeValidatorName(method);
         if (StringUtil.isEmpty(autoTypeValidatorName)) {
             return;
@@ -104,7 +104,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         String registerName = getConfigRegisterName(validatorName);
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ConfigRegister register = (ConfigRegister) container.getComponent(registerName);
-        register.regist(field, parameters);
+        register.register(field, parameters);
     }
 
     protected String getValidatorName(Class clazz) {

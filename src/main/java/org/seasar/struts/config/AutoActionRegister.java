@@ -44,7 +44,7 @@ public class AutoActionRegister {
     private AutoActionRegister() {
     }
 
-    public static void regist(ServletContext servletContext, ModuleConfig config, Collection classes) {
+    public static void register(ServletContext servletContext, ModuleConfig config, Collection classes) {
         StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         classes = ClassComparator.sort(classes);
         
@@ -55,7 +55,7 @@ public class AutoActionRegister {
                 strutsAction = new NullStrutsActionConfig();
             }
             if (strutsAction != null) {
-                registAction(strutsAction, clazz, config, servletContext);
+                registerAction(strutsAction, clazz, config, servletContext);
             }
         }
     }
@@ -64,7 +64,7 @@ public class AutoActionRegister {
         return clazz.getName().matches(configRule().getActionClassPattern());
     }
     
-    private static void registAction(StrutsActionConfig action, Class actionClass, ModuleConfig config,
+    private static void registerAction(StrutsActionConfig action, Class actionClass, ModuleConfig config,
             ServletContext servletContext) {
         String path = getPath(action, actionClass, config);
         if (!hasActionConfig(config, path)) {
@@ -106,10 +106,10 @@ public class AutoActionRegister {
         config.addActionConfig(actionConfig);
 
         if (log.isDebugEnabled()) {
-            log.debug("auto regist " + actionConfig);
+            log.debug("auto register " + actionConfig);
             ForwardConfig[] forwardConfigs = actionConfig.findForwardConfigs();
             for (int i = 0; i < forwardConfigs.length; i++) {
-                log.debug("auto regist " + forwardConfigs[i]);
+                log.debug("auto register " + forwardConfigs[i]);
             }
         }
     }

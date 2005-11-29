@@ -54,7 +54,7 @@ public class S2ActionServlet extends ActionServlet {
 
     /**
      * @see ActionServlet#init()
-     * @see S2StrutsInitializer#registActionClass(ActionServlet)
+     * @see S2StrutsInitializer#registerActionClass(ActionServlet)
      */
     public void init() throws ServletException {
         try {

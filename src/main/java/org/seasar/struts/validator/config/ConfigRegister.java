@@ -23,5 +23,5 @@ import org.apache.commons.validator.Field;
  * @author Satoshi Kimura
  */
 public interface ConfigRegister {
-    void regist(Field field, Map parameter);
+    void register(Field field, Map parameter);
 }
