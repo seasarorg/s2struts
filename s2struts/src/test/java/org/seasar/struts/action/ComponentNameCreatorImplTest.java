@@ -18,9 +18,6 @@ public class ComponentNameCreatorImplTest extends S2TestCase {
 
     protected void setUp() {
         include("s2struts.dicon");
-        include("TestAction.dicon");
-        //       SingletonS2ContainerFactory.setConfigPath("app.dicon");
-        //        SingletonS2ContainerFactory.init();
     }
 
     public void setUpCreateComponentName() {

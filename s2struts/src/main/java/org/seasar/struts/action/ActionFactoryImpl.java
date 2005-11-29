@@ -33,9 +33,13 @@ import org.seasar.struts.util.ClassRegister;
 /**
  * @author Satoshi Kimura
  * @author higa
+ * @author Katsuhiko Nagashima
  */
 public class ActionFactoryImpl implements ActionFactory {
+    
     private ClassRegister classRegister;
+    
+    private ComponentNameCreator componentNameCreator;
 
     public ActionFactoryImpl() {
     }
@@ -82,8 +86,7 @@ public class ActionFactoryImpl implements ActionFactory {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         try {
             if (isCreateActionWithComponentName(mapping)) {
-                ComponentNameCreator componentNameCreator = getComponentNameCreator();
-                String componentName = componentNameCreator.createComponentName(container, mapping);
+                String componentName = this.componentNameCreator.createComponentName(container, mapping);
                 actionInstance = getActionWithComponentName(componentName, servlet);
             } else {
                 String actionClassName = mapping.getType();
@@ -108,6 +111,10 @@ public class ActionFactoryImpl implements ActionFactory {
     public void setClassRegister(ClassRegister classRegister) {
         this.classRegister = classRegister;
     }
+    
+    public void setComponentNameCreator(ComponentNameCreator componentNameCreator) {
+        this.componentNameCreator = componentNameCreator;
+    }
 
     private static void processExceptionActionCreate(HttpServletResponse response, ActionMapping mapping, Log log,
             MessageResources internal, Exception e) throws IOException {
@@ -116,11 +123,6 @@ public class ActionFactoryImpl implements ActionFactory {
         log.error(internalMessage, e);
 
         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, internalMessage);
-    }
-
-    private static ComponentNameCreator getComponentNameCreator() {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (ComponentNameCreator) container.getComponent(ComponentNameCreator.class);
     }
 
     private static void setServlet(Action action, ActionServlet servlet) {
