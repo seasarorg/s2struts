@@ -53,7 +53,7 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
 
         String propName = propDesc.getPropertyName();
         if (form.getField(propName) != null) {
-            // registed
+            // registered
             return null;
         }
 
@@ -73,7 +73,7 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         addArgs(field, beanDesc, propDesc);
         field.setDepends(depends);
         field.setProperty(propDesc.getPropertyName());
-        registConfig(field, method, parameters);
+        registerConfig(field, method, parameters);
 
         return field;
     }
@@ -128,8 +128,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         return false;
     }
 
-    private void registConfig(Field field, Method method, List parameters) {
-        registAutoTypeValidatorConfig(field, method);
+    private void registerConfig(Field field, Method method, List parameters) {
+        registerAutoTypeValidatorConfig(field, method);
 
         for (Iterator it = parameters.iterator(); it.hasNext();) {
             Map parameter = (Map) it.next();

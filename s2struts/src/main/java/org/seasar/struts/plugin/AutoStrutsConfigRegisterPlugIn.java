@@ -84,11 +84,11 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
     }
 
     private void regist(ActionServlet actionServlet, ModuleConfig config) {
-        AutoActionFormRegister.regist(config, this.classFinder.getClassCollection());
-        AutoActionRegister.regist(actionServlet.getServletContext(), config, this.classFinder.getClassCollection());
+        AutoActionFormRegister.register(config, this.classFinder.getClassCollection());
+        AutoActionRegister.register(actionServlet.getServletContext(), config, this.classFinder.getClassCollection());
 
         ValidatorResources resources = getValidatorResources(actionServlet, config);
-        AutoValidationRegister.regist(resources, config, this.classFinder.getClassCollection());
+        AutoValidationRegister.register(resources, config, this.classFinder.getClassCollection());
     }
 
     private ValidatorResources getValidatorResources(ActionServlet actionServlet, ModuleConfig config) {

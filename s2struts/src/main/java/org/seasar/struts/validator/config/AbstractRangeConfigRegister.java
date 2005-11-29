@@ -26,7 +26,7 @@ import org.apache.commons.validator.Var;
  */
 public abstract class AbstractRangeConfigRegister implements ConfigRegister {
 
-    public void regist(Field field, Map parameter) {
+    public void register(Field field, Map parameter) {
         Object min = parameter.get("min");
         Object max = parameter.get("max");
         String type = getType();

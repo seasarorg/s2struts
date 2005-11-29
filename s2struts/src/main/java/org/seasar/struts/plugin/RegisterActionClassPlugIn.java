@@ -23,9 +23,9 @@ import org.seasar.struts.S2StrutsInitializer;
 /**
  * @author Satoshi Kimura
  */
-public class RegistActionClassPlugIn implements PlugIn {
+public class RegisterActionClassPlugIn implements PlugIn {
 
-    public RegistActionClassPlugIn() {
+    public RegisterActionClassPlugIn() {
     }
 
     /**
@@ -39,10 +39,10 @@ public class RegistActionClassPlugIn implements PlugIn {
     /**
      * @see org.apache.struts.action.PlugIn#init(org.apache.struts.action.ActionServlet,
      *      org.apache.struts.config.ModuleConfig)
-     * @see S2StrutsInitializer#registActionClass(ActionServlet, ModuleConfig)
+     * @see S2StrutsInitializer#registerActionClass(ActionServlet, ModuleConfig)
      */
     public void init(ActionServlet servlet, ModuleConfig config) {
-        S2StrutsInitializer.registActionClass(servlet, config);
+        S2StrutsInitializer.registerActionClass(servlet, config);
     }
 
 }

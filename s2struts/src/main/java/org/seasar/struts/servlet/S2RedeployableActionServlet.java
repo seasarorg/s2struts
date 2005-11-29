@@ -55,7 +55,7 @@ public class S2RedeployableActionServlet extends RedeployableActionServlet {
 
     /**
      * @see ActionServlet#init()
-     * @see S2StrutsInitializer#registActionClass(ActionServlet)
+     * @see S2StrutsInitializer#registerActionClass(ActionServlet)
      */
     public void init() throws ServletException {
         try {

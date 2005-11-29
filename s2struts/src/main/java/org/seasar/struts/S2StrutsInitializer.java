@@ -45,35 +45,35 @@ import org.seasar.struts.util.ClassRegister;
 public abstract class S2StrutsInitializer {
     private static Log log = LogFactory.getLog(S2StrutsInitializer.class);
 
-    private static void regist(S2Container container, Class interfaceClass, Class component, InstanceDef instanceType) {
+    private static void register(S2Container container, Class interfaceClass, Class component, InstanceDef instanceType) {
         ComponentDef cd = new ComponentDefImpl(component);
         cd.setInstanceDef(instanceType);
-        regist(container, interfaceClass, cd);
+        register(container, interfaceClass, cd);
     }
 
-    private static void regist(S2Container container, Class interfaceClass, ComponentDef component) {
+    private static void register(S2Container container, Class interfaceClass, ComponentDef component) {
         if (false == container.hasComponentDef(interfaceClass)) {
-            log.debug("regist " + interfaceClass + " : component=" + component.getComponentClass());
+            log.debug("register " + interfaceClass + " : component=" + component.getComponentClass());
             container.register(component);
         } else {
             log.debug(interfaceClass + " has already been registered.");
         }
     }
 
-    private static void registActionClass(ActionServlet servlet) {
+    private static void registerActionClass(ActionServlet servlet) {
         ModuleConfig[] configs = getModuleConfigs(servlet);
         for (int i = 0; i < configs.length; i++) {
-            registActionClass(servlet, configs[i]);
+            registerActionClass(servlet, configs[i]);
         }
 
     }
 
     public static void initServlet(ActionServlet servlet) {
-        registActionClass(servlet);
-        registRequestProcessor(servlet);
+        registerActionClass(servlet);
+        registerRequestProcessor(servlet);
     }
 
-    public static void registActionClass(ActionServlet servlet, ModuleConfig config) {
+    public static void registerActionClass(ActionServlet servlet, ModuleConfig config) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ActionConfig[] actionConfigs = config.findActionConfigs();
         ClassRegister classRegister = (ClassRegister) container.getComponent(ClassRegister.class);
@@ -87,7 +87,7 @@ public abstract class S2StrutsInitializer {
                     if (actionClass.equals(ProxyAction.class) == false) {
                         def.setInstanceDef(InstanceDefFactory.PROTOTYPE);
                     }
-                    regist(container, actionClass, def);
+                    register(container, actionClass, def);
                 }
             }
         }
@@ -113,20 +113,20 @@ public abstract class S2StrutsInitializer {
         return (ModuleConfig[]) moduleConfigs.toArray(new ModuleConfig[moduleConfigs.size()]);
     }
 
-    private static void registRequestProcessor(ActionServlet servlet) {
+    private static void registerRequestProcessor(ActionServlet servlet) {
         ModuleConfig[] configs = getModuleConfigs(servlet);
         for (int i = 0; i < configs.length; i++) {
-            registRequestProcessor(servlet, configs[i]);
+            registerRequestProcessor(servlet, configs[i]);
         }
     }
 
-    private static void registRequestProcessor(ActionServlet servlet, ModuleConfig config) {
+    private static void registerRequestProcessor(ActionServlet servlet, ModuleConfig config) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ControllerConfig controllerConfig = config.getControllerConfig();
         String processorClassName = controllerConfig.getProcessorClass();
         Class processorClass = ClassUtil.forName(processorClassName);
         if (ExternalRequestProcessor.class.isAssignableFrom(processorClass)) {
-            regist(container, ExternalRequestProcessor.class, processorClass, InstanceDefFactory.PROTOTYPE);
+            register(container, ExternalRequestProcessor.class, processorClass, InstanceDefFactory.PROTOTYPE);
         }
     }
 
