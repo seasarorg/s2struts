@@ -47,7 +47,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
 
         String propName = propDesc.getPropertyName();
         if (form.getField(propName) != null) {
-            // registed
+            // registered
             return null;
         }
 
@@ -72,7 +72,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         field.setDepends(depends);
         String propertyName = propDesc.getPropertyName();
         field.setProperty(propertyName);
-        registConfig(field, method);
+        registerConfig(field, method);
 
         return field;
     }
@@ -82,8 +82,8 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         return (annotations.length != 0);
     }
 
-    private void registConfig(Field field, Method method) {
-        registAutoTypeValidatorConfig(field, method);
+    private void registerConfig(Field field, Method method) {
+        registerAutoTypeValidatorConfig(field, method);
 
         for (Annotation annotation : method.getAnnotations()) {
             Class<?> type = annotation.annotationType();
