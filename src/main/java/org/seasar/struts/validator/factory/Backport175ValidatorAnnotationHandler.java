@@ -46,7 +46,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
 
         String propName = propDesc.getPropertyName();
         if (form.getField(propName) != null) {
-            // registed
+            // registered
             return null;
         }
 
@@ -70,7 +70,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         addArgs(field, method);
         field.setDepends(depends);
         field.setProperty(propDesc.getPropertyName());
-        registConfig(field, method);
+        registerConfig(field, method);
 
         return field;
     }
@@ -80,8 +80,8 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         return (annotations.length != 0);
     }
 
-    private void registConfig(Field field, Method method) {
-        registAutoTypeValidatorConfig(field, method);
+    private void registerConfig(Field field, Method method) {
+        registerAutoTypeValidatorConfig(field, method);
         
         Annotation[] annotations = Annotations.getAnnotations(method);
         for (int i = 0; i < annotations.length; i++) {
