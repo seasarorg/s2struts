@@ -2,5 +2,6 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
 "http://www.seasar.org/dtd/components.dtd">
 <components>
-	<component name="/path" class="org.seasar.struts.action.Test1Action"/>
+	<component name="/path" class="org.seasar.struts.action.Test1Action" instance="prototype"/>
+	<component class="org.seasar.struts.action.Test2Action" instance="prototype"/>
 </components>
