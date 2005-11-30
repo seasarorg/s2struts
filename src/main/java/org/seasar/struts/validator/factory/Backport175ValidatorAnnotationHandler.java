@@ -40,11 +40,19 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
 
     protected boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.noValidate(beanDesc, propDesc);
+        }
+        
         return Annotations.getAnnotation(NoValidate.class, method) != null;
     }
     
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.getDepends(beanDesc, propDesc);
+        }
+
         StringBuffer depends = new StringBuffer("");
         
         String autoTypeValidatorName = getAutoTypeValidatorName(propDesc);
@@ -76,6 +84,11 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
     
     protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerMessage(field, beanDesc, propDesc);
+            return;
+        }
+
         Annotation annotation = Annotations.getAnnotation(Message.class, method);
         if (annotation != null) {
             Message message = (Message) annotation;
@@ -90,6 +103,11 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
     
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerArgs(field, beanDesc, propDesc);
+            return;
+        }
+
         Annotation annotation = Annotations.getAnnotation(Args.class, method);
         String[] keys = { propDesc.getPropertyName() };
         boolean resource = false;
@@ -108,9 +126,14 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
     }
     
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerConfig(field, beanDesc, propDesc);
+            return;
+        }
+
         registerAutoTypeValidatorConfig(field, propDesc);
         
-        Method method = getMethodForValidation(propDesc);
         Annotation[] annotations = Annotations.getAnnotations(method);
         for (int i = 0; i < annotations.length; i++) {
             Class type = annotations[i].annotationType();
@@ -126,6 +149,10 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
     }
 
     // -----------------------------------------------------------------------
+    
+    private boolean hasAnnotation(Method method) {
+        return Annotations.getAnnotations(method).length != 0;
+    }
     
     private String createValidatorFieldDepends(ValidatorField validatorField) {
         StringBuffer result = new StringBuffer("");

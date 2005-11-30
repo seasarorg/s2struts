@@ -165,4 +165,10 @@ public class ValidatorAnnotationForm {
     public void setSelf(ValidatorAnnotationForm self) {
     }
     
+    public static final String constant_VALIDATOR = "required";
+    public static final String constant_VALIDATOR_ARGS = "Constant, resource=false";
+    
+    public void setConstant(String constant) {
+    }
+    
 }

@@ -284,4 +284,12 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertNull(field);
     }
     
+    public void testConstant() {
+        Field field = form.getField("constant");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("Constant", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
 }
