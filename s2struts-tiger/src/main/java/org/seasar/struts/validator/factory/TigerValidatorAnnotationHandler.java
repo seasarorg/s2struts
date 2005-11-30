@@ -41,10 +41,19 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
 
     protected boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.noValidate(beanDesc, propDesc);
+        }
+        
         return method.getAnnotation(NoValidate.class) != null;
     }
     
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.getDepends(beanDesc, propDesc);
+        }
+
         StringBuffer depends = new StringBuffer("");
 
         String autoTypeValidatorName = getAutoTypeValidatorName(propDesc);
@@ -52,7 +61,6 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             depends.append(autoTypeValidatorName).append(",");
         }
 
-        Method method = getMethodForValidation(propDesc);
         for (Annotation annotation : method.getAnnotations()) {
             Class<?> type = annotation.annotationType();
             ValidatorTarget target = type.getAnnotation(ValidatorTarget.class);
@@ -76,6 +84,11 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     
     protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerMessage(field, beanDesc, propDesc);
+            return;
+        }
+
         Annotation annotation = method.getAnnotation(Message.class);
         if (annotation != null) {
             Message message = (Message) annotation;
@@ -90,6 +103,11 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerArgs(field, beanDesc, propDesc);
+            return;
+        }
+
         Annotation annotation = method.getAnnotation(Args.class);
         String[] keys = { propDesc.getPropertyName() };
         boolean resource = false;
@@ -108,9 +126,14 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     }
     
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerConfig(field, beanDesc, propDesc);
+            return;
+        }
+
         registerAutoTypeValidatorConfig(field, propDesc);
 
-        Method method = getMethodForValidation(propDesc);
         for (Annotation annotation : method.getAnnotations()) {
             Class<?> type = annotation.annotationType();
             ValidatorTarget target = type.getAnnotation(ValidatorTarget.class);
@@ -125,6 +148,10 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     }
 
     // -----------------------------------------------------------------------
+    
+    private boolean hasAnnotation(Method method) {
+        return method.getAnnotations().length != 0;
+    }
 
     private String createValidatorFieldDepends(ValidatorField validatorField) {
         StringBuffer result = new StringBuffer("");
