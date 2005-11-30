@@ -93,6 +93,9 @@ public class ValidatorAnnotationForm {
     public void setAutoDate(Date date) {
     }
 
+    public void setNoValidate(String noValidate) {
+    }
+
     @NoValidate
     public void setNoValidateDate(Date data) {
     }
@@ -119,4 +122,23 @@ public class ValidatorAnnotationForm {
     public void setSimpleValidatorField(String message) {
     }
 
+    @Required
+    @Args(keys = "Array", resource = false)
+    public void setArray(String[] array) {
+    }
+
+    @Args(keys = "AutoArray", resource = false)
+    public void setAutoArray(int[] autoArray) {
+    }
+
+    public void setChild(ValidatorAnnotationChildForm child) {
+    }
+    
+    public void setChildren(ValidatorAnnotationChildForm[] children) {
+    }
+
+    @NoValidate
+    public void setSelf(ValidatorAnnotationForm self) {
+    }
+    
 }
