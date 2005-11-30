@@ -98,6 +98,9 @@ public class ValidatorAnnotationForm {
      */
     public void setAutoDate(Date date) {
     }
+    
+    public void setNoValidate(String noValidate) {
+    }
 
     /**
      * @org.seasar.struts.validator.annotation.backport175.NoValidate
@@ -137,4 +140,29 @@ public class ValidatorAnnotationForm {
     public void setSimpleValidatorField(String message) {
     }
 
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Required
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Array", resource=false)
+     */
+    public void setArray(String[] array) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="AutoArray", resource=false)
+     */
+    public void setAutoArray(int[] autoArray) {
+    }
+
+    public void setChild(ValidatorAnnotationChildForm child) {
+    }
+    
+    public void setChildren(ValidatorAnnotationChildForm[] children) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.NoValidate
+     */
+    public void setSelf(ValidatorAnnotationForm self) {
+    }
+    
 }

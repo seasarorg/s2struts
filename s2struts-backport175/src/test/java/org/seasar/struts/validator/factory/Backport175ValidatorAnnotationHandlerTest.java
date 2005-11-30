@@ -76,6 +76,11 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("yyyy/MM/dd", field.getVarValue("datePattern"));
     }
     
+    public void testNoValidate() {
+        Field field = form.getField("noValidate");
+        assertNull(field);
+    }
+    
     public void testNoValidateDate() {
         Field field = form.getField("noValidateDate");
         assertNull(field);
@@ -156,6 +161,127 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("${var:maxlength}", field.getArg("maxlength", 1).getKey());
         assertEquals("${var:min}", field.getArg("intRange", 1).getKey());
         assertEquals("${var:max}", field.getArg("intRange", 2).getKey());
+    }
+    
+    public void testArray() {
+        Field field = form.getField("array[].");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("Array", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testAutoArray() {
+        Field field = form.getField("autoArray[].");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
+        assertEquals("AutoArray", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildRequired() {
+        Field field = form.getField("child.required");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("ChildRequired", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildInteger() {
+        Field field = form.getField("child.integer");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
+        assertEquals("ChildInteger", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildNoValidate() {
+        Field field = form.getField("child.noValidate");
+        assertNull(field);
+    }
+    
+    public void testChildrenRequired() {
+        Field field = form.getField("children[].required");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("ChildRequired", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildrenInteger() {
+        Field field = form.getField("children[].integer");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
+        assertEquals("ChildInteger", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildrenNoValidate() {
+        Field field = form.getField("children[].noValidate");
+        assertNull(field);
+    }
+    
+    public void testChildGrandchildRequired() {
+        Field field = form.getField("child.grandchild.required");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("GrandchildRequired", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildGrandchildInteger() {
+        Field field = form.getField("child.grandchild.integer");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
+        assertEquals("GrandchildInteger", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildGrandchildNoValidate() {
+        Field field = form.getField("child.grandchild.noValidate");
+        assertNull(field);
+    }
+    
+    public void testChildGrandchildrenRequired() {
+        Field field = form.getField("child.grandchildren[].required");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("GrandchildRequired", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildGrandchildrenInteger() {
+        Field field = form.getField("child.grandchildren[].integer");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
+        assertEquals("GrandchildInteger", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildGrandchildrenNoValidate() {
+        Field field = form.getField("child.grandchildren[].noValidate");
+        assertNull(field);
+    }
+    
+    public void testChildrenGrandchildRequired() {
+        Field field = form.getField("children[].grandchild.required");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("GrandchildRequired", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildrenGrandchildInteger() {
+        Field field = form.getField("children[].grandchild.integer");
+        assertNotNull(field);
+        assertEquals("integer", field.getDepends());
+        assertEquals("GrandchildInteger", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
+    public void testChildrenGrandchildNoValidate() {
+        Field field = form.getField("children[].grandchild.noValidate");
+        assertNull(field);
     }
     
 }
