@@ -26,32 +26,10 @@
 			<field
 				property="input"
 				depends="required">
-			  <arg0 key="input" resource="false"/>
+			  <arg key="input" resource="false"/>
 		    </field>
 		</form>
     </formset>
-
-    <!-- following information is defined in "ANNOTATION".
-         please refer to ModDto.java.
-    <formset>
-        <form name="modForm">
-			<field
-				property="arg1"
-				depends="required, integer">
-			  <arg0 key="arg1" resource="false"/>
-		    </field>
-			<field
-				property="arg2"
-				depends="required, integer, mask">
-			  <arg0 key="arg2" resource="false"/>
-			  <var>
-			    <var-name>mask</var-name>
-			    <var-value>[^0]</var-value>
-			  </var>
-		    </field>
-		</form>
-    </formset>
-    -->
 
     <formset>
 

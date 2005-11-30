@@ -12,9 +12,12 @@
     
     <m:doRender id="appBody" name="content"/>
     
-    <html:errors m:id="errorMessage" />
+    <html:errors m:id="errorMessage"/>
 
-    <html:form m:id="appForm" action="/indexed" method="POST" />
+    <html:form m:id="appForm" action="/indexed" method="POST">
+        <s2struts:page />
+        <m:doBody />
+    </html:form>
     
     <html:text m:id="child_0_value" property="child[0].value" styleClass="text" errorStyleClass="text-error"/>
     <html:text m:id="child_1_value" property="child[1].value" styleClass="text" errorStyleClass="text-error"/>

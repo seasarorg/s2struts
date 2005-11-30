@@ -2,6 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
+	<include path="org/seasar/struts/examples/dicon/RequestProcessor.dicon"/>
 	<include path="s2struts.dicon"/>
 
 	<include path="org/seasar/struts/examples/dicon/Mod.dicon"/>
@@ -15,6 +16,5 @@
 	<include path="org/seasar/struts/examples/dicon/Validate.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Upload.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Indexed.dicon"/>
-	<include path="org/seasar/struts/examples/dicon/RequestProcessor.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/employee.dicon"/>
 </components>

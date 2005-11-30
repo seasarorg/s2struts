@@ -2,14 +2,15 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="s2struts">
-	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
-	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="messageFacade"                class="org.seasar.struts.action.MessageFacadeImpl" instance="request"/>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.S2StrutsContextImpl" instance="session"/>
+
+	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
+	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
+	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
 	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
 	<component name="executeProcessor"             class="org.seasar.struts.processor.ActionExecuteProcessorImpl"/>
-	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
 	<component name="validateProcessor"            class="org.seasar.struts.processor.ValidateProcessorImpl"/>
 	<component name="inputValueFormProcessor"      class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
 	<component name="requestProcessor"             class="org.seasar.struts.processor.S2RequestProcessor" instance="prototype">
