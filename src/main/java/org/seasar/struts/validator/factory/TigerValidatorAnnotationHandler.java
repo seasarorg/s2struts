@@ -45,7 +45,6 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     }
     
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
-        Method method = getMethodForValidation(propDesc);
         StringBuffer depends = new StringBuffer("");
 
         String autoTypeValidatorName = getAutoTypeValidatorName(propDesc);
@@ -53,6 +52,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             depends.append(autoTypeValidatorName).append(",");
         }
 
+        Method method = getMethodForValidation(propDesc);
         for (Annotation annotation : method.getAnnotations()) {
             Class<?> type = annotation.annotationType();
             ValidatorTarget target = type.getAnnotation(ValidatorTarget.class);
