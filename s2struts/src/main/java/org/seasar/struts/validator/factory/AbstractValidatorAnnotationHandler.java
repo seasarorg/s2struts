@@ -48,21 +48,143 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         form.setName(formName);
 
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(formClass);
-        for (int i = 0; i < beanDesc.getPropertyDescSize(); i++) {
-            PropertyDesc propDesc = beanDesc.getPropertyDesc(i);
-            Field field = createField(form, beanDesc, propDesc);
-            if (field != null) {
-                form.addField(field);
-            }
-        }
+        registerFields(form, new Field(), beanDesc);
         return form;
     }
+    
+    protected void registerFields(Form form, Field field, BeanDesc beanDesc) {
+        for (int i = 0; i < beanDesc.getPropertyDescSize(); i++) {
+            PropertyDesc propDesc = beanDesc.getPropertyDesc(i);
+            registerField(form, field, beanDesc, propDesc);
+        }
+    }
+    
+    protected void registerField(Form form, Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        if (!hasMethodForValidation(propDesc)) {
+            return;
+        }
 
-    protected abstract Field createField(Form form, BeanDesc beanDesc, PropertyDesc propDesc);
+        if (registeredField(form, field, propDesc)) {
+            return;
+        }
+        
+        if (noValidate(beanDesc, propDesc)) {
+            return;
+        }
+        
+        if (isNestedValidate(propDesc)) {
+            Field nestedField = createField(field, propDesc, "");
+            Class nestedClass = propDesc.getPropertyType();
+            if (nestedClass.isArray()) {
+                nestedClass = nestedClass.getComponentType();
+            }
+            BeanDesc nestedBeanDesc = BeanDescFactory.getBeanDesc(nestedClass);
+            registerFields(form, nestedField, nestedBeanDesc);
+            return;
+        }
+        
+        String depends = getDepends(beanDesc, propDesc);
+        if (depends == null) {
+            return;
+        }
+        
+        Field newField = createField(field, propDesc, depends);
+        registerMessage(newField, beanDesc, propDesc);
+        registerArgs(newField, beanDesc, propDesc);
+        registerConfig(newField, beanDesc, propDesc);
+        
+        form.addField(newField);
+    }
+    
+    protected boolean registeredField(Form form, Field field, PropertyDesc propDesc) {
+        String key = getFieldKey(field, propDesc);
+        return form.getField(key) != null;
+    }
 
-    protected String getAutoTypeValidatorName(Method method) {
-        Class[] classes = method.getParameterTypes();
-        Class paramType = classes[classes.length - 1];
+    protected boolean isNestedValidate(PropertyDesc propDesc) {
+        Class paramType = propDesc.getPropertyType();
+        if (paramType.isArray()) {
+            paramType = paramType.getComponentType();
+        }
+
+        if (paramType.equals(Byte.class) || paramType.equals(Byte.TYPE)) {
+            return false;
+        } else if (paramType.equals(Date.class) || paramType.equals(Timestamp.class)) {
+            return false;
+        } else if (paramType.equals(Double.class) || paramType.equals(Double.TYPE)) {
+            return false;
+        } else if (paramType.equals(Float.class) || paramType.equals(Float.TYPE)) {
+            return false;
+        } else if (paramType.equals(Integer.class) || paramType.equals(Integer.TYPE)) {
+            return false;
+        } else if (paramType.equals(Long.class) || paramType.equals(Long.TYPE)) {
+            return false;
+        } else if (paramType.equals(Short.class) || paramType.equals(Short.TYPE)) {
+            return false;
+        } else if (paramType.equals(String.class)) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    protected Field createField(Field field, PropertyDesc propDesc, String depends) {
+        Field newField = new Field();
+        newField.setDepends(depends);
+        
+        String property = getFieldProperty(field, propDesc);
+        if (propDesc.getPropertyType().isArray()) {
+            newField.setProperty("");
+            newField.setIndexedListProperty(property);
+        } else {
+            newField.setProperty(property);
+            newField.setIndexedListProperty(field.getIndexedListProperty());
+        }
+        
+        return newField;
+    }
+    
+    protected String getFieldProperty(Field field, PropertyDesc propDesc) {
+        if (StringUtil.isEmpty(field.getProperty())) {
+            return propDesc.getPropertyName();
+        } else {
+            return field.getProperty() + "." + propDesc.getPropertyName();
+        }
+    }
+    
+    protected String getFieldKey(Field field, PropertyDesc propDesc) {
+        String key = getFieldProperty(field, propDesc);
+        if (!StringUtil.isEmpty(field.getIndexedListProperty())) {
+            key = field.getIndexedListProperty() + "[]." + key;
+        }
+        return key;
+    }
+    
+    protected abstract boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc);
+    
+    protected abstract String getDepends(BeanDesc beanDesc, PropertyDesc propDesc);
+    
+    protected abstract void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+    
+    protected abstract void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+    
+    protected abstract void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+
+    // -----------------------------------------------------------------------
+    
+    protected boolean hasMethodForValidation(PropertyDesc propDesc) {
+        return propDesc.hasWriteMethod();
+    }
+    
+    protected Method getMethodForValidation(PropertyDesc propDesc) {
+        return propDesc.getWriteMethod();
+    }
+    
+    protected String getAutoTypeValidatorName(PropertyDesc propDesc) {
+        Class paramType = propDesc.getPropertyType();
+        if (paramType.isArray()) {
+            paramType = paramType.getComponentType();
+        }
 
         if (paramType.equals(Byte.class) || paramType.equals(Byte.TYPE)) {
             return "byte";
@@ -83,8 +205,8 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         return null;
     }
 
-    protected void registerAutoTypeValidatorConfig(Field field, Method method) {
-        String autoTypeValidatorName = getAutoTypeValidatorName(method);
+    protected void registerAutoTypeValidatorConfig(Field field, PropertyDesc propDesc) {
+        String autoTypeValidatorName = getAutoTypeValidatorName(propDesc);
         if (StringUtil.isEmpty(autoTypeValidatorName)) {
             return;
         }
@@ -107,6 +229,10 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         register.register(field, parameters);
     }
 
+    private String getConfigRegisterName(String validatorName) {
+        return validatorName + "ConfigRegister";
+    }
+
     protected String getValidatorName(Class clazz) {
         String validatorName = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(clazz));
         return validatorName.replaceFirst(VALIDATOR_TYPE_PREFIX_RE, "");
@@ -119,10 +245,6 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
             list.add(tokenizer.nextToken().trim());
         }
         return (String[]) list.toArray(new String[list.size()]);
-    }
-
-    private String getConfigRegisterName(String validatorName) {
-        return validatorName + "ConfigRegister";
     }
 
 }

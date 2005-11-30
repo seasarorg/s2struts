@@ -15,7 +15,6 @@
  */
 package org.seasar.struts.validator.factory;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.Map;
 
 import org.apache.commons.validator.Arg;
 import org.apache.commons.validator.Field;
-import org.apache.commons.validator.Form;
 import org.apache.commons.validator.Msg;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -45,79 +43,9 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
     private static final String TYPE = "type";
 
     private static final String NO_VALIDATE = "noValidate";
-
-    protected Field createField(Form form, BeanDesc beanDesc, PropertyDesc propDesc) {
-        if (!propDesc.hasWriteMethod()) {
-            return null;
-        }
-
-        String propName = propDesc.getPropertyName();
-        if (form.getField(propName) != null) {
-            // registered
-            return null;
-        }
-
+    
+    protected boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc) {
         List parameters = getValidatorParameters(beanDesc, propDesc);
-        if (noValidate(parameters)) {
-            return null;
-        }
-
-        Method method = propDesc.getWriteMethod();
-        String depends = createDepends(method, parameters);
-        if (depends == null) {
-            return null;
-        }
-
-        Field field = new Field();
-        addMessage(field, beanDesc, propDesc);
-        addArgs(field, beanDesc, propDesc);
-        field.setDepends(depends);
-        field.setProperty(propDesc.getPropertyName());
-        registerConfig(field, method, parameters);
-
-        return field;
-    }
-
-    private List getValidatorParameters(BeanDesc beanDesc, PropertyDesc propDesc) {
-        List result = new ArrayList();
-
-        String fieldName = propDesc.getPropertyName() + VALIDATOR_SUFFIX;
-        Map parameter = getValidatorParameter(beanDesc, fieldName);
-        if (parameter != null) {
-            result.add(parameter);
-        }
-
-        for (int i = 0; hasValidatorParameter(beanDesc, fieldName, i); i++) {
-            parameter = getValidatorParameter(beanDesc, fieldName, i);
-            if (parameter != null) {
-                result.add(parameter);
-            }
-        }
-
-        return result;
-    }
-
-    private boolean hasValidatorParameter(BeanDesc beanDesc, String fieldName) {
-        return beanDesc.hasField(fieldName);
-    }
-
-    private Map getValidatorParameter(BeanDesc beanDesc, String fieldName) {
-        if (!beanDesc.hasField(fieldName)) {
-            return null;
-        }
-        String value = (String) beanDesc.getFieldValue(fieldName, null);
-        return ConstantValueUtil.toMap(value, TYPE);
-    }
-
-    private boolean hasValidatorParameter(BeanDesc beanDesc, String fieldName, int index) {
-        return hasValidatorParameter(beanDesc, fieldName + "_" + Integer.toString(index));
-    }
-
-    private Map getValidatorParameter(BeanDesc beanDesc, String fieldName, int index) {
-        return getValidatorParameter(beanDesc, fieldName + "_" + Integer.toString(index));
-    }
-
-    private boolean noValidate(List parameters) {
         for (Iterator it = parameters.iterator(); it.hasNext();) {
             Map parameter = (Map) it.next();
             String type = (String) parameter.get(TYPE);
@@ -127,23 +55,12 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         }
         return false;
     }
-
-    private void registerConfig(Field field, Method method, List parameters) {
-        registerAutoTypeValidatorConfig(field, method);
-
-        for (Iterator it = parameters.iterator(); it.hasNext();) {
-            Map parameter = (Map) it.next();
-            String type = (String) parameter.get(TYPE);
-            if (hasConfigRegister(type)) {
-                executeConfigRegister(field, type, parameter);
-            }
-        }
-    }
-
-    private String createDepends(Method method, List parameters) {
+    
+    protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
+        List parameters = getValidatorParameters(beanDesc, propDesc);
         StringBuffer depends = new StringBuffer("");
 
-        String autoTypeValidatorName = getAutoTypeValidatorName(method);
+        String autoTypeValidatorName = getAutoTypeValidatorName(propDesc);
         if (!StringUtil.isEmpty(autoTypeValidatorName)) {
             depends.append(autoTypeValidatorName).append(",");
         }
@@ -158,32 +75,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         depends.setLength(depends.length() - 1);
         return depends.toString();
     }
-
-    private void addArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
-        String[] keys = { propDesc.getPropertyName() };
-        boolean resource = false;
-        
-        String fieldName = propDesc.getPropertyName() + ARGS_SUFFIX;
-        if (beanDesc.hasField(fieldName)) {
-            String value = (String) beanDesc.getFieldValue(fieldName, null);
-            Map parameter = ConstantValueUtil.toMap(value, "keys");
-            keys = toArrays((String) parameter.get("keys"));
-            String resourceStr = (String) parameter.get("resource");
-            if (!StringUtil.isEmpty(resourceStr)) {
-                resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
-            }
-        }
-
-        for (int i = 0; i < keys.length; i++) {
-            Arg arg = new Arg();
-            arg.setKey(keys[i]);
-            arg.setResource(resource);
-            arg.setPosition(i);
-            field.addArg(arg);
-        }
-    }
-
-    private void addMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+    
+    protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         String fieldName = propDesc.getPropertyName() + MESSAGE_SUFFIX;
         if (!beanDesc.hasField(fieldName)) {
             return;
@@ -206,6 +99,84 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         msg.setName(name);
         msg.setResource(resource);
         field.addMsg(msg);
+    }
+    
+    protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        String[] keys = { propDesc.getPropertyName() };
+        boolean resource = false;
+        
+        String fieldName = propDesc.getPropertyName() + ARGS_SUFFIX;
+        if (beanDesc.hasField(fieldName)) {
+            String value = (String) beanDesc.getFieldValue(fieldName, null);
+            Map parameter = ConstantValueUtil.toMap(value, "keys");
+            keys = toArrays((String) parameter.get("keys"));
+            String resourceStr = (String) parameter.get("resource");
+            if (!StringUtil.isEmpty(resourceStr)) {
+                resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
+            }
+        }
+
+        for (int i = 0; i < keys.length; i++) {
+            Arg arg = new Arg();
+            arg.setKey(keys[i]);
+            arg.setResource(resource);
+            arg.setPosition(i);
+            field.addArg(arg);
+        }
+    }
+    
+    protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        registerAutoTypeValidatorConfig(field, propDesc);
+
+        List parameters = getValidatorParameters(beanDesc, propDesc);
+        for (Iterator it = parameters.iterator(); it.hasNext();) {
+            Map parameter = (Map) it.next();
+            String type = (String) parameter.get(TYPE);
+            if (hasConfigRegister(type)) {
+                executeConfigRegister(field, type, parameter);
+            }
+        }
+    }
+    
+    // -----------------------------------------------------------------------
+    
+    private List getValidatorParameters(BeanDesc beanDesc, PropertyDesc propDesc) {
+        List result = new ArrayList();
+
+        String fieldName = propDesc.getPropertyName() + VALIDATOR_SUFFIX;
+        Map parameter = getValidatorParameter(beanDesc, fieldName);
+        if (parameter != null) {
+            result.add(parameter);
+        }
+
+        for (int i = 0; hasIndexedValidatorParameter(beanDesc, fieldName, i); i++) {
+            parameter = getIndexedValidatorParameter(beanDesc, fieldName, i);
+            if (parameter != null) {
+                result.add(parameter);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean hasValidatorParameter(BeanDesc beanDesc, String fieldName) {
+        return beanDesc.hasField(fieldName);
+    }
+
+    private Map getValidatorParameter(BeanDesc beanDesc, String fieldName) {
+        if (!beanDesc.hasField(fieldName)) {
+            return null;
+        }
+        String value = (String) beanDesc.getFieldValue(fieldName, null);
+        return ConstantValueUtil.toMap(value, TYPE);
+    }
+
+    private boolean hasIndexedValidatorParameter(BeanDesc beanDesc, String fieldName, int index) {
+        return hasValidatorParameter(beanDesc, fieldName + "_" + Integer.toString(index));
+    }
+
+    private Map getIndexedValidatorParameter(BeanDesc beanDesc, String fieldName, int index) {
+        return getValidatorParameter(beanDesc, fieldName + "_" + Integer.toString(index));
     }
 
 }
