@@ -38,42 +38,47 @@ public class AutoActionFormRegister {
     }
 
     public static void register(ModuleConfig config, Collection classes) {
-        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         classes = ClassComparator.sort(classes);
         
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
             Class clazz = (Class) iterator.next();
-            StrutsActionFormConfig strutsActionForm = annHandler.createStrutsActionFormConfig(clazz);
-            if (strutsActionForm == null && isActionFormClass(clazz)) {
-                strutsActionForm = new NullStrutsActionFormConfig();
-            }
-            if (strutsActionForm != null) {
-                registerActionForm(strutsActionForm, clazz, config);
-            }
+            registerFormBeanConfig(config, clazz);
         }
     }
     
-    private static boolean isActionFormClass(Class clazz) {
-        return clazz.getName().matches(configRule().getFormClassPattern());
-    }
-
-    private static void registerActionForm(StrutsActionFormConfig form, Class formClass, ModuleConfig config) {
-        String name = getName(form, formClass, config);
-        if (config.findFormBeanConfig(name) == null) {
-            register(config, form, formClass);
+    private static void registerFormBeanConfig(ModuleConfig config, Class formClass) {
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
+        StrutsActionFormConfig strutsActionForm = annHandler.createStrutsActionFormConfig(formClass);
+        if (strutsActionForm == null) {
+            if (matchesFormClassPattern(formClass)) {
+                strutsActionForm = new NullStrutsActionFormConfig();
+            } else {
+                return;
+            }
         }
-    }
 
-    private static void register(ModuleConfig config, StrutsActionFormConfig form, Class formClass) {
+        if (registeredFormBeanConfig(strutsActionForm, formClass, config)) {
+            return;
+        }
+        
         FormBeanConfig formBeanConfig = new FormBeanConfig();
-        formBeanConfig.setName(getName(form, formClass, config));
+        formBeanConfig.setName(getName(strutsActionForm, formClass, config));
         formBeanConfig.setType(formClass.getName());
-        formBeanConfig.setRestricted(getRestricted(form, formClass, config));
+        formBeanConfig.setRestricted(getRestricted(strutsActionForm, formClass, config));
         config.addFormBeanConfig(formBeanConfig);
         
         log.debug("auto register " + formBeanConfig);
     }
 
+    private static boolean matchesFormClassPattern(Class clazz) {
+        return clazz.getName().matches(configRule().getFormClassPattern());
+    }
+    
+    private static boolean registeredFormBeanConfig(StrutsActionFormConfig strutsActionForm, Class formClass, ModuleConfig config) {
+        String name = getName(strutsActionForm, formClass, config);
+        return config.findFormBeanConfig(name) != null;
+    }
+    
     private static ZeroConfigActionFormRule rule() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         return (ZeroConfigActionFormRule) container.getComponent(ZeroConfigActionFormRule.class);

@@ -45,63 +45,47 @@ public class AutoActionRegister {
     }
 
     public static void register(ServletContext servletContext, ModuleConfig config, Collection classes) {
-        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         classes = ClassComparator.sort(classes);
         
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
             Class clazz = (Class) iterator.next();
-            StrutsActionConfig strutsAction = annHandler.createStrutsActionConfig(clazz);
-            if (strutsAction == null && isActionClass(clazz)) {
+            registerActionConfig(servletContext, config, clazz);
+        }
+    }
+    
+    private static void registerActionConfig(ServletContext servletContext, ModuleConfig config, Class actionClass) {
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
+        StrutsActionConfig strutsAction = annHandler.createStrutsActionConfig(actionClass);
+        if (strutsAction == null) {
+            if (matchesActionClassPattern(actionClass)) {
                 strutsAction = new NullStrutsActionConfig();
-            }
-            if (strutsAction != null) {
-                registerAction(strutsAction, clazz, config, servletContext);
+            } else {
+                return;
             }
         }
-    }
-    
-    private static boolean isActionClass(Class clazz) {
-        return clazz.getName().matches(configRule().getActionClassPattern());
-    }
-    
-    private static void registerAction(StrutsActionConfig action, Class actionClass, ModuleConfig config,
-            ServletContext servletContext) {
-        String path = getPath(action, actionClass, config);
-        if (!hasActionConfig(config, path)) {
-            addActionConfig(servletContext, config, action, actionClass);
-        }
-    }
 
-    public static boolean hasActionConfig(ModuleConfig config, String path) {
-        ActionConfig[] actionConfigs = config.findActionConfigs();
-        for (int i = 0; i < actionConfigs.length; ++i) {
-            if (path.equals(actionConfigs[i].getPath())) {
-                return true;
-            }
+        if (registeredActionConfig(strutsAction, actionClass, config)) {
+            return;
         }
-        return false;
-    }
 
-    private static void addActionConfig(ServletContext servletContext, ModuleConfig config, StrutsActionConfig action,
-            Class actionClass) {
         ActionConfig actionConfig = new ActionMapping();
-        actionConfig.setAttribute(getAttribute(action, actionClass, config));
-        actionConfig.setForward(getForward(action, actionClass, config));
-        actionConfig.setInclude(getInclude(action, actionClass, config));
-        actionConfig.setInput(getInput(action, actionClass, config));
+        actionConfig.setAttribute(getAttribute(strutsAction, actionClass, config));
+        actionConfig.setForward(getForward(strutsAction, actionClass, config));
+        actionConfig.setInclude(getInclude(strutsAction, actionClass, config));
+        actionConfig.setInput(getInput(strutsAction, actionClass, config));
         actionConfig.setModuleConfig(config);
-        actionConfig.setName(getName(action, actionClass, config));
-        actionConfig.setParameter(getParameter(action, actionClass, config));
-        actionConfig.setPath(getPath(action, actionClass, config));
-        actionConfig.setPrefix(getPrefix(action, actionClass, config));
-        actionConfig.setRoles(getRoles(action, actionClass, config));
-        actionConfig.setScope(getScope(action, actionClass, config));
-        actionConfig.setSuffix(getSuffix(action, actionClass, config));
+        actionConfig.setName(getName(strutsAction, actionClass, config));
+        actionConfig.setParameter(getParameter(strutsAction, actionClass, config));
+        actionConfig.setPath(getPath(strutsAction, actionClass, config));
+        actionConfig.setPrefix(getPrefix(strutsAction, actionClass, config));
+        actionConfig.setRoles(getRoles(strutsAction, actionClass, config));
+        actionConfig.setScope(getScope(strutsAction, actionClass, config));
+        actionConfig.setSuffix(getSuffix(strutsAction, actionClass, config));
         actionConfig.setType(actionClass.getName());
-        actionConfig.setUnknown(getUnknown(action, actionClass, config));
-        actionConfig.setValidate(getValidate(action, actionClass, config));
+        actionConfig.setUnknown(getUnknown(strutsAction, actionClass, config));
+        actionConfig.setValidate(getValidate(strutsAction, actionClass, config));
 
-        addFowardConfig(servletContext, actionConfig, actionClass);
+        registerFowardConfigs(servletContext, actionConfig, actionClass);
 
         config.addActionConfig(actionConfig);
 
@@ -114,10 +98,25 @@ public class AutoActionRegister {
         }
     }
 
-    private static void addFowardConfig(ServletContext servletContext, ActionConfig actionConfig, Class actionClass) {
-        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
+    private static boolean matchesActionClassPattern(Class clazz) {
+        return clazz.getName().matches(configRule().getActionClassPattern());
+    }
+    
+    public static boolean registeredActionConfig(StrutsActionConfig strutsAction, Class actionClass, ModuleConfig config) {
+        String path = getPath(strutsAction, actionClass, config);
+        ActionConfig[] actionConfigs = config.findActionConfigs();
+        for (int i = 0; i < actionConfigs.length; ++i) {
+            if (path.equals(actionConfigs[i].getPath())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void registerFowardConfigs(ServletContext servletContext, ActionConfig actionConfig, Class actionClass) {
         Field[] fields = actionClass.getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
+            StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
             StrutsActionForwardConfig actionForward = annHandler.createStrutsActionForwardConfig(fields[i]);
             if (actionForward != null) {
                 fields[i].setAccessible(true);
@@ -129,7 +128,7 @@ public class AutoActionRegister {
                 actionConfig.addForwardConfig(forwardConfig);
             }
         }
-        if (actionClass.getName().matches(configRule().getActionClassPattern())) {
+        if (matchesActionClassPattern(actionClass)) {
             rule().addFowardConfig(actionClass, actionConfig, servletContext);
         }
     }

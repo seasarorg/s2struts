@@ -87,10 +87,35 @@ public class ValidatorAnnotationForm {
     
     public void setAutoDate(Date date) {
     }
+    
+    public void setNoValidate(String noValidate) {
+    }
 
     public static final String noValidateDate_VALIDATOR = "noValidate";
     
     public void setNoValidateDate(Date data) {
     }
 
+    public static final String array_VALIDATOR = "required";
+    public static final String array_VALIDATOR_ARGS = "Array, resource=false";
+    
+    public void setArray(String[] arrasy) {
+    }
+
+    public static final String autoArray_VALIDATOR_ARGS = "AutoArray, resource=false";
+    
+    public void setAutoArray(int[] autoArray) {
+    }
+    
+    public void setChild(ValidatorAnnotationChildForm child) {
+    }
+    
+    public void setChildren(ValidatorAnnotationChildForm[] children) {
+    }
+    
+    public static final String self_VALIDATOR = "noValidate";
+
+    public void setSelf(ValidatorAnnotationForm self) {
+    }
+    
 }
