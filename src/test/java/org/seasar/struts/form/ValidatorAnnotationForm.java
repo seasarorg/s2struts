@@ -2,6 +2,8 @@ package org.seasar.struts.form;
 
 import java.util.Date;
 
+import org.apache.struts.upload.FormFile;
+
 /**
  * @author Katsuhiko Nagashima
  */
@@ -116,6 +118,12 @@ public class ValidatorAnnotationForm {
     public static final String self_VALIDATOR = "noValidate";
 
     public void setSelf(ValidatorAnnotationForm self) {
+    }
+    
+    public static final String file_VALIDATOR = "required";
+    public static final String file_VALIDATOR_ARGS = "File, resource=false";
+    
+    public void setFile(FormFile file) {
     }
     
 }

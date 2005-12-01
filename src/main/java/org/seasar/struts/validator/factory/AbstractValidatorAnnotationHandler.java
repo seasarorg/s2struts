@@ -72,19 +72,17 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
             return;
         }
         
-        if (isNestedValidate(propDesc)) {
-            Field nestedField = createField(field, propDesc, "");
-            Class nestedClass = propDesc.getPropertyType();
-            if (nestedClass.isArray()) {
-                nestedClass = nestedClass.getComponentType();
-            }
-            BeanDesc nestedBeanDesc = BeanDescFactory.getBeanDesc(nestedClass);
-            registerFields(form, nestedField, nestedBeanDesc);
-            return;
-        }
-        
         String depends = getDepends(beanDesc, propDesc);
         if (depends == null) {
+            if (isNestedValidate(propDesc)) {
+                Field nestedField = createField(field, propDesc, "");
+                Class nestedClass = propDesc.getPropertyType();
+                if (nestedClass.isArray()) {
+                    nestedClass = nestedClass.getComponentType();
+                }
+                BeanDesc nestedBeanDesc = BeanDescFactory.getBeanDesc(nestedClass);
+                registerFields(form, nestedField, nestedBeanDesc);
+            }
             return;
         }
         
