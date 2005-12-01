@@ -57,7 +57,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         } else if (config.findFormBeanConfig(name) != null) {
             return name;
         }
-        return StrutsActionConfig.DEFAULT_NAME;
+        return null;
     }
     
     private String getActionPathName(Class actionClass, ModuleConfig config) {
