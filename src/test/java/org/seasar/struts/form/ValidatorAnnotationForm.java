@@ -2,6 +2,8 @@ package org.seasar.struts.form;
 
 import java.util.Date;
 
+import org.apache.struts.upload.FormFile;
+
 /**
  * @author Katsuhiko Nagashima
  * @org.seasar.struts.annotation.backport175.StrutsActionForm(name="testFormName")
@@ -163,6 +165,13 @@ public class ValidatorAnnotationForm {
      * @org.seasar.struts.validator.annotation.backport175.NoValidate
      */
     public void setSelf(ValidatorAnnotationForm self) {
+    }
+    
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Required
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="File", resource=false)
+     */
+    public void setFile(FormFile file) {
     }
     
     public static final String constant_VALIDATOR = "required";
