@@ -15,6 +15,7 @@
 	<include path="org/seasar/struts/examples/dicon/Message.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Validate.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Upload.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Download.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Indexed.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/employee.dicon"/>
 </components>

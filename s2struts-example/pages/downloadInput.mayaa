@@ -7,22 +7,20 @@
         m:extends="/pages/layout/layout.html">
 
     <m:doRender id="pageTitle" name="title">
-        <bean:message key="upload.title"/>
+        <bean:message key="download.title"/>
     </m:doRender>
     
     <m:doRender id="appBody" name="content"/>
     
     <html:errors m:id="errorMessage" />
 
-    <html:form m:id="appForm" action="/upload" enctype="multipart/form-data">
+    <html:form m:id="appForm" action="/download" method="POST">
         <s2struts:page />
         <m:doBody />
     </html:form>
     
     <html:text m:id="theText" property="theText" styleClass="text" errorStyleClass="text-error"/>
 
-    <html:file m:id="theFile" property="theFile" styleClass="text" errorStyleClass="text-error"/>
-
-    <s2struts:submit m:id="goUpload" action="#{upload.execute}"><bean:message key="upload"/></s2struts:submit>
+    <s2struts:submit m:id="goDownload" action="#{download.execute}"><bean:message key="download"/></s2struts:submit>
 
 </m:mayaa>

@@ -16,6 +16,7 @@
     <html:link m:id="messagePage" page="/message.do"><bean:message key="message.title"/></html:link>
     <html:link m:id="validatePage" page="/pages/validate.html"><bean:message key="validate.title"/></html:link>
     <html:link m:id="uploadPage" page="/pages/uploadInput.html"><bean:message key="upload.title"/></html:link>
+    <html:link m:id="downloadPage" page="/pages/downloadInput.html"><bean:message key="download.title"/></html:link>
     <html:link m:id="indexedPage" page="/pages/indexedInput.html"><bean:message key="indexed.title"/></html:link>
     <html:link m:id="employeePage" forward="employee"><bean:message key="title.employee" /></html:link>
 
