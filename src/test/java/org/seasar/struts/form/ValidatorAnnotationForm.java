@@ -2,6 +2,7 @@ package org.seasar.struts.form;
 
 import java.util.Date;
 
+import org.apache.struts.upload.FormFile;
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.CreditCardType;
@@ -139,6 +140,11 @@ public class ValidatorAnnotationForm {
 
     @NoValidate
     public void setSelf(ValidatorAnnotationForm self) {
+    }
+    
+    @Required
+    @Args(keys = "File", resource = false)
+    public void setFile(FormFile file) {
     }
     
     public static final String constant_VALIDATOR = "required";
