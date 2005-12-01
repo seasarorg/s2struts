@@ -284,6 +284,13 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         assertNull(field);
     }
     
+    public void testRequiredFile() {
+        Field field = form.getField("file");
+        assertNotNull(field);
+        assertEquals("required", field.getDepends());
+        assertEquals("File", field.getArg(0).getKey());
+    }
+    
     public void testConstant() {
         Field field = form.getField("constant");
         assertNotNull(field);
