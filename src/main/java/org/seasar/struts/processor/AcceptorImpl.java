@@ -118,6 +118,9 @@ public class AcceptorImpl implements Acceptor {
             log.error("Execute action", e);
             forward = processor.processException(request, response, e, form, mapping);
         }
+        if (forward == null) {
+            return;
+        }
 
         processor.processSetPath(forward);
         
