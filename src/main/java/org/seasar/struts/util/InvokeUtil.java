@@ -37,10 +37,7 @@ public class InvokeUtil {
         String componentName = getComponentName(methodBindingExpression);
         String methodName = getMethodName(methodBindingExpression);
 
-        if(componentName == null || !container.hasComponentDef(componentName)) {
-            return null;
-        }
-        
+        // Throw exception if component do not registered.
         ComponentDef cd = container.getComponentDef(componentName);
         Object component = cd.getComponent();
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(cd.getComponentClass());

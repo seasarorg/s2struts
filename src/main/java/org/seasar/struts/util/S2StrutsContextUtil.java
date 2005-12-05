@@ -49,6 +49,10 @@ public abstract class S2StrutsContextUtil {
     public static String getMethodBindingExpression() {
         return getContext().getMethodBindingExpression();
     }
+    
+    public static boolean existMethodBindingExpression() {
+        return getContext().existMethodBindingExpression();
+    }
 
     private static S2StrutsContext getContext() {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);

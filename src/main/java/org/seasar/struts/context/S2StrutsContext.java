@@ -19,6 +19,7 @@ import java.io.Serializable;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface S2StrutsContext extends Serializable {
     void clear(ContentsType type);
@@ -30,4 +31,7 @@ public interface S2StrutsContext extends Serializable {
     void setMethodBindingExpression(String kye, String value, String methodBindingExpression);
     
     String getMethodBindingExpression();
+    
+    boolean existMethodBindingExpression();
+    
 }

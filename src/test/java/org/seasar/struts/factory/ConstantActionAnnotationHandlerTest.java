@@ -7,6 +7,11 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.struts.action.ActionAnnotationActionImpl;
 import org.seasar.struts.config.ActionPropertyConfig;
 
+/**
+ * 
+ * @author Katsuhiko Nagashima
+ *
+ */
 public class ConstantActionAnnotationHandlerTest extends S2TestCase {
 
     private ActionAnnotationHandler annHandler;
