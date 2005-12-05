@@ -52,11 +52,24 @@ public class ActionExecuteProcessorImpl implements ActionExecuteProcessor {
     public ActionForward processActionExecute(HttpServletRequest request, HttpServletResponse response, Object action,
             Object form, ActionMapping mapping) throws IOException, ServletException {
         
+        if (S2StrutsContextUtil.existMethodBindingExpression()) {
+            return executeMethodBinding(mapping);
+        } else {
+            return executeAction(request, action, mapping);
+        }
+        
+    }
+
+    private ActionForward executeMethodBinding(ActionMapping mapping) throws IOException, ServletException {
         String forward = (String) InvokeUtil.invoke(S2StrutsContextUtil.getMethodBindingExpression(), mapping);
         if (forward != null) {
             return mapping.findForward(forward);
+        } else {
+            return null;
         }
+    }
 
+    private ActionForward executeAction(HttpServletRequest request, Object action, ActionMapping mapping) throws IOException, ServletException {
         String actionName = mapping.getType();
         Class actionInterface = this.classRegister.getClass(actionName);
         S2Container container = SingletonS2ContainerFactory.getContainer();
@@ -64,7 +77,7 @@ public class ActionExecuteProcessorImpl implements ActionExecuteProcessor {
         BeanDesc beanDesc = new BeanDescImpl(componentDef.getComponentClass());
 
         BindingUtil.importProperties(action, container, beanDesc, mapping);
-        forward = execute(request, actionInterface, action, mapping);
+        String forward = execute(request, actionInterface, action, mapping);
         BindingUtil.exportProperties(action, container, beanDesc, mapping);
 
         if (forward != null) {

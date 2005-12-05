@@ -75,6 +75,10 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         }
         return null;
     }
+    
+    public boolean existMethodBindingExpression() {
+        return getMethodBindingExpression() != null;
+    }
 
     private static final HttpServletRequest getRequest() {
         S2Container container = SingletonS2ContainerFactory.getContainer();

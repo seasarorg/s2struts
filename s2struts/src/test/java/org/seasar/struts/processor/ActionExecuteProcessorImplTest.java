@@ -5,6 +5,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.framework.container.ComponentNotFoundRuntimeException;
 import org.seasar.struts.action.ExportAction;
 import org.seasar.struts.action.ExportActionImpl;
 import org.seasar.struts.action.ExportForm;
@@ -16,9 +17,11 @@ import org.seasar.struts.action.POJOActionImpl;
 import org.seasar.struts.action.ReturnNullPOJOAction;
 import org.seasar.struts.action.ReturnNullPOJOActionImpl;
 import org.seasar.struts.mock.MockActionMapping;
+import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class ActionExecuteProcessorImplTest extends S2TestCase {
     private ActionExecuteProcessor actionExecuteProcessor;
@@ -165,6 +168,57 @@ public class ActionExecuteProcessorImplTest extends S2TestCase {
 
         ExportForm resultForm = (ExportForm) getRequest().getSession().getAttribute("exportForm");
         assertEquals("updated", resultForm.getMessage());
+    }
+    
+    public void setUpMethodBinding() throws Exception {
+        include("MethodBindingTest.dicon");
+    }
+    
+    public void testMethodBinding() throws Exception {
+        getRequest().setParameter("1234567890", "TEST");
+        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.exe}");
+        
+        Object action = null;
+        Object form = null;
+        ActionMapping mapping = new MockActionMapping();
+        
+        ActionForward actionForward = actionExecuteProcessor.processActionExecute(getRequest(), getResponse(), action,
+                form, mapping);
+        assertEquals("success", actionForward.getName());
+    }
+    
+    public void setUpMethodBindingDownload() throws Exception {
+        include("MethodBindingTest.dicon");
+    }
+    
+    public void testMethodBindingDownload() throws Exception {
+        getRequest().setParameter("1234567890", "TEST");
+        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.download}");
+        
+        Object action = null;
+        Object form = null;
+        ActionMapping mapping = new MockActionMapping();
+        
+        ActionForward actionForward = actionExecuteProcessor.processActionExecute(getRequest(), getResponse(), action,
+                form, mapping);
+        assertNull(actionForward);
+    }
+    
+    public void testMethodBindingNoRegisteredComponent() throws Exception {
+        getRequest().setParameter("1234567890", "TEST");
+        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.exe}");
+        
+        Object action = null;
+        Object form = null;
+        ActionMapping mapping = new MockActionMapping();
+        
+        try {
+            ActionForward actionForward = actionExecuteProcessor
+                    .processActionExecute(getRequest(), getResponse(), action, form, mapping);
+            fail();
+        } catch (ComponentNotFoundRuntimeException e) {
+            // success
+        }
     }
 
     // TODO リクエスト セッション フォーム
