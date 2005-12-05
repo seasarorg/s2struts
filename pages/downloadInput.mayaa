@@ -21,6 +21,6 @@
     
     <html:text m:id="theText" property="theText" styleClass="text" errorStyleClass="text-error"/>
 
-    <s2struts:submit m:id="goDownload" action="#{download.execute}"><bean:message key="download"/></s2struts:submit>
+    <s2struts:submit m:id="goDownload" action="#{downloadAction.execute}"><bean:message key="download"/></s2struts:submit>
 
 </m:mayaa>
