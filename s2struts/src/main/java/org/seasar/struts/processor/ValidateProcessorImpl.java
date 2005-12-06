@@ -43,7 +43,7 @@ public class ValidateProcessorImpl implements ValidateProcessor {
             ActionMapping mapping, ExternalRequestProcessor requestProcessor) throws IOException, ServletException {
 
         String input = mapping.getInput();
-        if (input == null && S2StrutsContextUtil.getPath() != null) {
+        if (input == null && S2StrutsContextUtil.getPreviousInputPath() != null) {
             ActionMapping newMapping = new ActionMapping();
 
             try {
@@ -56,7 +56,7 @@ public class ValidateProcessorImpl implements ValidateProcessor {
                 throw new NoSuchMethodRuntimeException(newMapping.getClass(), null, null, e);
             }
 
-            input = S2StrutsContextUtil.getPath();
+            input = S2StrutsContextUtil.getPreviousInputPath();
             newMapping.setInput(input);
             mapping = newMapping;
         }
