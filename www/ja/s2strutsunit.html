@@ -46,7 +46,7 @@
 	<ul>
 		<li>ServletAPIを利用したUnitTest機能</li>
 		<p>
-		S2Unitと同様にServlerAPIのモックオブジェクトを利用してのテストが可能です。
+		S2Unitと同様にServletAPIのモックオブジェクトを利用してのテストが可能です。
 		S2Unitとの違いは、ServletAPIからの戻り値をあらかじめ、コンポーネント定義ファイルに記述しておく事が可能な点です。
 		</p>
 		<li>StrutsのActionのサブクラスをテストする機能</li>
@@ -74,27 +74,27 @@
    		<dd>Actionクラスの実行を行う場合、ActionのインスタンスをS2StrutsTestCase#execute(Action)の引数に渡すのみで、
 		サービスなどがインジェクションされたActionクラスを実行可能です。</dd>
    		<dd>また、Actionクラスのインスタンスを生成せずに同様の動作をするS2StrutsTestCase#execute(Class)というメソッドもあります。</dd>
-		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのforword名となります。</dd>
    	</dl>
 	<dl>
    		<dt style="text-indent:1em;"><b>・ActionとActionFormを指定してのActionの実行</b></dt>
    		<dd>Actionクラスの実行を行う場合、ActionとActionFormのインスタンスをS2StrutsTestCase#execute(Action,ActionForm)の引数に渡すのみで、
 		サービスなどがインジェクションされたActionクラスを実行可能です。</dd>
    		<dd>また、Actionクラスのインスタンスを生成せずに同様の動作をするS2StrutsTestCase#execute(Class,ActionForm)というメソッドもあります。</dd>
-		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのforword名となります。</dd>
    	</dl>
 	<dl>
    		<dt style="text-indent:1em;"><b>・MappingDispatchActionの実行</b></dt>
    		<dd>MappingDispatchActionクラスの実行を行う場合、ActionとActionFormのインスタンスとメソッド名をS2StrutsTestCase#execute(Action,ActionForm,String)の引数に渡すのみで、
 		サービスなどがインジェクションされたActionクラスを実行可能です。また、ActionFormを使用しない場合に対応した、S2StrutsTestCase#execute(Action,String)というメソッドが用意されています。</dd>
    		<dd>また、Actionクラスのインスタンスを生成せずに同様の動作をするS2StrutsTestCase#execute(Class,ActionForm,String)というメソッドもあります。また、S2StrutsTestCase#execute(Class,String)というメソッドが用意されています。</dd>
-		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのforword名となります。</dd>
    	</dl>
 	<dl>
    		<dt style="text-indent:1em;"><b>・パスを指定しての実行</b></dt>
    		<dd>パスを指定して、Actionの実行を行う場合、パスをS2StrutsTestCase#execute(String)の引数に渡すのみで、パスに対応したActionが生成され、
 		サービスなどがインジェクションされたActionクラスを実行可能です。</dd>
-		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのfoword名となります。</dd>
+		<dd>実行した結果の戻り値は、Actionを実行した場合に返されるActionMappingのforword名となります。</dd>
 		<dd>パスを指定して実行を行う場合、下記の、コンテキストの読み込みを行う必要があります。</dd>
    	</dl>
 	<dl>
