@@ -28,9 +28,13 @@ import org.seasar.struts.Constants;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class S2StrutsContextImpl implements S2StrutsContext {
-    private String path;
+    
+    private String currentPath;
+    
+    private String previousPath;
 
     private Map methodBindingExpressions = new HashMap();
 
@@ -40,18 +44,29 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         }
     }
 
-    public String getPath() {
+    public String getCurrentInputPath() {
         String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
-
         if (param != null) {
-            this.path = new String(Base64Util.decode(param));
+            return new String(Base64Util.decode(param));
+        } else {
+            return this.currentPath;
         }
-
-        return this.path;
+    }
+    
+    public String getPreviousInputPath() {
+        String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
+        if (param != null) {
+            return new String(Base64Util.decode(param));
+        } else {
+            return this.previousPath;
+        }
     }
 
     public void setPath(String path) {
-        this.path = path;
+        if (!path.equals(this.currentPath)) {
+            this.previousPath = this.currentPath;
+            this.currentPath = path;
+        }
     }
 
     public void setMethodBindingExpression(String key, String value, String methodBindingExpression) {

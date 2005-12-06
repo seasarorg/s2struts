@@ -23,6 +23,7 @@ import org.seasar.struts.context.S2StrutsContext;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public abstract class S2StrutsContextUtil {
 
@@ -38,8 +39,12 @@ public abstract class S2StrutsContextUtil {
         getContext().setPath(path);
     }
 
-    public static String getPath() {
-        return getContext().getPath();
+    public static String getCurrentInputPath() {
+        return getContext().getCurrentInputPath();
+    }
+    
+    public static String getPreviousInputPath() {
+        return getContext().getPreviousInputPath();
     }
     
     public static void setMethodBindingExpression(String key, String value, String methodBindingExpression) {

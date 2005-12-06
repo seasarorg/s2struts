@@ -24,7 +24,9 @@ import java.io.Serializable;
 public interface S2StrutsContext extends Serializable {
     void clear(ContentsType type);
     
-    String getPath();
+    String getCurrentInputPath();
+    
+    String getPreviousInputPath();
 
     void setPath(String path);
 

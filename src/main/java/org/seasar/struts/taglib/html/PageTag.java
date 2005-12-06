@@ -30,7 +30,7 @@ public class PageTag extends BaseTag {
 
     public int doStartTag() throws JspException {
 
-        String path = S2StrutsContextUtil.getPath();
+        String path = S2StrutsContextUtil.getCurrentInputPath();
         path = new String(Base64Util.encode(path.getBytes()));
 
 
