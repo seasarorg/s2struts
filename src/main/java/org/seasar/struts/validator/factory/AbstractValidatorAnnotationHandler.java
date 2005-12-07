@@ -26,6 +26,8 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -100,6 +102,14 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
     }
 
     protected boolean isNestedValidate(PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (ActionForm.class.isAssignableFrom(method.getDeclaringClass())) {
+            return false;
+        }
+        if (ValidatorForm.class.isAssignableFrom(method.getDeclaringClass())) {
+            return false;
+        }
+        
         Class paramType = propDesc.getPropertyType();
         if (paramType.isArray()) {
             paramType = paramType.getComponentType();
