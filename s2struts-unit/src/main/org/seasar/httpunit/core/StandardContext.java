@@ -101,13 +101,6 @@ public class StandardContext extends org.apache.catalina.core.StandardContext {
 
     private void initSystemProperty() {
         setSystemProperty("catalina.useNaming", "true");
-
-        setDocumentBuilderImpl();
-    }
-
-    private void setDocumentBuilderImpl() {
-        setSystemProperty("javax.xml.parsers.DocumentBuilderFactory",
-                "org.apache.crimson.jaxp.DocumentBuilderFactoryImpl");
     }
 
     private static void setSystemProperty(String key, String value) {
