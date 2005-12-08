@@ -60,7 +60,7 @@ public class EmployeeEditActionImpl implements EmployeeEditAction {
     public String goConfirm() {
         if (processModeDto.getProcessMode() == Constants.CREATE_MODE
                 && employeeLogic.existEmployee(new Integer(employeeForm.getEmpno()))) {
-            MessageManager.addError("errors.employee.exist", employeeForm.getEmpno());
+            MessageManager.addGlobalError("errors.employee.exist", employeeForm.getEmpno());
             MessageManager.saveErrors();
             return ERROR;
         }
