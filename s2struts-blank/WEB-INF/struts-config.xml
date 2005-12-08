@@ -48,7 +48,9 @@
           value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
     </plug-in>
 
-    <plug-in className="org.seasar.struts.plugin.RegistActionClassPlugIn"/>
+<!--
+    <plug-in className="org.seasar.struts.plugin.RegisterActionClassPlugIn"/>
+-->
 
     <plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn">
         <set-property property="enableJar" value="false"/>
