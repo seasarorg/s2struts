@@ -143,11 +143,6 @@ public class ValidateDto implements Serializable {
         return length_;
     }
 
-    /**
-     * @org.seasar.struts.validator.annotation.Minlength(value=3)
-     * @org.seasar.struts.validator.annotation.Maxlength(value=5)
-     * @org.seasar.struts.validator.annotation.Args(keys="Length",resource=false)
-     */
     @Minlength(3)
     @Maxlength(5)
     @Args(keys = "Length", resource = false)
