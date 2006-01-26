@@ -50,6 +50,12 @@
             <includes>
               <include>**/*Test.java</include>
             </includes>
+            <systemProperties>
+                <property>
+                    <name>javax.xml.parsers.DocumentBuilderFactory</name>
+                     <value>org.apache.crimson.jaxp.DocumentBuilderFactoryImpl</value>
+                </property>
+            </systemProperties>
           </configuration>
         </plugin>
       </plugins>
