@@ -15,8 +15,10 @@
  */
 package org.seasar.struts.taglib;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.util.InvokeUtil;
 
 /**
@@ -34,6 +36,11 @@ public class InitializeTag extends BaseTag {
     }
     
     public int doStartTag() throws JspException {
+        // In case of Tomcat4.1, HttpServletRequest is set again,
+        // because of the different HttpServletRequest for JSP and Servlet.
+        SingletonS2ContainerFactory.getContainer().setRequest(
+                (HttpServletRequest) this.pageContext.getRequest());
+        
         InvokeUtil.invoke(this.action);
         return SKIP_BODY;
     }
