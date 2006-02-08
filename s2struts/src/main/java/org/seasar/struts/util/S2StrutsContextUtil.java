@@ -51,14 +51,10 @@ public abstract class S2StrutsContextUtil {
         getContext().setMethodBindingExpression(key, value, methodBindingExpression);
     }
     
-    public static String getMethodBindingExpression() {
-        return getContext().getMethodBindingExpression();
+    public static String getMethodBindingExpression(String key, String value) {
+        return getContext().getMethodBindingExpression(key, value);
     }
     
-    public static boolean existMethodBindingExpression() {
-        return getContext().existMethodBindingExpression();
-    }
-
     private static S2StrutsContext getContext() {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);
     }

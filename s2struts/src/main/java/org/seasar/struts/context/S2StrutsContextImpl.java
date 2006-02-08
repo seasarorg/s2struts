@@ -15,7 +15,6 @@
  */
 package org.seasar.struts.context;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,31 +67,13 @@ public class S2StrutsContextImpl implements S2StrutsContext {
             this.currentPath = path;
         }
     }
+    
+    public String getMethodBindingExpression(String key, String value) {
+        return (String) this.methodBindingExpressions.get(key + value);
+    }
 
     public void setMethodBindingExpression(String key, String value, String methodBindingExpression) {
         this.methodBindingExpressions.put(key + value, methodBindingExpression);
-    }
-
-    public String getMethodBindingExpression() {
-        HttpServletRequest request = getRequest();
-        for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
-            String key = (String)paramNames.nextElement();
-            String value = request.getParameter(key);
-            Object ret = this.methodBindingExpressions.get(key + value);
-            if (ret == null) {
-                key = key.replaceFirst("(\\.x$)|(\\.y$)", "");
-                value = request.getParameter(key);
-                ret = this.methodBindingExpressions.get(key + value);
-            }
-            if (ret != null) {
-                return (String)ret;
-            }
-        }
-        return null;
-    }
-    
-    public boolean existMethodBindingExpression() {
-        return getMethodBindingExpression() != null;
     }
 
     private static final HttpServletRequest getRequest() {

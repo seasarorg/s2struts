@@ -1,10 +1,8 @@
 package org.seasar.struts.action;
 
-public interface MethodBindingAction {
+public interface MultiMethodPojoAction {
     
     String exe();
-    
-    String exe(int index);
     
     String download();
 
