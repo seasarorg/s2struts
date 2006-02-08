@@ -70,7 +70,7 @@ public class MethodBinding {
 
     private Object invoke(Object component, BeanDesc beanDesc) {
         if (indexed) {
-            return beanDesc.invoke(component, this.methodName, new Object[] { index });
+            return beanDesc.invoke(component, this.methodName, new Object[] { new Integer(index) });
         } else {
             return beanDesc.invoke(component, this.methodName, null);
         }
