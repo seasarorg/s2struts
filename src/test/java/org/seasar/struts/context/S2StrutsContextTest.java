@@ -57,26 +57,4 @@ public class S2StrutsContextTest extends S2TestCase {
         assertEquals("/prev.jsp", path);
     }
     
-    public void testGetMethodBindingExpression() {
-        getRequest().setParameter("1234567890", "TEST");
-        context.setMethodBindingExpression("1234567890", "TEST", "#{action.execute}");
-        
-        String expression = context.getMethodBindingExpression();
-        assertEquals("#{action.execute}", expression);
-    }
-    
-    public void testExistMethodBindingExpression() {
-        getRequest().setParameter("1234567890", "TEST");
-        context.setMethodBindingExpression("1234567890", "TEST", "#{action.execute}");
-        
-        assertTrue(context.existMethodBindingExpression());
-    }
-    
-    public void testNotExistMethodBindingExpression() {
-        getRequest().setParameter("9999999999", "TEST");
-        context.setMethodBindingExpression("1234567890", "TEST", "#{action.execute}");
-        
-        assertFalse(context.existMethodBindingExpression());
-    }
-
 }

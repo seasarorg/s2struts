@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.util.InvokeUtil;
+import org.seasar.struts.processor.MethodBinding;
 
 /**
  * @author Satoshi Kimura
@@ -41,7 +41,8 @@ public class InitializeTag extends BaseTag {
         SingletonS2ContainerFactory.getContainer().setRequest(
                 (HttpServletRequest) this.pageContext.getRequest());
         
-        InvokeUtil.invoke(this.action);
+        MethodBinding methodBinding = new MethodBinding(this.action);
+        methodBinding.invoke();
         return SKIP_BODY;
     }
 

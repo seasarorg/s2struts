@@ -13,25 +13,23 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.context;
+package org.seasar.struts.processor;
 
-import java.io.Serializable;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Satoshi Kimura
+ * 
  * @author Katsuhiko Nagashima
  */
-public interface S2StrutsContext extends Serializable {
-    void clear(ContentsType type);
-    
-    String getCurrentInputPath();
-    
-    String getPreviousInputPath();
+public interface PojoActionCommand {
 
-    void setPath(String path);
-    
-    String getMethodBindingExpression(String key, String value);
+    String NOT_EXECUTE = "org.seasar.struts.processor.PojoActionCommand.NOT_EXECUTE";
 
-    void setMethodBindingExpression(String key, String value, String methodBindingExpression);
-    
+    String execute(HttpServletRequest request, HttpServletResponse response,
+            Class actionInterface, Object action, Object form,
+            ActionMapping mapping);
+
 }
