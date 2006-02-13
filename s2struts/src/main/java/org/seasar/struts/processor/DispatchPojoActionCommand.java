@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionMapping;
-import org.seasar.framework.exception.NoSuchMethodRuntimeException;
-import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.MethodUtil;
 
 /**
@@ -46,13 +44,22 @@ public class DispatchPojoActionCommand implements PojoActionCommand {
         }
 
         String methodName = request.getParameter(param);
-        Method method;
-        try {
-            method = ClassUtil.getMethod(action.getClass(), methodName, null);
-        } catch (NoSuchMethodRuntimeException e) {
+        Method method = getMethod(methods, methodName);
+        if (method == null) {
             return NOT_EXECUTE;
         }
         return (String) MethodUtil.invoke(method, action, null);
+    }
+    
+    private Method getMethod(Method[] methods, String methodName) {
+    	for (int i = 0; i < methods.length; i++) {
+    		Method method = methods[i];
+    		if (method.getName().equals(methodName)
+					&& method.getParameterTypes().length == 0) {
+    			return method;
+			}
+    	}
+    	return null;
     }
 
 }
