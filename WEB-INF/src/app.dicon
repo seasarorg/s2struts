@@ -17,5 +17,6 @@
 	<include path="org/seasar/struts/examples/dicon/Upload.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Download.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Indexed.dicon"/>
+	<include path="org/seasar/struts/examples/dicon/Iteration.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/employee.dicon"/>
 </components>
