@@ -112,31 +112,31 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
             return (null);
         }
 
-        ActionForm instance = lookupPojoForm(request, attribute, mapping
-                .getScope());
-
-        if (instance != null && instance instanceof SerializeBeanValidatorForm) {
-            return (instance);
+        Object instance = lookupPojoForm(request, attribute, mapping.getScope());
+        if (instance == null) {
+            instance = RequestUtils.createActionForm(config, servlet);
+            return new SerializeBeanValidatorForm((BeanValidatorForm) instance, servlet);
         }
 
-        instance = RequestUtils.createActionForm(config, servlet);
-
+        if (instance instanceof SerializeBeanValidatorForm) {
+            return (ActionForm) instance;
+        }
+        
+        if (!(instance instanceof BeanValidatorForm)) {
+            instance = new BeanValidatorForm(instance);
+        }
         return new SerializeBeanValidatorForm((BeanValidatorForm) instance, servlet);
     }
 
-    private ActionForm lookupPojoForm(HttpServletRequest request,
+    private Object lookupPojoForm(HttpServletRequest request,
             String attribute, String scope) {
 
-        ActionForm instance = null;
-        HttpSession session = null;
         if ("request".equals(scope)) {
-            instance = (ActionForm) request.getAttribute(attribute);
+            return request.getAttribute(attribute);
         } else {
-            session = request.getSession();
-            instance = (ActionForm) session.getAttribute(attribute);
+            HttpSession session = request.getSession();
+            return session.getAttribute(attribute);
         }
-
-        return (instance);
     }
 
     //

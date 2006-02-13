@@ -24,7 +24,7 @@ public class ProcessPojoFormInterceptorTest extends S2TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        include("ProcessPojoFormInterceptorTest.dicon");
+        include("s2struts.dicon");
     }
 
     protected void tearDown() throws Exception {
@@ -126,6 +126,28 @@ public class ProcessPojoFormInterceptorTest extends S2TestCase {
         assertEquals(scopeForm, form);
 
         TestActionForm resultForm = (TestActionForm) form;
+        assertEquals("reuse", resultForm.getMsg());
+    }
+    
+    public void testReuseNoWrapPojoFormFromSession() throws Exception {
+        initRequestProcessor();
+        MockActionMapping mapping = new MockActionMapping();
+        mapping.setName("testPojoForm");
+        mapping.setScope("session");
+        
+        TestPojoForm pojoForm = new TestPojoForm("reuse");
+        getRequest().getSession().setAttribute("testPojoForm", pojoForm);
+        
+        ActionForm form = requestProcessor.processActionForm(getRequest(),
+                getResponse(), mapping);
+
+        assertTrue(BeanValidatorForm.class.isAssignableFrom(form.getClass()));
+
+        Object scopeForm = getRequest().getSession().getAttribute("testPojoForm");
+        assertEquals(scopeForm, form);
+
+        TestPojoForm resultForm = (TestPojoForm) ((WrapDynaBean) ((BeanValidatorForm) form)
+                .getDynaBean()).getInstance();
         assertEquals("reuse", resultForm.getMsg());
     }
 
