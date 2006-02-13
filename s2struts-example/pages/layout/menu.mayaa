@@ -18,6 +18,7 @@
     <html:link m:id="uploadPage" page="/pages/uploadInput.html"><bean:message key="upload.title"/></html:link>
     <html:link m:id="downloadPage" page="/pages/downloadInput.html"><bean:message key="download.title"/></html:link>
     <html:link m:id="indexedPage" page="/pages/indexedInput.html"><bean:message key="indexed.title"/></html:link>
+    <html:link m:id="iterationPage" page="/pages/iterationList.html"><bean:message key="iteration.title"/></html:link>
     <html:link m:id="employeePage" forward="employee"><bean:message key="title.employee" /></html:link>
 
 </m:mayaa>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Windows-31j">
+  <link href="../../css/global.css" rel="stylesheet" type="text/css"></link>
+  <script type="text/javascript" src="../../js/execute.js"></script>
+  <title id="pageTitle">
+    S2Struts Iteration Example Demo - List
+  </title>
+</head>
+<body>
+
+<div id="appBody">
+  <div id="errorMessage"></div>
+
+  <form method="GET" action="iterationCreate.html" id="appForm">
+    <input type="submit" id="goCreate" value="create"/>
+    <table border="1">
+      <tr>
+        <th>command</th>
+        <th>id</th>
+        <th>name</th>
+      </tr>
+        <tr id="loop">
+          <td>
+            <input type="submit" id="goEdit" value="edit"/>
+            <input type="submit" id="goDelete" value="delete"/>
+          </td>
+          <td><span id="id">10</span></td>
+          <td><span id="name">dog</span></td>
+        </tr>
+      <div id="dummy">
+        <tr>
+          <td>
+            <input type="submit" value="edit"/>
+            <input type="submit" value="delete"/>
+          </td>
+          <td>11</td>
+          <td>cat</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="edit"/>
+            <input type="submit" value="delete"/>
+          </td>
+          <td>12</td>
+          <td>bird</td>
+        </tr>
+      </div>
+    </table>
+  </form>
+</div>
+
+</body>
+</html>

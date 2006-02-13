@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="iteration.title.list" />
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content">
+        <s2struts:init action="#{iterationListInitAction.initialize}" />
+        <m:doBody/>
+    </m:doRender>
+    
+    <html:errors m:id="errorMessage" />
+    
+    <html:form m:id="appForm" action="/iterationList" method="POST">
+        <s2struts:page />
+        <m:doBody/>
+    </html:form>
+
+    <s2struts:submit m:id="goCreate" action="#{iterationListAction.goCreate}">
+        <bean:message key="button.create" />
+    </s2struts:submit>
+
+<!-- これはできない
+    <logic:iterate m:id="loop" replace="false"
+            id="iterations"
+            name="iterationListDto"
+            property="iterations"
+            indexId="i" />
+-->
+    <m:forEach id="loop" replace="false"
+            items="${ iterationListDto.getIterations() }"
+            var="iterations"
+            index="i" />
+
+    <s2struts:submit m:id="goEdit" action="#{iterationListAction.goEdit}" indexId="i">
+        <bean:message key="button.edit" />
+    </s2struts:submit>
+    <s2struts:submit m:id="goDelete" action="#{iterationListAction.goDelete}" indexId="i">
+        <bean:message key="button.delete" />
+    </s2struts:submit>
+    <m:with id="id">
+      <bean:write name="iterations" property="id" />
+      <input type="hidden" name="iterations[${ i }].id" value="${ iterations.id }" />
+    </m:with>
+    <bean:write m:id="name" name="iterations" property="name" />
+
+    <m:null id="dummy"/>
+
+</m:mayaa>

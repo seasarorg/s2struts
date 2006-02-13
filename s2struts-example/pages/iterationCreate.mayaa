@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="iteration.title.create" />
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content">
+        <m:doBody/>
+    </m:doRender>
+    
+    <html:errors m:id="errorMessage" />
+    
+    <html:link m:id="goBack" page="/pages/iterationList.html">
+        <bean:message key="button.back" />
+    </html:link>
+ 
+</m:mayaa>
