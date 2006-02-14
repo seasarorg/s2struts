@@ -35,9 +35,11 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.util.RequestUtils;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
+import org.seasar.framework.util.ClassUtil;
 import org.seasar.struts.Constants;
 import org.seasar.struts.form.S2BeanValidatorForm;
 import org.seasar.struts.processor.ExternalRequestProcessor;
+import org.seasar.struts.util.BeanValidatorFormUtil;
 
 /**
  * <component class="org.seasar.struts.processor.S2RequestProcessor">
@@ -113,18 +115,18 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
         }
 
         Object instance = lookupPojoForm(request, attribute, mapping.getScope());
-        if (instance == null) {
-            instance = RequestUtils.createActionForm(config, servlet);
+        if (instance != null && canReusePojoForm(instance, config)) {
+            if (instance instanceof SerializeBeanValidatorForm) {
+                return (ActionForm) instance;
+            }
+            
+            if (!(instance instanceof BeanValidatorForm)) {
+                instance = new BeanValidatorForm(instance);
+            }
             return new SerializeBeanValidatorForm((BeanValidatorForm) instance, servlet);
         }
 
-        if (instance instanceof SerializeBeanValidatorForm) {
-            return (ActionForm) instance;
-        }
-        
-        if (!(instance instanceof BeanValidatorForm)) {
-            instance = new BeanValidatorForm(instance);
-        }
+        instance = RequestUtils.createActionForm(config, servlet);
         return new SerializeBeanValidatorForm((BeanValidatorForm) instance, servlet);
     }
 
@@ -137,6 +139,12 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
             HttpSession session = request.getSession();
             return session.getAttribute(attribute);
         }
+    }
+    
+    private boolean canReusePojoForm(Object instance, FormBeanConfig config) {
+        Class configClass = ClassUtil.forName(config.getType());
+        Object bean = BeanValidatorFormUtil.toBean(instance);
+        return configClass.isAssignableFrom(bean.getClass());
     }
 
     //
@@ -152,13 +160,13 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
     }
 
     private ModuleConfig getModuleConfig(MethodInvocation invocation) {
-    	ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation
+        ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation
                 .getThis();
         return processor.getModuleConfig();
     }
 
     private ActionServlet getServlet(MethodInvocation invocation) {
-    	ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation
+        ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation
                 .getThis();
         return processor.getActionServlet();
     }

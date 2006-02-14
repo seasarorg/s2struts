@@ -47,6 +47,45 @@ public class ProcessPojoFormInterceptorTest extends S2TestCase {
         requestProcessor.init(null, config);
     }
 
+    public void testNewActionForm() throws Exception {
+        initRequestProcessor();
+        MockActionMapping mapping = new MockActionMapping();
+        mapping.setName("testActionForm");
+        mapping.setScope("session");
+
+        ActionForm form = requestProcessor.processActionForm(getRequest(),
+                getResponse(), mapping);
+
+        assertFalse(BeanValidatorForm.class.isAssignableFrom(form.getClass()));
+
+        Object scopeForm = getRequest().getSession().getAttribute("testActionForm");
+        assertEquals(scopeForm, form);
+
+        TestActionForm resultForm = (TestActionForm) form;
+        assertEquals("new", resultForm.getMsg());
+    }
+
+    public void testReuseActionForm() throws Exception {
+        initRequestProcessor();
+        MockActionMapping mapping = new MockActionMapping();
+        mapping.setName("testActionForm");
+        mapping.setScope("session");
+
+        TestActionForm actionForm = new TestActionForm("reuse");
+        getRequest().getSession().setAttribute("testActionForm", actionForm);
+
+        ActionForm form = requestProcessor.processActionForm(getRequest(),
+                getResponse(), mapping);
+
+        assertFalse(BeanValidatorForm.class.isAssignableFrom(form.getClass()));
+
+        Object scopeForm = getRequest().getSession().getAttribute("testActionForm");
+        assertEquals(scopeForm, form);
+
+        TestActionForm resultForm = (TestActionForm) form;
+        assertEquals("reuse", resultForm.getMsg());
+    }
+    
     public void testNewPojoForm() throws Exception {
         initRequestProcessor();
         MockActionMapping mapping = new MockActionMapping();
@@ -89,46 +128,31 @@ public class ProcessPojoFormInterceptorTest extends S2TestCase {
                 .getDynaBean()).getInstance();
         assertEquals("reuse", resultForm.getMsg());
     }
-
-    public void testNewActionForm() throws Exception {
-        initRequestProcessor();
-        MockActionMapping mapping = new MockActionMapping();
-        mapping.setName("testActionForm");
-        mapping.setScope("session");
-
-        ActionForm form = requestProcessor.processActionForm(getRequest(),
-                getResponse(), mapping);
-
-        assertFalse(BeanValidatorForm.class.isAssignableFrom(form.getClass()));
-
-        Object scopeForm = getRequest().getSession().getAttribute("testActionForm");
-        assertEquals(scopeForm, form);
-
-        TestActionForm resultForm = (TestActionForm) form;
-        assertEquals("new", resultForm.getMsg());
-    }
-
-    public void testReuseActionForm() throws Exception {
-        initRequestProcessor();
-        MockActionMapping mapping = new MockActionMapping();
-        mapping.setName("testActionForm");
-        mapping.setScope("session");
-
-        TestActionForm actionForm = new TestActionForm("reuse");
-        getRequest().getSession().setAttribute("testActionForm", actionForm);
-
-        ActionForm form = requestProcessor.processActionForm(getRequest(),
-                getResponse(), mapping);
-
-        assertFalse(BeanValidatorForm.class.isAssignableFrom(form.getClass()));
-
-        Object scopeForm = getRequest().getSession().getAttribute("testActionForm");
-        assertEquals(scopeForm, form);
-
-        TestActionForm resultForm = (TestActionForm) form;
-        assertEquals("reuse", resultForm.getMsg());
-    }
     
+    public void testReuseExetendPojoForm() throws Exception {
+        initRequestProcessor();
+        MockActionMapping mapping = new MockActionMapping();
+        mapping.setName("testPojoForm");
+        mapping.setScope("session");
+
+        TestPojoForm pojoForm = new TestExtendPojoForm("reuse");
+        BeanValidatorForm beanForm = new BeanValidatorForm(pojoForm);
+        getRequest().getSession().setAttribute("testPojoForm",
+                new SerializeBeanValidatorForm(beanForm, null));
+
+        ActionForm form = requestProcessor.processActionForm(getRequest(),
+                getResponse(), mapping);
+
+        assertTrue(BeanValidatorForm.class.isAssignableFrom(form.getClass()));
+
+        Object scopeForm = getRequest().getSession().getAttribute("testPojoForm");
+        assertEquals(scopeForm, form);
+
+        TestPojoForm resultForm = (TestPojoForm) ((WrapDynaBean) ((BeanValidatorForm) form)
+                .getDynaBean()).getInstance();
+        assertEquals("extend:reuse", resultForm.getMsg());
+    }
+
     public void testReuseNoWrapPojoFormFromSession() throws Exception {
         initRequestProcessor();
         MockActionMapping mapping = new MockActionMapping();
@@ -149,6 +173,28 @@ public class ProcessPojoFormInterceptorTest extends S2TestCase {
         TestPojoForm resultForm = (TestPojoForm) ((WrapDynaBean) ((BeanValidatorForm) form)
                 .getDynaBean()).getInstance();
         assertEquals("reuse", resultForm.getMsg());
+    }
+    
+    public void testNotReusePojoFormFromSession() throws Exception {
+        initRequestProcessor();
+        MockActionMapping mapping = new MockActionMapping();
+        mapping.setName("testPojoForm");
+        mapping.setScope("session");
+        
+        Object pojoForm = "notPojoForm";
+        getRequest().getSession().setAttribute("testPojoForm", pojoForm);
+        
+        ActionForm form = requestProcessor.processActionForm(getRequest(),
+                getResponse(), mapping);
+
+        assertTrue(BeanValidatorForm.class.isAssignableFrom(form.getClass()));
+
+        Object scopeForm = getRequest().getSession().getAttribute("testPojoForm");
+        assertEquals(scopeForm, form);
+
+        TestPojoForm resultForm = (TestPojoForm) ((WrapDynaBean) ((BeanValidatorForm) form)
+                .getDynaBean()).getInstance();
+        assertEquals("new", resultForm.getMsg());
     }
 
 }
