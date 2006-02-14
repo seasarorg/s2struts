@@ -57,9 +57,9 @@ public class ValidatorAnnotationForm {
     public void setLength(String length) {
     }
 
-    public static final String bytelength_VALIDATOR_0 = "minbytelength, value=3, charset=ISO8859_1";
-    public static final String bytelength_VALIDATOR_1 = "maxbytelength, value=5, charset=ISO8859_1";
-    public static final String bytelength_VALIDATOR_ARGS = "Bytelength, resource=false";
+    public static final String byteLength_VALIDATOR_0 = "minbytelength, value=3, charset=ISO8859_1";
+    public static final String byteLength_VALIDATOR_1 = "maxbytelength, value=5, charset=ISO8859_1";
+    public static final String byteLength_VALIDATOR_ARGS = "Bytelength, resource=false";
     
     public void setByteLength(String byteLength) {
     }
