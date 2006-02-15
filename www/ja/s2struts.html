@@ -894,7 +894,7 @@ public String getFoo() {
 以下のように、backport175による記述も可能です。
 <pre>
 /**
- * @org.seasar.struts.action.backport175.ExportToSession()
+ * @org.seasar.struts.annotation.backport175.ExportToSession()
  */
 public String getFoo() {
     return foo;
@@ -1961,7 +1961,18 @@ S2Strutsでは、ButtonTagとSubmitTagを用意しています。
       <td><center>×</center></td>
       <td><center>-</center></td>
       <td>action="#{component.method}"と記述することによって、サブミット時に実行するコンポーネントとメソッドを指定する事が可能です。
-      コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
+      コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。<br>
+      indexId属性を指定しない場合は、引数なしとして指定されたメソッドを呼び出します。<br>
+      例えば、&lt;s2struts:submit action="{hogeAction.create}"&gt;
+       と記述して表示されたボタンを押した場合、
+       String create()
+       メソッドが呼び出されます<br>
+      indexId属性を指定した場合は、int型のindexを引数とする指定されたメソッドを呼び出します。<br>
+      例えば、&lt;s2struts:submit action="{hogeAction.create}" indexId="index"&gt;
+       と記述して表示されたボタンを押した場合、
+       String create(int index)
+       メソッドが呼び出されます<br>
+      </td>
   </tr>
   <tr>
     <td><center>indexId</center></td>
