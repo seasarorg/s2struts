@@ -27,7 +27,7 @@
         <bean:message key="button.create" />
     </s2struts:submit>
 
-<!-- ‚±‚ê‚Í‚Å‚«‚È‚¢
+<!-- mayaa‚Ì1.0.2‚ª‚Å‚½‚ç‚±‚¿‚ç‚Å‚à“®ì‚·‚é
     <logic:iterate m:id="loop" replace="false"
             id="iterations"
             name="iterationListDto"
