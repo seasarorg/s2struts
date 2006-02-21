@@ -24,6 +24,7 @@ import org.seasar.framework.util.BooleanConversionUtil;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
+import org.seasar.struts.util.ConstantAnnotationUtil;
 import org.seasar.struts.util.ConstantValueUtil;
 
 /**
@@ -45,7 +46,9 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (clazz != beanDesc.getField(ACTION).getDeclaringClass()) {
             return null;
         }
-        
+		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(ACTION))) {
+			return null;
+		}
         String value = (String) beanDesc.getFieldValue(ACTION, null);
         final Map parameters = ConstantValueUtil.toMap(value);
 
@@ -164,6 +167,9 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (!beanDesc.hasField(fieldName)) {
             return null;
         }
+		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
+			return null;
+		}
         String value = (String) beanDesc.getFieldValue(fieldName, null);
         final Map parameters = ConstantValueUtil.toMap(value, "path");
 
@@ -191,6 +197,9 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (clazz != beanDesc.getField(FORM).getDeclaringClass()) {
             return null;
         }
+		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(FORM))) {
+			return null;
+		}
         
         String value = (String) beanDesc.getFieldValue(FORM, null);
         final Map parameters = ConstantValueUtil.toMap(value, "name");

@@ -15,6 +15,8 @@ public class ActionAnnotationActionImpl implements ActionAnnotationAction {
     
     public static final String bar_EXPORT = Constants.SESSION;
 
+    private static final int foo_EXPORT = 0;
+
     public String getBar() {
         return bar;
     }
