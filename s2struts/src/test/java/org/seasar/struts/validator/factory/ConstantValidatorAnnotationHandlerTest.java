@@ -259,4 +259,16 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("File", field.getArg(0).getKey());
     }
     
+    public void testNotConstantValidator() {
+        Field field = form.getField("notConstantValidator");
+        assertNull(field);
+    }
+    
+    public void testNotConstantValidatorArg() {
+        Field field = form.getField("notConstantValidatorArg");
+        assertNotNull(field);
+        assertEquals("notConstantValidatorArg", field.getArg(0).getKey());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+    
 }
