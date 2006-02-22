@@ -27,6 +27,7 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.util.BooleanConversionUtil;
 import org.seasar.framework.util.StringUtil;
+import org.seasar.struts.util.ConstantAnnotationUtil;
 import org.seasar.struts.util.ConstantValueUtil;
 
 /**
@@ -81,6 +82,9 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         if (!beanDesc.hasField(fieldName)) {
             return;
         }
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
+            return;
+        }
         String value = (String) beanDesc.getFieldValue(fieldName, null);
         Map parameter = ConstantValueUtil.toMap(value);
 
@@ -107,12 +111,14 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         
         String fieldName = propDesc.getPropertyName() + ARGS_SUFFIX;
         if (beanDesc.hasField(fieldName)) {
-            String value = (String) beanDesc.getFieldValue(fieldName, null);
-            Map parameter = ConstantValueUtil.toMap(value, "keys");
-            keys = toArrays((String) parameter.get("keys"));
-            String resourceStr = (String) parameter.get("resource");
-            if (!StringUtil.isEmpty(resourceStr)) {
-                resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
+            if (ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
+                String value = (String) beanDesc.getFieldValue(fieldName, null);
+                Map parameter = ConstantValueUtil.toMap(value, "keys");
+                keys = toArrays((String) parameter.get("keys"));
+                String resourceStr = (String) parameter.get("resource");
+                if (!StringUtil.isEmpty(resourceStr)) {
+                    resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
+                }
             }
         }
 
@@ -165,6 +171,9 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
 
     private Map getValidatorParameter(BeanDesc beanDesc, String fieldName) {
         if (!beanDesc.hasField(fieldName)) {
+            return null;
+        }
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
             return null;
         }
         String value = (String) beanDesc.getFieldValue(fieldName, null);

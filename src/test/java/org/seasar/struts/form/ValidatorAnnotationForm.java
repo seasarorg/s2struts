@@ -126,4 +126,16 @@ public class ValidatorAnnotationForm {
     public void setFile(FormFile file) {
     }
     
+    public String notConstantValidator_VALIDATOR = "required";
+    public static final String notConstantValidator_VALIDATOR_ARGS = "NotConstantValidator, resource=false";
+    
+    public void setNotConstantValidator(String notConstantValidator) {
+    }
+    
+    public static final String notConstantValidatorArg_VALIDATOR = "required";
+    public String notConstantValidatorArg_VALIDATOR_ARGS = "not.constant.validator.arg, resource=true";
+    
+    public void setNotConstantValidatorArg(String notConstantValidatorArg) {
+    }
+    
 }
