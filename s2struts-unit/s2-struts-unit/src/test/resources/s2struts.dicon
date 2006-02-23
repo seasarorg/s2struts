@@ -2,20 +2,29 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="s2struts">
-	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
-	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="messageFacade"                class="org.seasar.struts.action.MessageFacadeImpl" instance="request"/>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.S2StrutsContextImpl" instance="session"/>
+
+	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
+	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
 	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
-	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
-	<component name="executeProcessor"             class="org.seasar.struts.processor.ActionExecuteProcessorImpl"/>
 	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
+	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
+
+	<component name="methodBindingActionCommand"    class="org.seasar.struts.processor.MethodBindingActionCommand"/>
+	<component name="singleMethodPojoActionCommand" class="org.seasar.struts.processor.SingleMethodPojoActionCommand"/>
+	<component name="dispatchPojoActionCommand"     class="org.seasar.struts.processor.DispatchPojoActionCommand"/>
+	<component name="pojoActionExecuteCommand"      class="org.seasar.struts.processor.PojoActionExecuteCommand">
+		<initMethod name="addPojoActionCommand"><arg>singleMethodPojoActionCommand</arg></initMethod>
+		<initMethod name="addPojoActionCommand"><arg>dispatchPojoActionCommand</arg></initMethod>
+	</component>
+	<component name="executeProcessor"              class="org.seasar.struts.processor.ActionExecuteProcessorImpl">
+		<initMethod name="addActionCommand"><arg>methodBindingActionCommand</arg></initMethod>
+		<initMethod name="addActionCommand"><arg>pojoActionExecuteCommand</arg></initMethod>
+	</component>
 	<component name="validateProcessor"            class="org.seasar.struts.processor.ValidateProcessorImpl"/>
 	<component name="inputValueFormProcessor"      class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
 	<component name="requestProcessor"             class="org.seasar.struts.processor.S2RequestProcessor" instance="prototype">
-	    <aspect>
-	    	<component name="traceInterceptor" class="org.seasar.framework.aop.interceptors.TraceInterceptor"/>
-	    </aspect>
 		<aspect pointcut="processActionForm">
 			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
 		</aspect>
@@ -28,7 +37,7 @@
 	</component>
 	-->
 
-    <!-- ZeroConfig Components  -->
+	<!-- ZeroConfig Components  -->
 	<component name="autoStrutsConfigRule"         class="org.seasar.struts.config.AutoStrutsConfigRuleImpl"/>
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>

@@ -5,9 +5,9 @@
 >
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.seasar.struts</groupId>
-  <artifactId>s2-struts-unit</artifactId>
-  <packaging>jar</packaging>
-  <name>s2-struts-unit</name>
+  <artifactId>s2-struts-unit-project</artifactId>
+  <packaging>pom</packaging>
+  <name>s2-struts-unit-project</name>
   <version>RC1</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
@@ -53,7 +53,7 @@
             <systemProperties>
                 <property>
                     <name>javax.xml.parsers.DocumentBuilderFactory</name>
-                     <value>org.apache.crimson.jaxp.DocumentBuilderFactoryImpl</value>
+                    <value>org.apache.crimson.jaxp.DocumentBuilderFactoryImpl</value>
                 </property>
             </systemProperties>
           </configuration>
@@ -61,6 +61,10 @@
       </plugins>
     </pluginManagement>
   </build>
+  <modules>
+    <module>s2-httpunit</module>
+    <module>s2-struts-unit</module>
+  </modules>
   <repositories>
     <repository>
       <id>maven.seasar.org</id>
@@ -69,93 +73,6 @@
     </repository>
   </repositories>
   <dependencies>
-    <dependency>
-      <groupId>org.seasar.struts</groupId>
-      <artifactId>s2-struts</artifactId>
-      <version>1.2.0</version>
-      <type>jar</type>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-modeler</groupId>
-      <artifactId>commons-modeler</artifactId>
-      <version>1.1M1</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>mx4j</groupId>
-      <artifactId>mx4j-jmx</artifactId>
-      <version>1.1.1</version>
-      <type>jar</type>
-    </dependency>
-    
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>catalina-i18n-ja</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>catalina-i18n-es</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>catalina-i18n-fr</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>catalina</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>naming-resources</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>naming-common</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>jasper-compiler</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>jasper-runtime</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>tomcat-util</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>servlets-ssi</artifactId>
-      <version>5.0.16</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>servlets-default</artifactId>
-      <version>5.0.28</version>
-      <type>jar</type>
-    </dependency>
-
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>

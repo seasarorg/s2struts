@@ -1,0 +1,24 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
+  <parent>
+    <groupId>org.seasar.struts</groupId>
+    <artifactId>s2-struts-unit-project</artifactId>
+    <version>RC1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>s2-struts-unit</artifactId>
+  <packaging>jar</packaging>
+  <name>s2-struts-unit</name>
+  <url>http://s2struts.seasar.org/</url>
+  <dependencies>
+    <dependency>
+      <groupId>org.seasar.struts</groupId>
+      <artifactId>s2-httpunit</artifactId>
+      <version>RC1</version>
+      <type>jar</type>
+    </dependency>
+  </dependencies>
+</project>
