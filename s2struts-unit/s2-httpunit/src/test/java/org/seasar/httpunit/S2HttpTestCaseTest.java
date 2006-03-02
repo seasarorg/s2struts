@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServlet;
 import org.apache.struts.action.ActionServlet;
 import org.seasar.framework.container.servlet.S2ContainerServlet;
 import org.seasar.httpunit.exception.TooManyRegistrationRuntimeException;
-import org.seasar.struts.servlet.S2ActionServlet;
 
 /**
  * @author Satoshi Kimura
@@ -23,7 +22,7 @@ public class S2HttpTestCaseTest extends S2HttpTestCase {
 
     public void testGetHttpServletString() {
         HttpServlet actual = getHttpServlet("action");
-        assertEquals(S2ActionServlet.class, actual.getClass());
+        assertEquals(ActionServlet.class, actual.getClass());
         actual = getHttpServlet("s2container");
         assertEquals(S2ContainerServlet.class, actual.getClass());
 
@@ -37,7 +36,7 @@ public class S2HttpTestCaseTest extends S2HttpTestCase {
 
     public void testGetHttpServletClass() {
         HttpServlet actual = getHttpServlet(ActionServlet.class);
-        assertEquals(S2ActionServlet.class, actual.getClass());
+        assertEquals(ActionServlet.class, actual.getClass());
         actual = getHttpServlet(S2ContainerServlet.class);
         assertEquals(S2ContainerServlet.class, actual.getClass());
 

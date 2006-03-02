@@ -306,8 +306,6 @@ public abstract class S2HttpTestCase extends S2TestCase {
 
         try {
             super.runBare();
-        } catch (Throwable e) {
-            e.printStackTrace();
         } finally {
             tearDownForS2HttpTestCase();
         }

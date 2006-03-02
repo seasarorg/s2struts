@@ -6,14 +6,6 @@
 
 <web-app>
   <display-name>Struts Application</display-name>
-  <servlet>
-    <servlet-name>test1</servlet-name>
-    <servlet-class>org.seasar.httpunit.TestServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>test2</servlet-name>
-    <servlet-class>org.seasar.httpunit.TestServlet</servlet-class>
-  </servlet>
 
   <servlet>
     <servlet-name>s2container</servlet-name>

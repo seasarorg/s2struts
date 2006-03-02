@@ -24,7 +24,7 @@
   <!-- Standard Action Servlet Configuration (with debugging) -->
   <servlet>
     <servlet-name>action</servlet-name>
-    <servlet-class>org.seasar.struts.servlet.S2ActionServlet</servlet-class>
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
     <init-param>
       <param-name>config</param-name>
       <param-value>/WEB-INF/struts-config.xml</param-value>
