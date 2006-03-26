@@ -1,77 +1,27 @@
 <project name="S2StrutsUnit" default="dist" basedir=".">
+	<property name="ver" value="RC1"/>
 
-  <property file="project.properties"/>
-
-  <property name="main" value="main" />
-  <property name="testcase" value="testcase" />
-
-  <property name="src" value="src" />
-  <property name="src.main" value="${src}/${main}"/>
-  <property name="src.testcase" value="${src}/${testcase}"/>
-
-  <property name="build" value="build" />
-  <property name="build.main" value="${build}/${main}"/>
-  <property name="build.testcase" value="${build}/${testcase}"/>
-
-  <property name="lib" value="lib"/>
-  
-  <path id="lib.classpath">
-    <fileset id="" dir="${lib}">
-      <include name="*" />
-      <exclude name="${exculudejarfile}" />
-    </fileset>
-  </path>
-  <path id="classpath">
-	<path refid="lib.classpath" />
-	<pathelement path="${build.main}"/>
-	<pathelement path="${build.testcase}"/>
-  </path>
-
-  <target name="compile" depends="init">
-    <javac srcdir="${src.main}" destdir="${build.main}" debug="on" classpathref="classpath"/>
-    <javac srcdir="${src.testcase}" destdir="${build.testcase}" debug="on" classpathref="classpath"/>
-  </target>
-
-  <target name="copy" depends="compile">
-    <copy todir="${build}" >
-      <fileset dir="${src}" >
-        <include name="**/*.properties" />
-        <include name="**/*.xml" />
-        <include name="**/*.dtd" />
-        <include name="**/*.dicon" />
-        <exclude name="build.xml" />
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="dist" depends="compile,copy,cleantargetjarfile">
-	<jar jarfile="${lib}/${httpunitjarfile}" basedir="${build.main}" includes="${httpunitpackage}" />
-	<jar jarfile="${lib}/${s2strutsunitjarfile}" basedir="${build.main}" includes="${s2strutsunitpackage}" />
-  	<antcall target="removeClassFile"/>
-    <zip destfile="../${releasefile}" basedir=".." includes="${projectDir} , ${projectDir}/**" excludes="**/.DS_Store,**/.djunitplugin"/>
-  </target>
-
-  <target name="cleanbuild">
-    <delete dir="${build}" />
-  </target>
-
-  <target name="removeClassFile">
-    <delete dir="${build.main}" />
-    <delete dir="${build.testcase}" />
-  </target>
-  
-  <target name="cleantargetjarfile">
-    <delete>
-      <fileset dir="${lib}" defaultexcludes="no" >
-        <include name="${exculudejarfile}" />
-      </fileset>
-    </delete>
-  </target>
-
-  <target name="init" depends="cleanbuild">
-    <mkdir dir="${build.main}"/>
-    <mkdir dir="${build.testcase}"/>
-  </target>
+	<target name="dist">
+		<mkdir dir="target"/>
+		<zip zipfile="target/S2StrutsUnit-V${ver}.zip">
+			<zipfileset prefix="s2struts-unit" dir=".">
+				<exclude name="**/target/**"/>
+				<exclude name="**/.settings/**"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts-unit/lib" dir="s2-httpunit/target">
+				<include name="s2-httpunit-${ver}.jar"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts-unit/lib" dir="s2-struts-unit/target">
+				<include name="s2-struts-unit-${ver}.jar"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts-unit/resources" dir="s2-httpunit/src/main/resources">
+				<include name="**/*.dicon"/>
+			</zipfileset>
+			<zipfileset prefix="s2struts-unit/doc" dir="../s2struts-www">
+				<exclude name="**/download/**"/>
+				<exclude name=".project"/>
+			</zipfileset>
+		</zip>
+	</target>
 
 </project>
-
