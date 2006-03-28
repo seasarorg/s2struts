@@ -8,6 +8,10 @@ import org.seasar.struts.action.ResetPojoForm;
 import org.seasar.struts.mock.MockActionMapping;
 import org.seasar.struts.util.BeanValidatorFormUtil;
 
+/**
+ * 
+ * @author Katsuhiko Nagashima
+ */
 public class S2BeanValidatorFormTest extends S2TestCase {
 
     public void testCalledReset() {
