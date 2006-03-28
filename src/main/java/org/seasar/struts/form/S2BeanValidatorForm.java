@@ -15,14 +15,19 @@
  */
 package org.seasar.struts.form;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.beanutils.WrapDynaBean;
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.BeanValidatorForm;
+import org.seasar.framework.beans.BeanDesc;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 
 /**
  * @author Katsuhiko Nagashima
  */
 public class S2BeanValidatorForm extends BeanValidatorForm {
-
+    
     public S2BeanValidatorForm(BeanValidatorForm form) {
         super(form.getDynaBean());
         if (form.getMultipartRequestHandler() != null) {
@@ -35,5 +40,17 @@ public class S2BeanValidatorForm extends BeanValidatorForm {
         super.dynaBean = new WrapDynaBean(bean);
     }
     
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        super.reset(mapping, request);
+        Object bean = getBean();
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(bean.getClass());
+        if (beanDesc.hasMethod("reset")) {
+            beanDesc.invoke(bean, "reset", null);
+        }
+    }
+    
+    private Object getBean() {
+        return ((WrapDynaBean) dynaBean).getInstance();
+    }
 
 }
