@@ -879,7 +879,7 @@ setFoo(int index, Object value);
 (1)基本的に、HttpServletRequest#setAttribute(プロパティー名,プロパティー値)を行います。<br>
 (2)HttpSession#setAttribute(プロパティー名,プロパティー値)を行いたい場合は、定数アノテーションにて、
 <pre>
-public final static String プロパティ名_EXPORT = org.seasar.struts.util.BindingUtil.SESSION;
+public final static String プロパティ名_EXPORT = org.seasar.struts.Constants.SESSION;
 </pre>
 とActionクラスに記述する必要があります。
 </p>

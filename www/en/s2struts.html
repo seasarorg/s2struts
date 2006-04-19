@@ -889,7 +889,7 @@ In case of a getter method, HttpServletRequest or Httpsession will be automatica
 (1) HttpservletRequest#setAttribute(property name, Property value) will be run by default.<br>
 (2) Enter
 <pre>
-public final static String PropertyName_EXPORT = org.seasar.struts.util.BindingUtil.SESSION;
+public final static String PropertyName_EXPORT = org.seasar.struts.Constants.SESSION;
 </pre>
 in the action class using constant value annotation to use Httpsession#setAttribute(property name, property value).
 </p>
