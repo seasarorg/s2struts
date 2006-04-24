@@ -51,6 +51,7 @@
 	<component name="maxbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MaxbytelengthConfigRegisterImpl"/>
 	<component name="minbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MinbytelengthConfigRegisterImpl"/>
 	<component name="intRangeConfigRegister"       class="org.seasar.struts.validator.config.IntRangeConfigRegisterImpl"/>
+	<component name="longRangeConfigRegister"      class="org.seasar.struts.validator.config.LongRangeConfigRegisterImpl"/>
 	<component name="floatRangeConfigRegister"     class="org.seasar.struts.validator.config.FloatRangeConfigRegisterImpl"/>
 	<component name="doubleRangeConfigRegister"    class="org.seasar.struts.validator.config.DoubleRangeConfigRegisterImpl"/>
 	<component name="validatorFieldConfigRegister" class="org.seasar.struts.validator.config.ValidatorFieldConfigRegisterImpl"/>
