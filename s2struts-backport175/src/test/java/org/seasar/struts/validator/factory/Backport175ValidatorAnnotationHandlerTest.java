@@ -4,6 +4,7 @@ import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.form.ValidatorAnnotationForm;
+import org.seasar.struts.form.ValidatorAnnotationRangeForm;
 
 /**
  * 
@@ -16,6 +17,8 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     
     private Form form;
     
+    private Form rangeForm;
+    
     public void setUp() {
         include("s2struts.dicon");
         
@@ -24,6 +27,7 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     
     public void setUpAfterContainerInit() {
         form = annHandler.createForm("testForm", ValidatorAnnotationForm.class);
+        rangeForm = annHandler.createForm("testRangeForm", ValidatorAnnotationRangeForm.class);
     }
 
     public void testArg() {
@@ -112,11 +116,19 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     }
     
     public void testRange() {
-        Field field = form.getField("range");
+        Field field = rangeForm.getField("range");
         assertNotNull(field);
         assertEquals("floatRange", field.getDepends());
         assertEquals("5.0", field.getVarValue("min"));
         assertEquals("10.1", field.getVarValue("max"));
+    }
+    
+    public void testLongRange() {
+        Field field = rangeForm.getField("longRange");
+        assertNotNull(field);
+        assertEquals("longRange", field.getDepends());
+        assertEquals("5", field.getVarValue("min"));
+        assertEquals("10", field.getVarValue("max"));
     }
     
     public void testMix() {
