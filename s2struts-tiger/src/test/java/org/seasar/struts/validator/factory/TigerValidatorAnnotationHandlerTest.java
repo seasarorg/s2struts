@@ -119,6 +119,14 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("10.1", field.getVarValue("max"));
     }
     
+    public void testLongRange() {
+        Field field = form.getField("longRange");
+        assertNotNull(field);
+        assertEquals("longRange", field.getDepends());
+        assertEquals("5", field.getVarValue("min"));
+        assertEquals("10", field.getVarValue("max"));
+    }
+    
     public void testMix() {
         Field field = form.getField("mix");
         assertNotNull(field);

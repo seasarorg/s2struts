@@ -10,6 +10,7 @@ import org.seasar.struts.validator.annotation.tiger.DateType;
 import org.seasar.struts.validator.annotation.tiger.EmailType;
 import org.seasar.struts.validator.annotation.tiger.FloatRange;
 import org.seasar.struts.validator.annotation.tiger.IntegerType;
+import org.seasar.struts.validator.annotation.tiger.LongRange;
 import org.seasar.struts.validator.annotation.tiger.Mask;
 import org.seasar.struts.validator.annotation.tiger.Maxbytelength;
 import org.seasar.struts.validator.annotation.tiger.Maxlength;
@@ -75,6 +76,11 @@ public class ValidatorAnnotationForm {
     @FloatRange(min = 5.0F, max = 10.1F)
     @Args(keys = "Range", resource = false)
     public void setRange(String range) {
+    }
+
+    @LongRange(min = 5, max = 10)
+    @Args(keys = "LongRange", resource = false)
+    public void setLongRange(String longRange) {
     }
 
     @Required
