@@ -72,13 +72,6 @@ public class ValidatorAnnotationForm {
     }
 
     /**
-     * @org.seasar.struts.validator.annotation.backport175.FloatRange(min=5.0F, max=10.1F)
-     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Range", resource=false)
-     */
-    public void setRange(String range) {
-    }
-
-    /**
      * @org.seasar.struts.validator.annotation.backport175.Required
      * @org.seasar.struts.validator.annotation.backport175.Minlength(10)
      * @org.seasar.struts.validator.annotation.backport175.Maxlength(15)
