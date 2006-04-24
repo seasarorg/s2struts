@@ -69,6 +69,12 @@ public class ValidatorAnnotationForm {
 
     public void setRange(String range) {
     }
+    
+    public static final String longRange_VALIDATOR = "longRange, min=5, max=10";
+    public static final String longRange_VALIDATOR_ARGS = "LongRange, resource=false";
+
+    public void setLongRange(String longRange) {
+    }
 
     public static final String mix_VALIDATOR = "required";
     public static final String mix_VALIDATOR_0 = "minlength, value=10";
