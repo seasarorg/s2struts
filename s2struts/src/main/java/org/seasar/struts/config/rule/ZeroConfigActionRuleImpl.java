@@ -154,11 +154,10 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
 
             path = getExistFilePath(this.configRule.getDocRoot(), packageDir, file, actionConfig, servletContext);
             if (path != null) {
-                break;
+                addFowardConfig(path, actionConfig);
+                return;
             }
         }
-
-        addFowardConfig(path, actionConfig);
     }
 
     private void addFowardConfig(String path, ActionConfig actionConfig) {
