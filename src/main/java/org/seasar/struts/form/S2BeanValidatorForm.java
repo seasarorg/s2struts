@@ -42,15 +42,11 @@ public class S2BeanValidatorForm extends BeanValidatorForm {
     
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         super.reset(mapping, request);
-        Object bean = getBean();
+        Object bean = getInstance();
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(bean.getClass());
         if (beanDesc.hasMethod("reset")) {
             beanDesc.invoke(bean, "reset", null);
         }
     }
     
-    private Object getBean() {
-        return ((WrapDynaBean) dynaBean).getInstance();
-    }
-
 }
