@@ -28,6 +28,7 @@
 	</component>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 		<property name="interceptor">traceInterceptor</property>
+		<property name="pointcut">"execute"</property>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.multiply"</arg>
 			<arg>".*Action"</arg>
