@@ -22,7 +22,9 @@ import java.io.Serializable;
  */
 public class ModDto implements Serializable {
     
-    public static final String FORM = "name=modForm";
+	private static final long serialVersionUID = 1807022024741371134L;
+
+	public static final String FORM = "name=modForm";
 
     private String arg1;
 

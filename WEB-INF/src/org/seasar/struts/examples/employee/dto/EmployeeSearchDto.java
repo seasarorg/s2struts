@@ -31,7 +31,9 @@ import org.seasar.struts.validator.annotation.tiger.NoValidate;
 @StrutsActionForm(name = "employeeSearchForm")
 public class EmployeeSearchDto implements Serializable {
 
-    private String empno = "";
+	private static final long serialVersionUID = -4431724683275939607L;
+
+	private String empno = "";
 
     private String ename = "";
 
@@ -154,6 +156,7 @@ public class EmployeeSearchDto implements Serializable {
         this.deptno = deptno;
     }
 
+	@Override
     public String toString() {
         StringBuffer buf = new StringBuffer("[");
         buf.append(empno).append(", ");

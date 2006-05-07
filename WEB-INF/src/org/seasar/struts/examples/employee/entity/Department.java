@@ -19,6 +19,8 @@ import java.io.Serializable;
 
 public class Department implements Serializable {
 	
+	private static final long serialVersionUID = -415252834769980814L;
+
 	public static final String TABLE = "DEPT";
 
     private String deptno = "";
@@ -64,12 +66,14 @@ public class Department implements Serializable {
         this.versionNo = versionNo;
     }
 
+	@Override
     public boolean equals(Object other) {
         if ( !(other instanceof Department) ) return false;
         Department castOther = (Department) other;
         return this.getDeptno() == castOther.getDeptno();
     }
     
+	@Override
     public String toString() {
     	StringBuffer buf = new StringBuffer("[");
     	buf.append(deptno).append(", ");
@@ -79,6 +83,7 @@ public class Department implements Serializable {
     	return buf.toString();
     }
 
+	@Override
     public int hashCode() {
         if (deptno != null) {
             return Integer.parseInt(deptno);

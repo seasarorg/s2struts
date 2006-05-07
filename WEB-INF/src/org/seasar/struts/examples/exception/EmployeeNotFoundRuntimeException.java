@@ -17,6 +17,7 @@ package org.seasar.struts.examples.exception;
 
 public class EmployeeNotFoundRuntimeException extends AppRuntimeException {
 
+	private static final long serialVersionUID = 190237517629836744L;
 	private int empno;
 
 	public EmployeeNotFoundRuntimeException(int empno) {

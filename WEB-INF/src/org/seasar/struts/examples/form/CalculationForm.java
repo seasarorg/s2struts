@@ -21,7 +21,8 @@ import org.apache.struts.action.ActionForm;
  * @author Satoshi Kimura
  */
 public class CalculationForm extends ActionForm {
-    private int arg1_;
+	private static final long serialVersionUID = 7914771274544612470L;
+	private int arg1_;
     private int arg2_;
     private int result_;
 
@@ -51,4 +52,9 @@ public class CalculationForm extends ActionForm {
     public void setResult(int result) {
         result_ = result;
     }
+    
+    @Override
+    public String toString() {
+		return "arg1=" + arg1_ + " arg2=" + arg2_ + " result=" + result_;
+	}
 }

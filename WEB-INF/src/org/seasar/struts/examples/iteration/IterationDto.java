@@ -19,6 +19,8 @@ import java.io.Serializable;
 
 public class IterationDto implements Serializable {
 
+	private static final long serialVersionUID = 4874237356300304839L;
+
 	private String id = "";
 
 	private String name = "";
@@ -47,6 +49,7 @@ public class IterationDto implements Serializable {
 		this.name = name;
 	}
 
+	@Override
 	public String toString() {
 		StringBuffer buf = new StringBuffer("[");
 		buf.append(id).append(",");

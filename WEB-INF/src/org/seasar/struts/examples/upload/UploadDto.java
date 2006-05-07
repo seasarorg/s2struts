@@ -22,7 +22,9 @@ import org.seasar.struts.validator.annotation.tiger.Required;
 
 public class UploadDto implements Serializable {
 
-    private String theText;
+	private static final long serialVersionUID = 5198154639739745521L;
+
+	private String theText;
 
     private FormFile theFile;
     

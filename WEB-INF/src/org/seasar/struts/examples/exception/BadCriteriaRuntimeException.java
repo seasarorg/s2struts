@@ -17,6 +17,8 @@ package org.seasar.struts.examples.exception;
 
 public class BadCriteriaRuntimeException extends AppRuntimeException {
 
+	private static final long serialVersionUID = 6479864908873110698L;
+
 	public BadCriteriaRuntimeException() {
 		super("examples.jsf.BadCriteria");
 	}

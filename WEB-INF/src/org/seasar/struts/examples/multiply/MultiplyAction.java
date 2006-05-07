@@ -35,6 +35,7 @@ public class MultiplyAction extends Action {
 	    multiplyService_ = multiplyService;
 	}
 
+	@Override
 	public ActionForward execute(
 		ActionMapping mapping,
 		ActionForm form,
@@ -44,6 +45,6 @@ public class MultiplyAction extends Action {
 		CalculationForm calForm = (CalculationForm) form;
 		int result = multiplyService_.multiply(calForm.getArg1(), calForm.getArg2());
 		calForm.setResult(result);
-		return (mapping.findForward("success"));
+		return mapping.findForward("success");
 	}
 }

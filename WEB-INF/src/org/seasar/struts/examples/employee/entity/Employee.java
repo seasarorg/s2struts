@@ -27,7 +27,9 @@ import org.seasar.struts.validator.annotation.tiger.Required;
 
 public class Employee implements Serializable {
 
-    public static final String TABLE = "EMP";
+	private static final long serialVersionUID = -2946217385486127529L;
+
+	public static final String TABLE = "EMP";
 
     private String empno = "";
 
@@ -146,6 +148,7 @@ public class Employee implements Serializable {
         this.versionNo = versionNo;
     }
 
+    @Override
     public boolean equals(Object other) {
         if (!(other instanceof Employee)) {
             return false;
@@ -154,6 +157,7 @@ public class Employee implements Serializable {
         return getEmpno() == castOther.getEmpno();
     }
 
+    @Override
     public String toString() {
         StringBuffer buf = new StringBuffer("[");
         setupToString(buf);
@@ -173,6 +177,7 @@ public class Employee implements Serializable {
         buf.append(versionNo);
     }
 
+    @Override
     public int hashCode() {
         if (empno != null) {
             return Integer.parseInt(empno);

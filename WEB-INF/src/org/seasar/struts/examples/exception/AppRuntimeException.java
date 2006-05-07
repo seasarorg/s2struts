@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class AppRuntimeException extends RuntimeException {
 
+	private static final long serialVersionUID = -4936016907463233098L;
 	private static final Object[] EMPTY_ARGS = new Object[0];
 	private static final String BUNDLE_NAME = "application";
 	
@@ -50,6 +51,7 @@ public class AppRuntimeException extends RuntimeException {
 		return messageId;
 	}
 	
+	@Override
 	public String getMessage() {
 		ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME);
 		String pattern = bundle.getString(messageId);
