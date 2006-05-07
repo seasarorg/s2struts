@@ -21,6 +21,7 @@ import java.util.List;
 
 public class IterationListDto implements Serializable {
 
+	private static final long serialVersionUID = 3371889267212256454L;
 	private List<IterationDto> iterations = new ArrayList<IterationDto>();
 	
 	public IterationListDto() {
@@ -41,6 +42,7 @@ public class IterationListDto implements Serializable {
 		return iterations.get(index);
 	}
 
+	@Override
 	public String toString() {
 		StringBuffer buf = new StringBuffer("[");
 		buf.append(iterations).append("]");

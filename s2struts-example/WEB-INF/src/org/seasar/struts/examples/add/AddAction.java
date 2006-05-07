@@ -29,6 +29,7 @@ import org.seasar.struts.examples.form.CalculationForm;
  * @author Satoshi Kimura
  */
 public class AddAction extends Action {
+	@Override
 	public ActionForward execute(
 		ActionMapping mapping,
 		ActionForm form,

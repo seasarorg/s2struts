@@ -24,7 +24,8 @@ import org.seasar.struts.examples.employee.entity.Employee;
 @StrutsActionForm(name = "employeeForm")
 public class EmployeeDto extends Employee {
 
-    private String dname = "";
+	private static final long serialVersionUID = -2723452297448548819L;
+	private String dname = "";
 
     public EmployeeDto() {
     }
@@ -37,7 +38,8 @@ public class EmployeeDto extends Employee {
         this.dname = dname;
     }
 
-    protected void setupToString(StringBuffer buf) {
+	@Override
+	protected void setupToString(StringBuffer buf) {
         super.setupToString(buf);
         buf.append(", ");
         buf.append(dname);

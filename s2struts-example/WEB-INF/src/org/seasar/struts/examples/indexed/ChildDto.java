@@ -32,6 +32,7 @@ public class ChildDto {
         this.value = value;
     }
     
+	@Override
     public String toString() {
         StringBuffer buf = new StringBuffer("[");
         buf.append(value).append("]");

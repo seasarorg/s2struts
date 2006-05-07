@@ -18,4 +18,5 @@ package org.seasar.struts.examples.employee.dto;
 import org.seasar.struts.examples.employee.entity.Department;
 
 public class DepartmentDto extends Department {
+	private static final long serialVersionUID = 2979639437835686980L;
 }

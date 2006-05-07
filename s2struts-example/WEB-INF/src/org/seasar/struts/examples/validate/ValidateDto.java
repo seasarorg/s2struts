@@ -39,6 +39,8 @@ import org.seasar.struts.validator.annotation.tiger.UrlType;
  * @author Satoshi Kimura
  */
 public class ValidateDto implements Serializable {
+	private static final long serialVersionUID = -2918322782862139730L;
+
     private String required_;
 
     private String byte_ = "1111";
