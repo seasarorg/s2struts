@@ -1361,7 +1361,7 @@ S2Strutsを使用すると、規約に従ってstruts-configを自動的に補完します（<a href="#Z
   </tr>
   <tr>
     <td>validate</td>
-    <td>false</td>
+    <td>true</td>
   </tr>
   <tr>
     <td>input</td>
@@ -1508,7 +1508,7 @@ public interface EmployeeEditAction {
         type="org.seasar.struts.examples.employee.action.EmployeeEditAction"
         name="employeeForm"
         scope="request"
-        validate="false"&gt;
+        validate="true"&gt;
         &lt;forward name="success" path="/pages/employee/employeeEdit.jsp" /&gt;
     &lt;/action&gt;
     ...
