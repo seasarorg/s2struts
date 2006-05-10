@@ -24,7 +24,8 @@ import org.seasar.framework.util.IntegerConversionUtil;
  * @author Satoshi Kimura
  */
 public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
-    protected String type;
+    private static final long serialVersionUID = 2601132488286028174L;
+	protected String type;
     protected String indexId;
     /**
      * @return Returns the indexId.

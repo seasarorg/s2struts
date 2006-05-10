@@ -47,7 +47,7 @@ public class IndexedDispatchPojoActionCommand implements PojoActionCommand {
 
 		for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
 			String key = (String) paramNames.nextElement();
-			String methodName = (String) request.getParameter(key);
+			String methodName = request.getParameter(key);
 			if (IndexedUtil.isIndexedParameter(key)) {
 				String indexedParam = IndexedUtil.getParameter(key);
 				if (param.equals(indexedParam)) {

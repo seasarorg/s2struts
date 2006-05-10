@@ -27,8 +27,9 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
  * @author Katsuhiko Nagashima
  */
 public class S2BeanValidatorForm extends BeanValidatorForm {
-    
-    public S2BeanValidatorForm(BeanValidatorForm form) {
+    private static final long serialVersionUID = 190262930254589604L;
+
+	public S2BeanValidatorForm(BeanValidatorForm form) {
         super(form.getDynaBean());
         if (form.getMultipartRequestHandler() != null) {
             setMultipartRequestHandler(form.getMultipartRequestHandler());
