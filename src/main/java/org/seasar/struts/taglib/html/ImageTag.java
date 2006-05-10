@@ -25,7 +25,8 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  * @author Satoshi Kimura
  */
 public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
-    protected String action;
+    private static final long serialVersionUID = -1259226695386015865L;
+	protected String action;
 
     public int doEndTag() throws JspException {
         setMethodBindingExpression();

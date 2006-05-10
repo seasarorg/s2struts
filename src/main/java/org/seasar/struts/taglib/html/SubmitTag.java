@@ -26,7 +26,8 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  * @author Satoshi Kimura
  */
 public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
-    protected String indexId;
+    private static final long serialVersionUID = 3565695013866921990L;
+	protected String indexId;
     protected String action;
 
     public int doEndTag() throws JspException {
@@ -83,6 +84,9 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     }
     
     protected void setMethodBindingExpression() {
+    	if (StringUtil.isEmpty(this.action)) {
+			return;
+		}
         if (StringUtil.isEmpty(super.property)) {
             super.property = Base64Util.encode(this.action.getBytes());
         }

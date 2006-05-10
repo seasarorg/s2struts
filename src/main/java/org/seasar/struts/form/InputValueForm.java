@@ -26,7 +26,9 @@ import org.apache.struts.validator.BeanValidatorForm;
  * @author Satoshi Kimura
  */
 public class InputValueForm extends BeanValidatorForm {
-    private Map map = new HashMap();
+    private static final long serialVersionUID = 2950008729706264463L;
+
+	private Map map = new HashMap();
 
     private boolean freeze = false;
 

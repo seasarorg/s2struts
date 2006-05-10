@@ -51,8 +51,9 @@ import org.seasar.struts.util.BeanValidatorFormUtil;
  * @author Katsuhiko Nagashima
  */
 public class ProcessPojoFormInterceptor extends AbstractInterceptor {
+    private static final long serialVersionUID = 2099594177189105461L;
 
-    public Object invoke(MethodInvocation invocation) throws Throwable {
+	public Object invoke(MethodInvocation invocation) throws Throwable {
         ActionMapping mapping = getMapping(invocation);
         ModuleConfig moduleConfig = getModuleConfig(invocation);
 
@@ -176,8 +177,8 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
     //
 
     public static class SerializeBeanValidatorForm extends S2BeanValidatorForm {
-
-        protected Object bean = null;
+        private static final long serialVersionUID = 7286186270470466966L;
+		protected Object bean = null;
 
         public SerializeBeanValidatorForm(BeanValidatorForm form,
                 ActionServlet servlet) {

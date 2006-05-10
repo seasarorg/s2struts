@@ -24,8 +24,9 @@ import org.apache.struts.config.FormBeanConfig;
  * @author Satoshi Kimura
  */
 public class StringDynaActionFormClass extends DynaActionFormClass {
+    private static final long serialVersionUID = -6780598674384267875L;
 
-    public StringDynaActionFormClass() {
+	public StringDynaActionFormClass() {
         super(null);
     }
     

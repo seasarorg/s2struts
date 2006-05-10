@@ -23,8 +23,9 @@ import org.seasar.framework.util.StringUtil;
  * @author Satoshi Kimura
  */
 public class GenericValidator extends org.apache.commons.validator.GenericValidator {
+    private static final long serialVersionUID = 1146798779925238494L;
 
-    /**
+	/**
      * Checks if the value's length of byte is greater than or equal to the min.
      * 
      * @param value The value validation is being performed on.

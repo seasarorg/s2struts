@@ -28,8 +28,9 @@ import org.apache.struts.validator.Resources;
  * @author Satoshi Kimura
  */
 public class FieldChecks extends org.apache.struts.validator.FieldChecks {
+	private static final long serialVersionUID = -8929484039023790851L;
 
-    /**
+	/**
      * Checks if the field's length of byte is less than or equal to the maximum value. A <code>Null</code> will be
      * considered an error.
      * 

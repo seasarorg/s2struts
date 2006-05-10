@@ -30,8 +30,9 @@ import org.seasar.struts.Constants;
  * @author Katsuhiko Nagashima
  */
 public class S2StrutsContextImpl implements S2StrutsContext {
-    
-    private String currentPath;
+    private static final long serialVersionUID = -4835702530138078142L;
+
+	private String currentPath;
     
     private String previousPath;
 
