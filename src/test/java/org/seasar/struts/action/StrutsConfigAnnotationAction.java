@@ -7,7 +7,8 @@ public interface StrutsConfigAnnotationAction {
 
     String ACTION = "path=testpath, name=testname, input=testinput, parameter=testparameter"
             + ", attribute=testattribute, forward=testforward, include=testinclude"
-            + ", prefix=testprefix, suffix=testsuffix, roles=testroles";
+            + ", prefix=testprefix, suffix=testsuffix, roles=testroles"
+            + ", cancellable=true";
 
     String SUCCESS_FORWARD = "/test.jsp";
     

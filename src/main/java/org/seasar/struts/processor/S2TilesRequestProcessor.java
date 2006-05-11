@@ -26,6 +26,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
+import org.apache.struts.action.InvalidCancelException;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
@@ -104,14 +105,14 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor implements Ex
     }
 
     public boolean processS2Validate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping) throws IOException, ServletException {
+            ActionMapping mapping) throws IOException, ServletException, InvalidCancelException {
         return this.validateProcessor.processValidate(request, response, form, mapping, this);
     }
     
     public boolean processValidate(HttpServletRequest request,
             HttpServletResponse response,
             ActionForm form,
-            ActionMapping mapping) throws IOException, ServletException {
+            ActionMapping mapping) throws IOException, ServletException, InvalidCancelException {
         return super.processValidate(request, response, form, mapping);
     }
 

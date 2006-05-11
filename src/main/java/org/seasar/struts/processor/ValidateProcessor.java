@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.InvalidCancelException;
 
 /**
  * @author Satoshi Kimura
@@ -33,6 +34,6 @@ public interface ValidateProcessor {
             HttpServletResponse response,
             ActionForm form,
             ActionMapping mapping,
-            ExternalRequestProcessor requestProcessor) throws IOException, ServletException;
+            ExternalRequestProcessor requestProcessor) throws IOException, ServletException, InvalidCancelException;
 
 }

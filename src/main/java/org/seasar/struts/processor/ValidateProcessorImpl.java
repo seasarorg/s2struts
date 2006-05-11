@@ -26,6 +26,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
+import org.apache.struts.action.InvalidCancelException;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.util.RequestUtils;
 import org.seasar.framework.exception.IllegalAccessRuntimeException;
@@ -40,7 +41,7 @@ import org.seasar.struts.util.S2StrutsContextUtil;
 public class ValidateProcessorImpl implements ValidateProcessor {
 
     public boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping, ExternalRequestProcessor requestProcessor) throws IOException, ServletException {
+            ActionMapping mapping, ExternalRequestProcessor requestProcessor) throws IOException, ServletException, InvalidCancelException {
 
         String input = mapping.getInput();
         if (input == null && S2StrutsContextUtil.getPreviousInputPath() != null) {
