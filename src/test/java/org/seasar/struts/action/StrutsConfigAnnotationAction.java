@@ -10,7 +10,8 @@ package org.seasar.struts.action;
  *                                                             include="testinclude",
  *                                                             prefix="testprefix",
  *                                                             suffix="testsuffix",
- *                                                             roles="testroles")
+ *                                                             roles="testroles",
+ *                                                             cancellable=true)
  */
 public interface StrutsConfigAnnotationAction {
 

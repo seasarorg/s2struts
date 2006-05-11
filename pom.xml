@@ -8,7 +8,7 @@
   <artifactId>s2-struts-backport175</artifactId>
   <packaging>jar</packaging>
   <name>s2-struts-backport175</name>
-  <version>1.2.0</version>
+  <version>1.2.3</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
   <inceptionYear>2005</inceptionYear>
@@ -41,40 +41,42 @@
   </organization>
   <build>
     <defaultGoal>validate</defaultGoal>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <configuration>
+            <updateReleaseInfo>true</updateReleaseInfo>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
+        <groupId>org.seasar.maven.plugin.backport175</groupId>
+        <artifactId>maven-backport175-plugin</artifactId>
         <executions>
           <execution>
-            <id>main-annotationc</id>
-            <phase>compile</phase>
-            <configuration>
-              <tasks>
-                <ant
-                  antfile="build-backport175.xml"
-                  target="main-annotationc"
-                  inheritRefs="true"
-                />
-              </tasks>
-            </configuration>
             <goals>
-              <goal>run</goal>
+              <goal>annotationc</goal>
+              <goal>testAnnotationc</goal>
             </goals>
-          </execution>
-          <execution>
-            <id>test-annotationc</id>
-            <phase>test-compile</phase>
             <configuration>
-              <tasks>
-                <ant
-                  antfile="build-backport175.xml"
-                  target="test-annotationc"
-                  inheritRefs="true"
-                />
-              </tasks>
+              <!--
+              <verbose>true</verbose>
+              -->
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>source-jar</id>
+            <phase>package</phase>
             <goals>
-              <goal>run</goal>
+              <goal>jar</goal>
             </goals>
           </execution>
         </executions>
@@ -88,11 +90,18 @@
       <url>http://maven.seasar.org/maven2</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>maven.seasar.org</id>
+      <name>The Seasar Foundation Maven2 Repository</name>
+      <url>http://maven.seasar.org/maven2</url>
+    </pluginRepository>
+  </pluginRepositories>
   <dependencies>
     <dependency>
       <groupId>org.seasar.struts</groupId>
       <artifactId>s2-struts</artifactId>
-      <version>1.2.3-SNAPSHOT</version>
+      <version>1.2.3</version>
       <type>jar</type>
     </dependency>
     <dependency>
