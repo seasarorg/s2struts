@@ -8,7 +8,7 @@
   <artifactId>s2-struts-tiger</artifactId>
   <packaging>jar</packaging>
   <name>s2-struts-tiger</name>
-  <version>1.2.3-SNAPSHOT</version>
+  <version>1.2.3</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
   <inceptionYear>2005</inceptionYear>
@@ -51,8 +51,28 @@
             <target>1.5</target>
           </configuration>
         </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <configuration>
+            <updateReleaseInfo>true</updateReleaseInfo>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>source-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
   <repositories>
     <repository>
@@ -65,7 +85,7 @@
     <dependency>
       <groupId>org.seasar.struts</groupId>
       <artifactId>s2-struts</artifactId>
-      <version>1.2.3-SNAPSHOT</version>
+      <version>1.2.3</version>
       <type>jar</type>
     </dependency>
     <!-- provided -->

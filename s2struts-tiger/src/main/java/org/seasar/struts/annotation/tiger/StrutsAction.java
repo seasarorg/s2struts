@@ -56,5 +56,7 @@ public @interface StrutsAction {
     boolean unknown() default StrutsActionConfig.DEFAULT_UNKNOWN;
 
     String roles() default StrutsActionConfig.DEFAULT_ROLES;
+    
+    boolean cancellable() default StrutsActionConfig.DEFAULT_CANCELLABLE;
 
 }

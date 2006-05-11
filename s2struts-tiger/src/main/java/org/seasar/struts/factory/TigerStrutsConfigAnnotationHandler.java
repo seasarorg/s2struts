@@ -89,6 +89,10 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
             public String roles() {
                 return config.roles();
             }
+            
+            public boolean cancellable() {
+            	return config.cancellable();
+            }
 
         };
     }

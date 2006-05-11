@@ -1,5 +1,5 @@
 <project name="S2StrutsTiger" default="dist" basedir=".">
-	<property name="ver" value="1.2.3-SNAPSHOT"/>
+	<property name="ver" value="1.2.3"/>
 
 	<target name="dist">
 		<mkdir dir="target"/>
@@ -10,6 +10,7 @@
 			</zipfileset>
 			<zipfileset prefix="s2struts-tiger/lib" dir="target">
 				<include name="s2-struts-tiger-${ver}.jar"/>
+				<include name="s2-struts-tiger-${ver}-sources.jar"/>
 			</zipfileset>
 		</zip>
 	</target>
