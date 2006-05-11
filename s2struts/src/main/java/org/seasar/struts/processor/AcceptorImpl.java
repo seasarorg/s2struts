@@ -26,6 +26,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.InvalidCancelException;
 
 /**
  * @author Satoshi Kimura
@@ -86,8 +87,20 @@ public class AcceptorImpl implements Acceptor {
         // Process any ActionForm bean related to this request
         ActionForm form = processor.processActionForm(request, response, mapping);
         processor.processPopulate(request, response, form, mapping);
-        if (!processor.processS2Validate(request, response, form, mapping)) {
+
+        // Validate any fields of the ActionForm bean, if applicable
+        try {
+            if (!processor.processS2Validate(request, response, form, mapping)) {
+                return;
+            }
+        } catch (InvalidCancelException e) {
+            ActionForward forward = processor.processException(request, response, e, form, mapping);
+            processor.processForwardConfig(request, response, forward);
             return;
+        } catch (IOException e) {
+            throw e;
+        } catch (ServletException e) {
+            throw e;
         }
 
         // Process a forward or include specified by this mapping

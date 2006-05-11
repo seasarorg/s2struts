@@ -1,5 +1,5 @@
 <project name="S2Struts" default="dist" basedir=".">
-	<property name="ver" value="1.2.3-SNAPSHOT"/>
+	<property name="ver" value="1.2.3"/>
 
 	<target name="dist">
 		<mkdir dir="target"/>
@@ -10,6 +10,7 @@
 			</zipfileset>
 			<zipfileset prefix="s2struts/lib" dir="target">
 				<include name="s2-struts-${ver}.jar"/>
+				<include name="s2-struts-${ver}-sources.jar"/>
 			</zipfileset>
 			<zipfileset prefix="s2struts/resources" dir="src/main/resources">
 				<include name="s2struts.dicon"/>

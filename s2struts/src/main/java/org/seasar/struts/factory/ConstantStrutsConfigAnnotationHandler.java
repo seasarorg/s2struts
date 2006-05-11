@@ -157,6 +157,14 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 }
                 return value;
             }
+            
+            public boolean cancellable() {
+                String value = (String) parameters.get("cancellable");
+                if (value == null) {
+                    return StrutsActionConfig.DEFAULT_CANCELLABLE;
+                }
+                return BooleanConversionUtil.toPrimitiveBoolean(value);
+            }
 
         };
     }

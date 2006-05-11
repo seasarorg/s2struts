@@ -134,6 +134,10 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     public boolean getUnknown(Class actionClass, ModuleConfig config) {
         return StrutsActionConfig.DEFAULT_UNKNOWN;
     }
+    
+    public boolean getCancellable(Class actionClass, ModuleConfig config) {
+    	return StrutsActionConfig.DEFAULT_CANCELLABLE;
+    }
 
     public String getRoles(Class actionClass, ModuleConfig config) {
         return null;

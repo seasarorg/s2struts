@@ -84,6 +84,7 @@ public class AutoActionRegister {
         actionConfig.setType(actionClass.getName());
         actionConfig.setUnknown(getUnknown(strutsAction, actionClass, config));
         actionConfig.setValidate(getValidate(strutsAction, actionClass, config));
+        actionConfig.setCancellable(getCancellable(strutsAction, actionClass, config));
 
         registerFowardConfigs(servletContext, actionConfig, actionClass);
 
@@ -198,6 +199,11 @@ public class AutoActionRegister {
 
     private static boolean getValidate(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
         return action.validate() == StrutsActionConfig.DEFAULT_VALIDATE ? rule().getValidate(actionClass, config) : action
+                .validate();
+    }
+
+    private static boolean getCancellable(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
+        return action.cancellable() == StrutsActionConfig.DEFAULT_CANCELLABLE ? rule().getCancellable(actionClass, config) : action
                 .validate();
     }
 

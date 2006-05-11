@@ -70,4 +70,8 @@ public class NullStrutsActionConfig implements StrutsActionConfig {
     public String roles() {
         return DEFAULT_ROLES;
     }
+    
+    public boolean cancellable() {
+    	return DEFAULT_CANCELLABLE;
+    }
 }

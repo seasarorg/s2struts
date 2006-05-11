@@ -40,6 +40,7 @@ public class ConstantStrutsConfigAnnotationHandlerTest extends S2TestCase {
         assertEquals("request", config.scope());
         assertEquals(true, config.validate());
         assertEquals(false, config.unknown());
+        assertEquals(true, config.cancellable());
     }
     
     public void testNotCreateStrutsActionConfig() {

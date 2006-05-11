@@ -26,6 +26,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
+import org.apache.struts.action.InvalidCancelException;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 
@@ -97,10 +98,10 @@ public interface ExternalRequestProcessor {
      *      ActionForm, ActionMapping)
      */
     boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form, ActionMapping mapping) throws IOException,
-            ServletException;
+            ServletException, InvalidCancelException;
 
     boolean processS2Validate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping) throws IOException, ServletException;
+            ActionMapping mapping) throws IOException, ServletException, InvalidCancelException;
     
     /**
      * @see org.apache.struts.action.RequestProcessor#processActionPerform(HttpServletRequest, HttpServletResponse,

@@ -50,6 +50,8 @@ public interface ZeroConfigActionRule {
 
     String getRoles(Class actionClass, ModuleConfig config);
 
+    boolean getCancellable(Class actionClass, ModuleConfig config);
+
     void addFowardConfig(Class actionClass, ActionConfig actionConfig, ServletContext servletContext);
 
 }

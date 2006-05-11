@@ -59,5 +59,8 @@ public interface StrutsActionConfig {
 
     String DEFAULT_ROLES = "";
     String roles();
+    
+    boolean DEFAULT_CANCELLABLE = false;
+    boolean cancellable();
 
 }
