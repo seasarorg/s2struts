@@ -1399,6 +1399,10 @@ S2Strutsを使用すると、規約に従ってstruts-configを自動的に補完します（<a href="#Z
     <td>roles</td>
     <td>設定しない(null)</td>
   </tr>
+  <tr>
+    <td>cancellable</td>
+    <td>false</td>
+  </tr>
 </table>
 <h4>actionタグ内のforwardタグの属性値</h4>
 クラス名が"Action"で終了しているクラスを基に設定を補完します。
@@ -1556,6 +1560,9 @@ public interface EmployeeEditAction {
   </tr>
   <tr>
     <td>roles</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>cancellable</td><td><center>×</center></td>
   </tr>
 </table>
 struts-configのactionタグの属性と対になります。また、各属性のデフォルト値は、無設定S2Strutsで定義される値になります。
@@ -1749,7 +1756,7 @@ Args以外のアノテーションは基本的なバリデータを行うために利用します。
       falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
   </tr>
 </table>
-<h4>IntRange, FloatRange, DoubleRange</h4>
+<h4>IntRange, LongRange, FloatRange, DoubleRange</h4>
 <p>
 値がminとmaxで指定された範囲内であるか確認します。
 </p>

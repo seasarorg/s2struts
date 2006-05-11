@@ -1413,6 +1413,10 @@ Configuration is completed based on the class with a classname ending with "Acti
     <td>roles</td>
     <td>not configured (null)</td>
   </tr>
+  <tr>
+    <td>cancellable</td>
+    <td>false</td>
+  </tr>
 </table>
 <h4>Attribute values of  forward tag located within action tag</h4>
 Configuration is completed based on the class with a classname ending with "Action".
@@ -1555,6 +1559,9 @@ These are functionally identical to the following.
   </tr>
   <tr>
     <td>roles</td><td><center>X</center></td>
+  </tr>
+  <tr>
+    <td>cancellable</td><td><center>X</center></td>
   </tr>
 </table>
 These form a pair with the attribute of the action tag in struts-config.
@@ -1722,7 +1729,7 @@ Checks if the value corresponds to the regular expression defined in pattern.
       When false, it will simply use the value defined in keys as a substitute parameter.</td>
   </tr>
 </table>
-<h4>IntRange, FloatRange, DoubleRange</h4>
+<h4>IntRange, LongRange, FloatRange, DoubleRange</h4>
 <p>
 Checks if the value is within min and max.
 </p>
