@@ -1,5 +1,5 @@
 <project name="S2StrutsBackport175" default="dist" basedir=".">
-	<property name="ver" value="1.2.3-SNAPSHOT"/>
+	<property name="ver" value="1.2.3"/>
 
 	<target name="dist">
 		<mkdir dir="target"/>
@@ -10,6 +10,7 @@
 			</zipfileset>
 			<zipfileset prefix="s2struts-backport175/lib" dir="target">
 				<include name="s2-struts-backport175-${ver}.jar"/>
+				<include name="s2-struts-backport175-${ver}-sources.jar"/>
 			</zipfileset>
 		</zip>
 	</target>

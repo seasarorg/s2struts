@@ -84,5 +84,10 @@ public interface StrutsAction {
      * @org.codehaus.backport175.DefaultValue ("")
      */
     String roles();
+    
+    /**
+     * @org.codehaus.backport175.DefaultValue (false)
+     */
+    boolean cancellable();
 
 }

@@ -87,6 +87,10 @@ public class Backport175StrutsConfigAnnotationHandler extends ConstantStrutsConf
             public String roles() {
                 return config.roles();
             }
+            
+            public boolean cancellable() {
+            	return config.cancellable();
+            }
 
         };
     }
