@@ -117,6 +117,9 @@ public interface ExternalRequestProcessor {
     void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws ServletException;
 
+    void processS2Populate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+            ActionMapping mapping) throws ServletException;
+
     /**
      * @see org.apache.struts.action.RequestProcessor#processForward(HttpServletRequest, HttpServletResponse,
      *      ActionMapping)

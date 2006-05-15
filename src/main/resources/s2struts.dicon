@@ -24,6 +24,7 @@
 	</component>
 	<component name="validateProcessor"            class="org.seasar.struts.processor.ValidateProcessorImpl"/>
 	<component name="inputValueFormProcessor"      class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
+	<component name="populateProcessor"            class="org.seasar.struts.processor.PopulateProcessorImpl"/>
 	<component name="requestProcessor"             class="org.seasar.struts.processor.S2RequestProcessor" instance="prototype">
 		<aspect pointcut="processActionForm">
 			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
