@@ -44,6 +44,7 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor implements Ex
     private Acceptor acceptor;
     private ValidateProcessor validateProcessor;
     private InputValueFormProcessor inputValueFormCreator;
+    private PopulateProcessor populateProcessor;
 
     /**
      * <p>
@@ -123,7 +124,12 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor implements Ex
 
     public void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws ServletException {
-        super.processPopulate(request, response, form, mapping);
+    	super.processPopulate(request, response, form, mapping);
+    }
+
+    public void processS2Populate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+            ActionMapping mapping) throws ServletException {
+    	populateProcessor.processPopulate(request, response, form, mapping);
     }
 
     public boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
@@ -219,7 +225,11 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor implements Ex
         this.inputValueFormCreator = inputValueFormCreator;
     }
     
-    public ModuleConfig getModuleConfig(){
+    public void setPopulateProcessor(PopulateProcessor populateProcessor) {
+		this.populateProcessor = populateProcessor;
+	}
+
+	public ModuleConfig getModuleConfig(){
         return super.moduleConfig;
     }
 

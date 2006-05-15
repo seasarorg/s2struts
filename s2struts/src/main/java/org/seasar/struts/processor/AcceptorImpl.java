@@ -86,7 +86,7 @@ public class AcceptorImpl implements Acceptor {
         
         // Process any ActionForm bean related to this request
         ActionForm form = processor.processActionForm(request, response, mapping);
-        processor.processPopulate(request, response, form, mapping);
+        processor.processS2Populate(request, response, form, mapping);
 
         // Validate any fields of the ActionForm bean, if applicable
         try {

@@ -44,6 +44,7 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
     private Acceptor acceptor;
     private ValidateProcessor validateProcessor;
     private InputValueFormProcessor inputValueFormCreator;
+    private PopulateProcessor populateProcessor;
 
     /**
      * <p>
@@ -123,7 +124,12 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
 
     public void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws ServletException {
-        super.processPopulate(request, response, form, mapping);
+    	super.processPopulate(request, response, form, mapping);
+    }
+
+    public void processS2Populate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+            ActionMapping mapping) throws ServletException {
+    	populateProcessor.processPopulate(request, response, form, mapping);
     }
 
     public boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
@@ -218,7 +224,11 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
     public void setInputValueFormCreator(InputValueFormProcessor inputValueFormCreator) {
         this.inputValueFormCreator = inputValueFormCreator;
     }
-    
+
+    public void setPopulateProcessor(PopulateProcessor populateProcessor) {
+		this.populateProcessor = populateProcessor;
+	}
+
     public ModuleConfig getModuleConfig(){
         return super.moduleConfig;
     }
