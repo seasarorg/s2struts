@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.impl.BeanDescImpl;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
@@ -51,7 +51,7 @@ public class PojoActionExecuteCommand implements ActionCommand {
         Class actionInterface = this.classRegister.getClass(actionName);
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ComponentDef componentDef = container.getComponentDef(actionInterface);
-        BeanDesc beanDesc = new BeanDescImpl(componentDef.getComponentClass());
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(componentDef.getComponentClass());
 
         BindingUtil.importProperties(action, container, beanDesc, mapping);
         String forward = executeCommand(request, response, actionInterface,

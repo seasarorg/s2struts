@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -56,7 +58,7 @@ public class BindingUtil {
     }
 
     private static Object getValue(S2Container container, String name) {
-        Object var = RequestUtil.getValue(container.getRequest(), name);
+        Object var = RequestUtil.getValue(S2StrutsContextUtil.getRequest(container), name);
         if (var != null) {
             return var;
         }
@@ -83,7 +85,7 @@ public class BindingUtil {
         String propertyName = propertyDesc.getPropertyName();
         Object value = BindingUtil.getValue(container, propertyName);
         if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
-            value = ActionFormUtil.getActualForm(container.getRequest(), mapping);
+            value = ActionFormUtil.getActualForm(S2StrutsContextUtil.getRequest(container), mapping);
         } else {
             value = BeanValidatorFormUtil.toBean(value);
         }
@@ -101,7 +103,7 @@ public class BindingUtil {
     }
 
     private static void importParameter(Object action, S2Container container) {
-        Enumeration paramNames = container.getRequest().getParameterNames();
+        Enumeration paramNames = S2StrutsContextUtil.getRequest(container).getParameterNames();
         BeanDesc beanDesc = new BeanDescImpl(action.getClass());
         while (paramNames.hasMoreElements()) {
             String paramName = (String) paramNames.nextElement();
@@ -117,7 +119,7 @@ public class BindingUtil {
                 } catch (NumberFormatException e) {
                     continue;
                 }
-                String paramValue = container.getRequest().getParameter(paramName);
+                String paramValue = S2StrutsContextUtil.getRequest(container).getParameter(paramName);
                 IndexedPropertyDesc propertyDesc = new IndexedPropertyDescImpl(propertyName, String.class, beanDesc);
                 if (propertyDesc.hasWriteMethod()) {
                     propertyDesc.setValue(action, index, paramValue);
@@ -144,19 +146,19 @@ public class BindingUtil {
         }
         
         if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
-            ActionFormUtil.setActualForm(container.getRequest(), value, mapping);
+            ActionFormUtil.setActualForm(S2StrutsContextUtil.getRequest(container), value, mapping);
         } else {
             String propertyName = propertyDesc.getPropertyName();
-            if (BeanValidatorFormUtil.isBeanValidatorForm(container.getRequest(), propertyName)) {
-                value = BeanValidatorFormUtil.toBeanValidatorForm(container.getRequest(), propertyName, value);
+            if (BeanValidatorFormUtil.isBeanValidatorForm(S2StrutsContextUtil.getRequest(container), propertyName)) {
+                value = BeanValidatorFormUtil.toBeanValidatorForm(S2StrutsContextUtil.getRequest(container), propertyName, value);
             }
             
             ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
             ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
             if (propertyConfig.isSessionScope()) {
-                container.getSession().setAttribute(propertyName, value);
+                S2StrutsContextUtil.getSession(container).setAttribute(propertyName, value);
             } else {
-                container.getRequest().setAttribute(propertyName, value);
+                S2StrutsContextUtil.getRequest(container).setAttribute(propertyName, value);
             }
         }
     }

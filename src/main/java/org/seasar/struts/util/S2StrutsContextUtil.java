@@ -15,6 +15,10 @@
  */
 package org.seasar.struts.util;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts.config.ForwardConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
@@ -62,4 +66,38 @@ public abstract class S2StrutsContextUtil {
     private static S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
+    
+    
+    public static HttpServletResponse getResponse(S2Container container) {
+        return (HttpServletResponse) container.getExternalContext().getResponse();
+    }
+    
+    public static HttpServletResponse getResponse() {
+        return getResponse(getContainer());
+    }
+    
+    public static HttpServletRequest getRequest(S2Container container) {
+        return (HttpServletRequest) container.getExternalContext().getRequest();
+    }
+    
+    public static HttpServletRequest getRequest() {
+        return getRequest(getContainer());
+    }
+    
+    public static HttpSession getSession(S2Container container) {
+        return (HttpSession) container.getExternalContext().getSession();
+    }
+    
+    public static HttpSession getSession() {
+        return getSession(getContainer());
+    }
+    
+    public static void setRequest(S2Container container, Object request) {
+        container.getExternalContext().setRequest(request);
+    }
+    
+    public static void setRequest(Object request) {
+        setRequest(getContainer(), request);
+    }
+    
 }

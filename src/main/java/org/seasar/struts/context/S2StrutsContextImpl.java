@@ -24,6 +24,7 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.util.Base64Util;
 import org.seasar.struts.Constants;
+import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * @author Satoshi Kimura
@@ -79,6 +80,6 @@ public class S2StrutsContextImpl implements S2StrutsContext {
 
     private static final HttpServletRequest getRequest() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        return container.getRequest();
+        return S2StrutsContextUtil.getRequest(container);
     }
 }

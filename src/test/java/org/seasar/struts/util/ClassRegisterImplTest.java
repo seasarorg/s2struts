@@ -13,20 +13,6 @@ import org.seasar.extension.unit.S2TestCase;
  */
 public class ClassRegisterImplTest extends S2TestCase {
 
-    private ClassRegister classRegister;
-
-    protected void setUp() throws Exception {
-        include("s2struts.dicon");
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    public ClassRegisterImplTest(String name) {
-        super(name);
-    }
-
     public void testGetClassString() {
         long startTime = new Date().getTime();
         long endTime = 0;
@@ -45,11 +31,11 @@ public class ClassRegisterImplTest extends S2TestCase {
         startTime = new Date().getTime();
         for (int i = 0; i < 1000; i++) {
             ClassRegister classRegister = new ClassRegisterImpl();
-            this.classRegister.getClass(String.class.getName());
-            this.classRegister.getClass(ArrayList.class.getName());
-            this.classRegister.getClass(HashSet.class.getName());
-            this.classRegister.getClass(Hashtable.class.getName());
-            this.classRegister.getClass(HashMap.class.getName());
+            classRegister.getClass(String.class.getName());
+            classRegister.getClass(ArrayList.class.getName());
+            classRegister.getClass(HashSet.class.getName());
+            classRegister.getClass(Hashtable.class.getName());
+            classRegister.getClass(HashMap.class.getName());
             classRegister.destroy();
         }
         endTime = new Date().getTime();
@@ -59,6 +45,7 @@ public class ClassRegisterImplTest extends S2TestCase {
     }
 
     public void testDestroy() {
+        ClassRegister classRegister = new ClassRegisterImpl();
         classRegister.getClass(String.class.getName());
 
         classRegister.destroy();

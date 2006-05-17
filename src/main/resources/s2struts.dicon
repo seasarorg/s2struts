@@ -7,7 +7,13 @@
 
 	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
+
+	<!-- Hotdeploy(or Ondemand) Components -->
+	<!--
 	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
+	-->
+	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
+
 	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
 	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
 
@@ -39,9 +45,28 @@
 	-->
 
 	<!-- ZeroConfig Components  -->
+	<!-- Hotdeploy(or Ondemand) Components -->
+	<!-- 
 	<component name="autoStrutsConfigRule"         class="org.seasar.struts.config.AutoStrutsConfigRuleImpl"/>
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
+	-->
+	<component name="strutsConfigRule"             class="org.seasar.struts.hotdeploy.HotdeployStrutsConfigRule">
+	</component>
+	<component name="actionPathNamingRule"         class="org.seasar.struts.hotdeploy.ActionPathNamingRule"/>
+	<component name="actionFormNamingRule"         class="org.seasar.struts.hotdeploy.ActionFormNamingRule"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.hotdeploy.HotdeployZeroConfigActionRule">
+	    <property name="namingRule">actionPathNamingRule</property>
+	</component>
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.hotdeploy.HotdeployZeroConfigActionFormRule"/>
+	<component name="actionConfigCreatorImpl"      class="org.seasar.struts.hotdeploy.ActionConfigCreatorImpl">
+	    <property name="namingRule">actionPathNamingRule</property>
+	</component>
+	<component name="actionFormConfigCreatorImpl"  class="org.seasar.struts.hotdeploy.ActionFormConfigCreatorImpl">
+	    <property name="namingRule">actionFormNamingRule</property>
+	</component>
+	<component name="autoStrutsConfigRegister"     class="org.seasar.struts.hotdeploy.AutoStrutsConfigRegisterImpl"/>
+	
 
 	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>

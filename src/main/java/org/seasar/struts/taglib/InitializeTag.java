@@ -38,7 +38,7 @@ public class InitializeTag extends BaseTag {
     public int doStartTag() throws JspException {
         // In case of Tomcat4.1, HttpServletRequest is set again,
         // because of the different HttpServletRequest for JSP and Servlet.
-        SingletonS2ContainerFactory.getContainer().setRequest(
+        SingletonS2ContainerFactory.getContainer().getExternalContext().setRequest(
                 (HttpServletRequest) this.pageContext.getRequest());
         
         MethodBinding methodBinding = new MethodBinding(this.action);

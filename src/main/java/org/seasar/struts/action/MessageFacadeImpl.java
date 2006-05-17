@@ -22,7 +22,7 @@ import org.apache.struts.Globals;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * @author Satoshi Kimura
@@ -256,11 +256,11 @@ public class MessageFacadeImpl implements MessageFacade {
     }
 
     private static HttpServletRequest getRequest() {
-        return SingletonS2ContainerFactory.getContainer().getRequest();
+        return S2StrutsContextUtil.getRequest();
     }
 
     private static HttpSession getSession() {
-        return SingletonS2ContainerFactory.getContainer().getSession();
+        return S2StrutsContextUtil.getSession();
     }
 
 }

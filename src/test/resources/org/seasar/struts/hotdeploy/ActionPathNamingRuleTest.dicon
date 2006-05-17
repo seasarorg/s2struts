@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component class="org.seasar.struts.hotdeploy.HotdeployStrutsConfigRule">
+	    <property name="rootPackageName">"org.seasar.struts.hotdeploy"</property>
+	    <property name="actionMiddlePackageName">"web"</property>
+	    <property name="actionSuffix">"Action"</property>
+	</component>
+	
+	<component class="org.seasar.struts.hotdeploy.ActionPathNamingRule"/>
+</components>
