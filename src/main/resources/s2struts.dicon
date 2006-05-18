@@ -51,7 +51,7 @@
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
 	-->
-	<component name="strutsConfigRule"             class="org.seasar.struts.hotdeploy.HotdeployStrutsConfigRule">
+	<component name="strutsConfigRule"             class="org.seasar.struts.hotdeploy.StrutsConfigRuleImpl">
 	</component>
 	<component name="actionPathNamingRule"         class="org.seasar.struts.hotdeploy.ActionPathNamingRule"/>
 	<component name="actionFormNamingRule"         class="org.seasar.struts.hotdeploy.ActionFormNamingRule"/>

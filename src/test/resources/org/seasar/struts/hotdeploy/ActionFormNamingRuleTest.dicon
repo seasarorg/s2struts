@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
 "http://www.seasar.org/dtd/components.dtd">
 <components>
-	<component class="org.seasar.struts.hotdeploy.HotdeployStrutsConfigRule">
+	<component class="org.seasar.struts.hotdeploy.StrutsConfigRuleImpl">
 	    <property name="rootPackageName">"org.seasar.struts.hotdeploy"</property>
 	    <property name="actionFormMiddlePackageName">"web"</property>
 	    <property name="actionFormSuffix">"Form"</property>
