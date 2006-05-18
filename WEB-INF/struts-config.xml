@@ -72,6 +72,14 @@
     </plug-in>
     -->
     <plug-in className="org.seasar.struts.hotdeploy.HotdeployAutoStrutsConfigRegisterPlugIn">
+	    <set-property property="rootPackageName"             value="examples.hotdeploy"/>
+	    <set-property property="enableJar"                   value="false"/>
+	    <set-property property="actionMiddlePackageName"     value="web"/>
+	    <set-property property="actionSuffix"                value="Action"/>
+	    <set-property property="actionFormMiddlePackageName" value="web"/>
+	    <set-property property="actionFormSuffix"            value="Form"/>
+	    <set-property property="docRoot"                     value=""/>
+	    <set-property property="viewExtension"               value="jsp,html"/>
     </plug-in>
 
 </struts-config>

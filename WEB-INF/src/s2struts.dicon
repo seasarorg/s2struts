@@ -51,16 +51,7 @@
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
 	-->
-	<component name="strutsConfigRule"             class="org.seasar.struts.hotdeploy.HotdeployStrutsConfigRule">
-	    <property name="rootPackageName">"examples.hotdeploy"</property>
-	    <property name="enableJar">false</property>
-	    <property name="actionMiddlePackageName">"web"</property>
-	    <property name="actionSuffix">"Action"</property>
-	    <property name="actionFormMiddlePackageName">"web"</property>
-	    <property name="actionFormSuffix">"Form"</property>
-	    <property name="docRoot">""</property>
-	    <property name="viewExtension">new String[] {"jsp", "html"}</property>
-	</component>
+	<component name="strutsConfigRule"             class="org.seasar.struts.hotdeploy.StrutsConfigRuleImpl"/>
 	<component name="actionPathNamingRule"         class="org.seasar.struts.hotdeploy.ActionPathNamingRule"/>
 	<component name="actionFormNamingRule"         class="org.seasar.struts.hotdeploy.ActionFormNamingRule"/>
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.hotdeploy.HotdeployZeroConfigActionRule">

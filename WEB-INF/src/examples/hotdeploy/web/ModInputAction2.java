@@ -15,15 +15,16 @@
  */
 package examples.hotdeploy.web;
 
+import org.seasar.struts.annotation.tiger.StrutsAction;
+import org.seasar.struts.annotation.tiger.StrutsActionForward;
+
 /**
  * @author Katsuhiko Nagashima
  */
+@StrutsAction(name="modForm", validate=false)
 public interface ModInputAction2 {
     
-    String ACTION = "name=modForm, validate=false";
-    
-    String SUCCESS_FORWARD = "path=/pages/modInput.html";
-
+    @StrutsActionForward(path="/pages/modInput.html")
     String SUCCESS = "success";
 
     String input();
