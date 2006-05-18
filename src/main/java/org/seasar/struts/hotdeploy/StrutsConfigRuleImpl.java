@@ -19,7 +19,7 @@ package org.seasar.struts.hotdeploy;
  * 
  * @author Katsuhiko Nagashima
  */
-public class HotdeployStrutsConfigRule implements AutoStrutsConfigRegisterRule,
+public class StrutsConfigRuleImpl implements AutoStrutsConfigRegisterRule,
 		AutoActionRule, AutoActionFormRule, AutoActionForwardRule {
 
 	private String rootPackageName;

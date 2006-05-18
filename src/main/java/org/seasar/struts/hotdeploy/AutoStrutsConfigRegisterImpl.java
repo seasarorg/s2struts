@@ -18,14 +18,11 @@ package org.seasar.struts.hotdeploy;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.log.Logger;
-import org.seasar.struts.util.ClassFinder;
-import org.seasar.struts.util.ClassFinderImpl;
 
 /**
  * 
@@ -35,23 +32,7 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
 
     private static final Logger log = Logger.getLogger(AutoStrutsConfigRegisterImpl.class);
 
-    private ClassFinder classFinder = new ClassFinderImpl();
-
-    private AutoStrutsConfigRegisterRule retisterRule;
-
-    public AutoStrutsConfigRegisterRule getRetisterRule() {
-        return retisterRule;
-    }
-
-    public void setRetisterRule(AutoStrutsConfigRegisterRule retisterRule) {
-        this.retisterRule = retisterRule;
-    }
-
     private ActionConfigCreator actionConfigCreator;
-
-    public ActionConfigCreator getActionConfigCreator() {
-        return actionConfigCreator;
-    }
 
     public void setActionConfigCreator(ActionConfigCreator actionConfigCreator) {
         this.actionConfigCreator = actionConfigCreator;
@@ -59,33 +40,15 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
     
     private ActionFormConfigCreator formConfigCreator;
 
-    public ActionFormConfigCreator getFormConfigCreator() {
-        return formConfigCreator;
-    }
-
     public void setFormConfigCreator(ActionFormConfigCreator formConfigCreator) {
         this.formConfigCreator = formConfigCreator;
     }
 
-    public void register(ActionServlet actionServlet, ModuleConfig config) {
-        try {
-            this.classFinder.find(getRetisterRule().isEnableJar());
-            if (actionServlet != null) {
-                this.classFinder.find(actionServlet, getRetisterRule().isEnableJar());
-            }
-
-            register(config);
-        } finally {
-            this.classFinder.destroy();
-        }
-    }
-
-    private void register(ModuleConfig config) {
-        Collection classes = this.classFinder.getClassCollection();
+    public void register(ModuleConfig config, Collection classes) {
         registerActionForms(config, classes);
         registerActions(config, classes);
     }
-
+    
     private void registerActionForms(ModuleConfig config, Collection classes) {
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
             Class clazz = (Class) iterator.next();
@@ -94,7 +57,7 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
     }
     
     private void registerActionForm(ModuleConfig config, Class clazz) {
-        FormBeanConfig formConfig = getFormConfigCreator().createFormBeanConfig(config, clazz);
+        FormBeanConfig formConfig = this.formConfigCreator.createFormBeanConfig(config, clazz);
         if (formConfig != null) {
             config.addFormBeanConfig(formConfig);
 
@@ -112,7 +75,7 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
     }
     
     private void registerAction(ModuleConfig config, Class clazz) {
-        ActionConfig actionConfig = getActionConfigCreator().createActionConfig(config, clazz);
+        ActionConfig actionConfig = this.actionConfigCreator.createActionConfig(config, clazz);
         if (actionConfig != null) {
             config.addActionConfig(actionConfig);
 
@@ -125,5 +88,5 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
             }
         }
     }
-    
+
 }

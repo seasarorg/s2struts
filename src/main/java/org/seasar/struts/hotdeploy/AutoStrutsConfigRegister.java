@@ -15,7 +15,8 @@
  */
 package org.seasar.struts.hotdeploy;
 
-import org.apache.struts.action.ActionServlet;
+import java.util.Collection;
+
 import org.apache.struts.config.ModuleConfig;
 
 /**
@@ -23,7 +24,7 @@ import org.apache.struts.config.ModuleConfig;
  * @author Katsuhiko Nagashima
  */
 public interface AutoStrutsConfigRegister {
-	
-	void register(ActionServlet actionServlet, ModuleConfig config);
+    
+    void register(ModuleConfig config, Collection classes);
 	
 }

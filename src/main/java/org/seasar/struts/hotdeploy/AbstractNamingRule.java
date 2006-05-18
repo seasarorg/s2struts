@@ -26,10 +26,6 @@ public abstract class AbstractNamingRule implements NamingRule {
 
     private AutoStrutsConfigRegisterRule registerRule;
 
-    public AutoStrutsConfigRegisterRule getRegisterRule() {
-        return registerRule;
-    }
-
     public void setRegisterRule(AutoStrutsConfigRegisterRule registerRule) {
         this.registerRule = registerRule;
     }
@@ -52,7 +48,7 @@ public abstract class AbstractNamingRule implements NamingRule {
         String lastName = names[names.length - 1];
         lastName = StringUtil.decapitalize(lastName);
 
-        StringBuffer result = new StringBuffer();        
+        StringBuffer result = new StringBuffer();
         for (int i = 0; i < names.length - 1; i++) {
             result.append(names[i]).append("_");
         }
@@ -77,9 +73,9 @@ public abstract class AbstractNamingRule implements NamingRule {
 
         return ClassUtil.forName(className.toString());
     }
-    
+
     private String getPackageName(String middlePackageName) {
-        return getRegisterRule().getRootPackageName() + "." + middlePackageName;
+        return this.registerRule.getRootPackageName() + "." + middlePackageName;
     }
 
 }

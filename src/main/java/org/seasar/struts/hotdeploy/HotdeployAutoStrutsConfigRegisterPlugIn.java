@@ -22,6 +22,9 @@ import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.util.StringUtil;
+import org.seasar.struts.util.ClassFinder;
+import org.seasar.struts.util.ClassFinderImpl;
 
 /**
  * 
@@ -29,16 +32,68 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
  */
 public class HotdeployAutoStrutsConfigRegisterPlugIn implements PlugIn {
 
+    private ClassFinder classFinder = new ClassFinderImpl();
+
     public void destroy() {
     }
 
     public void init(ActionServlet actionServlet, ModuleConfig config) throws ServletException {
-        getConfigRegister().register(actionServlet, config);
+        try {
+            this.classFinder.find(getStrutsConfigRule().isEnableJar());
+            if (actionServlet != null) {
+                this.classFinder.find(actionServlet, getStrutsConfigRule().isEnableJar());
+            }
+
+            getConfigRegister().register(config, this.classFinder.getClassCollection());
+        } finally {
+            this.classFinder.destroy();
+        }
     }
-    
+
     private AutoStrutsConfigRegister getConfigRegister() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         return (AutoStrutsConfigRegister) container.getComponent(AutoStrutsConfigRegister.class);
+    }
+
+    private StrutsConfigRuleImpl getStrutsConfigRule() {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        return (StrutsConfigRuleImpl) container.getComponent(StrutsConfigRuleImpl.class);
+    }
+
+    // -----------------------------------------------------------------------
+    // set-property
+
+    public void setRootPackageName(String rootPackageName) {
+        getStrutsConfigRule().setRootPackageName(rootPackageName);
+    }
+
+    public void setEnableJar(boolean enableJar) {
+        getStrutsConfigRule().setEnableJar(enableJar);
+    }
+
+    public void setActionMiddlePackageName(String actionMiddlePackageName) {
+        getStrutsConfigRule().setActionMiddlePackageName(actionMiddlePackageName);
+    }
+
+    public void setActionSuffix(String actionSuffix) {
+        getStrutsConfigRule().setActionSuffix(actionSuffix);
+    }
+
+    public void setActionFormMiddlePackageName(String actionFormMiddlePackageName) {
+        getStrutsConfigRule().setActionFormMiddlePackageName(actionFormMiddlePackageName);
+    }
+
+    public void setActionFormSuffix(String actionFormSuffix) {
+        getStrutsConfigRule().setActionFormSuffix(actionFormSuffix);
+    }
+
+    public void setDocRoot(String docRoot) {
+        getStrutsConfigRule().setDocRoot(docRoot);
+    }
+
+    public void setViewExtension(String viewExtension) {
+        String[] extensions = StringUtil.split(viewExtension, ",");
+        getStrutsConfigRule().setViewExtension(extensions);
     }
 
 }
