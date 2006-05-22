@@ -34,6 +34,8 @@ public class ModForm2 implements Serializable {
         return arg1;
     }
 
+    //@Required
+    //@IntegerType
     public void setArg1(String arg1) {
         this.arg1 = arg1;
     }
@@ -50,6 +52,8 @@ public class ModForm2 implements Serializable {
         return arg2;
     }
 
+    //@Required
+    //@IntegerType
     public void setArg2(String arg2) {
         this.arg2 = arg2;
     }

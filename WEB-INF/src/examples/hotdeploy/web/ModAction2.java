@@ -21,7 +21,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsAction(validate=false)
+@StrutsAction
 public interface ModAction2 {
     
     @StrutsActionForward(path="/pages/modResult.html")
