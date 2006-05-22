@@ -18,11 +18,18 @@ package org.seasar.struts.hotdeploy;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.servlet.ServletContext;
+
+import org.apache.commons.validator.Form;
+import org.apache.commons.validator.FormSet;
+import org.apache.commons.validator.ValidatorResources;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.apache.struts.validator.ValidatorPlugIn;
 import org.seasar.framework.log.Logger;
+import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * 
@@ -31,7 +38,13 @@ import org.seasar.framework.log.Logger;
 public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
 
     private static final Logger log = Logger.getLogger(AutoStrutsConfigRegisterImpl.class);
-
+    
+    private ServletContext servletContext;
+    
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
+    
     private ActionConfigCreator actionConfigCreator;
 
     public void setActionConfigCreator(ActionConfigCreator actionConfigCreator) {
@@ -43,10 +56,17 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
     public void setFormConfigCreator(ActionFormConfigCreator formConfigCreator) {
         this.formConfigCreator = formConfigCreator;
     }
+    
+    private ValidationCreator validationCreator;
+    
+    public void setValidationConfigCreator(ValidationCreator validationCreator) {
+        this.validationCreator = validationCreator;
+    }
 
     public void register(ModuleConfig config, Collection classes) {
         registerActionForms(config, classes);
         registerActions(config, classes);
+        registerValidations(config, classes);
     }
     
     private void registerActionForms(ModuleConfig config, Collection classes) {
@@ -89,4 +109,42 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
         }
     }
 
+    private void registerValidations(ModuleConfig config, Collection classes) {
+        
+        // Create Forms.
+        FormSet formSet = new FormSet();
+        for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
+            Class clazz = (Class) iterator.next();
+            Form form = this.validationCreator.createForm(config, clazz);
+            if (form != null) {
+                formSet.addForm(form);
+                
+                if (log.isDebugEnabled()) {
+                    log.debug("auto register " + form);
+                }
+            }
+        }
+
+        // Initialize ValidatorResources
+        ValidatorResources resources = getValidatorResources(config);
+        if (formSet.getForms().size() != 0) {
+            resources.addFormSet(formSet);
+            resources.process();
+        }
+        
+        // Replace HotdeployValidatorResources
+        HotdeployValidatorResources hotdeployResources = new HotdeployValidatorResources(resources);
+        hotdeployResources.setValidationCreator(this.validationCreator);
+        setValidatorResources(config, hotdeployResources);
+    }
+    
+    private ValidatorResources getValidatorResources(ModuleConfig config) {
+        return (ValidatorResources) this.servletContext.getAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
+    }
+    
+    private void setValidatorResources(ModuleConfig config, ValidatorResources resources) {
+        this.servletContext.removeAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
+        this.servletContext.setAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix(), resources);
+    }
+    
 }

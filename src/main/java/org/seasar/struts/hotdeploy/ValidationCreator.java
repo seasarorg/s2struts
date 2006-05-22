@@ -13,21 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.processor;
+package org.seasar.struts.hotdeploy;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
+import org.apache.commons.validator.Form;
+import org.apache.struts.config.ModuleConfig;
 
 /**
- * @author Satoshi Kimura
+ * 
+ * @author Katsuhiko Nagashima
  */
-public interface PopulateProcessor {
-    void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping) throws ServletException;
+public interface ValidationCreator {
     
-    void setRequestProcessor(ExternalRequestProcessor requestProcessor);
+    Form createForm(ModuleConfig config, String name);
+    
+    Form createForm(ModuleConfig config, Class formClass);
+
 }

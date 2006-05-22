@@ -45,10 +45,10 @@ public class HotdeployModuleConfig extends ModuleConfigImpl {
         ActionConfig result = getActionConfigCreator().createActionConfig(this, path);
         if (result != null) {
             if (log.isDebugEnabled()) {
-                log.debug("auto register " + result);
+                log.debug("auto create " + result);
                 ForwardConfig[] forwardConfigs = result.findForwardConfigs();
                 for (int i = 0; i < forwardConfigs.length; i++) {
-                    log.debug("auto register " + forwardConfigs[i]);
+                    log.debug("auto create " + forwardConfigs[i]);
                 }
             }
             return result;
@@ -60,7 +60,7 @@ public class HotdeployModuleConfig extends ModuleConfigImpl {
         FormBeanConfig result = getActionFormConfigCreator().createFormBeanConfig(this, name);
         if (result != null) {
             if (log.isDebugEnabled()) {
-                log.debug("auto register " + result);
+                log.debug("auto create " + result);
             }
             return result;
         }

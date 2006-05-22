@@ -226,6 +226,7 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
 
     public void setPopulateProcessor(PopulateProcessor populateProcessor) {
 		this.populateProcessor = populateProcessor;
+        this.populateProcessor.setRequestProcessor(this);
 	}
 
     public ModuleConfig getModuleConfig(){

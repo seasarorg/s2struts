@@ -8,8 +8,8 @@ import org.seasar.struts.action.StrutsConfigAnnotationActionImpl;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.form.StrutsConfigAnnotationForm;
 import org.seasar.struts.form.NoStrutsConfigAnnotationForm;
+import org.seasar.struts.form.StrutsConfigAnnotationForm;
 
 /**
  * 

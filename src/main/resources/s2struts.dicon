@@ -59,10 +59,13 @@
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.hotdeploy.HotdeployZeroConfigActionFormRule"/>
-	<component name="actionConfigCreatorImpl"      class="org.seasar.struts.hotdeploy.ActionConfigCreatorImpl">
+	<component name="actionConfigCreator"          class="org.seasar.struts.hotdeploy.ActionConfigCreatorImpl">
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
-	<component name="actionFormConfigCreatorImpl"  class="org.seasar.struts.hotdeploy.ActionFormConfigCreatorImpl">
+	<component name="actionFormConfigCreator"      class="org.seasar.struts.hotdeploy.ActionFormConfigCreatorImpl">
+	    <property name="namingRule">actionFormNamingRule</property>
+	</component>
+	<component name="validatorCreator"             class="org.seasar.struts.hotdeploy.ValidationCreatorImpl">
 	    <property name="namingRule">actionFormNamingRule</property>
 	</component>
 	<component name="autoStrutsConfigRegister"     class="org.seasar.struts.hotdeploy.AutoStrutsConfigRegisterImpl"/>
