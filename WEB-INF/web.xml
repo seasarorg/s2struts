@@ -65,10 +65,6 @@
       <param-value>/WEB-INF/struts-config.xml</param-value>
     </init-param>
     <init-param>
-      <param-name>configFactory</param-name>
-      <param-value>org.seasar.struts.hotdeploy.HotdeployModuleConfigFactory</param-value>
-    </init-param>
-    <init-param>
       <param-name>debug</param-name>
       <param-value>2</param-value>
     </init-param>

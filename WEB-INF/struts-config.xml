@@ -71,7 +71,7 @@
         <set-property property="docRoot" value="/pages"/>
     </plug-in>
     -->
-    <plug-in className="org.seasar.struts.hotdeploy.HotdeployAutoStrutsConfigRegisterPlugIn">
+    <plug-in className="org.seasar.struts.hotdeploy.StrutsConfigRegisterPlugIn">
 	    <set-property property="rootPackageName"             value="examples.hotdeploy"/>
 	    <set-property property="enableJar"                   value="false"/>
 	    <set-property property="actionMiddlePackageName"     value="web"/>
@@ -81,6 +81,6 @@
 	    <set-property property="docRoot"                     value=""/>
 	    <set-property property="viewExtension"               value="jsp,html"/>
     </plug-in>
+    <plug-in className="org.seasar.struts.hotdeploy.HotdeployPlugIn"/>
 
 </struts-config>
-
