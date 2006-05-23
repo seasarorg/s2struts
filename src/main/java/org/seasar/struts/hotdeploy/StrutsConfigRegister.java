@@ -15,21 +15,16 @@
  */
 package org.seasar.struts.hotdeploy;
 
-import java.io.Serializable;
+import java.util.Collection;
 
 import org.apache.struts.config.ModuleConfig;
-import org.apache.struts.config.ModuleConfigFactory;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public class HotdeployModuleConfigFactory extends ModuleConfigFactory implements Serializable {
-
-    private static final long serialVersionUID = 3499384728990237976L;
-
-    public ModuleConfig createModuleConfig(String prefix) {
-        return new HotdeployModuleConfig(prefix);
-    }
-
+public interface StrutsConfigRegister {
+    
+    void register(ModuleConfig config, Collection classes);
+	
 }

@@ -29,15 +29,14 @@ import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.validator.ValidatorPlugIn;
 import org.seasar.framework.log.Logger;
-import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
+public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
 
-    private static final Logger log = Logger.getLogger(AutoStrutsConfigRegisterImpl.class);
+    private static final Logger log = Logger.getLogger(StrutsConfigRegisterImpl.class);
     
     private ServletContext servletContext;
     
@@ -110,7 +109,6 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
     }
 
     private void registerValidations(ModuleConfig config, Collection classes) {
-        
         // Create Forms.
         FormSet formSet = new FormSet();
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
@@ -131,20 +129,10 @@ public class AutoStrutsConfigRegisterImpl implements AutoStrutsConfigRegister {
             resources.addFormSet(formSet);
             resources.process();
         }
-        
-        // Replace HotdeployValidatorResources
-        HotdeployValidatorResources hotdeployResources = new HotdeployValidatorResources(resources);
-        hotdeployResources.setValidationCreator(this.validationCreator);
-        setValidatorResources(config, hotdeployResources);
     }
     
     private ValidatorResources getValidatorResources(ModuleConfig config) {
         return (ValidatorResources) this.servletContext.getAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
-    }
-    
-    private void setValidatorResources(ModuleConfig config, ValidatorResources resources) {
-        this.servletContext.removeAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
-        this.servletContext.setAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix(), resources);
     }
     
 }

@@ -30,7 +30,7 @@ import org.seasar.struts.util.ClassFinderImpl;
  * 
  * @author Katsuhiko Nagashima
  */
-public class HotdeployAutoStrutsConfigRegisterPlugIn implements PlugIn {
+public class StrutsConfigRegisterPlugIn implements PlugIn {
 
     private ClassFinder classFinder = new ClassFinderImpl();
 
@@ -50,9 +50,9 @@ public class HotdeployAutoStrutsConfigRegisterPlugIn implements PlugIn {
         }
     }
 
-    private AutoStrutsConfigRegister getConfigRegister() {
+    private StrutsConfigRegister getConfigRegister() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (AutoStrutsConfigRegister) container.getComponent(AutoStrutsConfigRegister.class);
+        return (StrutsConfigRegister) container.getComponent(StrutsConfigRegister.class);
     }
 
     private StrutsConfigRuleImpl getStrutsConfigRule() {
