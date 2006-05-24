@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -30,6 +31,7 @@ import org.apache.struts.action.InvalidCancelException;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
+import org.apache.struts.util.MessageResources;
 import org.seasar.struts.action.ActionFactory;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
@@ -245,6 +247,14 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor implements Ex
         
         S2StrutsContextUtil.setPath(uri);
         super.doForward(uri, request, response);
+    }
+
+    public MessageResources getInternal() {
+        return super.getInternal();
+    }
+
+    public Log getLog() {
+        return this.log;
     }
 
 }

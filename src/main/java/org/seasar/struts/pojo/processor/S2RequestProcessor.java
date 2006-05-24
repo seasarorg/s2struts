@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.processor;
+package org.seasar.struts.pojo.processor;
 
 import java.io.IOException;
 
@@ -33,19 +33,19 @@ import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.util.MessageResources;
 import org.seasar.struts.action.ActionFactory;
-import org.seasar.struts.util.S2StrutsContextUtil;
+import org.seasar.struts.processor.Acceptor;
+import org.seasar.struts.processor.ActionExecuteProcessor;
+import org.seasar.struts.processor.ExternalRequestProcessor;
+import org.seasar.struts.processor.InputValueFormProcessor;
+import org.seasar.struts.processor.PopulateProcessor;
+import org.seasar.struts.processor.ValidateProcessor;
 
 /**
  * @author Satoshi Kimura
  * @author higa
+ * @author Katsuhiko Nagashima
  */
 public class S2RequestProcessor extends RequestProcessor implements ExternalRequestProcessor {
-    private ActionExecuteProcessor executeProcessor;
-    private ActionFactory actionFactory;
-    private Acceptor acceptor;
-    private ValidateProcessor validateProcessor;
-    private InputValueFormProcessor inputValueFormCreator;
-    private PopulateProcessor populateProcessor;
 
     /**
      * <p>
@@ -59,13 +59,12 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
      * @exception ServletException if a processing exception occurs
      */
     public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        this.acceptor.process(this, request, response, log);
+        //this.acceptor.process(this, request, response, log);
+        super.process(request, response);
     }
 
     public HttpServletRequest processMultipart(HttpServletRequest request) {
-        HttpServletRequest result = super.processMultipart(request);
-        S2StrutsContextUtil.setRequest(result);
-        return result;
+        return super.processMultipart(request);
     }
 
     public String processPath(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -108,7 +107,8 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
 
     public boolean processS2Validate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws IOException, ServletException, InvalidCancelException {
-        return this.validateProcessor.processValidate(request, response, form, mapping, this);
+        // TODO
+        return true;
     }
     
     public boolean processValidate(HttpServletRequest request,
@@ -125,12 +125,12 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
 
     public void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws ServletException {
-    	super.processPopulate(request, response, form, mapping);
+        super.processPopulate(request, response, form, mapping);
     }
 
     public void processS2Populate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws ServletException {
-    	populateProcessor.processPopulate(request, response, form, mapping);
+        // TODO
     }
 
     public boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
@@ -153,6 +153,33 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
         return super.processException(request, response, exception, form, mapping);
     }
 
+    public ModuleConfig getModuleConfig(){
+        return super.moduleConfig;
+    }
+
+    public ActionServlet getActionServlet() {
+        return super.servlet;
+    }
+    
+    public void doForward(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException,
+            ServletException {
+        super.doForward(uri, request, response);
+    }
+    
+    public MessageResources getInternal() {
+        return super.getInternal();
+    }
+
+    public Log getLog() {
+        return this.log;
+    }
+
+    //
+    //
+    //
+    //
+    //
+    
     /**
      * Return an <code>Action</code> instance that will be used to process the current request, creating a new one if
      * necessary.
@@ -164,98 +191,79 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
      */
     public Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
             throws IOException {
-        return this.actionFactory.processActionCreate(request, response, mapping, log, getInternal(), this.servlet);
+        // TODO
+        return super.processActionCreate(request, response, mapping);
     }
 
     public Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
             throws IOException {
-        return this.actionFactory.getActionInstance(request, response, mapping, log, getInternal(), this.servlet);
+        // TODO
+        return null;
 
     }
 
     public ActionForward processActionExecute(HttpServletRequest request, HttpServletResponse response, Object action,
             ActionForm form, ActionMapping mapping) throws IOException, ServletException {
-        return this.executeProcessor.processActionExecute(request, response, action, form, mapping);
+        // TODO
+        return null;
     }
     
     public ActionForm processInputValueFormCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) throws ServletException {
-        return this.inputValueFormCreator.create(request, response, mapping, this);
+        // TODO
+        return null;
     }
 
     public void processInputValueFormDelete(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) {
-        this.inputValueFormCreator.delete(request, response, mapping);
+        // TODO
     }
 
     /**
      * @return Returns the executeProcessor.
      */
     public ActionExecuteProcessor getExecuteProcessor() {
-        return this.executeProcessor;
+        // TODO
+        return null;
     }
 
     /**
      * @param executeProcessor The executeProcessor to set.
      */
     public void setExecuteProcessor(ActionExecuteProcessor executeProcessor) {
-        this.executeProcessor = executeProcessor;
+        // TODO
     }
     /**
      * @param actionFactory The actionFactory to set.
      */
     public void setActionFactory(ActionFactory actionFactory) {
-        this.actionFactory = actionFactory;
+        // TODO
     }
     /**
      * @param acceptor The acceptor to set.
      */
     public void setAcceptor(Acceptor acceptor) {
-        this.acceptor = acceptor;
+        // TODO
     }
     
     /**
      * @param validateProcessor The validateProcessor to set.
      */
     public void setValidateProcessor(ValidateProcessor validateProcessor) {
-        this.validateProcessor = validateProcessor;
+        // TODO
     }
     
     /**
      * @param inputValueFormCreator The inputValueFormCreator to set.
      */
     public void setInputValueFormCreator(InputValueFormProcessor inputValueFormCreator) {
-        this.inputValueFormCreator = inputValueFormCreator;
+        // TODO
     }
 
     public void setPopulateProcessor(PopulateProcessor populateProcessor) {
-		this.populateProcessor = populateProcessor;
-        this.populateProcessor.setRequestProcessor(this);
-	}
-
-    public ModuleConfig getModuleConfig(){
-        return super.moduleConfig;
+        // TODO
     }
 
-    public ActionServlet getActionServlet() {
-        return super.servlet;
-    }
-    
     public void processSetPath(ForwardConfig forward) {
-        S2StrutsContextUtil.setPath(forward);
+        // TODO
     }
     
-    public void doForward(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException,
-            ServletException {
-        
-        S2StrutsContextUtil.setPath(uri);
-        super.doForward(uri, request, response);
-    }
-
-    public MessageResources getInternal() {
-        return super.getInternal();
-    }
-
-    public Log getLog() {
-        return this.log;
-    }
-
 }

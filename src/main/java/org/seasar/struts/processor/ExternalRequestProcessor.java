@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -29,6 +30,7 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.InvalidCancelException;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.apache.struts.util.MessageResources;
 
 /**
  * @author Satoshi Kimura
@@ -187,4 +189,9 @@ public interface ExternalRequestProcessor {
     ModuleConfig getModuleConfig();
     
     ActionServlet getActionServlet();
+    
+    MessageResources getInternal();
+    
+    Log getLog();
+    
 }

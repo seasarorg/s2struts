@@ -23,7 +23,7 @@ public class PojoActionExecuteCommandExportTest extends S2TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        include("s2struts.dicon");
+        include("s2struts_old.dicon");
         include("PojoActionExecuteCommandExportTest.dicon");
     }
 
