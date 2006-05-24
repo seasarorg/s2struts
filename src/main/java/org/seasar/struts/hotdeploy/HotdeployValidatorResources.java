@@ -88,7 +88,6 @@ public class HotdeployValidatorResources extends ValidatorResources {
     }
 
     public Form getForm(String language, String country, String variant, String formKey) {
-        System.out.println("aaaaaaaaaaaaaaaaaa:" + S2StrutsContextUtil.getRequest());
         ModuleConfig config = ModuleUtils.getInstance().getModuleConfig(S2StrutsContextUtil.getRequest());
         Form form = this.validationCreator.createForm(config, formKey);
         if (form == null) {
