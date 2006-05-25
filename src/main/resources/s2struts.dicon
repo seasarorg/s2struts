@@ -14,8 +14,8 @@
 	-->
 	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
 
-	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
 	<!-- Old RequestProcessor
+	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
 	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
 
 	<component name="methodBindingActionCommand"    class="org.seasar.struts.processor.MethodBindingActionCommand"/>
@@ -45,11 +45,11 @@
 	-->
 	<!-- New RequestProcessor -->
 	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
-		<initMethod name="addActionCommnad"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingActionCommand"/></arg></initMethod>
-		<initMethod name="addActionCommnad"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodActionCommand"/></arg></initMethod>
-		<initMethod name="addActionCommnad"><arg><component class="org.seasar.struts.pojo.commands.DispatchActionCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
 	</component>
-	<component name="requestProcessor"             class="org.seasar.struts.pojo.processor.S2RequestProcessor" instance="prototype">
+	<component name="requestProcessor"             class="org.seasar.struts.pojo.processor.InternalS2RequestProcessor" instance="prototype">
 		<aspect pointcut="processMultipart">
 			<component class="org.seasar.struts.pojo.processor.ProcessMultipartInterceptor"/>
 		</aspect>
