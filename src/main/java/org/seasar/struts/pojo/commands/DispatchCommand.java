@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.util.MethodUtil;
-import org.seasar.struts.pojo.ActionCommand;
-import org.seasar.struts.pojo.ActionInvocation;
+import org.seasar.struts.pojo.PojoCommand;
+import org.seasar.struts.pojo.PojoInvocation;
 
-public class DispatchActionCommand implements ActionCommand {
+public class DispatchCommand implements PojoCommand {
 
-    public String execute(ActionInvocation invocation) {
+    public String execute(PojoInvocation invocation) {
         HttpServletRequest request = invocation.getRequest();
         ActionMapping mapping = invocation.getActionMapping();
         Class actionInterface = invocation.getActionInterface();

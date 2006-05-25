@@ -5,13 +5,13 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.pojo.ActionCommand;
-import org.seasar.struts.pojo.ActionInvocation;
+import org.seasar.struts.pojo.PojoCommand;
+import org.seasar.struts.pojo.PojoInvocation;
 import org.seasar.struts.util.BindingUtil;
 
-public class PropertyBindingActionCommand implements ActionCommand {
+public class PropertyBindingCommand implements PojoCommand {
     
-    public String execute(ActionInvocation invocation) {
+    public String execute(PojoInvocation invocation) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ActionMapping mapping = invocation.getActionMapping();
         Object action = invocation.getActionInstance();

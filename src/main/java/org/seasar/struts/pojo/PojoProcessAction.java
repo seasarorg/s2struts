@@ -22,17 +22,17 @@ public class PojoProcessAction extends Action {
         this.classRegister = classRegister;
     }
 
-    private List actionCommands = new ArrayList();
+    private List pojoCommands = new ArrayList();
 
-    public void addActionCommnad(ActionCommand actionCommand) {
-        this.actionCommands.add(actionCommand);
+    public void addPojoCommnad(PojoCommand pojoCommand) {
+        this.pojoCommands.add(pojoCommand);
     }
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         
-        if (this.actionCommands.size() == 0) {
-            throw new RuntimeException("ActionCommand is not registered.");
+        if (this.pojoCommands.size() == 0) {
+            throw new RuntimeException("PojoCommand is not registered.");
         }
 
         S2Container container = SingletonS2ContainerFactory.getContainer();
@@ -43,7 +43,7 @@ public class PojoProcessAction extends Action {
         }
         Object actionInstance = container.getComponent(actionInterface);
 
-        ActionInvocation invocation = new ActionInvocationImpl(this.actionCommands, mapping,
+        PojoInvocation invocation = new PojoInvocationImpl(this.pojoCommands, mapping,
                 actionInterface, actionInstance, form, request, response);
         String forward = invocation.execute();
         if (forward != null) {
