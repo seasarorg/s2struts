@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.processor.MethodBinding;
+import org.seasar.struts.pojo.MethodBinding;
 
 /**
  * @author Satoshi Kimura

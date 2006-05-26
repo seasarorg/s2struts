@@ -28,7 +28,6 @@ import org.apache.struts.util.MessageResources;
 import org.seasar.framework.container.ComponentNotFoundRuntimeException;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.util.ClassRegister;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**

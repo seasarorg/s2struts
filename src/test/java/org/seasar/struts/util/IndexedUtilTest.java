@@ -1,5 +1,7 @@
 package org.seasar.struts.util;
 
+import org.seasar.struts.pojo.util.IndexedUtil;
+
 import junit.framework.TestCase;
 
 public class IndexedUtilTest extends TestCase {

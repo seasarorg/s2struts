@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Hashtable;
 
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.struts.action.ClassRegister;
+import org.seasar.struts.action.ClassRegisterImpl;
 
 /**
  * @author Satoshi Kimura

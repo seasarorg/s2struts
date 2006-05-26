@@ -1,5 +1,7 @@
 package org.seasar.struts.config.rule;
 
+import org.seasar.struts.zeroconfig.config.rule.CommonNamingRule;
+
 import junit.framework.TestCase;
 
 /**

@@ -1,5 +1,7 @@
 package org.seasar.struts.form;
 
+import org.seasar.struts.pojo.form.InputValueForm;
+
 import junit.framework.TestCase;
 
 /**

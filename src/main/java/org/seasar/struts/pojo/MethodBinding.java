@@ -21,7 +21,7 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.util.BindingUtil;
+import org.seasar.struts.pojo.util.BindingUtil;
 
 /**
  * 

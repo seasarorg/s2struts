@@ -18,8 +18,8 @@ package org.seasar.struts.pojo.processor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
+import org.seasar.struts.action.ClassRegister;
 import org.seasar.struts.pojo.PojoProcessAction;
-import org.seasar.struts.util.ClassRegister;
 
 /**
  * 

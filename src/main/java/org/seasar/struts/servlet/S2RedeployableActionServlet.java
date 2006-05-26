@@ -18,16 +18,12 @@ package org.seasar.struts.servlet;
 import javax.servlet.ServletException;
 
 import org.apache.struts.action.ActionServlet;
-import org.apache.struts.action.RequestProcessor;
 import org.apache.struts.actions.RedeployableActionServlet;
-import org.apache.struts.config.ModuleConfig;
-import org.seasar.framework.container.S2Container;
-import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.S2StrutsInitializer;
-import org.seasar.struts.processor.RequestProcessorFactory;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class S2RedeployableActionServlet extends RedeployableActionServlet {
 
@@ -38,19 +34,6 @@ public class S2RedeployableActionServlet extends RedeployableActionServlet {
      */
     public S2RedeployableActionServlet() {
         super();
-    }
-
-    /**
-     * <p>
-     * Look up and return the {@link RequestProcessor}responsible for the specified module, creating a new one if
-     * necessary.
-     * </p>
-     * 
-     * @param config The module configuration for which to acquire and return a RequestProcessor.
-     * @exception ServletException if we cannot instantiate a RequestProcessor instance
-     */
-    protected synchronized RequestProcessor getRequestProcessor(ModuleConfig moduleConfig) throws ServletException {
-        return getRequestProcessorFactory().getRequestProcessor(moduleConfig, getServletContext(), this);
     }
 
     /**
@@ -68,11 +51,6 @@ public class S2RedeployableActionServlet extends RedeployableActionServlet {
             e.printStackTrace();
             throw e;
         }
-    }
-
-    private static RequestProcessorFactory getRequestProcessorFactory() {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (RequestProcessorFactory) container.getComponent(RequestProcessorFactory.class);
     }
 
 }

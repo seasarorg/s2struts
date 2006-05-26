@@ -3,6 +3,7 @@ package org.seasar.struts.hotdeploy;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.hotdeploy.web.add.AddAction;
 import org.seasar.struts.hotdeploy.web.add.AddForm;
+import org.seasar.struts.zeroconfig.hotdeploy.NamingRule;
 
 public class ActionFormNamingRuleTest extends S2TestCase {
 

@@ -27,7 +27,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.util.ClassRegister;
+import org.seasar.struts.action.ClassRegister;
 
 /**
  * 

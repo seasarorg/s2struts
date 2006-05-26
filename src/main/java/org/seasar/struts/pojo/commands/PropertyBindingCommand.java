@@ -22,7 +22,7 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.pojo.PojoCommand;
 import org.seasar.struts.pojo.PojoInvocation;
-import org.seasar.struts.util.BindingUtil;
+import org.seasar.struts.pojo.util.BindingUtil;
 
 /**
  * 

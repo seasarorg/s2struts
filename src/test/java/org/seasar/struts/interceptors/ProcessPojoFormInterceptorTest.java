@@ -7,9 +7,9 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.impl.ModuleConfigImpl;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.interceptors.ProcessPojoFormInterceptor.SerializeBeanValidatorForm;
 import org.seasar.struts.mock.MockActionMapping;
-import org.seasar.struts.pojo.processor.InternalS2RequestProcessor;
+import org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor.SerializeBeanValidatorForm;
+import org.seasar.struts.processor.InternalS2RequestProcessor;
 
 /**
  * @author Katsuhiko Nagashima

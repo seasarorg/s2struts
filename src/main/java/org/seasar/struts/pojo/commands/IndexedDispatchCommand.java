@@ -24,7 +24,7 @@ import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.util.MethodUtil;
 import org.seasar.struts.pojo.PojoCommand;
 import org.seasar.struts.pojo.PojoInvocation;
-import org.seasar.struts.util.IndexedUtil;
+import org.seasar.struts.pojo.util.IndexedUtil;
 
 /**
  * 

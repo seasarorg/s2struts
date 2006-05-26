@@ -20,7 +20,7 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionServlet;
-import org.seasar.struts.util.IndexedUtil;
+import org.seasar.struts.pojo.util.IndexedUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**

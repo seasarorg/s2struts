@@ -8,6 +8,7 @@ import org.seasar.struts.action.ExportPOJOActionImpl;
 import org.seasar.struts.action.ExportPOJOForm;
 import org.seasar.struts.action.POJOActionImpl;
 import org.seasar.struts.mock.MockActionMapping;
+import org.seasar.struts.pojo.util.BindingUtil;
 
 /**
  * @author Satoshi Kimura

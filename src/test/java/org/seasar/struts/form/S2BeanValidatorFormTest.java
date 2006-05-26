@@ -6,7 +6,8 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.action.ResetNotDefinedPojoForm;
 import org.seasar.struts.action.ResetPojoForm;
 import org.seasar.struts.mock.MockActionMapping;
-import org.seasar.struts.util.BeanValidatorFormUtil;
+import org.seasar.struts.pojo.form.S2BeanValidatorForm;
+import org.seasar.struts.pojo.util.BeanValidatorFormUtil;
 
 /**
  * 

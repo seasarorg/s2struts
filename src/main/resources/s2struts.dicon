@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="s2struts">
-	<component name="messageFacade"                class="org.seasar.struts.action.MessageFacadeImpl" instance="request"/>
+	<component name="messageFacade"                class="org.seasar.struts.pojo.MessageFacadeImpl" instance="request"/>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.S2StrutsContextImpl" instance="session"/>
 
 	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
@@ -12,7 +12,7 @@
 	<!--
 	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
 	-->
-	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
+	<component name="classRegister"                class="org.seasar.struts.zeroconfig.hotdeploy.HotdeployClassRegister"/>
 
 	<!-- Old RequestProcessor
 	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
@@ -49,21 +49,21 @@
 		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
 		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
 	</component>
-	<component name="requestProcessor"             class="org.seasar.struts.pojo.processor.InternalS2RequestProcessor" instance="prototype">
+	<component name="requestProcessor"             class="org.seasar.struts.processor.InternalS2RequestProcessor" instance="prototype">
 		<aspect pointcut="processMultipart">
-			<component class="org.seasar.struts.pojo.processor.ProcessMultipartInterceptor"/>
+			<component class="org.seasar.struts.processor.ProcessMultipartInterceptor"/>
 		</aspect>
 		<aspect pointcut="processValidate">
 			<component class="org.seasar.struts.pojo.processor.ProcessSetInputPathValidateInterceptor"/>
 		</aspect>
 		<aspect pointcut="processActionForm">
-			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
+			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
 		</aspect>
 		<aspect pointcut="processActionCreate">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessMethodBindingActionCreatorInterceptor"/></arg></initMethod>
 				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessPojoActionCreateInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessActionCreateInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.processor.ProcessActionCreateInterceptor"/></arg></initMethod>
 			</component>
 		</aspect>
 		<aspect pointcut="doForward">
@@ -78,36 +78,36 @@
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
 	-->
-	<component name="strutsConfigRule"             class="org.seasar.struts.hotdeploy.StrutsConfigRuleImpl"/>
-	<component name="actionPathNamingRule"         class="org.seasar.struts.hotdeploy.ActionPathNamingRule"/>
-	<component name="actionFormNamingRule"         class="org.seasar.struts.hotdeploy.ActionFormNamingRule"/>
-	<component name="zeroConfigActionRule"         class="org.seasar.struts.hotdeploy.HotdeployZeroConfigActionRule">
+	<component name="strutsConfigRule"             class="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRuleImpl"/>
+	<component name="actionPathNamingRule"         class="org.seasar.struts.zeroconfig.hotdeploy.ActionPathNamingRule"/>
+	<component name="actionFormNamingRule"         class="org.seasar.struts.zeroconfig.hotdeploy.ActionFormNamingRule"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.zeroconfig.hotdeploy.HotdeployZeroConfigActionRule">
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
-	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.hotdeploy.HotdeployZeroConfigActionFormRule"/>
-	<component name="actionConfigCreator"          class="org.seasar.struts.hotdeploy.ActionConfigCreatorImpl">
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.zeroconfig.hotdeploy.HotdeployZeroConfigActionFormRule"/>
+	<component name="actionConfigCreator"          class="org.seasar.struts.zeroconfig.hotdeploy.ActionConfigCreatorImpl">
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
-	<component name="actionFormConfigCreator"      class="org.seasar.struts.hotdeploy.ActionFormConfigCreatorImpl">
+	<component name="actionFormConfigCreator"      class="org.seasar.struts.zeroconfig.hotdeploy.ActionFormConfigCreatorImpl">
 	    <property name="namingRule">actionFormNamingRule</property>
 	</component>
-	<component name="validatorCreator"             class="org.seasar.struts.hotdeploy.ValidationCreatorImpl">
+	<component name="validatorCreator"             class="org.seasar.struts.zeroconfig.hotdeploy.ValidationCreatorImpl">
 	    <property name="namingRule">actionFormNamingRule</property>
 	</component>
-	<component name="strutsConfigRegister"         class="org.seasar.struts.hotdeploy.StrutsConfigRegisterImpl"/>
+	<component name="strutsConfigRegister"         class="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRegisterImpl"/>
 	
 
-	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
+	<component name="dateConfigRegister"           class="org.seasar.struts.zeroconfig.validator.config.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>
 	</component>
-	<component name="maskConfigRegister"           class="org.seasar.struts.validator.config.MaskConfigRegisterImpl"/>
-	<component name="maxlengthConfigRegister"      class="org.seasar.struts.validator.config.MaxlengthConfigRegisterImpl"/>
-	<component name="minlengthConfigRegister"      class="org.seasar.struts.validator.config.MinlengthConfigRegisterImpl"/>
-	<component name="maxbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MaxbytelengthConfigRegisterImpl"/>
-	<component name="minbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MinbytelengthConfigRegisterImpl"/>
-	<component name="intRangeConfigRegister"       class="org.seasar.struts.validator.config.IntRangeConfigRegisterImpl"/>
-	<component name="longRangeConfigRegister"      class="org.seasar.struts.validator.config.LongRangeConfigRegisterImpl"/>
-	<component name="floatRangeConfigRegister"     class="org.seasar.struts.validator.config.FloatRangeConfigRegisterImpl"/>
-	<component name="doubleRangeConfigRegister"    class="org.seasar.struts.validator.config.DoubleRangeConfigRegisterImpl"/>
-	<component name="validatorFieldConfigRegister" class="org.seasar.struts.validator.config.ValidatorFieldConfigRegisterImpl"/>
+	<component name="maskConfigRegister"           class="org.seasar.struts.zeroconfig.validator.config.MaskConfigRegisterImpl"/>
+	<component name="maxlengthConfigRegister"      class="org.seasar.struts.zeroconfig.validator.config.MaxlengthConfigRegisterImpl"/>
+	<component name="minlengthConfigRegister"      class="org.seasar.struts.zeroconfig.validator.config.MinlengthConfigRegisterImpl"/>
+	<component name="maxbytelengthConfigRegister"  class="org.seasar.struts.zeroconfig.validator.config.MaxbytelengthConfigRegisterImpl"/>
+	<component name="minbytelengthConfigRegister"  class="org.seasar.struts.zeroconfig.validator.config.MinbytelengthConfigRegisterImpl"/>
+	<component name="intRangeConfigRegister"       class="org.seasar.struts.zeroconfig.validator.config.IntRangeConfigRegisterImpl"/>
+	<component name="longRangeConfigRegister"      class="org.seasar.struts.zeroconfig.validator.config.LongRangeConfigRegisterImpl"/>
+	<component name="floatRangeConfigRegister"     class="org.seasar.struts.zeroconfig.validator.config.FloatRangeConfigRegisterImpl"/>
+	<component name="doubleRangeConfigRegister"    class="org.seasar.struts.zeroconfig.validator.config.DoubleRangeConfigRegisterImpl"/>
+	<component name="validatorFieldConfigRegister" class="org.seasar.struts.zeroconfig.validator.config.ValidatorFieldConfigRegisterImpl"/>
 </components>

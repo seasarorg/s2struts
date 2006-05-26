@@ -2,11 +2,11 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
 "http://www.seasar.org/dtd/components.dtd">
 <components>
-	<component class="org.seasar.struts.hotdeploy.StrutsConfigRuleImpl">
+	<component class="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRuleImpl">
 	    <property name="rootPackageName">"org.seasar.struts.hotdeploy"</property>
 	    <property name="actionMiddlePackageName">"web"</property>
 	    <property name="actionSuffix">"Action"</property>
 	</component>
 	
-	<component class="org.seasar.struts.hotdeploy.ActionPathNamingRule"/>
+	<component class="org.seasar.struts.zeroconfig.hotdeploy.ActionPathNamingRule"/>
 </components>

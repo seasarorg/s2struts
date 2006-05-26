@@ -4,6 +4,8 @@ import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.form.ValidatorAnnotationForm;
+import org.seasar.struts.zeroconfig.factory.ConstantValidatorAnnotationHandler;
+import org.seasar.struts.zeroconfig.factory.ValidatorAnnotationHandler;
 
 /**
  * 

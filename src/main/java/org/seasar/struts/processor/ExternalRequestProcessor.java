@@ -102,9 +102,6 @@ public interface ExternalRequestProcessor {
     boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form, ActionMapping mapping) throws IOException,
             ServletException, InvalidCancelException;
 
-    boolean processS2Validate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping) throws IOException, ServletException, InvalidCancelException;
-    
     /**
      * @see org.apache.struts.action.RequestProcessor#processActionPerform(HttpServletRequest, HttpServletResponse,
      *      Action, ActionForm, ActionMapping)
@@ -117,9 +114,6 @@ public interface ExternalRequestProcessor {
      *      ActionForm, ActionMapping)
      */
     void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping) throws ServletException;
-
-    void processS2Populate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws ServletException;
 
     /**
@@ -158,33 +152,17 @@ public interface ExternalRequestProcessor {
     ActionForward processException(HttpServletRequest request, HttpServletResponse response,
             Exception exception, ActionForm form, ActionMapping mapping) throws IOException, ServletException;
     
-    ActionForm processInputValueFormCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) throws ServletException;
-
-    void processInputValueFormDelete(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping);
-
     /**
      * @see org.apache.struts.action.RequestProcessor#doForward(java.lang.String, javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
     void doForward(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 
-    Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
-            throws IOException;
-
-    ActionForward processActionExecute(HttpServletRequest request, HttpServletResponse response, Object action,
-            ActionForm form, ActionMapping mapping) throws IOException, ServletException;
-
-    void processSetPath(ForwardConfig forward);
-    
     /**
-     * @return Returns the executeProcessor.
+     * @see org.apache.struts.action.RequestProcessor#doInclude(java.lang.String, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    ActionExecuteProcessor getExecuteProcessor();
-
-    /**
-     * @param executeProcessor The executeProcessor to set.
-     */
-    void setExecuteProcessor(ActionExecuteProcessor executeProcessor);
+    void doInclude(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 
     ModuleConfig getModuleConfig();
     
