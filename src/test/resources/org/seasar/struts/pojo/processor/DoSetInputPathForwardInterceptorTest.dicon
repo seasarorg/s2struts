@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<component name="s2strutsContext"              class="org.seasar.struts.context.S2StrutsContextImpl" instance="session"/>
+
+	<component class="org.seasar.struts.processor.MockRequestProcessor" instance="prototype">
+		<aspect pointcut="doForward">
+			<component class="org.seasar.struts.pojo.processor.DoSetInputPathForwardInterceptor"/>
+		</aspect>
+	</component>
+</components>

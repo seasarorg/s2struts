@@ -53,7 +53,7 @@ import org.seasar.struts.processor.ExternalRequestProcessor;
 public class ProcessPojoFormInterceptor extends AbstractInterceptor {
     private static final long serialVersionUID = 2099594177189105461L;
 
-	public Object invoke(MethodInvocation invocation) throws Throwable {
+    public Object invoke(MethodInvocation invocation) throws Throwable {
         ActionMapping mapping = getMapping(invocation);
         ModuleConfig moduleConfig = getModuleConfig(invocation);
 
@@ -66,43 +66,39 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
         }
     }
 
-    private boolean isPojoForm(ActionMapping mapping, ModuleConfig moduleConfig)
-            throws Throwable {
+    private boolean isPojoForm(ActionMapping mapping, ModuleConfig moduleConfig) throws Throwable {
 
-        FormBeanConfig formConfig = moduleConfig.findFormBeanConfig(mapping
-                .getName());
-        
-        if(formConfig == null) {
+        FormBeanConfig formConfig = moduleConfig.findFormBeanConfig(mapping.getName());
+
+        if (formConfig == null) {
             return false;
         }
-        
+
         Class fromClass = RequestUtils.applicationClass(formConfig.getType());
 
         return !(ActionForm.class.isAssignableFrom(fromClass));
     }
-    
-    private ActionForm processPojoForm(HttpServletRequest request,
-            ActionMapping mapping, ModuleConfig moduleConfig,
-            ActionServlet servlet) {
-        
+
+    private ActionForm processPojoForm(HttpServletRequest request, ActionMapping mapping,
+            ModuleConfig moduleConfig, ActionServlet servlet) {
+
         ActionForm instance = createPojoForm(request, mapping, moduleConfig, servlet);
         if (instance == null) {
             return null;
         }
-        
+
         if (Constants.REQUEST.equals(mapping.getScope())) {
             request.setAttribute(mapping.getAttribute(), instance);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute(mapping.getAttribute(), instance);
         }
-        return instance; 
-        
+        return instance;
+
     }
 
-    private ActionForm createPojoForm(HttpServletRequest request,
-            ActionMapping mapping, ModuleConfig moduleConfig,
-            ActionServlet servlet) {
+    private ActionForm createPojoForm(HttpServletRequest request, ActionMapping mapping,
+            ModuleConfig moduleConfig, ActionServlet servlet) {
 
         String attribute = mapping.getAttribute();
         if (attribute == null) {
@@ -120,7 +116,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
             if (instance instanceof SerializeBeanValidatorForm) {
                 return (ActionForm) instance;
             }
-            
+
             if (!(instance instanceof BeanValidatorForm)) {
                 instance = new BeanValidatorForm(instance);
             }
@@ -131,8 +127,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
         return new SerializeBeanValidatorForm((BeanValidatorForm) instance, servlet);
     }
 
-    private Object lookupPojoForm(HttpServletRequest request,
-            String attribute, String scope) {
+    private Object lookupPojoForm(HttpServletRequest request, String attribute, String scope) {
 
         if ("request".equals(scope)) {
             return request.getAttribute(attribute);
@@ -141,7 +136,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
             return session.getAttribute(attribute);
         }
     }
-    
+
     private boolean canReusePojoForm(Object instance, FormBeanConfig config) {
         Class configClass = ClassUtil.forName(config.getType());
         Object bean = BeanValidatorFormUtil.toBean(instance);
@@ -161,14 +156,12 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
     }
 
     private ModuleConfig getModuleConfig(MethodInvocation invocation) {
-        ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation
-                .getThis();
+        ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation.getThis();
         return processor.getModuleConfig();
     }
 
     private ActionServlet getServlet(MethodInvocation invocation) {
-        ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation
-                .getThis();
+        ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation.getThis();
         return processor.getActionServlet();
     }
 
@@ -178,10 +171,10 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
 
     public static class SerializeBeanValidatorForm extends S2BeanValidatorForm {
         private static final long serialVersionUID = 7286186270470466966L;
-		protected Object bean = null;
 
-        public SerializeBeanValidatorForm(BeanValidatorForm form,
-                ActionServlet servlet) {
+        protected Object bean = null;
+
+        public SerializeBeanValidatorForm(BeanValidatorForm form, ActionServlet servlet) {
 
             // WrapDynaBeanをフィールドで持つとSerializeできなくなる。
             // それを回避するために
@@ -195,7 +188,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
         }
 
         // ------------------- Public Methods ----------------------------------
-        
+
         public void initBean(Object beanObject) {
             this.bean = beanObject;
         }
@@ -266,8 +259,8 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
                     this.page = ((Integer) value).intValue();
                 } else {
                     try {
-                        this.page = ((Integer) ConvertUtils.convert(
-                                value.toString(), Integer.class)).intValue();
+                        this.page = ((Integer) ConvertUtils
+                                .convert(value.toString(), Integer.class)).intValue();
                     } catch (RuntimeException ignore) {
                         this.page = 0;
                     }

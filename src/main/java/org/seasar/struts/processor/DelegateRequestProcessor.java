@@ -33,27 +33,19 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
  */
 public class DelegateRequestProcessor extends RequestProcessor {
 
-    private RequestProcessor processor;
+    private ExternalRequestProcessor processor;
 
     public DelegateRequestProcessor() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        this.processor = (RequestProcessor) container.getComponent(RequestProcessor.class);
-    }
-
-    public void destroy() {
-        this.processor.destroy();
-    }
-
-    public boolean equals(Object obj) {
-        return this.processor.equals(obj);
-    }
-
-    public int hashCode() {
-        return this.processor.hashCode();
+        this.processor = (ExternalRequestProcessor) container.getComponent(ExternalRequestProcessor.class);
     }
 
     public void init(ActionServlet arg0, ModuleConfig arg1) throws ServletException {
         this.processor.init(arg0, arg1);
+    }
+
+    public void destroy() {
+        this.processor.destroy();
     }
 
     public void process(HttpServletRequest arg0, HttpServletResponse arg1) throws IOException,
@@ -63,6 +55,14 @@ public class DelegateRequestProcessor extends RequestProcessor {
 
     public String toString() {
         return this.processor.toString();
+    }
+
+    public boolean equals(Object obj) {
+        return this.processor.equals(obj);
+    }
+
+    public int hashCode() {
+        return this.processor.hashCode();
     }
 
 }

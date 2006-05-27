@@ -52,7 +52,6 @@ public class InternalS2RequestProcessor extends RequestProcessor implements Exte
      * @exception ServletException if a processing exception occurs
      */
     public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //this.acceptor.process(this, request, response, log);
         super.process(request, response);
     }
 

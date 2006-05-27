@@ -29,7 +29,7 @@ public class DoSetInputPathForwardInterceptor extends AbstractInterceptor {
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         String uri = (String) invocation.getArguments()[0];
-        
+
         S2StrutsContextUtil.setPath(uri);
         return invocation.proceed();
     }

@@ -36,6 +36,16 @@ import org.apache.struts.util.MessageResources;
  * @author Satoshi Kimura
  */
 public interface ExternalRequestProcessor {
+    
+    /**
+     * @see org.apache.struts.action.RequestProcessor#init(ActionServlet, ModuleConfig)
+     */
+    void init(ActionServlet servlet, ModuleConfig config) throws ServletException;
+    
+    /**
+     * @see org.apache.struts.action.RequestProcessor#destroy()
+     */
+    void destroy();
 
     /**
      * @see org.apache.struts.action.RequestProcessor#process(HttpServletRequest, HttpServletResponse)
