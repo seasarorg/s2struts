@@ -3,7 +3,7 @@
 "http://www.seasar.org/dtd/components.dtd">
 <components>
 	<component class="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRuleImpl">
-	    <property name="rootPackageName">"org.seasar.struts.hotdeploy"</property>
+	    <property name="rootPackageName">"org.seasar.struts.zeroconfig.hotdeploy"</property>
 	    <property name="actionMiddlePackageName">"web"</property>
 	    <property name="actionSuffix">"Action"</property>
 	</component>

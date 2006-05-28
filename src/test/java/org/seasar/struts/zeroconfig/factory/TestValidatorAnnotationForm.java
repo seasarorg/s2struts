@@ -1,4 +1,4 @@
-package org.seasar.struts.form;
+package org.seasar.struts.zeroconfig.factory;
 
 import java.util.Date;
 
@@ -7,11 +7,11 @@ import org.apache.struts.upload.FormFile;
 /**
  * @author Katsuhiko Nagashima
  */
-public class ValidatorAnnotationForm {
+public class TestValidatorAnnotationForm {
     
     public static final String FORM = "testFormName";
 
-    public ValidatorAnnotationForm() {
+    public TestValidatorAnnotationForm() {
     }
 
     public static final String arg_VALIDATOR = "required";
@@ -115,15 +115,15 @@ public class ValidatorAnnotationForm {
     public void setAutoArray(int[] autoArray) {
     }
     
-    public void setChild(ValidatorAnnotationChildForm child) {
+    public void setChild(TestValidatorAnnotationChildForm child) {
     }
     
-    public void setChildren(ValidatorAnnotationChildForm[] children) {
+    public void setChildren(TestValidatorAnnotationChildForm[] children) {
     }
     
     public static final String self_VALIDATOR = "noValidate";
 
-    public void setSelf(ValidatorAnnotationForm self) {
+    public void setSelf(TestValidatorAnnotationForm self) {
     }
     
     public static final String file_VALIDATOR = "required";

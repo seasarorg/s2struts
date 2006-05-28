@@ -1,10 +1,8 @@
-package org.seasar.struts.form;
+package org.seasar.struts.pojo.form;
 
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.action.ResetNotDefinedPojoForm;
-import org.seasar.struts.action.ResetPojoForm;
 import org.seasar.struts.mock.MockActionMapping;
 import org.seasar.struts.pojo.form.S2BeanValidatorForm;
 import org.seasar.struts.pojo.util.BeanValidatorFormUtil;
@@ -18,17 +16,17 @@ public class S2BeanValidatorFormTest extends S2TestCase {
     public void testCalledReset() {
         ActionMapping mapping = new MockActionMapping();
         S2BeanValidatorForm form = new S2BeanValidatorForm(
-                new BeanValidatorForm(new ResetPojoForm()));
+                new BeanValidatorForm(new TestResetPojoForm()));
         form.reset(mapping, getRequest());
         
-        ResetPojoForm resultForm = (ResetPojoForm) BeanValidatorFormUtil.toBean(form);
+        TestResetPojoForm resultForm = (TestResetPojoForm) BeanValidatorFormUtil.toBean(form);
         assertEquals("calledReset", resultForm.getMessage());
     }
     
     public void testNotDefinedRest() {
         ActionMapping mapping = new MockActionMapping();
         S2BeanValidatorForm form = new S2BeanValidatorForm(
-                new BeanValidatorForm(new ResetNotDefinedPojoForm()));
+                new BeanValidatorForm(new TestResetNotDefinedPojoForm()));
         form.reset(mapping, getRequest());
         
         // Confirm that Exception don't happen.

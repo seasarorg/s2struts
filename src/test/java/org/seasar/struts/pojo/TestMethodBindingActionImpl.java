@@ -1,6 +1,6 @@
-package org.seasar.struts.action;
+package org.seasar.struts.pojo;
 
-public class MethodBindingActionImpl implements MethodBindingAction {
+public class TestMethodBindingActionImpl implements TestMethodBindingAction {
 
     public String exe() {
         return "success";

@@ -1,6 +1,6 @@
-package org.seasar.struts.form;
+package org.seasar.struts.zeroconfig.factory;
 
-public class ValidatorAnnotationChildForm {
+public class TestValidatorAnnotationChildForm {
     
     public static final String required_VALIDATOR = "required";
     public static final String required_VALIDATOR_ARGS = "ChildRequired, resource=false";
@@ -16,10 +16,10 @@ public class ValidatorAnnotationChildForm {
     public void setNoValidate(String noValidate) {
     }
     
-    public void setGrandchild(ValidatorAnnotationGrandchildForm grandchild) {
+    public void setGrandchild(TestValidatorAnnotationGrandchildForm grandchild) {
     }
     
-    public void setGrandchildren(ValidatorAnnotationGrandchildForm[] grandchildren) {
+    public void setGrandchildren(TestValidatorAnnotationGrandchildForm[] grandchildren) {
     }
 
 }

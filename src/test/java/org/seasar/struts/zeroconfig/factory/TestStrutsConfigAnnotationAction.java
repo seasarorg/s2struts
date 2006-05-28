@@ -1,9 +1,9 @@
-package org.seasar.struts.action;
+package org.seasar.struts.zeroconfig.factory;
 
 /**
  * @author Katsuhiko Nagashima
  */
-public interface StrutsConfigAnnotationAction {
+public interface TestStrutsConfigAnnotationAction {
 
     String ACTION = "path=testpath, name=testname, input=testinput, parameter=testparameter"
             + ", attribute=testattribute, forward=testforward, include=testinclude"

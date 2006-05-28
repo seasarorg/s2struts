@@ -1,4 +1,4 @@
-package org.seasar.struts.form;
+package org.seasar.struts.pojo.form;
 
 import org.seasar.struts.pojo.form.InputValueForm;
 

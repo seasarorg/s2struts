@@ -3,7 +3,6 @@ package org.seasar.struts.zeroconfig.factory;
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.form.ValidatorAnnotationForm;
 import org.seasar.struts.zeroconfig.factory.ConstantValidatorAnnotationHandler;
 import org.seasar.struts.zeroconfig.factory.ValidatorAnnotationHandler;
 
@@ -25,7 +24,7 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
     }
     
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", ValidatorAnnotationForm.class);
+        form = annHandler.createForm("testForm", TestValidatorAnnotationForm.class);
     }
 
     public void testArg() {

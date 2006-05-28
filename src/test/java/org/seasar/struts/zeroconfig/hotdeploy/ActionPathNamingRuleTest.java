@@ -1,9 +1,9 @@
-package org.seasar.struts.hotdeploy;
+package org.seasar.struts.zeroconfig.hotdeploy;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.hotdeploy.web.add.AddAction;
-import org.seasar.struts.hotdeploy.web.add.AddForm;
 import org.seasar.struts.zeroconfig.hotdeploy.NamingRule;
+import org.seasar.struts.zeroconfig.hotdeploy.web.add.AddAction;
+import org.seasar.struts.zeroconfig.hotdeploy.web.add.AddForm;
 
 public class ActionPathNamingRuleTest extends S2TestCase {
     

@@ -51,6 +51,14 @@ public class SingleMethodCommandTest extends S2TestCase {
         assertEquals("success", result);
     }
 
+    public void testExecuteReturnNull() {
+        this.invocation.setActionInterface(TestReturnNullPOJOAction.class);
+        this.invocation.setActionInstance(new TestReturnNullPOJOActionImpl());
+
+        String result = this.invocation.execute();
+        assertNull(result);
+    }
+
     public void testNotExecuteBecauseActionIsMultiMethodAction() {
         this.invocation.setActionInterface(TestMultiMethodAction.class);
         this.invocation.setActionInstance(new TestMultiMethodActionImpl());

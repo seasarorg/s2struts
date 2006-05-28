@@ -1,10 +1,10 @@
-package org.seasar.struts.action;
+package org.seasar.struts.pojo.form;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public class ResetPojoForm {
+public class TestResetPojoForm {
     
     private String message;
     
