@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.seasar.struts.pojo.exception.NotCalledActionRuntimeException;
 
 /**
  * 
@@ -112,7 +113,7 @@ public class PojoInvocationImpl implements PojoInvocation {
             this.index++;
             return command.execute(this);
         }
-        throw new RuntimeException("Action cannot be called.");
+        throw new NotCalledActionRuntimeException();
     }
 
 }

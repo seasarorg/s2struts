@@ -28,6 +28,7 @@ import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.action.ClassRegister;
+import org.seasar.struts.pojo.exception.NotRegisteredComponentRuntimeException;
 
 /**
  * 
@@ -49,17 +50,13 @@ public class PojoProcessAction extends Action {
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+
         if (this.pojoCommands.size() == 0) {
-            throw new RuntimeException("PojoCommand is not registered.");
+            throw new NotRegisteredComponentRuntimeException(PojoCommand.class);
         }
 
         S2Container container = SingletonS2ContainerFactory.getContainer();
         Class actionInterface = this.classRegister.getClass(mapping.getType());
-        if (!container.hasComponentDef(actionInterface)) {
-            throw new RuntimeException("POJOAction of " + actionInterface.getName()
-                    + " is not registered in S2Container.");
-        }
         Object actionInstance = container.getComponent(actionInterface);
 
         PojoInvocation invocation = new PojoInvocationImpl(this.pojoCommands, mapping,

@@ -13,24 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.zeroconfig.hotdeploy;
-
-import org.apache.struts.config.ModuleConfig;
-import org.seasar.struts.zeroconfig.config.StrutsActionFormConfig;
-import org.seasar.struts.zeroconfig.config.rule.ZeroConfigActionFormRule;
+package org.seasar.struts.pojo.exception;
 
 /**
  * 
  * @author Katsuhiko Nagashima
+ * 
  */
-public class HotdeployZeroConfigActionFormRule implements ZeroConfigActionFormRule {
+public class NotRegisteredComponentRuntimeException extends RuntimeException {
 
-    public String getName(Class formClass, ModuleConfig config) {
-        throw new UnsupportedOperationException();
-    }
+    private static final long serialVersionUID = 5313009570580017157L;
 
-    public boolean getRestricted(Class formClass, ModuleConfig config) {
-        return StrutsActionFormConfig.DEFAULT_RESTRICTED;
+    public NotRegisteredComponentRuntimeException(Class clazz) {
+        super("Component(" + clazz.getName() + ") not registered.");
     }
 
 }

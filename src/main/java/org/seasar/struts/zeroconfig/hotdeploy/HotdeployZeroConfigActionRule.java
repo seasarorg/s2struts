@@ -57,7 +57,7 @@ public class HotdeployZeroConfigActionRule implements ZeroConfigActionRule {
     }
 
     public String getPath(Class actionClass, ModuleConfig config) {
-        throw new  UnsupportedOperationException("");
+        throw new  UnsupportedOperationException();
     }
 
     public String getName(Class actionClass, ModuleConfig config) {
