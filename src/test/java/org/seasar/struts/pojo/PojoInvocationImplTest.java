@@ -10,6 +10,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.extension.unit.S2TestCase;
 
+/**
+ * 
+ * @author Katsuhiko Nagashima
+ * 
+ */
 public class PojoInvocationImplTest extends S2TestCase {
 
     private final List traceMessage = new ArrayList();

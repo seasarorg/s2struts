@@ -5,6 +5,11 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.framework.mock.servlet.MockHttpServletRequest;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
+/**
+ * 
+ * @author Katsuhiko Nagashima
+ * 
+ */
 public class MethodBindingActionFactoryTest extends S2TestCase {
 
     protected void setUp() throws Exception {

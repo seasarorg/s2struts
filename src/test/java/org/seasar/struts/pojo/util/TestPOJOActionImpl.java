@@ -1,4 +1,4 @@
-package org.seasar.struts.action;
+package org.seasar.struts.pojo.util;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,7 +7,7 @@ import org.seasar.struts.Constants;
 /**
  * @author Satoshi Kimura
  */
-public class POJOActionImpl implements POJOAction {
+public class TestPOJOActionImpl implements TestPOJOAction {
     private String foo;
     private int bar;
     private String baz;

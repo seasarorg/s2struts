@@ -13,6 +13,11 @@ import org.seasar.struts.pojo.PojoCommand;
 import org.seasar.struts.pojo.PojoInvocation;
 import org.seasar.struts.pojo.PojoInvocationImpl;
 
+/**
+ * 
+ * @author Katsuhiko Nagashima
+ * 
+ */
 public class SingleMethodCommandTest extends S2TestCase {
 
     private PojoInvocation invocation;
