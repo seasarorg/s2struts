@@ -13,43 +13,32 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.zeroconfig.hotdeploy;
+package org.seasar.struts.hotdeploy;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
-import org.seasar.framework.log.Logger;
-import org.seasar.struts.zeroconfig.cooldeploy.ActionFormConfigCreator;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public class OndemandFindFormBeanConfigInterceptor extends AbstractInterceptor {
+public class ReloadFindFormBeanConfigInterceptor extends AbstractInterceptor {
 
-    private static final long serialVersionUID = 1039238091161277633L;
+    private static final long serialVersionUID = 1729529241669613257L;
 
-    private static final Logger log = Logger.getLogger(OndemandFindFormBeanConfigInterceptor.class);
+    private ModuleConfigLoader moduleConfigLoader;
 
-    private ActionFormConfigCreator formConfigCreator;
-
-    public void setActionFormConfigCreator(ActionFormConfigCreator formConfigCreator) {
-        this.formConfigCreator = formConfigCreator;
+    public void setModuleConfigLoader(ModuleConfigLoader moduleConfigLoader) {
+        this.moduleConfigLoader = moduleConfigLoader;
     }
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         ModuleConfig config = (ModuleConfig) invocation.getThis();
         String name = (String) invocation.getArguments()[0];
 
-        FormBeanConfig result = this.formConfigCreator.createFormBeanConfig(config, name);
-        if (result != null) {
-            if (log.isDebugEnabled()) {
-                log.debug("auto create " + result);
-            }
-            return result;
-        }
-        return invocation.proceed();
+        ModuleConfig reloadConfig = moduleConfigLoader.load(config.getPrefix());
+        return reloadConfig.findFormBeanConfig(name);
     }
 
 }

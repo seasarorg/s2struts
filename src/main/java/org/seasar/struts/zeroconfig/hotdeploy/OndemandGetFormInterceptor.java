@@ -26,6 +26,7 @@ import org.apache.struts.util.ModuleUtils;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.framework.log.Logger;
 import org.seasar.struts.util.S2StrutsContextUtil;
+import org.seasar.struts.zeroconfig.cooldeploy.ValidationCreator;
 
 /**
  * 

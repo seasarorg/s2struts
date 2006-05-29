@@ -12,30 +12,30 @@
 	<!--
 	<component name="classRegister"                class="org.seasar.struts.action.ClassRegisterImpl"/>
 	-->
-	<component name="classRegister"                class="org.seasar.struts.zeroconfig.hotdeploy.HotdeployClassRegister"/>
+	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
 
-	<component name="moduleConfigLoader"           class="org.seasar.struts.zeroconfig.hotdeploy.ModuleConfigLoaderImpl"/>
-	<component name="moduleConfigWrapper"          class="org.seasar.struts.zeroconfig.hotdeploy.ModuleConfigWrapper" instance="prototype">
+	<component name="moduleConfigLoader"           class="org.seasar.struts.hotdeploy.ModuleConfigLoaderImpl"/>
+	<component name="moduleConfigWrapper"          class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
 		<aspect pointcut="findActionConfig">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.OndemandFindActionConfigInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.ReloadFindActionConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindActionConfigInterceptor"/></arg></initMethod>
 			</component>
 		</aspect>
 		<aspect pointcut="findFormBeanConfig">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.OndemandFindFormBeanConfigInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.ReloadFindFormBeanConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindFormBeanConfigInterceptor"/></arg></initMethod>
 			</component>
 		</aspect>
 	</component>
 
-	<component name="validatorResourcesLoader"     class="org.seasar.struts.zeroconfig.hotdeploy.ValidatorResourcesLoaderImpl"/>
-	<component name="validatorResourcesWrapper"    class="org.seasar.struts.zeroconfig.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
+	<component name="validatorResourcesLoader"     class="org.seasar.struts.hotdeploy.ValidatorResourcesLoaderImpl"/>
+	<component name="validatorResourcesWrapper"    class="org.seasar.struts.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
 		<aspect pointcut="getForm">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.OndemandGetFormInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.ReloadGetFormInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadGetFormInterceptor"/></arg></initMethod>
 			</component>
 		</aspect>
 	</component>
@@ -75,23 +75,23 @@
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.zeroconfig.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.zeroconfig.config.rule.ZeroConfigActionFormRuleImpl"/>
 	-->
-	<component name="strutsConfigRule"             class="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRuleImpl"/>
-	<component name="actionPathNamingRule"         class="org.seasar.struts.zeroconfig.hotdeploy.ActionPathNamingRule"/>
-	<component name="actionFormNamingRule"         class="org.seasar.struts.zeroconfig.hotdeploy.ActionFormNamingRule"/>
-	<component name="zeroConfigActionRule"         class="org.seasar.struts.zeroconfig.hotdeploy.HotdeployZeroConfigActionRule">
+	<component name="strutsConfigRule"             class="org.seasar.struts.zeroconfig.cooldeploy.StrutsConfigRuleImpl"/>
+	<component name="actionPathNamingRule"         class="org.seasar.struts.zeroconfig.cooldeploy.ActionPathNamingRule"/>
+	<component name="actionFormNamingRule"         class="org.seasar.struts.zeroconfig.cooldeploy.ActionFormNamingRule"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.zeroconfig.cooldeploy.DeployZeroConfigActionRule">
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
-	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.zeroconfig.hotdeploy.HotdeployZeroConfigActionFormRule"/>
-	<component name="actionConfigCreator"          class="org.seasar.struts.zeroconfig.hotdeploy.ActionConfigCreatorImpl">
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.zeroconfig.cooldeploy.DeployZeroConfigActionFormRule"/>
+	<component name="actionConfigCreator"          class="org.seasar.struts.zeroconfig.cooldeploy.ActionConfigCreatorImpl">
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
-	<component name="actionFormConfigCreator"      class="org.seasar.struts.zeroconfig.hotdeploy.ActionFormConfigCreatorImpl">
+	<component name="actionFormConfigCreator"      class="org.seasar.struts.zeroconfig.cooldeploy.ActionFormConfigCreatorImpl">
 	    <property name="namingRule">actionFormNamingRule</property>
 	</component>
-	<component name="validatorCreator"             class="org.seasar.struts.zeroconfig.hotdeploy.ValidationCreatorImpl">
+	<component name="validatorCreator"             class="org.seasar.struts.zeroconfig.cooldeploy.ValidationCreatorImpl">
 	    <property name="namingRule">actionFormNamingRule</property>
 	</component>
-	<component name="strutsConfigRegister"         class="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRegisterImpl"/>
+	<component name="strutsConfigRegister"         class="org.seasar.struts.zeroconfig.cooldeploy.StrutsConfigRegisterImpl"/>
 	
 
 	<component name="dateConfigRegister"           class="org.seasar.struts.zeroconfig.validator.config.DateConfigRegisterImpl">
