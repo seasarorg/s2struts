@@ -78,12 +78,12 @@
     </plug-in>
     
     <!--
-    <plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn">
+    <plug-in className="org.seasar.struts.zeroconfig.plugin.AutoStrutsConfigRegisterPlugIn">
         <set-property property="enableJar" value="false"/>
         <set-property property="docRoot" value="/pages"/>
     </plug-in>
     -->
-    <plug-in className="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRegisterPlugIn">
+    <plug-in className="org.seasar.struts.zeroconfig.plugin.DeployStrutsConfigRegisterPlugIn">
 	    <set-property property="rootPackageName"             value="examples.hotdeploy"/>
 	    <set-property property="enableJar"                   value="false"/>
 	    <set-property property="actionMiddlePackageName"     value="webpojo"/>
@@ -93,6 +93,6 @@
 	    <set-property property="docRoot"                     value="/pages"/>
 	    <set-property property="viewExtension"               value="jsp,html"/>
     </plug-in>
-    <plug-in className="org.seasar.struts.zeroconfig.hotdeploy.HotdeployPlugIn"/>
+    <plug-in className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/>
 
 </struts-config>
