@@ -8,7 +8,7 @@
 	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
 
-	<!-- Hotdeploy(or Ondemand) Components -->
+	<!-- HOT Deploy(or Ondemand) Components -->
 	<!--
 	<component name="classRegister"                class="org.seasar.struts.action.ClassRegisterImpl"/>
 	-->
@@ -69,19 +69,21 @@
 	</component>
 
 	<!-- ZeroConfig Components  -->
-	<!-- Hotdeploy(or Ondemand) Components -->
-	<!-- 
+	<!-- AutoRegister Components
 	<component name="autoStrutsConfigRule"         class="org.seasar.struts.zeroconfig.config.AutoStrutsConfigRuleImpl"/>
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.zeroconfig.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.zeroconfig.config.rule.ZeroConfigActionFormRuleImpl"/>
 	-->
+	<!-- COOL Deploy Components -->
 	<component name="strutsConfigRule"             class="org.seasar.struts.zeroconfig.cooldeploy.StrutsConfigRuleImpl"/>
 	<component name="actionPathNamingRule"         class="org.seasar.struts.zeroconfig.cooldeploy.ActionPathNamingRule"/>
 	<component name="actionFormNamingRule"         class="org.seasar.struts.zeroconfig.cooldeploy.ActionFormNamingRule"/>
+
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.zeroconfig.cooldeploy.DeployZeroConfigActionRule">
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.zeroconfig.cooldeploy.DeployZeroConfigActionFormRule"/>
+
 	<component name="actionConfigCreator"          class="org.seasar.struts.zeroconfig.cooldeploy.ActionConfigCreatorImpl">
 	    <property name="namingRule">actionPathNamingRule</property>
 	</component>
@@ -93,7 +95,7 @@
 	</component>
 	<component name="strutsConfigRegister"         class="org.seasar.struts.zeroconfig.cooldeploy.StrutsConfigRegisterImpl"/>
 	
-
+    <!-- Validator ConfigRegister Components -->
 	<component name="dateConfigRegister"           class="org.seasar.struts.zeroconfig.validator.config.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>
 	</component>
