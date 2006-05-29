@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.zeroconfig.hotdeploy;
 
+import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.StringUtil;
 
@@ -71,7 +72,11 @@ public abstract class AbstractNamingRule implements NamingRule {
         }
         className.append(lastName);
 
-        return ClassUtil.forName(className.toString());
+        try {
+            return ClassUtil.forName(className.toString());
+        } catch (ClassNotFoundRuntimeException e) {
+            return null;
+        }
     }
 
     private String getPackageName(String middlePackageName) {

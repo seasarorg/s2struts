@@ -31,4 +31,9 @@ public class ActionFormNamingRuleTest extends S2TestCase {
         assertEquals(AddForm.class, clazz);
     }
     
+    public void testNotFoundDefineClass() {
+        Class clazz = namingRule.defineClass("not_foundForm");
+        assertNull(clazz);
+    }
+    
 }

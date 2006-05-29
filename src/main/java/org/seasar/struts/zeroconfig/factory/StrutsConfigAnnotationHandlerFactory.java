@@ -23,9 +23,9 @@ import org.seasar.framework.util.ClassUtil;
  */
 public class StrutsConfigAnnotationHandlerFactory {
     
-    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.factory.TigerStrutsConfigAnnotationHandler";
+    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.zeroconfig.factory.TigerStrutsConfigAnnotationHandler";
     
-    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.factory.Backport175StrutsConfigAnnotationHandler";
+    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.zeroconfig.factory.Backport175StrutsConfigAnnotationHandler";
 
     private static StrutsConfigAnnotationHandler annotationHandler;
     

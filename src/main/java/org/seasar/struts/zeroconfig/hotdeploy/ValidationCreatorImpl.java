@@ -34,6 +34,9 @@ public class ValidationCreatorImpl implements ValidationCreator {
 
     public Form createForm(ModuleConfig config, String name) {
         Class formClass = this.namingRule.defineClass(name);
+        if (formClass == null) {
+            return null;
+        }
         return createForm(config, formClass, name);
     }
 

@@ -23,9 +23,9 @@ import org.seasar.framework.util.ClassUtil;
  */
 public class ValidatorAnnotationHandlerFactory {
 
-    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.validator.factory.TigerValidatorAnnotationHandler";
+    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.zeroconfig.factory.TigerValidatorAnnotationHandler";
     
-    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.validator.factory.Backport175ValidatorAnnotationHandler";
+    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.zeroconfig.factory.Backport175ValidatorAnnotationHandler";
 
     private static ValidatorAnnotationHandler annotationHandler;
     

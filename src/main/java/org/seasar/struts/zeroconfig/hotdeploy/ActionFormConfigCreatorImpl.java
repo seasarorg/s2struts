@@ -43,6 +43,9 @@ public class ActionFormConfigCreatorImpl implements ActionFormConfigCreator {
 
     public FormBeanConfig createFormBeanConfig(ModuleConfig config, String name) {
         Class formClass = this.namingRule.defineClass(name);
+        if (formClass == null) {
+            return null;
+        }
         return createFormBeanConfig(config, formClass, name);
     }
 

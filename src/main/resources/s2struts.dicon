@@ -10,39 +10,36 @@
 
 	<!-- Hotdeploy(or Ondemand) Components -->
 	<!--
-	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
+	<component name="classRegister"                class="org.seasar.struts.action.ClassRegisterImpl"/>
 	-->
 	<component name="classRegister"                class="org.seasar.struts.zeroconfig.hotdeploy.HotdeployClassRegister"/>
 
-	<!-- Old RequestProcessor
-	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
-	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>
+	<component name="moduleConfigLoader"           class="org.seasar.struts.zeroconfig.hotdeploy.ModuleConfigLoaderImpl"/>
+	<component name="moduleConfigWrapper"          class="org.seasar.struts.zeroconfig.hotdeploy.ModuleConfigWrapper" instance="prototype">
+		<aspect pointcut="findActionConfig">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.OndemandFindActionConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.ReloadFindActionConfigInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+		<aspect pointcut="findFormBeanConfig">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.OndemandFindFormBeanConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.ReloadFindFormBeanConfigInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+	</component>
 
-	<component name="methodBindingActionCommand"    class="org.seasar.struts.processor.MethodBindingActionCommand"/>
-	<component name="singleMethodPojoActionCommand" class="org.seasar.struts.processor.SingleMethodPojoActionCommand"/>
-	<component name="dispatchPojoActionCommand"     class="org.seasar.struts.processor.DispatchPojoActionCommand"/>
-	<component name="pojoActionExecuteCommand"      class="org.seasar.struts.processor.PojoActionExecuteCommand">
-		<initMethod name="addPojoActionCommand"><arg>singleMethodPojoActionCommand</arg></initMethod>
-		<initMethod name="addPojoActionCommand"><arg>dispatchPojoActionCommand</arg></initMethod>
-	</component>
-	<component name="executeProcessor"              class="org.seasar.struts.processor.ActionExecuteProcessorImpl">
-		<initMethod name="addActionCommand"><arg>methodBindingActionCommand</arg></initMethod>
-		<initMethod name="addActionCommand"><arg>pojoActionExecuteCommand</arg></initMethod>
-	</component>
-	<component name="validateProcessor"            class="org.seasar.struts.processor.ValidateProcessorImpl"/>
-	<component name="inputValueFormProcessor"      class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
-	<component name="populateProcessor"            class="org.seasar.struts.processor.PopulateProcessorImpl"/>
-	<component name="requestProcessor"             class="org.seasar.struts.processor.S2RequestProcessor" instance="prototype">
-		<aspect pointcut="processActionForm">
-			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
+	<component name="validatorResourcesLoader"     class="org.seasar.struts.zeroconfig.hotdeploy.ValidatorResourcesLoaderImpl"/>
+	<component name="validatorResourcesWrapper"    class="org.seasar.struts.zeroconfig.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
+		<aspect pointcut="getForm">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.OndemandGetFormInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.zeroconfig.hotdeploy.ReloadGetFormInterceptor"/></arg></initMethod>
+			</component>
 		</aspect>
 	</component>
-	<component name="tilesRequestProcessor"        class="org.seasar.struts.processor.S2TilesRequestProcessor" instance="prototype">
-		<aspect pointcut="processActionForm">
-			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
-		</aspect>
-	</component>
-	-->
+	
 	<!-- New RequestProcessor -->
 	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
 		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
@@ -74,9 +71,9 @@
 	<!-- ZeroConfig Components  -->
 	<!-- Hotdeploy(or Ondemand) Components -->
 	<!-- 
-	<component name="autoStrutsConfigRule"         class="org.seasar.struts.config.AutoStrutsConfigRuleImpl"/>
-	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
-	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
+	<component name="autoStrutsConfigRule"         class="org.seasar.struts.zeroconfig.config.AutoStrutsConfigRuleImpl"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.zeroconfig.config.rule.ZeroConfigActionRuleImpl"/>
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.zeroconfig.config.rule.ZeroConfigActionFormRuleImpl"/>
 	-->
 	<component name="strutsConfigRule"             class="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRuleImpl"/>
 	<component name="actionPathNamingRule"         class="org.seasar.struts.zeroconfig.hotdeploy.ActionPathNamingRule"/>

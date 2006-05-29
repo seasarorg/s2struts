@@ -31,4 +31,9 @@ public class ActionPathNamingRuleTest extends S2TestCase {
         assertEquals(AddAction.class, clazz);
     }
     
+    public void testNotFoundDefineClass() {
+        Class clazz = namingRule.defineClass("/not_found");
+        assertNull(clazz);
+    }
+    
 }

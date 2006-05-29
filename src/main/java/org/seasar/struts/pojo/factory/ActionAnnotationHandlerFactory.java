@@ -23,9 +23,9 @@ import org.seasar.framework.util.ClassUtil;
  */
 public class ActionAnnotationHandlerFactory {
 
-    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.factory.TigerActionAnnotationHandler";
+    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.pojo.factory.TigerActionAnnotationHandler";
     
-    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.factory.Backport175ActionAnnotationHandler";
+    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.pojo.factory.Backport175ActionAnnotationHandler";
 
     private static ActionAnnotationHandler annotationHandler;
     

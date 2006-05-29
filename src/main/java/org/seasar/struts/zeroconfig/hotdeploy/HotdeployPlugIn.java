@@ -39,18 +39,24 @@ public class HotdeployPlugIn implements PlugIn {
     public void init(ActionServlet actionServlet, ModuleConfig config) throws ServletException {
         ServletContext context = actionServlet.getServletContext();
         
-        HotdeployModuleConfig hotdeployConfig = new HotdeployModuleConfig(config);
-        context.setAttribute(Globals.MODULE_KEY + config.getPrefix(), hotdeployConfig);
+        ModuleConfigWrapper configWrapper = getModuleConfigWrapper();
+        configWrapper.init(config);
+        context.setAttribute(Globals.MODULE_KEY + config.getPrefix(), configWrapper);
         
         ValidatorResources resources = (ValidatorResources) context.getAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
-        HotdeployValidatorResources hotdeployResources = new HotdeployValidatorResources(resources);
-        hotdeployResources.setValidationCreator(getValidationCreator());
-        context.setAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix(), hotdeployResources);
+        ValidatorResourcesWrapper resourcesWrapper = getValidatorResourcesWrapper();
+        resourcesWrapper.init(resources);
+        context.setAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix(), resourcesWrapper);
+    }
+    
+    private ModuleConfigWrapper getModuleConfigWrapper() {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        return (ModuleConfigWrapper) container.getComponent(ModuleConfigWrapper.class);
     }
 
-    private ValidationCreator getValidationCreator() {
+    private ValidatorResourcesWrapper getValidatorResourcesWrapper() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (ValidationCreator) container.getComponent(ValidationCreator.class);
+        return (ValidatorResourcesWrapper) container.getComponent(ValidatorResourcesWrapper.class);
     }
 
 }

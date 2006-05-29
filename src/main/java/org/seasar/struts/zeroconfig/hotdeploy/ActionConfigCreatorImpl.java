@@ -58,6 +58,9 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
 
     public ActionConfig createActionConfig(ModuleConfig config, String path) {
         Class actionClass = this.namingRule.defineClass(path);
+        if (actionClass == null) {
+            return null;
+        }
         return createActionConfig(config, actionClass, path);
     }
 

@@ -26,30 +26,25 @@ import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.MessageResourcesConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.PlugInConfig;
-import org.seasar.framework.container.S2Container;
-import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.framework.log.Logger;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public class HotdeployModuleConfig implements ModuleConfig, Serializable {
-    
-    private static final long serialVersionUID = -3864217606693855421L;
+public class ModuleConfigWrapper implements ModuleConfig, Serializable {
 
-    private static final Logger log = Logger.getLogger(HotdeployModuleConfig.class);
+    private static final long serialVersionUID = -3843234257147440110L;
 
     private ModuleConfig config;
-    
-    public HotdeployModuleConfig(ModuleConfig config) {
+
+    public void init(ModuleConfig config) {
         this.config = config;
     }
 
     public void addActionConfig(ActionConfig arg0) {
         config.addActionConfig(arg0);
     }
-    
+
     public void addDataSourceConfig(DataSourceConfig arg0) {
         config.addDataSourceConfig(arg0);
     }
@@ -74,19 +69,8 @@ public class HotdeployModuleConfig implements ModuleConfig, Serializable {
         config.addPlugInConfig(arg0);
     }
 
-    public ActionConfig findActionConfig(String path) {
-        ActionConfig result = getActionConfigCreator().createActionConfig(this, path);
-        if (result != null) {
-            if (log.isDebugEnabled()) {
-                log.debug("auto create " + result);
-                ForwardConfig[] forwardConfigs = result.findForwardConfigs();
-                for (int i = 0; i < forwardConfigs.length; i++) {
-                    log.debug("auto create " + forwardConfigs[i]);
-                }
-            }
-            return result;
-        }
-        return config.findActionConfig(path);
+    public ActionConfig findActionConfig(String arg0) {
+        return config.findActionConfig(arg0);
     }
 
     public ActionConfig[] findActionConfigs() {
@@ -109,15 +93,8 @@ public class HotdeployModuleConfig implements ModuleConfig, Serializable {
         return config.findExceptionConfigs();
     }
 
-    public FormBeanConfig findFormBeanConfig(String name) {
-        FormBeanConfig result = getActionFormConfigCreator().createFormBeanConfig(this, name);
-        if (result != null) {
-            if (log.isDebugEnabled()) {
-                log.debug("auto create " + result);
-            }
-            return result;
-        }
-        return config.findFormBeanConfig(name);
+    public FormBeanConfig findFormBeanConfig(String arg0) {
+        return config.findFormBeanConfig(arg0);
     }
 
     public FormBeanConfig[] findFormBeanConfigs() {
@@ -214,16 +191,6 @@ public class HotdeployModuleConfig implements ModuleConfig, Serializable {
 
     public void setPrefix(String arg0) {
         config.setPrefix(arg0);
-    }
-
-    private ActionConfigCreator getActionConfigCreator() {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (ActionConfigCreator) container.getComponent(ActionConfigCreator.class);
-    }
-
-    private ActionFormConfigCreator getActionFormConfigCreator() {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (ActionFormConfigCreator) container.getComponent(ActionFormConfigCreator.class);
     }
 
 }

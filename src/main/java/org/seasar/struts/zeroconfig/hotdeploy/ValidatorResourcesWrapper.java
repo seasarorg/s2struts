@@ -23,30 +23,18 @@ import org.apache.commons.validator.Form;
 import org.apache.commons.validator.FormSet;
 import org.apache.commons.validator.ValidatorAction;
 import org.apache.commons.validator.ValidatorResources;
-import org.apache.struts.config.ModuleConfig;
-import org.apache.struts.util.ModuleUtils;
-import org.seasar.framework.log.Logger;
-import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public class HotdeployValidatorResources extends ValidatorResources {
+public class ValidatorResourcesWrapper extends ValidatorResources {
 
-    private static final long serialVersionUID = -6030764274075450761L;
-    
-    private static final Logger log = Logger.getLogger(HotdeployValidatorResources.class);
+    private static final long serialVersionUID = 23638277930244549L;
 
-    private ValidationCreator validationCreator;
-    
-    public void setValidationCreator(ValidationCreator validationCreator) {
-        this.validationCreator = validationCreator;
-    }
-    
     private ValidatorResources resources;
 
-    public HotdeployValidatorResources(ValidatorResources resources) {
+    public void init(ValidatorResources resources) {
         this.resources = resources;
     }
 
@@ -82,29 +70,12 @@ public class HotdeployValidatorResources extends ValidatorResources {
         return resources.get(arg0, arg1, arg2, arg3);
     }
 
-    public Form getForm(Locale locale, String formKey) {
-        return this.getForm(locale.getLanguage(), locale.getCountry(), locale
-                .getVariant(), formKey);
+    public Form getForm(Locale arg0, String arg1) {
+        return resources.getForm(arg0, arg1);
     }
 
-    public Form getForm(String language, String country, String variant, String formKey) {
-        ModuleConfig config = ModuleUtils.getInstance().getModuleConfig(S2StrutsContextUtil.getRequest());
-        Form form = this.validationCreator.createForm(config, formKey);
-        if (form == null) {
-            return resources.getForm(language, country, variant, formKey);
-        }
-        if (log.isDebugEnabled()) {
-            log.debug("auto create " + form);
-        }
-        
-        // initialize form...
-        FormSet formSet = new FormSet();
-        formSet.addForm(form);
-        resources.addFormSet(formSet);
-        resources.process();
-        // ...initialized form
-        
-        return form;
+    public Form getForm(String arg0, String arg1, String arg2, String arg3) {
+        return resources.getForm(arg0, arg1, arg2, arg3);
     }
 
     public ValidatorAction getValidatorAction(String arg0) {
