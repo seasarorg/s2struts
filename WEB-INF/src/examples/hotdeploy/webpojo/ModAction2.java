@@ -13,37 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package examples.hotdeploy.web.impl;
+package examples.hotdeploy.webpojo;
 
-import examples.hotdeploy.web.ModAction2;
-import examples.hotdeploy.web.ModForm2;
-import examples.hotdeploy.web.ModService;
+import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author Katsuhiko Nagashima
  */
-public class ModActionImpl implements ModAction2 {
+// @StrutsAction(validate = false)
+public interface ModAction2 {
 
-	private ModService modService;
+    @StrutsActionForward(path = "/pages/modResult.html")
+    String SUCCESS = "success";
 
-	private ModForm2 modForm;
-
-	public ModActionImpl(ModService modService) {
-		this.modService = modService;
-	}
-
-	public String mod() {
-		int result = modService.mod(modForm.getIntArg1(), modForm.getIntArg2());
-		modForm.setResult(result);
-		return SUCCESS;
-	}
-
-	public ModForm2 getModForm() {
-		return modForm;
-	}
-
-	public void setModForm(ModForm2 modForm) {
-		this.modForm = modForm;
-	}
+    String mod();
 
 }

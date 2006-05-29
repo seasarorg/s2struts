@@ -9,6 +9,9 @@
 <!-- ======================================== Form Bean Definitions -->
 
     <form-beans>
+		<form-bean
+			name="addForm"
+			type="examples.hotdeploy.web.AddForm"/>
     </form-beans>
 
 <!-- ================================= Global Exception Definitions -->
@@ -41,6 +44,15 @@
 <!-- =================================== Action Mapping Definitions -->
 
     <action-mappings>
+        <action
+            path="/add"
+            type="examples.hotdeploy.web.AddAction"
+            name="addForm"
+            scope="request"
+            validate="false"
+            input="/pages/addInput.html">
+            <forward name="success" path="/pages/addResult.html" />
+        </action>
     </action-mappings>
     
 
@@ -71,16 +83,16 @@
         <set-property property="docRoot" value="/pages"/>
     </plug-in>
     -->
-    <plug-in className="org.seasar.struts.hotdeploy.StrutsConfigRegisterPlugIn">
+    <plug-in className="org.seasar.struts.zeroconfig.hotdeploy.StrutsConfigRegisterPlugIn">
 	    <set-property property="rootPackageName"             value="examples.hotdeploy"/>
 	    <set-property property="enableJar"                   value="false"/>
-	    <set-property property="actionMiddlePackageName"     value="web"/>
+	    <set-property property="actionMiddlePackageName"     value="webpojo"/>
 	    <set-property property="actionSuffix"                value="Action"/>
-	    <set-property property="actionFormMiddlePackageName" value="web"/>
+	    <set-property property="actionFormMiddlePackageName" value="webpojo"/>
 	    <set-property property="actionFormSuffix"            value="Form"/>
-	    <set-property property="docRoot"                     value=""/>
+	    <set-property property="docRoot"                     value="/pages"/>
 	    <set-property property="viewExtension"               value="jsp,html"/>
     </plug-in>
-    <plug-in className="org.seasar.struts.hotdeploy.HotdeployPlugIn"/>
+    <plug-in className="org.seasar.struts.zeroconfig.hotdeploy.HotdeployPlugIn"/>
 
 </struts-config>

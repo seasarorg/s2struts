@@ -7,7 +7,7 @@
 		<initMethod name="addCreator">
 			<arg>
 				<component class="org.seasar.framework.container.hotdeploy.creator.InterfaceCentricSinglePackageCreator">
-				    <property name="middlePackageName">"web"</property>
+				    <property name="middlePackageName">"webpojo"</property>
 				    <property name="nameSuffix">"Action"</property>
 				    <property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
 				</component>
@@ -15,8 +15,13 @@
 		</initMethod>
 		<initMethod name="addCreator">
 			<arg>
+				<component class="org.seasar.framework.container.hotdeploy.creator.ActionCreator"/>
+			</arg>
+		</initMethod>
+		<initMethod name="addCreator">
+			<arg>
 				<component class="org.seasar.framework.container.hotdeploy.creator.InterfaceCentricSinglePackageCreator">
-				    <property name="middlePackageName">"web"</property>
+				    <property name="middlePackageName">"service"</property>
 				    <property name="nameSuffix">"Service"</property>
 				    <property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
 				</component>

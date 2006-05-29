@@ -13,13 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package examples.hotdeploy.web;
+package examples.hotdeploy.service;
 
 /**
  * @author Katsuhiko Nagashima
  */
-public interface ModService {
-	
-	public int mod(int arg1, int arg2);
-	
+public interface AddService {
+
+    int execute(int arg1, int arg2);
+
 }

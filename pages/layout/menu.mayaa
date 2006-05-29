@@ -6,6 +6,7 @@
 
     <m:doRender id="menuBody" name="menu"/>
 
-    <html:link m:id="modPage" page="/modInput.do"><bean:message key="mod.title"/></html:link>
+    <html:link m:id="addPage" page="/pages/addInput.html"><bean:message key="title.add.input"/></html:link>
+    <html:link m:id="modPage" page="/pages/modInput.html"><bean:message key="title.mod.input"/></html:link>
 
 </m:mayaa>

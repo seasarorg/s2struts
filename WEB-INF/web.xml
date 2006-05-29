@@ -18,7 +18,7 @@
 
   <filter>
     <filter-name>s2strutsfilter</filter-name>
-    <filter-class>org.seasar.struts.filter.S2StrutsFilter</filter-class>
+    <filter-class>org.seasar.struts.pojo.filter.S2StrutsFilter</filter-class>
   </filter>
 
   <filter>
@@ -59,7 +59,10 @@
   <!-- Standard Action Servlet Configuration (with debugging) -->
   <servlet>
     <servlet-name>action</servlet-name>
+    <!--
     <servlet-class>org.seasar.struts.servlet.S2ActionServlet</servlet-class>
+    -->
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
     <init-param>
       <param-name>config</param-name>
       <param-value>/WEB-INF/struts-config.xml</param-value>

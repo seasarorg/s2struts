@@ -6,13 +6,19 @@
         m:extends="/pages/layout/layout.html">
 
     <m:doRender id="pageTitle" name="title">
-        <bean:message key="title.mod.result"/>
+        <bean:message key="title.add.input"/>
     </m:doRender>
     
     <m:doRender id="appBody" name="content"/>
     
-    <div m:id="resultMessage">
-        <bean:message key="label.result"/>:<bean:write name="modForm" property="result"/>
-    </div>
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/add" focus="arg1" />
     
+    <html:text m:id="appForm.arg1" property="arg1" />
+
+    <html:text m:id="appForm.arg2" property="arg2" />
+
+    <html:submit m:id="appForm.goCalc" ><bean:message key="button.calc"/></html:submit>
+
 </m:mayaa>

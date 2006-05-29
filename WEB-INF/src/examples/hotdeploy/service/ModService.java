@@ -13,20 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package examples.hotdeploy.web;
-
-import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
+package examples.hotdeploy.service;
 
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsAction
-public interface ModAction2 {
-    
-    @StrutsActionForward(path="/pages/modResult.html")
-    String SUCCESS = "success";
-
-    String mod();
-
+public interface ModService {
+	
+	int execute(int arg1, int arg2);
+	
 }

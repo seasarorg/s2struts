@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package examples.hotdeploy.web;
+package examples.hotdeploy.webpojo;
 
 import java.io.Serializable;
 
@@ -21,8 +21,8 @@ import java.io.Serializable;
  * @author Katsuhiko Nagashima
  */
 public class ModForm2 implements Serializable {
-    
-	private static final long serialVersionUID = 1807022024741371134L;
+
+    private static final long serialVersionUID = 1807022024741371134L;
 
     private String arg1;
 
@@ -34,8 +34,9 @@ public class ModForm2 implements Serializable {
         return arg1;
     }
 
-    //@Required
-    //@IntegerType
+    // @Required
+    // @IntegerType
+    // @Args(keys = "modForm.arg1")
     public void setArg1(String arg1) {
         this.arg1 = arg1;
     }
@@ -52,8 +53,9 @@ public class ModForm2 implements Serializable {
         return arg2;
     }
 
-    //@Required
-    //@IntegerType
+    // @Required
+    // @IntegerType
+    // @Args(keys = "modForm.arg2")
     public void setArg2(String arg2) {
         this.arg2 = arg2;
     }
@@ -73,9 +75,9 @@ public class ModForm2 implements Serializable {
     public void setResult(int result) {
         this.result = result;
     }
-    
+
     public String toString() {
-    	return "[" + arg1 + "," + arg2 + "]";
+        return "[" + arg1 + "," + arg2 + "]";
     }
 
 }

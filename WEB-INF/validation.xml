@@ -40,10 +40,23 @@
                     </var>
             </field>
         </form>
+        
+        <form name="addForm">
+            <field
+                property="arg1"
+                depends="required">
+                    <arg key="addForm.arg1"/>
+            </field>
+            <field
+                property="arg2"
+                depends="required">
+                    <arg key="addForm.arg2"/>
+            </field>
+        </form>
 
     </formset>
 
-    <!-- An example formset for another locale -->
+    <!-- An example formset for another locale
     <formset language="fr">
 
         <constant>
@@ -51,7 +64,6 @@
             <constant-value>^[0-9a-zA-Z]*$</constant-value>
         </constant>
 
-        <!-- An example form -->
         <form name="logonForm">
             <field
                 property="username"
@@ -70,5 +82,6 @@
         </form>
 
    </formset>
-
+   -->
+    
 </form-validation>

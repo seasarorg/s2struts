@@ -13,20 +13,20 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package examples.hotdeploy.web;
+package examples.hotdeploy.service.impl;
 
-import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import examples.hotdeploy.service.ModService;
 
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsAction(name="modForm", validate=false)
-public interface ModInputAction2 {
-    
-    @StrutsActionForward(path="/pages/modInput.html")
-    String SUCCESS = "success";
+public class ModServiceImpl implements ModService {
 
-    String input();
+	public int execute(int arg1, int arg2) {
+        if(arg2 == 0){
+            return 0;
+        }
+		return arg1 % arg2;
+	}
 
 }

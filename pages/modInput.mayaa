@@ -6,7 +6,7 @@
         m:extends="/pages/layout/layout.html">
 
     <m:doRender id="pageTitle" name="title">
-        <bean:message key="mod.title"/>
+        <bean:message key="title.mod.input"/>
     </m:doRender>
     
     <m:doRender id="appBody" name="content"/>
@@ -15,6 +15,10 @@
 
     <html:form m:id="appForm" action="/mod" focus="arg1" />
     
-    <html:submit m:id="goCalc" ><bean:message key="calc"/></html:submit>
+    <html:text m:id="appForm.arg1" property="arg1" />
+
+    <html:text m:id="appForm.arg2" property="arg2" />
+
+    <html:submit m:id="appForm.goCalc" ><bean:message key="button.calc"/></html:submit>
 
 </m:mayaa>

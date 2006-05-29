@@ -13,20 +13,17 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package examples.hotdeploy.web.impl;
+package examples.hotdeploy.service.impl;
 
-import examples.hotdeploy.web.ModService;
+import examples.hotdeploy.service.AddService;
 
 /**
  * @author Katsuhiko Nagashima
  */
-public class ModServiceImpl implements ModService {
+public class AddServiceImpl implements AddService {
 
-	public int mod(int arg1, int arg2) {
-        if(arg2 == 0){
-            return 0;
-        }
-		return arg1 % arg2;
-	}
+    public int execute(int arg1, int arg2) {
+        return arg1 + arg2;
+    }
 
 }
