@@ -1,4 +1,4 @@
-<project name="S2StrutsExample" default="dist" basedir=".">
+<project name="S2StrutsHotdeployDemo" default="dist" basedir=".">
 
   <property file="project.properties"/>
 
