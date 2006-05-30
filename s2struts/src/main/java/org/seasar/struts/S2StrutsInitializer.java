@@ -33,9 +33,9 @@ import org.seasar.framework.container.deployer.InstanceDefFactory;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.container.impl.ComponentDefImpl;
 import org.seasar.framework.util.ClassUtil;
+import org.seasar.struts.action.ClassRegister;
 import org.seasar.struts.action.ProxyAction;
 import org.seasar.struts.processor.ExternalRequestProcessor;
-import org.seasar.struts.util.ClassRegister;
 
 /**
  * initialize for use S2Struts.

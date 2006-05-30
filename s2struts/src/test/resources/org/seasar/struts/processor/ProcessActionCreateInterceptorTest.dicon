@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+    <component class="org.seasar.struts.action.ActionFactory">
+		<aspect>
+			<component class="org.seasar.framework.aop.interceptors.MockInterceptor">
+				<initMethod name="setReturnValue">
+					<arg>"processActionCreate"</arg>
+					<arg><component class="org.seasar.struts.processor.MockAction"/></arg>
+				</initMethod>
+			</component>
+		</aspect>
+    </component>
+
+	<component class="org.seasar.struts.processor.MockRequestProcessor" instance="prototype">
+		<aspect pointcut="processActionCreate">
+			<component class="org.seasar.struts.processor.ProcessActionCreateInterceptor"/>
+		</aspect>
+	</component>
+</components>

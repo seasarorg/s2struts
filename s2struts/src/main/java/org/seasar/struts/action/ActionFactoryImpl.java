@@ -28,7 +28,7 @@ import org.apache.struts.util.MessageResources;
 import org.seasar.framework.container.ComponentNotFoundRuntimeException;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.util.ClassRegister;
+import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * @author Satoshi Kimura
@@ -97,7 +97,7 @@ public class ActionFactoryImpl implements ActionFactory {
                 actionInstance = container.getComponent(componentKey);
             }
         } catch (Exception e) {
-            processExceptionActionCreate(container.getResponse(), mapping, log, internal, e);
+            processExceptionActionCreate(S2StrutsContextUtil.getResponse(container), mapping, log, internal, e);
             return null;
         }
 

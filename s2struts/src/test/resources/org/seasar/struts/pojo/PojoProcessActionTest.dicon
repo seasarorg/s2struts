@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<component name="classRegister"                class="org.seasar.struts.action.ClassRegisterImpl"/>
+	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction"/>
+	<component class="org.seasar.struts.pojo.TestPojoActionImpl"/>
+</components>

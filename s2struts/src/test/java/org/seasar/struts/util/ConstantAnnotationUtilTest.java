@@ -1,9 +1,9 @@
 package org.seasar.struts.util;
 
+import junit.framework.TestCase;
+
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
-
-import junit.framework.TestCase;
 
 /**
  * @author Satoshi Kimura
