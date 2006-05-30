@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org" 
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="title.sample"/>
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content"/>
+
+</m:mayaa>
