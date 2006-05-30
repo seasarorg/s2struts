@@ -1,4 +1,4 @@
-package org.seasar.struts.action;
+package org.seasar.struts.pojo.factory;
 
 import org.seasar.struts.annotation.tiger.Export;
 import org.seasar.struts.annotation.tiger.ExportToSession;
@@ -7,14 +7,14 @@ import org.seasar.struts.annotation.tiger.ScopeType;
 /**
  * @author Katsuhiko Nagashima
  */
-public class ActionAnnotationActionImpl implements ActionAnnotationAction {
+public class TestActionAnnotationActionImpl implements TestActionAnnotationAction {
 
     private String bar;
 
     private String baz;
 
     private String foo;
-    
+
     @ExportToSession
     public String getBar() {
         return bar;

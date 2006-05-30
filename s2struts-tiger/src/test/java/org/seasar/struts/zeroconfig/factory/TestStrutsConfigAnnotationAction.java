@@ -1,4 +1,4 @@
-package org.seasar.struts.action;
+package org.seasar.struts.zeroconfig.factory;
 
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
@@ -11,7 +11,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
         forward = "testforward", include = "testinclude",
         prefix = "testprefix", suffix = "testsuffix", roles = "testroles",
         cancellable=true)
-public interface StrutsConfigAnnotationAction {
+public interface TestStrutsConfigAnnotationAction {
 
     @StrutsActionForward(path = "/test.jsp")
     String SUCCESS = "success";

@@ -1,4 +1,4 @@
-package org.seasar.struts.form;
+package org.seasar.struts.zeroconfig.factory;
 
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
@@ -6,6 +6,6 @@ import org.seasar.struts.annotation.tiger.StrutsActionForm;
  * @author Katsuhiko Nagashima
  */
 @StrutsActionForm(name = "testFormName")
-public class StrutsConfigAnnotationForm {
+public class TestStrutsConfigAnnotationForm {
 
 }

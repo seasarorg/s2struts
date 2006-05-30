@@ -1,4 +1,4 @@
-package org.seasar.struts.form;
+package org.seasar.struts.zeroconfig.factory;
 
 import java.util.Date;
 
@@ -26,21 +26,21 @@ import org.seasar.struts.validator.annotation.tiger.Variable;
  * @author Katsuhiko Nagashima
  */
 @StrutsActionForm(name = "testFormName")
-public class ValidatorAnnotationForm {
+public class TestValidatorAnnotationForm {
 
-    public ValidatorAnnotationForm() {
+    public TestValidatorAnnotationForm() {
     }
 
     @Required
     @Args(keys = "Arg", resource = false)
     public void setArg(String arg) {
     }
-    
+
     @Required
     @Args(keys = "Arg0, Arg1, Arg2", resource = false)
     public void setArgs(String args) {
     }
-    
+
     @Required
     @Args(keys = "Required", resource = false)
     public void setRequired(String required) {
@@ -108,10 +108,8 @@ public class ValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = {
-                    @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }),
-            @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
             @Validator(name = "maxlength", vars = { @Variable(name = "maxlength", value = "3") }) })
     @Required
     @Args(keys = "form.message1")
@@ -119,10 +117,8 @@ public class ValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = {
-                    @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }),
-            @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
             @Validator(name = "maxlength", value = "3") })
     @Required
     @Args(keys = "form.message2")
@@ -138,25 +134,26 @@ public class ValidatorAnnotationForm {
     public void setAutoArray(int[] autoArray) {
     }
 
-    public void setChild(ValidatorAnnotationChildForm child) {
+    public void setChild(TestValidatorAnnotationChildForm child) {
     }
-    
-    public void setChildren(ValidatorAnnotationChildForm[] children) {
+
+    public void setChildren(TestValidatorAnnotationChildForm[] children) {
     }
 
     @NoValidate
-    public void setSelf(ValidatorAnnotationForm self) {
+    public void setSelf(TestValidatorAnnotationForm self) {
     }
-    
+
     @Required
     @Args(keys = "File", resource = false)
     public void setFile(FormFile file) {
     }
-    
+
     public static final String constant_VALIDATOR = "required";
+
     public static final String constant_VALIDATOR_ARGS = "Constant, resource=false";
-    
+
     public void setConstant(String constant) {
     }
-    
+
 }

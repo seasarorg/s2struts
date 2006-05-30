@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.validator.factory;
+package org.seasar.struts.zeroconfig.factory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -31,6 +31,7 @@ import org.seasar.struts.validator.annotation.tiger.NoValidate;
 import org.seasar.struts.validator.annotation.tiger.Validator;
 import org.seasar.struts.validator.annotation.tiger.ValidatorField;
 import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
+import org.seasar.struts.zeroconfig.factory.ConstantValidatorAnnotationHandler;
 
 /**
  * 

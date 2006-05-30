@@ -20,7 +20,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.seasar.struts.config.StrutsActionFormConfig;
+import org.seasar.struts.zeroconfig.config.StrutsActionFormConfig;
 
 /**
  * 

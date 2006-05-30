@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.factory;
+package org.seasar.struts.pojo.factory;
 
 import java.lang.reflect.Method;
 
@@ -22,8 +22,9 @@ import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.struts.Constants;
 import org.seasar.struts.annotation.tiger.Export;
 import org.seasar.struts.annotation.tiger.ExportToSession;
-import org.seasar.struts.config.ActionPropertyConfig;
-import org.seasar.struts.config.ActionPropertyConfigImpl;
+import org.seasar.struts.pojo.config.ActionPropertyConfig;
+import org.seasar.struts.pojo.config.ActionPropertyConfigImpl;
+import org.seasar.struts.pojo.factory.ConstantActionAnnotationHandler;
 
 /**
  * 
