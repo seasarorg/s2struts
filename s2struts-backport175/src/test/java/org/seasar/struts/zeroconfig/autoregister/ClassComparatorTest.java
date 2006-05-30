@@ -1,4 +1,4 @@
-package org.seasar.struts.config;
+package org.seasar.struts.zeroconfig.autoregister;
 
 import java.util.ArrayList;
 import java.util.Arrays;
