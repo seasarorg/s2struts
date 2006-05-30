@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.validator.factory;
+package org.seasar.struts.zeroconfig.factory;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -32,6 +32,7 @@ import org.seasar.struts.validator.annotation.backport175.NoValidate;
 import org.seasar.struts.validator.annotation.backport175.Validator;
 import org.seasar.struts.validator.annotation.backport175.ValidatorField;
 import org.seasar.struts.validator.annotation.backport175.ValidatorTarget;
+import org.seasar.struts.zeroconfig.factory.ConstantValidatorAnnotationHandler;
 
 /**
  * @author Katsuhiko Nagashima

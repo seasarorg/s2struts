@@ -1,10 +1,8 @@
-package org.seasar.struts.validator.factory;
+package org.seasar.struts.zeroconfig.factory;
 
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.form.ValidatorAnnotationForm;
-import org.seasar.struts.form.ValidatorAnnotationRangeForm;
 
 /**
  * 
@@ -17,8 +15,6 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     
     private Form form;
     
-    private Form rangeForm;
-    
     public void setUp() {
         include("s2struts.dicon");
         
@@ -26,8 +22,7 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     }
     
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", ValidatorAnnotationForm.class);
-        rangeForm = annHandler.createForm("testRangeForm", ValidatorAnnotationRangeForm.class);
+        form = annHandler.createForm("testForm", TestValidatorAnnotationForm.class);
     }
 
     public void testArg() {
@@ -116,7 +111,7 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     }
     
     public void testRange() {
-        Field field = rangeForm.getField("range");
+        Field field = form.getField("range");
         assertNotNull(field);
         assertEquals("floatRange", field.getDepends());
         assertEquals("5.0", field.getVarValue("min"));
@@ -124,7 +119,7 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     }
     
     public void testLongRange() {
-        Field field = rangeForm.getField("longRange");
+        Field field = form.getField("longRange");
         assertNotNull(field);
         assertEquals("longRange", field.getDepends());
         assertEquals("5", field.getVarValue("min"));

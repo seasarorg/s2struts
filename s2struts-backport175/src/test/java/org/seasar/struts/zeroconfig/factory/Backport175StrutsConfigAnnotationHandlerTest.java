@@ -1,15 +1,13 @@
-package org.seasar.struts.factory;
+package org.seasar.struts.zeroconfig.factory;
 
 import java.lang.reflect.Field;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.action.StrutsConfigAnnotationAction;
-import org.seasar.struts.action.StrutsConfigAnnotationActionImpl;
-import org.seasar.struts.config.StrutsActionConfig;
-import org.seasar.struts.config.StrutsActionFormConfig;
-import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.form.NoStrutsConfigAnnotationForm;
-import org.seasar.struts.form.StrutsConfigAnnotationForm;
+import org.seasar.struts.zeroconfig.config.StrutsActionConfig;
+import org.seasar.struts.zeroconfig.config.StrutsActionFormConfig;
+import org.seasar.struts.zeroconfig.config.StrutsActionForwardConfig;
+import org.seasar.struts.zeroconfig.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.zeroconfig.factory.StrutsConfigAnnotationHandlerFactory;
 
 /**
  * 
@@ -25,7 +23,7 @@ public class Backport175StrutsConfigAnnotationHandlerTest extends S2TestCase {
     }
     
     public void testCreateStrutsActionConfig() {
-        StrutsActionConfig config = annHandler.createStrutsActionConfig(StrutsConfigAnnotationAction.class);
+        StrutsActionConfig config = annHandler.createStrutsActionConfig(TestStrutsConfigAnnotationAction.class);
         assertNotNull(config);
         assertEquals("testpath", config.path());
         assertEquals("testname", config.name());
@@ -44,12 +42,12 @@ public class Backport175StrutsConfigAnnotationHandlerTest extends S2TestCase {
     }
     
     public void testNotCreateStrutsActionConfig() {
-        StrutsActionConfig config = annHandler.createStrutsActionConfig(StrutsConfigAnnotationActionImpl.class);
+        StrutsActionConfig config = annHandler.createStrutsActionConfig(TestStrutsConfigAnnotationActionImpl.class);
         assertNull(config);
     }
     
     public void testCreateStrutsActionForwardConfig() throws Exception {
-        Field field = StrutsConfigAnnotationAction.class.getField("SUCCESS");
+        Field field = TestStrutsConfigAnnotationAction.class.getField("SUCCESS");
         StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
         assertNotNull(config);
         assertEquals("/test.jsp", config.path());
@@ -57,20 +55,20 @@ public class Backport175StrutsConfigAnnotationHandlerTest extends S2TestCase {
     }
     
     public void testNotCreateStrutsActionForwardConfig() throws Exception {
-        Field field = StrutsConfigAnnotationAction.class.getField("CONST");
+        Field field = TestStrutsConfigAnnotationAction.class.getField("CONST");
         StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
         assertNull(config);
     }
     
     public void testCreateActionFormConfig() {
-        StrutsActionFormConfig config = annHandler.createStrutsActionFormConfig(StrutsConfigAnnotationForm.class);
+        StrutsActionFormConfig config = annHandler.createStrutsActionFormConfig(TestStrutsConfigAnnotationForm.class);
         assertNotNull(config);
         assertEquals("testFormName", config.name());
         assertEquals(false, config.restricted());
     }
 
     public void testNotCreateActionFormConfig() {
-        StrutsActionFormConfig config = annHandler.createStrutsActionFormConfig(NoStrutsConfigAnnotationForm.class);
+        StrutsActionFormConfig config = annHandler.createStrutsActionFormConfig(TestNoStrutsConfigAnnotationForm.class);
         assertNull(config);
     }
 

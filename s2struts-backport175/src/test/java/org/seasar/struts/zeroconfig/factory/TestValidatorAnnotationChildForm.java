@@ -1,6 +1,6 @@
-package org.seasar.struts.form;
+package org.seasar.struts.zeroconfig.factory;
 
-public class ValidatorAnnotationChildForm {
+public class TestValidatorAnnotationChildForm {
     
     /**
      * @org.seasar.struts.validator.annotation.backport175.Required
@@ -18,10 +18,10 @@ public class ValidatorAnnotationChildForm {
     public void setNoValidate(String noValidate) {
     }
     
-    public void setGrandchild(ValidatorAnnotationGrandchildForm grandchild) {
+    public void setGrandchild(TestValidatorAnnotationGrandchildForm grandchild) {
     }
     
-    public void setGrandchildren(ValidatorAnnotationGrandchildForm[] grandchildren) {
+    public void setGrandchildren(TestValidatorAnnotationGrandchildForm[] grandchildren) {
     }
 
 }

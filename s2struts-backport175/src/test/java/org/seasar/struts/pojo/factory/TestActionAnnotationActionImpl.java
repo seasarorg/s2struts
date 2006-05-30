@@ -1,9 +1,9 @@
-package org.seasar.struts.action;
+package org.seasar.struts.pojo.factory;
 
 /**
  * @author Katsuhiko Nagashima
  */
-public class ActionAnnotationActionImpl implements ActionAnnotationAction {
+public class TestActionAnnotationActionImpl implements TestActionAnnotationAction {
 
     private String bar;
 

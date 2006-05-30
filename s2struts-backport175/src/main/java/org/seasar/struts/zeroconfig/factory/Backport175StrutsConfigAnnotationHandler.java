@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.factory;
+package org.seasar.struts.zeroconfig.factory;
 
 import java.lang.reflect.Field;
 
@@ -21,9 +21,10 @@ import org.codehaus.backport175.reader.Annotations;
 import org.seasar.struts.annotation.backport175.StrutsAction;
 import org.seasar.struts.annotation.backport175.StrutsActionForm;
 import org.seasar.struts.annotation.backport175.StrutsActionForward;
-import org.seasar.struts.config.StrutsActionConfig;
-import org.seasar.struts.config.StrutsActionFormConfig;
-import org.seasar.struts.config.StrutsActionForwardConfig;
+import org.seasar.struts.zeroconfig.config.StrutsActionConfig;
+import org.seasar.struts.zeroconfig.config.StrutsActionFormConfig;
+import org.seasar.struts.zeroconfig.config.StrutsActionForwardConfig;
+import org.seasar.struts.zeroconfig.factory.ConstantStrutsConfigAnnotationHandler;
 
 /**
  * @author Katsuhiko Nagashima

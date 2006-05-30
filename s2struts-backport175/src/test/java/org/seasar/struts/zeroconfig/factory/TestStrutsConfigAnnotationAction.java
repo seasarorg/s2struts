@@ -1,4 +1,4 @@
-package org.seasar.struts.action;
+package org.seasar.struts.zeroconfig.factory;
 
 /**
  * @author Katsuhiko Nagashima
@@ -13,7 +13,7 @@ package org.seasar.struts.action;
  *                                                             roles="testroles",
  *                                                             cancellable=true)
  */
-public interface StrutsConfigAnnotationAction {
+public interface TestStrutsConfigAnnotationAction {
 
     /**
      * @org.seasar.struts.annotation.backport175.StrutsActionForward(path="/test.jsp")

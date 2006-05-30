@@ -1,6 +1,6 @@
-package org.seasar.struts.form;
+package org.seasar.struts.zeroconfig.factory;
 
-public class ValidatorAnnotationGrandchildForm {
+public class TestValidatorAnnotationGrandchildForm {
 
     /**
      * @org.seasar.struts.validator.annotation.backport175.Required
