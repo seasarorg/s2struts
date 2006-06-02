@@ -24,7 +24,7 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.zeroconfig.cooldeploy.StrutsConfigRegister;
-import org.seasar.struts.zeroconfig.cooldeploy.StrutsConfigRuleImpl;
+import org.seasar.struts.zeroconfig.cooldeploy.impl.StrutsConfigRuleImpl;
 import org.seasar.struts.zeroconfig.util.ClassFinder;
 import org.seasar.struts.zeroconfig.util.ClassFinderImpl;
 

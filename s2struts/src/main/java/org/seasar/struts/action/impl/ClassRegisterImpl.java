@@ -13,12 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.action;
+package org.seasar.struts.action.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.seasar.framework.util.ClassUtil;
+import org.seasar.struts.action.ClassRegister;
 
 /**
  * @author Satoshi Kimura
@@ -32,11 +33,11 @@ public class ClassRegisterImpl implements ClassRegister {
     public void register(String type) {
         getClass(type);
     }
-    
+
     public void register(Class clazz) {
         getClass(clazz.getName());
     }
-    
+
     public synchronized Class getClass(String type) {
         Class clazz = (Class) this.classes.get(type);
         if (clazz == null) {

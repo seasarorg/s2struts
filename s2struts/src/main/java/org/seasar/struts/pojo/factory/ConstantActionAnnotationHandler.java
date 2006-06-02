@@ -18,7 +18,7 @@ package org.seasar.struts.pojo.factory;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
-import org.seasar.struts.pojo.config.ActionPropertyConfigImpl;
+import org.seasar.struts.pojo.config.impl.ActionPropertyConfigImpl;
 import org.seasar.struts.util.ConstantAnnotationUtil;
 
 /**
@@ -33,10 +33,10 @@ public class ConstantActionAnnotationHandler implements ActionAnnotationHandler 
         if (!beanDesc.hasField(fieldName)) {
             return new ActionPropertyConfigImpl();
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
-			return new ActionPropertyConfigImpl();
-		}
-		String value = (String) beanDesc.getFieldValue(fieldName, null);
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
+            return new ActionPropertyConfigImpl();
+        }
+        String value = (String) beanDesc.getFieldValue(fieldName, null);
         return new ActionPropertyConfigImpl(value);
     }
 

@@ -13,10 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.action;
+package org.seasar.struts.action.impl;
 
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.container.S2Container;
+import org.seasar.struts.action.ComponentNameCreator;
 
 /**
  * @see org.seasar.struts.ComponentNameCreator
@@ -36,8 +37,7 @@ public class ComponentNameCreatorImpl implements ComponentNameCreator {
      * @see org.seasar.struts.ComponentNameCreator#createComponentName(org.seasar.framework.container.S2Container,
      *      org.apache.struts.action.ActionMapping)
      */
-    public String createComponentName(S2Container container,
-            ActionMapping mapping) {
+    public String createComponentName(S2Container container, ActionMapping mapping) {
         String moduleName = mapping.getModuleConfig().getPrefix();
         String path = mapping.getPath();
 

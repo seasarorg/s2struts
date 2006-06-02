@@ -42,11 +42,8 @@ import org.seasar.struts.pojo.util.BeanValidatorFormUtil;
 import org.seasar.struts.processor.ExternalRequestProcessor;
 
 /**
- * <component class="org.seasar.struts.processor.S2RequestProcessor">
- *     <aspect pointcut="processActionForm">
- *         <component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
- *     </aspect>
- * </component>
+ * <component class="org.seasar.struts.processor.S2RequestProcessor"> <aspect pointcut="processActionForm"> <component
+ * class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/> </aspect> </component>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -79,8 +76,8 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
         return !(ActionForm.class.isAssignableFrom(fromClass));
     }
 
-    private ActionForm processPojoForm(HttpServletRequest request, ActionMapping mapping,
-            ModuleConfig moduleConfig, ActionServlet servlet) {
+    private ActionForm processPojoForm(HttpServletRequest request, ActionMapping mapping, ModuleConfig moduleConfig,
+            ActionServlet servlet) {
 
         ActionForm instance = createPojoForm(request, mapping, moduleConfig, servlet);
         if (instance == null) {
@@ -97,8 +94,8 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
 
     }
 
-    private ActionForm createPojoForm(HttpServletRequest request, ActionMapping mapping,
-            ModuleConfig moduleConfig, ActionServlet servlet) {
+    private ActionForm createPojoForm(HttpServletRequest request, ActionMapping mapping, ModuleConfig moduleConfig,
+            ActionServlet servlet) {
 
         String attribute = mapping.getAttribute();
         if (attribute == null) {
@@ -166,7 +163,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
     }
 
     //
-    // serialize‰Â”\‚É‚·‚é‚½‚ß‚ÌƒNƒ‰ƒXÄ’è‹`
+    // serializeå¯èƒ½ã«ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹å†å®šç¾©
     //
 
     public static class SerializeBeanValidatorForm extends S2BeanValidatorForm {
@@ -176,10 +173,10 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
 
         public SerializeBeanValidatorForm(BeanValidatorForm form, ActionServlet servlet) {
 
-            // WrapDynaBean‚ğƒtƒB[ƒ‹ƒh‚Å‚Â‚ÆSerialize‚Å‚«‚È‚­‚È‚éB
-            // ‚»‚ê‚ğ‰ñ”ğ‚·‚é‚½‚ß‚É
-            // getDynaBean()‚Ì‚Æ‚«‚É–ˆ‰ñWrapDynaBean‚ğ¶¬‚·‚é‚æ‚¤‚É‚·‚éB
-            // ‚æ‚Á‚ÄAdynaBean‚Í—˜—p‚µ‚È‚¢‚Ì‚ÅAnull‚É‰Šú‰»‚·‚éB
+            // WrapDynaBeanã‚’ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã§æŒã¤ã¨Serializeã§ããªããªã‚‹ã€‚
+            // ãã‚Œã‚’å›é¿ã™ã‚‹ãŸã‚ã«
+            // getDynaBean()ã®ã¨ãã«æ¯å›WrapDynaBeanã‚’ç”Ÿæˆã™ã‚‹ã‚ˆã†ã«ã™ã‚‹ã€‚
+            // ã‚ˆã£ã¦ã€dynaBeanã¯åˆ©ç”¨ã—ãªã„ã®ã§ã€nullã«åˆæœŸåŒ–ã™ã‚‹ã€‚
             super(form);
             this.dynaBean = null;
 
@@ -259,8 +256,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
                     this.page = ((Integer) value).intValue();
                 } else {
                     try {
-                        this.page = ((Integer) ConvertUtils
-                                .convert(value.toString(), Integer.class)).intValue();
+                        this.page = ((Integer) ConvertUtils.convert(value.toString(), Integer.class)).intValue();
                     } catch (RuntimeException ignore) {
                         this.page = 0;
                     }

@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.action;
+package org.seasar.struts.action.impl;
 
 import java.io.IOException;
 
@@ -28,6 +28,9 @@ import org.apache.struts.util.MessageResources;
 import org.seasar.framework.container.ComponentNotFoundRuntimeException;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.struts.action.ActionFactory;
+import org.seasar.struts.action.ClassRegister;
+import org.seasar.struts.action.ComponentNameCreator;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**

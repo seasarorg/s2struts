@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
 "http://www.seasar.org/dtd/components.dtd">
 <components>
-	<component class="org.seasar.struts.zeroconfig.cooldeploy.StrutsConfigRuleImpl">
+	<component class="org.seasar.struts.zeroconfig.cooldeploy.impl.StrutsConfigRuleImpl">
 	    <property name="rootPackageName">"org.seasar.struts.zeroconfig.cooldeploy"</property>
 	    <property name="actionMiddlePackageName">"web"</property>
 	    <property name="actionSuffix">"Action"</property>

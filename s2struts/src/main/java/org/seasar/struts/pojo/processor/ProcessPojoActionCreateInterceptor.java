@@ -43,14 +43,14 @@ public class ProcessPojoActionCreateInterceptor extends AbstractInterceptor {
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         ActionMapping mapping = (ActionMapping) invocation.getArguments()[2];
-        
+
         String type = mapping.getType();
         if (type != null) {
             Class action = this.classRegister.getClass(type);
             if (action.isInterface()) {
-                // TODO pojoProcessAction.setServlet()‚ÌÀs‚É‚Â‚¢‚Ä‚Ç‚¤‚·‚é‚©B
-                // ¡‚Í—˜—p‚µ‚Ä‚È‚¢‚Ì‚ÅÀs‚µ‚È‚­‚Ä‚àOK‚¾‚¯‚ÇA«—ˆ•K—v‚É‚È‚Á‚½ê‡A
-                // ‚Ç‚¤‚·‚é‚©l‚¦‚é•K—v‚ª‚ ‚éB
+                // TODO pojoProcessAction.setServlet()ã®å®Ÿè¡Œã«ã¤ã„ã¦ã©ã†ã™ã‚‹ã‹ã€‚
+                // ä»Šã¯åˆ©ç”¨ã—ã¦ãªã„ã®ã§å®Ÿè¡Œã—ãªãã¦ã‚‚OKã ã‘ã©ã€å°†æ¥å¿…è¦ã«ãªã£ãŸå ´åˆã€
+                // ã©ã†ã™ã‚‹ã‹è€ƒãˆã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
                 return this.pojoProcessAction;
             }
         }

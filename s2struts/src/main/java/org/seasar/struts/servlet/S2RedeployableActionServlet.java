@@ -27,7 +27,7 @@ import org.seasar.struts.S2StrutsInitializer;
  */
 public class S2RedeployableActionServlet extends RedeployableActionServlet {
 
-    private static final long serialVersionUID = S2RedeployableActionServlet.class.hashCode();
+    private static final long serialVersionUID = 6425959102294054816L;
 
     /**
      * 

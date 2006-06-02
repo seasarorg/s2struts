@@ -13,7 +13,7 @@ import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.mock.MockActionMapping;
 import org.seasar.struts.pojo.PojoInvocation;
-import org.seasar.struts.pojo.PojoInvocationImpl;
+import org.seasar.struts.pojo.impl.PojoInvocationImpl;
 
 /**
  * 
@@ -37,8 +37,7 @@ public class PropertyBindingCommandTest extends S2TestCase {
         HttpServletRequest request = null;
         HttpServletResponse response = null;
 
-        this.invocation = new PojoInvocationImpl(commands, mapping, actionInterface,
-                actionInstance, form, request, response);
+        this.invocation = new PojoInvocationImpl(commands, mapping, actionInterface, actionInstance, form, request, response);
     }
 
     public void testExecuteExportPOJOFormFromRequest() throws Exception {
@@ -57,10 +56,8 @@ public class PropertyBindingCommandTest extends S2TestCase {
         String forward = this.invocation.execute();
         assertEquals("success", forward);
 
-        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest()
-                .getAttribute("exportPOJOForm");
-        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean())
-                .getInstance();
+        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getAttribute("exportPOJOForm");
+        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
         assertEquals("updated", resultForm.getMessage());
     }
 
@@ -80,10 +77,8 @@ public class PropertyBindingCommandTest extends S2TestCase {
         String forward = this.invocation.execute();
         assertEquals("success", forward);
 
-        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getSession().getAttribute(
-                "exportPOJOForm");
-        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean())
-                .getInstance();
+        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getSession().getAttribute("exportPOJOForm");
+        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
         assertEquals("updated", resultForm.getMessage());
     }
 
@@ -123,8 +118,7 @@ public class PropertyBindingCommandTest extends S2TestCase {
         String forward = this.invocation.execute();
         assertEquals("success", forward);
 
-        TestExportForm resultForm = (TestExportForm) getRequest().getSession().getAttribute(
-                "exportForm");
+        TestExportForm resultForm = (TestExportForm) getRequest().getSession().getAttribute("exportForm");
         assertEquals("updated", resultForm.getMessage());
     }
 

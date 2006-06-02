@@ -18,7 +18,6 @@ package org.seasar.struts.hotdeploy;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.validator.Constant;
 import org.apache.commons.validator.Form;
 import org.apache.commons.validator.FormSet;
 import org.apache.commons.validator.ValidatorAction;
@@ -38,7 +37,10 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
         this.resources = resources;
     }
 
-    public void addConstant(Constant arg0) {
+    /**
+     * @deprecated
+     */
+    public void addConstant(org.apache.commons.validator.Constant arg0) {
         resources.addConstant(arg0);
     }
 
@@ -46,6 +48,9 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
         resources.addConstant(arg0, arg1);
     }
 
+    /**
+     * @deprecated
+     */
     public void addConstantParam(String arg0, String arg1) {
         resources.addConstantParam(arg0, arg1);
     }
@@ -62,10 +67,16 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
         return resources.equals(arg0);
     }
 
+    /**
+     * @deprecated
+     */
     public Form get(Locale arg0, Object arg1) {
         return resources.get(arg0, arg1);
     }
 
+    /**
+     * @deprecated
+     */
     public Form get(String arg0, String arg1, String arg2, Object arg3) {
         return resources.get(arg0, arg1, arg2, arg3);
     }
@@ -94,10 +105,16 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
         resources.process();
     }
 
+    /**
+     * @deprecated
+     */
     public void processForms() {
         resources.processForms();
     }
 
+    /**
+     * @deprecated
+     */
     public void put(FormSet arg0) {
         resources.put(arg0);
     }

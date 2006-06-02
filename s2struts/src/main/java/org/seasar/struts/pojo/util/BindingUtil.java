@@ -26,6 +26,8 @@ import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.IntegerConversionUtil;
+import org.seasar.struts.bean.IndexedPropertyDesc;
+import org.seasar.struts.bean.impl.IndexedPropertyDescImpl;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandler;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandlerFactory;
@@ -60,7 +62,7 @@ public class BindingUtil {
         if (var != null) {
             return var;
         }
-        
+
         if (container.hasComponentDef(name)) {
             return container.getComponent(name);
         }
@@ -79,7 +81,7 @@ public class BindingUtil {
         if (!propertyDesc.hasWriteMethod()) {
             return;
         }
-        
+
         String propertyName = propertyDesc.getPropertyName();
         Object value = BindingUtil.getValue(container, propertyName);
         if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
@@ -90,7 +92,7 @@ public class BindingUtil {
         if (value == null) {
             return;
         }
-        
+
         Class propertyType = propertyDesc.getPropertyType();
         if (propertyType.isPrimitive()) {
             propertyType = getPrimitiveWrappedClass(propertyType);
@@ -133,16 +135,17 @@ public class BindingUtil {
         }
     }
 
-    private static void exportProperty(Object action, S2Container container, BeanDesc beanDesc, PropertyDesc propertyDesc, ActionMapping mapping) {
+    private static void exportProperty(Object action, S2Container container, BeanDesc beanDesc, PropertyDesc propertyDesc,
+            ActionMapping mapping) {
         if (!propertyDesc.hasReadMethod()) {
             return;
         }
-        
+
         Object value = propertyDesc.getValue(action);
         if (value == null) {
             return;
         }
-        
+
         if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
             ActionFormUtil.setActualForm(S2StrutsContextUtil.getRequest(container), value, mapping);
         } else {
@@ -150,7 +153,7 @@ public class BindingUtil {
             if (BeanValidatorFormUtil.isBeanValidatorForm(S2StrutsContextUtil.getRequest(container), propertyName)) {
                 value = BeanValidatorFormUtil.toBeanValidatorForm(S2StrutsContextUtil.getRequest(container), propertyName, value);
             }
-            
+
             ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
             ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
             if (propertyConfig.isSessionScope()) {

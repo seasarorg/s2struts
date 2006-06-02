@@ -29,6 +29,7 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.action.ClassRegister;
 import org.seasar.struts.pojo.exception.NotRegisteredComponentRuntimeException;
+import org.seasar.struts.pojo.impl.PojoInvocationImpl;
 
 /**
  * 
@@ -48,8 +49,8 @@ public class PojoProcessAction extends Action {
         this.pojoCommands.add(pojoCommand);
     }
 
-    public ActionForward execute(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
 
         if (this.pojoCommands.size() == 0) {
             throw new NotRegisteredComponentRuntimeException(PojoCommand.class);
@@ -59,8 +60,8 @@ public class PojoProcessAction extends Action {
         Class actionInterface = this.classRegister.getClass(mapping.getType());
         Object actionInstance = container.getComponent(actionInterface);
 
-        PojoInvocation invocation = new PojoInvocationImpl(this.pojoCommands, mapping,
-                actionInterface, actionInstance, form, request, response);
+        PojoInvocation invocation = new PojoInvocationImpl(this.pojoCommands, mapping, actionInterface, actionInstance, form,
+                request, response);
         String forward = invocation.execute();
         if (forward != null) {
             return mapping.findForward(forward);

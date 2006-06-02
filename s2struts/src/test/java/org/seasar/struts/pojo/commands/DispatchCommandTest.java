@@ -12,7 +12,7 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.mock.MockActionMapping;
 import org.seasar.struts.pojo.PojoCommand;
 import org.seasar.struts.pojo.PojoInvocation;
-import org.seasar.struts.pojo.PojoInvocationImpl;
+import org.seasar.struts.pojo.impl.PojoInvocationImpl;
 
 /**
  * 
