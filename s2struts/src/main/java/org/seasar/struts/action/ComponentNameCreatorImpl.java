@@ -25,18 +25,19 @@ import org.seasar.framework.container.S2Container;
 public class ComponentNameCreatorImpl implements ComponentNameCreator {
 
     /**
-     * ActionMapping‚©‚çƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ğAì¬‚·‚éB <br>
-     * ƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ğŒŸõ‚·‚é‡”Ô‚ÍA
+     * ActionMappingã‹ã‚‰ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆåã‚’ã€ä½œæˆã™ã‚‹ã€‚ <br>
+     * ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆåã‚’æ¤œç´¢ã™ã‚‹é †ç•ªã¯ã€
      * <UL>
-     * <LI>module–¼(prefix)+path</LI>
+     * <LI>moduleå(prefix)+path</LI>
      * <LI>path</LI>
      * </UL>
-     * ‚Æ‚È‚éB
+     * ã¨ãªã‚‹ã€‚
      * 
      * @see org.seasar.struts.ComponentNameCreator#createComponentName(org.seasar.framework.container.S2Container,
      *      org.apache.struts.action.ActionMapping)
      */
-    public String createComponentName(S2Container container, ActionMapping mapping) {
+    public String createComponentName(S2Container container,
+            ActionMapping mapping) {
         String moduleName = mapping.getModuleConfig().getPrefix();
         String path = mapping.getPath();
 

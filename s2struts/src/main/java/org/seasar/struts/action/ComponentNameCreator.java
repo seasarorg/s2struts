@@ -19,17 +19,20 @@ import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.container.S2Container;
 
 /**
- * ActionMapping‚©‚çAƒRƒ“ƒ|[ƒg–¼‚ğì¬‚·‚é‚½‚ß‚ÌƒCƒ“ƒ^[ƒtƒF[ƒXB
+ * ActionMappingã‹ã‚‰ã€ã‚³ãƒ³ãƒãƒ¼ãƒˆåã‚’ä½œæˆã™ã‚‹ãŸã‚ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã€‚
  * 
  * @author Satoshi Kimura
  */
 public interface ComponentNameCreator {
     /**
-     * ActionMapping‚©‚çƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ğAì¬‚µA‚»‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ªg—p‘ÎÛ‚ÌƒRƒ“ƒeƒi‚ÉŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎA path‚ğƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚Æ‚µ‚Ä•Ô‚·B
+     * ActionMappingã‹ã‚‰ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆåã‚’ã€ä½œæˆã—ã€ãã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆåãŒä½¿ç”¨å¯¾è±¡ã®ã‚³ãƒ³ãƒ†ãƒŠã«è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ã€
+     * pathã‚’ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆåã¨ã—ã¦è¿”ã™ã€‚
      * 
-     * @param container ŒŸõ‘ÎÛ‚ÌƒRƒ“ƒeƒi
-     * @param mapping ƒRƒ“ƒeƒi–¼‚ğì¬‚·‚é‚Ì‚Ég—p‚·‚éƒ}ƒbƒsƒ“ƒO
-     * @return ƒRƒ“ƒeƒi–¼
+     * @param container
+     *            æ¤œç´¢å¯¾è±¡ã®ã‚³ãƒ³ãƒ†ãƒŠ
+     * @param mapping
+     *            ã‚³ãƒ³ãƒ†ãƒŠåã‚’ä½œæˆã™ã‚‹ã®ã«ä½¿ç”¨ã™ã‚‹ãƒãƒƒãƒ”ãƒ³ã‚°
+     * @return ã‚³ãƒ³ãƒ†ãƒŠå
      */
     String createComponentName(S2Container container, ActionMapping mapping);
 }

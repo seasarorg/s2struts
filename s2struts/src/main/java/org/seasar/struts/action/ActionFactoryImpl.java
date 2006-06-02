@@ -36,9 +36,9 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  * @author Katsuhiko Nagashima
  */
 public class ActionFactoryImpl implements ActionFactory {
-    
+
     private ClassRegister classRegister;
-    
+
     private ComponentNameCreator componentNameCreator;
 
     public ActionFactoryImpl() {
@@ -67,8 +67,8 @@ public class ActionFactoryImpl implements ActionFactory {
         }
     }
 
-    public Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
-            Log log, MessageResources internal, ActionServlet servlet) throws IOException {
+    public Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping, Log log,
+            MessageResources internal, ActionServlet servlet) throws IOException {
 
         Action instance = null;
         try {
@@ -80,8 +80,8 @@ public class ActionFactoryImpl implements ActionFactory {
         return instance;
     }
 
-    public Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
-            Log log, MessageResources internal, ActionServlet servlet) throws IOException {
+    public Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping, Log log,
+            MessageResources internal, ActionServlet servlet) throws IOException {
         Object actionInstance = null;
         S2Container container = SingletonS2ContainerFactory.getContainer();
         try {
@@ -111,7 +111,7 @@ public class ActionFactoryImpl implements ActionFactory {
     public void setClassRegister(ClassRegister classRegister) {
         this.classRegister = classRegister;
     }
-    
+
     public void setComponentNameCreator(ComponentNameCreator componentNameCreator) {
         this.componentNameCreator = componentNameCreator;
     }
