@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DownloadActionImpl implements DownloadAction {
 
     private DownloadDto downloadDto;
-    
+
     private HttpServletResponse response;
 
     public String execute() {
@@ -37,14 +37,6 @@ public class DownloadActionImpl implements DownloadAction {
             e.printStackTrace();
             response.reset();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        } finally {
-            if (out == null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return null;
     }
@@ -56,7 +48,7 @@ public class DownloadActionImpl implements DownloadAction {
     public void setDownloadDto(DownloadDto downloadDto) {
         this.downloadDto = downloadDto;
     }
-    
+
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
