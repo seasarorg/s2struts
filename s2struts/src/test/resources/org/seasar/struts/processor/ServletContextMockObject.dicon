@@ -2,9 +2,9 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
 "http://www.seasar.org/dtd/components.dtd">
 <components>
-	<component name="componentNameCreator"    class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
-	<component name="classRegister"           class="org.seasar.struts.action.ClassRegisterImpl"/>
-	<component name="actionFactory"           class="org.seasar.struts.action.ActionFactoryImpl"/>
+	<component name="componentNameCreator"    class="org.seasar.struts.action.impl.ComponentNameCreatorImpl"/>
+	<component name="classRegister"           class="org.seasar.struts.action.impl.ClassRegisterImpl"/>
+	<component name="actionFactory"           class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
 	
 	<component name="ServletContext" class="javax.servlet.ServletContext">
 		<aspect>ServletContextMockObjectInterceptor</aspect>
