@@ -24,7 +24,7 @@ import org.seasar.struts.Constants;
 import org.seasar.struts.annotation.backport175.Export;
 import org.seasar.struts.annotation.backport175.ExportToSession;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
-import org.seasar.struts.pojo.config.ActionPropertyConfigImpl;
+import org.seasar.struts.pojo.config.impl.ActionPropertyConfigImpl;
 
 /**
  * @author Katsuhiko Nagashima

@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -32,7 +32,6 @@ import org.seasar.struts.validator.annotation.backport175.NoValidate;
 import org.seasar.struts.validator.annotation.backport175.Validator;
 import org.seasar.struts.validator.annotation.backport175.ValidatorField;
 import org.seasar.struts.validator.annotation.backport175.ValidatorTarget;
-import org.seasar.struts.zeroconfig.factory.ConstantValidatorAnnotationHandler;
 
 /**
  * @author Katsuhiko Nagashima
@@ -44,10 +43,10 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         if (!hasAnnotation(method)) {
             return super.noValidate(beanDesc, propDesc);
         }
-        
+
         return Annotations.getAnnotation(NoValidate.class, method) != null;
     }
-    
+
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -55,12 +54,12 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         }
 
         StringBuffer depends = new StringBuffer("");
-        
+
         String autoTypeValidatorName = getAutoTypeValidatorName(propDesc);
         if (!StringUtil.isEmpty(autoTypeValidatorName)) {
             depends.append(autoTypeValidatorName).append(",");
         }
-        
+
         Annotation[] annotations = Annotations.getAnnotations(method);
         for (int i = 0; i < annotations.length; i++) {
             Class type = annotations[i].annotationType();
@@ -82,7 +81,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         depends.setLength(depends.length() - 1);
         return depends.toString();
     }
-    
+
     protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -101,7 +100,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
             field.addMsg(msg);
         }
     }
-    
+
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -125,7 +124,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
             field.addArg(arg);
         }
     }
-    
+
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -134,7 +133,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         }
 
         registerAutoTypeValidatorConfig(field, propDesc);
-        
+
         Annotation[] annotations = Annotations.getAnnotations(method);
         for (int i = 0; i < annotations.length; i++) {
             Class type = annotations[i].annotationType();
@@ -142,7 +141,8 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
             if (target != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
-                    Map parameter = Backport175AnnotationConverter.getInstance().toMap(annotations[i]);
+                    Map parameter = Backport175AnnotationConverter.getInstance().toMap(
+                            annotations[i]);
                     executeConfigRegister(field, validatorName, parameter);
                 }
             }
@@ -150,11 +150,11 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
     }
 
     // -----------------------------------------------------------------------
-    
+
     private boolean hasAnnotation(Method method) {
         return Annotations.getAnnotations(method).length != 0;
     }
-    
+
     private String createValidatorFieldDepends(ValidatorField validatorField) {
         StringBuffer result = new StringBuffer("");
         if (validatorField.validators() != null) {
@@ -171,5 +171,5 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         result.setLength(result.length() - 1);
         return result.toString();
     }
-    
+
 }

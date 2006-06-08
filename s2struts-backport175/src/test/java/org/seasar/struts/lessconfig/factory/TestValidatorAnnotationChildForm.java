@@ -1,4 +1,6 @@
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
+
+import org.seasar.struts.lessconfig.factory.TestValidatorAnnotationGrandchildForm;
 
 public class TestValidatorAnnotationChildForm {
     

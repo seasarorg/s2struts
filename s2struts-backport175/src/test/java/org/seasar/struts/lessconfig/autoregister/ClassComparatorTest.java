@@ -1,4 +1,4 @@
-package org.seasar.struts.zeroconfig.autoregister;
+package org.seasar.struts.lessconfig.autoregister;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,9 +8,9 @@ import junit.framework.TestCase;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
-import org.seasar.struts.zeroconfig.autoregister.ClassComparator;
-import org.seasar.struts.zeroconfig.factory.TestStrutsConfigAnnotationAction;
-import org.seasar.struts.zeroconfig.factory.TestValidatorAnnotationForm;
+import org.seasar.struts.lessconfig.autoregister.ClassComparator;
+import org.seasar.struts.lessconfig.factory.TestStrutsConfigAnnotationAction;
+import org.seasar.struts.lessconfig.factory.TestValidatorAnnotationForm;
 
 /**
  * @author Satoshi Kimura

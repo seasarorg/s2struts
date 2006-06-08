@@ -1,13 +1,17 @@
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.lang.reflect.Field;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.zeroconfig.config.StrutsActionConfig;
-import org.seasar.struts.zeroconfig.config.StrutsActionFormConfig;
-import org.seasar.struts.zeroconfig.config.StrutsActionForwardConfig;
-import org.seasar.struts.zeroconfig.factory.StrutsConfigAnnotationHandler;
-import org.seasar.struts.zeroconfig.factory.StrutsConfigAnnotationHandlerFactory;
+import org.seasar.struts.lessconfig.config.StrutsActionConfig;
+import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
+import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
+import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
+import org.seasar.struts.lessconfig.factory.TestNoStrutsConfigAnnotationForm;
+import org.seasar.struts.lessconfig.factory.TestStrutsConfigAnnotationAction;
+import org.seasar.struts.lessconfig.factory.TestStrutsConfigAnnotationActionImpl;
+import org.seasar.struts.lessconfig.factory.TestStrutsConfigAnnotationForm;
 
 /**
  * 

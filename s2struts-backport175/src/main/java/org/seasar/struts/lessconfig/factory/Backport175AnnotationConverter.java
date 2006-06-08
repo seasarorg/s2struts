@@ -13,13 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.lang.reflect.Method;
 
 import org.codehaus.backport175.reader.Annotation;
-import org.seasar.struts.zeroconfig.factory.AbstractAnnotationConverter;
-import org.seasar.struts.zeroconfig.factory.AnnotationConverter;
 
 /**
  * @author Katsuhiko Nagashima

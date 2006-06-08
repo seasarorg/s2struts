@@ -1,8 +1,9 @@
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.util.Date;
 
 import org.apache.struts.upload.FormFile;
+import org.seasar.struts.lessconfig.factory.TestValidatorAnnotationChildForm;
 
 /**
  * @author Katsuhiko Nagashima

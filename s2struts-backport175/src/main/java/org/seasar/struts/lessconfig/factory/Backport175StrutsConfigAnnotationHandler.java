@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.lang.reflect.Field;
 
@@ -21,10 +21,9 @@ import org.codehaus.backport175.reader.Annotations;
 import org.seasar.struts.annotation.backport175.StrutsAction;
 import org.seasar.struts.annotation.backport175.StrutsActionForm;
 import org.seasar.struts.annotation.backport175.StrutsActionForward;
-import org.seasar.struts.zeroconfig.config.StrutsActionConfig;
-import org.seasar.struts.zeroconfig.config.StrutsActionFormConfig;
-import org.seasar.struts.zeroconfig.config.StrutsActionForwardConfig;
-import org.seasar.struts.zeroconfig.factory.ConstantStrutsConfigAnnotationHandler;
+import org.seasar.struts.lessconfig.config.StrutsActionConfig;
+import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
+import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 
 /**
  * @author Katsuhiko Nagashima
@@ -32,7 +31,8 @@ import org.seasar.struts.zeroconfig.factory.ConstantStrutsConfigAnnotationHandle
 public class Backport175StrutsConfigAnnotationHandler extends ConstantStrutsConfigAnnotationHandler {
 
     public StrutsActionConfig createStrutsActionConfig(Class clazz) {
-        final StrutsAction config = (StrutsAction) Annotations.getAnnotation(StrutsAction.class, clazz);
+        final StrutsAction config = (StrutsAction) Annotations.getAnnotation(StrutsAction.class,
+                clazz);
         if (config == null) {
             return super.createStrutsActionConfig(clazz);
         }
@@ -88,16 +88,17 @@ public class Backport175StrutsConfigAnnotationHandler extends ConstantStrutsConf
             public String roles() {
                 return config.roles();
             }
-            
+
             public boolean cancellable() {
-            	return config.cancellable();
+                return config.cancellable();
             }
 
         };
     }
 
     public StrutsActionForwardConfig createStrutsActionForwardConfig(Field field) {
-        final StrutsActionForward config = (StrutsActionForward) Annotations.getAnnotation(StrutsActionForward.class, field);
+        final StrutsActionForward config = (StrutsActionForward) Annotations.getAnnotation(
+                StrutsActionForward.class, field);
         if (config == null) {
             return super.createStrutsActionForwardConfig(field);
         }
@@ -110,12 +111,13 @@ public class Backport175StrutsConfigAnnotationHandler extends ConstantStrutsConf
             public boolean redirect() {
                 return config.redirect();
             }
-            
+
         };
     }
 
     public StrutsActionFormConfig createStrutsActionFormConfig(Class clazz) {
-        final StrutsActionForm config = (StrutsActionForm) Annotations.getAnnotation(StrutsActionForm.class, clazz);
+        final StrutsActionForm config = (StrutsActionForm) Annotations.getAnnotation(
+                StrutsActionForm.class, clazz);
         if (config == null) {
             return super.createStrutsActionFormConfig(clazz);
         }
@@ -128,7 +130,7 @@ public class Backport175StrutsConfigAnnotationHandler extends ConstantStrutsConf
             public boolean restricted() {
                 return config.restricted();
             }
-            
+
         };
     }
 
