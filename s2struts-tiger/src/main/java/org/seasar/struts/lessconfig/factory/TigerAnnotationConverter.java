@@ -13,15 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.seasar.struts.zeroconfig.factory.AbstractAnnotationConverter;
-import org.seasar.struts.zeroconfig.factory.AnnotationConverter;
 
 /**
  * @author Katsuhiko Nagashima
@@ -46,7 +43,7 @@ public class TigerAnnotationConverter extends AbstractAnnotationConverter {
                 result.add(method);
             }
         }
-        
+
         Method[] array = new Method[result.size()];
         return result.toArray(array);
     }

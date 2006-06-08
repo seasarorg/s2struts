@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -31,7 +31,6 @@ import org.seasar.struts.validator.annotation.tiger.NoValidate;
 import org.seasar.struts.validator.annotation.tiger.Validator;
 import org.seasar.struts.validator.annotation.tiger.ValidatorField;
 import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
-import org.seasar.struts.zeroconfig.factory.ConstantValidatorAnnotationHandler;
 
 /**
  * 
@@ -45,10 +44,10 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (!hasAnnotation(method)) {
             return super.noValidate(beanDesc, propDesc);
         }
-        
+
         return method.getAnnotation(NoValidate.class) != null;
     }
-    
+
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -82,7 +81,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         depends.setLength(depends.length() - 1);
         return depends.toString();
     }
-    
+
     protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -101,7 +100,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             field.addMsg(msg);
         }
     }
-    
+
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -125,7 +124,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             field.addArg(arg);
         }
     }
-    
+
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -149,7 +148,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     }
 
     // -----------------------------------------------------------------------
-    
+
     private boolean hasAnnotation(Method method) {
         return method.getAnnotations().length != 0;
     }

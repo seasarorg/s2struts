@@ -23,8 +23,7 @@ import org.seasar.struts.Constants;
 import org.seasar.struts.annotation.tiger.Export;
 import org.seasar.struts.annotation.tiger.ExportToSession;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
-import org.seasar.struts.pojo.config.ActionPropertyConfigImpl;
-import org.seasar.struts.pojo.factory.ConstantActionAnnotationHandler;
+import org.seasar.struts.pojo.config.impl.ActionPropertyConfigImpl;
 
 /**
  * 

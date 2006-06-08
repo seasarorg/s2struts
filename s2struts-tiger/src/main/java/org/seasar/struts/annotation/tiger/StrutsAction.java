@@ -20,17 +20,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.seasar.struts.zeroconfig.config.StrutsActionConfig;
+import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface StrutsAction {
-    
+
     String path() default StrutsActionConfig.DEFAULT_PATH;
 
     String name() default StrutsActionConfig.DEFAULT_NAME;
@@ -56,7 +56,7 @@ public @interface StrutsAction {
     boolean unknown() default StrutsActionConfig.DEFAULT_UNKNOWN;
 
     String roles() default StrutsActionConfig.DEFAULT_ROLES;
-    
+
     boolean cancellable() default StrutsActionConfig.DEFAULT_CANCELLABLE;
 
 }

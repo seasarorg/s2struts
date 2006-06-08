@@ -1,4 +1,4 @@
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 

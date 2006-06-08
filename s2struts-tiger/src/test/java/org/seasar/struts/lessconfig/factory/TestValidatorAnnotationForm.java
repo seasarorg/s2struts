@@ -1,9 +1,10 @@
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import java.util.Date;
 
 import org.apache.struts.upload.FormFile;
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.lessconfig.factory.TestValidatorAnnotationChildForm;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.CreditCardType;
 import org.seasar.struts.validator.annotation.tiger.DateType;

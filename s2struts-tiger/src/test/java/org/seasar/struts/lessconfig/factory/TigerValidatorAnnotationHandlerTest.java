@@ -1,4 +1,4 @@
-package org.seasar.struts.zeroconfig.factory;
+package org.seasar.struts.lessconfig.factory;
 
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
@@ -18,7 +18,7 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     public void setUp() {
         include("s2struts.dicon");
 
-        annHandler = new TigerValidatorAnnotationHandler();
+        annHandler = ValidatorAnnotationHandlerFactory.getAnnotationHandler();
     }
 
     public void setUpAfterContainerInit() {
