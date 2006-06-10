@@ -22,7 +22,7 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
     public void setUp() {
         include("s2struts.dicon");
         
-        annHandler = new Backport175ValidatorAnnotationHandler();
+        annHandler = ValidatorAnnotationHandlerFactory.getAnnotationHandler();
     }
     
     public void setUpAfterContainerInit() {
