@@ -19,7 +19,7 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
     public void setUp() {
         include("s2struts.dicon");
         
-        annHandler = new ConstantValidatorAnnotationHandler();
+        annHandler = ValidatorAnnotationHandlerFactory.getAnnotationHandler();
     }
     
     public void setUpAfterContainerInit() {

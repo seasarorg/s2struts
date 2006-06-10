@@ -18,8 +18,11 @@ package org.seasar.struts.validator.factory;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -53,27 +56,32 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         registerFields(form, new Field(), beanDesc);
         return form;
     }
-    
+
     protected void registerFields(Form form, Field field, BeanDesc beanDesc) {
+        List propDescs = new ArrayList();
         for (int i = 0; i < beanDesc.getPropertyDescSize(); i++) {
             PropertyDesc propDesc = beanDesc.getPropertyDesc(i);
+            if (!hasMethodForValidation(propDesc)) {
+                continue;
+            }
+            if (registeredField(form, field, propDesc)) {
+                continue;
+            }
+            if (noValidate(beanDesc, propDesc)) {
+                continue;
+            }
+            propDescs.add(propDesc);
+        }
+        Comparator comparator = getPropertyDescComparator(beanDesc);
+        Collections.sort(propDescs, comparator);
+
+        for (Iterator itr = propDescs.iterator(); itr.hasNext();) {
+            PropertyDesc propDesc = (PropertyDesc) itr.next();
             registerField(form, field, beanDesc, propDesc);
         }
     }
-    
-    protected void registerField(Form form, Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
-        if (!hasMethodForValidation(propDesc)) {
-            return;
-        }
 
-        if (registeredField(form, field, propDesc)) {
-            return;
-        }
-        
-        if (noValidate(beanDesc, propDesc)) {
-            return;
-        }
-        
+    protected void registerField(Form form, Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         String depends = getDepends(beanDesc, propDesc);
         if (depends == null) {
             if (isNestedValidate(propDesc)) {
@@ -87,15 +95,15 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
             }
             return;
         }
-        
+
         Field newField = createField(field, propDesc, depends);
         registerMessage(newField, beanDesc, propDesc);
         registerArgs(newField, beanDesc, propDesc);
         registerConfig(newField, beanDesc, propDesc);
-        
+
         form.addField(newField);
     }
-    
+
     protected boolean registeredField(Form form, Field field, PropertyDesc propDesc) {
         String key = getFieldKey(field, propDesc);
         return form.getField(key) != null;
@@ -109,7 +117,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         if (ValidatorForm.class.isAssignableFrom(method.getDeclaringClass())) {
             return false;
         }
-        
+
         Class paramType = propDesc.getPropertyType();
         if (paramType.isArray()) {
             paramType = paramType.getComponentType();
@@ -135,11 +143,11 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
 
         return true;
     }
-    
+
     protected Field createField(Field field, PropertyDesc propDesc, String depends) {
         Field newField = new Field();
         newField.setDepends(depends);
-        
+
         String property = getFieldProperty(field, propDesc);
         if (propDesc.getPropertyType().isArray()) {
             newField.setProperty("");
@@ -148,10 +156,10 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
             newField.setProperty(property);
             newField.setIndexedListProperty(field.getIndexedListProperty());
         }
-        
+
         return newField;
     }
-    
+
     protected String getFieldProperty(Field field, PropertyDesc propDesc) {
         if (StringUtil.isEmpty(field.getProperty())) {
             return propDesc.getPropertyName();
@@ -159,7 +167,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
             return field.getProperty() + "." + propDesc.getPropertyName();
         }
     }
-    
+
     protected String getFieldKey(Field field, PropertyDesc propDesc) {
         String key = getFieldProperty(field, propDesc);
         if (!StringUtil.isEmpty(field.getIndexedListProperty())) {
@@ -167,27 +175,29 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         }
         return key;
     }
-    
+
+    protected abstract Comparator getPropertyDescComparator(BeanDesc beanDesc);
+
     protected abstract boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc);
-    
+
     protected abstract String getDepends(BeanDesc beanDesc, PropertyDesc propDesc);
-    
+
     protected abstract void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
-    
+
     protected abstract void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
-    
+
     protected abstract void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
 
     // -----------------------------------------------------------------------
-    
+
     protected boolean hasMethodForValidation(PropertyDesc propDesc) {
         return propDesc.hasWriteMethod();
     }
-    
+
     protected Method getMethodForValidation(PropertyDesc propDesc) {
         return propDesc.getWriteMethod();
     }
-    
+
     protected String getAutoTypeValidatorName(PropertyDesc propDesc) {
         Class paramType = propDesc.getPropertyType();
         if (paramType.isArray()) {
@@ -242,7 +252,8 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
     }
 
     protected String getValidatorName(Class clazz) {
-        String validatorName = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(clazz));
+        String validatorName = CommonNamingRule
+                .decapitalizeName(ClassUtil.getShortClassName(clazz));
         return validatorName.replaceFirst(VALIDATOR_TYPE_PREFIX_RE, "");
     }
 

@@ -16,6 +16,7 @@
 package org.seasar.struts.validator.factory;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,11 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
     private static final String TYPE = "type";
 
     private static final String NO_VALIDATE = "noValidate";
-    
+
+    protected Comparator getPropertyDescComparator(BeanDesc beanDesc) {
+        return new ConstantPropertyDescComparator(beanDesc);
+    }
+
     protected boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc) {
         List parameters = getValidatorParameters(beanDesc, propDesc);
         for (Iterator it = parameters.iterator(); it.hasNext();) {
@@ -56,7 +61,7 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         }
         return false;
     }
-    
+
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
         List parameters = getValidatorParameters(beanDesc, propDesc);
         StringBuffer depends = new StringBuffer("");
@@ -76,7 +81,7 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         depends.setLength(depends.length() - 1);
         return depends.toString();
     }
-    
+
     protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         String fieldName = propDesc.getPropertyName() + MESSAGE_SUFFIX;
         if (!beanDesc.hasField(fieldName)) {
@@ -104,14 +109,15 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         msg.setResource(resource);
         field.addMsg(msg);
     }
-    
+
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         String[] keys = { propDesc.getPropertyName() };
         boolean resource = false;
-        
+
         String fieldName = propDesc.getPropertyName() + ARGS_SUFFIX;
         if (beanDesc.hasField(fieldName)) {
-            if (ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
+            if (ConstantAnnotationUtil
+                    .isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
                 String value = (String) beanDesc.getFieldValue(fieldName, null);
                 Map parameter = ConstantValueUtil.toMap(value, "keys");
                 keys = toArrays((String) parameter.get("keys"));
@@ -130,7 +136,7 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
             field.addArg(arg);
         }
     }
-    
+
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         registerAutoTypeValidatorConfig(field, propDesc);
 
@@ -143,9 +149,9 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
             }
         }
     }
-    
+
     // -----------------------------------------------------------------------
-    
+
     private List getValidatorParameters(BeanDesc beanDesc, PropertyDesc propDesc) {
         List result = new ArrayList();
 
