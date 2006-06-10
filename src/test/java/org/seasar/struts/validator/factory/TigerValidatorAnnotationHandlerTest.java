@@ -19,7 +19,7 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     public void setUp() {
         include("s2struts.dicon");
         
-        annHandler = new TigerValidatorAnnotationHandler();
+        annHandler = ValidatorAnnotationHandlerFactory.getAnnotationHandler();
     }
     
     public void setUpAfterContainerInit() {

@@ -17,6 +17,7 @@ package org.seasar.struts.validator.factory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Comparator;
 import java.util.Map;
 
 import org.apache.commons.validator.Arg;
@@ -38,6 +39,10 @@ import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
  * 
  */
 public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotationHandler {
+    
+    protected Comparator getPropertyDescComparator(BeanDesc beanDesc) {
+        return new TigerPropertyDescComparator(beanDesc);
+    }
 
     protected boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
