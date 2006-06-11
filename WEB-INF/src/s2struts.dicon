@@ -24,6 +24,7 @@
 	</component>
 	<component name="validateProcessor"            class="org.seasar.struts.processor.ValidateProcessorImpl"/>
 	<component name="inputValueFormProcessor"      class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
+	<component name="populateProcessor"            class="org.seasar.struts.processor.PopulateProcessorImpl"/>
 	<component name="requestProcessor"             class="org.seasar.struts.processor.S2RequestProcessor" instance="prototype">
 		<aspect pointcut="processActionForm">
 			<component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
@@ -51,6 +52,7 @@
 	<component name="maxbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MaxbytelengthConfigRegisterImpl"/>
 	<component name="minbytelengthConfigRegister"  class="org.seasar.struts.validator.config.MinbytelengthConfigRegisterImpl"/>
 	<component name="intRangeConfigRegister"       class="org.seasar.struts.validator.config.IntRangeConfigRegisterImpl"/>
+	<component name="longRangeConfigRegister"      class="org.seasar.struts.validator.config.LongRangeConfigRegisterImpl"/>
 	<component name="floatRangeConfigRegister"     class="org.seasar.struts.validator.config.FloatRangeConfigRegisterImpl"/>
 	<component name="doubleRangeConfigRegister"    class="org.seasar.struts.validator.config.DoubleRangeConfigRegisterImpl"/>
 	<component name="validatorFieldConfigRegister" class="org.seasar.struts.validator.config.ValidatorFieldConfigRegisterImpl"/>
