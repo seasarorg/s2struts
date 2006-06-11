@@ -27,5 +27,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public interface PopulateProcessor {
     void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping) throws ServletException;
+            ActionMapping mapping, ExternalRequestProcessor requestProcessor)
+            throws ServletException;
 }

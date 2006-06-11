@@ -10,6 +10,7 @@
 	<component name="requestProcessorFactory" class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
 	<component name="validateProcessor"       class="org.seasar.struts.processor.ValidateProcessorImpl"/>
 	<component name="inputValueFormProcessor" class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
+	<component name="populateProcessor"            class="org.seasar.struts.processor.PopulateProcessorImpl"/>
     <component class="org.seasar.struts.processor.S2RequestProcessor">
         <aspect pointcut="processActionForm">
             <component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>

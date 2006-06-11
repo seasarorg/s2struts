@@ -204,7 +204,7 @@ public class AutoActionRegister {
 
     private static boolean getCancellable(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
         return action.cancellable() == StrutsActionConfig.DEFAULT_CANCELLABLE ? rule().getCancellable(actionClass, config) : action
-                .validate();
+                .cancellable();
     }
 
 }

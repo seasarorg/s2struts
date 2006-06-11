@@ -129,7 +129,7 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
 
     public void processS2Populate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping) throws ServletException {
-    	populateProcessor.processPopulate(request, response, form, mapping);
+    	this.populateProcessor.processPopulate(request, response, form, mapping, this);
     }
 
     public boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)

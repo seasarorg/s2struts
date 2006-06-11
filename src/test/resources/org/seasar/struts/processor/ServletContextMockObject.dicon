@@ -10,6 +10,7 @@
 	<component name="executeProcessor"        class="org.seasar.struts.processor.ActionExecuteProcessorImpl"/>
 	<component name="validateProcessor"       class="org.seasar.struts.processor.ValidateProcessorImpl"/>
 	<component name="inputValueFormProcessor" class="org.seasar.struts.processor.InputValueFormProcessorImpl"/>
+	<component name="populateProcessor"       class="org.seasar.struts.processor.PopulateProcessorImpl"/>
 	
 	<component name="ServletContext" class="javax.servlet.ServletContext">
 		<aspect>ServletContextMockObjectInterceptor</aspect>
