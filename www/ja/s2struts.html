@@ -1647,7 +1647,8 @@ public class ValidateDto implements Serializable {
 
     private String value;
 
-    <b><font color="red">@Required
+    <b><font color="red">@ValidateOrder(1)
+    @Required
     @Minlength(10)
     @Maxlength(15)
     @Mask(pattern="com$",messageKey="mustendcom")
@@ -1664,6 +1665,7 @@ public class ValidateDto implements Serializable {
     private String value;
 
     <b>/**
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.ValidateOrder(1)</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Required</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Minlength(value=10)</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Maxlength(value=15)</font>
@@ -1683,6 +1685,7 @@ public class ValidateDto implements Serializable {
 
     private String value;
 
+    <b>public static final <font color="red">int value_VALIDATOR_ORDER = 1;</font></b>
     <b>public static final <font color="red">String value_VALIDATOR = "required";</font></b>
     <b>public static final <font color="red">String value_VALIDATOR_0 = "minlength, value=10";</font></b>
     <b>public static final <font color="red">String value_VALIDATOR_1 = "maxlength, value=15";</font></b>
@@ -1696,8 +1699,23 @@ public class ValidateDto implements Serializable {
 }</pre>
 <p>
 S2Strutsでは、validation設定のために各種アノテーションを用意しています。
-Args以外のアノテーションは基本的なバリデータを行うために利用します。
+ValidateOrder、Args以外のアノテーションは基本的なバリデータを行うために利用します。
 </p>
+<h4>ValidateOrder</h4>
+<p>
+検証する順番を制御します。指定した順番でエラーメッセージを表示します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>×</center></center></td>
+      <td><center>999</center></td>
+      <td>検証する順番を指定します。</td>
+  </tr>
+</table>
 <h4>Args</h4>
 <p>
 メッセージで使用される置換パラメータを指定します。

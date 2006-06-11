@@ -1501,6 +1501,22 @@ public interface EmployeeEditAction {
 
 }
 </pre>
+定数アノテーションの記述では以下のようになります。
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+public interface EmployeeEditAction {
+
+	<b>public static final String <font color="red">ACTION = "name=employeeForm, validate=false";</font></b>
+
+	<b>public static final String <font color="red">SUCCESS_FORWARD = "path=/pages/employee/employeeEdit.jsp";</font></b>
+
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
 These are functionally identical to the following.
 <pre>
 ...
@@ -1604,6 +1620,16 @@ public class EmployeeDto extends Employee {
 	...
 }
 </pre>
+定数アノテーションの記述では以下のようになります。
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+public class EmployeeDto extends Employee {
+
+	<b>public static final <font color="red">String FORM = "name=employeeForm"</font></b>;
+	...
+}
+</pre>
 This is equivalent to what is shown below.
 <pre>
 ...
@@ -1638,7 +1664,8 @@ public class ValidateDto implements Serializable {
 
     private String value;
 
-    <b><font color="red">@Required
+    <b><font color="red">@ValidateOrder(1)
+    @Required
     @Minlength(10)
     @Maxlength(15)
     @Mask(pattern="com$",messageKey="mustendcom")
@@ -1655,6 +1682,7 @@ public class ValidateDto implements Serializable {
     private String value;
 
     <b>/**
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.ValidateOrder(1)</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Required</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Minlength(value=10)</font>
      * <font color="red">@org.seasar.struts.validator.annotation.backport175.Maxlength(value=15)</font>
@@ -1668,10 +1696,43 @@ public class ValidateDto implements Serializable {
         this.value = value;
     }
 }</pre>
+定数アノテーションの記述では以下のようになります。
+<pre>
+public class ValidateDto implements Serializable {
+
+    private String value;
+
+    <b>public static final <font color="red">int value_VALIDATOR_ORDER = 1;</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR = "required";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_0 = "minlength, value=10";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_1 = "maxlength, value=15";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_2 = "mask, pattern=com$, messageKey=mustendcom";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_3 = "email";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARGS = "keys=mixValue, resource=false";</font></b>
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+}</pre>
 <p>
 S2Struts has annotations prepared for validation configuration.
-All annotation besides Args is used in basic validation.
+All annotation besides ValidateOrder, Args is used in basic validation.
 </p>
+<h4>ValidateOrder</h4>
+<p>
+検証する順番を制御します。指定した順番でエラーメッセージを表示します。
+</p>
+<table border="1">
+  <tr>
+    <td>Attribute</td><td>Required</td><td>Default value</td><td>Description</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>X</center></center></td>
+      <td><center>999</center></td>
+      <td>検証する順番を指定します。</td>
+  </tr>
+</table>
 <h4>Args</h4>
 <p>
 The substitute data used in the message is selected.
@@ -1960,7 +2021,7 @@ Additional attributes are shown below to supplement the above information.
   </tr>
   <tr>
     <td><center>action</center></td>
-      <td><center>�?</center></td>
+      <td><center>X</center></td>
       <td><center>-</center></td>
       <td>The component and method run from submit can be selected using action="#{component.method}".<br>
       the component must be registered in S2Container with the name selected in this attribute.</td>
