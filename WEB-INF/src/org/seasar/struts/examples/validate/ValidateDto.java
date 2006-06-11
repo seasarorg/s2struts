@@ -34,12 +34,13 @@ import org.seasar.struts.validator.annotation.tiger.Minbytelength;
 import org.seasar.struts.validator.annotation.tiger.Minlength;
 import org.seasar.struts.validator.annotation.tiger.Required;
 import org.seasar.struts.validator.annotation.tiger.UrlType;
+import org.seasar.struts.validator.annotation.tiger.ValidateOrder;
 
 /**
  * @author Satoshi Kimura
  */
 public class ValidateDto implements Serializable {
-	private static final long serialVersionUID = -2918322782862139730L;
+    private static final long serialVersionUID = -2918322782862139730L;
 
     private String required_;
 
@@ -71,80 +72,87 @@ public class ValidateDto implements Serializable {
 
     private String mix_;
 
+    public String getRequired() {
+        return required_;
+    }
+
+    @ValidateOrder(1)
+    @Required
+    @Args(keys = "validate.required")
+    public void setRequired(String required) {
+        required_ = required;
+    }
+
     public String getByte() {
         return byte_;
     }
 
+    @ValidateOrder(2)
     @ByteType
     @Args(keys = "Byte", resource = false)
     public void setByte(String b) {
         byte_ = b;
     }
 
-    public String getCreditCard() {
-        return creditCard_;
+    public short getShort() {
+        return short_;
     }
 
-    @CreditCardType
-    @Args(keys = "CreditCard", resource = false)
-    public void setCreditCard(String creditCard) {
-        creditCard_ = creditCard;
-    }
-
-    public String getDate() {
-        return date_;
-    }
-
-    @DateType
-    @Args(keys = "Date", resource = false)
-    public void setDate(String date) {
-        date_ = date;
-    }
-
-    public String getDouble() {
-        return double_;
-    }
-
-    @DoubleType
-    @Args(keys = "Double", resource = false)
-    public void setDouble(String d) {
-        double_ = d;
-    }
-
-    public String getEmail() {
-        return email_;
-    }
-
-    @EmailType
-    @Args(keys = "Email", resource = false)
-    public void setEmail(String email) {
-        email_ = email;
-    }
-
-    public String getFloat() {
-        return float_;
-    }
-
-    @FloatType
-    @Args(keys = "Float", resource = false)
-    public void setFloat(String f) {
-        float_ = f;
+    @ValidateOrder(3)
+    @Args(keys = "Short", resource = false)
+    public void setShort(short s) {
+        short_ = s;
     }
 
     public String getInteger() {
         return integer_;
     }
 
+    @ValidateOrder(4)
     @IntegerType
     @Args(keys = "Integer", resource = false)
     public void setInteger(String integer) {
         integer_ = integer;
     }
 
+    public String getLong() {
+        return long_;
+    }
+
+    @ValidateOrder(5)
+    @LongType
+    @Args(keys = "Long", resource = false)
+    public void setLong(String l) {
+        long_ = l;
+    }
+
+    public String getFloat() {
+        return float_;
+    }
+
+    @ValidateOrder(6)
+    @FloatType
+    @Args(keys = "Float", resource = false)
+    public void setFloat(String f) {
+        float_ = f;
+    }
+
+    public String getDouble() {
+        return double_;
+    }
+
+    @ValidateOrder(7)
+    @DoubleType
+    @Args(keys = "Double", resource = false)
+    public void setDouble(String d) {
+        double_ = d;
+    }
+
     public String getLength() {
         return length_;
     }
 
+    @ValidateOrder(8)
     @Minlength(3)
     @Maxlength(5)
     @Args(keys = "Length", resource = false)
@@ -156,6 +164,7 @@ public class ValidateDto implements Serializable {
         return length2_;
     }
 
+    @ValidateOrder(9)
     @Minbytelength(value = 3, charset = "ISO8859_1")
     @Maxbytelength(value = 5, charset = "ISO8859_1")
     @Args(keys = "Length2", resource = false)
@@ -163,59 +172,66 @@ public class ValidateDto implements Serializable {
         length2_ = length2;
     }
 
-    public String getLong() {
-        return long_;
-    }
-
-    @LongType
-    @Args(keys = "Long", resource = false)
-    public void setLong(String l) {
-        long_ = l;
-    }
-
     public String getRange() {
         return range_;
     }
 
+    @ValidateOrder(10)
     @FloatRange(min = 5.0F, max = 10.1F)
     @Args(keys = "Range", resource = false)
     public void setRange(String range) {
         range_ = range;
     }
 
-    public String getRequired() {
-        return required_;
+    public String getDate() {
+        return date_;
     }
 
-    @Required
-    @Args(keys = "validate.required")
-    public void setRequired(String required) {
-        required_ = required;
+    @ValidateOrder(11)
+    @DateType
+    @Args(keys = "Date", resource = false)
+    public void setDate(String date) {
+        date_ = date;
     }
 
-    public short getShort() {
-        return short_;
+    public String getEmail() {
+        return email_;
     }
 
-    @Args(keys = "Short", resource = false)
-    public void setShort(short s) {
-        short_ = s;
+    @ValidateOrder(12)
+    @EmailType
+    @Args(keys = "Email", resource = false)
+    public void setEmail(String email) {
+        email_ = email;
     }
 
     public String getUrl() {
         return url_;
     }
 
+    @ValidateOrder(13)
     @UrlType
     @Args(keys = "URL", resource = false)
     public void setUrl(String url) {
         url_ = url;
     }
 
+    public String getCreditCard() {
+        return creditCard_;
+    }
+
+    @ValidateOrder(14)
+    @CreditCardType
+    @Args(keys = "CreditCard", resource = false)
+    public void setCreditCard(String creditCard) {
+        creditCard_ = creditCard;
+    }
+
     public String getMix() {
         return mix_;
     }
 
+    @ValidateOrder(15)
     @Required
     @Minlength(10)
     @Maxlength(15)
