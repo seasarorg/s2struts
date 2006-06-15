@@ -36,7 +36,7 @@ import org.seasar.struts.lessconfig.util.ClassFinderImpl;
  * Example.
  * <p>
  * 
- * <plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn">
+ * <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn">
  *   <set-property property="enableJar" value="false"/>
  *   <set-property property="actionClassPattern" value="foo.bar.action.*Action"/>
  *   <set-property property="formClassPattern" value="foo.bar.form.*Form"/>

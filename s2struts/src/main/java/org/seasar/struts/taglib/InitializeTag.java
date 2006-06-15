@@ -15,8 +15,6 @@
  */
 package org.seasar.struts.taglib;
 
-import javax.servlet.jsp.JspException;
-
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.pojo.MethodBinding;
 
@@ -34,7 +32,7 @@ public class InitializeTag extends BaseTag {
         this.action = action;
     }
 
-    public int doStartTag() throws JspException {
+    public int doStartTag() {
         // In case of Tomcat4.1, HttpServletRequest is set again,
         // because of the different HttpServletRequest for JSP and Servlet.
         SingletonS2ContainerFactory.getContainer().getExternalContext().setRequest(this.pageContext.getRequest());
