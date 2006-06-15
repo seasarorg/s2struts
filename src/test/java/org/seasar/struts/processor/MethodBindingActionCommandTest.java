@@ -68,5 +68,15 @@ public class MethodBindingActionCommandTest extends S2TestCase {
         String forward = command.execute(getRequest(), getResponse(), action, form, mapping);
         assertEquals("success10", forward);
     }
+    
+    public void testDoubleExecute() {
+        getRequest().setParameter("1234567890", "TEST");
+        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.exe}");
+        
+        String forward = command.execute(getRequest(), getResponse(), action, form, mapping);
+        assertEquals("success", forward);
+        forward = command.execute(getRequest(), getResponse(), action, form, mapping);
+        assertEquals(ActionCommand.NOT_EXECUTE, forward);
+    }
 
 }

@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionMapping;
+import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.util.IndexedUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
@@ -30,20 +31,20 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  */
 public class MethodBindingActionCommand implements ActionCommand {
 
-    public String execute(HttpServletRequest request,
-            HttpServletResponse response, Object action, Object form,
-            ActionMapping mapping) {
-        
+    public String execute(HttpServletRequest request, HttpServletResponse response, Object action,
+            Object form, ActionMapping mapping) {
+
         MethodBinding methodBinding = createMethodBinding(request);
         if (methodBinding == null) {
             return NOT_EXECUTE;
         }
+        S2StrutsContextUtil.clear(ContentsType.MethodBindingExpression);
         return (String) methodBinding.invoke(mapping);
     }
-    
+
     private MethodBinding createMethodBinding(HttpServletRequest request) {
         for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
-            String key = (String)paramNames.nextElement();
+            String key = (String) paramNames.nextElement();
             String value = request.getParameter(key);
             String expression = S2StrutsContextUtil.getMethodBindingExpression(key, value);
             if (expression != null) {
@@ -56,7 +57,7 @@ public class MethodBindingActionCommand implements ActionCommand {
             if (expression != null) {
                 return new MethodBinding(expression);
             }
-            
+
             // indexed
             if (IndexedUtil.isIndexedParameter(key)) {
                 String indexedKey = IndexedUtil.getParameter(key);
