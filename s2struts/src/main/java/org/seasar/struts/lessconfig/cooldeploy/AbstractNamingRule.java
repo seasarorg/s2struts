@@ -59,6 +59,10 @@ public abstract class AbstractNamingRule implements NamingRule {
     }
 
     protected Class defineClass(String middlePackageName, String name) {
+        if (name == null || name.length() == 0) {
+            return null;
+        }
+
         String packageName = getPackageName(middlePackageName);
         StringBuffer className = new StringBuffer();
         className.append(packageName).append(".");

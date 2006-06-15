@@ -37,27 +37,27 @@ import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
 public class DeployZeroConfigActionRule implements ZeroConfigActionRule {
 
     private static final Logger logger = Logger.getLogger(DeployZeroConfigActionRule.class);
-    
+
     private NamingRule namingRule;
-    
+
     public void setNamingRule(NamingRule namingRule) {
         this.namingRule = namingRule;
     }
-    
+
     private AutoActionForwardRule forwardRule;
-    
+
     public void setForwardRule(AutoActionForwardRule forwardRule) {
         this.forwardRule = forwardRule;
     }
-    
+
     private AutoActionFormRule formRule;
-    
+
     public void setFormRule(AutoActionFormRule formRule) {
         this.formRule = formRule;
     }
 
     public String getPath(Class actionClass, ModuleConfig config) {
-        throw new  UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public String getName(Class actionClass, ModuleConfig config) {
@@ -68,7 +68,7 @@ public class DeployZeroConfigActionRule implements ZeroConfigActionRule {
         }
         return null;
     }
-    
+
     public String getScope(Class actionClass, ModuleConfig config) {
         return StrutsActionConfig.DEFAULT_SCOPE;
     }
@@ -108,7 +108,7 @@ public class DeployZeroConfigActionRule implements ZeroConfigActionRule {
     public boolean getUnknown(Class actionClass, ModuleConfig config) {
         return StrutsActionConfig.DEFAULT_UNKNOWN;
     }
-    
+
     public boolean getCancellable(Class actionClass, ModuleConfig config) {
         return StrutsActionConfig.DEFAULT_CANCELLABLE;
     }
@@ -126,7 +126,7 @@ public class DeployZeroConfigActionRule implements ZeroConfigActionRule {
         String path = null;
         String[] viewExtension = this.forwardRule.getViewExtension();
         for (int i = 0; i < viewExtension.length; i++) {
-            String file = getPath(actionClass, null) + "." + viewExtension[i];
+            String file = namingRule.defineName(actionClass) + "." + viewExtension[i];
             path = this.forwardRule.getDocRoot() + file;
             String packageDir = "/" + actionClass.getPackage().getName().replace('.', '/');
 
@@ -155,7 +155,7 @@ public class DeployZeroConfigActionRule implements ZeroConfigActionRule {
             if (isLastExtension(file) && actionConfig.findForwardConfigs().length == 0) {
                 String message = "View file was not found." + new File(path).getAbsolutePath();
                 logger.info(message);
-                //throw new IllegalStateException("View file was not found." + new File(path).getAbsolutePath());
+                // throw new IllegalStateException("View file was not found." + new File(path).getAbsolutePath());
             }
             return null;
         } else {
