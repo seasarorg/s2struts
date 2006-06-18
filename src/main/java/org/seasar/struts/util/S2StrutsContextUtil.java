@@ -55,6 +55,14 @@ public abstract class S2StrutsContextUtil {
         return getContext().getMethodBindingExpression(key, value);
     }
     
+    public static Boolean isCancelAction(String key, String value) {
+        return getContext().isCancelAction(key, value);
+    }
+
+    public static void setCancelAction(String key, String value) {
+        getContext().setCancelAction(key, value);
+    }
+    
     private static S2StrutsContext getContext() {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);
     }

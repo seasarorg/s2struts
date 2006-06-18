@@ -32,15 +32,19 @@ import org.seasar.struts.Constants;
 public class S2StrutsContextImpl implements S2StrutsContext {
     private static final long serialVersionUID = -4835702530138078142L;
 
-	private String currentPath;
-    
+    private String currentPath;
+
     private String previousPath;
 
     private Map methodBindingExpressions = new HashMap();
 
+    private Map cancelActions = new HashMap();
+
     public void clear(ContentsType type) {
         if (type == ContentsType.MethodBindingExpression) {
             this.methodBindingExpressions = new HashMap();
+        } else if (type == ContentsType.CancelAction) {
+            this.cancelActions = new HashMap();
         }
     }
 
@@ -52,7 +56,7 @@ public class S2StrutsContextImpl implements S2StrutsContext {
             return this.currentPath;
         }
     }
-    
+
     public String getPreviousInputPath() {
         String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
         if (param != null) {
@@ -68,7 +72,7 @@ public class S2StrutsContextImpl implements S2StrutsContext {
             this.currentPath = path;
         }
     }
-    
+
     public String getMethodBindingExpression(String key, String value) {
         return (String) this.methodBindingExpressions.get(key + value);
     }
@@ -81,4 +85,13 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         return container.getRequest();
     }
+
+    public Boolean isCancelAction(String key, String value) {
+        return (Boolean) this.cancelActions.get(key + value);
+    }
+
+    public void setCancelAction(String key, String value) {
+        this.cancelActions.put(key + value, Boolean.TRUE);
+    }
+
 }

@@ -27,6 +27,7 @@ import org.seasar.struts.util.S2StrutsContextUtil;
 public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
     private static final long serialVersionUID = -1259226695386015865L;
 	protected String action;
+    protected boolean cancel = false;
 
     public int doEndTag() throws JspException {
         setMethodBindingExpression();
@@ -50,12 +51,27 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
     public void setAction(String action) {
         this.action = action;
     }
+    
+    public boolean isCancel() {
+        return this.cancel;
+    }
+    
+    public void setCancel(boolean cancel) {
+        this.cancel = cancel;
+    }
 
     protected void setMethodBindingExpression() {
         if (StringUtil.isEmpty(super.property)) {
             super.property = Base64Util.encode(this.action.getBytes());
         }
         S2StrutsContextUtil.setMethodBindingExpression(super.property, null, this.action);
+    }
+    
+    protected void setCancelAction() {
+        if (!this.cancel) {
+            return;
+        }
+        S2StrutsContextUtil.setCancelAction(super.property, null);
     }
 
 }

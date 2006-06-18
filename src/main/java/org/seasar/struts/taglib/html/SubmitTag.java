@@ -29,9 +29,11 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     private static final long serialVersionUID = 3565695013866921990L;
 	protected String indexId;
     protected String action;
+    protected boolean cancel;
 
     public int doEndTag() throws JspException {
         setMethodBindingExpression();
+        setCancelAction();
         
         try {
             return super.doEndTag();
@@ -44,6 +46,7 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
         super.release();
         this.indexId = null;
         this.action = null;
+        this.cancel = false;
     }
 
     /**
@@ -70,6 +73,14 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
 
     public void setAction(String action) {
         this.action = action;
+    }
+    
+    public boolean isCancel() {
+        return this.cancel;
+    }
+    
+    public void setCancel(boolean cancel) {
+        this.cancel = cancel;
     }
 
     protected void prepareIndex(StringBuffer handlers, String name) throws JspException {
@@ -98,5 +109,20 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
             val = super.getDefaultValue();
         }
         S2StrutsContextUtil.setMethodBindingExpression(super.property, val, this.action);
+    }
+    
+    protected void setCancelAction() {
+        if (!this.cancel) {
+            return;
+        }
+        
+        String val = super.value;
+        if(val == null) {
+            val = super.text;
+        }
+        if(val == null) {
+            val = super.getDefaultValue();
+        }
+        S2StrutsContextUtil.setCancelAction(super.property, val);
     }
 }

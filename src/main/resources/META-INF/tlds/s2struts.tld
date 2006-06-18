@@ -155,6 +155,11 @@
 <name>submit</name>
 <tagclass>org.seasar.struts.taglib.html.SubmitTag</tagclass>
 <attribute>
+<name>cancel</name>
+<required>false</required>
+<rtexprvalue>false</rtexprvalue>
+</attribute>
+<attribute>
 <name>indexId</name>
 <required>false</required>
 <rtexprvalue>false</rtexprvalue>
@@ -299,6 +304,11 @@
 <tag>
 <name>image</name>
 <tagclass>org.seasar.struts.taglib.html.ImageTag</tagclass>
+<attribute>
+<name>cancel</name>
+<required>false</required>
+<rtexprvalue>false</rtexprvalue>
+</attribute>
 <attribute>
 <name>action</name>
 <required>false</required>

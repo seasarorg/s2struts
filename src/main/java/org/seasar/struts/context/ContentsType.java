@@ -22,4 +22,7 @@ public interface ContentsType {
     ContentsType MethodBindingExpression = new ContentsType() {
     };
     
+    ContentsType CancelAction = new ContentsType() {
+    };
+    
 }

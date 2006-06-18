@@ -17,6 +17,7 @@ package org.seasar.struts.processor;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,16 +33,29 @@ import org.apache.struts.util.RequestUtils;
 import org.seasar.framework.exception.IllegalAccessRuntimeException;
 import org.seasar.framework.exception.InvocationTargetRuntimeException;
 import org.seasar.framework.exception.NoSuchMethodRuntimeException;
+import org.seasar.framework.log.Logger;
+import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.form.InputValueForm;
+import org.seasar.struts.util.IndexedUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class ValidateProcessorImpl implements ValidateProcessor {
 
+    private static final Logger log = Logger.getLogger(ValidateProcessorImpl.class);
+
     public boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping, ExternalRequestProcessor requestProcessor) throws IOException, ServletException, InvalidCancelException {
+        
+        if (isCancel(request)) {
+            // Clear
+            log.debug(" Cancelled transaction, skipping validation");
+            S2StrutsContextUtil.clear(ContentsType.CancelAction);
+            return true;
+        }
 
         String input = mapping.getInput();
         if (input == null && S2StrutsContextUtil.getPreviousInputPath() != null) {
@@ -73,6 +87,34 @@ public class ValidateProcessorImpl implements ValidateProcessor {
         }
         
         return valid;
+    }
+
+    private boolean isCancel(HttpServletRequest request) {
+        for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
+            String key = (String) paramNames.nextElement();
+            String value = request.getParameter(key);
+            Boolean cancel = S2StrutsContextUtil.isCancelAction(key, value);
+            if (cancel != null) {
+                return cancel.booleanValue();
+            }
+
+            // image tag
+            String imageKey = key.replaceFirst("(\\.x$)|(\\.y$)", "");
+            cancel = S2StrutsContextUtil.isCancelAction(imageKey, null);
+            if (cancel != null) {
+                return cancel.booleanValue();
+            }
+
+            // indexed
+            if (IndexedUtil.isIndexedParameter(key)) {
+                String indexedKey = IndexedUtil.getParameter(key);
+                cancel = S2StrutsContextUtil.isCancelAction(indexedKey, value);
+                if (cancel != null) {
+                    return cancel.booleanValue();
+                }
+            }
+        }
+        return false;
     }
 
 }

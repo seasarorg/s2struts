@@ -34,4 +34,8 @@ public interface S2StrutsContext extends Serializable {
 
     void setMethodBindingExpression(String key, String value, String methodBindingExpression);
     
+    Boolean isCancelAction(String key, String value);
+
+    void setCancelAction(String key, String value);
+    
 }
