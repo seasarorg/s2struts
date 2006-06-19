@@ -47,20 +47,20 @@ public abstract class S2StrutsContextUtil {
         return getContext().getPreviousInputPath();
     }
     
-    public static void setMethodBindingExpression(String key, String value, String methodBindingExpression) {
-        getContext().setMethodBindingExpression(key, value, methodBindingExpression);
+    public static void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression) {
+        getContext().setMethodBindingExpression(mappingName, key, value, methodBindingExpression);
     }
     
-    public static String getMethodBindingExpression(String key, String value) {
-        return getContext().getMethodBindingExpression(key, value);
+    public static String getMethodBindingExpression(String mappingName, String key, String value) {
+        return getContext().getMethodBindingExpression(mappingName, key, value);
     }
     
-    public static Boolean isCancelAction(String key, String value) {
-        return getContext().isCancelAction(key, value);
+    public static Boolean isCancelAction(String mappingName, String key, String value) {
+        return getContext().isCancelAction(mappingName, key, value);
     }
 
-    public static void setCancelAction(String key, String value) {
-        getContext().setCancelAction(key, value);
+    public static void setCancelAction(String mappingName, String key, String value) {
+        getContext().setCancelAction(mappingName, key, value);
     }
     
     private static S2StrutsContext getContext() {

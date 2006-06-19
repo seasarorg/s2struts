@@ -19,6 +19,7 @@ import javax.servlet.jsp.JspException;
 
 import org.seasar.framework.util.Base64Util;
 import org.seasar.framework.util.StringUtil;
+import org.seasar.struts.taglib.TagUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -26,7 +27,9 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  */
 public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
     private static final long serialVersionUID = -1259226695386015865L;
-	protected String action;
+
+    protected String action;
+
     protected boolean cancel = false;
 
     public int doEndTag() throws JspException {
@@ -51,27 +54,30 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
     public void setAction(String action) {
         this.action = action;
     }
-    
+
     public boolean isCancel() {
         return this.cancel;
     }
-    
+
     public void setCancel(boolean cancel) {
         this.cancel = cancel;
     }
 
-    protected void setMethodBindingExpression() {
+    protected void setMethodBindingExpression() throws JspException {
         if (StringUtil.isEmpty(super.property)) {
             super.property = Base64Util.encode(this.action.getBytes());
         }
-        S2StrutsContextUtil.setMethodBindingExpression(super.property, null, this.action);
+        String mappingName = TagUtil.getActionMappingName(this.pageContext);
+        S2StrutsContextUtil.setMethodBindingExpression(mappingName, super.property, null,
+                this.action);
     }
-    
-    protected void setCancelAction() {
+
+    protected void setCancelAction() throws JspException {
         if (!this.cancel) {
             return;
         }
-        S2StrutsContextUtil.setCancelAction(super.property, null);
+        String mappingName = TagUtil.getActionMappingName(this.pageContext);
+        S2StrutsContextUtil.setCancelAction(mappingName, super.property, null);
     }
 
 }

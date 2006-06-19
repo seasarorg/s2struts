@@ -73,25 +73,25 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         }
     }
 
-    public String getMethodBindingExpression(String key, String value) {
-        return (String) this.methodBindingExpressions.get(key + value);
+    public String getMethodBindingExpression(String mappingName, String key, String value) {
+        return (String) this.methodBindingExpressions.get(mappingName + key + value);
     }
 
-    public void setMethodBindingExpression(String key, String value, String methodBindingExpression) {
-        this.methodBindingExpressions.put(key + value, methodBindingExpression);
+    public void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression) {
+        this.methodBindingExpressions.put(mappingName + key + value, methodBindingExpression);
+    }
+
+    public Boolean isCancelAction(String mappingName, String key, String value) {
+        return (Boolean) this.cancelActions.get(mappingName + key + value);
+    }
+
+    public void setCancelAction(String mappingName, String key, String value) {
+        this.cancelActions.put(mappingName + key + value, Boolean.TRUE);
     }
 
     private static final HttpServletRequest getRequest() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         return container.getRequest();
-    }
-
-    public Boolean isCancelAction(String key, String value) {
-        return (Boolean) this.cancelActions.get(key + value);
-    }
-
-    public void setCancelAction(String key, String value) {
-        this.cancelActions.put(key + value, Boolean.TRUE);
     }
 
 }

@@ -34,7 +34,6 @@ import org.seasar.framework.exception.IllegalAccessRuntimeException;
 import org.seasar.framework.exception.InvocationTargetRuntimeException;
 import org.seasar.framework.exception.NoSuchMethodRuntimeException;
 import org.seasar.framework.log.Logger;
-import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.form.InputValueForm;
 import org.seasar.struts.util.IndexedUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
@@ -50,10 +49,8 @@ public class ValidateProcessorImpl implements ValidateProcessor {
     public boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
             ActionMapping mapping, ExternalRequestProcessor requestProcessor) throws IOException, ServletException, InvalidCancelException {
         
-        if (isCancel(request)) {
-            // Clear
+        if (isCancel(request, mapping)) {
             log.debug(" Cancelled transaction, skipping validation");
-            S2StrutsContextUtil.clear(ContentsType.CancelAction);
             return true;
         }
 
@@ -89,18 +86,18 @@ public class ValidateProcessorImpl implements ValidateProcessor {
         return valid;
     }
 
-    private boolean isCancel(HttpServletRequest request) {
+    private boolean isCancel(HttpServletRequest request, ActionMapping mapping) {
         for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
             String key = (String) paramNames.nextElement();
             String value = request.getParameter(key);
-            Boolean cancel = S2StrutsContextUtil.isCancelAction(key, value);
+            Boolean cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), key, value);
             if (cancel != null) {
                 return cancel.booleanValue();
             }
 
             // image tag
             String imageKey = key.replaceFirst("(\\.x$)|(\\.y$)", "");
-            cancel = S2StrutsContextUtil.isCancelAction(imageKey, null);
+            cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), imageKey, null);
             if (cancel != null) {
                 return cancel.booleanValue();
             }
@@ -108,7 +105,7 @@ public class ValidateProcessorImpl implements ValidateProcessor {
             // indexed
             if (IndexedUtil.isIndexedParameter(key)) {
                 String indexedKey = IndexedUtil.getParameter(key);
-                cancel = S2StrutsContextUtil.isCancelAction(indexedKey, value);
+                cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), indexedKey, value);
                 if (cancel != null) {
                     return cancel.booleanValue();
                 }

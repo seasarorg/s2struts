@@ -28,7 +28,7 @@ public class MethodBindingActionCommandTest extends S2TestCase {
     
     public void testExecute() {
         getRequest().setParameter("1234567890", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression(mapping.getPath(), "1234567890", "TEST", "#{bindingAction.exe}");
         
         String forward = command.execute(getRequest(), getResponse(), action, form, mapping);
         assertEquals("success", forward);
@@ -36,7 +36,7 @@ public class MethodBindingActionCommandTest extends S2TestCase {
     
     public void testMethodBindingDownload() {
         getRequest().setParameter("1234567890", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.download}");
+        S2StrutsContextUtil.setMethodBindingExpression(mapping.getPath(), "1234567890", "TEST", "#{bindingAction.download}");
         
         String forward = command.execute(getRequest(), getResponse(), action, form, mapping);
         assertNull(forward);
@@ -44,7 +44,7 @@ public class MethodBindingActionCommandTest extends S2TestCase {
     
     public void testNoRegisteredComponent() {
         getRequest().setParameter("1234567890", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{noregisteredAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression(mapping.getPath(), "1234567890", "TEST", "#{noregisteredAction.exe}");
         
         try {
             command.execute(getRequest(), getResponse(), action, form, mapping);
@@ -55,7 +55,7 @@ public class MethodBindingActionCommandTest extends S2TestCase {
     }
     
     public void testNotExecute() {
-        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression(mapping.getPath(), "1234567890", "TEST", "#{bindingAction.exe}");
         
         String forward = command.execute(getRequest(), getResponse(), action, form, mapping);
         assertEquals(ActionCommand.NOT_EXECUTE, forward);
@@ -63,20 +63,27 @@ public class MethodBindingActionCommandTest extends S2TestCase {
 
     public void testIndexedExecute() {
         getRequest().setParameter("1234567890[10]", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression(mapping.getPath(), "1234567890", "TEST", "#{bindingAction.exe}");
         
         String forward = command.execute(getRequest(), getResponse(), action, form, mapping);
         assertEquals("success10", forward);
     }
     
-    public void testDoubleExecute() {
+    public void testOtherActionMappingExecute() {
+        mapping.setPath("/first");
         getRequest().setParameter("1234567890", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression("1234567890", "TEST", "#{bindingAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression(mapping.getPath(), "1234567890", "TEST", "#{bindingAction.exe}");
         
         String forward = command.execute(getRequest(), getResponse(), action, form, mapping);
         assertEquals("success", forward);
+        
+        mapping.setPath("/second");
         forward = command.execute(getRequest(), getResponse(), action, form, mapping);
         assertEquals(ActionCommand.NOT_EXECUTE, forward);
+        
+        mapping.setPath("/first");
+        forward = command.execute(getRequest(), getResponse(), action, form, mapping);
+        assertEquals("success", forward);
     }
 
 }
