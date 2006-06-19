@@ -305,16 +305,6 @@
 <name>cancel</name>
 <tagclass>org.seasar.struts.taglib.html.CancelTag</tagclass>
 <attribute>
-<name>indexId</name>
-<required>false</required>
-<rtexprvalue>false</rtexprvalue>
-</attribute>
-<attribute>
-<name>action</name>
-<required>false</required>
-<rtexprvalue>false</rtexprvalue>
-</attribute>
-<attribute>
 <name>accesskey</name>
 <required>false</required>
 <rtexprvalue>true</rtexprvalue>
