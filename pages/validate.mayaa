@@ -51,4 +51,6 @@
 
     <html:submit m:id="goValidate" ><bean:message key="validate"/></html:submit>
 
+    <s2struts:cancel m:id="goCancel" />
+
 </m:mayaa>
