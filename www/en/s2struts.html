@@ -52,6 +52,7 @@
 	<ul>
 		<li><a href="#TagLibButton">button tag </a></li>
 		<li><a href="#TagLibSubmit">submit tag</a></li>
+		<li><a href="#TagLibCancel">cancel tag</a></li>
 		<li><a href="#TagLibImage">image tag</a></li>
 		<li><a href="#TagLibPage">page tag</a></li>
 		<li><a href="#TagLibInit">init tag</a></li>
@@ -2008,7 +2009,21 @@ Additional attributes are shown below to supplement the above information.</p>
       This will be converted in the form of propertyName[variable].<br>
       (If the variable is an Integer of 32, the converted HTML will look like &lt;... foo[32]="bar"...&gt;)</td>
   </tr>
+  <tr>
+    <td><center>cancel</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>trueを指定した場合、フォームに関連付けされたActionFormのvalidateを無視し、
+            アクションを呼び出します。</td>
+  </tr>
 </table>
+<h3><a name="TagLibCancel">cancelタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.CancelTag(タグ名：cancel)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit</a><br>
+を拡張し、Requestパラメーターを利用しないでCancel機能を実現したタグです。
+追加した属性はありません。
+</p>
 <h3><a name="TagLibImage">image tag</a></h3>
 <h4>org.seasar.struts.taglib.html.ImageTag(tagname : image)</h4>
 <p>
