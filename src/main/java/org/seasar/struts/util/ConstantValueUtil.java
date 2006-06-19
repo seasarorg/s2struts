@@ -40,17 +40,18 @@ public class ConstantValueUtil {
 
         String[] keyValues = StringUtil.split(parameters, ",");
         for (int i = 0; i < keyValues.length; i++) {
-            String[] keyValue = StringUtil.split(keyValues[i], "=");
-            if (keyValue.length == 1) {
+            String keyValue = keyValues[i];
+            int pos = keyValue.indexOf('=');
+            if (pos > 0) {
+                String key = keyValue.substring(0, pos);
+                String value = keyValue.substring(pos + 1);
+                result.put(key.trim(), convertValue(value.trim()));
+            } else {
                 if (defaultKey == null) {
                     throw new IllegalArgumentException(parameters);
                 } else {
-                    result.put(defaultKey, convertValue(keyValue[0].trim()));
+                    result.put(defaultKey, convertValue(keyValue.trim()));
                 }
-            } else if (keyValue.length == 2) {
-                result.put(keyValue[0].trim(), convertValue(keyValue[1].trim()));
-            } else {
-                throw new IllegalArgumentException(parameters);
             }
         }
 
