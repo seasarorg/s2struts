@@ -47,6 +47,7 @@
 		<li><a href="#ZoroConfig">Unconfigured S2Struts</a></li>
 		<li><a href="#Annotation">Configuration of struts-config using annotation</a></li>
 		<li><a href="#AnnotationValidation">Configuring validation using annotation</a></li>
+		<li><a href="#ConstAnnotationCodicil">定数アノテーションの補足</a></li>
 	</ul>
 	<li><a href="#TagLibReference">S2Struts tag library reference</a></li>
 	<ul>
@@ -1951,6 +1952,16 @@ Checks if the value is a valid URL.
 <p>
 Turns off automatic validation. There are no associated attributes.
 </p>
+<h2><a name="ConstAnnotationCodicil">定数アノテーションの補足</a></h2>
+<p>
+定数アノテーションでは、属性の区切り文字として「,」(カンマ)を利用しています。
+値に「,」を指定する場合は以下のように値を「'」(シングルコーテーション)または「"」(ダブルコーテーション)で囲んでください。
+</p>
+<pre>
+ pblic static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
+
+ public static final String value_VALIDATOR = "mask, pattern=\"(^[0-9]{1,2}$)\", messageKey=comma";
+</pre>
 
 <h2><a name="TagLibReference">S2Struts tag library reference</a></h2>
 <p>

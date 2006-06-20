@@ -41,6 +41,7 @@
 		<li><a href="#ZoroConfig">–³İ’èS2Struts</a></li>
 		<li><a href="#Annotation">ƒAƒmƒe[ƒVƒ‡ƒ“‚ğg—p‚µ‚½struts-config‚Ìİ’è</a></li>
 		<li><a href="#AnnotationValidation">ƒAƒmƒe[ƒVƒ‡ƒ“‚ğg—p‚µ‚½validation‚Ìİ’è</a></li>
+		<li><a href="#ConstAnnotationCodicil">’è”ƒAƒmƒe[ƒVƒ‡ƒ“‚Ì•â‘«</a></li>
 	</ul>
 	<li><a href="#TagLibReference">S2Strutsƒ^ƒOƒ‰ƒCƒuƒ‰ƒŠƒŠƒtƒ@ƒŒƒ“ƒX</a></li>
 	<ul>
@@ -1937,6 +1938,16 @@ ValidateOrderAArgsˆÈŠO‚ÌƒAƒmƒe[ƒVƒ‡ƒ“‚ÍŠî–{“I‚ÈƒoƒŠƒf[ƒ^‚ğs‚¤‚½‚ß‚É—˜—p‚µ‚Ü‚
 ©“®“I‚ÉƒoƒŠƒf[ƒVƒ‡ƒ“‚ğs‚í‚È‚¢‚æ‚¤‚Éw’è‚µ‚Ü‚·B
 ‘®«‚Í‚ ‚è‚Ü‚¹‚ñB
 </p>
+<h2><a name="ConstAnnotationCodicil">’è”ƒAƒmƒe[ƒVƒ‡ƒ“‚Ì•â‘«</a></h2>
+<p>
+’è”ƒAƒmƒe[ƒVƒ‡ƒ“‚Å‚ÍA‘®«‚Ì‹æØ‚è•¶š‚Æ‚µ‚Äu,v(ƒJƒ“ƒ})‚ğ—˜—p‚µ‚Ä‚¢‚Ü‚·B
+’l‚Éu,v‚ğw’è‚·‚éê‡‚ÍˆÈ‰º‚Ì‚æ‚¤‚É’l‚ğu'v(ƒVƒ“ƒOƒ‹ƒR[ƒe[ƒVƒ‡ƒ“)‚Ü‚½‚Íu"v(ƒ_ƒuƒ‹ƒR[ƒe[ƒVƒ‡ƒ“)‚ÅˆÍ‚ñ‚Å‚­‚¾‚³‚¢B
+</p>
+<pre>
+ pblic static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
+
+ public static final String value_VALIDATOR = "mask, pattern=\"(^[0-9]{1,2}$)\", messageKey=comma";
+</pre>
 
 <h2><a name="TagLibReference">S2Strutsƒ^ƒOƒ‰ƒCƒuƒ‰ƒŠƒŠƒtƒ@ƒŒƒ“ƒX</a></h2>
 <p>
