@@ -55,6 +55,7 @@
 		<li><a href="#TagLibSubmit">submit tag</a></li>
 		<li><a href="#TagLibCancel">cancel tag</a></li>
 		<li><a href="#TagLibImage">image tag</a></li>
+		<li><a href="#TagLibCheckbox">checkbox tag</a></li>
 		<li><a href="#TagLibPage">page tag</a></li>
 		<li><a href="#TagLibInit">init tag</a></li>
 	</ul>
@@ -2031,7 +2032,7 @@ Additional attributes are shown below to supplement the above information.</p>
 <h3><a name="TagLibCancel">cancelタグ</a></h3>
 <h4>org.seasar.struts.taglib.html.CancelTag(タグ名：cancel)</h4>
 <p>
-<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit</a><br>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#cancel">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#cancel</a><br>
 を拡張し、Requestパラメーターを利用しないでCancel機能を実現したタグです。
 追加した属性はありません。
 </p>
@@ -2053,6 +2054,13 @@ Additional attributes are shown below to supplement the above information.
       the component must be registered in S2Container with the name selected in this attribute.</td>
   </tr>
 </table>
+<h3><a name="TagLibCheckbox">checkboxタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.CheckboxTag(タグ名：checkbox)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#checkbox">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#checkbox</a><br>
+を拡張し、チェックがない場合でもフォームに関連付けされたActionFormのプロパティにfalseを設定します。
+追加した属性はありません。
+</p>
 <h3><a name="TagLibPage">page tag</a></h3>
 <h4>org.seasar.struts.taglib.html.PageTag(tagname : page)</h4>
 <p>
