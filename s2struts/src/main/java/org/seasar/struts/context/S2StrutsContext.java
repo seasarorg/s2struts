@@ -30,8 +30,12 @@ public interface S2StrutsContext extends Serializable {
 
     void setPath(String path);
     
-    String getMethodBindingExpression(String key, String value);
+    String getMethodBindingExpression(String mappingName, String key, String value);
 
-    void setMethodBindingExpression(String key, String value, String methodBindingExpression);
+    void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression);
+    
+    Boolean isCancelAction(String mappingName, String key, String value);
+
+    void setCancelAction(String mappingName, String key, String value);
     
 }

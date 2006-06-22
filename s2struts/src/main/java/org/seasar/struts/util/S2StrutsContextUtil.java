@@ -46,19 +46,28 @@ public abstract class S2StrutsContextUtil {
     public static String getCurrentInputPath() {
         return getContext().getCurrentInputPath();
     }
-    
+
     public static String getPreviousInputPath() {
         return getContext().getPreviousInputPath();
     }
-    
-    public static void setMethodBindingExpression(String key, String value, String methodBindingExpression) {
-        getContext().setMethodBindingExpression(key, value, methodBindingExpression);
+
+    public static void setMethodBindingExpression(String mappingName, String key, String value,
+            String methodBindingExpression) {
+        getContext().setMethodBindingExpression(mappingName, key, value, methodBindingExpression);
     }
-    
-    public static String getMethodBindingExpression(String key, String value) {
-        return getContext().getMethodBindingExpression(key, value);
+
+    public static String getMethodBindingExpression(String mappingName, String key, String value) {
+        return getContext().getMethodBindingExpression(mappingName, key, value);
     }
-    
+
+    public static Boolean isCancelAction(String mappingName, String key, String value) {
+        return getContext().isCancelAction(mappingName, key, value);
+    }
+
+    public static void setCancelAction(String mappingName, String key, String value) {
+        getContext().setCancelAction(mappingName, key, value);
+    }
+
     private static S2StrutsContext getContext() {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);
     }
@@ -66,38 +75,37 @@ public abstract class S2StrutsContextUtil {
     private static S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
-    
-    
+
     public static HttpServletResponse getResponse(S2Container container) {
         return (HttpServletResponse) container.getExternalContext().getResponse();
     }
-    
+
     public static HttpServletResponse getResponse() {
         return getResponse(getContainer());
     }
-    
+
     public static HttpServletRequest getRequest(S2Container container) {
         return (HttpServletRequest) container.getExternalContext().getRequest();
     }
-    
+
     public static HttpServletRequest getRequest() {
         return getRequest(getContainer());
     }
-    
+
     public static HttpSession getSession(S2Container container) {
         return (HttpSession) container.getExternalContext().getSession();
     }
-    
+
     public static HttpSession getSession() {
         return getSession(getContainer());
     }
-    
+
     public static void setRequest(S2Container container, Object request) {
         container.getExternalContext().setRequest(request);
     }
-    
+
     public static void setRequest(Object request) {
         setRequest(getContainer(), request);
     }
-    
+
 }

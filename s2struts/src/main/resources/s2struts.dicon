@@ -7,66 +7,7 @@
 
 	<component name="componentNameCreator"         class="org.seasar.struts.action.impl.ComponentNameCreatorImpl"/>
 	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
-
-	<!-- HOT Deploy(or Ondemand) Components -->
-	<!--
-	<component name="classRegister"                class="org.seasar.struts.action.ClassRegisterImpl"/>
-	-->
-	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
-
-	<component name="moduleConfigLoader"           class="org.seasar.struts.hotdeploy.impl.ModuleConfigLoaderImpl"/>
-	<component name="moduleConfigWrapper"          class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
-		<aspect pointcut="findActionConfig">
-			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindActionConfigInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindActionConfigInterceptor"/></arg></initMethod>
-			</component>
-		</aspect>
-		<aspect pointcut="findFormBeanConfig">
-			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindFormBeanConfigInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindFormBeanConfigInterceptor"/></arg></initMethod>
-			</component>
-		</aspect>
-	</component>
-
-	<component name="validatorResourcesLoader"     class="org.seasar.struts.hotdeploy.impl.ValidatorResourcesLoaderImpl"/>
-	<component name="validatorResourcesWrapper"    class="org.seasar.struts.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
-		<aspect pointcut="getForm">
-			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandGetFormInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadGetFormInterceptor"/></arg></initMethod>
-			</component>
-		</aspect>
-	</component>
-	
-	<!-- New RequestProcessor -->
-	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
-		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
-		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
-		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
-	</component>
-	<component name="requestProcessor"             class="org.seasar.struts.processor.InternalS2RequestProcessor" instance="prototype">
-		<aspect pointcut="processMultipart">
-			<component class="org.seasar.struts.processor.ProcessMultipartInterceptor"/>
-		</aspect>
-		<aspect pointcut="processValidate">
-			<component class="org.seasar.struts.pojo.processor.ProcessSetInputPathValidateInterceptor"/>
-		</aspect>
-		<aspect pointcut="processActionForm">
-			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
-		</aspect>
-		<aspect pointcut="processActionCreate">
-			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessMethodBindingActionCreatorInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessPojoActionCreateInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.processor.ProcessActionCreateInterceptor"/></arg></initMethod>
-			</component>
-		</aspect>
-		<aspect pointcut="doForward">
-			<component class="org.seasar.struts.pojo.processor.DoSetInputPathForwardInterceptor"/>
-		</aspect>
-	</component>
+	<component name="classRegister"                class="org.seasar.struts.action.impl.ClassRegisterImpl"/>
 
 	<!-- Lessconfig Components  -->
 	<!-- AutoRegister Components

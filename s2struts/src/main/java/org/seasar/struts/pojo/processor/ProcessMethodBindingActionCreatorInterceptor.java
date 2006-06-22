@@ -18,6 +18,7 @@ package org.seasar.struts.pojo.processor;
 import javax.servlet.http.HttpServletRequest;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.pojo.MethodBindingAction;
 import org.seasar.struts.pojo.MethodBindingActionFactory;
@@ -33,10 +34,11 @@ public class ProcessMethodBindingActionCreatorInterceptor extends AbstractInterc
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         HttpServletRequest request = (HttpServletRequest) invocation.getArguments()[0];
+        ActionMapping mapping = (ActionMapping) invocation.getArguments()[2];
         ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation.getThis();
 
-        MethodBindingAction action = MethodBindingActionFactory.createMethodBindingAction(request,
-                processor.getActionServlet());
+        MethodBindingAction action = MethodBindingActionFactory.createMethodBindingAction(request, mapping, processor
+                .getActionServlet());
         if (action != null) {
             return action;
         }

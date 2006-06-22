@@ -1,50 +1,45 @@
+/*
+ * Copyright 2004-2006 the Seasar Foundation and the Others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 package org.seasar.struts.taglib.html;
 
 import javax.servlet.jsp.JspException;
 
-import org.apache.struts.taglib.html.Constants;
+import org.seasar.struts.taglib.TagUtil;
+import org.seasar.struts.util.S2StrutsContextUtil;
 
-public class CancelTag extends SubmitTag {
-    private static final long serialVersionUID = -4527737065254142441L;
+/**
+ * 
+ * @author Katsuhiko Nagashima
+ *
+ */
+public class CancelTag extends org.apache.struts.taglib.html.CancelTag {
+
+    private static final long serialVersionUID = -5828952087103949643L;
+
+    private static final String DEFAULT_PROPERTY = "org.seasar.struts.taglib.html.CancelTag.CANCEL";
 
     public CancelTag() {
         super();
-        property = Constants.CANCEL_PROPERTY;
+        property = DEFAULT_PROPERTY;
 
     }
 
-    /**
-     * Returns the onClick event handler.
-     */
-    public String getOnclick() {
-        return super.getOnclick() == null ? "bCancel=true;" : super.getOnclick();
-    }
-
-    // /**
-    // * Render the opening element.
-    // *
-    // * @return The opening part of the element.
-    // */
-    // protected String getElementOpen() {
-    // return "<input type=\"submit\"";
-    // }
-
-    /**
-     * Prepare the name element
-     * 
-     * @return The element name.
-     */
-    protected String prepareName() throws JspException {
-        return property;
-    }
-
-    /**
-     * Return the default value.
-     * 
-     * @return The default value if none supplied.
-     */
-    protected String getDefaultValue() {
-        return "Cancel";
+    public int doEndTag() throws JspException {
+        setCancelAction();
+        return super.doEndTag();
     }
 
     /**
@@ -53,8 +48,20 @@ public class CancelTag extends SubmitTag {
     public void release() {
 
         super.release();
-        property = Constants.CANCEL_PROPERTY;
+        property = DEFAULT_PROPERTY;
 
+    }
+
+    protected void setCancelAction() throws JspException {
+        String val = super.value;
+        if (val == null) {
+            val = super.text;
+        }
+        if (val == null) {
+            val = getDefaultValue();
+        }
+        String mappingName = TagUtil.getActionMappingName(this.pageContext);
+        S2StrutsContextUtil.setCancelAction(mappingName, super.property, val);
     }
 
 }

@@ -20,6 +20,7 @@ import javax.servlet.jsp.JspException;
 import org.seasar.framework.util.Base64Util;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.framework.util.StringUtil;
+import org.seasar.struts.taglib.TagUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -27,23 +28,29 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  */
 public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     private static final long serialVersionUID = 3565695013866921990L;
-	protected String indexId;
+
+    protected String indexId;
+
     protected String action;
+
+    protected boolean cancel;
 
     public int doEndTag() throws JspException {
         setMethodBindingExpression();
-        
+        setCancelAction();
+
         try {
             return super.doEndTag();
         } finally {
             release();
         }
     }
-    
+
     public void release() {
         super.release();
         this.indexId = null;
         this.action = null;
+        this.cancel = false;
     }
 
     /**
@@ -52,9 +59,10 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     public String getIndexId() {
         return this.indexId;
     }
-    
+
     /**
-     * @param indexId The indexName to set.
+     * @param indexId
+     *            The indexName to set.
      */
     public void setIndexId(String indexId) {
         this.indexId = indexId;
@@ -72,6 +80,14 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
         this.action = action;
     }
 
+    public boolean isCancel() {
+        return this.cancel;
+    }
+
+    public void setCancel(boolean cancel) {
+        this.cancel = cancel;
+    }
+
     protected void prepareIndex(StringBuffer handlers, String name) throws JspException {
         if (this.indexId == null) {
             super.prepareIndex(handlers, name);
@@ -82,21 +98,39 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
         handlers.append(IntegerConversionUtil.toPrimitiveInt(index));
         handlers.append("]");
     }
-    
-    protected void setMethodBindingExpression() {
-    	if (StringUtil.isEmpty(this.action)) {
-			return;
-		}
+
+    protected void setMethodBindingExpression() throws JspException {
+        if (StringUtil.isEmpty(this.action)) {
+            return;
+        }
         if (StringUtil.isEmpty(super.property)) {
             super.property = Base64Util.encode(this.action.getBytes());
         }
         String val = super.value;
-        if(val == null) {
+        if (val == null) {
             val = super.text;
         }
-        if(val == null) {
-            val = super.getDefaultValue();
+        if (val == null) {
+            val = getDefaultValue();
         }
-        S2StrutsContextUtil.setMethodBindingExpression(super.property, val, this.action);
+        String mappingName = TagUtil.getActionMappingName(this.pageContext);
+        S2StrutsContextUtil.setMethodBindingExpression(mappingName, super.property, val, this.action);
     }
+
+    protected void setCancelAction() throws JspException {
+        if (!this.cancel) {
+            return;
+        }
+
+        String val = super.value;
+        if (val == null) {
+            val = super.text;
+        }
+        if (val == null) {
+            val = getDefaultValue();
+        }
+        String mappingName = TagUtil.getActionMappingName(this.pageContext);
+        S2StrutsContextUtil.setCancelAction(mappingName, super.property, val);
+    }
+
 }

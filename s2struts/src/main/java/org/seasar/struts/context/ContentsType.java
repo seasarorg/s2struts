@@ -21,5 +21,8 @@ package org.seasar.struts.context;
 public interface ContentsType {
     ContentsType MethodBindingExpression = new ContentsType() {
     };
-    
+
+    ContentsType CancelAction = new ContentsType() {
+    };
+
 }

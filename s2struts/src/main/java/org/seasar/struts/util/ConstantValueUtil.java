@@ -18,12 +18,16 @@ package org.seasar.struts.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.seasar.framework.util.StringUtil;
-
 /**
  * @author Katsuhiko Nagashima
  */
 public class ConstantValueUtil {
+
+    private static final char[] ENCLOSE_CHAR = { '\'', '"' };
+
+    private static final char SEP_ITEM = ',';
+
+    private static final char SEP_KEYVALUE = '=';
 
     private ConstantValueUtil() {
     }
@@ -38,26 +42,116 @@ public class ConstantValueUtil {
             return result;
         }
 
-        String[] keyValues = StringUtil.split(parameters, ",");
-        for (int i = 0; i < keyValues.length; i++) {
-            String[] keyValue = StringUtil.split(keyValues[i], "=");
-            if (keyValue.length == 1) {
+        String key = "";
+        String value = "";
+        String next = parameters.trim();
+        while (next.length() != 0) {
+            if (!isNextValue(next)) {
+                key = getKey(next);
+                next = skipAndTrim(next, key.length() + 1);
+            } else {
+                key = "";
+            }
+            value = getValue(next);
+            next = skipAndTrim(next, value.length() + 1);
+
+            if (key.length() != 0) {
+                result.put(key.trim(), convertValue(value.trim()));
+            } else {
                 if (defaultKey == null) {
                     throw new IllegalArgumentException(parameters);
                 } else {
-                    result.put(defaultKey, convertValue(keyValue[0].trim()));
+                    result.put(defaultKey, convertValue(value.trim()));
                 }
-            } else if (keyValue.length == 2) {
-                result.put(keyValue[0].trim(), convertValue(keyValue[1].trim()));
-            } else {
-                throw new IllegalArgumentException(parameters);
             }
         }
 
         return result;
     }
 
+    private static String getKey(String parameter) {
+        int pos = parameter.indexOf(SEP_KEYVALUE);
+        return parameter.substring(0, pos);
+    }
+
+    private static String getValue(String parameter) {
+        // When last value is empty.
+        if (parameter.length() == 0) {
+            return "";
+        }
+
+        for (int i = 0; i < ENCLOSE_CHAR.length; i++) {
+            if (parameter.charAt(0) == ENCLOSE_CHAR[i]) {
+                return getEnclosedValue(parameter, ENCLOSE_CHAR[i]);
+            }
+        }
+
+        int pos = parameter.indexOf(SEP_ITEM);
+        if (pos >= 0) {
+            return parameter.substring(0, pos);
+        } else {
+            return parameter;
+        }
+    }
+
+    private static String getEnclosedValue(String parameter, char encloseChar) {
+        int fromPos = parameter.indexOf(encloseChar, 1);
+        if (fromPos < 0) {
+            throw new IllegalArgumentException("Not closed value. " + parameter);
+        }
+
+        String result;
+        int pos = parameter.indexOf(SEP_ITEM, fromPos);
+        if (pos >= 0) {
+            result = parameter.substring(0, pos);
+        } else {
+            result = parameter;
+        }
+        if (result.trim().charAt(result.trim().length() - 1) != encloseChar) {
+            throw new IllegalArgumentException("Illegal separator value. " + parameter);
+        }
+        return result;
+    }
+
+    private static String skipAndTrim(String parameter, int count) {
+        if (parameter.length() > count) {
+            return parameter.substring(count).trim();
+        } else {
+            return "";
+        }
+    }
+
+    private static boolean isNextValue(String parameter) {
+        for (int i = 0; i < ENCLOSE_CHAR.length; i++) {
+            if (parameter.charAt(0) == ENCLOSE_CHAR[i]) {
+                return true;
+            }
+        }
+
+        int itemPos = parameter.indexOf(SEP_ITEM);
+        int keyValuePos = parameter.indexOf(SEP_KEYVALUE);
+        if (itemPos < 0 && keyValuePos < 0) {
+            // last value.
+            return true;
+        }
+        if (itemPos < 0) {
+            // last key.
+            return false;
+        }
+        return itemPos < keyValuePos;
+    }
+
     private static String convertValue(String value) {
+        if (value.length() == 0) {
+            return value;
+        }
+
+        for (int i = 0; i < ENCLOSE_CHAR.length; i++) {
+            if (value.charAt(0) == ENCLOSE_CHAR[i]) {
+                // The enclosed value is not replaced('\n' -> ',').
+                return value.substring(1, value.length() - 1);
+            }
+        }
         return value.replace('\n', ',');
     }
 

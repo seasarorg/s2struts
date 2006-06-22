@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components namespace="s2struts-hotdeploy">
+	<include path="s2struts.dicon"/>
+
+	<!-- HOT Deploy(or Ondemand) Components -->
+	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
+
+	<component name="moduleConfigLoader"           class="org.seasar.struts.hotdeploy.impl.ModuleConfigLoaderImpl"/>
+	<component name="moduleConfigWrapper"          class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
+		<aspect pointcut="findActionConfig">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindActionConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindActionConfigInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+		<aspect pointcut="findFormBeanConfig">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindFormBeanConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindFormBeanConfigInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+	</component>
+
+	<component name="validatorResourcesLoader"     class="org.seasar.struts.hotdeploy.impl.ValidatorResourcesLoaderImpl"/>
+	<component name="validatorResourcesWrapper"    class="org.seasar.struts.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
+		<aspect pointcut="getForm">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadGetFormInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandGetFormInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+	</component>
+</components>
