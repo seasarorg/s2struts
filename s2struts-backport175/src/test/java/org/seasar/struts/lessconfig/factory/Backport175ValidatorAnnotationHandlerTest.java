@@ -91,15 +91,6 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("creditCard", field.getDepends());
     }
 
-    public void testLength() {
-        Field field = form.getField("length");
-        assertNotNull(field);
-        assertEquals("minlength,maxlength = " + field.getDepends(), "minlength,maxlength".length(),
-                field.getDepends().length());
-        assertEquals("3", field.getVarValue("minlength"));
-        assertEquals("5", field.getVarValue("maxlength"));
-    }
-
     public void testByteLength() {
         Field field = form.getField("byteLength");
         assertNotNull(field);
@@ -108,6 +99,15 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("3", field.getVarValue("minbytelength"));
         assertEquals("5", field.getVarValue("maxbytelength"));
         assertEquals("ISO8859_1", field.getVarValue("charset"));
+    }
+
+    public void testLength() {
+        Field field = form.getField("length");
+        assertNotNull(field);
+        assertEquals("minlength,maxlength = " + field.getDepends(), "minlength,maxlength".length(),
+                field.getDepends().length());
+        assertEquals("3", field.getVarValue("minlength"));
+        assertEquals("5", field.getVarValue("maxlength"));
     }
 
     public void testRange() {

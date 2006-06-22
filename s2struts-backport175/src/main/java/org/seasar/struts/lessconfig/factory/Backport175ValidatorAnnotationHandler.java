@@ -16,6 +16,7 @@
 package org.seasar.struts.lessconfig.factory;
 
 import java.lang.reflect.Method;
+import java.util.Comparator;
 import java.util.Map;
 
 import org.apache.commons.validator.Arg;
@@ -37,6 +38,10 @@ import org.seasar.struts.validator.annotation.backport175.ValidatorTarget;
  * @author Katsuhiko Nagashima
  */
 public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnnotationHandler {
+
+    protected Comparator getPropertyDescComparator(BeanDesc beanDesc) {
+        return new Backport175PropertyDescComparator(beanDesc);
+    }
 
     protected boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
