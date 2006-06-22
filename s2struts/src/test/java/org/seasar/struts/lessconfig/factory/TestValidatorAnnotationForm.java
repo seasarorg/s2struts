@@ -88,6 +88,11 @@ public class TestValidatorAnnotationForm {
     public void setLongRange(String longRange) {
     }
 
+    public static final String mask_VALIDATOR = "mask, pattern='(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)', messageKey=comma";
+
+    public void setMask(String mask) {
+    }
+
     public static final String mix_VALIDATOR = "required";
 
     public static final String mix_VALIDATOR_0 = "minlength, value=10";

@@ -18,7 +18,7 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
     public void setUp() {
         include("s2struts.dicon");
 
-        annHandler = new ConstantValidatorAnnotationHandler();
+        annHandler = ValidatorAnnotationHandlerFactory.getAnnotationHandler();
     }
 
     public void setUpAfterContainerInit() {
@@ -126,6 +126,14 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("10", field.getVarValue("max"));
     }
 
+    public void testMask() {
+        Field field = form.getField("mask");
+        assertNotNull(field);
+        assertEquals("mask", field.getDepends());
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertEquals("comma", field.getMsg("mask"));
+    }
+    
     public void testMix() {
         Field field = form.getField("mix");
         assertNotNull(field);
