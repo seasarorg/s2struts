@@ -111,10 +111,10 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
 
     protected boolean isNestedValidate(PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
-        if (ActionForm.class.isAssignableFrom(method.getDeclaringClass())) {
+        if (method.getDeclaringClass().isAssignableFrom(ActionForm.class)) {
             return false;
         }
-        if (ValidatorForm.class.isAssignableFrom(method.getDeclaringClass())) {
+        if (method.getDeclaringClass().isAssignableFrom(ValidatorForm.class)) {
             return false;
         }
 
