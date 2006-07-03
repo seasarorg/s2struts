@@ -28,6 +28,8 @@ public class UploadDto implements Serializable {
 
     private FormFile theFile;
     
+    private boolean check = true;
+
     private int size;
     
     public String getTheText() {
@@ -46,6 +48,14 @@ public class UploadDto implements Serializable {
     @Required
     public void setTheFile(FormFile theFile) {
         this.theFile = theFile;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+    
+    public boolean isCheck() {
+        return this.check;
     }
 
     public int getSize() {

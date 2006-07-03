@@ -2,6 +2,7 @@
 <m:mayaa xmlns:m="http://mayaa.seasar.org"
         xmlns:html="http://struts.apache.org/tags-html"
         xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
         m:noCache="true"
         m:extends="/pages/layout/layout.html">
 
@@ -15,6 +16,9 @@
 
     <html:form m:id="appForm" action="/mod" focus="arg1" />
     
+    <html:text m:id="arg1" property="arg1" />
+    <html:text m:id="arg2" property="arg2" />
+
     <html:submit m:id="goCalc" ><bean:message key="calc"/></html:submit>
 
 </m:mayaa>

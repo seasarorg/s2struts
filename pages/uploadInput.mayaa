@@ -23,6 +23,8 @@
 
     <html:file m:id="theFile" property="theFile" styleClass="text" errorStyleClass="text-error"/>
 
+    <s2struts:checkbox m:id="check" property="check"/>
+
     <s2struts:submit m:id="goUpload" action="#{uploadAction.execute}"><bean:message key="upload"/></s2struts:submit>
 
 </m:mayaa>

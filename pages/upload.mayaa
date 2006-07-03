@@ -18,4 +18,6 @@
     
     <bean:write m:id="size" name="uploadDto" property="size"/>
 
+    <bean:write m:id="check" name="uploadDto" property="check"/>
+
 </m:mayaa>

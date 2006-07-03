@@ -27,7 +27,7 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/mayaa-1.0.5.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3.10.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3.10.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.4.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-tiger-1.2.4.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.5-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
