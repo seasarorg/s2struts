@@ -15,9 +15,9 @@
  */
 package org.seasar.struts.processor;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +25,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.upload.MultipartRequestWrapper;
 import org.seasar.struts.Constants;
 import org.seasar.struts.servlet.http.S2ServletRequestWrapper;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class PopulateProcessorImpl implements PopulateProcessor {
 
@@ -37,30 +39,46 @@ public class PopulateProcessorImpl implements PopulateProcessor {
             ActionForm form, ActionMapping mapping, ExternalRequestProcessor requestProcessor)
             throws ServletException {
 
-        request = new S2ServletRequestWrapper(request);
-        addParameterForCheckBox(request);
-        requestProcessor.processPopulate(request, response, form, mapping);
+        if (request instanceof MultipartRequestWrapper) {
+            requestProcessor.processPopulate(request, response, form, mapping);
+            Map parameters = getCheckBoxParameters(request);
+            if (!parameters.isEmpty()) {
+                S2ServletRequestWrapper s2request = new S2ServletRequestWrapper(
+                        ((MultipartRequestWrapper) request).getRequest());
+                addParameter(s2request, parameters);
+                request = new MultipartRequestWrapper(s2request);
+                requestProcessor.processPopulate(request, response, form, mapping);
+            }
+        } else {
+            Map parameters = getCheckBoxParameters(request);
+            if (!parameters.isEmpty()) {
+                S2ServletRequestWrapper s2request = new S2ServletRequestWrapper(request);
+                addParameter(s2request, parameters);
+                request = s2request;
+            }
+            requestProcessor.processPopulate(request, response, form, mapping);
+        }
     }
 
-    private void addParameterForCheckBox(HttpServletRequest request) {
-        Set paramNameSet = new HashSet();
-        paramNameSet.addAll(request.getParameterMap().keySet());
-        for (Iterator paramNames = paramNameSet.iterator(); paramNames.hasNext();) {
-            String paramName = (String) paramNames.next();
+    private Map getCheckBoxParameters(HttpServletRequest request) {
+        Map result = new HashMap();
+        for (Iterator i = request.getParameterMap().keySet().iterator(); i.hasNext();) {
+            String paramName = (String) i.next();
             if (paramName.startsWith(Constants.CHECKBOX_NAME)) {
                 String checkboxParamName = paramName.substring(Constants.CHECKBOX_NAME.length());
                 String checkboxValue = request.getParameter(checkboxParamName);
                 if (checkboxValue == null) {
-                    addParam(request, checkboxParamName, Boolean.FALSE.toString());
+                    result.put(checkboxParamName, Boolean.FALSE.toString());
                 }
             }
         }
+        return result;
     }
 
-    private void addParam(HttpServletRequest request, String paramName, String value) {
-        if (request instanceof S2ServletRequestWrapper) {
-            S2ServletRequestWrapper requestWrapper = (S2ServletRequestWrapper) request;
-            requestWrapper.addParameterValue(paramName, value);
+    private void addParameter(S2ServletRequestWrapper request, Map parameters) {
+        for (Iterator i = parameters.entrySet().iterator(); i.hasNext();) {
+            Map.Entry parameter = (Map.Entry) i.next();
+            request.addParameterValue((String) parameter.getKey(), (String) parameter.getValue());
         }
     }
 
