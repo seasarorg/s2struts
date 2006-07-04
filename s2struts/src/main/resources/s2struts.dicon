@@ -9,6 +9,34 @@
 	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
 	<component name="classRegister"                class="org.seasar.struts.action.impl.ClassRegisterImpl"/>
 
+	<!-- New RequestProcessor -->
+	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
+		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
+	</component>
+	<component name="requestProcessor"             class="org.seasar.struts.processor.InternalS2RequestProcessor" instance="prototype">
+		<aspect pointcut="processMultipart">
+			<component class="org.seasar.struts.processor.ProcessMultipartInterceptor"/>
+		</aspect>
+		<aspect pointcut="processValidate">
+			<component class="org.seasar.struts.pojo.processor.ProcessSetInputPathValidateInterceptor"/>
+		</aspect>
+		<aspect pointcut="processActionForm">
+			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
+		</aspect>
+		<aspect pointcut="processActionCreate">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessMethodBindingActionCreatorInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessPojoActionCreateInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.processor.ProcessActionCreateInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+		<aspect pointcut="doForward">
+			<component class="org.seasar.struts.pojo.processor.DoSetInputPathForwardInterceptor"/>
+		</aspect>
+	</component>
+
 	<!-- Lessconfig Components  -->
 	<!-- AutoRegister Components
 	<component name="autoStrutsConfigRule"         class="org.seasar.struts.lessconfig.config.AutoStrutsConfigRuleImpl"/>
