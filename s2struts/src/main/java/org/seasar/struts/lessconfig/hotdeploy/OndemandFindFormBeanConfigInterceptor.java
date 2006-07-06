@@ -41,6 +41,9 @@ public class OndemandFindFormBeanConfigInterceptor extends AbstractInterceptor {
     public Object invoke(MethodInvocation invocation) throws Throwable {
         ModuleConfig config = (ModuleConfig) invocation.getThis();
         String name = (String) invocation.getArguments()[0];
+        if (name == null) {
+            return invocation.proceed();
+        }
 
         FormBeanConfig result = this.formConfigCreator.createFormBeanConfig(config, name);
         if (result != null) {

@@ -15,8 +15,6 @@
  */
 package org.seasar.struts.lessconfig.hotdeploy;
 
-import java.util.Locale;
-
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.validator.Form;
 import org.apache.commons.validator.FormSet;
@@ -47,10 +45,13 @@ public class OndemandGetFormInterceptor extends AbstractInterceptor {
     public Object invoke(MethodInvocation invocation) throws Throwable {
         ValidatorResources resources = (ValidatorResources) invocation.getThis();
         String formKey;
-        if (invocation.getArguments()[0] instanceof Locale) {
+        if (invocation.getArguments().length == 2) {
             formKey = (String) invocation.getArguments()[1];
         } else {
             formKey = (String) invocation.getArguments()[3];
+        }
+        if (formKey == null) {
+            return invocation.proceed();
         }
 
         ModuleConfig config = ModuleUtils.getInstance().getModuleConfig(

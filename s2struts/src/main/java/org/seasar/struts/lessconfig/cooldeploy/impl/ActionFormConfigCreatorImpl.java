@@ -17,11 +17,12 @@ package org.seasar.struts.lessconfig.cooldeploy.impl;
 
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 import org.seasar.struts.lessconfig.config.NullStrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
+import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRule;
 import org.seasar.struts.lessconfig.cooldeploy.ActionFormConfigCreator;
-import org.seasar.struts.lessconfig.cooldeploy.NamingRule;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
 
@@ -31,20 +32,26 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory
  */
 public class ActionFormConfigCreatorImpl implements ActionFormConfigCreator {
 
-    private NamingRule namingRule;
-
-    public void setNamingRule(NamingRule namingRule) {
-        this.namingRule = namingRule;
-    }
-
     private ZeroConfigActionFormRule defaultRule;
 
     public void setDefaultRule(ZeroConfigActionFormRule defaultRule) {
         this.defaultRule = defaultRule;
     }
 
+    private AutoStrutsConfigRule configRule;
+
+    public void setConfigRule(AutoStrutsConfigRule configRule) {
+        this.configRule = configRule;
+    }
+
+    private ActionFormNamingRule namingRule;
+
+    public void setNamingRule(ActionFormNamingRule namingRule) {
+        this.namingRule = namingRule;
+    }
+
     public FormBeanConfig createFormBeanConfig(ModuleConfig config, String name) {
-        Class formClass = this.namingRule.defineClass(name);
+        Class formClass = this.namingRule.toComponentClass(name);
         if (formClass == null) {
             return null;
         }
@@ -52,10 +59,10 @@ public class ActionFormConfigCreatorImpl implements ActionFormConfigCreator {
     }
 
     public FormBeanConfig createFormBeanConfig(ModuleConfig config, Class formClass) {
-        if (!this.namingRule.isTargetClass(formClass)) {
+        String name = this.namingRule.toActionFormName(formClass);
+        if (name == null) {
             return null;
         }
-        String name = this.namingRule.defineName(formClass);
         return createFormBeanConfig(config, formClass, name);
     }
 
@@ -63,11 +70,19 @@ public class ActionFormConfigCreatorImpl implements ActionFormConfigCreator {
         StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         StrutsActionFormConfig strutsActionForm = annHandler.createStrutsActionFormConfig(formClass);
         if (strutsActionForm == null) {
-            strutsActionForm = new NullStrutsActionFormConfig();
+            if (formClass.getName().matches(this.configRule.getFormClassPattern())) {
+                strutsActionForm = new NullStrutsActionFormConfig();
+            } else {
+                return null;
+            }
         }
 
         FormBeanConfig formBeanConfig = new FormBeanConfig();
-        formBeanConfig.setName(name);
+        if (StrutsActionFormConfig.DEFAULT_NAME.equals(strutsActionForm.name())) {
+            formBeanConfig.setName(name);
+        } else {
+            formBeanConfig.setName(strutsActionForm.name());
+        }
         formBeanConfig.setType(formClass.getName());
 
         formBeanConfig.setRestricted(getRestricted(strutsActionForm, formClass, config));
@@ -76,8 +91,8 @@ public class ActionFormConfigCreatorImpl implements ActionFormConfigCreator {
     }
 
     private boolean getRestricted(StrutsActionFormConfig form, Class formClass, ModuleConfig config) {
-        return form.restricted() == StrutsActionFormConfig.DEFAULT_RESTRICTED ? defaultRule.getRestricted(formClass, config)
-                : form.restricted();
+        return form.restricted() == StrutsActionFormConfig.DEFAULT_RESTRICTED ? defaultRule.getRestricted(formClass,
+                config) : form.restricted();
     }
 
 }

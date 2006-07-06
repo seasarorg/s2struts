@@ -32,6 +32,7 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory
 
 /**
  * @author Katsuhiko Nagashima
+ * @deprecated
  */
 public class AutoActionFormRegister {
 

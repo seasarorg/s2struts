@@ -16,9 +16,8 @@
 package org.seasar.struts.lessconfig.config.rule.impl;
 
 import org.apache.struts.config.ModuleConfig;
-import org.seasar.framework.util.ClassUtil;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
-import org.seasar.struts.lessconfig.config.rule.CommonNamingRule;
+import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRule;
 
 /**
@@ -26,12 +25,18 @@ import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRule;
  */
 public class ZeroConfigActionFormRuleImpl implements ZeroConfigActionFormRule {
 
+    private ActionFormNamingRule namingRule;
+
+    public void setNamingRule(ActionFormNamingRule namingRule) {
+        this.namingRule = namingRule;
+    }
+
     public String getName(Class formClass, ModuleConfig config) {
-        String name = ClassUtil.getShortClassName(formClass);
-        return CommonNamingRule.decapitalizeName(name);
+        return this.namingRule.toActionFormName(formClass);
     }
 
     public boolean getRestricted(Class formClass, ModuleConfig config) {
         return StrutsActionFormConfig.DEFAULT_RESTRICTED;
     }
+
 }

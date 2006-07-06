@@ -26,6 +26,6 @@ public interface ValidationCreator {
     
     Form createForm(ModuleConfig config, String name);
     
-    Form createForm(ModuleConfig config, Class formClass);
+    Form createForm(ModuleConfig config, Class formClass, String name);
 
 }

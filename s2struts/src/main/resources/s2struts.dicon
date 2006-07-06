@@ -2,12 +2,17 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="s2struts">
+	<component name="proxyAction"                  class="org.seasar.struts.action.ProxyAction"/>
+
 	<component name="messageFacade"                class="org.seasar.struts.pojo.impl.MessageFacadeImpl" instance="request"/>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.impl.S2StrutsContextImpl" instance="session"/>
 
 	<component name="componentNameCreator"         class="org.seasar.struts.action.impl.ComponentNameCreatorImpl"/>
 	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
+	<!--
 	<component name="classRegister"                class="org.seasar.struts.action.impl.ClassRegisterImpl"/>
+	-->
+	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
 
 	<!-- New RequestProcessor -->
 	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
@@ -38,32 +43,17 @@
 	</component>
 
 	<!-- Lessconfig Components  -->
-	<!-- AutoRegister Components
-	<component name="autoStrutsConfigRule"         class="org.seasar.struts.lessconfig.config.AutoStrutsConfigRuleImpl"/>
-	<component name="zeroConfigActionRule"         class="org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRuleImpl"/>
-	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRuleImpl"/>
-	-->
-	<!-- COOL Deploy Components -->
-	<component name="strutsConfigRule"             class="org.seasar.struts.lessconfig.cooldeploy.impl.StrutsConfigRuleImpl"/>
-	<component name="actionPathNamingRule"         class="org.seasar.struts.lessconfig.cooldeploy.ActionPathNamingRule"/>
-	<component name="actionFormNamingRule"         class="org.seasar.struts.lessconfig.cooldeploy.ActionFormNamingRule"/>
+	<component name="autoStrutsConfigRule"         class="org.seasar.struts.lessconfig.config.impl.AutoStrutsConfigRuleImpl"/>
+	<component name="actionPathNamingRule"         class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRule"/>
+	<component name="actionFormNamingRule"         class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionFormNamingRule"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionRuleImpl"/>
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionFormRuleImpl"/>
 
-	<component name="zeroConfigActionRule"         class="org.seasar.struts.lessconfig.cooldeploy.DeployZeroConfigActionRule">
-	    <property name="namingRule">actionPathNamingRule</property>
-	</component>
-	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.lessconfig.cooldeploy.DeployZeroConfigActionFormRule"/>
-
-	<component name="actionConfigCreator"          class="org.seasar.struts.lessconfig.cooldeploy.impl.ActionConfigCreatorImpl">
-	    <property name="namingRule">actionPathNamingRule</property>
-	</component>
-	<component name="actionFormConfigCreator"      class="org.seasar.struts.lessconfig.cooldeploy.impl.ActionFormConfigCreatorImpl">
-	    <property name="namingRule">actionFormNamingRule</property>
-	</component>
-	<component name="validatorCreator"             class="org.seasar.struts.lessconfig.cooldeploy.impl.ValidationCreatorImpl">
-	    <property name="namingRule">actionFormNamingRule</property>
-	</component>
+	<component name="actionConfigCreator"          class="org.seasar.struts.lessconfig.cooldeploy.impl.ActionConfigCreatorImpl"/>
+	<component name="actionFormConfigCreator"      class="org.seasar.struts.lessconfig.cooldeploy.impl.ActionFormConfigCreatorImpl"/>
+	<component name="validatorCreator"             class="org.seasar.struts.lessconfig.cooldeploy.impl.ValidationCreatorImpl"/>
 	<component name="strutsConfigRegister"         class="org.seasar.struts.lessconfig.cooldeploy.impl.StrutsConfigRegisterImpl"/>
-	
+
     <!-- Validator ConfigRegister Components -->
 	<component name="dateConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>

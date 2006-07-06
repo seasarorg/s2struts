@@ -23,17 +23,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
-import org.seasar.framework.container.ComponentDef;
-import org.seasar.framework.container.S2Container;
-import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.log.Logger;
-import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.Constants;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
-import org.seasar.struts.lessconfig.config.rule.CommonNamingRule;
+import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
 
 /**
@@ -42,14 +38,28 @@ import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
 public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     private static final Logger logger = Logger.getLogger(ZeroConfigActionRuleImpl.class);
 
+    private ActionPathNamingRule namingRule;
+
+    public void setNamingRule(ActionPathNamingRule namingRule) {
+        this.namingRule = namingRule;
+    }
+
     private AutoStrutsConfigRule configRule;
 
+    public void setAutoStrutsConfigPattern(AutoStrutsConfigRule configRule) {
+        this.configRule = configRule;
+    }
+
     public String getPath(Class actionClass, ModuleConfig config) {
-        return getActionPathName(actionClass, config);
+        String path = this.namingRule.toActionPathName(actionClass);
+        if (path == null) {
+            throw new RuntimeException();
+        }
+        return path;
     }
 
     public String getName(Class actionClass, ModuleConfig config) {
-        String name = getActionPathName(actionClass, config).substring(1);
+        String name = getPath(actionClass, config).substring(1);
         String formName = name + "Form";
         String dtoName = name + "Dto";
         if (config.findFormBeanConfig(formName) != null) {
@@ -60,41 +70,6 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             return name;
         }
         return null;
-    }
-
-    private String getActionPathName(Class actionClass, ModuleConfig config) {
-        String result = getActionComponentName(actionClass);
-        if (result == null) {
-            result = ClassUtil.getShortClassName(actionClass);
-            result = CommonNamingRule.decapitalizeName(result);
-        } else if (isPathComponentName(result)) {
-            return toPathComponentName(result, config);
-        }
-
-        result = result.replaceFirst("Impl$", "");
-        result = result.replaceFirst("Action$", "");
-        return "/" + result;
-    }
-
-    private String getActionComponentName(Class actionClass) {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
-        if (!container.hasComponentDef(actionClass)) {
-            return null;
-        }
-
-        ComponentDef componentDef = container.getComponentDef(actionClass);
-        if (componentDef == null) {
-            return null;
-        }
-        return componentDef.getComponentName();
-    }
-
-    private boolean isPathComponentName(String componentName) {
-        return componentName.startsWith("/");
-    }
-
-    private String toPathComponentName(String componentName, ModuleConfig config) {
-        return config.getPrefix() + componentName;
     }
 
     public String getScope(Class actionClass, ModuleConfig config) {
@@ -202,7 +177,4 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         return file.endsWith(this.configRule.getViewExtension()[this.configRule.getViewExtension().length - 1]);
     }
 
-    public void setAutoStrutsConfigPattern(AutoStrutsConfigRule configRule) {
-        this.configRule = configRule;
-    }
 }

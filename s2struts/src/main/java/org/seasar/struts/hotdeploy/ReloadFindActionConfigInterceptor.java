@@ -16,6 +16,7 @@
 package org.seasar.struts.hotdeploy;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 
@@ -38,7 +39,13 @@ public class ReloadFindActionConfigInterceptor extends AbstractInterceptor {
         String path = (String) invocation.getArguments()[0];
 
         ModuleConfig reloadConfig = moduleConfigLoader.load(config.getPrefix());
-        return reloadConfig.findActionConfig(path);
+        ActionConfig[] actionConfigs = reloadConfig.findActionConfigs();
+        for (int i = 0; i < actionConfigs.length; i++) {
+            if (path.equals(actionConfigs[i].getPath())) {
+                return actionConfigs[i];
+            }
+        }
+        return invocation.proceed();
     }
 
 }

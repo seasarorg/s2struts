@@ -17,7 +17,7 @@ package org.seasar.struts.lessconfig.cooldeploy.impl;
 
 import org.apache.commons.validator.Form;
 import org.apache.struts.config.ModuleConfig;
-import org.seasar.struts.lessconfig.cooldeploy.NamingRule;
+import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.lessconfig.cooldeploy.ValidationCreator;
 import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandlerFactory;
@@ -28,29 +28,21 @@ import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandlerFactory;
  */
 public class ValidationCreatorImpl implements ValidationCreator {
 
-    private NamingRule namingRule;
+    private ActionFormNamingRule namingRule;
 
-    public void setNamingRule(NamingRule namingRule) {
+    public void setNamingRule(ActionFormNamingRule namingRule) {
         this.namingRule = namingRule;
     }
 
     public Form createForm(ModuleConfig config, String name) {
-        Class formClass = this.namingRule.defineClass(name);
+        Class formClass = this.namingRule.toComponentClass(name);
         if (formClass == null) {
             return null;
         }
         return createForm(config, formClass, name);
     }
 
-    public Form createForm(ModuleConfig config, Class formClass) {
-        if (!this.namingRule.isTargetClass(formClass)) {
-            return null;
-        }
-        String name = this.namingRule.defineName(formClass);
-        return createForm(config, formClass, name);
-    }
-
-    private Form createForm(ModuleConfig config, Class formClass, String name) {
+    public Form createForm(ModuleConfig config, Class formClass, String name) {
         if (config.findFormBeanConfig(name) == null) {
             return null;
         }
@@ -58,4 +50,5 @@ public class ValidationCreatorImpl implements ValidationCreator {
         ValidatorAnnotationHandler annHandler = ValidatorAnnotationHandlerFactory.getAnnotationHandler();
         return annHandler.createForm(name, formClass);
     }
+
 }

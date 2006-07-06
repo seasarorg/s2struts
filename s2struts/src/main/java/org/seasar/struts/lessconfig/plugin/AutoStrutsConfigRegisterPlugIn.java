@@ -15,20 +15,15 @@
  */
 package org.seasar.struts.lessconfig.plugin;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-import org.apache.commons.validator.ValidatorResources;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
-import org.apache.struts.validator.ValidatorPlugIn;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.lessconfig.autoregister.AutoActionFormRegister;
-import org.seasar.struts.lessconfig.autoregister.AutoActionRegister;
-import org.seasar.struts.lessconfig.autoregister.AutoValidationRegister;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
+import org.seasar.struts.lessconfig.cooldeploy.StrutsConfigRegister;
 import org.seasar.struts.lessconfig.util.ClassFinder;
 import org.seasar.struts.lessconfig.util.ClassFinderImpl;
 
@@ -77,25 +72,14 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
                 this.classFinder.find(actionServlet, isEnableJar());
             }
 
-            regist(actionServlet, config);
+            getConfigRegister().register(config, this.classFinder.getClassCollection());
         } finally {
             this.classFinder.destroy();
         }
     }
 
-    private void regist(ActionServlet actionServlet, ModuleConfig config) {
-        AutoActionFormRegister.register(config, this.classFinder.getClassCollection());
-        AutoActionRegister.register(actionServlet.getServletContext(), config, this.classFinder.getClassCollection());
-
-        ValidatorResources resources = getValidatorResources(actionServlet, config);
-        AutoValidationRegister.register(resources, config, this.classFinder.getClassCollection());
-    }
-
-    private ValidatorResources getValidatorResources(ActionServlet actionServlet, ModuleConfig config) {
-        ServletContext servletContext = actionServlet.getServletContext();
-        String key = ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix();
-        return (ValidatorResources) servletContext.getAttribute(key);
-    }
+    // -----------------------------------------------------------------------
+    // set-property
 
     public boolean isEnableJar() {
         return this.enableJar;
@@ -119,6 +103,13 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
 
     public void setViewExtension(String viewExtension) {
         configRule().setViewExtension(viewExtension);
+    }
+
+    // -----------------------------------------------------------------------
+
+    private static StrutsConfigRegister getConfigRegister() {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        return (StrutsConfigRegister) container.getComponent(StrutsConfigRegister.class);
     }
 
     private static AutoStrutsConfigRule configRule() {

@@ -17,6 +17,7 @@ package org.seasar.struts.lessconfig.cooldeploy.impl;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 
@@ -29,6 +30,8 @@ import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.validator.ValidatorPlugIn;
 import org.seasar.framework.log.Logger;
+import org.seasar.framework.util.ClassUtil;
+import org.seasar.struts.lessconfig.autoregister.ClassComparator;
 import org.seasar.struts.lessconfig.cooldeploy.ActionConfigCreator;
 import org.seasar.struts.lessconfig.cooldeploy.ActionFormConfigCreator;
 import org.seasar.struts.lessconfig.cooldeploy.StrutsConfigRegister;
@@ -67,9 +70,11 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
     }
 
     public void register(ModuleConfig config, Collection classes) {
-        registerActionForms(config, classes);
-        registerActions(config, classes);
-        registerValidations(config, classes);
+        Collection sorted = ClassComparator.sort(classes);
+
+        registerActionForms(config, sorted);
+        registerActions(config, sorted);
+        registerValidations(config);
     }
 
     private void registerActionForms(ModuleConfig config, Collection classes) {
@@ -82,12 +87,18 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
     private void registerActionForm(ModuleConfig config, Class clazz) {
         FormBeanConfig formConfig = this.formConfigCreator.createFormBeanConfig(config, clazz);
         if (formConfig != null) {
-            config.addFormBeanConfig(formConfig);
+            if (!registeredActionForm(config, formConfig)) {
+                config.addFormBeanConfig(formConfig);
 
-            if (log.isDebugEnabled()) {
-                log.debug("auto register " + formConfig);
+                if (log.isDebugEnabled()) {
+                    log.debug("auto register " + formConfig);
+                }
             }
         }
+    }
+
+    private boolean registeredActionForm(ModuleConfig config, FormBeanConfig formConfig) {
+        return (config.findFormBeanConfig(formConfig.getName()) != null);
     }
 
     private void registerActions(ModuleConfig config, Collection classes) {
@@ -100,43 +111,65 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
     private void registerAction(ModuleConfig config, Class clazz) {
         ActionConfig actionConfig = this.actionConfigCreator.createActionConfig(config, clazz);
         if (actionConfig != null) {
-            config.addActionConfig(actionConfig);
+            if (!registeredActionConfig(config, actionConfig)) {
+                config.addActionConfig(actionConfig);
 
-            if (log.isDebugEnabled()) {
-                log.debug("auto register " + actionConfig);
-                ForwardConfig[] forwardConfigs = actionConfig.findForwardConfigs();
-                for (int i = 0; i < forwardConfigs.length; i++) {
-                    log.debug("auto register " + forwardConfigs[i]);
+                if (log.isDebugEnabled()) {
+                    log.debug("auto register " + actionConfig);
+                    ForwardConfig[] forwardConfigs = actionConfig.findForwardConfigs();
+                    for (int i = 0; i < forwardConfigs.length; i++) {
+                        log.debug("auto register " + forwardConfigs[i]);
+                    }
                 }
             }
         }
     }
 
-    private void registerValidations(ModuleConfig config, Collection classes) {
+    public static boolean registeredActionConfig(ModuleConfig config, ActionConfig actionConfig) {
+        ActionConfig[] actionConfigs = config.findActionConfigs();
+        for (int i = 0; i < actionConfigs.length; ++i) {
+            if (actionConfig.getPath().equals(actionConfigs[i].getPath())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void registerValidations(ModuleConfig config) {
         // Create Forms.
         FormSet formSet = new FormSet();
-        for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
-            Class clazz = (Class) iterator.next();
-            Form form = this.validationCreator.createForm(config, clazz);
-            if (form != null) {
-                formSet.addForm(form);
+        ValidatorResources resources = getValidatorResources(config);
+        
+        FormBeanConfig[] formConfigs = config.findFormBeanConfigs();
+        for (int i = 0; i < formConfigs.length; i++) {
+            if (!registeredValidation(resources, formConfigs[i])) {
+                Class clazz = ClassUtil.forName(formConfigs[i].getType());
+                String name = formConfigs[i].getName();
+                Form form = this.validationCreator.createForm(config, clazz, name);
+                if (form != null) {
+                    formSet.addForm(form);
 
-                if (log.isDebugEnabled()) {
-                    log.debug("auto register " + form);
+                    if (log.isDebugEnabled()) {
+                        log.debug("auto register " + form);
+                    }
                 }
             }
         }
-
+        
         // Initialize ValidatorResources
-        ValidatorResources resources = getValidatorResources(config);
         if (formSet.getForms().size() != 0) {
             resources.addFormSet(formSet);
             resources.process();
         }
     }
 
+    private boolean registeredValidation(ValidatorResources resources, FormBeanConfig formConfig) {
+        return (resources.getForm(Locale.getDefault(), formConfig.getName()) != null);
+    }
+
     private ValidatorResources getValidatorResources(ModuleConfig config) {
-        return (ValidatorResources) this.servletContext.getAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
+        return (ValidatorResources) this.servletContext
+                .getAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
     }
 
 }

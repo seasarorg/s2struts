@@ -16,6 +16,7 @@
 package org.seasar.struts.hotdeploy;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 
@@ -38,7 +39,12 @@ public class ReloadFindFormBeanConfigInterceptor extends AbstractInterceptor {
         String name = (String) invocation.getArguments()[0];
 
         ModuleConfig reloadConfig = moduleConfigLoader.load(config.getPrefix());
-        return reloadConfig.findFormBeanConfig(name);
+        FormBeanConfig formConfig = reloadConfig.findFormBeanConfig(name);
+        if (formConfig != null) {
+            return formConfig;
+        }
+        
+        return invocation.proceed();
     }
 
 }

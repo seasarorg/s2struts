@@ -18,6 +18,7 @@ package org.seasar.struts.hotdeploy;
 import java.util.Locale;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.validator.Form;
 import org.apache.commons.validator.ValidatorResources;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 
@@ -36,18 +37,23 @@ public class ReloadGetFormInterceptor extends AbstractInterceptor {
     }
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
+        Form result;
         ValidatorResources reloadResources = validatorResourcesLoader.load();
-        if (invocation.getArguments()[0] instanceof Locale) {
+        if (invocation.getArguments().length == 2) {
             Locale locale = (Locale) invocation.getArguments()[0];
             String formKey = (String) invocation.getArguments()[1];
-            return reloadResources.getForm(locale, formKey);
+            result = reloadResources.getForm(locale, formKey);
         } else {
             String language = (String) invocation.getArguments()[0];
             String country = (String) invocation.getArguments()[1];
             String variant = (String) invocation.getArguments()[2];
             String formKey = (String) invocation.getArguments()[3];
-            return reloadResources.getForm(language, country, variant, formKey);
+            result = reloadResources.getForm(language, country, variant, formKey);
         }
+        if (result != null) {
+            return result;
+        }
+        return invocation.proceed();
     }
 
 }

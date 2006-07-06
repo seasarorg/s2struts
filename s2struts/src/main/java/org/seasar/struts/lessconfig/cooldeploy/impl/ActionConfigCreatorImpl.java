@@ -25,12 +25,13 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.util.FieldUtil;
+import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 import org.seasar.struts.lessconfig.config.NullStrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
+import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
 import org.seasar.struts.lessconfig.cooldeploy.ActionConfigCreator;
-import org.seasar.struts.lessconfig.cooldeploy.NamingRule;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
 
@@ -46,20 +47,26 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
         this.servletContext = servletContext;
     }
 
-    private NamingRule namingRule;
-
-    public void setNamingRule(NamingRule namingRule) {
-        this.namingRule = namingRule;
-    }
-
     private ZeroConfigActionRule defaultRule;
 
     public void setDefaultRule(ZeroConfigActionRule defaultRule) {
         this.defaultRule = defaultRule;
     }
 
+    private AutoStrutsConfigRule configRule;
+
+    public void setConfigRule(AutoStrutsConfigRule configRule) {
+        this.configRule = configRule;
+    }
+
+    private ActionPathNamingRule namingRule;
+
+    public void setNamingRule(ActionPathNamingRule namingRule) {
+        this.namingRule = namingRule;
+    }
+
     public ActionConfig createActionConfig(ModuleConfig config, String path) {
-        Class actionClass = this.namingRule.defineClass(path);
+        Class actionClass = this.namingRule.toComponentClass(path);
         if (actionClass == null) {
             return null;
         }
@@ -67,10 +74,10 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
     }
 
     public ActionConfig createActionConfig(ModuleConfig config, Class actionClass) {
-        if (!this.namingRule.isTargetClass(actionClass)) {
+        String path = this.namingRule.toActionPathName(actionClass);
+        if (path == null) {
             return null;
         }
-        String path = this.namingRule.defineName(actionClass);
         return createActionConfig(config, actionClass, path);
     }
 
@@ -78,11 +85,19 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
         StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         StrutsActionConfig strutsAction = annHandler.createStrutsActionConfig(actionClass);
         if (strutsAction == null) {
-            strutsAction = new NullStrutsActionConfig();
+            if (actionClass.getName().matches(this.configRule.getActionClassPattern())) {
+                strutsAction = new NullStrutsActionConfig();
+            } else {
+                return null;
+            }
         }
 
         ActionConfig actionConfig = new ActionMapping();
-        actionConfig.setPath(path);
+        if (StrutsActionConfig.DEFAULT_PATH.equals(strutsAction.path())) {
+            actionConfig.setPath(path);
+        } else {
+            actionConfig.setPath(strutsAction.path());
+        }
         actionConfig.setType(actionClass.getName());
         actionConfig.setModuleConfig(config);
 
@@ -107,7 +122,7 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
 
     private void registerFowardConfigs(ActionConfig actionConfig, Class actionClass) {
 
-        Field[] fields = actionClass.getDeclaredFields();
+        Field[] fields = actionClass.getFields();
         for (int i = 0; i < fields.length; i++) {
             StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
             StrutsActionForwardConfig actionForward = annHandler.createStrutsActionForwardConfig(fields[i]);
@@ -125,68 +140,68 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
     }
 
     private String getAttribute(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_ATTRIBUTE.equals(action.attribute()) ? this.defaultRule.getAttribute(actionClass,
-                config) : action.attribute();
+        return StrutsActionConfig.DEFAULT_ATTRIBUTE.equals(action.attribute()) ? this.defaultRule.getAttribute(
+                actionClass, config) : action.attribute();
     }
 
     private String getForward(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_FORWARD.equals(action.forward()) ? this.defaultRule.getForward(actionClass, config)
-                : action.forward();
+        return StrutsActionConfig.DEFAULT_FORWARD.equals(action.forward()) ? this.defaultRule.getForward(actionClass,
+                config) : action.forward();
     }
 
     private String getInclude(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_INCLUDE.equals(action.include()) ? this.defaultRule.getInclude(actionClass, config)
-                : action.include();
+        return StrutsActionConfig.DEFAULT_INCLUDE.equals(action.include()) ? this.defaultRule.getInclude(actionClass,
+                config) : action.include();
     }
 
     private String getInput(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_INPUT.equals(action.input()) ? this.defaultRule.getInput(actionClass, config) : action
-                .input();
+        return StrutsActionConfig.DEFAULT_INPUT.equals(action.input()) ? this.defaultRule.getInput(actionClass, config)
+                : action.input();
     }
 
     private String getName(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_NAME.equals(action.name()) ? this.defaultRule.getName(actionClass, config) : action
-                .name();
+        return StrutsActionConfig.DEFAULT_NAME.equals(action.name()) ? this.defaultRule.getName(actionClass, config)
+                : action.name();
     }
 
     private String getParameter(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_PARAMETER.equals(action.parameter()) ? this.defaultRule.getParameter(actionClass,
-                config) : action.parameter();
+        return StrutsActionConfig.DEFAULT_PARAMETER.equals(action.parameter()) ? this.defaultRule.getParameter(
+                actionClass, config) : action.parameter();
     }
 
     private String getPrefix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_PREFIX.equals(action.prefix()) ? this.defaultRule.getPrefix(actionClass, config)
-                : action.prefix();
+        return StrutsActionConfig.DEFAULT_PREFIX.equals(action.prefix()) ? this.defaultRule.getPrefix(actionClass,
+                config) : action.prefix();
     }
 
     private String getRoles(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_ROLES.equals(action.roles()) ? this.defaultRule.getRoles(actionClass, config) : action
-                .roles();
+        return StrutsActionConfig.DEFAULT_ROLES.equals(action.roles()) ? this.defaultRule.getRoles(actionClass, config)
+                : action.roles();
     }
 
     private String getScope(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_SCOPE.equals(action.scope()) ? this.defaultRule.getScope(actionClass, config) : action
-                .scope();
+        return StrutsActionConfig.DEFAULT_SCOPE.equals(action.scope()) ? this.defaultRule.getScope(actionClass, config)
+                : action.scope();
     }
 
     private String getSuffix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_SUFFIX.equals(action.suffix()) ? this.defaultRule.getSuffix(actionClass, config)
-                : action.suffix();
+        return StrutsActionConfig.DEFAULT_SUFFIX.equals(action.suffix()) ? this.defaultRule.getSuffix(actionClass,
+                config) : action.suffix();
     }
 
     private boolean getUnknown(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.unknown() == StrutsActionConfig.DEFAULT_UNKNOWN ? this.defaultRule.getUnknown(actionClass, config) : action
-                .unknown();
+        return action.unknown() == StrutsActionConfig.DEFAULT_UNKNOWN ? this.defaultRule
+                .getUnknown(actionClass, config) : action.unknown();
     }
 
     private boolean getValidate(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.validate() == StrutsActionConfig.DEFAULT_VALIDATE ? this.defaultRule.getValidate(actionClass, config)
-                : action.validate();
+        return action.validate() == StrutsActionConfig.DEFAULT_VALIDATE ? this.defaultRule.getValidate(actionClass,
+                config) : action.validate();
     }
 
     private boolean getCancellable(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.cancellable() == StrutsActionConfig.DEFAULT_CANCELLABLE ? this.defaultRule.getCancellable(actionClass,
-                config) : action.cancellable();
+        return action.cancellable() == StrutsActionConfig.DEFAULT_CANCELLABLE ? this.defaultRule.getCancellable(
+                actionClass, config) : action.cancellable();
     }
 
 }

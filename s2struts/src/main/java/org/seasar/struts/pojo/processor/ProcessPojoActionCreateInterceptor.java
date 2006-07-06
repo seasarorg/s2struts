@@ -16,6 +16,7 @@
 package org.seasar.struts.pojo.processor;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.action.ClassRegister;
@@ -47,7 +48,7 @@ public class ProcessPojoActionCreateInterceptor extends AbstractInterceptor {
         String type = mapping.getType();
         if (type != null) {
             Class action = this.classRegister.getClass(type);
-            if (action.isInterface()) {
+            if (action.isInterface() || !Action.class.isAssignableFrom(action)) {
                 // TODO pojoProcessAction.setServlet()の実行についてどうするか。
                 // 今は利用してないので実行しなくてもOKだけど、将来必要になった場合、
                 // どうするか考える必要がある。

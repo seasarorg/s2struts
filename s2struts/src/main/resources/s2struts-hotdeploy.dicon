@@ -4,21 +4,46 @@
 <components namespace="s2struts-hotdeploy">
 	<include path="s2struts.dicon"/>
 
-	<!-- HOT Deploy(or Ondemand) Components -->
-	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
+	<component name="traceInterceptor"
+		class="org.seasar.framework.aop.interceptors.TraceInterceptor"/>
 
+	<!-- HOT Deploy(or Ondemand) Components -->
 	<component name="moduleConfigLoader"           class="org.seasar.struts.hotdeploy.impl.ModuleConfigLoaderImpl"/>
 	<component name="moduleConfigWrapper"          class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
 		<aspect pointcut="findActionConfig">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindActionConfigInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindActionConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.ReloadFindActionConfigInterceptor">
+							<aspect pointcut="invoke">traceInterceptor</aspect>
+						</component>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindActionConfigInterceptor">
+							<aspect pointcut="invoke">traceInterceptor</aspect>
+						</component>
+					</arg>
+				</initMethod>
 			</component>
 		</aspect>
 		<aspect pointcut="findFormBeanConfig">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadFindFormBeanConfigInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindFormBeanConfigInterceptor"/></arg></initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.ReloadFindFormBeanConfigInterceptor">
+							<aspect pointcut="invoke">traceInterceptor</aspect>
+						</component>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindFormBeanConfigInterceptor">
+							<aspect pointcut="invoke">traceInterceptor</aspect>
+						</component>
+					</arg>
+				</initMethod>
 			</component>
 		</aspect>
 	</component>
@@ -27,8 +52,20 @@
 	<component name="validatorResourcesWrapper"    class="org.seasar.struts.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
 		<aspect pointcut="getForm">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.hotdeploy.ReloadGetFormInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.lessconfig.hotdeploy.OndemandGetFormInterceptor"/></arg></initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.ReloadGetFormInterceptor">
+							<aspect pointcut="invoke">traceInterceptor</aspect>
+						</component>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.lessconfig.hotdeploy.OndemandGetFormInterceptor">
+							<aspect pointcut="invoke">traceInterceptor</aspect>
+						</component>
+					</arg>
+				</initMethod>
 			</component>
 		</aspect>
 	</component>
