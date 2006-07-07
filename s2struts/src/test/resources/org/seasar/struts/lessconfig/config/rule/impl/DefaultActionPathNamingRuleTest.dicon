@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRule"/>
+	<component name="/path"                       class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$PathComponentAction" instance="prototype"/>
+	<component name="/module/modulePath"          class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$ModulePathComponentAction" instance="prototype"/>
+	<component name="/noModulePath"               class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$NoModulePathComponentAction" instance="prototype"/>
+	<component name="ruleComponentAction"         class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$RuleComponentAction" instance="prototype"/>
+	<component name="pojoComponentAction"         class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$PojoComponentActionImpl" instance="prototype"/>
+	<component name="package_ruleComponentAction" class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$PackageRuleComponentAction" instance="prototype"/>
+	<component class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$UndefinedComponentAction" instance="prototype"/>
+</components>

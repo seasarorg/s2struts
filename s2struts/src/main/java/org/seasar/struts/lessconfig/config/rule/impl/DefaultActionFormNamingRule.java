@@ -25,9 +25,25 @@ public class DefaultActionFormNamingRule implements ActionFormNamingRule {
 
     public Class toComponentClass(String name) {
         S2Container container = getContainer();
+        
         if (container.hasComponentDef(name)) {
             return container.getComponentDef(name).getComponentClass();
         }
+        
+        if (name.endsWith("Dto")) {
+            String componentName = name.substring(0, name.length() - 3) + "Form";
+            if (container.hasComponentDef(componentName)) {
+                return container.getComponentDef(componentName).getComponentClass();
+            }
+        }
+        
+        if (name.endsWith("Form")) {
+            String componentName = name.substring(0, name.length() - 4) + "Dto";
+            if (container.hasComponentDef(componentName)) {
+                return container.getComponentDef(componentName).getComponentClass();
+            }
+        }
+        
         return null;
     }
 
