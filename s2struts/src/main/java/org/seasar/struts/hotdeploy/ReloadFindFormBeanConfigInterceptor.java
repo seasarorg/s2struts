@@ -38,12 +38,12 @@ public class ReloadFindFormBeanConfigInterceptor extends AbstractInterceptor {
         ModuleConfig config = (ModuleConfig) invocation.getThis();
         String name = (String) invocation.getArguments()[0];
 
-        ModuleConfig reloadConfig = moduleConfigLoader.load(config.getPrefix());
+        ModuleConfig reloadConfig = this.moduleConfigLoader.load(config.getPrefix());
         FormBeanConfig formConfig = reloadConfig.findFormBeanConfig(name);
         if (formConfig != null) {
             return formConfig;
         }
-        
+
         return invocation.proceed();
     }
 

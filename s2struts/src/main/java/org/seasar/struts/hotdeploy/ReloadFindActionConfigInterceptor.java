@@ -38,7 +38,7 @@ public class ReloadFindActionConfigInterceptor extends AbstractInterceptor {
         ModuleConfig config = (ModuleConfig) invocation.getThis();
         String path = (String) invocation.getArguments()[0];
 
-        ModuleConfig reloadConfig = moduleConfigLoader.load(config.getPrefix());
+        ModuleConfig reloadConfig = this.moduleConfigLoader.load(config.getPrefix());
         ActionConfig[] actionConfigs = reloadConfig.findActionConfigs();
         for (int i = 0; i < actionConfigs.length; i++) {
             if (path.equals(actionConfigs[i].getPath())) {

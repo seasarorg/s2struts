@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.pojo.util;
 
+import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,7 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
 import org.seasar.framework.container.S2Container;
+import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.struts.bean.IndexedPropertyDesc;
 import org.seasar.struts.bean.impl.IndexedPropertyDescImpl;
@@ -36,8 +38,12 @@ import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class BindingUtil {
+
+    private static final Logger log = Logger.getLogger(BindingUtil.class);
+
     private static Map primitiveMap = new HashMap();
 
     static {
@@ -77,7 +83,8 @@ public class BindingUtil {
         }
     }
 
-    private static void importProperty(Object action, S2Container container, PropertyDesc propertyDesc, ActionMapping mapping) {
+    private static void importProperty(Object action, S2Container container, PropertyDesc propertyDesc,
+            ActionMapping mapping) {
         if (!propertyDesc.hasWriteMethod()) {
             return;
         }
@@ -99,6 +106,17 @@ public class BindingUtil {
         }
         if (propertyType.isInstance(value)) {
             propertyDesc.setValue(action, value);
+        } else {
+            if (value instanceof Serializable) {
+                log.debug("Maybe ClassLoader is different... propertyType[" + propertyType + "], valueClass["
+                        + value.getClass() + "]");
+                log.debug("Try to copy...");
+                value = CopyUtil.deepCopy((Serializable) value, Thread.currentThread().getContextClassLoader());
+                if (propertyType.isInstance(value)) {
+                    log.debug("Try to set...");
+                    propertyDesc.setValue(action, value);
+                }
+            }
         }
     }
 
@@ -135,8 +153,8 @@ public class BindingUtil {
         }
     }
 
-    private static void exportProperty(Object action, S2Container container, BeanDesc beanDesc, PropertyDesc propertyDesc,
-            ActionMapping mapping) {
+    private static void exportProperty(Object action, S2Container container, BeanDesc beanDesc,
+            PropertyDesc propertyDesc, ActionMapping mapping) {
         if (!propertyDesc.hasReadMethod()) {
             return;
         }
@@ -151,7 +169,8 @@ public class BindingUtil {
         } else {
             String propertyName = propertyDesc.getPropertyName();
             if (BeanValidatorFormUtil.isBeanValidatorForm(S2StrutsContextUtil.getRequest(container), propertyName)) {
-                value = BeanValidatorFormUtil.toBeanValidatorForm(S2StrutsContextUtil.getRequest(container), propertyName, value);
+                value = BeanValidatorFormUtil.toBeanValidatorForm(S2StrutsContextUtil.getRequest(container),
+                        propertyName, value);
             }
 
             ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();

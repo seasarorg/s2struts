@@ -38,7 +38,7 @@ public class ReloadGetFormInterceptor extends AbstractInterceptor {
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         Form result;
-        ValidatorResources reloadResources = validatorResourcesLoader.load();
+        ValidatorResources reloadResources = this.validatorResourcesLoader.load();
         if (invocation.getArguments().length == 2) {
             Locale locale = (Locale) invocation.getArguments()[0];
             String formKey = (String) invocation.getArguments()[1];
