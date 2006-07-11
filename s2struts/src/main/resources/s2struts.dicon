@@ -24,14 +24,17 @@
 		<aspect pointcut="processMultipart">
 			<component class="org.seasar.struts.processor.ProcessMultipartInterceptor"/>
 		</aspect>
+		<aspect pointcut="processActionForm">
+			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
+		</aspect>
 		<aspect pointcut="processValidate">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessCancelledValidateInterceptor"/></arg></initMethod>
 				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessSetInputPathValidateInterceptor"/></arg></initMethod>
 			</component>
 		</aspect>
-		<aspect pointcut="processActionForm">
-			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
+		<aspect pointcut="processPopulate">
+			<component class="org.seasar.struts.pojo.processor.ProcessCheckboxPopulateInterceptor"/>
 		</aspect>
 		<aspect pointcut="processActionCreate">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
