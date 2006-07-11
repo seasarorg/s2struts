@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.lessconfig.cooldeploy.impl;
+package org.seasar.struts.lessconfig.autoregister.impl;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -31,11 +31,11 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.validator.ValidatorPlugIn;
 import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.ClassUtil;
+import org.seasar.struts.lessconfig.autoregister.ActionConfigCreator;
+import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
 import org.seasar.struts.lessconfig.autoregister.ClassComparator;
-import org.seasar.struts.lessconfig.cooldeploy.ActionConfigCreator;
-import org.seasar.struts.lessconfig.cooldeploy.ActionFormConfigCreator;
-import org.seasar.struts.lessconfig.cooldeploy.StrutsConfigRegister;
-import org.seasar.struts.lessconfig.cooldeploy.ValidationCreator;
+import org.seasar.struts.lessconfig.autoregister.StrutsConfigRegister;
+import org.seasar.struts.lessconfig.autoregister.ValidationCreator;
 
 /**
  * 

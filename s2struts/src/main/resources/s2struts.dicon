@@ -52,10 +52,10 @@
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionFormRuleImpl"/>
 
-	<component name="actionConfigCreator"          class="org.seasar.struts.lessconfig.cooldeploy.impl.ActionConfigCreatorImpl"/>
-	<component name="actionFormConfigCreator"      class="org.seasar.struts.lessconfig.cooldeploy.impl.ActionFormConfigCreatorImpl"/>
-	<component name="validatorCreator"             class="org.seasar.struts.lessconfig.cooldeploy.impl.ValidationCreatorImpl"/>
-	<component name="strutsConfigRegister"         class="org.seasar.struts.lessconfig.cooldeploy.impl.StrutsConfigRegisterImpl"/>
+	<component name="actionConfigCreator"          class="org.seasar.struts.lessconfig.autoregister.impl.ActionConfigCreatorImpl"/>
+	<component name="actionFormConfigCreator"      class="org.seasar.struts.lessconfig.autoregister.impl.ActionFormConfigCreatorImpl"/>
+	<component name="validatorCreator"             class="org.seasar.struts.lessconfig.autoregister.impl.ValidationCreatorImpl"/>
+	<component name="strutsConfigRegister"         class="org.seasar.struts.lessconfig.autoregister.impl.StrutsConfigRegisterImpl"/>
 
     <!-- Validator ConfigRegister Components -->
 	<component name="dateConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.DateConfigRegisterImpl">

@@ -13,19 +13,18 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.lessconfig.cooldeploy;
+package org.seasar.struts.lessconfig.autoregister;
 
-import org.apache.struts.config.ActionConfig;
+import java.util.Collection;
+
 import org.apache.struts.config.ModuleConfig;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public interface ActionConfigCreator {
-
-    ActionConfig createActionConfig(ModuleConfig config, String path);
-
-    ActionConfig createActionConfig(ModuleConfig config, Class actionClass);
-
+public interface StrutsConfigRegister {
+    
+    void register(ModuleConfig config, Collection classes);
+	
 }

@@ -22,8 +22,8 @@ import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.struts.lessconfig.autoregister.StrutsConfigRegister;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
-import org.seasar.struts.lessconfig.cooldeploy.StrutsConfigRegister;
 import org.seasar.struts.lessconfig.util.ClassFinder;
 import org.seasar.struts.lessconfig.util.ClassFinderImpl;
 

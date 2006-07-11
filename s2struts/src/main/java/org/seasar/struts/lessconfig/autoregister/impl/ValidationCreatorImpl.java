@@ -13,12 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.lessconfig.cooldeploy.impl;
+package org.seasar.struts.lessconfig.autoregister.impl;
 
 import org.apache.commons.validator.Form;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.struts.lessconfig.autoregister.ValidationCreator;
 import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
-import org.seasar.struts.lessconfig.cooldeploy.ValidationCreator;
 import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandlerFactory;
 

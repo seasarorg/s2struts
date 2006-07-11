@@ -13,19 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.lessconfig.cooldeploy;
+package org.seasar.struts.lessconfig.autoregister;
 
-import org.apache.commons.validator.Form;
+import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  */
-public interface ValidationCreator {
-    
-    Form createForm(ModuleConfig config, String name);
-    
-    Form createForm(ModuleConfig config, Class formClass, String name);
+public interface ActionFormConfigCreator {
+
+    FormBeanConfig createFormBeanConfig(ModuleConfig config, String name);
+
+    FormBeanConfig createFormBeanConfig(ModuleConfig config, Class formClass);
 
 }

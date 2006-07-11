@@ -21,7 +21,7 @@ import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.framework.log.Logger;
-import org.seasar.struts.lessconfig.cooldeploy.ActionConfigCreator;
+import org.seasar.struts.lessconfig.autoregister.ActionConfigCreator;
 
 /**
  * 

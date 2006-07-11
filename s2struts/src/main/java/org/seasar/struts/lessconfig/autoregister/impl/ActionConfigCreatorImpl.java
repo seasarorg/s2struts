@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.lessconfig.cooldeploy.impl;
+package org.seasar.struts.lessconfig.autoregister.impl;
 
 import java.lang.reflect.Field;
 
@@ -25,13 +25,13 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.util.FieldUtil;
+import org.seasar.struts.lessconfig.autoregister.ActionConfigCreator;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 import org.seasar.struts.lessconfig.config.NullStrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
-import org.seasar.struts.lessconfig.cooldeploy.ActionConfigCreator;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
 

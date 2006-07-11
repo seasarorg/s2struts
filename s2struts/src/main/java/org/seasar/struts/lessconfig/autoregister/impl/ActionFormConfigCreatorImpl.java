@@ -13,16 +13,16 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.lessconfig.cooldeploy.impl;
+package org.seasar.struts.lessconfig.autoregister.impl;
 
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 import org.seasar.struts.lessconfig.config.NullStrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRule;
-import org.seasar.struts.lessconfig.cooldeploy.ActionFormConfigCreator;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
 

@@ -32,7 +32,7 @@ import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandlerFactory;
 
 /**
  * @author Katsuhiko Nagashima
- * @deprecated
+ * @deprecated changes to <code>ValidationCreator</code>
  */
 public class AutoValidationRegister {
 

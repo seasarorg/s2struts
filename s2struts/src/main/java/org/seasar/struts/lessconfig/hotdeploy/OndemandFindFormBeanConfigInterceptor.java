@@ -20,7 +20,7 @@ import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.framework.log.Logger;
-import org.seasar.struts.lessconfig.cooldeploy.ActionFormConfigCreator;
+import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
 
 /**
  * 
