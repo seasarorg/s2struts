@@ -8,8 +8,13 @@
 		class="org.seasar.framework.aop.interceptors.TraceInterceptor"/>
 
 	<!-- HOT Deploy(or Ondemand) Components -->
-	<component name="moduleConfigLoader"           class="org.seasar.struts.hotdeploy.impl.ModuleConfigLoaderImpl"/>
-	<component name="moduleConfigWrapper"          class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
+	<component name="reloadMessageResourcesFactory" class="org.seasar.struts.hotdeploy.ReloadPropertyMessageResourcesFactory">
+		<aspect>traceInterceptor</aspect>
+	</component>
+
+	<component name="moduleConfigLoader"            class="org.seasar.struts.hotdeploy.impl.ModuleConfigLoaderImpl"/>
+	<component name="moduleConfigWrapper"           class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
+		<aspect pointcut="init">traceInterceptor</aspect>
 		<aspect pointcut="findActionConfig">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add">
@@ -48,8 +53,9 @@
 		</aspect>
 	</component>
 
-	<component name="validatorResourcesLoader"     class="org.seasar.struts.hotdeploy.impl.ValidatorResourcesLoaderImpl"/>
-	<component name="validatorResourcesWrapper"    class="org.seasar.struts.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
+	<component name="validatorResourcesLoader"      class="org.seasar.struts.hotdeploy.impl.ValidatorResourcesLoaderImpl"/>
+	<component name="validatorResourcesWrapper"     class="org.seasar.struts.hotdeploy.ValidatorResourcesWrapper" instance="prototype">
+		<aspect pointcut="init">traceInterceptor</aspect>
 		<aspect pointcut="getForm">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add">
