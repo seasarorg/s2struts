@@ -45,12 +45,15 @@ import org.seasar.struts.util.ClassFinderImpl;
  * </plug-in>
  * 
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
 
     private ClassFinder classFinder = new ClassFinderImpl();
 
     private boolean enableJar;
+
+    private String jarFilePattern = "";
 
     public AutoStrutsConfigRegisterPlugIn() {
     }
@@ -71,10 +74,10 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
      */
     public void init(ActionServlet actionServlet, ModuleConfig config) throws ServletException {
         try {
-            this.classFinder.find(isEnableJar());
+            this.classFinder.find(isEnableJar(), getJarFilePattern());
 
             if (actionServlet != null) {
-                this.classFinder.find(actionServlet, isEnableJar());
+                this.classFinder.find(actionServlet, isEnableJar(), getJarFilePattern());
             }
 
             regist(actionServlet, config);
@@ -103,6 +106,14 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
 
     public void setEnableJar(boolean enableJar) {
         this.enableJar = enableJar;
+    }
+
+    public String getJarFilePattern() {
+        return this.jarFilePattern;
+    }
+
+    public void setJarFilePattern(String jarFilePattern) {
+        this.jarFilePattern = jarFilePattern;
     }
 
     public void setActionClassPattern(String actionClassPattern) {
