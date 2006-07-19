@@ -57,7 +57,7 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find(String pattern) {
-        find(true, pattern);
+        find(true, ALL_MATCHE_PATTERN, pattern);
 
     }
 
