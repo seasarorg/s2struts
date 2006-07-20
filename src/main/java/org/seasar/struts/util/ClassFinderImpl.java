@@ -132,8 +132,7 @@ public class ClassFinderImpl implements ClassFinder {
             return;
         }
         
-        String jarFileName = jarFile.getName();
-        jarFileName = jarFileName.substring(jarFileName.lastIndexOf(File.separatorChar) + 1);
+        String jarFileName = getJarFileName(jarFile.getName());
         if (!jarFileName.matches(jarFilePattern)) {
             return;
         }
@@ -147,6 +146,14 @@ public class ClassFinderImpl implements ClassFinder {
                 addToCollection(clazz, pattern);
             }
         }
+    }
+    
+    private String getJarFileName(String fullJarFileName) {
+        int index = fullJarFileName.lastIndexOf(File.separatorChar);
+        if (index < 0) {
+            return fullJarFileName;
+        }
+        return fullJarFileName.substring(index + 1);
     }
 
     private static JarFile createJarFileInstance(File path) {
