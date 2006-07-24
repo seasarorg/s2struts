@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.processor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.MultipartRequestWrapper;
@@ -43,11 +45,13 @@ public class PopulateProcessorImpl implements PopulateProcessor {
             requestProcessor.processPopulate(request, response, form, mapping);
             Map parameters = getCheckBoxParameters(request);
             if (!parameters.isEmpty()) {
-                S2ServletRequestWrapper s2request = new S2ServletRequestWrapper(
-                        ((MultipartRequestWrapper) request).getRequest());
-                addParameter(s2request, parameters);
-                request = new MultipartRequestWrapper(s2request);
-                requestProcessor.processPopulate(request, response, form, mapping);
+                try {
+                    BeanUtils.populate(form, parameters);
+                } catch (IllegalAccessException e) {
+                    throw new ServletException("BeanUtils.populate", e);
+                } catch (InvocationTargetException e) {
+                    throw new ServletException("BeanUtils.populate", e);
+                }
             }
         } else {
             Map parameters = getCheckBoxParameters(request);
