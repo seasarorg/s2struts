@@ -15,13 +15,17 @@
  */
 package org.seasar.struts.pojo.processor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.MultipartRequestWrapper;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.Constants;
@@ -30,7 +34,7 @@ import org.seasar.struts.servlet.http.S2ServletRequestWrapper;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class ProcessCheckboxPopulateInterceptor extends AbstractInterceptor {
 
@@ -38,16 +42,19 @@ public class ProcessCheckboxPopulateInterceptor extends AbstractInterceptor {
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         HttpServletRequest request = (HttpServletRequest) invocation.getArguments()[0];
-        
+
         if (request instanceof MultipartRequestWrapper) {
             invocation.proceed();
             Map parameters = getCheckBoxParameters(request);
             if (!parameters.isEmpty()) {
-                S2ServletRequestWrapper s2request = new S2ServletRequestWrapper(
-                        ((MultipartRequestWrapper) request).getRequest());
-                addParameter(s2request, parameters);
-                invocation.getArguments()[0] = new MultipartRequestWrapper(s2request);
-                invocation.proceed();
+                ActionForm form = (ActionForm) invocation.getArguments()[3];
+                try {
+                    BeanUtils.populate(form, parameters);
+                } catch (IllegalAccessException e) {
+                    throw new ServletException("BeanUtils.populate", e);
+                } catch (InvocationTargetException e) {
+                    throw new ServletException("BeanUtils.populate", e);
+                }
             }
         } else {
             Map parameters = getCheckBoxParameters(request);
@@ -58,7 +65,7 @@ public class ProcessCheckboxPopulateInterceptor extends AbstractInterceptor {
             }
             invocation.proceed();
         }
-        
+
         return null;
     }
 
