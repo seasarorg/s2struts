@@ -1262,6 +1262,7 @@ S2Strutsを使用すると、規約に従ってstruts-configを自動的に補完します（<a href="#Z
   ...
   <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn</font>&quot;&gt;
     &lt;set-property property="enableJar" value="false"/&gt;
+    &lt;set-property property="jarFilePattern" value="^My.*\.jar$"/&gt;
     &lt;set-property property="actionClassPattern" value="foo.bar.action.*Action"/&gt;
     &lt;set-property property="formClassPattern" value="foo.bar.form.*Form"/&gt;
     &lt;set-property property="docRoot" value="/WEB-INF/jsp"/&gt;
@@ -1283,6 +1284,11 @@ S2Strutsを使用すると、規約に従ってstruts-configを自動的に補完します（<a href="#Z
     <td>enableJar</td>
     <td>無設定S2Strutsに含めるクラスをクラスパスに含まれているjarファイル内からも検索するか指定します。検索する場合、true。</td>
     <td>false</td>
+  </tr>
+  <tr>
+    <td>jarFilePattern</td>
+    <td>enableJarをtrueとしたときに検索するjarファイルのファイル名パターンを指定します。</td>
+    <td>なし<br>（どのjarファイルも検索対象になりません）</td>
   </tr>
   <tr>
     <td>actionClassPattern</td>
