@@ -9,8 +9,8 @@
 	<classpathentry kind="lib" path="lib/backport175-1.0.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/commons-validator-1.1.4.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/junit-3.8.1.jar"/>
-	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.3.8.jar"/>
-	<classpathentry kind="lib" path="/s2struts/lib/s2-framework-2.3.8.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/struts-1.2.9.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.3.10.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-framework-2.3.10.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
