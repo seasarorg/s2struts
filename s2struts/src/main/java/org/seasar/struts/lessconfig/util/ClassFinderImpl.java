@@ -57,58 +57,58 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find(String pattern) {
-        find(true, pattern);
+        find(true, ALL_MATCHE_PATTERN, pattern);
 
     }
 
-    public void find(boolean enableJar, String pattern) {
+    public void find(boolean enableJar, String jarFilePattern) {
+        find(enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
+    }
+
+    public void find(boolean enableJar, String jarFilePattern, String pattern) {
         String cp = System.getProperty("java.class.path");
         String ps = System.getProperty("path.separator");
 
         for (StringTokenizer tokenizer = new StringTokenizer(cp, ps); tokenizer.hasMoreTokens();) {
             String path = tokenizer.nextToken();
-            loadAllClass(path, enableJar, pattern);
+            loadAllClass(path, enableJar, jarFilePattern, pattern);
         }
     }
 
-    public void find(boolean enableJar) {
-        find(enableJar, ALL_MATCHE_PATTERN);
+    public void find(String path, boolean enableJar, String jarFilePattern) {
+        find(path, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
     }
 
-    public void find(String path, boolean enableJar, String pattern) {
-        loadAllClass(path, enableJar, pattern);
+    public void find(String path, boolean enableJar, String jarFilePattern, String pattern) {
+        loadAllClass(path, enableJar, jarFilePattern, pattern);
     }
 
-    public void find(String path, boolean enableJar) {
-        find(path, enableJar, ALL_MATCHE_PATTERN);
+    public void find(File file, boolean enableJar, String jarFilePattern) {
+        find(file.getAbsolutePath(), enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
     }
 
-    public void find(File file, boolean enableJar, String pattern) {
-        loadAllClass(file.getAbsolutePath(), enableJar, pattern);
+    public void find(File file, boolean enableJar, String jarFilePattern, String pattern) {
+        loadAllClass(file.getAbsolutePath(), enableJar, jarFilePattern, pattern);
     }
 
-    public void find(File file, boolean enableJar) {
-        find(file.getAbsolutePath(), enableJar, ALL_MATCHE_PATTERN);
+    public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern) {
+        find(servlet, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
     }
 
-    public void find(GenericServlet servlet, boolean enableJar) {
-        find(servlet, enableJar, ALL_MATCHE_PATTERN);
-    }
-
-    public void find(GenericServlet servlet, boolean enableJar, String pattern) {
+    public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern, String pattern) {
         String classesDirPath = servlet.getServletContext().getRealPath(WEB_CLASSES_DIR);
-        find(classesDirPath, enableJar, pattern);
+        find(classesDirPath, enableJar, jarFilePattern, pattern);
 
         String libDirPath = servlet.getServletContext().getRealPath(WEB_LIB_DIR);
         File[] files = new File(libDirPath).listFiles();
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
-                find(files[i], enableJar, pattern);
+                find(files[i], enableJar, jarFilePattern, pattern);
             }
         }
     }
 
-    private void loadAllClass(String classpath, boolean enableJar, String pattern) {
+    private void loadAllClass(String classpath, boolean enableJar, String jarFilePattern, String pattern) {
         File path = new File(classpath);
         if (!path.exists()) {
             return;
@@ -117,16 +117,27 @@ public class ClassFinderImpl implements ClassFinder {
         if (path.isDirectory()) {
             loadFromDir(path, path, pattern);
         } else if (enableJar) {
-            loadFromJar(path, pattern);
+            loadFromJar(path, jarFilePattern, pattern);
         }
     }
 
-    private void loadFromJar(File path, String pattern) {
+    private void loadFromJar(File path, String jarFilePattern, String pattern) {
+        if (jarFilePattern == null || jarFilePattern.length() == 0) {
+            logger.debug("Not load jarFile because of undefineding jarFilePattern.");
+            return;
+        }
+        
         JarFile jarFile = createJarFileInstance(path);
         if (jarFile == null) {
             return;
         }
+        
+        String jarFileName = getJarFileName(jarFile.getName());
+        if (!jarFileName.matches(jarFilePattern)) {
+            return;
+        }
 
+        logger.debug("loading " + jarFile.getName());
         for (Enumeration entries = jarFile.entries(); entries.hasMoreElements();) {
             String entryName = ((JarEntry) entries.nextElement()).getName();
             if (entryName.endsWith(CLASS_FILE_EXTENTION)) {
@@ -135,6 +146,14 @@ public class ClassFinderImpl implements ClassFinder {
                 addToCollection(clazz, pattern);
             }
         }
+    }
+    
+    private String getJarFileName(String fullJarFileName) {
+        int index = fullJarFileName.lastIndexOf(File.separatorChar);
+        if (index < 0) {
+            return fullJarFileName;
+        }
+        return fullJarFileName.substring(index + 1);
     }
 
     private static JarFile createJarFileInstance(File path) {

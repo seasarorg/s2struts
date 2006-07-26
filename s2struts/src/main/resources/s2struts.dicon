@@ -9,10 +9,7 @@
 
 	<component name="componentNameCreator"         class="org.seasar.struts.action.impl.ComponentNameCreatorImpl"/>
 	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
-	<!--
 	<component name="classRegister"                class="org.seasar.struts.action.impl.ClassRegisterImpl"/>
-	-->
-	<component name="classRegister"                class="org.seasar.struts.hotdeploy.HotdeployClassRegister"/>
 
 	<!-- New RequestProcessor -->
 	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">

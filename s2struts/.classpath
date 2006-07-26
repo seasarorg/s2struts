@@ -18,7 +18,7 @@
 	<classpathentry kind="lib" path="lib/geronimo-j2ee_1.4_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/geronimo-jta_1.0.1B_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/ognl-2.6.7.jar"/>
-	<classpathentry kind="lib" path="lib/s2-extension-2.4.0-beta-2.jar"/>
-	<classpathentry kind="lib" path="lib/s2-framework-2.4.0-beta-2.jar"/>
+	<classpathentry kind="lib" path="lib/s2-extension-2.4.0-beta-4.jar"/>
+	<classpathentry kind="lib" path="lib/s2-framework-2.4.0-beta-4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

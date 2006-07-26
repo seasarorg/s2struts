@@ -28,21 +28,21 @@ public interface ClassFinder {
 
     void find(String pattern);
 
-    void find(boolean enableJar);
+    void find(boolean enableJar, String jarFilePattern);
 
-    void find(boolean enableJar, String pattern);
+    void find(boolean enableJar, String jarFilePattern, String pattern);
 
-    void find(String path, boolean enableJar);
+    void find(String path, boolean enableJar, String jarFilePattern);
 
-    void find(String path, boolean enableJar, String pattern);
+    void find(String path, boolean enableJar, String jarFilePattern, String pattern);
 
-    void find(File file, boolean enableJar);
+    void find(File file, boolean enableJar, String jarFilePattern);
 
-    void find(File file, boolean enableJar, String pattern);
+    void find(File file, boolean enableJar, String jarFilePattern, String pattern);
 
-    void find(GenericServlet servlet, boolean enableJar);
+    void find(GenericServlet servlet, boolean enableJar, String jarFilePattern);
 
-    void find(GenericServlet servlet, boolean enableJar, String pattern);
+    void find(GenericServlet servlet, boolean enableJar, String jarFilePattern, String pattern);
 
     Collection getClassCollection();
 

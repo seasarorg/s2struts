@@ -1,7 +1,6 @@
 package org.seasar.struts.action.impl;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.action.ClassRegister;
 
 /**
  * @author Satoshi Kimura
@@ -40,17 +39,12 @@ public class ClassRegisterImplTest extends S2TestCase {
     // }
 
     public void testDestroy() {
-        ClassRegister classRegister = new ClassRegisterImpl();
+        ClassRegisterImpl classRegister = new ClassRegisterImpl();
         classRegister.getClass(String.class.getName());
+        assertEquals(1, classRegister.getCacheSize());
 
         classRegister.destroy();
-
-        try {
-            classRegister.getClass(String.class.getName());
-            fail();
-        } catch (NullPointerException e) {
-            // success
-        }
+        assertEquals(0, classRegister.getCacheSize());
     }
 
 }

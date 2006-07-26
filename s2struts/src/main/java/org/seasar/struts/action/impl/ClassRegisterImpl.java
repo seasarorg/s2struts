@@ -19,17 +19,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.seasar.framework.util.ClassUtil;
+import org.seasar.framework.util.Disposable;
+import org.seasar.framework.util.DisposableUtil;
 import org.seasar.struts.action.ClassRegister;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class ClassRegisterImpl implements ClassRegister {
+
     private Map classes = new HashMap();
+
+    private boolean initialized;
 
     public ClassRegisterImpl() {
     }
-
+    
     public void register(String type) {
         getClass(type);
     }
@@ -39,6 +45,10 @@ public class ClassRegisterImpl implements ClassRegister {
     }
 
     public synchronized Class getClass(String type) {
+        if (!initialized) {
+            initialize();
+        }
+
         Class clazz = (Class) this.classes.get(type);
         if (clazz == null) {
             clazz = ClassUtil.forName(type);
@@ -47,8 +57,22 @@ public class ClassRegisterImpl implements ClassRegister {
         return clazz;
     }
 
+    public void initialize() {
+        DisposableUtil.add(new Disposable() {
+            public void dispose() {
+                destroy();
+            }
+        });
+        this.initialized = true;
+    }
+
     public synchronized void destroy() {
-        this.classes = null;
+        this.classes.clear();
+        this.initialized = false;
+    }
+
+    public int getCacheSize() {
+        return this.classes.size();
     }
 
 }
