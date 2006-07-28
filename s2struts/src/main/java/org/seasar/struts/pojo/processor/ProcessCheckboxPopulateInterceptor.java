@@ -47,7 +47,7 @@ public class ProcessCheckboxPopulateInterceptor extends AbstractInterceptor {
             invocation.proceed();
             Map parameters = getCheckBoxParameters(request);
             if (!parameters.isEmpty()) {
-                ActionForm form = (ActionForm) invocation.getArguments()[3];
+                ActionForm form = (ActionForm) invocation.getArguments()[2];
                 try {
                     BeanUtils.populate(form, parameters);
                 } catch (IllegalAccessException e) {
