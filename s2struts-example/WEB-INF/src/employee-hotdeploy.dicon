@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<include path="convention.dicon"/>
+	<include path="customizer.dicon"/>
+
+	<component class="org.seasar.framework.container.hotdeploy.creator.ActionOndemandCreator">
+		<property name="middlePackageName">"action"</property>
+	</component>
+	<component class="org.seasar.framework.container.hotdeploy.creator.DtoOndemandCreator">
+		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@PROTOTYPE</property>
+	</component>
+	<component class="org.seasar.framework.container.hotdeploy.creator.LogicOndemandCreator"/>
+	<component class="org.seasar.framework.container.hotdeploy.creator.DaoOndemandCreator"/>
+	
+	<component class="org.seasar.framework.container.hotdeploy.OndemandBehavior">
+		<initMethod name="addProject">
+			<arg>
+				<component class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
+					<property name="rootPackageName">"org.seasar.struts.examples.employee"</property>
+				</component>
+			</arg>
+		</initMethod>
+	</component>
+</components>

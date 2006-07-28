@@ -3,4 +3,5 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<component class="org.seasar.struts.examples.add.AddServiceImpl"/>
+	<component class="org.seasar.struts.examples.add.AddAction"/>
 </components>

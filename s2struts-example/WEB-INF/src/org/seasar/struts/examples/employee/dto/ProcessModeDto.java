@@ -15,15 +15,26 @@
  */
 package org.seasar.struts.examples.employee.dto;
 
-public class ProcessModeDto {
+import java.io.Serializable;
 
-	private int processMode;
+public class ProcessModeDto implements Serializable {
 
-	public int getProcessMode() {
-		return processMode;
-	}
-	
-	public void setProcessMode(int processMode) {
-		this.processMode = processMode;
-	}
+    private static final long serialVersionUID = -2118507657368213908L;
+
+    private int processMode;
+
+    public int getProcessMode() {
+        return processMode;
+    }
+
+    public void setProcessMode(int processMode) {
+        this.processMode = processMode;
+    }
+    
+    public String toString() {
+        StringBuffer buf = new StringBuffer("ProcessModeDto[");
+        buf.append(processMode).append("]");
+        return buf.toString();
+    }
+
 }

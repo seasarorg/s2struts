@@ -19,8 +19,11 @@ public class UploadActionImpl implements UploadAction {
     
     private UploadDto uploadDto;
     
+    private String theText;
+    
     public String execute() {
         uploadDto.setSize(uploadDto.getTheFile().getFileSize());
+        System.out.println("set theText:" + theText);
         return SUCCESS;
     }
 
@@ -32,4 +35,12 @@ public class UploadActionImpl implements UploadAction {
         this.uploadDto = uploadDto;
     }
     
+    public String getTheText() {
+        return theText;
+    }
+
+    public void setTheText(String theText) {
+        this.theText = theText;
+    }
+
 }

@@ -69,7 +69,7 @@
     <s2struts:submit m:id="goConfirm" action="#{employeeEditAction.goConfirm}">
         <bean:message key="button.confirm" />
     </s2struts:submit>
-    <s2struts:submit m:id="goPrevious" action="#{employeeEditAction.goPrevious}">
+    <s2struts:submit m:id="goPrevious" action="#{employeeEditAction.goPrevious}" cancel="true">
         <bean:message key="button.prev" />
     </s2struts:submit>
 

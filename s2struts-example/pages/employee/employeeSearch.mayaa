@@ -48,7 +48,7 @@
         <html:options collection="departmentDtoList" property="deptno" labelProperty="dname" />
     </html:select>
 
-    <s2struts:submit m:id="goCreate" action="#{employeeSearchAction.goEditForCreate}">
+    <s2struts:submit m:id="goCreate" action="#{employeeSearchAction.goEditForCreate}" cancel="true">
         <bean:message key="button.create" />
     </s2struts:submit>
     <s2struts:submit m:id="goSearch" action="#{employeeSearchAction.goList}">

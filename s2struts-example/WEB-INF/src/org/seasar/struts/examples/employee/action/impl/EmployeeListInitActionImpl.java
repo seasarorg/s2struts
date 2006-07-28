@@ -17,10 +17,10 @@ package org.seasar.struts.examples.employee.action.impl;
 
 import java.util.List;
 
-import org.seasar.struts.action.MessageManager;
 import org.seasar.struts.examples.employee.action.EmployeeListInitAction;
 import org.seasar.struts.examples.employee.dto.EmployeeSearchDto;
 import org.seasar.struts.examples.employee.logic.EmployeeLogic;
+import org.seasar.struts.pojo.MessageManager;
 
 public class EmployeeListInitActionImpl implements EmployeeListInitAction {
 

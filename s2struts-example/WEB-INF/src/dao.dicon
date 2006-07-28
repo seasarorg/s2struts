@@ -5,8 +5,12 @@
 	<include path="j2ee.dicon"/>
 	<component
 		class="org.seasar.dao.impl.FieldAnnotationReaderFactory"/>
+	<!--
 	<component
 		class="org.seasar.dao.impl.DaoMetaDataFactoryImpl"/>
+	-->
+	<component
+		class="org.seasar.struts.examples.MyDaoMetaDataFactoryImpl"/>
 	<component name="interceptor"
 		class="org.seasar.dao.interceptors.S2DaoInterceptor"/>
 	<component

@@ -15,12 +15,12 @@
  */
 package org.seasar.struts.examples.form;
 
-import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
 
 /**
  * @author Satoshi Kimura
  */
-public class CalculationForm extends ActionForm {
+public class CalculationForm extends ValidatorForm {
 	private static final long serialVersionUID = 7914771274544612470L;
 	private int arg1_;
     private int arg2_;

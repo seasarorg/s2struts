@@ -15,8 +15,8 @@
  */
 package org.seasar.struts.examples.message;
 
-import org.seasar.struts.action.MessageManager;
 import org.seasar.struts.examples.FowardNameConstants;
+import org.seasar.struts.pojo.MessageManager;
 
 /**
  * @author Satoshi Kimura

@@ -17,12 +17,12 @@ package org.seasar.struts.examples.employee.action.impl;
 
 import java.util.List;
 
-import org.seasar.struts.action.MessageManager;
 import org.seasar.struts.examples.common.Constants;
 import org.seasar.struts.examples.employee.action.EmployeeEditAction;
 import org.seasar.struts.examples.employee.dto.EmployeeDto;
 import org.seasar.struts.examples.employee.dto.ProcessModeDto;
 import org.seasar.struts.examples.employee.logic.EmployeeLogic;
+import org.seasar.struts.pojo.MessageManager;
 
 /**
  * @author Katsuhiko Nagashima
