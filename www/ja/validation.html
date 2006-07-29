@@ -199,7 +199,7 @@ import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
 
 public class TwoFieldsConfigRegisterImpl implements ConfigRegister {
 
-    public void regist(Field field, Map parameter) {
+    public void register(Field field, Map parameter) {
         String secondProperty = (String) parameter.get("secondProperty");
 
         Var var = new Var();
@@ -231,14 +231,194 @@ public class TwoFieldsConfigRegisterImpl implements ConfigRegister {
 そしてapp.diconにincludeを追加して、validator.dionを読み込むようにします。
 </p>
 <pre>
-    &lt;include path="org/seasar/struts/examples/dicon/allvalidator.dicon"/&gt;
+    &lt;include path="validator.dicon"/&gt;
 </pre>
 <p>
 ここまでがS2Strutsでの新規アノテーションの作成作業です。
 </p>
 <h2><a name="Confirmation">動作確認</a></h2>
 <p>
-未作成...
+作成したTwoFieldsアノテーションを試すには、
+<ul>
+<li>Viewの作成</li>
+<li>Actionの作成</li>
+<li>Formの作成</li>
+</ul>
+を行います。
+</p>
+<p>
+まずはViewの作成です。ここではJSPをViewとして利用します。確認用のため簡単な作りです。
+</p>
+<pre>
+&lt;%@ page contentType="text/html;charset=Windows-31j" language="java" %&gt;
+&lt;%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %&gt;
+&lt;%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Two Fields Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;html:errors /&gt;
+
+  &lt;html:form action="/twoFields" method="POST"&gt;
+    &lt;s2struts:page/&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;field&lt;/td&gt;
+        &lt;td&gt;&lt;html:text property="field"/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;confirm field&lt;/td&gt;
+        &lt;td&gt;&lt;html:text property="confirmField"/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;html:submit/&gt;
+  &lt;/html:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+次はActionの作成です。今回はPOJOのActionで無設定機能（詳細は<a href="s2struts.html#ZeroConfigReference">「無設定S2Strutsリファレンス」</a>を参照）を使います。
+Actionのインターフェースと実装は以下のようになります。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+public interface TwoFieldsAction {
+    
+    String execute();
+
+}
+</pre>
+<pre>
+package org.seasar.struts.examples.validator;
+
+public class TwoFieldsActionImpl implements TwoFieldsAction {
+
+    public String execute() {
+        return "success";
+    }
+
+}
+</pre>
+<p>
+Actionの処理は"success"を返すだけですがTwoFieldsアノテーションの動作確認には十分です。
+</p>
+<p>
+Actionはコンポーネントとして登録する必要があります。新規に作成したtwoFields.diconは以下のようになります。
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+	&lt;component name="twoFieldsAction"
+			class="org.seasar.struts.examples.validator.TwoFieldsActionImpl"
+			instance="request" /&gt;
+&lt;/components&gt;
+</pre>
+<p>
+そしてapp.diconにincludeを追加して、twoFields.diconを読み込むようにします。
+</p>
+<pre>
+    &lt;include path="org/seasar/struts/examples/dicon/twoFields.dicon"/&gt;
+</pre>
+<p>
+最後にFormを作成します。例として定数アノテーションの場合とTigerアノテーションの場合の2つのFormを以下に記述します。
+利用するアノテーションでFormを作成してください。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import java.io.Serializable;
+
+public class TwoFieldsForm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String field = "";
+
+    private String confirmField = "";
+    
+    public String getField() {
+        return field;
+    }
+    
+    public static final String field_VALIDATOR_0 = "required";
+
+    public static final String field_VALIDATOR_1 = "twoFields, secondProperty = confirmField";
+
+    public static final String field_VALIDATOR_ARGS = "Field, resource=false";
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getConfirmField() {
+        return confirmField;
+    }
+
+    public static final String confirmField_VALIDATOR = "required";
+
+    public static final String confirmField_VALIDATOR_ARGS = "ConfirmField, resource=false";
+
+    public void setConfirmField(String confirmField) {
+        this.confirmField = confirmField;
+    }
+
+}
+</pre>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import java.io.Serializable;
+
+import org.seasar.struts.examples.validator.tiger.TwoFields;
+import org.seasar.struts.validator.annotation.tiger.Args;
+import org.seasar.struts.validator.annotation.tiger.Required;
+
+public class TwoFieldsForm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String field = "";
+
+    private String confirmField = "";
+    
+    public String getField() {
+        return field;
+    }
+    
+    @Required
+    @TwoFields(secondProperty="confirmField")
+    @Args(keys = "Field", resource = false)
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getConfirmField() {
+        return confirmField;
+    }
+
+    @Required
+    @Args(keys = "ConfirmField", resource = false)
+    public void setConfirmField(String confirmField) {
+        this.confirmField = confirmField;
+    }
+
+}
+</pre>
+<p>
+これで確認ができます。
+Tomcatを起動して、ブラウザから<a href="http://localhost:8080/s2struts-example/pages/twoFields.jsp">http://localhost:8080/s2struts-example/pages/twoFields.jsp</a>にアクセスし動作確認してください。
+</p>
+<p>
+新規にアノテーションを使用したValidationを作成するのは通常より大変な作業かもしれませんが、一度作成すれば簡単にFormで使えるようになると思います。
+作成したときの苦労を十分回収することができるのではないでしょうか？
+</p>
+<p>
+独自のValidationを作ってみませんか？
 </p>
 <!-- document end -->
 <!-- don't edit start -->
