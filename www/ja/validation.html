@@ -35,7 +35,7 @@ S2Strutsでは、アノテーションを使用したValidation（<a href="s2struts.html#Annotat
 <li><a href="#Validation">Strutsでの新規Validation作成</a></li>
 <li><a href="#Annotation">Validationアノテーションの作成</a></li>
 </ul>
-の作業について、2つの入力内容が同じか検証するValidationを追加する作業を通して説明します。
+の作業について、S2StrutsExampleに2つの入力内容が同じか検証するValidationを追加する作業を通して説明します。
 </p>
 <h2><a name="Validation">Strutsでの新規Validation作成</a></h2>
 <p>
@@ -95,10 +95,16 @@ public class MyFieldChecks {
 }
 </pre>
 <p>
+最初に検証を行うプロパティの値を取得します。
+次にvalidation設定の"secondProperty"変数に指定したプロパティ名を取得しそのプロパティの値を取得します。
+最後にその2つの値を比較します。
+ここでは、"secondProperty"という変数が必要になるところがポイントです。
+この変数はValidationアノテーションを作成するときのプロパティとして宣言することになるからです。
+</p>
+<p>
 次に上記のクラスをvalidator-rules.xmlに追加します。
 validatorタグのname属性（validator name）に指定する内容は、アノテーション名と関連があります。
-
-S2Strutsでは以下の規則によりアノテーション名を変換しvalidator nameと一致するか判断して特定しています。
+S2Strutsでは以下の規則によりアノテーション名を変換しvalidator nameと一致するか判断して特定します。
 <ul>
 <li>アノテーション名の先頭文字を小文字にする</li>
 <li>アノテーション名の最後が"Type"で終わっている場合それを除く</li>
@@ -178,6 +184,10 @@ public interface TwoFields {
 
 }
 </pre>
+<p>
+今回は検証するためにsecondPropertyが必要となるため上記のようになりました。
+validation設定で変数が必要ない場合はプロパティを定義する必要はありませんし、これから作成するConfigRegisterは必要ありません。
+</p>
 <p>
 次に上記アノテーションを登録するためのConfigRegisterとしてTwoFieldsConfigRegisterImplを作成します。
 </p>
