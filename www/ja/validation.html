@@ -29,13 +29,13 @@
 </ul>
 <h2><a name="Summary">概要</a></h2>
 <p>
-S2Strutsでは、アノテーションを使用したValidation（<a href="s2struts.html#AnnotationValidation">「アノテーションを使用したvalidationの設定」</a>）を設定できます。
-新規にValidationを追加するときに必要となる
+S2Strutsで利用できるアノテーションを使用したValidationを作成するには
 <ul>
 <li><a href="#Validation">Strutsでの新規Validation作成</a></li>
 <li><a href="#Annotation">Validationアノテーションの作成</a></li>
 </ul>
-の作業について、S2StrutsExampleに2つの入力内容が同じか検証するValidationを追加する作業を通して説明します。
+を行います。
+この作業について、S2StrutsExampleに2つの入力内容が同じか検証するValidationの作成を通して説明します。
 </p>
 <h2><a name="Validation">Strutsでの新規Validation作成</a></h2>
 <p>
@@ -97,7 +97,7 @@ public class MyFieldChecks {
 <p>
 最初に検証を行うプロパティの値を取得します。
 次にvalidation設定の"secondProperty"変数に指定したプロパティ名を取得しそのプロパティの値を取得します。
-最後にその2つの値を比較します。
+最後にその2つの値を比較し、正しい値か確かめています。
 ここでは、"secondProperty"という変数が必要になるところがポイントです。
 この変数はValidationアノテーションを作成するときのプロパティとして宣言することになるからです。
 </p>
@@ -189,7 +189,7 @@ public interface TwoFields {
 validation設定で変数が必要ない場合はプロパティを定義する必要はありませんし、これから作成するConfigRegisterは必要ありません。
 </p>
 <p>
-次に上記アノテーションを登録するためのConfigRegisterとしてTwoFieldsConfigRegisterImplを作成します。
+secondPropertyの値をValidatorに設定するためのConfigRegisterとしてTwoFieldsConfigRegisterImplを作成します。
 </p>
 <p>
 TwoFieldsConfigRegisterImplは、org.seasar.struts.lessconfig.validator.config.ConfigRegisterを実装します。
@@ -245,6 +245,9 @@ public class TwoFieldsConfigRegisterImpl implements ConfigRegister {
 </pre>
 <p>
 ここまでがS2Strutsでの新規アノテーションの作成作業です。
+</p>
+<p>
+これでアノテーションを使用したValidation作成作業は完了です。
 </p>
 <h2><a name="Confirmation">動作確認</a></h2>
 <p>
