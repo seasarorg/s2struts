@@ -238,6 +238,7 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor implements Ex
     }
     
     public void processSetPath(ForwardConfig forward) {
+        S2StrutsContextUtil.clearPageNameElementValue();
         S2StrutsContextUtil.setPath(forward);
     }
     

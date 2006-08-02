@@ -31,6 +31,8 @@ public abstract class S2StrutsContextUtil {
         getContext().clear(type);
     }
 
+    //
+
     public static void setPath(ForwardConfig forward) {
         getContext().setPath(forward.getPath());
     }
@@ -42,19 +44,28 @@ public abstract class S2StrutsContextUtil {
     public static String getCurrentInputPath() {
         return getContext().getCurrentInputPath();
     }
-    
+
     public static String getPreviousInputPath() {
         return getContext().getPreviousInputPath();
     }
-    
-    public static void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression) {
+
+    public static void clearPageNameElementValue() {
+        getContext().clearPageNameElementValue();
+    }
+
+    //
+
+    public static void setMethodBindingExpression(String mappingName, String key, String value,
+            String methodBindingExpression) {
         getContext().setMethodBindingExpression(mappingName, key, value, methodBindingExpression);
     }
-    
+
     public static String getMethodBindingExpression(String mappingName, String key, String value) {
         return getContext().getMethodBindingExpression(mappingName, key, value);
     }
-    
+
+    //
+
     public static Boolean isCancelAction(String mappingName, String key, String value) {
         return getContext().isCancelAction(mappingName, key, value);
     }
@@ -63,6 +74,8 @@ public abstract class S2StrutsContextUtil {
         getContext().setCancelAction(mappingName, key, value);
     }
     
+    //
+
     private static S2StrutsContext getContext() {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);
     }

@@ -30,6 +30,7 @@ import org.seasar.struts.Constants;
  * @author Katsuhiko Nagashima
  */
 public class S2StrutsContextImpl implements S2StrutsContext {
+
     private static final long serialVersionUID = -4835702530138078142L;
 
     private String currentPath;
@@ -48,23 +49,7 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         }
     }
 
-    public String getCurrentInputPath() {
-        String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
-        if (param != null) {
-            return new String(Base64Util.decode(param));
-        } else {
-            return this.currentPath;
-        }
-    }
-
-    public String getPreviousInputPath() {
-        String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
-        if (param != null) {
-            return new String(Base64Util.decode(param));
-        } else {
-            return this.previousPath;
-        }
-    }
+    //
 
     public void setPath(String path) {
         if (!path.equals(this.currentPath)) {
@@ -73,13 +58,44 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         }
     }
 
+    public String getCurrentInputPath() {
+        if (isClearPageNameElementValue()) {
+            String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
+            if (param != null) {
+                return new String(Base64Util.decode(param));
+            }
+        }
+        return this.currentPath;
+    }
+
+    public String getPreviousInputPath() {
+        String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
+        if (param != null) {
+            return new String(Base64Util.decode(param));
+        }
+        return this.previousPath;
+    }
+
+    public void clearPageNameElementValue() {
+        getRequest().setAttribute(Constants.PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK, Boolean.TRUE);
+    }
+
+    private boolean isClearPageNameElementValue() {
+        return (getRequest().getAttribute(Constants.PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK) == null);
+    }
+
+    //
+
     public String getMethodBindingExpression(String mappingName, String key, String value) {
         return (String) this.methodBindingExpressions.get(mappingName + key + value);
     }
 
-    public void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression) {
+    public void setMethodBindingExpression(String mappingName, String key, String value,
+            String methodBindingExpression) {
         this.methodBindingExpressions.put(mappingName + key + value, methodBindingExpression);
     }
+
+    //
 
     public Boolean isCancelAction(String mappingName, String key, String value) {
         return (Boolean) this.cancelActions.get(mappingName + key + value);
@@ -88,6 +104,8 @@ public class S2StrutsContextImpl implements S2StrutsContext {
     public void setCancelAction(String mappingName, String key, String value) {
         this.cancelActions.put(mappingName + key + value, Boolean.TRUE);
     }
+
+    //
 
     private static final HttpServletRequest getRequest() {
         S2Container container = SingletonS2ContainerFactory.getContainer();

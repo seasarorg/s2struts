@@ -238,6 +238,7 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
     }
     
     public void processSetPath(ForwardConfig forward) {
+        S2StrutsContextUtil.clearPageNameElementValue();
         S2StrutsContextUtil.setPath(forward);
     }
     
