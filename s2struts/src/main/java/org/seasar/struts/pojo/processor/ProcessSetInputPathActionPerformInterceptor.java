@@ -13,23 +13,29 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.mock;
+package org.seasar.struts.pojo.processor;
 
+import org.aopalliance.intercept.MethodInvocation;
 import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.seasar.framework.aop.interceptors.AbstractInterceptor;
+import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * 
  * @author Katsuhiko Nagashima
+ * 
  */
-public class MockActionMapping extends ActionMapping {
-    private static final long serialVersionUID = 5138089406949424336L;
+public class ProcessSetInputPathActionPerformInterceptor extends AbstractInterceptor {
 
-	public ActionForward findForward(String name) {
-        ActionForward actionForward = new ActionForward();
-        actionForward.setName(name);
-        actionForward.setPath("/" + name + ".html");
+    private static final long serialVersionUID = -7258342500009911154L;
 
-        return actionForward;
+    public Object invoke(MethodInvocation invocation) throws Throwable {
+        Object forward = invocation.proceed();
+        if (forward != null) {
+            S2StrutsContextUtil.clearPageNameElementValue();
+            S2StrutsContextUtil.setPath((ActionForward) forward);
+        }
+        return forward;
     }
 
 }

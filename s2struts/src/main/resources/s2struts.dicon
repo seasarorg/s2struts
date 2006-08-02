@@ -40,6 +40,9 @@
 				<initMethod name="add"><arg><component class="org.seasar.struts.processor.ProcessActionCreateInterceptor"/></arg></initMethod>
 			</component>
 		</aspect>
+		<aspect pointcut="processActionPerform">
+			<component class="org.seasar.struts.pojo.processor.ProcessSetInputPathActionPerformInterceptor"/>
+		</aspect>
 		<aspect pointcut="doForward">
 			<component class="org.seasar.struts.pojo.processor.DoSetInputPathForwardInterceptor"/>
 		</aspect>

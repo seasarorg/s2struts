@@ -27,6 +27,8 @@ public interface Constants {
 
     String PAGE_NAME_ELEMENT_VALUE = "org.seasar.struts.page";
 
+    String PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK = "org.seasar.struts.page.CLEAR_MARK";
+
     String CHECKBOX_NAME = "org.seasar.struts.checkbox.";
 
     String BACKUP_SESSION_FORM_KEY = "org.seasar.struts.BACKUP_SESSION_FORM";

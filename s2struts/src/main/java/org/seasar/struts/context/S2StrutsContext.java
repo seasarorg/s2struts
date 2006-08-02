@@ -22,20 +22,29 @@ import java.io.Serializable;
  * @author Katsuhiko Nagashima
  */
 public interface S2StrutsContext extends Serializable {
+
     void clear(ContentsType type);
-    
-    String getCurrentInputPath();
-    
-    String getPreviousInputPath();
+
+    //
 
     void setPath(String path);
-    
+
+    String getCurrentInputPath();
+
+    String getPreviousInputPath();
+
+    void clearPageNameElementValue();
+
+    //
+
     String getMethodBindingExpression(String mappingName, String key, String value);
 
     void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression);
-    
+
+    //
+
     Boolean isCancelAction(String mappingName, String key, String value);
 
     void setCancelAction(String mappingName, String key, String value);
-    
+
 }

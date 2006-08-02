@@ -182,7 +182,7 @@ public class MockRequestProcessor implements ExternalRequestProcessor {
         this.argMapping = mapping;
         this.argAction = action;
         this.argForm = form;
-        return null;
+        return mapping.findForward("result");
     }
 
     public void processPopulate(HttpServletRequest request, HttpServletResponse response,

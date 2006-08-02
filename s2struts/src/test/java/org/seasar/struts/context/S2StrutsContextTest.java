@@ -58,4 +58,14 @@ public class S2StrutsContextTest extends S2TestCase {
         assertEquals("/prev.jsp", path);
     }
 
+    public void testClearGetCurrentInputPath() {
+        getRequest().setParameter(Constants.PAGE_NAME_ELEMENT_VALUE, Base64Util.encode("/request.jsp".getBytes()));
+        context.setPath("/prev.jsp");
+        context.setPath("/current.jsp");
+        
+        context.clearPageNameElementValue();
+        String path = context.getCurrentInputPath();
+        assertEquals("/current.jsp", path);
+    }
+    
 }
