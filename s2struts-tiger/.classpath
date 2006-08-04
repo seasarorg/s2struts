@@ -6,7 +6,7 @@
 	<classpathentry output="target/test-classes" kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/s2struts"/>
-	<classpathentry kind="lib" path="/s2struts/lib/commons-validator-1.1.4.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/commons-validator-1.2.0.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/struts-1.2.9.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.4.0-beta-4.jar"/>
