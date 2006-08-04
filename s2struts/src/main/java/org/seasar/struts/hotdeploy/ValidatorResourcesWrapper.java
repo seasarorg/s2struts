@@ -37,22 +37,8 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
         this.resources = resources;
     }
 
-    /**
-     * @deprecated
-     */
-    public void addConstant(org.apache.commons.validator.Constant arg0) {
-        resources.addConstant(arg0);
-    }
-
     public void addConstant(String arg0, String arg1) {
         resources.addConstant(arg0, arg1);
-    }
-
-    /**
-     * @deprecated
-     */
-    public void addConstantParam(String arg0, String arg1) {
-        resources.addConstantParam(arg0, arg1);
     }
 
     public void addFormSet(FormSet arg0) {
@@ -65,20 +51,6 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
 
     public boolean equals(Object arg0) {
         return resources.equals(arg0);
-    }
-
-    /**
-     * @deprecated
-     */
-    public Form get(Locale arg0, Object arg1) {
-        return resources.get(arg0, arg1);
-    }
-
-    /**
-     * @deprecated
-     */
-    public Form get(String arg0, String arg1, String arg2, Object arg3) {
-        return resources.get(arg0, arg1, arg2, arg3);
     }
 
     public Form getForm(Locale arg0, String arg1) {
@@ -103,20 +75,6 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
 
     public void process() {
         resources.process();
-    }
-
-    /**
-     * @deprecated
-     */
-    public void processForms() {
-        resources.processForms();
-    }
-
-    /**
-     * @deprecated
-     */
-    public void put(FormSet arg0) {
-        resources.put(arg0);
     }
 
     public String toString() {

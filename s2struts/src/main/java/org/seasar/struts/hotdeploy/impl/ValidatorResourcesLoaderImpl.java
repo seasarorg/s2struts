@@ -52,7 +52,6 @@ public class ValidatorResourcesLoaderImpl implements ValidatorResourcesLoader {
 
         String pathnames = (String) plugInConfig.getProperties().get("pathnames");
         ValidatorResources resources = initResources(pathnames);
-        resources.process();
         return resources;
     }
 
