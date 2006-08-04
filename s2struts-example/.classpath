@@ -7,7 +7,7 @@
 	<classpathentry kind="var" path="TOMCAT_HOME/common/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/javassist-3.0.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/log4j-1.2.13.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-digester-1.6.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-fileupload-1.0.jar"/>
@@ -15,6 +15,8 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/commons-validator-1.2.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/hsqldb-1.8.0.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/poi-2.5.1-final-20040804.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/jaxen-1.1-beta-8.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/nekohtml-0.9.5.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/rhino-1.6r2.jar"/>
