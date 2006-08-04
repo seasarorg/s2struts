@@ -17,12 +17,11 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/hsqldb-1.8.0.1.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/poi-2.5.1-final-20040804.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/jaxen-1.1-beta-8.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jaxen-1.1-beta-9.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/nekohtml-0.9.5.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/rhino-1.6r2.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/xercesImpl-2.7.1.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/xml-apis-1.3.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/mayaa-1.0.4.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/struts-1.2.9.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/geronimo-jta_1.0.1B_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/ognl-2.6.7.jar"/>
@@ -31,5 +30,6 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.4.0-beta-4.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.3.0-beta-2-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-tiger-1.3.0-beta-2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mayaa-1.0.6.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
