@@ -58,9 +58,11 @@ public class DefaultActionFormNamingRuleTest extends S2TestCase {
     //
 
     public static class FormComponentForm {
+        public static final String FORM = "name = formComponentDto";
     }
 
     public static class DtoComponentDto {
+        public static final String FORM = "name = dtoComponentForm";
     }
 
     public static class NoRegisteredComponentDto {

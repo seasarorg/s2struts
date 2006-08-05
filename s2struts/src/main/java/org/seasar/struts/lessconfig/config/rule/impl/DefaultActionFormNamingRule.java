@@ -3,8 +3,11 @@ package org.seasar.struts.lessconfig.config.rule.impl;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.util.ClassUtil;
+import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.lessconfig.config.rule.CommonNamingRule;
+import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
+import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
 
 /**
  * 
@@ -30,17 +33,24 @@ public class DefaultActionFormNamingRule implements ActionFormNamingRule {
             return container.getComponentDef(name).getComponentClass();
         }
         
+        Class formClass = null;
         if (name.endsWith("Dto")) {
             String componentName = name.substring(0, name.length() - 3) + "Form";
             if (container.hasComponentDef(componentName)) {
-                return container.getComponentDef(componentName).getComponentClass();
+                formClass = container.getComponentDef(componentName).getComponentClass();
             }
         }
-        
         if (name.endsWith("Form")) {
             String componentName = name.substring(0, name.length() - 4) + "Dto";
             if (container.hasComponentDef(componentName)) {
-                return container.getComponentDef(componentName).getComponentClass();
+                formClass = container.getComponentDef(componentName).getComponentClass();
+            }
+        }
+        if (formClass != null) {
+            StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
+            StrutsActionFormConfig strutsActionForm = annHandler.createStrutsActionFormConfig(formClass);
+            if (strutsActionForm != null && name.equals(strutsActionForm.name())) {
+                return formClass;
             }
         }
         
