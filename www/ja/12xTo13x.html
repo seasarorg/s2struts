@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+	<li><a href="#">概要</a></li>
+	<li><a href="#">S2.4への移行</a></li>
+	<li><a href="#">S2Struts1.3.xへの移行</a></li>
+	<li><a href="#">S2StrutsのHOTdeploy対応</a></li>
+	<li><a href="#">無設定S2StrutsのHOTdeploy対応</a></li>
+	<li><a href="#">動作確認</a></li>
+</ul>
+<h2><a name="">概要</a></h2>
+<p>
+S2Struts1.2.xから1.3.xへ移行する手順について、S2StrutsExampleの移行を通して説明します。
+移行するために必要となるファイルはS2StrutsBlank V1.3.xに含まれていますので、あらかじめダウンロードして下さい。
+</p>
+<h2><a name="">S2.4への移行</a></h2>
+<p>
+S2Struts1.3.xはS2.4で動作するため、S2.3からS2.4への移行が必要です。移行は以下の手順で行います。
+</p>
+<ol>
+  <li>jarファイルの置き換え　以下のjarファイルを置き換えてください</li>
+    <ul>
+      <li>s2-framework-2.4.0-beta-5-SNAPSHOT.jar</li>
+      <li>s2-extension-2.4.0-beta-5-SNAPSHOT.jar</li>
+    </ul>
+  <li>diconファイルの追加　以下のdiconファイルをWEB-INF/srcへコピーして下さい</li>
+    <ul>
+      <li>jdbc.dicon</li>
+      <li>convention.dicon</li>
+    </ul>
+  <li>不要なdiconファイルの追加　以下のdiconファイルをWEB-INF/srcから削除して下さい</li>
+    <ul>
+      <li>j2ee.dicon（s2-extension-2.4.0-beta-5-SNAPSHOT.jarに含まれているため削除して下さい）</li>
+    </ul>
+</ol>
+<p>
+jarファイルを置き換えるとAutoRegisterを利用しているdiconファイルでエラーが発生すると思います。
+これはAutoRegisterを利用した場合のコンポーネント名定義方法が変わったためです。
+エラーの発生したdiconファイルをS2.4に対応するために、
+先ほどコピーしたconvention.diconをincludeし、autoNamingプロパティの記述を削除して下さい。
+S2StrutsExample Mod.diconの修正例を以下に示します。
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+
+  <b><font color="red">&lt;!-- convention.diconのincludeを追加する --&gt;
+  &lt;include path="convention.dicon"/&gt;</font></b>
+
+  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    <b><font color="red">&lt;!-- autoNamingプロパティの記述を削除（コメントアウト）する
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    --&gt;</font></b>
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.mod"&lt;/arg&gt;
+      &lt;arg&gt;".*ServiceImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  
+  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="instanceDef"&gt;
+      @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+    &lt;/property&gt;
+    <b><font color="red">&lt;!-- autoNamingプロパティの記述を削除（コメントアウト）する
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    --&gt;</font></b>
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.mod"&lt;/arg&gt;
+      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+&lt;/components&gt;
+</pre>
+<h2><a name="">S2Struts1.3.xへの移行</a></h2>
+<p>
+S2Struts1.3.xへの移行は以下の手順で行います。
+</p>
+<ol>
+  <li>jarファイルの置き換え　以下のjarファイルを置き換えてください</li>
+    <ul>
+      <li>s2-struts-1.3.0-beta-2.jar</li>
+      <li>s2-struts-tiger-1.3.0-beta-2.jar（Tigerアノテーションを利用している場合、置き換えてください）</li>
+      <li>s2-struts-backport175-1.3.0-beta-2.jar（Backport175アノテーションを利用している場合、置き換えてください）</li>
+    </ul>
+  <li>不要なdiconファイルの追加　以下のdiconファイルをWEB-INF/srcから削除して下さい</li>
+    <ul>
+      <li>s2struts.dicon（s2-struts-1.3.0-beta-2.jarに含まれているため削除して下さい）</li>
+    </ul>
+  <li>web.xmlの修正</li>
+    <ul>
+      <li>S2ActionServletを利用していたところをorg.apache.struts.action.ActionServletに戻して下さい。
+          S2ActionServletにはActionを自動的にS2へ登録する機能が含まれていますが、この機能は使わず、
+          S2.4のHOTdeploy / COOLdeploy機能を利用しActionを登録するためです。
+<pre>
+&lt;web-app&gt;
+    :
+    :
+  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    <b><font color="red">&lt;!-- S2ActionServletをActionServletに戻す
+    &lt;servlet-class&gt;org.seasar.struts.servlet.S2ActionServlet&lt;/servlet-class&gt;
+    --&gt;
+    &lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;</font></b>
+    &lt;init-param&gt;
+      &lt;param-name&gt;config&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;debug&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;detail&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+    :
+    :
+&lt;/web-app&gt;
+</pre>
+      </li>
+      <!--
+      <li>
+      </li>
+      -->
+    </ul>
+  <li>struts-config.xmlの修正</li>
+    <ul>
+      <li>org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugInを
+          org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugInに変更して下さい。
+<pre>
+&lt;struts-config&gt;
+    :
+    :
+  <b><font color="red">&lt;!-- PlugInのクラス名を修正
+  &lt;plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn"&gt;
+  --&gt;
+  &lt;plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn"&gt;</font></b>
+    &lt;set-property property="enableJar" value="false"/&gt;
+    &lt;set-property property="docRoot" value="/pages"/&gt;
+  &lt;/plug-in&gt;
+    :
+    :
+&lt;/struts-config&gt;
+</pre>
+      </li>
+    </ul>
+</ol>
+<!--
+<p>
+RequestProcessor.diconがエラーになるため削除する必要があるけど、
+ちょっとわき道にそれてしまうから移行手順として書く必要はないかも
+</p>
+-->
+<h2><a name="">S2StrutsのHOTdeploy対応</a></h2>
+<p>
+struts-config.xml、validation.xml、application.propertiesの変更がすぐに反映させるためには以下の修正が必要です。
+</p>
+<ol>
+  <li>struts-config.xmlの修正</li>
+    <ul>
+      <li>org.seasar.struts.hotdeploy.plugin.HotdeployPlugInを追加して下さい。
+<pre>
+&lt;struts-config&gt;
+    :
+    :
+  <b><font color="red">&lt;!-- HotdeployPlugInの追加 --&gt;
+  &lt;plug-in className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/&gt;</font></b>
+    :
+    :
+&lt;/struts-config&gt;
+</pre>
+      </li>
+    </ul>
+  <li>app.diconの修正</li>
+    <ul>
+      <li>add.diconにs2struts-hotdeploy.diconを追加します。
+          環境によりHOTdeploy / COOLdeployの切り替えを行えるようにするために条件付includeとします。
+<pre>
+&lt;components&gt;
+  <b><font color="red">&lt;include condition="#ENV != 'ut'" path="s2struts.dicon"/&gt;
+  &lt;include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/&gt;</font></b>
+    :
+    :
+&lt;/components&gt;
+</pre>
+      </li>
+    </ul>
+  <li>env.txtの追加</li>
+    <ul>
+      <li>条件付includeで利用する環境名をenv.txtに書き、WEB-INF/srcへ追加します。
+          HOTdeployを利用するため環境名は「ut」とします。
+      </li>
+    </ul>
+</ol>
+<p>
+これでstruts-config.xml、validation.xml、application.properties（リソースファイル）の変更が即時反映されるようになります。
+Tomcatを起動し、試してください。
+</p>
+<h2><a name="">無設定S2StrutsのHOTdeploy対応</a></h2>
+<p>
+...
+</p>
+<h2><a name="">動作確認</a></h2>
+<p>
+...
+</p>
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Foundation and the others 2004-2005, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
