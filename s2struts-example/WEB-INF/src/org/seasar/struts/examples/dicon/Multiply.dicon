@@ -2,11 +2,12 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
-	<include path="convention.dicon"/>
-
 	<component name="traceInterceptor" class="org.seasar.framework.aop.interceptors.TraceInterceptor"/>
 
 	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+		<property name="autoNaming">
+			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
+		</property>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.multiply"</arg>
 			<arg>".*ServiceImpl"</arg>
@@ -16,6 +17,9 @@
 	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
 		<property name="instanceDef">
 			@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+		</property>
+		<property name="autoNaming">
+			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.multiply"</arg>

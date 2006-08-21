@@ -4,7 +4,6 @@
 <components>
 	<include path="dao.dicon"/>
 	<include path="aop.dicon"/>
-	<include path="convention.dicon"/>
 
 	<component name="daoInterceptorChain" class="org.seasar.framework.aop.interceptors.InterceptorChain">
 		<initMethod name="add"><arg>aop.traceInterceptor</arg></initMethod>
@@ -13,6 +12,9 @@
 
     <!-- auto registration -->
 	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+		<property name="autoNaming">
+			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
+		</property>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.employee.dao"</arg>
 			<arg>".*Dao"</arg>
