@@ -5,18 +5,18 @@
 	<classpathentry output="target/test-classes" kind="src" path="src/test/java"/>
 	<classpathentry output="target/test-classes" kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.3.jar"/>
 	<classpathentry kind="lib" path="lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/ognl-2.6.7.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.13.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-digester-1.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-validator-1.2.0.jar"/>
-	<classpathentry kind="lib" path="lib/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/junit-3.8.2.jar"/>
 	<classpathentry kind="lib" path="lib/struts-1.2.9.jar"/>
-	<classpathentry kind="lib" path="lib/ognl-2.6.7.jar"/>
-	<classpathentry kind="lib" path="lib/s2-extension-2.4.0-beta-4.jar"/>
-	<classpathentry kind="lib" path="lib/s2-framework-2.4.0-beta-4.jar"/>
-	<classpathentry kind="lib" path="lib/servlet-api-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/s2-extension-2.4.0-rc-1.jar"/>
+	<classpathentry kind="lib" path="lib/s2-framework-2.4.0-rc-1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
