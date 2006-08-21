@@ -33,9 +33,9 @@
 	<classpathentry kind="lib" path="lib/servlets-default-5.0.28.jar"/>
 	<classpathentry kind="lib" path="lib/servlets-ssi-5.0.16.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-util-5.0.28.jar"/>
-	<classpathentry kind="lib" path="lib/struts-1.2.8.jar"/>
-	<classpathentry kind="lib" path="lib/s2-struts-1.2.2.jar"/>
-	<classpathentry kind="lib" path="lib/s2-extension-2.3.7.jar"/>
-	<classpathentry kind="lib" path="lib/s2-framework-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/s2-extension-2.3.11.jar"/>
+	<classpathentry kind="lib" path="lib/s2-framework-2.3.11.jar"/>
+	<classpathentry kind="lib" path="lib/s2-struts-1.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/struts-1.2.9.jar"/>
 	<classpathentry kind="output" path="s2-struts-unit/target/classes"/>
 </classpath>
