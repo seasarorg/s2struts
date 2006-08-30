@@ -46,6 +46,10 @@ public class ClassPool {
     public void loadAllClass(String classpath, boolean enableJar, String jarFilePattern,
             String pattern) {
         File path = new File(classpath);
+        loadAllClass(path, enableJar, jarFilePattern, pattern);
+    }
+    
+    public void loadAllClass(File path, boolean enableJar, String jarFilePattern, String pattern) {
         if (!path.exists()) {
             return;
         }

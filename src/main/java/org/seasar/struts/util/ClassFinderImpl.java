@@ -16,16 +16,10 @@
 package org.seasar.struts.util;
 
 import java.io.File;
-import java.net.URL;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.servlet.GenericServlet;
-
-import org.seasar.framework.util.ResourceUtil;
-import org.seasar.framework.util.URLUtil;
 
 /**
  * @author Satoshi Kimura
@@ -40,14 +34,6 @@ public class ClassFinderImpl implements ClassFinder {
     private static final String ALL_MATCHE_PATTERN = ".*";
 
     private ClassPool classPool = new ClassPool();
-
-    protected Map strategies = new HashMap();
-
-    public ClassFinderImpl() {
-        strategies.put("file", new FileSystemStrategy());
-        strategies.put("jar", new JarFileStrategy());
-        strategies.put("zip", new ZipFileStrategy());
-    }
 
     public synchronized Collection getClassCollection() {
         return this.classPool.getClassCollection();
@@ -89,11 +75,11 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find(File file, boolean enableJar, String jarFilePattern) {
-        find(file.getAbsolutePath(), enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
+        find(file, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
     }
 
     public void find(File file, boolean enableJar, String jarFilePattern, String pattern) {
-        this.classPool.loadAllClass(file.getAbsolutePath(), enableJar, jarFilePattern, pattern);
+        this.classPool.loadAllClass(file, enableJar, jarFilePattern, pattern);
     }
 
     public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern) {
@@ -123,70 +109,8 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find(Class referenceClass, String pattern) {
-        String baseClassPath = ResourceUtil.getResourcePath(referenceClass);
-        URL url = ResourceUtil.getResource(baseClassPath);
-        Strategy strategy = (Strategy) strategies.get(url.getProtocol());
-        strategy.registerAll(referenceClass, url, pattern);
-    }
-
-    //
-    //
-    //
-
-    protected interface Strategy {
-        void registerAll(Class referenceClass, URL url, String pattern);
-    }
-
-    protected class FileSystemStrategy implements Strategy {
-
-        public void registerAll(final Class referenceClass, final URL url, final String pattern) {
-            final File rootDir = getRootDir(referenceClass, url);
-            classPool.loadFromDir(rootDir, rootDir, pattern);
-        }
-
-        protected File getRootDir(final Class referenceClass, final URL url) {
-            final String[] names = referenceClass.getName().split("\\.");
-            File path = ResourceUtil.getFile(url);
-            for (int i = 0; i < names.length; ++i) {
-                path = path.getParentFile();
-            }
-            return path;
-        }
-
-    }
-
-    protected class JarFileStrategy implements Strategy {
-
-        public void registerAll(final Class referenceClass, final URL url, final String pattern) {
-            final File jarFile = createFile(url);
-            classPool.loadFromJar(jarFile, ALL_MATCHE_PATTERN, pattern);
-        }
-
-        protected File createFile(final URL url) {
-            final URL nestedUrl = URLUtil.create(url.getPath());
-            String path = nestedUrl.getPath();
-            int pos = path.lastIndexOf('!');
-            String jarFileName = path.substring(0, pos);
-            return new File(jarFileName);
-        }
-    }
-
-    /**
-     * WebLogic固有の<code>zip:</code>プロトコルで表現されるURLをサポートするストラテジです。
-     */
-    protected class ZipFileStrategy implements Strategy {
-
-        public void registerAll(final Class referenceClass, final URL url, final String pattern) {
-            final File jarFile = createFile(url);
-            classPool.loadFromJar(jarFile, ALL_MATCHE_PATTERN, pattern);
-        }
-
-        protected File createFile(final URL url) {
-            final String urlString = ResourceUtil.toExternalForm(url);
-            final int pos = urlString.lastIndexOf('!');
-            final String jarFileName = urlString.substring("zip:".length(), pos);
-            return new File(jarFileName);
-        }
+        File file = WebResourceUtil.createFile(referenceClass);
+        this.classPool.loadAllClass(file, true, ALL_MATCHE_PATTERN, pattern);
     }
 
 }
