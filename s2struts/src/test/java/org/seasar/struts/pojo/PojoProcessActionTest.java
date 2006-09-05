@@ -19,7 +19,7 @@ public class PojoProcessActionTest extends S2TestCase {
     }
 
     public void testExecute() throws Exception {
-        action.addPojoCommnad(new PojoCommand() {
+        action.addPojoCommand(new PojoCommand() {
             public String execute(PojoInvocation invocation) {
                 return "success";
             }
@@ -37,7 +37,7 @@ public class PojoProcessActionTest extends S2TestCase {
     }
 
     public void testExecuteDownload() throws Exception {
-        action.addPojoCommnad(new PojoCommand() {
+        action.addPojoCommand(new PojoCommand() {
             public String execute(PojoInvocation invocation) {
                 return null;
             }
@@ -69,7 +69,7 @@ public class PojoProcessActionTest extends S2TestCase {
     }
 
     public void testNotExecuteBecauseNotCalledAction() throws Exception {
-        action.addPojoCommnad(new PojoCommand() {
+        action.addPojoCommand(new PojoCommand() {
             public String execute(PojoInvocation invocation) {
                 return invocation.execute();
             }
@@ -90,7 +90,7 @@ public class PojoProcessActionTest extends S2TestCase {
     }
 
     public void testNotExecuteBecauseNotFoundComponent() throws Exception {
-        action.addPojoCommnad(new PojoCommand() {
+        action.addPojoCommand(new PojoCommand() {
             public String execute(PojoInvocation invocation) {
                 return "success";
             }

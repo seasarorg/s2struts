@@ -13,15 +13,26 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.lessconfig.factory;
+package org.seasar.struts.lessconfig.validator.config.impl;
 
-import org.apache.commons.validator.Form;
+import java.util.Map;
+
+import org.apache.commons.validator.Field;
+import org.apache.commons.validator.Var;
+import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
 
 /**
- * @author Katsuhiko Nagashima
+ * @author Satsohi Kimura
  */
-public interface ValidatorAnnotationHandler {
+public class CharacterPatternConfigRegisterImpl implements ConfigRegister {
 
-    Form createForm(String formName, Class formClass);
+    public void register(Field field, Map parameter) {
+        String pattern = (String) parameter.get("value");
+
+        Var var = new Var();
+        var.setName("datePattern");
+        var.setValue(pattern);
+        field.addVar(var);
+    }
 
 }

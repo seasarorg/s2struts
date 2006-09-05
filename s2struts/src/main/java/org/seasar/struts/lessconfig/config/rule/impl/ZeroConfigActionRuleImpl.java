@@ -120,7 +120,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         return null;
     }
 
-    public void addFowardConfig(Class actionClass, ActionConfig actionConfig, ServletContext servletContext) {
+    public void addForwardConfig(Class actionClass, ActionConfig actionConfig, ServletContext servletContext) {
         ForwardConfig forwardConfig = actionConfig.findForwardConfig(Constants.SUCCESS);
         if (forwardConfig != null) {
             return;
@@ -135,13 +135,13 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
 
             path = getExistFilePath(this.configRule.getDocRoot(), packageDir, file, actionConfig, servletContext);
             if (path != null) {
-                addFowardConfig(path, actionConfig);
+                addForwardConfig(path, actionConfig);
                 return;
             }
         }
     }
 
-    private void addFowardConfig(String path, ActionConfig actionConfig) {
+    private void addForwardConfig(String path, ActionConfig actionConfig) {
         ForwardConfig forwardConfig = new ActionForward();
         forwardConfig.setName(Constants.SUCCESS);
         forwardConfig.setPath(path);

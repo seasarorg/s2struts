@@ -19,6 +19,6 @@ public interface TestStrutsConfigAnnotationAction {
 
     String CONST = "const";
 
-    public String exe();
+    String exe();
 
 }

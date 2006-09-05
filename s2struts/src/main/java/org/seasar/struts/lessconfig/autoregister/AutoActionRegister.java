@@ -91,7 +91,7 @@ public class AutoActionRegister {
         actionConfig.setValidate(getValidate(strutsAction, actionClass, config));
         actionConfig.setCancellable(getCancellable(strutsAction, actionClass, config));
 
-        registerFowardConfigs(servletContext, actionConfig, actionClass);
+        registerForwardConfigs(servletContext, actionConfig, actionClass);
 
         config.addActionConfig(actionConfig);
 
@@ -119,7 +119,7 @@ public class AutoActionRegister {
         return false;
     }
 
-    private static void registerFowardConfigs(ServletContext servletContext, ActionConfig actionConfig,
+    private static void registerForwardConfigs(ServletContext servletContext, ActionConfig actionConfig,
             Class actionClass) {
         Field[] fields = actionClass.getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
@@ -136,7 +136,7 @@ public class AutoActionRegister {
             }
         }
         if (matchesActionClassPattern(actionClass)) {
-            rule().addFowardConfig(actionClass, actionConfig, servletContext);
+            rule().addForwardConfig(actionClass, actionConfig, servletContext);
         }
     }
 

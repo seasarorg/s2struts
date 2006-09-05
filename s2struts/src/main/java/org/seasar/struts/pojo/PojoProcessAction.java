@@ -45,7 +45,7 @@ public class PojoProcessAction extends Action {
 
     private List pojoCommands = new ArrayList();
 
-    public void addPojoCommnad(PojoCommand pojoCommand) {
+    public void addPojoCommand(PojoCommand pojoCommand) {
         this.pojoCommands.add(pojoCommand);
     }
 

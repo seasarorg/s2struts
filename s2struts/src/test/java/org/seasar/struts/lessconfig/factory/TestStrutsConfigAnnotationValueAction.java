@@ -17,6 +17,6 @@ public interface TestStrutsConfigAnnotationValueAction {
     
     String SUCCESS3 = "success";
 
-    public String exe();
+    String exe();
 
 }

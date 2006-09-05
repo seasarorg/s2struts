@@ -130,7 +130,7 @@ public class TestValidatorAnnotationForm {
 
     public static final String array_VALIDATOR_ARGS = "Array, resource=false";
 
-    public void setArray(String[] arrasy) {
+    public void setArray(String[] arrays) {
     }
 
     public static final String autoArray_VALIDATOR_ARGS = "AutoArray, resource=false";

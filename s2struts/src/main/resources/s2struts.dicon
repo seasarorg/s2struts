@@ -13,9 +13,9 @@
 
 	<!-- New RequestProcessor -->
 	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
-		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
-		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
-		<initMethod name="addPojoCommnad"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
 	</component>
 	<component name="requestProcessor"             class="org.seasar.struts.processor.InternalS2RequestProcessor" instance="prototype">
 		<aspect pointcut="processMultipart">

@@ -26,10 +26,10 @@ import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
  */
 public interface StrutsConfigAnnotationHandler {
 
-    public StrutsActionConfig createStrutsActionConfig(Class clazz);
+    StrutsActionConfig createStrutsActionConfig(Class clazz);
 
-    public StrutsActionForwardConfig createStrutsActionForwardConfig(Field field);
+    StrutsActionForwardConfig createStrutsActionForwardConfig(Field field);
 
-    public StrutsActionFormConfig createStrutsActionFormConfig(Class clazz);
+    StrutsActionFormConfig createStrutsActionFormConfig(Class clazz);
 
 }

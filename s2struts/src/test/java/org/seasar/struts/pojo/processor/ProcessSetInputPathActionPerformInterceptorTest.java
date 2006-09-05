@@ -39,8 +39,8 @@ public class ProcessSetInputPathActionPerformInterceptorTest extends S2TestCase 
         S2StrutsContextUtil.setPath("/previous.html");
         S2StrutsContextUtil.setPath("/current.html");
 
-        ActionForward foward = this.processor.processActionPerform(request, response, action, from, mapping);
-        assertEquals(foward.getPath(), S2StrutsContextUtil.getCurrentInputPath());
+        ActionForward forward = this.processor.processActionPerform(request, response, action, from, mapping);
+        assertEquals(forward.getPath(), S2StrutsContextUtil.getCurrentInputPath());
     }
 
 }

@@ -24,6 +24,6 @@ import org.seasar.struts.pojo.config.ActionPropertyConfig;
  */
 public interface ActionAnnotationHandler {
 
-    public ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc);
+    ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc);
 
 }

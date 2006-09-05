@@ -115,12 +115,12 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
         actionConfig.setValidate(getValidate(strutsAction, actionClass, config));
         actionConfig.setCancellable(getCancellable(strutsAction, actionClass, config));
 
-        registerFowardConfigs(actionConfig, actionClass);
+        registerForwardConfigs(actionConfig, actionClass);
 
         return actionConfig;
     }
 
-    private void registerFowardConfigs(ActionConfig actionConfig, Class actionClass) {
+    private void registerForwardConfigs(ActionConfig actionConfig, Class actionClass) {
 
         Field[] fields = actionClass.getFields();
         for (int i = 0; i < fields.length; i++) {
@@ -136,7 +136,7 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
                 actionConfig.addForwardConfig(forwardConfig);
             }
         }
-        this.defaultRule.addFowardConfig(actionClass, actionConfig, this.servletContext);
+        this.defaultRule.addForwardConfig(actionClass, actionConfig, this.servletContext);
     }
 
     private String getAttribute(StrutsActionConfig action, Class actionClass, ModuleConfig config) {

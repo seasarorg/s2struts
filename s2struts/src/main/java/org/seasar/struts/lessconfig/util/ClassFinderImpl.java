@@ -45,7 +45,7 @@ public class ClassFinderImpl implements ClassFinder {
 
     private static final String WEB_LIB_DIR = "/WEB-INF/lib";
     
-    private static final String ALL_MATCHE_PATTERN = ".*";
+    private static final String ALL_MATCH_PATTERN = ".*";
 
     private Collection classCollection = new ArrayList();
 
@@ -53,16 +53,16 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find() {
-        find(ALL_MATCHE_PATTERN);
+        find(ALL_MATCH_PATTERN);
     }
 
     public void find(String pattern) {
-        find(true, ALL_MATCHE_PATTERN, pattern);
+        find(true, ALL_MATCH_PATTERN, pattern);
 
     }
 
     public void find(boolean enableJar, String jarFilePattern) {
-        find(enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
+        find(enableJar, jarFilePattern, ALL_MATCH_PATTERN);
     }
 
     public void find(boolean enableJar, String jarFilePattern, String pattern) {
@@ -76,7 +76,7 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find(String path, boolean enableJar, String jarFilePattern) {
-        find(path, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
+        find(path, enableJar, jarFilePattern, ALL_MATCH_PATTERN);
     }
 
     public void find(String path, boolean enableJar, String jarFilePattern, String pattern) {
@@ -84,7 +84,7 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find(File file, boolean enableJar, String jarFilePattern) {
-        find(file.getAbsolutePath(), enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
+        find(file.getAbsolutePath(), enableJar, jarFilePattern, ALL_MATCH_PATTERN);
     }
 
     public void find(File file, boolean enableJar, String jarFilePattern, String pattern) {
@@ -92,7 +92,7 @@ public class ClassFinderImpl implements ClassFinder {
     }
 
     public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern) {
-        find(servlet, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
+        find(servlet, enableJar, jarFilePattern, ALL_MATCH_PATTERN);
     }
 
     public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern, String pattern) {
