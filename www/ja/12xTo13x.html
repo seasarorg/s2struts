@@ -53,52 +53,6 @@ S2Struts1.3.x‚ÍS2.4‚Å“®ì‚·‚é‚½‚ßAS2.3‚©‚çS2.4‚Ö‚ÌˆÚs‚ª•K—v‚Å‚·BˆÚs‚ÍˆÈ‰º‚Ì
     <li>j2ee.diconis2-extension-2.4.0-rc-1.jar‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚½‚ßíœ‚µ‚Ä‚­‚¾‚³‚¢j</li>
   </ul>
 </ol>
-<!--
-<p>
-jarƒtƒ@ƒCƒ‹‚ğ’u‚«Š·‚¦‚é‚ÆAutoRegister‚ğ—˜—p‚µ‚Ä‚¢‚édiconƒtƒ@ƒCƒ‹‚ÅƒGƒ‰[‚ª”­¶‚·‚é‚Æv‚¢‚Ü‚·B
-‚±‚ê‚ÍAutoRegister‚ğ—˜—p‚µ‚½ê‡‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg–¼’è‹`•û–@‚ª•Ï‚í‚Á‚½‚½‚ß‚Å‚·B
-ƒGƒ‰[‚Ì”­¶‚µ‚½diconƒtƒ@ƒCƒ‹‚ğS2.4‚É‘Î‰‚·‚é‚½‚ß‚ÉA
-æ‚Ù‚ÇƒRƒs[‚µ‚½convention.dicon‚ğinclude‚µAautoNamingƒvƒƒpƒeƒB‚Ì‹Lq‚ğíœ‚µ‚Ä‚­‚¾‚³‚¢B
-S2StrutsExample Mod.dicon‚ÌC³—á‚ğˆÈ‰º‚É¦‚µ‚Ü‚·B
-</p>
-<pre>
-&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
-&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
-  "http://www.seasar.org/dtd/components21.dtd"&gt;
-&lt;components&gt;
-
-  <b><font color="red">&lt;!-- convention.dicon‚Ìinclude‚ğ’Ç‰Á‚·‚é --&gt;
-  &lt;include path="convention.dicon"/&gt;</font></b>
-
-  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
-    <b><font color="red">&lt;!-- autoNamingƒvƒƒpƒeƒB‚Ì‹Lq‚ğíœiƒRƒƒ“ƒgƒAƒEƒgj‚·‚é
-    &lt;property name="autoNaming"&gt;
-      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
-    &lt;/property&gt;
-    --&gt;</font></b>
-    &lt;initMethod name="addClassPattern"&gt;
-      &lt;arg&gt;"org.seasar.struts.examples.mod"&lt;/arg&gt;
-      &lt;arg&gt;".*ServiceImpl"&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;
-  
-  &lt;component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
-    &lt;property name="instanceDef"&gt;
-      @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
-    &lt;/property&gt;
-    <b><font color="red">&lt;!-- autoNamingƒvƒƒpƒeƒB‚Ì‹Lq‚ğíœiƒRƒƒ“ƒgƒAƒEƒgj‚·‚é
-    &lt;property name="autoNaming"&gt;
-      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
-    &lt;/property&gt;
-    --&gt;</font></b>
-    &lt;initMethod name="addClassPattern"&gt;
-      &lt;arg&gt;"org.seasar.struts.examples.mod"&lt;/arg&gt;
-      &lt;arg&gt;".*ActionImpl"&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;
-&lt;/components&gt;
-</pre>
--->
 <h2><a name="">S2Struts1.3.x‚Ö‚ÌˆÚs</a></h2>
 <p>
 S2Struts1.3.x‚Ö‚ÌˆÚs‚ÍˆÈ‰º‚Ìè‡‚Ås‚¢‚Ü‚·B
@@ -395,11 +349,12 @@ Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º
   &lt;include condition="#ENV == 'ut'" path="employee-hotdeploy.dicon"/&gt;
 &lt;/components&gt;
 </pre>
-    <li>Action/Logic/Dao‚ª—˜—p‚·‚é‹¤’Ê‚Ìdiconƒtƒ@ƒCƒ‹iaop.diconAdao.diconj‚ğapp.dicon‚ÉƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B</li>
+    <li>Action/Logic/Dao‚ª—˜—p‚·‚é‹¤’Ê‚Ìdiconƒtƒ@ƒCƒ‹iconvention.diconAaop.diconAdao.diconj‚ğapp.dicon‚ÉƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B</li>
 <pre>
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
   "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
+  &lt;include path="convention.dicon"/&gt;
   &lt;include path="aop.dicon"/&gt;
   &lt;include path="dao.dicon"/&gt;
     :
