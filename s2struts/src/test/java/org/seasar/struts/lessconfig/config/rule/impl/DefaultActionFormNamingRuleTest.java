@@ -17,7 +17,7 @@ public class DefaultActionFormNamingRuleTest extends S2TestCase {
         assertEquals(FormComponentForm.class, clazz);
     }
 
-    public void testToComponentClassAutoConverteFormComponentName() {
+    public void testToComponentClassAutoConvertFormComponentName() {
         assertFalse(this.getContainer().hasComponentDef("formComponentDto"));
         Class clazz = this.namingRule.toComponentClass("formComponentDto");
         assertEquals(FormComponentForm.class, clazz);
@@ -29,7 +29,7 @@ public class DefaultActionFormNamingRuleTest extends S2TestCase {
         assertEquals(DtoComponentDto.class, clazz);
     }
 
-    public void testToComponentClassAutoConverteDtoComponentName() {
+    public void testToComponentClassAutoConvertDtoComponentName() {
         assertFalse(this.getContainer().hasComponentDef("dtoComponentForm"));
         Class clazz = this.namingRule.toComponentClass("dtoComponentForm");
         assertEquals(DtoComponentDto.class, clazz);

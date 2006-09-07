@@ -51,7 +51,7 @@ public class ConstantValueUtilTest extends TestCase {
         }
     }
 
-    public void testToMapValueEnclosedWithSingleCortation() {
+    public void testToMapValueEnclosedWithSingleQuotation() {
         Map result = ConstantValueUtil.toMap("value1 = 'aaa, bbb', value2='bbb, ccc'");
 
         assertEquals(2, result.size());
@@ -59,7 +59,7 @@ public class ConstantValueUtilTest extends TestCase {
         assertEquals("bbb, ccc", result.get("value2"));
     }
 
-    public void testToMapEmptyValueEnclosedWithSingleCortation() {
+    public void testToMapEmptyValueEnclosedWithSingleQuotation() {
         Map result = ConstantValueUtil.toMap("value1 = '', value2=''");
 
         assertEquals(2, result.size());
@@ -67,7 +67,7 @@ public class ConstantValueUtilTest extends TestCase {
         assertEquals("", result.get("value2"));
     }
 
-    public void testToMapValueEnclosedWithDoubleCortation() {
+    public void testToMapValueEnclosedWithDoubleQuotation() {
         Map result = ConstantValueUtil.toMap("value1 = \"aaa, bbb\", value2=\"bbb, ccc\"");
 
         assertEquals(2, result.size());
@@ -75,7 +75,7 @@ public class ConstantValueUtilTest extends TestCase {
         assertEquals("bbb, ccc", result.get("value2"));
     }
 
-    public void testToMapEmptyValueEnclosedWithDoubleCortation() {
+    public void testToMapEmptyValueEnclosedWithDoubleQuotation() {
         Map result = ConstantValueUtil.toMap("value1 = \"\", value2=\"\"");
 
         assertEquals(2, result.size());
@@ -83,7 +83,7 @@ public class ConstantValueUtilTest extends TestCase {
         assertEquals("", result.get("value2"));
     }
 
-    public void testToMapValueNoCloseSingleCortation1() {
+    public void testToMapValueNoCloseSingleQuotation1() {
         try {
             ConstantValueUtil.toMap("value1 = 'aaa, bbb', value2='bbb, ccc");
             fail();
@@ -92,7 +92,7 @@ public class ConstantValueUtilTest extends TestCase {
         }
     }
 
-    public void testToMapValueNoCloseSingleCortation2() {
+    public void testToMapValueNoCloseSingleQuotation2() {
         try {
             ConstantValueUtil.toMap("value1 = 'aaa, bbb, value2='bbb, ccc'");
             fail();

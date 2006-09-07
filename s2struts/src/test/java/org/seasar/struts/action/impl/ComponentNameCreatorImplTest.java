@@ -51,11 +51,11 @@ public class ComponentNameCreatorImplTest extends S2TestCase {
         assertEquals("/path", componentName);
     }
 
-    public void setUpCreateComponentNameOnluPath() {
+    public void setUpCreateComponentNameOnlyPath() {
         include("ComponentNameCreatorImplTest.dicon");
     }
 
-    public void testCreateComponentNameOnluPath() {
+    public void testCreateComponentNameOnlyPath() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ActionMapping mapping = new ActionMapping();
         String moduleName = "";
