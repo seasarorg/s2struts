@@ -16,10 +16,13 @@
 package org.seasar.struts.util;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.seasar.framework.exception.IORuntimeException;
 import org.seasar.framework.util.ResourceUtil;
 import org.seasar.framework.util.URLUtil;
 
@@ -62,7 +65,7 @@ public class WebResourceUtil {
     //
     //
     //
-
+    
     protected interface Strategy {
         File createFile(final Class referenceClass, final URL url);
     }
@@ -87,8 +90,17 @@ public class WebResourceUtil {
             String path = nestedUrl.getPath();
             int pos = path.lastIndexOf('!');
             String jarFileName = path.substring(0, pos);
-            return new File(jarFileName);
+            return new File(decode(jarFileName));
         }
+        
+        private String decode(String jarFileName) {
+            try {
+                return URLDecoder.decode(jarFileName, "UTF8");
+            } catch (final UnsupportedEncodingException e) {
+                throw new IORuntimeException(e);
+            }
+        }
+
     }
 
     /**
