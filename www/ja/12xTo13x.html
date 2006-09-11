@@ -40,8 +40,8 @@ S2Struts1.3.x‚ÍS2.4‚Å“®ì‚·‚é‚½‚ßAS2.3‚©‚çS2.4‚Ö‚ÌˆÚs‚ª•K—v‚Å‚·BˆÚs‚ÍˆÈ‰º‚Ì
 <ol>
   <li>jarƒtƒ@ƒCƒ‹‚Ì’u‚«Š·‚¦@ˆÈ‰º‚Ìjarƒtƒ@ƒCƒ‹‚ğ’u‚«Š·‚¦‚Ü‚·</li>
   <ul>
-    <li>s2-framework-2.4.0-rc-1.jar</li>
-    <li>s2-extension-2.4.0-rc-1.jar</li>
+    <li>s2-framework-2.4.0-rc-2.jar</li>
+    <li>s2-extension-2.4.0-rc-2.jar</li>
   </ul>
   <li>diconƒtƒ@ƒCƒ‹‚Ì’Ç‰Á@ˆÈ‰º‚Ìdiconƒtƒ@ƒCƒ‹‚ğWEB-INF/src‚ÖƒRƒs[‚µ‚Ü‚·</li>
   <ul>
@@ -50,7 +50,7 @@ S2Struts1.3.x‚ÍS2.4‚Å“®ì‚·‚é‚½‚ßAS2.3‚©‚çS2.4‚Ö‚ÌˆÚs‚ª•K—v‚Å‚·BˆÚs‚ÍˆÈ‰º‚Ì
   </ul>
   <li>•s—v‚Èdiconƒtƒ@ƒCƒ‹‚Ìíœ@ˆÈ‰º‚Ìdiconƒtƒ@ƒCƒ‹‚ğWEB-INF/src‚©‚çíœ‚µ‚Ü‚·</li>
   <ul>
-    <li>j2ee.diconis2-extension-2.4.0-rc-1.jar‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚½‚ßíœ‚µ‚Ä‚­‚¾‚³‚¢j</li>
+    <li>j2ee.diconis2-extension-2.4.0-rc-2.jar‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚½‚ßíœ‚µ‚Ä‚­‚¾‚³‚¢j</li>
   </ul>
 </ol>
 <h2><a name="">S2Struts1.3.x‚Ö‚ÌˆÚs</a></h2>
@@ -248,9 +248,24 @@ S2.4‚ª„§‚·‚éƒfƒBƒŒƒNƒgƒŠ\¬‚É‹ß‚¢
 Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º‚Ìè‡‚Ås‚¢‚Ü‚·B
 </p>
 <ol>
-  <li>employee-customizer.dicon‚Ìì¬</li>
+  <li>convention.dicon‚ÌC³</li>
   <ul>
-    <li>Employee‹@”\‚Å‚ÍAAction/DTO/Logic/Dao‚ğ—˜—p‚µ‚Ä‚¢‚Ü‚·B‚»‚ê‚¼‚ê‚ÌCustomizer‚ğˆÈ‰º‚Ì‚æ‚¤‚É’è‹`‚µ‚Ü‚·B</li>
+    <li>RootPackageName‚ğ’Ç‰Á‚µ‚Ü‚·B</li>
+<pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;component class="org.seasar.framework.convention.impl.NamingConventionImpl"&gt;
+    <b><font color="red">&lt;initMethod name="addRootPackageName"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.employee"&lt;/arg&gt;
+    &lt;/initMethod&gt;</font></b>
+  &lt;/component&gt;
+&lt;/components&gt;
+</pre>
+  </ul>
+  <li>customizer.dicon‚Ìì¬</li>
+  <ul>
+    <li>Employee‹@”\‚Å‚ÍAAction/DTO/Logic/Dao‚ğ—˜—p‚µ‚Ä‚¢‚Ü‚·B‚»‚ê‚¼‚ê‚ÌCustomizer‚ğ’è‹`‚µ‚Ü‚·B</li>
 <pre>
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
   "http://www.seasar.org/dtd/components24.dtd"&gt;
@@ -259,97 +274,91 @@ Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º
   &lt;include path="dao.dicon"/&gt;
 
   &lt;component name="traceAspectCustomizer"
-      class="org.seasar.framework.container.autoregister.AspectCustomizer"&gt;
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
     &lt;property name="interceptorName"&gt;"aop.traceInterceptor"&lt;/property&gt;
   &lt;/component&gt;
   
   &lt;component name="traceThrowsAspectCustomizer"
-      class="org.seasar.framework.container.autoregister.AspectCustomizer"&gt;
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
     &lt;property name="interceptorName"&gt;"aop.traceThrowsInterceptor"&lt;/property&gt;
   &lt;/component&gt;
   
   &lt;component name="txAspectCustomizer"
-      class="org.seasar.framework.container.autoregister.AspectCustomizer"&gt;
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
     &lt;property name="interceptorName"&gt;"j2ee.requiredTx"&lt;/property&gt;
   &lt;/component&gt;
   
   &lt;component name="daoAspectCustomizer"
-      class="org.seasar.framework.container.autoregister.AspectCustomizer"&gt;
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
     &lt;property name="interceptorName"&gt;"dao.interceptor"&lt;/property&gt;
   &lt;/component&gt;
   
   &lt;component name="actionCustomizer"
-      class="org.seasar.framework.container.autoregister.CustomizerChain"&gt;
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;traceAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
   &lt;/component&gt;
 
   &lt;component name="dtoCustomizer"
-      class="org.seasar.framework.container.autoregister.CustomizerChain"&gt;
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
   &lt;/component&gt;
 
   &lt;component name="logicCustomizer"
-      class="org.seasar.framework.container.autoregister.CustomizerChain"&gt;
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;traceThrowsAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;traceAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;txAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
   &lt;/component&gt;
 
   &lt;component name="daoCustomizer"
-      class="org.seasar.framework.container.autoregister.CustomizerChain"&gt;
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;traceAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;daoAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
   &lt;/component&gt;
+
 &lt;/components&gt;
 </pre>
   </ul>
-  <li>employee-hotdeploy.dicon‚Ìì¬[S2.4.0-rc-2‚Æ‚È‚Á‚½‚çC³‚ª•K—v]</li>
+  <li>creator.dicon‚Ìì¬</li>
   <ul>
-    <li>HOTdeploy‘ÎÛ‚Æ‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌCreator‚ğ’è‹`‚µ‚Ü‚·B
+    <li>Action/DTO/Logic/Dao‚ÌCreator‚ğ’è‹`‚µ‚Ü‚·B
         Employee‹@”\‚Å‚ÍADTO‚ğActionForm‚Æ‚µ‚Ä—˜—p‚µ‚Ä‚¢‚Ü‚·B
         DTOiActionFormj‚ÌƒCƒ“ƒXƒ^ƒ“ƒXŠÇ—‚ÍS2Container‚Å‚Í‚È‚­Struts‚ªs‚¢‚Ü‚·B
         ‚»‚Ì‚½‚ßADtoOndemandCreator‚ÌinstanceDef‚ğREQUESTiƒfƒtƒHƒ‹ƒgj‚©‚çPROTOTYPE‚É•ÏX‚µ‚Ü‚·B
     </li>
 <pre>
-&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
   "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
   &lt;include path="convention.dicon"/&gt;
-  &lt;include path="employee-customizer.dicon"/&gt;
-
-  &lt;component
-      class="org.seasar.framework.container.hotdeploy.creator.ActionOndemandCreator"/&gt;
-  &lt;component
-      class="org.seasar.framework.container.hotdeploy.creator.DtoOndemandCreator"&gt;
+  &lt;include path="customizer.dicon"/&gt;
+  
+  &lt;component class="org.seasar.framework.container.creator.ActionCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.DtoCreator"&gt;
     <b><font color="red">&lt;property name="instanceDef"&gt;
       @org.seasar.framework.container.deployer.InstanceDefFactory@PROTOTYPE
     &lt;/property&gt;</font></b>
   &lt;/component&gt;
-  &lt;component
-      class="org.seasar.framework.container.hotdeploy.creator.LogicOndemandCreator"/&gt;
-  &lt;component
-      class="org.seasar.framework.container.hotdeploy.creator.DaoOndemandCreator"/&gt;
-  
-  &lt;component class="org.seasar.framework.container.hotdeploy.OndemandBehavior"&gt;
-    &lt;initMethod name="addProject"&gt;
-      &lt;arg&gt;
-        &lt;component
-            class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl"&gt;
-          &lt;property name="rootPackageName"&gt;
-            "org.seasar.struts.examples.employee"
-          &lt;/property&gt;
-        &lt;/component&gt;
-      &lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;
+  &lt;component class="org.seasar.framework.container.creator.LogicCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.DaoCreator"/&gt;
 &lt;/components&gt;
 </pre>
-    <li>ì¬‚µ‚½employee-hotdeploy.dicon‚ğs2container.diocn‚ÉƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B</li>
+  </ul>
+  <li>s2container.dicon‚ÌC³</li>
+  <ul>
+    <li>hotdeploy.dicon‚ğƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B</li>
 <pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
-  &lt;include condition="#ENV == 'ut'" path="employee-hotdeploy.dicon"/&gt;
+  <b><font color="red">&lt;include condition="#ENV == 'ut'" path="hotdeploy.dicon"/&gt;</font></b>
 &lt;/components&gt;
 </pre>
-    <li>Action/Logic/Dao‚ª—˜—p‚·‚é‹¤’Ê‚Ìdiconƒtƒ@ƒCƒ‹iconvention.diconAaop.diconAdao.diconj‚ğapp.dicon‚ÉƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B</li>
+  </ul>
+  <li>app.dicon‚ÌC³</li>
+  <ul>
+    <li>employee.dicon‚Í•s—v‚Æ‚È‚é‚½‚ßƒRƒƒ“ƒgƒAƒEƒg‚µAcooldeploy.dicon‚ğƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B
+        convention.diconAaop.diconAdao.dicon‚ğƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B
+    </li>
 <pre>
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
   "http://www.seasar.org/dtd/components24.dtd"&gt;
@@ -357,102 +366,27 @@ Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º
   &lt;include path="convention.dicon"/&gt;
   &lt;include path="aop.dicon"/&gt;
   &lt;include path="dao.dicon"/&gt;
+
+  &lt;include condition="#ENV != 'ut'" path="s2struts.dicon"/&gt;
+  &lt;include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/&gt;
     :
     :
-&lt;/components&gt;
-</pre>
-  </ul>
-  <li>employee-cooldeploy.dicon‚Ìì¬[S2.4.0-rc-2‚Æ‚È‚Á‚½‚çC³‚ª•K—v]</li>
-  <ul>
-    <li>COOLdeploy‘ÎÛ‚Æ‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌCreator‚ğ’è‹`‚µ‚Ü‚·B
-        employee-hotdeploy.dicon‚Æ“¯—l‚É
-        DtoCoolCreator‚ÌinstanceDef‚ğREQUESTiƒfƒtƒHƒ‹ƒgj‚©‚çPROTOTYPE‚É•ÏX‚µ‚Ü‚·B
-    </li>
-<pre>
-&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
-  "http://www.seasar.org/dtd/components24.dtd"&gt;
-&lt;components&gt;
-  &lt;include path="convention.dicon"/&gt;
-  &lt;include path="employee-customizer.dicon"/&gt;
-  
-  &lt;component class="org.seasar.framework.container.cooldeploy.creator.ActionCoolCreator"&gt;
-    &lt;property name="middlePackageName"&gt;"web"&lt;/property&gt;
-  &lt;/component&gt;
-  &lt;component class="org.seasar.framework.container.cooldeploy.creator.DtoCoolCreator"&gt;
-    <b><font color="red">&lt;property name="instanceDef"&gt;
-      @org.seasar.framework.container.deployer.InstanceDefFactory@PROTOTYPE
-    &lt;/property&gt;</font></b>
-  &lt;/component&gt;
-  &lt;component class="org.seasar.framework.container.cooldeploy.creator.LogicCoolCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.cooldeploy.creator.DaoCoolCreator"/&gt;
-  
-  &lt;component name="project"
-      class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl"&gt;
-    &lt;property name="rootPackageName"&gt;"org.seasar.struts.examples.employee"&lt;/property&gt;
-  &lt;/component&gt;
-  &lt;component class="org.seasar.framework.container.cooldeploy.CoolComponentAutoRegister"&gt;
-    &lt;initMethod name="addProject"&gt;
-      &lt;arg&gt;project&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;
-&lt;/components&gt;
-</pre>
-    <li>ì¬‚µ‚½employee-cooldeploy.dicon‚ğapp.diocn‚ÉƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B</li>
-<pre>
-&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
-  "http://www.seasar.org/dtd/components24.dtd"&gt;
-&lt;components&gt;
-    :
-    :
-  &lt;!--
+  <b><font color="red">&lt;!--
   &lt;include path="org/seasar/struts/examples/dicon/employee.dicon"/&gt;
   --&gt;
-  &lt;include condition="#ENV != 'ut'" path="employee-cooldeploy.dicon"/&gt;
+  &lt;include condition="#ENV != 'ut'" path="cooldeploy.dicon"/&gt;</font></b>
 &lt;/components&gt;
 </pre>
-  </ul>
   </ul>
   <li>S2StrutsExample‚Å‚Í‚³‚ç‚É...</li>
   <ul>
-    <li>ActionƒNƒ‰ƒX‚ª”z’u‚³‚ê‚Ä‚¢‚éƒpƒbƒP[ƒW‚ÍAS2.4‚ª„§‚·‚éƒfƒBƒŒƒNƒgƒŠ\¬‚Æ‚ÍˆÙ‚È‚é‚½‚ßC³‚ª•K—v‚Å‚·B
-        ‚Ü‚¸Aconvention.dicon‚ÌWebŠÖ˜AƒNƒ‰ƒX‚ğ”z’u‚·‚éƒpƒbƒP[ƒW‚ğ"web"iƒfƒtƒHƒ‹ƒg’lj‚©‚ç"action"‚É•ÏX‚µ‚Ü‚·B
-    </li>
-<pre>
-&lt;components&gt;
-  &lt;component class="org.seasar.framework.convention.impl.NamingConventionImpl"&gt;
-    <b><font color="red">&lt;property name="webPackageName"&gt;"action"&lt;/property&gt;</font></b>
-  &lt;/component&gt;
-&lt;/components&gt;
-</pre>
-    <li>WebŠÖ˜AƒNƒ‰ƒX‚Íƒ‹[ƒgƒpƒbƒP[ƒW + webƒpƒbƒP[ƒW("action"‚É•ÏX) + ƒTƒuƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ì”z‰º‚É’u‚­•K—v‚ª‚ ‚è‚Ü‚·B
-        ƒTƒuƒAƒvƒŠƒP[ƒVƒ‡ƒ“–¼‚ğ"employee"‚Æ‚·‚éê‡A
-        ActionƒNƒ‰ƒX‚ğorg.seasar.struts.examples.employee.action‚©‚ç
-        org.seasar.struts.examples.employee.action.employee‚ÉˆÚ“®‚µ‚Ü‚·B
-        ‚ ‚í‚¹‚ÄAAction‚ÌÀ‘•ƒNƒ‰ƒX‚àorg.seasar.struts.examples.employee.action.impl‚©‚ç
-        org.seasar.struts.examples.employee.action.employee.impl‚ÉˆÚ“®‚µ‚Ü‚·B
-    </li>
-    <li>ActionƒNƒ‰ƒX‚ÌˆÚ“®‚É‚æ‚èA
-        ƒRƒ“ƒ|[ƒlƒ“ƒg–¼i"employeeSearchInitAction"‚ª"employee_employeeSearchInitAction"‚Éj‚Æ
-        Action Pathi"/employeeSearch"‚ª"/employee_employeeSearch"‚Éj‚ª•Ï‚í‚è‚Ü‚·B
-        ŠÖŒW‚·‚éMayaaƒtƒ@ƒCƒ‹‚ğC³‚µA
-        ©“®“I‚ÉActionForm‚ğ’è‹`‚µ‚Ä‚¢‚éEmployeeSearchActionƒCƒ“ƒ^[ƒtƒF[ƒX‚Ì
-        StrutsActionƒAƒmƒe[ƒVƒ‡ƒ“‚Éname‘®«‚ğ’Ç‰Á‚µ‚Ü‚·B
-    </li>
-<pre>
-@StrutsAction(<b><font color="red">name = "employeeSearchForm"</font></b>, scope = ScopeType.SESSION)
-public interface EmployeeSearchAction {
-    :
-    :
-}
-</pre>
     <li>HttpSession‚ÉŠi”[‚·‚éƒIƒuƒWƒFƒNƒg‚ÍƒVƒŠƒAƒ‰ƒCƒY‚Å‚«‚é•K—v‚ª‚ ‚è‚Ü‚·B
         Employee‹@”\‚Å‚ÍAProcessModeDto‚ğHttpSession‚ÉŠi”[‚µ‚Ä‚¢‚é‚½‚ßA
         ProcessModeDto‚ÉSerializable‚ğÀ‘•‚µ‚Ü‚·B
     </li>
     <li>Employee‹@”\‚Å‚ÍAS2Dao‚ğ—˜—p‚µ‚Ä‚¢‚é‚½‚ßA
         HOTdeploy‚É‘Î‰‚µ‚Ä‚¢‚éS2Dao‚É’u‚«Š·‚¦‚é•K—v‚ª‚ ‚è‚Ü‚·B
-        s2-dao-1.0.36-SNAPSHOT.jar‚É’u‚«Š·‚¦A
-        s2-dao-1.0.36-SNAPSHOT.jar‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚édao.dicon‚ğíœ‚µ‚Ü‚·B
+        s2-dao-1.0.36-SNAPSHOT.jar‚É’u‚«Š·‚¦Adao.dicon‚ğ/WEB-INF/src‚©‚çíœ‚µ‚Ü‚·B
     </li>
   </ul>
 </ol>
