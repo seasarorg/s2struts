@@ -3,8 +3,8 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<component class="org.seasar.framework.convention.impl.NamingConventionImpl">
-		<!--
-		<property name="webPackageName">"action"</property>
-		-->
+		<initMethod name="addRootPackageName">
+			<arg>"org.seasar.struts.examples.employee"</arg>
+		</initMethod>
 	</component>
 </components>

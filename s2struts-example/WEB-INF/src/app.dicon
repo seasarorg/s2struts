@@ -23,5 +23,5 @@
 	<include path="org/seasar/struts/examples/dicon/Indexed.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Iteration.dicon"/>
 
-	<include condition="#ENV != 'ut'" path="employee-cooldeploy.dicon"/>
+	<include condition="#ENV != 'ut'" path="cooldeploy.dicon"/>
 </components>
