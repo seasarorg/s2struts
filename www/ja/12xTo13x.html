@@ -270,9 +270,6 @@ Employee機能（org.seasar.struts.examples.employeeパッケージ）のHOTdeploy化は以下
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
   "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
-  &lt;include path="aop.dicon"/&gt;
-  &lt;include path="dao.dicon"/&gt;
-
   &lt;component name="traceAspectCustomizer"
       class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
     &lt;property name="interceptorName"&gt;"aop.traceInterceptor"&lt;/property&gt;
@@ -314,7 +311,6 @@ Employee機能（org.seasar.struts.examples.employeeパッケージ）のHOTdeploy化は以下
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;traceAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
     &lt;initMethod name="addCustomizer"&gt;&lt;arg&gt;daoAspectCustomizer&lt;/arg&gt;&lt;/initMethod&gt;
   &lt;/component&gt;
-
 &lt;/components&gt;
 </pre>
   </ul>
