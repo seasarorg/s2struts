@@ -2,9 +2,6 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
 	"http://www.seasar.org/dtd/components24.dtd">
 <components>
-	<include path="aop.dicon"/>
-	<include path="dao.dicon"/>
-
 	<component name="traceAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
 		<property name="interceptorName">"aop.traceInterceptor"</property>
 	</component>
@@ -38,5 +35,4 @@
 		<initMethod name="addCustomizer"><arg>traceAspectCustomizer</arg></initMethod>
 		<initMethod name="addCustomizer"><arg>daoAspectCustomizer</arg></initMethod>
 	</component>
-
 </components>
