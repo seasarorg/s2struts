@@ -56,5 +56,7 @@
         <set-property property="enableJar" value="false"/>
     </plug-in>
 
+    <plug-in className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/>
+
 </struts-config>
 
