@@ -31,6 +31,7 @@ import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
+import org.seasar.struts.lessconfig.util.WebResourceUtil;
 
 /**
  * @author Satoshi Kimura
@@ -133,7 +134,9 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             path = this.configRule.getDocRoot() + file;
             String packageDir = "/" + actionClass.getPackage().getName().replace('.', '/');
 
-            path = getExistFilePath(this.configRule.getDocRoot(), packageDir, file, actionConfig, servletContext);
+            String rootDir = WebResourceUtil.getWebRootDir(this.getClass()).getAbsolutePath();
+            String docRoot = this.configRule.getDocRoot();
+            path = getExistFilePath(rootDir, docRoot, packageDir, file, actionConfig);
             if (path != null) {
                 addForwardConfig(path, actionConfig);
                 return;
@@ -149,16 +152,15 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         actionConfig.addForwardConfig(forwardConfig);
     }
 
-    private String getExistFilePath(String docRoot, String packageDir, String file, ActionConfig actionConfig,
-            ServletContext servletContext) {
+    private String getExistFilePath(String rootDir, String docRoot, String packageDir, String file, ActionConfig actionConfig) {
         String path = docRoot + packageDir + file;
-        if (new File(servletContext.getRealPath(path)).exists()) {
+        if (new File(rootDir + path).exists()) {
             return path;
         } else if (StringUtil.isEmpty(packageDir)) {
             if (isLastExtension(file) && actionConfig.findForwardConfigs().length == 0) {
-                String message = "View file was not found." + new File(path).getAbsolutePath();
+                String message = "View file was not found." + new File(rootDir + path).getAbsolutePath();
                 logger.info(message);
-                // throw new IllegalStateException("View file was not found." + new File(path).getAbsolutePath());
+                //throw new IllegalStateException("View file was not found." + new File(path).getAbsolutePath());
             }
             return null;
         } else {
@@ -169,7 +171,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             } else {
                 packageDir = "/" + packageDir;
             }
-            return getExistFilePath(docRoot, packageDir, file, actionConfig, servletContext);
+            return getExistFilePath(rootDir, docRoot, packageDir, file, actionConfig);
         }
     }
 
