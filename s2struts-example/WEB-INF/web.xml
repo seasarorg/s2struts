@@ -13,10 +13,7 @@
 
   <filter>
     <filter-name>hotdeployfilter</filter-name>
-    <!--
     <filter-class>org.seasar.framework.container.hotdeploy.HotdeployFilter</filter-class>
-    -->
-    <filter-class>org.seasar.struts.examples.MyHotDeployFilter</filter-class>
   </filter>
 
   <filter>
