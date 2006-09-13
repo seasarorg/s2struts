@@ -7,7 +7,16 @@
 	</component>
 	<component name="commandAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
 		<property name="interceptorName">"aop.traceInterceptor"</property>
-		<property name="pointcut">"do.*, initialize"</property>
+		<property name="pointcut">"do.*, go.*, initialize"</property>
+	</component>
+	<component name="traceThrowsAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
+		<property name="interceptorName">"aop.traceThrowsInterceptor"</property>
+	</component>
+	<component name="txAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
+		<property name="interceptorName">"j2ee.requiredTx"</property>
+	</component>
+	<component name="daoAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
+		<property name="interceptorName">"dao.interceptor"</property>
 	</component>
 
 	<component name="actionCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
@@ -18,6 +27,9 @@
 	<component name="daoCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 		<initMethod name="addCustomizer">
 			<arg>defaultCustomizer</arg>
+		</initMethod>
+		<initMethod name="addCustomizer">
+			<arg>daoAspectCustomizer</arg>
 		</initMethod>
 	</component>
 	<component name="dtoCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
@@ -36,6 +48,9 @@
 		<initMethod name="addCustomizer">
 			<arg>defaultCustomizer</arg>
 		</initMethod>
+		<initMethod name="addCustomizer">
+			<arg>txAspectCustomizer</arg>
+		</initMethod>
 	</component>
 	<component name="pageCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 		<initMethod name="addCustomizer">
@@ -45,6 +60,9 @@
 	<component name="serviceCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 		<initMethod name="addCustomizer">
 			<arg>defaultCustomizer</arg>
+		</initMethod>
+		<initMethod name="addCustomizer">
+			<arg>txAspectCustomizer</arg>
 		</initMethod>
 	</component>
 	<component name="interceptorCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
