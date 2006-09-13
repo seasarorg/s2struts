@@ -44,6 +44,10 @@ public interface ClassFinder {
 
     void find(GenericServlet servlet, boolean enableJar, String jarFilePattern, String pattern);
 
+    void find(Class referenceClass);
+
+    void find(Class referenceClass, String pattern);
+
     Collection getClassCollection();
 
     void destroy();

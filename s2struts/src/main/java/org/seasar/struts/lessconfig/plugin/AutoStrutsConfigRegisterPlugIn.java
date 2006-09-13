@@ -22,6 +22,7 @@ import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.util.ClassUtil;
 import org.seasar.struts.lessconfig.autoregister.StrutsConfigRegister;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 import org.seasar.struts.lessconfig.util.ClassFinder;
@@ -49,6 +50,8 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
 
     private String jarFilePattern = "";
 
+    private String referenceClassName = null;
+
     public AutoStrutsConfigRegisterPlugIn() {
     }
 
@@ -74,6 +77,10 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
                 this.classFinder.find(actionServlet, isEnableJar(), getJarFilePattern());
             }
 
+            if (getReferenceClass() != null) {
+                this.classFinder.find(ClassUtil.forName(getReferenceClass()));
+            }
+
             getConfigRegister().register(config, this.classFinder.getClassCollection());
         } finally {
             this.classFinder.destroy();
@@ -97,6 +104,14 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
 
     public void setJarFilePattern(String jarFilePattern) {
         this.jarFilePattern = jarFilePattern;
+    }
+
+    public String getReferenceClass() {
+        return this.referenceClassName;
+    }
+    
+    public void setReferenceClass(String referenceClassName) {
+        this.referenceClassName = referenceClassName; 
     }
 
     public void setActionClassPattern(String actionClassPattern) {
