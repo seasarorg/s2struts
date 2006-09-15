@@ -16,6 +16,8 @@
 package org.seasar.struts.config.rule;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.servlet.ServletContext;
 
@@ -33,7 +35,6 @@ import org.seasar.struts.Constants;
 import org.seasar.struts.config.AutoStrutsConfigRule;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.util.WebResourceUtil;
 
 /**
  * @author Satoshi Kimura
@@ -60,7 +61,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         }
         return null;
     }
-    
+
     private String getActionPathName(Class actionClass, ModuleConfig config) {
         String result = getActionComponentName(actionClass);
         if (result == null) {
@@ -69,25 +70,25 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         } else if (isPathComponentName(result)) {
             return toPathComponentName(result, config);
         }
-        
+
         result = result.replaceFirst("Impl$", "");
         result = result.replaceFirst("Action$", "");
         return "/" + result;
     }
-    
+
     private String getActionComponentName(Class actionClass) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         if (!container.hasComponentDef(actionClass)) {
             return null;
         }
-        
+
         ComponentDef componentDef = container.getComponentDef(actionClass);
         if (componentDef == null) {
             return null;
         }
         return componentDef.getComponentName();
     }
-    
+
     private boolean isPathComponentName(String componentName) {
         return componentName.startsWith("/");
     }
@@ -95,7 +96,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     private String toPathComponentName(String componentName, ModuleConfig config) {
         return config.getPrefix() + componentName;
     }
-    
+
     public String getScope(Class actionClass, ModuleConfig config) {
         return StrutsActionConfig.DEFAULT_SCOPE;
     }
@@ -135,16 +136,17 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     public boolean getUnknown(Class actionClass, ModuleConfig config) {
         return StrutsActionConfig.DEFAULT_UNKNOWN;
     }
-    
+
     public boolean getCancellable(Class actionClass, ModuleConfig config) {
-    	return StrutsActionConfig.DEFAULT_CANCELLABLE;
+        return StrutsActionConfig.DEFAULT_CANCELLABLE;
     }
 
     public String getRoles(Class actionClass, ModuleConfig config) {
         return null;
     }
 
-    public void addFowardConfig(Class actionClass, ActionConfig actionConfig, ServletContext servletContext) {
+    public void addFowardConfig(Class actionClass, ActionConfig actionConfig,
+            ServletContext servletContext) {
         ForwardConfig forwardConfig = actionConfig.findForwardConfig(Constants.SUCCESS);
         if (forwardConfig != null) {
             return;
@@ -161,14 +163,20 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             }
             packageDir = "/" + packageDir.replace('.', '/');
 
-            String rootDir = WebResourceUtil.getWebRootDir(this.getClass()).getAbsolutePath();
             String docRoot = this.configRule.getDocRoot();
-            path = getExistFilePath(rootDir, docRoot, packageDir, file, actionConfig);
+            path = getExistFilePath(docRoot, packageDir, file, actionConfig, servletContext);
+            if (path == null) {
+                path = getExistResourcePath(docRoot, packageDir, file, actionConfig, servletContext);
+            }
             if (path != null) {
                 addFowardConfig(path, actionConfig);
                 return;
             }
         }
+
+        String message = "View file was not found. " + getPath(actionClass, null) + "."
+                + viewExtension[this.configRule.getViewExtension().length - 1];
+        logger.info(message);
     }
 
     private void addFowardConfig(String path, ActionConfig actionConfig) {
@@ -179,16 +187,18 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         actionConfig.addForwardConfig(forwardConfig);
     }
 
-    private String getExistFilePath(String rootDir, String docRoot, String packageDir, String file, ActionConfig actionConfig) {
+    private String getExistFilePath(String docRoot, String packageDir, String file,
+            ActionConfig actionConfig, ServletContext servletContext) {
+        if (servletContext.getRealPath("/") == null) {
+            return null;
+        }
+
         String path = docRoot + packageDir + file;
-        if (new File(rootDir + path).exists()) {
+        String realPath = servletContext.getRealPath(path);
+        if (new File(realPath).exists()) {
             return path;
-        } else if (StringUtil.isEmpty(packageDir)) {
-            if (isLastExtension(file) && actionConfig.findForwardConfigs().length == 0) {
-                String message = "View file was not found." + new File(rootDir + path).getAbsolutePath();
-                logger.info(message);
-                //throw new IllegalStateException("View file was not found." + new File(path).getAbsolutePath());
-            }
+        }
+        if (StringUtil.isEmpty(packageDir)) {
             return null;
         } else {
             int index = packageDir.indexOf("/", 1);
@@ -198,12 +208,34 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             } else {
                 packageDir = "/" + packageDir;
             }
-            return getExistFilePath(rootDir, docRoot, packageDir, file, actionConfig);
+            return getExistFilePath(docRoot, packageDir, file, actionConfig, servletContext);
         }
     }
 
-    private boolean isLastExtension(String file) {
-        return file.endsWith(this.configRule.getViewExtension()[this.configRule.getViewExtension().length - 1]);
+    private String getExistResourcePath(String docRoot, String packageDir, String file,
+            ActionConfig actionConfig, ServletContext servletContext) {
+        String path = docRoot + packageDir + file;
+        URL resourceUrl;
+        try {
+            resourceUrl = servletContext.getResource(path);
+        } catch (MalformedURLException e) {
+            return null;
+        }
+        if (resourceUrl != null) {
+            return path;
+        }
+        if (StringUtil.isEmpty(packageDir)) {
+            return null;
+        } else {
+            int index = packageDir.indexOf("/", 1);
+            packageDir = packageDir.substring(index + 1);
+            if (index < 0) {
+                packageDir = "";
+            } else {
+                packageDir = "/" + packageDir;
+            }
+            return getExistResourcePath(docRoot, packageDir, file, actionConfig, servletContext);
+        }
     }
 
     public void setAutoStrutsConfigPattern(AutoStrutsConfigRule configRule) {
