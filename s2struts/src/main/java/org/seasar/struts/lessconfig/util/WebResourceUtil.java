@@ -51,17 +51,6 @@ public class WebResourceUtil {
         return strategy.createFile(referenceClass, url);
     }
 
-    public static File getWebRootDir(Class referenceClass) {
-        File result = createFile(referenceClass);
-        if (result.isDirectory()) {
-            // "/WEB-INF/classes"
-            return result.getParentFile().getParentFile();
-        } else {
-            // "/WEB-INF/lib/hoge.jar"
-            return result.getParentFile().getParentFile().getParentFile();
-        }
-    }
-
     //
     //
     //

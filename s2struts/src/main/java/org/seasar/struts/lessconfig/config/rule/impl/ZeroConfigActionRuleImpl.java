@@ -16,6 +16,8 @@
 package org.seasar.struts.lessconfig.config.rule.impl;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.servlet.ServletContext;
 
@@ -32,7 +34,6 @@ import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
-import org.seasar.struts.lessconfig.util.WebResourceUtil;
 
 /**
  * @author Satoshi Kimura
@@ -139,14 +140,20 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             }
             packageDir = "/" + packageDir.replace('.', '/');
 
-            String rootDir = WebResourceUtil.getWebRootDir(this.getClass()).getAbsolutePath();
             String docRoot = this.configRule.getDocRoot();
-            path = getExistFilePath(rootDir, docRoot, packageDir, file, actionConfig);
+            path = getExistFilePath(docRoot, packageDir, file, actionConfig, servletContext);
+            if (path == null) {
+                path = getExistResourcePath(docRoot, packageDir, file, actionConfig, servletContext);
+            }
             if (path != null) {
                 addForwardConfig(path, actionConfig);
                 return;
             }
         }
+
+        String message = "View file was not found. " + getPath(actionClass, null) + "."
+                + viewExtension[this.configRule.getViewExtension().length - 1];
+        logger.info(message);
     }
 
     private void addForwardConfig(String path, ActionConfig actionConfig) {
@@ -157,16 +164,18 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         actionConfig.addForwardConfig(forwardConfig);
     }
 
-    private String getExistFilePath(String rootDir, String docRoot, String packageDir, String file, ActionConfig actionConfig) {
+    private String getExistFilePath(String docRoot, String packageDir, String file,
+            ActionConfig actionConfig, ServletContext servletContext) {
+        if (servletContext.getRealPath("/") == null) {
+            return null;
+        }
+
         String path = docRoot + packageDir + file;
-        if (new File(rootDir + path).exists()) {
+        String realPath = servletContext.getRealPath(path);
+        if (new File(realPath).exists()) {
             return path;
-        } else if (StringUtil.isEmpty(packageDir)) {
-            if (isLastExtension(file) && actionConfig.findForwardConfigs().length == 0) {
-                String message = "View file was not found." + new File(rootDir + path).getAbsolutePath();
-                logger.info(message);
-                //throw new IllegalStateException("View file was not found." + new File(path).getAbsolutePath());
-            }
+        }
+        if (StringUtil.isEmpty(packageDir)) {
             return null;
         } else {
             int index = packageDir.indexOf("/", 1);
@@ -176,12 +185,34 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             } else {
                 packageDir = "/" + packageDir;
             }
-            return getExistFilePath(rootDir, docRoot, packageDir, file, actionConfig);
+            return getExistFilePath(docRoot, packageDir, file, actionConfig, servletContext);
         }
     }
 
-    private boolean isLastExtension(String file) {
-        return file.endsWith(this.configRule.getViewExtension()[this.configRule.getViewExtension().length - 1]);
+    private String getExistResourcePath(String docRoot, String packageDir, String file,
+            ActionConfig actionConfig, ServletContext servletContext) {
+        String path = docRoot + packageDir + file;
+        URL resourceUrl;
+        try {
+            resourceUrl = servletContext.getResource(path);
+        } catch (MalformedURLException e) {
+            return null;
+        }
+        if (resourceUrl != null) {
+            return path;
+        }
+        if (StringUtil.isEmpty(packageDir)) {
+            return null;
+        } else {
+            int index = packageDir.indexOf("/", 1);
+            packageDir = packageDir.substring(index + 1);
+            if (index < 0) {
+                packageDir = "";
+            } else {
+                packageDir = "/" + packageDir;
+            }
+            return getExistResourcePath(docRoot, packageDir, file, actionConfig, servletContext);
+        }
     }
 
 }
