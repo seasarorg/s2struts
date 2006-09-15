@@ -24,6 +24,7 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.log.Logger;
+import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.Constants;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
@@ -132,7 +133,11 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         for (int i = 0; i < viewExtension.length; i++) {
             String file = getPath(actionClass, null) + "." + viewExtension[i];
             path = this.configRule.getDocRoot() + file;
-            String packageDir = "/" + actionClass.getPackage().getName().replace('.', '/');
+            String packageDir = ClassUtil.getPackageName(actionClass);
+            if (packageDir == null) {
+                return;
+            }
+            packageDir = "/" + packageDir.replace('.', '/');
 
             String rootDir = WebResourceUtil.getWebRootDir(this.getClass()).getAbsolutePath();
             String docRoot = this.configRule.getDocRoot();
