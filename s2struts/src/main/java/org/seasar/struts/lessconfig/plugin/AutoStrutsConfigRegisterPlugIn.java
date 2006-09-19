@@ -22,6 +22,8 @@ import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.container.hotdeploy.HotdeployBehavior;
+import org.seasar.framework.container.impl.S2ContainerBehavior;
 import org.seasar.framework.util.ClassUtil;
 import org.seasar.struts.lessconfig.autoregister.StrutsConfigRegister;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
@@ -70,6 +72,21 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
      *      org.apache.struts.config.ModuleConfig)
      */
     public void init(ActionServlet actionServlet, ModuleConfig config) throws ServletException {
+        S2ContainerBehavior.Provider provider = S2ContainerBehavior.getProvider();
+        if (provider instanceof HotdeployBehavior) {
+            HotdeployBehavior ondemand = (HotdeployBehavior) provider;
+            ondemand.start();
+            try {
+                register(actionServlet, config);
+            } finally {
+                ondemand.stop();
+            }
+        } else {
+            register(actionServlet, config);
+        }
+    }
+
+    public void register(ActionServlet actionServlet, ModuleConfig config) {
         try {
             this.classFinder.find(isEnableJar(), getJarFilePattern());
 
