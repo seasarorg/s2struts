@@ -28,6 +28,6 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3.11.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3.11.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/mayaa-1.0.7.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.6.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.7-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
