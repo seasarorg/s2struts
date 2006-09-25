@@ -1445,13 +1445,23 @@ Configuration is completed based on the class with a classname ending with "Acti
   </tr>
   <tr>
     <td>path</td>
-    <td>configures path as described below.<br>
-    1. changes the "." in the package name to a "/" and link that value to the class name.<br>
-    2. If the name ends with "ActionImpl", "Impl", or "Action", deletes this term. Changes the first letter of the class name to lower case when linked.<br>
-    3. Prefixes the selected value in docRoot contained in AutoStrutsConfigRegisterPlugIn.<br>
-    4. Searches for files with the extension ".html" and ".jsp", configuring those files found in path.<br>
-    5. If file is not found, step 4 is repeated after deleting the string to the second "/" referring to the package.<br>
-    6. If all steps fail, no configuration will be made. A log will be output.
+    <td>configures path as described below.<br />
+    1. changes the "." in the package name to a "/" and link that value to the class name.<br />
+    2. If the name ends with "ActionImpl", "Impl", or "Action", deletes this term. Changes the first letter of the class name to lower case when linked.<br />
+    3. Prefixes the selected value in docRoot contained in AutoStrutsConfigRegisterPlugIn.<br />
+    4. Searches for files with the extension ".html" and ".jsp", configuring those files found in path.<br />
+    5. If file is not found, step 4 is repeated after deleting the string to the second "/" referring to the package.<br />
+    6. If all steps fail, no configuration will be made. A log will be output.<br />
+    <br/>
+    例えば、<br />
+    クラス：aaa.bbb.ccc.HogeAction<br />
+    AutoStrutsConfigRegisterPlugInのdocRoot：/jsp<br />
+    の場合、pathに設定するファイルの検索順は<br />
+    1)/jsp/aaa/bbb/ccc/hoge.jsp<br />
+    2)/jsp/bbb/ccc/hoge.jsp<br />
+    3)/jsp/ccc/hoge.jsp<br />
+    4)/jsp/hoge.jsp<br />
+    となります。<br />
     </td>
   </tr>
   <tr>
