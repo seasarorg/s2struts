@@ -1437,7 +1437,18 @@ S2Strutsを使用すると、規約に従ってstruts-configを自動的に補完します（<a href="#Z
     3.AutoStrutsConfigRegisterPlugInのdocRootに指定した値を先頭に付加します。<br/>
     4.".html"と".jsp"を拡張子にしたファイル検索し、ファイルが存在すればpathに設定します。<br/>
     5.ファイルが見つからない場合は、パッケージにあたる2番目の"/"の直前までを削除した文字列を使用し上記"4"を行います。<br/>
-    6.最終的に見つからなかった場合は、設定を行わずログに出力します。</td>
+    6.最終的に見つからなかった場合は、設定を行わずログに出力します。<br/>
+    <br/>
+    例えば、<br />
+    クラス：aaa.bbb.ccc.HogeAction<br />
+    AutoStrutsConfigRegisterPlugInのdocRoot：/jsp<br />
+    の場合、pathに設定するファイルの検索順は<br />
+    1)/jsp/aaa/bbb/ccc/hoge.jsp<br />
+    2)/jsp/bbb/ccc/hoge.jsp<br />
+    3)/jsp/ccc/hoge.jsp<br />
+    4)/jsp/hoge.jsp<br />
+    となります。<br />
+    </td>
   </tr>
   <tr>
     <td>redirect</td>
