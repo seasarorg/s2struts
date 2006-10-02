@@ -1,11 +1,15 @@
 package org.seasar.struts.pojo.util;
 
 import org.apache.commons.beanutils.WrapDynaBean;
+import org.apache.struts.Globals;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.config.FormBeanConfig;
+import org.apache.struts.config.ModuleConfig;
+import org.apache.struts.config.impl.ModuleConfigImpl;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.framework.beans.impl.BeanDescImpl;
 import org.seasar.struts.mock.MockActionMapping;
-import org.seasar.struts.pojo.util.BindingUtil;
 
 /**
  * @author Satoshi Kimura
@@ -35,8 +39,8 @@ public class BindingUtilTest extends S2TestCase {
         getRequest().setParameter("qux[3]", "quxValue3");
 
         TestPOJOActionImpl action = new TestPOJOActionImpl();
-        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(
-                TestPOJOActionImpl.class), new MockActionMapping());
+        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(TestPOJOActionImpl.class),
+                new MockActionMapping());
 
         assertEquals("fooVal", action.getFoo());
         assertEquals(100, action.getBar());
@@ -54,8 +58,8 @@ public class BindingUtilTest extends S2TestCase {
         action.setBar(100);
         action.setBaz("bazVal");
 
-        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(
-                TestPOJOActionImpl.class), new MockActionMapping());
+        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(TestPOJOActionImpl.class),
+                new MockActionMapping());
         assertEquals("fooVal", getRequest().getAttribute("foo"));
         assertEquals(new Integer(100), getRequest().getSession().getAttribute("bar"));
         assertEquals("bazVal", getRequest().getAttribute("baz"));
@@ -66,26 +70,60 @@ public class BindingUtilTest extends S2TestCase {
         getRequest().setAttribute("exportPOJOForm", pojoForm);
 
         TestExportPOJOActionImpl action = new TestExportPOJOActionImpl();
-        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(
-                TestExportPOJOActionImpl.class), new MockActionMapping());
+        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(TestExportPOJOActionImpl.class),
+                new MockActionMapping());
         assertEquals("importPOJO", action.getExportPOJOForm().getMessage());
     }
 
     public void testExportPOJOProperty() {
+        FormBeanConfig beanConfig = new FormBeanConfig();
+        beanConfig.setName("exportPOJOForm");
+
+        ActionMapping actionConfig = new MockActionMapping();
+        actionConfig.setName("exportPOJOForm");
+        actionConfig.setScope("request");
+
+        ModuleConfig config = new ModuleConfigImpl();
+        config.addFormBeanConfig(beanConfig);
+        config.addActionConfig(actionConfig);
+        getServletContext().setAttribute(Globals.MODULE_KEY, config);
+
         Object oldPojo = new BeanValidatorForm(new TestExportPOJOForm("oldPOJO"));
         getRequest().setAttribute("exportPOJOForm", oldPojo);
 
         TestExportPOJOActionImpl action = new TestExportPOJOActionImpl();
         action.setExportPOJOForm(new TestExportPOJOForm("newPOJO"));
 
-        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(
-                TestExportPOJOActionImpl.class), new MockActionMapping());
-        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest()
-                .getAttribute("exportPOJOForm");
-        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean())
-                .getInstance();
+        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(TestExportPOJOActionImpl.class),
+                new MockActionMapping());
+        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getAttribute("exportPOJOForm");
+        assertNotNull(beanForm);
+        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
         assertEquals("newPOJO", resultForm.getMessage());
-
     }
+    
+    public void testExportPOJOPropertyNotExistsRequestAttribute() {
+        FormBeanConfig beanConfig = new FormBeanConfig();
+        beanConfig.setName("exportPOJOForm");
 
+        ActionMapping actionConfig = new MockActionMapping();
+        actionConfig.setName("exportPOJOForm");
+        actionConfig.setScope("request");
+
+        ModuleConfig config = new ModuleConfigImpl();
+        config.addFormBeanConfig(beanConfig);
+        config.addActionConfig(actionConfig);
+        getServletContext().setAttribute(Globals.MODULE_KEY, config);
+
+        TestExportPOJOActionImpl action = new TestExportPOJOActionImpl();
+        action.setExportPOJOForm(new TestExportPOJOForm("newPOJO"));
+
+        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(TestExportPOJOActionImpl.class),
+                new MockActionMapping());
+        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getAttribute("exportPOJOForm");
+        assertNotNull(beanForm);
+        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
+        assertEquals("newPOJO", resultForm.getMessage());
+    }
+    
 }

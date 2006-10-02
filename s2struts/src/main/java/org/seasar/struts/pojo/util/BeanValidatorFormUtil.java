@@ -15,21 +15,18 @@
  */
 package org.seasar.struts.pojo.util;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.beanutils.WrapDynaBean;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.struts.pojo.form.S2BeanValidatorForm;
-import org.seasar.struts.util.RequestUtil;
 
 /**
  * @author Katsuhiko Nagashima
  */
 public class BeanValidatorFormUtil {
-    
+
     private BeanValidatorFormUtil() {
     }
-    
+
     public static Object toBean(Object bean) {
         if (bean instanceof BeanValidatorForm) {
             BeanValidatorForm beanValidatorForm = (BeanValidatorForm) bean;
@@ -39,25 +36,16 @@ public class BeanValidatorFormUtil {
         return bean;
     }
 
-    public static boolean isBeanValidatorForm(HttpServletRequest request, String propertyName) {
-        Object value = RequestUtil.getValue(request, propertyName);
-        if (value == null) {
-            return false;
-        }
-        return (value instanceof BeanValidatorForm);
-    }
-
-    public static Object toBeanValidatorForm(HttpServletRequest request, String propertyName, Object value) {
-        Object old = RequestUtil.getValue(request, propertyName);
-        return toBeanValidatorForm(old, value);
-    }
-    
     public static Object toBeanValidatorForm(Object oldForm, Object newForm) {
+        if (oldForm == null) {
+            return new S2BeanValidatorForm(new BeanValidatorForm(newForm));
+        }
+
         if (!(oldForm instanceof BeanValidatorForm)) {
             return null;
         }
         BeanValidatorForm beanForm = (BeanValidatorForm) oldForm;
-        
+
         S2BeanValidatorForm result;
         if (beanForm instanceof S2BeanValidatorForm) {
             result = (S2BeanValidatorForm) oldForm;
@@ -67,5 +55,5 @@ public class BeanValidatorFormUtil {
         result.initBean(newForm);
         return result;
     }
-    
+
 }

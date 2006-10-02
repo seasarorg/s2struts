@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.util;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -87,7 +88,13 @@ public abstract class S2StrutsContextUtil {
     private static S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
+    
+    //
 
+    public static ServletContext getServletContext() {
+        return (ServletContext) getContainer().getComponent(ServletContext.class);
+    }
+    
     public static HttpServletResponse getResponse(S2Container container) {
         return (HttpServletResponse) container.getExternalContext().getResponse();
     }
