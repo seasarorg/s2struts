@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component name="moduleConfigWrapper"           class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
+		<aspect pointcut="findActionConfig">
+			<component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindActionConfigInterceptor"/>
+		</aspect>
+	</component>
+
+	<component class="org.seasar.struts.lessconfig.autoregister.impl.ActionConfigCreatorImpl"/>
+	<component class="org.seasar.struts.lessconfig.config.impl.AutoStrutsConfigRuleImpl"/>
+	<component class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionRuleImpl"/>
+	<component class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRule"/>
+
+	<component name="testOndemandAction" class="org.seasar.struts.lessconfig.hotdeploy.TestOndemandAction"/>
+</components>
