@@ -1269,10 +1269,15 @@ This can be used to abbreviate the configuration using struts-config.
 <h3><a name="ZoroConfig">Unconfigured S2Struts</a></h3>
 <p>
 AutoStrutsConfigRegisterPlugIn must be registered with struts-config to use Unconfigured S2Struts functionality.
+PlugInには読み込み順があるのでValidatorPlugInより後に登録してください。
 </p>
 <h4>struts-config.xml</h4>
 <pre>&lt;struts-config&gt;
   ...
+  &lt;plug-in className="org.apache.struts.validator.ValidatorPlugIn"&gt;
+    ...
+  &lt;/plug-in&gt;
+    
   <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn</font>&quot;&gt;
     &lt;set-property property="enableJar" value="false"/&gt;
     &lt;set-property property="jarFilePattern" value="^My.*\.jar$"/&gt;
