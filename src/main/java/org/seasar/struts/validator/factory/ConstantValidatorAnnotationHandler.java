@@ -124,6 +124,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
                 String resourceStr = (String) parameter.get("resource");
                 if (!StringUtil.isEmpty(resourceStr)) {
                     resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
+                } else {
+                    resource = true;
                 }
             }
         }
