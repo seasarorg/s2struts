@@ -42,6 +42,11 @@ public class ValidatorAnnotationForm {
     }
     
     @Required
+    @Args(keys = "Arg")
+    public void setArgDefaultResource(String argDefaultResource) {
+    }
+    
+    @Required
     @Args(keys = "Required", resource = false)
     public void setRequired(String required) {
     }
