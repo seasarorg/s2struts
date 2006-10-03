@@ -27,6 +27,13 @@ public class TestValidatorAnnotationForm {
 
     public void setArgs(String args) {
     }
+    
+    public static final String argDefaultResource_VALIDATOR = "required";
+
+    public static final String argDefaultResource_VALIDATOR_ARGS = "Arg";
+
+    public void setArgDefaultResource(String argDefaultResource) {
+    }
 
     public static final String required_VALIDATOR = "required";
 
