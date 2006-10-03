@@ -43,6 +43,13 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals(false, field.getArg(2).isResource());
     }
 
+    public void testArgDefaultResource() {
+        Field field = form.getField("argDefaultResource");
+        assertNotNull(field);
+        assertEquals("Arg", field.getArg(0).getKey());
+        assertEquals(true, field.getArg(0).isResource());
+    }
+
     public void testRequired() {
         Field field = form.getField("required");
         assertNotNull(field);
