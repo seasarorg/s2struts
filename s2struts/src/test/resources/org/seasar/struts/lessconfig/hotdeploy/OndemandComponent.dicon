@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+    <include path="org/seasar/struts/lessconfig/hotdeploy/IncludeOndemandComponent1.dicon" />
+    <include path="org/seasar/struts/lessconfig/hotdeploy/IncludeOndemandComponent2.dicon" />
+        
+	<component name="testOndemandAction" class="org.seasar.struts.lessconfig.hotdeploy.TestOndemandAction"/>
+	<component name="testOndemandDto" class="org.seasar.struts.lessconfig.hotdeploy.TestOndemandDto"/>
+</components>
