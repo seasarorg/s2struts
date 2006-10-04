@@ -19,6 +19,11 @@
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
 				<initMethod name="add">
 					<arg>
+						<component class="org.seasar.struts.hotdeploy.CacheFindActionConfigInterceptor"/>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
 						<component class="org.seasar.struts.hotdeploy.ReloadFindActionConfigInterceptor">
 							<aspect pointcut="invoke">traceInterceptor</aspect>
 						</component>
@@ -33,8 +38,32 @@
 				</initMethod>
 			</component>
 		</aspect>
+		<aspect pointcut="findActionConfigs">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.CacheFindActionConfigsInterceptor"/>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.ReloadFindActionConfigsInterceptor"/>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindActionConfigsInterceptor"/>
+					</arg>
+				</initMethod>
+			</component>
+		</aspect>
 		<aspect pointcut="findFormBeanConfig">
 			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.CacheFindFormBeanConfigInterceptor"/>
+					</arg>
+				</initMethod>
 				<initMethod name="add">
 					<arg>
 						<component class="org.seasar.struts.hotdeploy.ReloadFindFormBeanConfigInterceptor">

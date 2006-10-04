@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component name="moduleConfigWrapper"           class="org.seasar.struts.hotdeploy.ModuleConfigWrapper" instance="prototype">
+		<aspect pointcut="findActionConfigs">
+			<component class="org.seasar.struts.hotdeploy.CacheFindActionConfigsInterceptor"/>
+		</aspect>
+	</component>
+</components>
