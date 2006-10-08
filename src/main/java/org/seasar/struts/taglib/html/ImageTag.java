@@ -34,6 +34,7 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
 
     public int doEndTag() throws JspException {
         setMethodBindingExpression();
+        setCancelAction();
 
         try {
             return super.doEndTag();
