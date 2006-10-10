@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -143,22 +145,28 @@ public class BindingUtil {
             return;
         }
         
+        HttpServletRequest request = container.getRequest();
         if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
-            ActionFormUtil.setActualForm(container.getRequest(), value, mapping);
-        } else {
-            String propertyName = propertyDesc.getPropertyName();
-            if (BeanValidatorFormUtil.isBeanValidatorForm(container.getRequest(), propertyName)) {
-                value = BeanValidatorFormUtil.toBeanValidatorForm(container.getRequest(), propertyName, value);
-            }
-            
-            ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
-            ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
-            if (propertyConfig.isSessionScope()) {
-                container.getSession().setAttribute(propertyName, value);
-            } else {
-                container.getRequest().setAttribute(propertyName, value);
-            }
+            ActionFormUtil.setActualForm(request, value, mapping);
+            return;
         }
+        
+        String propertyName = propertyDesc.getPropertyName();
+        ActionMapping propertyActionMapping = (ActionMapping) ModuleConfigUtil
+                .findActionConfigForFormBeanName(propertyName);
+        if (propertyActionMapping != null) {
+            ActionFormUtil.setActualForm(request, value, propertyActionMapping);
+            return;
+        }
+
+        ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
+        ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
+        if (propertyConfig.isSessionScope()) {
+            request.getSession().setAttribute(propertyName, value);
+        } else {
+            request.setAttribute(propertyName, value);
+        }
+
     }
 
     private static boolean isActionFormProperty(PropertyDesc propertyDesc, ActionMapping mapping) {

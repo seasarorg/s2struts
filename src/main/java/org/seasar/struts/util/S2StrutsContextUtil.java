@@ -80,7 +80,7 @@ public abstract class S2StrutsContextUtil {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);
     }
 
-    private static S2Container getContainer() {
+    public static S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
 }
