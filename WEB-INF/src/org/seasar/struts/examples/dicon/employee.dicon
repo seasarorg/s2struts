@@ -6,10 +6,13 @@
 	<include path="org/seasar/struts/examples/dicon/allaop.dicon"/>
 
     <!-- auto registration -->
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.employee.logic.impl"</arg>
 			<arg>".*LogicImpl"</arg>
@@ -23,13 +26,16 @@
 		</initMethod>
 	</component>
 	
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="instanceDef">
 			@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
 		</property>
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.employee.action.impl"</arg>
 			<arg>".*ActionImpl"</arg>

@@ -4,23 +4,29 @@
 <components>
 	<component name="traceInterceptor" class="org.seasar.framework.aop.interceptors.TraceInterceptor"/>
 
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.multiply"</arg>
 			<arg>".*ServiceImpl"</arg>
 		</initMethod>
 	</component>
 	
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="instanceDef">
 			@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
 		</property>
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.multiply"</arg>
 			<arg>".*Action"</arg>

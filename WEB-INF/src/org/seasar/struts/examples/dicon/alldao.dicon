@@ -11,10 +11,13 @@
 	</component>
 
     <!-- auto registration -->
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.employee.dao"</arg>
 			<arg>".*Dao"</arg>

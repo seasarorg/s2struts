@@ -3,10 +3,13 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<include path="org/seasar/struts/examples/dicon/allaop.dicon"/>
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.iteration"</arg>
 			<arg>".*ServiceImpl"</arg>
@@ -22,13 +25,16 @@
 	</component>
 
 
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="instanceDef">
 			@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
 		</property>
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.iteration"</arg>
 			<arg>".*ActionImpl"</arg>

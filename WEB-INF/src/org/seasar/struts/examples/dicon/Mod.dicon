@@ -2,23 +2,29 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.mod"</arg>
 			<arg>".*ServiceImpl"</arg>
 		</initMethod>
 	</component>
 	
-	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+	<component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
 		<property name="instanceDef">
 			@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
 		</property>
 		<property name="autoNaming">
 			<component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/>
 		</property>
+		<initMethod name="addReferenceClass">
+			<arg>@org.seasar.struts.examples.FowardNameConstants@class</arg>
+		</initMethod>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.struts.examples.mod"</arg>
 			<arg>".*ActionImpl"</arg>
