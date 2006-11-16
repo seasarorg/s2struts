@@ -3,4 +3,5 @@
 	"http://www.seasar.org/dtd/components24.dtd">
 <components>
 	<include condition="#ENV == 'ut'" path="hotdeploy.dicon"/>
+	<include condition="#ENV == 'product'" path="cooldeploy.dicon"/>
 </components>

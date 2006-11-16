@@ -27,17 +27,11 @@
         <bean:message key="button.create" />
     </s2struts:submit>
 
-<!-- mayaa‚Ì1.0.2‚ª‚Å‚½‚ç‚±‚¿‚ç‚Å‚à“®ì‚·‚é
-    <logic:iterate m:id="loop" replace="false"
+    <logic:iterate m:id="loop" m:replace="false"
             id="iterations"
             name="iterationListDto"
             property="iterations"
             indexId="i" />
--->
-    <m:forEach id="loop" replace="false"
-            items="${ iterationListDto.getIterations() }"
-            var="iterations"
-            index="i" />
 
     <s2struts:submit m:id="goEdit" action="#{iterationListAction.goEdit}" indexId="i">
         <bean:message key="button.edit" />

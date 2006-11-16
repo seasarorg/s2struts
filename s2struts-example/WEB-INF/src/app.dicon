@@ -6,7 +6,7 @@
 	<include path="aop.dicon"/>
 	<include path="dao.dicon"/>
 
-	<include condition="#ENV != 'ut'" path="s2struts.dicon"/>
+	<include condition="#ENV == 'product'" path="s2struts.dicon"/>
 	<include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/>
 	
 	<include path="org/seasar/struts/examples/dicon/Mod.dicon"/>
@@ -22,6 +22,4 @@
 	<include path="org/seasar/struts/examples/dicon/Download.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Indexed.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Iteration.dicon"/>
-
-	<include condition="#ENV != 'ut'" path="cooldeploy.dicon"/>
 </components>
