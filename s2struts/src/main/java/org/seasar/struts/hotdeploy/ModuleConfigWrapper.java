@@ -19,7 +19,6 @@ import java.io.Serializable;
 
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ControllerConfig;
-import org.apache.struts.config.DataSourceConfig;
 import org.apache.struts.config.ExceptionConfig;
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ForwardConfig;
@@ -43,10 +42,6 @@ public class ModuleConfigWrapper implements ModuleConfig, Serializable {
 
     public void addActionConfig(ActionConfig arg0) {
         config.addActionConfig(arg0);
-    }
-
-    public void addDataSourceConfig(DataSourceConfig arg0) {
-        config.addDataSourceConfig(arg0);
     }
 
     public void addExceptionConfig(ExceptionConfig arg0) {
@@ -75,14 +70,6 @@ public class ModuleConfigWrapper implements ModuleConfig, Serializable {
 
     public ActionConfig[] findActionConfigs() {
         return config.findActionConfigs();
-    }
-
-    public DataSourceConfig findDataSourceConfig(String arg0) {
-        return config.findDataSourceConfig(arg0);
-    }
-
-    public DataSourceConfig[] findDataSourceConfigs() {
-        return config.findDataSourceConfigs();
     }
 
     public ExceptionConfig findExceptionConfig(String arg0) {
@@ -153,10 +140,6 @@ public class ModuleConfigWrapper implements ModuleConfig, Serializable {
         config.removeActionConfig(arg0);
     }
 
-    public void removeDataSourceConfig(DataSourceConfig arg0) {
-        config.removeDataSourceConfig(arg0);
-    }
-
     public void removeExceptionConfig(ExceptionConfig arg0) {
         config.removeExceptionConfig(arg0);
     }
@@ -191,6 +174,10 @@ public class ModuleConfigWrapper implements ModuleConfig, Serializable {
 
     public void setPrefix(String arg0) {
         config.setPrefix(arg0);
+    }
+
+    public ExceptionConfig findException(Class arg0) {
+        return config.findException(arg0);
     }
 
 }

@@ -2,7 +2,6 @@ package org.seasar.struts.processor;
 
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ControllerConfig;
-import org.apache.struts.config.DataSourceConfig;
 import org.apache.struts.config.ExceptionConfig;
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ForwardConfig;
@@ -18,11 +17,6 @@ import org.apache.struts.config.PlugInConfig;
 public class MockModuleConfig implements ModuleConfig {
 
     public void addActionConfig(ActionConfig arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void addDataSourceConfig(DataSourceConfig arg0) {
         // TODO Auto-generated method stub
 
     }
@@ -58,16 +52,6 @@ public class MockModuleConfig implements ModuleConfig {
     }
 
     public ActionConfig[] findActionConfigs() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public DataSourceConfig findDataSourceConfig(String arg0) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public DataSourceConfig[] findDataSourceConfigs() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -157,11 +141,6 @@ public class MockModuleConfig implements ModuleConfig {
 
     }
 
-    public void removeDataSourceConfig(DataSourceConfig arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
     public void removeExceptionConfig(ExceptionConfig arg0) {
         // TODO Auto-generated method stub
 
@@ -205,6 +184,11 @@ public class MockModuleConfig implements ModuleConfig {
     public void setPrefix(String arg0) {
         // TODO Auto-generated method stub
 
+    }
+
+    public ExceptionConfig findException(Class arg0) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
