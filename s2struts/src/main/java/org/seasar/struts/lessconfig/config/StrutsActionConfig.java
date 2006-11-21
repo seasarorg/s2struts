@@ -19,48 +19,49 @@ import org.seasar.struts.Constants;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface StrutsActionConfig {
-    String DEFAULT_PATH = "";
+    String DEFAULT_PATH = Constants.UNDEFINED;
     String path();
 
-    String DEFAULT_NAME = "";
+    String DEFAULT_NAME = Constants.UNDEFINED;
     String name();
 
-    String DEFAULT_SCOPE = Constants.REQUEST;
+    String DEFAULT_SCOPE = Constants.UNDEFINED;
     String scope();
 
-    boolean DEFAULT_VALIDATE = true;
-    boolean validate();
+    Boolean DEFAULT_VALIDATE = null;
+    Boolean validate();
 
-    String DEFAULT_INPUT = "";
+    String DEFAULT_INPUT = Constants.UNDEFINED;
     String input();
 
-    String DEFAULT_PARAMETER = "";
+    String DEFAULT_PARAMETER = Constants.UNDEFINED;
     String parameter();
 
-    String DEFAULT_ATTRIBUTE = "";
+    String DEFAULT_ATTRIBUTE = Constants.UNDEFINED;
     String attribute();
 
-    String DEFAULT_FORWARD = "";
+    String DEFAULT_FORWARD = Constants.UNDEFINED;
     String forward();
 
-    String DEFAULT_INCLUDE = "";
+    String DEFAULT_INCLUDE = Constants.UNDEFINED;
     String include();
 
-    String DEFAULT_PREFIX = "";
+    String DEFAULT_PREFIX = Constants.UNDEFINED;
     String prefix();
 
-    String DEFAULT_SUFFIX = "";
+    String DEFAULT_SUFFIX = Constants.UNDEFINED;
     String suffix();
 
-    boolean DEFAULT_UNKNOWN = false;
-    boolean unknown();
+    Boolean DEFAULT_UNKNOWN = null;
+    Boolean unknown();
 
-    String DEFAULT_ROLES = "";
+    String DEFAULT_ROLES = Constants.UNDEFINED;
     String roles();
     
-    boolean DEFAULT_CANCELLABLE = false;
-    boolean cancellable();
+    Boolean DEFAULT_CANCELLABLE = null;
+    Boolean cancellable();
 
 }

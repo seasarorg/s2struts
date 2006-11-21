@@ -15,28 +15,34 @@
  */
 package org.seasar.struts.lessconfig.config.rule.impl;
 
+import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.framework.util.ClassUtil;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
-import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRule;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class ZeroConfigActionFormRuleImpl implements ZeroConfigActionFormRule {
 
-    private ActionFormNamingRule namingRule;
+    public FormBeanConfig createFormBeanConfig(ModuleConfig config, Class formClass, String name,
+            StrutsActionFormConfig strutsActionForm) {
 
-    public void setNamingRule(ActionFormNamingRule namingRule) {
-        this.namingRule = namingRule;
-    }
+        FormBeanConfig formBeanConfig = (FormBeanConfig) ClassUtil.newInstance(config.getActionFormBeanClass());
+        formBeanConfig.setType(formClass.getName());
+        if (!StrutsActionFormConfig.DEFAULT_NAME.equals(strutsActionForm.name())) {
+            formBeanConfig.setName(strutsActionForm.name());
+        } else {
+            formBeanConfig.setName(name);
+        }
 
-    public String getName(Class formClass, ModuleConfig config) {
-        return this.namingRule.toActionFormName(formClass);
-    }
-
-    public boolean getRestricted(Class formClass, ModuleConfig config) {
-        return StrutsActionFormConfig.DEFAULT_RESTRICTED;
+        if (StrutsActionFormConfig.DEFAULT_RESTRICTED != strutsActionForm.restricted()) {
+            formBeanConfig.setRestricted(strutsActionForm.restricted().booleanValue());
+        }
+        
+        return formBeanConfig;
     }
 
 }

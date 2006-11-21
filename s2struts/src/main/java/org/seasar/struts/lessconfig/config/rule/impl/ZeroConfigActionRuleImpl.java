@@ -21,7 +21,6 @@ import java.net.URL;
 
 import javax.servlet.ServletContext;
 
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
@@ -37,9 +36,16 @@ import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     private static final Logger logger = Logger.getLogger(ZeroConfigActionRuleImpl.class);
+
+    private ServletContext servletContext;
+
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
 
     private ActionPathNamingRule namingRule;
 
@@ -53,7 +59,65 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         this.configRule = configRule;
     }
 
-    public String getPath(Class actionClass, ModuleConfig config) {
+    public ActionConfig createActionConfig(ModuleConfig config, Class actionClass, String path,
+            StrutsActionConfig strutsAction) {
+
+        ActionConfig actionConfig = (ActionConfig) ClassUtil.newInstance(config.getActionMappingClass());
+        actionConfig.setType(actionClass.getName());
+        actionConfig.setModuleConfig(config);
+        if (!StrutsActionConfig.DEFAULT_PATH.equals(strutsAction.path())) {
+            actionConfig.setPath(strutsAction.path());
+        } else {
+            actionConfig.setPath(path);
+        }
+
+        if (!StrutsActionConfig.DEFAULT_NAME.equals(strutsAction.name())) {
+            actionConfig.setName(strutsAction.name());
+        } else {
+            actionConfig.setName(this.getName(config, actionClass));
+        }
+
+        if (!StrutsActionConfig.DEFAULT_ATTRIBUTE.equals(strutsAction.attribute())) {
+            actionConfig.setAttribute(strutsAction.attribute());
+        }
+        if (!StrutsActionConfig.DEFAULT_FORWARD.equals(strutsAction.forward())) {
+            actionConfig.setForward(strutsAction.forward());
+        }
+        if (!StrutsActionConfig.DEFAULT_INCLUDE.equals(strutsAction.include())) {
+            actionConfig.setInclude(strutsAction.include());
+        }
+        if (!StrutsActionConfig.DEFAULT_INPUT.equals(strutsAction.input())) {
+            actionConfig.setInput(strutsAction.input());
+        }
+        if (!StrutsActionConfig.DEFAULT_PARAMETER.equals(strutsAction.parameter())) {
+            actionConfig.setParameter(strutsAction.parameter());
+        }
+        if (!StrutsActionConfig.DEFAULT_PREFIX.equals(strutsAction.prefix())) {
+            actionConfig.setPrefix(strutsAction.prefix());
+        }
+        if (!StrutsActionConfig.DEFAULT_ROLES.equals(strutsAction.roles())) {
+            actionConfig.setRoles(strutsAction.roles());
+        }
+        if (!StrutsActionConfig.DEFAULT_SCOPE.equals(strutsAction.scope())) {
+            actionConfig.setScope(strutsAction.scope());
+        }
+        if (!StrutsActionConfig.DEFAULT_SUFFIX.equals(strutsAction.suffix())) {
+            actionConfig.setSuffix(strutsAction.suffix());
+        }
+        if (StrutsActionConfig.DEFAULT_UNKNOWN != strutsAction.unknown()) {
+            actionConfig.setUnknown(strutsAction.unknown().booleanValue());
+        }
+        if (StrutsActionConfig.DEFAULT_VALIDATE != strutsAction.validate()) {
+            actionConfig.setValidate(strutsAction.validate().booleanValue());
+        }
+        if (StrutsActionConfig.DEFAULT_CANCELLABLE != strutsAction.cancellable()) {
+            actionConfig.setCancellable(strutsAction.cancellable().booleanValue());
+        }
+
+        return actionConfig;
+    }
+
+    protected String getPath(Class actionClass) {
         String path = this.namingRule.toActionPathName(actionClass);
         if (path == null) {
             throw new RuntimeException();
@@ -61,8 +125,8 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         return path;
     }
 
-    public String getName(Class actionClass, ModuleConfig config) {
-        String name = getPath(actionClass, config).substring(1);
+    protected String getName(ModuleConfig config, Class actionClass) {
+        String name = getPath(actionClass).substring(1);
         String formName = name + "Form";
         String dtoName = name + "Dto";
         if (config.findFormBeanConfig(formName) != null) {
@@ -75,55 +139,21 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         return null;
     }
 
-    public String getScope(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_SCOPE;
+    public ForwardConfig createActionForwardConfig(ModuleConfig config, Class actionClass, String name,
+            StrutsActionForwardConfig actionForward) {
+        
+        ForwardConfig forwardConfig = (ForwardConfig) ClassUtil.newInstance(config.getActionForwardClass());
+        forwardConfig.setName(name);
+        forwardConfig.setPath(actionForward.path());
+
+        if (StrutsActionForwardConfig.DEFAULT_REDIRECT != actionForward.redirect()) {
+            forwardConfig.setRedirect(actionForward.redirect().booleanValue());
+        }
+
+        return forwardConfig;
     }
 
-    public boolean getValidate(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_VALIDATE;
-    }
-
-    public String getInput(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public String getParameter(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public String getAttribute(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public String getForward(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public String getInclude(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public String getPrefix(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public String getSuffix(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public boolean getUnknown(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_UNKNOWN;
-    }
-
-    public boolean getCancellable(Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_CANCELLABLE;
-    }
-
-    public String getRoles(Class actionClass, ModuleConfig config) {
-        return null;
-    }
-
-    public void addForwardConfig(Class actionClass, ActionConfig actionConfig, ServletContext servletContext) {
+    public void addForwardConfig(ModuleConfig config, Class actionClass, ActionConfig actionConfig) {
         ForwardConfig forwardConfig = actionConfig.findForwardConfig(Constants.SUCCESS);
         if (forwardConfig != null) {
             return;
@@ -132,7 +162,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         String path = null;
         String[] viewExtension = this.configRule.getViewExtension();
         for (int i = 0; i < viewExtension.length; i++) {
-            String file = getPath(actionClass, null) + "." + viewExtension[i];
+            String file = getPath(actionClass) + "." + viewExtension[i];
             path = this.configRule.getDocRoot() + file;
             String packageDir = ClassUtil.getPackageName(actionClass);
             if (packageDir == null) {
@@ -146,26 +176,25 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
                 path = getExistResourcePath(docRoot, packageDir, file, actionConfig, servletContext);
             }
             if (path != null) {
-                addForwardConfig(path, actionConfig);
+                addForwardConfig(config, path, actionConfig);
                 return;
             }
         }
 
-        String message = "View file was not found. " + getPath(actionClass, null) + "."
+        String message = "View file was not found. " + getPath(actionClass) + "."
                 + viewExtension[this.configRule.getViewExtension().length - 1];
         logger.info(message);
     }
 
-    private void addForwardConfig(String path, ActionConfig actionConfig) {
-        ForwardConfig forwardConfig = new ActionForward();
+    protected void addForwardConfig(ModuleConfig config, String path, ActionConfig actionConfig) {
+        ForwardConfig forwardConfig = (ForwardConfig) ClassUtil.newInstance(config.getActionForwardClass());
         forwardConfig.setName(Constants.SUCCESS);
         forwardConfig.setPath(path);
-        forwardConfig.setRedirect(StrutsActionForwardConfig.DEFAULT_REDIRECT);
         actionConfig.addForwardConfig(forwardConfig);
     }
 
-    private String getExistFilePath(String docRoot, String packageDir, String file,
-            ActionConfig actionConfig, ServletContext servletContext) {
+    protected String getExistFilePath(String docRoot, String packageDir, String file, ActionConfig actionConfig,
+            ServletContext servletContext) {
         if (servletContext.getRealPath("/") == null) {
             return null;
         }
@@ -189,8 +218,8 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         }
     }
 
-    private String getExistResourcePath(String docRoot, String packageDir, String file,
-            ActionConfig actionConfig, ServletContext servletContext) {
+    protected String getExistResourcePath(String docRoot, String packageDir, String file, ActionConfig actionConfig,
+            ServletContext servletContext) {
         String path = docRoot + packageDir + file;
         URL resourceUrl;
         try {

@@ -15,13 +15,16 @@
  */
 package org.seasar.struts.lessconfig.config;
 
+import org.seasar.struts.Constants;
+
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface StrutsActionFormConfig {
-    String DEFAULT_NAME = "";
+    String DEFAULT_NAME = Constants.UNDEFINED;
     String name();
 
-    boolean DEFAULT_RESTRICTED = false;
-    boolean restricted();
+    Boolean DEFAULT_RESTRICTED = null;
+    Boolean restricted();
 }

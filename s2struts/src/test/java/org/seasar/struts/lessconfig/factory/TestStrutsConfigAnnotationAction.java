@@ -5,11 +5,13 @@ package org.seasar.struts.lessconfig.factory;
  */
 public interface TestStrutsConfigAnnotationAction {
 
-    String ACTION = "path=testpath, name=testname, input=testinput, parameter=testparameter"
+    String ACTION = "path=testpath, name=testname, scope=request"
+            + ", validate=true, input=testinput, parameter=testparameter"
             + ", attribute=testattribute, forward=testforward, include=testinclude"
-            + ", prefix=testprefix, suffix=testsuffix, roles=testroles" + ", cancellable=true";
+            + ", prefix=testprefix, suffix=testsuffix, roles=testroles"
+            + ", unknown=false, cancellable=true";
 
-    String SUCCESS_FORWARD = "/test.jsp";
+    String SUCCESS_FORWARD = "/test.jsp, redirect=false";
 
     String SUCCESS = "success";
 

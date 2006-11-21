@@ -23,7 +23,7 @@ public class ConstantStrutsConfigAnnotationHandlerValueTest extends S2TestCase {
         StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
         assertNotNull(config);
         assertEquals("/test.jsp?aaa=bbb", config.path());
-        assertEquals(true, config.redirect());
+        assertEquals(Boolean.TRUE, config.redirect());
     }
 
     public void testValue2() throws Exception {
@@ -31,7 +31,7 @@ public class ConstantStrutsConfigAnnotationHandlerValueTest extends S2TestCase {
         StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
         assertNotNull(config);
         assertEquals("/test.jsp", config.path());
-        assertEquals(true, config.redirect());
+        assertEquals(Boolean.TRUE, config.redirect());
     }
 
     public void testValue3() throws Exception {
@@ -39,7 +39,7 @@ public class ConstantStrutsConfigAnnotationHandlerValueTest extends S2TestCase {
         StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
         assertNotNull(config);
         assertEquals("", config.path());
-        assertEquals(true, config.redirect());
+        assertEquals(Boolean.TRUE, config.redirect());
     }
 
 }

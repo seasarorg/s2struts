@@ -5,6 +5,6 @@ package org.seasar.struts.lessconfig.factory;
  */
 public class TestStrutsConfigAnnotationForm {
 
-    public static final String FORM = "testFormName";
+    public static final String FORM = "testFormName, restricted=false";
 
 }

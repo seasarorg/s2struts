@@ -1,5 +1,6 @@
 package org.seasar.struts.processor;
 
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ControllerConfig;
 import org.apache.struts.config.ExceptionConfig;
@@ -107,18 +108,15 @@ public class MockModuleConfig implements ModuleConfig {
     }
 
     public String getActionFormBeanClass() {
-        // TODO Auto-generated method stub
-        return null;
+        return FormBeanConfig.class.getName();
     }
 
     public String getActionForwardClass() {
-        // TODO Auto-generated method stub
-        return null;
+        return ForwardConfig.class.getName();
     }
 
     public String getActionMappingClass() {
-        // TODO Auto-generated method stub
-        return null;
+        return ActionMapping.class.getName();
     }
 
     public boolean getConfigured() {

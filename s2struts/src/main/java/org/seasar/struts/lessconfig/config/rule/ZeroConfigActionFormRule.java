@@ -15,14 +15,17 @@
  */
 package org.seasar.struts.lessconfig.config.rule;
 
+import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface ZeroConfigActionFormRule {
-    String getName(Class formClass, ModuleConfig config);
-    
-    boolean getRestricted(Class formClass, ModuleConfig config);
-    
+
+    FormBeanConfig createFormBeanConfig(ModuleConfig config, Class formClass, String name,
+            StrutsActionFormConfig strutsActionForm);
+
 }

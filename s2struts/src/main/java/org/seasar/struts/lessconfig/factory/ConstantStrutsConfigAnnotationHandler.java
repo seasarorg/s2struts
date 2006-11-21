@@ -33,7 +33,7 @@ import org.seasar.struts.util.ConstantValueUtil;
 public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnotationHandler {
 
     private static final String ACTION = "ACTION";
-    
+
     private static final String FORM = "FORM";
 
     private static final String FORWARD_SUFFIX = "_FORWARD";
@@ -46,9 +46,9 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (clazz != beanDesc.getField(ACTION).getDeclaringClass()) {
             return null;
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(ACTION))) {
-			return null;
-		}
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(ACTION))) {
+            return null;
+        }
         String value = (String) beanDesc.getFieldValue(ACTION, null);
         final Map parameters = ConstantValueUtil.toMap(value);
 
@@ -78,12 +78,12 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 return value;
             }
 
-            public boolean validate() {
+            public Boolean validate() {
                 String value = (String) parameters.get("validate");
                 if (value == null) {
                     return StrutsActionConfig.DEFAULT_VALIDATE;
                 }
-                return BooleanConversionUtil.toPrimitiveBoolean(value);
+                return BooleanConversionUtil.toBoolean(value);
             }
 
             public String input() {
@@ -142,12 +142,12 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 return value;
             }
 
-            public boolean unknown() {
+            public Boolean unknown() {
                 String value = (String) parameters.get("unknown");
                 if (value == null) {
                     return StrutsActionConfig.DEFAULT_UNKNOWN;
                 }
-                return BooleanConversionUtil.toPrimitiveBoolean(value);
+                return BooleanConversionUtil.toBoolean(value);
             }
 
             public String roles() {
@@ -157,13 +157,13 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 }
                 return value;
             }
-            
-            public boolean cancellable() {
+
+            public Boolean cancellable() {
                 String value = (String) parameters.get("cancellable");
                 if (value == null) {
                     return StrutsActionConfig.DEFAULT_CANCELLABLE;
                 }
-                return BooleanConversionUtil.toPrimitiveBoolean(value);
+                return BooleanConversionUtil.toBoolean(value);
             }
 
         };
@@ -175,9 +175,9 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (!beanDesc.hasField(fieldName)) {
             return null;
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
-			return null;
-		}
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
+            return null;
+        }
         String value = (String) beanDesc.getFieldValue(fieldName, null);
         final Map parameters = ConstantValueUtil.toMap(value, "path");
 
@@ -187,12 +187,12 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 return (String) parameters.get("path");
             }
 
-            public boolean redirect() {
+            public Boolean redirect() {
                 String value = (String) parameters.get("redirect");
                 if (value == null) {
                     return StrutsActionForwardConfig.DEFAULT_REDIRECT;
                 }
-                return BooleanConversionUtil.toPrimitiveBoolean(value);
+                return BooleanConversionUtil.toBoolean(value);
             }
         };
     }
@@ -205,13 +205,13 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (clazz != beanDesc.getField(FORM).getDeclaringClass()) {
             return null;
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(FORM))) {
-			return null;
-		}
-        
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(FORM))) {
+            return null;
+        }
+
         String value = (String) beanDesc.getFieldValue(FORM, null);
         final Map parameters = ConstantValueUtil.toMap(value, "name");
-        
+
         return new StrutsActionFormConfig() {
 
             public String name() {
@@ -222,14 +222,14 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 return value;
             }
 
-            public boolean restricted() {
+            public Boolean restricted() {
                 String value = (String) parameters.get("restricted");
                 if (value == null) {
                     return StrutsActionFormConfig.DEFAULT_RESTRICTED;
                 }
-                return BooleanConversionUtil.toPrimitiveBoolean(value);
+                return BooleanConversionUtil.toBoolean(value);
             }
-            
+
         };
     }
 

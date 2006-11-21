@@ -18,13 +18,14 @@ package org.seasar.struts.lessconfig.config;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class NullStrutsActionFormConfig implements StrutsActionFormConfig {
     public String name() {
         return DEFAULT_NAME;
     }
 
-    public boolean restricted() {
+    public Boolean restricted() {
         return DEFAULT_RESTRICTED;
     }
 }

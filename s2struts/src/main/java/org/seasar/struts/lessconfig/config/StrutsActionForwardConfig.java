@@ -17,10 +17,11 @@ package org.seasar.struts.lessconfig.config;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface StrutsActionForwardConfig {
     String path();
 
-    boolean DEFAULT_REDIRECT = false;
-    boolean redirect();
+    Boolean DEFAULT_REDIRECT = null;
+    Boolean redirect();
 }

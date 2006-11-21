@@ -17,13 +17,17 @@ package org.seasar.struts;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface Constants {
+
     String SUCCESS = "success";
 
     String REQUEST = "request";
 
     String SESSION = "session";
+
+    String UNDEFINED = "org.seasar.struts.UNDEFINED";
 
     String PAGE_NAME_ELEMENT_VALUE = "org.seasar.struts.page";
 

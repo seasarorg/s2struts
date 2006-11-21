@@ -17,10 +17,6 @@ package org.seasar.struts.lessconfig.autoregister.impl;
 
 import java.lang.reflect.Field;
 
-import javax.servlet.ServletContext;
-
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
@@ -40,12 +36,6 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory
  * @author Katsuhiko Nagashima
  */
 public class ActionConfigCreatorImpl implements ActionConfigCreator {
-
-    private ServletContext servletContext;
-
-    public void setServletContext(ServletContext servletContext) {
-        this.servletContext = servletContext;
-    }
 
     private ZeroConfigActionRule defaultRule;
 
@@ -92,35 +82,13 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
             }
         }
 
-        ActionConfig actionConfig = new ActionMapping();
-        if (StrutsActionConfig.DEFAULT_PATH.equals(strutsAction.path())) {
-            actionConfig.setPath(path);
-        } else {
-            actionConfig.setPath(strutsAction.path());
-        }
-        actionConfig.setType(actionClass.getName());
-        actionConfig.setModuleConfig(config);
-
-        actionConfig.setName(getName(strutsAction, actionClass, config));
-        actionConfig.setAttribute(getAttribute(strutsAction, actionClass, config));
-        actionConfig.setForward(getForward(strutsAction, actionClass, config));
-        actionConfig.setInclude(getInclude(strutsAction, actionClass, config));
-        actionConfig.setInput(getInput(strutsAction, actionClass, config));
-        actionConfig.setParameter(getParameter(strutsAction, actionClass, config));
-        actionConfig.setPrefix(getPrefix(strutsAction, actionClass, config));
-        actionConfig.setRoles(getRoles(strutsAction, actionClass, config));
-        actionConfig.setScope(getScope(strutsAction, actionClass, config));
-        actionConfig.setSuffix(getSuffix(strutsAction, actionClass, config));
-        actionConfig.setUnknown(getUnknown(strutsAction, actionClass, config));
-        actionConfig.setValidate(getValidate(strutsAction, actionClass, config));
-        actionConfig.setCancellable(getCancellable(strutsAction, actionClass, config));
-
-        registerForwardConfigs(actionConfig, actionClass);
+        ActionConfig actionConfig = this.defaultRule.createActionConfig(config, actionClass, path, strutsAction);
+        registerForwardConfigs(config, actionConfig, actionClass);
 
         return actionConfig;
     }
 
-    private void registerForwardConfigs(ActionConfig actionConfig, Class actionClass) {
+    private void registerForwardConfigs(ModuleConfig config, ActionConfig actionConfig, Class actionClass) {
 
         Field[] fields = actionClass.getFields();
         for (int i = 0; i < fields.length; i++) {
@@ -129,79 +97,12 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
             if (actionForward != null) {
                 fields[i].setAccessible(true);
                 String name = FieldUtil.get(fields[i], actionClass).toString();
-                ForwardConfig forwardConfig = new ActionForward();
-                forwardConfig.setName(name);
-                forwardConfig.setPath(actionForward.path());
-                forwardConfig.setRedirect(actionForward.redirect());
+                ForwardConfig forwardConfig = this.defaultRule.createActionForwardConfig(config, actionClass, name,
+                        actionForward);
                 actionConfig.addForwardConfig(forwardConfig);
             }
         }
-        this.defaultRule.addForwardConfig(actionClass, actionConfig, this.servletContext);
-    }
-
-    private String getAttribute(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_ATTRIBUTE.equals(action.attribute()) ? this.defaultRule.getAttribute(
-                actionClass, config) : action.attribute();
-    }
-
-    private String getForward(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_FORWARD.equals(action.forward()) ? this.defaultRule.getForward(actionClass,
-                config) : action.forward();
-    }
-
-    private String getInclude(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_INCLUDE.equals(action.include()) ? this.defaultRule.getInclude(actionClass,
-                config) : action.include();
-    }
-
-    private String getInput(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_INPUT.equals(action.input()) ? this.defaultRule.getInput(actionClass, config)
-                : action.input();
-    }
-
-    private String getName(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_NAME.equals(action.name()) ? this.defaultRule.getName(actionClass, config)
-                : action.name();
-    }
-
-    private String getParameter(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_PARAMETER.equals(action.parameter()) ? this.defaultRule.getParameter(
-                actionClass, config) : action.parameter();
-    }
-
-    private String getPrefix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_PREFIX.equals(action.prefix()) ? this.defaultRule.getPrefix(actionClass,
-                config) : action.prefix();
-    }
-
-    private String getRoles(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_ROLES.equals(action.roles()) ? this.defaultRule.getRoles(actionClass, config)
-                : action.roles();
-    }
-
-    private String getScope(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_SCOPE.equals(action.scope()) ? this.defaultRule.getScope(actionClass, config)
-                : action.scope();
-    }
-
-    private String getSuffix(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return StrutsActionConfig.DEFAULT_SUFFIX.equals(action.suffix()) ? this.defaultRule.getSuffix(actionClass,
-                config) : action.suffix();
-    }
-
-    private boolean getUnknown(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.unknown() == StrutsActionConfig.DEFAULT_UNKNOWN ? this.defaultRule
-                .getUnknown(actionClass, config) : action.unknown();
-    }
-
-    private boolean getValidate(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.validate() == StrutsActionConfig.DEFAULT_VALIDATE ? this.defaultRule.getValidate(actionClass,
-                config) : action.validate();
-    }
-
-    private boolean getCancellable(StrutsActionConfig action, Class actionClass, ModuleConfig config) {
-        return action.cancellable() == StrutsActionConfig.DEFAULT_CANCELLABLE ? this.defaultRule.getCancellable(
-                actionClass, config) : action.cancellable();
+        this.defaultRule.addForwardConfig(config, actionClass, actionConfig);
     }
 
 }

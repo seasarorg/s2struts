@@ -19,6 +19,7 @@ package org.seasar.struts.lessconfig.config;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class NullStrutsActionConfig implements StrutsActionConfig {
     public String path() {
@@ -33,7 +34,7 @@ public class NullStrutsActionConfig implements StrutsActionConfig {
         return DEFAULT_SCOPE;
     }
 
-    public boolean validate() {
+    public Boolean validate() {
         return DEFAULT_VALIDATE;
     }
 
@@ -65,7 +66,7 @@ public class NullStrutsActionConfig implements StrutsActionConfig {
         return DEFAULT_SUFFIX;
     }
 
-    public boolean unknown() {
+    public Boolean unknown() {
         return DEFAULT_UNKNOWN;
     }
 
@@ -73,7 +74,7 @@ public class NullStrutsActionConfig implements StrutsActionConfig {
         return DEFAULT_ROLES;
     }
     
-    public boolean cancellable() {
+    public Boolean cancellable() {
     	return DEFAULT_CANCELLABLE;
     }
 }

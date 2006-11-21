@@ -77,22 +77,10 @@ public class ActionFormConfigCreatorImpl implements ActionFormConfigCreator {
             }
         }
 
-        FormBeanConfig formBeanConfig = new FormBeanConfig();
-        if (StrutsActionFormConfig.DEFAULT_NAME.equals(strutsActionForm.name())) {
-            formBeanConfig.setName(name);
-        } else {
-            formBeanConfig.setName(strutsActionForm.name());
-        }
-        formBeanConfig.setType(formClass.getName());
-
-        formBeanConfig.setRestricted(getRestricted(strutsActionForm, formClass, config));
+        FormBeanConfig formBeanConfig = this.defaultRule
+                .createFormBeanConfig(config, formClass, name, strutsActionForm);
 
         return formBeanConfig;
-    }
-
-    private boolean getRestricted(StrutsActionFormConfig form, Class formClass, ModuleConfig config) {
-        return form.restricted() == StrutsActionFormConfig.DEFAULT_RESTRICTED ? defaultRule.getRestricted(formClass,
-                config) : form.restricted();
     }
 
 }
