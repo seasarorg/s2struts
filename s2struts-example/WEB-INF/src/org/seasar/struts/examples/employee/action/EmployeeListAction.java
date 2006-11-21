@@ -15,13 +15,14 @@
  */
 package org.seasar.struts.examples.employee.action;
 
+import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsAction(name = "employeeForm", parameter = "method", validate = false)
+@StrutsAction(name = "employeeForm", parameter = "method", validate = BoolType.FALSE)
 public interface EmployeeListAction {
 
     @StrutsActionForward(path = "/pages/employee/employeeEdit.html")

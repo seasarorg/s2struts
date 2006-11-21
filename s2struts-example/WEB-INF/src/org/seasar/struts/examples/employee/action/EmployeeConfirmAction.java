@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.examples.employee.action;
 
+import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
@@ -27,10 +28,10 @@ public interface EmployeeConfirmAction {
     @StrutsActionForward(path = "/pages/employee/employeeEdit.html")
     public String EDIT = "edit";
 
-    @StrutsActionForward(path = "/pages/employee/employeeSearch.html", redirect = true)
+    @StrutsActionForward(path = "/pages/employee/employeeSearch.html", redirect = BoolType.TRUE)
     public String SEARCH = "search";
 
-    @StrutsActionForward(path = "/pages/employee/employeeList.html", redirect = true)
+    @StrutsActionForward(path = "/pages/employee/employeeList.html", redirect = BoolType.TRUE)
     public String LIST = "list";
 
     public String store();
