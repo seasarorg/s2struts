@@ -20,8 +20,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
-
 /**
  * 
  * @author Katsuhiko Nagashima
@@ -33,6 +31,6 @@ public @interface StrutsActionForward {
 
     String path();
 
-    boolean redirect() default StrutsActionForwardConfig.DEFAULT_REDIRECT;
+    BoolType redirect() default BoolType.UNDEFINED;
 
 }

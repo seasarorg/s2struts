@@ -50,8 +50,8 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
                 return config.scope().getScopeMode();
             }
 
-            public boolean validate() {
-                return config.validate();
+            public Boolean validate() {
+                return config.validate().getBoolean();
             }
 
             public String input() {
@@ -82,16 +82,16 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
                 return config.suffix();
             }
 
-            public boolean unknown() {
-                return config.unknown();
+            public Boolean unknown() {
+                return config.unknown().getBoolean();
             }
 
             public String roles() {
                 return config.roles();
             }
 
-            public boolean cancellable() {
-                return config.cancellable();
+            public Boolean cancellable() {
+                return config.cancellable().getBoolean();
             }
 
         };
@@ -108,8 +108,8 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
                 return config.path();
             }
 
-            public boolean redirect() {
-                return config.redirect();
+            public Boolean redirect() {
+                return config.redirect().getBoolean();
             }
 
         };
@@ -127,8 +127,8 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
                 return config.name();
             }
 
-            public boolean restricted() {
-                return config.restricted();
+            public Boolean restricted() {
+                return config.restricted().getBoolean();
             }
 
         };

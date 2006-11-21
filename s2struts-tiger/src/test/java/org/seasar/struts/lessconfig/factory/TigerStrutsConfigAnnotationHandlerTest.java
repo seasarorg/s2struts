@@ -35,9 +35,9 @@ public class TigerStrutsConfigAnnotationHandlerTest extends S2TestCase {
         assertEquals("testsuffix", config.suffix());
         assertEquals("testroles", config.roles());
         assertEquals("request", config.scope());
-        assertEquals(true, config.validate());
-        assertEquals(false, config.unknown());
-        assertEquals(true, config.cancellable());
+        assertEquals(Boolean.TRUE, config.validate());
+        assertEquals(Boolean.FALSE, config.unknown());
+        assertEquals(Boolean.TRUE, config.cancellable());
     }
 
     public void testNotCreateStrutsActionConfig() {
@@ -51,7 +51,7 @@ public class TigerStrutsConfigAnnotationHandlerTest extends S2TestCase {
         StrutsActionForwardConfig config = annHandler.createStrutsActionForwardConfig(field);
         assertNotNull(config);
         assertEquals("/test.jsp", config.path());
-        assertEquals(false, config.redirect());
+        assertEquals(Boolean.FALSE, config.redirect());
     }
 
     public void testNotCreateStrutsActionForwardConfig() throws Exception {
@@ -65,7 +65,7 @@ public class TigerStrutsConfigAnnotationHandlerTest extends S2TestCase {
                 .createStrutsActionFormConfig(TestStrutsConfigAnnotationForm.class);
         assertNotNull(config);
         assertEquals("testFormName", config.name());
-        assertEquals(false, config.restricted());
+        assertEquals(Boolean.FALSE, config.restricted());
     }
 
     public void testNotCreateActionFormConfig() {

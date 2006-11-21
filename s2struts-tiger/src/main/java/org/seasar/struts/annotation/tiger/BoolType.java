@@ -15,24 +15,23 @@
  */
 package org.seasar.struts.annotation.tiger;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 
 /**
  * 
  * @author Katsuhiko Nagashima
- * 
+ *
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface StrutsActionForm {
+public enum BoolType {
 
-    String name() default StrutsActionFormConfig.DEFAULT_NAME;
-
-    BoolType restricted() default BoolType.UNDEFINED;
+    TRUE,
+    FALSE,
+    UNDEFINED;
+    
+    public Boolean getBoolean() {
+        if (this == UNDEFINED) {
+            return null;
+        }
+        return (this == TRUE);
+    }
 
 }

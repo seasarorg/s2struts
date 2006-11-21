@@ -35,9 +35,9 @@ public @interface StrutsAction {
 
     String name() default StrutsActionConfig.DEFAULT_NAME;
 
-    ScopeType scope() default ScopeType.REQUEST;
+    ScopeType scope() default ScopeType.UNDEFINED;
 
-    boolean validate() default StrutsActionConfig.DEFAULT_VALIDATE;
+    BoolType validate() default BoolType.UNDEFINED;
 
     String input() default StrutsActionConfig.DEFAULT_INPUT;
 
@@ -53,10 +53,10 @@ public @interface StrutsAction {
 
     String suffix() default StrutsActionConfig.DEFAULT_SUFFIX;
 
-    boolean unknown() default StrutsActionConfig.DEFAULT_UNKNOWN;
+    BoolType unknown() default BoolType.UNDEFINED;
 
     String roles() default StrutsActionConfig.DEFAULT_ROLES;
 
-    boolean cancellable() default StrutsActionConfig.DEFAULT_CANCELLABLE;
+    BoolType cancellable() default BoolType.UNDEFINED;
 
 }

@@ -15,6 +15,8 @@
  */
 package org.seasar.struts.annotation.tiger;
 
+import org.seasar.struts.Constants;
+
 /**
  * 
  * @author Katsuhiko Nagashima
@@ -23,9 +25,13 @@ package org.seasar.struts.annotation.tiger;
 public enum ScopeType {
     
     REQUEST,
-    SESSION;
+    SESSION,
+    UNDEFINED;
     
     public String getScopeMode() {
+        if (this == UNDEFINED) {
+            return Constants.UNDEFINED;
+        }
         return toString().toLowerCase();
     }
 
