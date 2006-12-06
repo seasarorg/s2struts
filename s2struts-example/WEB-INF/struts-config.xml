@@ -65,7 +65,7 @@
 
 <!-- =================================== Action Mapping Definitions -->
 
-    <action-mappings>
+    <action-mappings type="org.apache.struts.action.RequestActionMapping">
         <action
             path="/add"
             type="org.seasar.struts.examples.add.AddAction"
