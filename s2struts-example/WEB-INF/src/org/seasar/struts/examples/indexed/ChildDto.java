@@ -15,11 +15,15 @@
  */
 package org.seasar.struts.examples.indexed;
 
+import java.io.Serializable;
+
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.Required;
 
-public class ChildDto {
-    
+public class ChildDto implements Serializable {
+
+    private static final long serialVersionUID = -4852344089329079245L;
+
     private String value;
 
     public String getValue() {
@@ -31,8 +35,8 @@ public class ChildDto {
     public void setValue(String value) {
         this.value = value;
     }
-    
-	@Override
+
+    @Override
     public String toString() {
         StringBuffer buf = new StringBuffer("[");
         buf.append(value).append("]");

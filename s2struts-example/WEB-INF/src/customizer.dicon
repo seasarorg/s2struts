@@ -2,75 +2,39 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
 	"http://www.seasar.org/dtd/components24.dtd">
 <components>
-	<component name="defaultCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
-		<property name="interceptorName">"aop.traceInterceptor"</property>
-	</component>
-	<component name="commandAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
-		<property name="interceptorName">"aop.traceInterceptor"</property>
-		<property name="pointcut">"do.*, go.*, initialize"</property>
-	</component>
-	<component name="traceThrowsAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
-		<property name="interceptorName">"aop.traceThrowsInterceptor"</property>
-	</component>
+	<include path="default-customizer.dicon"/>
+
 	<component name="txAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
 		<property name="interceptorName">"j2ee.requiredTx"</property>
-	</component>
-	<component name="daoAspectCustomizer" class="org.seasar.framework.container.customizer.AspectCustomizer">
-		<property name="interceptorName">"dao.interceptor"</property>
 	</component>
 
 	<component name="actionCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 		<initMethod name="addCustomizer">
-			<arg>commandAspectCustomizer</arg>
-		</initMethod>
-	</component>
-	<component name="daoCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>defaultCustomizer</arg>
-		</initMethod>
-		<initMethod name="addCustomizer">
-			<arg>daoAspectCustomizer</arg>
-		</initMethod>
-	</component>
-	<component name="dtoCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-	</component>
-	<component name="dxoCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>defaultCustomizer</arg>
-		</initMethod>
-	</component>
-	<component name="helperCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>defaultCustomizer</arg>
-		</initMethod>
-	</component>
-	<component name="logicCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>defaultCustomizer</arg>
-		</initMethod>
-		<initMethod name="addCustomizer">
-			<arg>txAspectCustomizer</arg>
-		</initMethod>
-	</component>
-	<component name="pageCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>commandAspectCustomizer</arg>
+			<arg>traceCustomizer</arg>
 		</initMethod>
 	</component>
 	<component name="serviceCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 		<initMethod name="addCustomizer">
-			<arg>defaultCustomizer</arg>
+			<arg>traceCustomizer</arg>
 		</initMethod>
 		<initMethod name="addCustomizer">
 			<arg>txAspectCustomizer</arg>
 		</initMethod>
 	</component>
-	<component name="interceptorCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+	<component name="logicCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+		<initMethod name="addCustomizer">
+			<arg>traceCustomizer</arg>
+		</initMethod>
+		<initMethod name="addCustomizer">
+			<arg>txAspectCustomizer</arg>
+		</initMethod>
 	</component>
-	<component name="validatorCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-	</component>
-	<component name="converterCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-	</component>
-	<component name="connectorCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+	<component name="daoCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+		<initMethod name="addCustomizer">
+			<arg>traceCustomizer</arg>
+		</initMethod>
+		<initMethod name="addCustomizer">
+			<arg>s2DaoCustomizer</arg>
+		</initMethod>
 	</component>
 </components>

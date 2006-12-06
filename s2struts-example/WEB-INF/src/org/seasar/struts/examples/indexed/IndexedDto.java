@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.examples.indexed;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,7 +25,9 @@ import java.util.Map;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.Required;
 
-public class IndexedDto {
+public class IndexedDto implements Serializable {
+
+    private static final long serialVersionUID = 7108435471068662902L;
 
     private List<ChildDto> children = new ArrayList<ChildDto>();
 
