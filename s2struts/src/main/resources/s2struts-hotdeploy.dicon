@@ -80,6 +80,25 @@
 				</initMethod>
 			</component>
 		</aspect>
+		<aspect pointcut="findFormBeanConfigs">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.CacheFindFormBeanConfigsInterceptor"/>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.hotdeploy.ReloadFindFormBeanConfigsInterceptor"/>
+					</arg>
+				</initMethod>
+				<initMethod name="add">
+					<arg>
+						<component class="org.seasar.struts.lessconfig.hotdeploy.OndemandFindFormBeanConfigsInterceptor"/>
+					</arg>
+				</initMethod>
+			</component>
+		</aspect>
 	</component>
 
 	<component name="validatorResourcesLoader"      class="org.seasar.struts.hotdeploy.impl.ValidatorResourcesLoaderImpl"/>
