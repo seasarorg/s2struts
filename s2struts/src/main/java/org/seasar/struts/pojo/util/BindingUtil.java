@@ -27,6 +27,7 @@ import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
+import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.IntegerConversionUtil;
@@ -91,9 +92,9 @@ public class BindingUtil {
             return;
         }
 
-        String propertyName = propertyDesc.getPropertyName();
+        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
         Object value = BindingUtil.getValue(container, propertyName);
-        if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
+        if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
             value = ActionFormUtil.getActualForm(S2StrutsContextUtil.getRequest(container), mapping);
         } else {
             value = BeanValidatorFormUtil.toBean(value);
@@ -167,12 +168,12 @@ public class BindingUtil {
         }
 
         HttpServletRequest request = S2StrutsContextUtil.getRequest(container);
-        if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
+        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
+        if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
             ActionFormUtil.setActualForm(request, value, mapping);
             return;
         }
 
-        String propertyName = propertyDesc.getPropertyName();
         ActionMapping propertyActionMapping = (ActionMapping) ModuleConfigUtil
                 .findActionConfigForFormBeanName(propertyName);
         if (propertyActionMapping != null) {
@@ -189,8 +190,28 @@ public class BindingUtil {
         }
     }
 
-    private static boolean isActionFormProperty(PropertyDesc propertyDesc, ActionMapping mapping) {
-        return propertyDesc.getPropertyName().equals(mapping.getAttribute());
+    private static boolean isActionFormProperty(String propertyName, ActionMapping mapping) {
+        return propertyName.equals(mapping.getAttribute());
+    }
+
+    private static String getComponentPropertyName(S2Container container, PropertyDesc propertyDesc) {
+        String propertyName = propertyDesc.getPropertyName();
+        Class propertyClass = propertyDesc.getPropertyType();
+
+        if (!container.hasComponentDef(propertyClass)) {
+            return propertyName;
+        }
+
+        ComponentDef propertyDef = container.getComponentDef(propertyClass);
+        String componentName = propertyDef.getComponentName();
+        if (componentName == null) {
+            return propertyName;
+        }
+
+        if (componentName.endsWith("_" + propertyName)) {
+            return componentName;
+        }
+        return propertyName;
     }
 
 }

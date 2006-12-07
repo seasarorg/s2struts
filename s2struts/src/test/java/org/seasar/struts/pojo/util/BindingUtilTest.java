@@ -13,6 +13,7 @@ import org.seasar.struts.mock.MockActionMapping;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class BindingUtilTest extends S2TestCase {
 
