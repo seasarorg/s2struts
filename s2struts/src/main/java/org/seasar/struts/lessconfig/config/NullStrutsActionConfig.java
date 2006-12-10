@@ -15,8 +15,6 @@
  */
 package org.seasar.struts.lessconfig.config;
 
-
-
 /**
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
@@ -73,8 +71,8 @@ public class NullStrutsActionConfig implements StrutsActionConfig {
     public String roles() {
         return DEFAULT_ROLES;
     }
-    
+
     public Boolean cancellable() {
-    	return DEFAULT_CANCELLABLE;
+        return DEFAULT_CANCELLABLE;
     }
 }

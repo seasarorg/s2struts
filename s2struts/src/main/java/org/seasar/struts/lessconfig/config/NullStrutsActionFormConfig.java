@@ -15,7 +15,6 @@
  */
 package org.seasar.struts.lessconfig.config;
 
-
 /**
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
