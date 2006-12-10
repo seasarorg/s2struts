@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts">
+        
+    <m:echo id="globalStyle">
+        <m:attribute name="href" value="${contextPath}/css/global.css" />
+    </m:echo>
+
+    <m:echo id="executeJs">
+        <m:attribute name="src" value="${contextPath}/js/execute.js" />
+    </m:echo>
+
+    <m:insert id="pageTitle" name="title" replace="false" />
+
+    <m:insert id="layoutBody" name="content" replace="false" />
+
+    <html:img m:id="header" page="/images/seasar.gif" m:replace="false"/>
+
+    <!-- ignored ids -->
+    <m:ignore id="footer" />
+
+</m:mayaa>

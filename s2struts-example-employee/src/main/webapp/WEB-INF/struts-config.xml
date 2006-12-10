@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+<!-- ======================================== Form Bean Definitions -->
+
+    <form-beans>
+    </form-beans>
+
+<!-- ================================= Global Exception Definitions -->
+
+    <global-exceptions>
+
+        <exception
+            key="errors.global.runtime"
+            type="java.lang.RuntimeException"
+            path="/pages/error.html"/>
+
+        <exception
+            key="errors.global.runtime.sql"
+            type="org.seasar.framework.exception.SQLRuntimeException"
+            path="/pages/error.html"/>
+
+    </global-exceptions>
+
+<!-- =================================== Global Forward Definitions -->
+
+    <global-forwards>
+
+        <forward
+            name="welcome"
+            path="/index.html"/>
+
+        <forward
+            name="globalStyle"
+            path="/css/global.css"/>
+
+        <forward
+            name="executeJs"
+            path="/js/execute.js"/>
+
+        <forward
+            name="error"
+            path="/pages/error.html"/>
+
+        <forward
+            name="employee"
+            path="/pages/employee/employeeSearch.html"/>
+
+        <forward
+            name="logoff"
+            path="/logon_logoff.do"/>
+
+    </global-forwards>
+
+<!-- =================================== Action Mapping Definitions -->
+
+    <action-mappings type="org.apache.struts.action.RequestActionMapping">
+    </action-mappings>
+
+
+<!-- ===================================== Controller Configuration -->
+
+    <controller
+       processorClass="org.seasar.struts.processor.S2RequestProcessor"/>
+<!--
+    <controller
+       processorClass="org.apache.struts.action.RequestProcessor"/>
+-->
+
+<!-- ================================ Message Resources Definitions -->
+
+    <message-resources parameter="application"/>
+
+<!-- ======================================= Plug Ins Configuration -->
+
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+          property="pathnames"
+          value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+
+    <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn">
+        <set-property property="enableJar" value="false"/>
+        <set-property property="docRoot" value="/pages"/>
+    </plug-in>
+
+    <plug-in className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/>
+
+</struts-config>
+

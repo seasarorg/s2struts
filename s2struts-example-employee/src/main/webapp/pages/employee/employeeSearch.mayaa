@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="title.employee.search" /> - <bean:message key="title.employee" />
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content">
+        <s2struts:init action="#{manage_employeeSearchInitAction.initialize}" />
+        <m:doBody/>
+    </m:doRender>
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/manage/employeeSearch" method="POST">
+        <s2struts:page />
+        <m:doBody/>
+    </html:form>
+
+    <bean:message m:id="labelEmpno" key="form.employee.no" />
+    <html:text m:id="empno" property="empno" styleClass="number" errorStyleClass="number-error" />
+    
+    <bean:message m:id="labelEname" key="form.employee.name" />
+    <html:text m:id="ename" property="ename" styleClass="text" errorStyleClass="text-error" />
+
+    <bean:message m:id="labelJob" key="form.employee.job" />
+    <html:text m:id="job" property="job" styleClass="text" errorStyleClass="text-error" />
+
+    <bean:message m:id="labelMgr" key="form.employee.manager" />
+    <html:text m:id="mgr" property="mgr" styleClass="number" errorStyleClass="number-error" />
+
+    <bean:message m:id="labelHiredate" key="form.employee.hiredate" />
+    <html:text m:id="fromHiredate" property="hiredate_from" styleClass="date" errorStyleClass="date-error" />
+    <html:text m:id="toHiredate" property="hiredate_to" styleClass="date" errorStyleClass="date-error" />
+
+    <bean:message m:id="labelSal" key="form.employee.salary" />
+    <html:text m:id="fromSal" property="sal_from" styleClass="number" errorStyleClass="number-error" />
+    <html:text m:id="toSal" property="sal_to" styleClass="number" errorStyleClass="number-error" />
+
+    <bean:message m:id="labelDeptNo" key="form.department" />
+    <html:select m:id="deptno" property="deptno" errorStyleClass="error">
+        <html:option value="" key="messages.select.space" />
+        <html:options collection="departmentDtos" property="deptno" labelProperty="dname" />
+    </html:select>
+
+    <s2struts:submit m:id="goCreate" action="#{manage_employeeSearchAction.goEditForCreate}" cancel="true">
+        <bean:message key="button.create" />
+    </s2struts:submit>
+    <s2struts:submit m:id="goSearch" action="#{manage_employeeSearchAction.goList}">
+        <bean:message key="button.search" />
+    </s2struts:submit>
+
+</m:mayaa>

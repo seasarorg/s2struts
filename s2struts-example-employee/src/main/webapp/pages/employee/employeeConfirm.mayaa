@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:with id="pageTitle">
+        <m:doRender name="title">
+            <m:if test="${ param.mode == 'create' }">
+                <bean:message key="title.employee.create" /> - <bean:message key="title.employee" />
+            </m:if>
+            <m:if test="${ param.mode == 'update' }">
+                <bean:message key="title.employee.update" /> - <bean:message key="title.employee" />
+            </m:if>
+            <m:if test="${ param.mode == 'delete' }">
+                <bean:message key="title.employee.delete" /> - <bean:message key="title.employee" />
+            </m:if>
+            <m:if test="${ param.mode == 'refer' }">
+                <bean:message key="title.employee.inquire" /> - <bean:message key="title.employee" />
+            </m:if>
+        </m:doRender>
+    </m:with>
+    
+    <m:doRender id="appBody" name="content">
+        <s2struts:init action="#{manage_employeeConfirmInitAction.initialize}" />
+        <m:doBody/>
+    </m:doRender>
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/manage/employeeConfirm" method="POST">
+        <html:hidden property="mode" value="${ param.mode }" />
+        <html:hidden property="versionNo" />
+        <html:hidden property="empno" />
+        <html:hidden property="ename" />
+        <html:hidden property="job" />
+        <html:hidden property="mgr" />
+        <html:hidden property="hiredate" />
+        <html:hidden property="sal" />
+        <html:hidden property="comm" />
+        <html:hidden property="deptno" />
+        <html:hidden property="dname" />
+        <m:doBody/>
+    </html:form>
+
+    <bean:message m:id="labelEmpno" key="form.employee.no" />
+    <bean:write m:id="empno" name="manage_employeeForm" property="empno"/>
+    
+    <bean:message m:id="labelEname" key="form.employee.name" />
+    <bean:write m:id="ename" name="manage_employeeForm" property="ename"/>
+
+    <bean:message m:id="labelJob" key="form.employee.job" />
+    <bean:write m:id="job" name="manage_employeeForm" property="job"/>
+
+    <bean:message m:id="labelMgr" key="form.employee.manager" />
+    <bean:write m:id="mgr" name="manage_employeeForm" property="mgr"/>
+
+    <bean:message m:id="labelHiredate" key="form.employee.hiredate" />
+    <bean:write m:id="hiredate" name="manage_employeeForm" property="hiredate"/>
+
+    <bean:message m:id="labelSal" key="form.employee.salary" />
+    <bean:write m:id="sal" name="manage_employeeForm" property="sal"/>
+
+    <bean:message m:id="labelComm" key="form.employee.commission" />
+    <bean:write m:id="comm" name="manage_employeeForm" property="comm"/>
+
+    <bean:message m:id="labelDeptno" key="form.department" />
+    <bean:write m:id="deptno" name="manage_employeeForm" property="dname"/>
+
+    <s2struts:submit m:id="goConfirm" action="#{employeeEditAction.goConfirm}">
+        <bean:message key="button.confirm" />
+    </s2struts:submit>
+
+    <m:if id="goStore" test="${ param.mode != 'refer' }">
+        <s2struts:submit action="#{manage_employeeConfirmAction.doStore}">
+            <bean:message key="button.store" />
+        </s2struts:submit>
+    </m:if>
+    
+    <s2struts:submit m:id="goPrevious" action="#{manage_employeeConfirmAction.goPrevious}">
+        <bean:message key="button.prev" />
+    </s2struts:submit>
+
+</m:mayaa>

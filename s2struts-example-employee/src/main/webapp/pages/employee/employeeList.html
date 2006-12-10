@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link type="text/css" href="../../css/global.css" rel="stylesheet"/>
+  <script type="text/javascript" src="../../js/execute.js"></script>
+  <title id="pageTitle">
+    List - Employee Management Demo
+  </title>
+</head>
+<body>
+
+<div id="appBody">
+  <div id="errorMessage"></div>
+  <table class="list">
+    <tr class="label">
+      <th><span id="labelEmpno">EmployeeNo</span></th>
+      <th><span id="labelEname">EmployeeName</span></th>
+      <th><span id="labelJob">Job</span></th>
+      <th><span id="labelMgr">Manager</span></th>
+      <th><span id="labelHiredate">HireDate</span></th>
+      <th><span id="labelSal">Salary</span></th>
+      <th><span id="labelComm">Commission</span></th>
+      <th><span id="labelDept">Department</span></th>
+      <th><span id="labelDetail">Detail</span></th>
+    </tr>
+    <div id="loop">
+      <tr class="row-0" id="row">
+        <td class="number"><span id="empno">7782</span></td>
+        <td class="text"><span id="ename">CLARK</span></td>
+        <td class="text"><span id="job">MANAGER</span></td>
+        <td class="number"><span id="mgr">7839</span></td>
+        <td class="date"><span id="hiredate">1981/06/09</span></td>
+        <td class="number"><span id="sal">2450</span></td>
+        <td class="number"><span id="comm"></span></td>
+        <td class="text"><span id="dept">ACCOUNTING</span></td>
+        <td>
+          <a href="employeeEdit.html" id="goEdit">edit</a>
+          <a href="employeeConfirm.html" id="goDelete">delete</a>
+          <a href="employeeConfirm.html" id="goInquire">inquire</a>
+        </td>
+      </tr>
+    </div>
+    
+    <div id="dummy">
+      <tr class="row-1">
+        <td class="number">7839</td>
+        <td class="text">KING</td>
+        <td class="text">PRESIDENT</td>
+        <td class="number"></td>
+        <td class="date">1981/11/17</td>
+        <td class="number">5000</td>
+        <td class="number"></td>
+        <td class="text">ACCOUNTING</td>
+        <td>
+          <a href="employeeEdit.html">edit</a>
+          <a href="employeeConfirm.html">delete</a>
+          <a href="employeeConfirm.html">inquire</a>
+        </td>
+      </tr>
+    
+      <tr class="row-0">
+        <td class="number">7934</td>
+        <td class="text">MILLER</td>
+        <td class="text">CLERK</td>
+        <td class="number">7782</td>
+        <td class="date">1982/01/23</td>
+        <td class="number">1300</td>
+        <td class="number"></td>
+        <td class="text">ACCOUNTING</td>
+        <td>
+          <a href="employeeEdit.html">edit</a>
+          <a href="employeeConfirm.html">delete</a>
+          <a href="employeeConfirm.html">inquire</a>
+        </td>
+      </tr>
+    </div>
+  </table>
+  <a href="employeeSearch.html" id="goPrevious">previous</a>
+</div>
+
+</body>
+</html>

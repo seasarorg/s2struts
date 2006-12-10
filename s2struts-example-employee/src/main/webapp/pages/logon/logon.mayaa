@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/simpleLayout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="title.logon" /> - <bean:message key="title.application" />
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content">
+        <s2struts:init action="#{logon_logonInitAction.initialize}" />
+        
+        <m:doBody/>
+    </m:doRender>
+    
+    <bean:message m:id="labelLogon" key="title.application" />
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/logon_logon" method="POST">
+        <s2struts:page />
+        <m:doBody/>
+    </html:form>
+
+    <bean:message m:id="labelUserName" key="form.logon.userName" />
+    <html:text m:id="userName" property="userName" styleClass="text" errorStyleClass="text-error" />
+
+    <bean:message m:id="labelPassword" key="form.logon.password" />
+    <html:password m:id="password" property="password" styleClass="text" errorStyleClass="text-error" />
+
+    <s2struts:submit m:id="goLogon" action="#{logon_logonAction.doLogon}">
+        <bean:message key="button.logon" />
+    </s2struts:submit>
+
+</m:mayaa>

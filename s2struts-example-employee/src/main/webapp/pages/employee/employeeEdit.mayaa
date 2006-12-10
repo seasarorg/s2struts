@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:with id="pageTitle">
+        <m:doRender name="title">
+            <m:if test="${ param.mode == 'create' }">
+                <bean:message key="title.employee.create" /> - <bean:message key="title.employee" />
+            </m:if>
+            <m:if test="${ param.mode == 'update' }">
+                <bean:message key="title.employee.update" /> - <bean:message key="title.employee" />
+            </m:if>
+        </m:doRender>
+    </m:with>
+    
+    <m:doRender id="appBody" name="content">
+        <s2struts:init action="#{manage_employeeEditInitAction.initialize}" />
+        
+        <m:doBody/>
+    </m:doRender>
+    
+    <html:errors m:id="errorMessage" />
+
+    <html:form m:id="appForm" action="/manage/employeeEdit" method="POST">
+        <s2struts:page />
+        <html:hidden property="mode" value="${ param.mode }"/>
+        <m:doBody/>
+    </html:form>
+
+    <bean:message m:id="labelEmpno" key="form.employee.no" />
+    <m:with id="empno">
+        <m:if test="${ param.mode == 'create' }">
+            <html:text property="empno" styleClass="number" errorStyleClass="number-error" />
+        </m:if>
+        <m:if test="${ param.mode == 'update' }">
+            <html:hidden property="versionNo" />
+            <html:hidden property="empno" />
+            <span class="right"><bean:write name="manage_employeeForm" property="empno"/></span>
+        </m:if>
+    </m:with>
+    
+    <bean:message m:id="labelEname" key="form.employee.name" />
+    <html:text m:id="ename" property="ename" styleClass="text" errorStyleClass="text-error" />
+
+    <bean:message m:id="labelJob" key="form.employee.job" />
+    <html:text m:id="job" property="job" styleClass="text" errorStyleClass="text-error" />
+
+    <bean:message m:id="labelMgr" key="form.employee.manager" />
+    <html:text m:id="mgr" property="mgr" styleClass="number" errorStyleClass="number-error" />
+
+    <bean:message m:id="labelHiredate" key="form.employee.hiredate" />
+    <html:text m:id="hiredate" property="hiredate" styleClass="date" errorStyleClass="date-error" />
+
+    <bean:message m:id="labelSal" key="form.employee.salary" />
+    <html:text m:id="sal" property="sal" styleClass="number" errorStyleClass="number-error" />
+
+    <bean:message m:id="labelComm" key="form.employee.commission" />
+    <html:text m:id="comm" property="comm" styleClass="number" errorStyleClass="number-error" />
+
+    <bean:message m:id="labelDeptno" key="form.department" />
+    <html:select m:id="deptno" property="deptno" errorStyleClass="error">
+        <html:option value="" key="messages.select.space" />
+        <html:options collection="departmentDtos" property="deptno" labelProperty="dname" />
+    </html:select>
+
+    <s2struts:submit m:id="goConfirm" action="#{manage_employeeEditAction.goConfirm}">
+        <bean:message key="button.confirm" />
+    </s2struts:submit>
+    <s2struts:submit m:id="goPrevious" action="#{manage_employeeEditAction.goPrevious}" cancel="true">
+        <bean:message key="button.prev" />
+    </s2struts:submit>
+
+</m:mayaa>

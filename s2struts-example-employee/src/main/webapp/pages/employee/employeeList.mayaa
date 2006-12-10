@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:logic="http://struts.apache.org/tags-logic"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"
+        m:extends="/pages/layout/layout.html">
+
+    <m:doRender id="pageTitle" name="title">
+        <bean:message key="title.employee.list" /> - <bean:message key="title.employee" />
+    </m:doRender>
+    
+    <m:doRender id="appBody" name="content">
+        <s2struts:init action="#{manage_employeeListInitAction.initialize}" />
+        <m:doBody/>
+    </m:doRender>
+    
+    <html:errors m:id="errorMessage" />
+
+    <bean:message m:id="labelEmpno" key="form.employee.no" />
+    <bean:message m:id="labelEname" key="form.employee.name" />
+    <bean:message m:id="labelJob" key="form.employee.job" />
+    <bean:message m:id="labelMgr" key="form.employee.manager" />
+    <bean:message m:id="labelHiredate" key="form.employee.hiredate" />
+    <bean:message m:id="labelSal" key="form.employee.salary" />
+    <bean:message m:id="labelComm" key="form.employee.commission" />
+    <bean:message m:id="labelDept" key="form.department" />
+    <bean:message m:id="labelDetail" key="form.detail" />
+    
+    <logic:iterate m:id="loop" m:replace="false"
+            id="employee"
+            name="employeeForms"
+            indexId="i" />
+ 
+    <m:echo id="row">
+        <m:attribute name="class" value="row-${ i % 2}" />
+    </m:echo>
+    <bean:write m:id="empno" name="employee" property="empno" />
+    <bean:write m:id="ename" name="employee" property="ename" />
+    <bean:write m:id="job" name="employee" property="job" />
+    <bean:write m:id="mgr" name="employee" property="mgr" />
+    <bean:write m:id="hiredate" name="employee" property="hiredate" />
+    <bean:write m:id="sal" name="employee" property="sal" />
+    <bean:write m:id="comm" name="employee" property="comm" />
+    <bean:write m:id="dept" name="employee" property="dname" />
+
+    <html:link m:id="goEdit" page="/manage/employeeList.do?method=goEditForUpdate"
+               paramId="empno" paramName="employee" paramProperty="empno">
+        <bean:message key="button.edit" />
+    </html:link>
+    <html:link m:id="goDelete" page="/manage/employeeList.do?method=goDelete"
+               paramId="empno" paramName="employee" paramProperty="empno">
+        <bean:message key="button.delete" />
+    </html:link>
+    <html:link m:id="goInquire" page="/manage/employeeList.do?method=goInquire"
+               paramId="empno" paramName="employee" paramProperty="empno">
+        <bean:message key="button.inquire" />
+    </html:link>
+    
+    <m:null id="dummy"/>
+
+    <html:link m:id="goPrevious" page="/pages/employee/employeeSearch.html">
+        <bean:message key="button.prev" />
+    </html:link>
+ 
+</m:mayaa>
