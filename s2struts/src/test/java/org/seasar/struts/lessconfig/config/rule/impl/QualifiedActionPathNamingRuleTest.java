@@ -6,13 +6,13 @@ import org.apache.struts.config.impl.ModuleConfigImpl;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 
-public class DefaultActionPathNamingRuleTest extends S2TestCase {
+public class QualifiedActionPathNamingRuleTest extends S2TestCase {
 
     private ActionPathNamingRule namingRule;
 
     public void setUp() throws Exception {
         super.setUp();
-        include("DefaultActionPathNamingRuleTest.dicon");
+        include("QualifiedActionPathNamingRuleTest.dicon");
     }
 
     public void testToComponentClassPathComponentName() {
@@ -51,7 +51,7 @@ public class DefaultActionPathNamingRuleTest extends S2TestCase {
         ModuleConfig config = new ModuleConfigImpl();
         config.setPrefix("");
 
-        Class clazz = this.namingRule.toComponentClass(config, "/package_ruleComponent");
+        Class clazz = this.namingRule.toComponentClass(config, "/package/ruleComponent");
         assertEquals(PackageRuleComponentAction.class, clazz);
     }
 
@@ -88,7 +88,7 @@ public class DefaultActionPathNamingRuleTest extends S2TestCase {
 
     public void testToActionPathNamePackageComponentName() {
         String path = this.namingRule.toActionPathName(PackageRuleComponentAction.class);
-        assertEquals("/package_ruleComponent", path);
+        assertEquals("/package/ruleComponent", path);
     }
 
     public void testToActionPathNamePojoComponentName() {

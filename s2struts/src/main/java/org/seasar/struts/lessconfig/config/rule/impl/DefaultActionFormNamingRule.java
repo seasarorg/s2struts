@@ -1,3 +1,18 @@
+/*
+ * Copyright 2004-2006 the Seasar Foundation and the Others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 package org.seasar.struts.lessconfig.config.rule.impl;
 
 import org.seasar.framework.container.S2Container;
@@ -16,23 +31,17 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory
  */
 public class DefaultActionFormNamingRule implements ActionFormNamingRule {
 
-    // private S2Container container;
-    //
-    // public void setContainer(S2Container container) {
-    // this.container = container;
-    // }
-
     private S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
 
     public Class toComponentClass(String name) {
         S2Container container = getContainer();
-        
+
         if (container.hasComponentDef(name)) {
             return container.getComponentDef(name).getComponentClass();
         }
-        
+
         Class formClass = null;
         if (name.endsWith("Dto")) {
             String componentName = name.substring(0, name.length() - 3) + "Form";
@@ -53,7 +62,7 @@ public class DefaultActionFormNamingRule implements ActionFormNamingRule {
                 return formClass;
             }
         }
-        
+
         return null;
     }
 

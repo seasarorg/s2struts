@@ -18,6 +18,7 @@ package org.seasar.struts.lessconfig.config.rule.impl;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.convention.NamingConvention;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 
 /**
@@ -25,7 +26,13 @@ import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
  * @author Katsuhiko Nagashima
  * 
  */
-public class DefaultActionPathNamingRule implements ActionPathNamingRule {
+public class QualifiedActionPathNamingRule implements ActionPathNamingRule {
+
+    private NamingConvention namingConvention;
+
+    public void setNamingConvention(NamingConvention namingConvention) {
+        this.namingConvention = namingConvention;
+    }
 
     private S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
@@ -33,7 +40,6 @@ public class DefaultActionPathNamingRule implements ActionPathNamingRule {
 
     public Class toComponentClass(ModuleConfig config, String path) {
         S2Container container = getContainer();
-
         String componentName = config.getPrefix() + path;
         if (container.hasComponentDef(componentName)) {
             return container.getComponentDef(componentName).getComponentClass();
@@ -44,21 +50,35 @@ public class DefaultActionPathNamingRule implements ActionPathNamingRule {
             return container.getComponentDef(componentName).getComponentClass();
         }
 
-        componentName = path.substring(1) + "Action";
-        if (container.hasComponentDef(componentName)) {
-            Class clazz = container.getComponentDef(componentName).getComponentClass();
-            if (!clazz.getName().endsWith("Impl")) {
-                return clazz;
-            }
+        if (path.startsWith(this.namingConvention.getViewRootPath())
+                && path.endsWith(this.namingConvention.getViewExtension())) {
 
-            Class[] interfaces = clazz.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++) {
-                if (interfaces[i].getName().endsWith("Action")) {
-                    return interfaces[i];
+            componentName = this.namingConvention.fromPathToActionName(path);
+            if (container.hasComponentDef(componentName)) {
+                Class clazz = container.getComponentDef(componentName).getComponentClass();
+                if (!clazz.getName().endsWith("Impl")) {
+                    return clazz;
+                }
+
+                Class[] interfaces = clazz.getInterfaces();
+                for (int i = 0; i < interfaces.length; i++) {
+                    if (interfaces[i].getName().endsWith("Action")) {
+                        return interfaces[i];
+                    }
                 }
             }
         }
         return null;
+    }
+
+    public String toComponentName(Class actionClass) {
+        S2Container container = getContainer();
+
+        if (!container.hasComponentDef(actionClass)) {
+            return null;
+        }
+
+        return container.getComponentDef(actionClass).getComponentName();
     }
 
     public String toActionPathName(Class actionClass) {
@@ -77,8 +97,11 @@ public class DefaultActionPathNamingRule implements ActionPathNamingRule {
             return componentName;
         }
 
-        String result = componentName.replaceFirst("Action$", "");
-        return "/" + result;
+        if (componentName.endsWith(this.namingConvention.getActionSuffix())) {
+            String result = this.namingConvention.fromActionNameToPath(componentName);
+            return result;
+        }
+        return null;
     }
 
 }

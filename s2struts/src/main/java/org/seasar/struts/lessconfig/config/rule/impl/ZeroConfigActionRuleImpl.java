@@ -24,6 +24,8 @@ import javax.servlet.ServletContext;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.StringUtil;
@@ -57,6 +59,10 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
 
     public void setAutoStrutsConfigPattern(AutoStrutsConfigRule configRule) {
         this.configRule = configRule;
+    }
+
+    private S2Container getContainer() {
+        return SingletonS2ContainerFactory.getContainer();
     }
 
     public ActionConfig createActionConfig(ModuleConfig config, Class actionClass, String path,
@@ -126,7 +132,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     }
 
     protected String getName(ModuleConfig config, Class actionClass) {
-        String name = getPath(actionClass).substring(1);
+        String name = getFormNameBase(actionClass);
         String formName = name + "Form";
         String dtoName = name + "Dto";
         if (config.findFormBeanConfig(formName) != null) {
@@ -139,9 +145,22 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         return null;
     }
 
+    private String getFormNameBase(Class actionClass) {
+        S2Container container = getContainer();
+
+        if (!container.hasComponentDef(actionClass)) {
+            return null;
+        }
+        String result = container.getComponentDef(actionClass).getComponentName();
+        if (result.startsWith("/")) {
+            result = result.substring(1);
+        }
+        return result.replaceFirst("Action$", "");
+    }
+
     public ForwardConfig createActionForwardConfig(ModuleConfig config, Class actionClass, String name,
             StrutsActionForwardConfig actionForward) {
-        
+
         ForwardConfig forwardConfig = (ForwardConfig) ClassUtil.newInstance(config.getActionForwardClass());
         forwardConfig.setName(name);
         forwardConfig.setPath(actionForward.path());
