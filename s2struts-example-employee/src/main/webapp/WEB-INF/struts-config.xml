@@ -53,7 +53,7 @@
 
         <forward
             name="logoff"
-            path="/logon_logoff.do"/>
+            path="/logon/logoff.do"/>
 
     </global-forwards>
 

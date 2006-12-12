@@ -21,7 +21,7 @@
     
     <html:errors m:id="errorMessage" />
 
-    <html:form m:id="appForm" action="/logon_logon" method="POST">
+    <html:form m:id="appForm" action="/logon/logon" method="POST">
         <s2struts:page />
         <m:doBody/>
     </html:form>
