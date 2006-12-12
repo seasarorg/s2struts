@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.seasar.struts.examples.employee.Constants;
 import org.seasar.struts.examples.employee.web.logon.LogonAction;
 import org.seasar.struts.examples.employee.web.logon.LogonForm;
+import org.seasar.struts.examples.employee.web.logon.LogonLogic;
 import org.seasar.struts.pojo.MessageManager;
 
 public class LogonActionImpl implements LogonAction {
@@ -24,6 +25,12 @@ public class LogonActionImpl implements LogonAction {
         this.session = session;
     }
 
+    private LogonLogic logonLogic;
+
+    public void setLogonLogic(LogonLogic logonLogic) {
+        this.logonLogic = logonLogic;
+    }
+
     private LogonForm logonForm;
 
     public void setLogonForm(LogonForm logonForm) {
@@ -35,7 +42,9 @@ public class LogonActionImpl implements LogonAction {
     //
 
     public String doLogon() {
-        if (!logon()) {
+
+        if (!this.logonLogic.logon(this.logonForm.getUserName(), this.logonForm
+                .getPassword())) {
             MessageManager.addGlobalError("errors.logon");
             MessageManager.saveErrors();
             return LogonAction.ERROR;
@@ -53,11 +62,6 @@ public class LogonActionImpl implements LogonAction {
         }
 
         return LogonAction.SUCCESS;
-    }
-
-    private boolean logon() {
-        return this.logonForm.getUserName()
-                .equals(this.logonForm.getPassword());
     }
 
     private void sendRedirect(String requestUri) {
