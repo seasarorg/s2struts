@@ -18,6 +18,8 @@ package org.seasar.struts.lessconfig.config.rule.impl;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.util.ClassUtil;
+import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 
 /**
@@ -51,9 +53,19 @@ public class DefaultActionPathNamingRule implements ActionPathNamingRule {
                 return clazz;
             }
 
+            //
+            // 複数のActionインターフェースが実装されている場合の対応
+            // pathから求めたコンポーネント名と一致したインターフェースか
+            // packageを含まないコンポーネント名と一致したインターフェースを
+            // Actionインターフェースとする
+            //
             Class[] interfaces = clazz.getInterfaces();
             for (int i = 0; i < interfaces.length; i++) {
-                if (interfaces[i].getName().endsWith("Action")) {
+                String interfaceName = StringUtil.decapitalize(ClassUtil.getShortClassName(interfaces[i]));
+                if (componentName.equals(interfaceName)) {
+                    return interfaces[i];
+                }
+                if (componentName.endsWith("_" + interfaceName)) {
                     return interfaces[i];
                 }
             }

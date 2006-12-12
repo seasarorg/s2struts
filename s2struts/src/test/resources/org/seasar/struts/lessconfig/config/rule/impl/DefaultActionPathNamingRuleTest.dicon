@@ -3,11 +3,13 @@
 "http://www.seasar.org/dtd/components.dtd">
 <components>
 	<component class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRule"/>
-	<component name="/path"                       class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$PathComponentAction" instance="prototype"/>
-	<component name="/module/modulePath"          class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$ModulePathComponentAction" instance="prototype"/>
-	<component name="/noModulePath"               class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$NoModulePathComponentAction" instance="prototype"/>
-	<component name="ruleComponentAction"         class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$RuleComponentAction" instance="prototype"/>
-	<component name="pojoComponentAction"         class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$PojoComponentActionImpl" instance="prototype"/>
-	<component name="package_ruleComponentAction" class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$PackageRuleComponentAction" instance="prototype"/>
-	<component class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRuleTest$UndefinedComponentAction" instance="prototype"/>
+	<component name="/path"                       class="org.seasar.struts.lessconfig.config.rule.impl.action.PathComponentAction" instance="prototype"/>
+	<component name="/module/modulePath"          class="org.seasar.struts.lessconfig.config.rule.impl.action.ModulePathComponentAction" instance="prototype"/>
+	<component name="/noModulePath"               class="org.seasar.struts.lessconfig.config.rule.impl.action.NoModulePathComponentAction" instance="prototype"/>
+	<component name="ruleComponentAction"         class="org.seasar.struts.lessconfig.config.rule.impl.action.RuleComponentAction" instance="prototype"/>
+	<component name="pojoComponentAction"         class="org.seasar.struts.lessconfig.config.rule.impl.action.PojoComponentActionImpl" instance="prototype"/>
+	<component name="package_ruleComponentAction" class="org.seasar.struts.lessconfig.config.rule.impl.action.PackageRuleComponentAction" instance="prototype"/>
+	<component class="org.seasar.struts.lessconfig.config.rule.impl.action.UndefinedComponentAction" instance="prototype"/>
+	<component name="pojoComponentOneAction"      class="org.seasar.struts.lessconfig.config.rule.impl.action.PojoMultiComponentActionImpl" instance="prototype"/>
+	<component name="pojoComponentTwoAction"      class="org.seasar.struts.lessconfig.config.rule.impl.action.PojoMultiComponentActionImpl" instance="prototype"/>
 </components>

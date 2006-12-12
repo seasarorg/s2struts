@@ -1,10 +1,19 @@
 package org.seasar.struts.lessconfig.config.rule.impl;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.impl.ModuleConfigImpl;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
+import org.seasar.struts.lessconfig.config.rule.impl.action.ModulePathComponentAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.NoModulePathComponentAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.NoRegisteredComponentAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.PackageRuleComponentAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.PathComponentAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.PojoComponentAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.PojoComponentOneAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.PojoComponentTwoAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.RuleComponentAction;
+import org.seasar.struts.lessconfig.config.rule.impl.action.UndefinedComponentAction;
 
 public class QualifiedActionPathNamingRuleTest extends S2TestCase {
 
@@ -72,6 +81,16 @@ public class QualifiedActionPathNamingRuleTest extends S2TestCase {
         assertNull(clazz);
     }
 
+    public void testToComponentClassMultiImplements() {
+        ModuleConfig config = new ModuleConfigImpl();
+        config.setPrefix("");
+
+        Class clazz = this.namingRule.toComponentClass(config, "/pojoComponentOne");
+        assertEquals(PojoComponentOneAction.class, clazz);
+        clazz = this.namingRule.toComponentClass(config, "/pojoComponentTwo");
+        assertEquals(PojoComponentTwoAction.class, clazz);
+    }
+
     //
     //
     //
@@ -106,37 +125,6 @@ public class QualifiedActionPathNamingRuleTest extends S2TestCase {
         assertFalse(this.getContainer().hasComponentDef(NoRegisteredComponentAction.class));
         String path = this.namingRule.toActionPathName(NoRegisteredComponentAction.class);
         assertNull(path);
-    }
-
-    //
-    //
-    //
-
-    public static class PathComponentAction extends Action {
-    }
-
-    public static class ModulePathComponentAction extends Action {
-    }
-
-    public static class NoModulePathComponentAction extends Action {
-    }
-
-    public static class RuleComponentAction extends Action {
-    }
-
-    public static class PackageRuleComponentAction extends Action {
-    }
-
-    public static class UndefinedComponentAction extends Action {
-    }
-
-    public static class NoRegisteredComponentAction extends Action {
-    }
-
-    public static interface PojoComponentAction {
-    }
-
-    public static class PojoComponentActionImpl implements PojoComponentAction {
     }
 
 }
