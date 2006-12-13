@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
+"http://www.seasar.org/dtd/components.dtd">
+<components>
+	<component name="autoStrutsConfigRule"         class="org.seasar.struts.lessconfig.config.impl.AutoStrutsConfigRuleImpl"/>
+	<component name="actionPathNamingRule"         class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRule"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionRuleImpl"/>
+	
+	<component name="testForwardAction"            class="org.seasar.struts.lessconfig.config.rule.impl.TestForwardSimpleActionImpl"/>
+	<component name="testNotForwardAction"         class="org.seasar.struts.lessconfig.config.rule.impl.TestNotForwardSimpleActionImpl"/>
+	<component name="/testForward"                 class="org.seasar.struts.lessconfig.config.rule.impl.TestForwardSlashActionImpl"/>
+	<component name="/testNotForward"              class="org.seasar.struts.lessconfig.config.rule.impl.TestNotForwardSlashActionImpl"/>
+</components>

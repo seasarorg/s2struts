@@ -220,7 +220,7 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
 
         String path = docRoot + packageDir + file;
         String realPath = servletContext.getRealPath(path);
-        if (new File(realPath).exists()) {
+        if (realPath != null && new File(realPath).exists()) {
             return path;
         }
         if (StringUtil.isEmpty(packageDir)) {
