@@ -38,6 +38,7 @@ import org.seasar.struts.config.StrutsActionForwardConfig;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     private static final Logger logger = Logger.getLogger(ZeroConfigActionRuleImpl.class);
@@ -94,6 +95,9 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
     }
 
     private String toPathComponentName(String componentName, ModuleConfig config) {
+        if (config == null) {
+            return componentName;
+        }
         return config.getPrefix() + componentName;
     }
 
