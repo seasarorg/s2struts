@@ -15,8 +15,6 @@ public interface EmployeeDxo {
 
     DeptDto convertDeptDto(EmployeeForm employeeForm);
 
-    String convertEmpPackFindDto_CONVERSION_RULE = "'ename' : ename == '' ? null : ename, 'job' : job == '' ? null : job";
-
     EmpPackFindDto convertEmpPackFindDto(EmployeeSearchForm employeeSearchForm);
 
     EmployeeForm convertEmployeeForm(EmpPackDto result);

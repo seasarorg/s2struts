@@ -8,7 +8,7 @@
 
   <filter>
     <filter-name>redirectFilter</filter-name>
-    <filter-class>org.seasar.struts.examples.filter.RedirectFilter</filter-class>
+    <filter-class>org.seasar.struts.examples.extension.RedirectFilter</filter-class>
     <init-param>
       <param-name>sessionKey</param-name>
       <param-value>logonUserId</param-value>

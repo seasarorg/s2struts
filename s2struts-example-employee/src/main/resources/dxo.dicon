@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components namespace="dxo">
+	<include path="dxo-converter.dicon"/>
+	
+	<component name="interceptor" class="org.seasar.extension.dxo.DxoInterceptor"/>
+	
+	<component class="org.seasar.extension.dxo.meta.impl.DxoMetadataFactoryImpl"/>
+	<component class="org.seasar.extension.dxo.converter.impl.ConverterFactoryImpl"/>
+	<component class="org.seasar.extension.dxo.annotation.impl.AnnotationReaderFactoryImpl"/>
+
+	<component class="org.seasar.extension.dxo.builder.impl.MapToBeanDxoCommandBuilder"/>
+	<component class="org.seasar.extension.dxo.builder.impl.BeanToMapDxoCommandBuilder"/>
+	<component class="org.seasar.extension.dxo.builder.impl.BeanToBeanDxoCommandBuilder"/>
+</components>
