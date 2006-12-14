@@ -3,8 +3,8 @@ package org.seasar.struts.config.rule;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
-public interface TestNotForwardAction {
+public class TestForwardSimpleActionImpl implements TestForwardSimpleAction {
 
 }
