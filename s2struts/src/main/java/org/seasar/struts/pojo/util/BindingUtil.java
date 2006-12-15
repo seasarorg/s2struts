@@ -168,26 +168,34 @@ public class BindingUtil {
         }
 
         HttpServletRequest request = S2StrutsContextUtil.getRequest(container);
-        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
-        if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
-            ActionFormUtil.setActualForm(request, value, mapping);
-            return;
-        }
-
-        ActionMapping propertyActionMapping = (ActionMapping) ModuleConfigUtil
-                .findActionConfigForFormBeanName(propertyName);
-        if (propertyActionMapping != null) {
-            ActionFormUtil.setActualForm(request, value, propertyActionMapping);
-            return;
-        }
-
         ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
         ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
+        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
+
+        ActionMapping propertyMapping = getPropertyActionMapping(propertyName, mapping);
+        if (propertyMapping != null) {
+            if (propertyConfig.isUndefinedScope()) {
+                ActionFormUtil.setActualForm(request, value, propertyMapping);
+            } else if (propertyConfig.isSessionScope()) {
+                ActionFormUtil.setSessionActualForm(request, value, propertyMapping);
+            } else {
+                ActionFormUtil.setRequestActualForm(request, value, propertyMapping);
+            }
+            return;
+        }
+
         if (propertyConfig.isSessionScope()) {
             request.getSession().setAttribute(propertyName, value);
         } else {
             request.setAttribute(propertyName, value);
         }
+    }
+
+    private static ActionMapping getPropertyActionMapping(String propertyName, ActionMapping mapping) {
+        if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
+            return mapping;
+        }
+        return (ActionMapping) ModuleConfigUtil.findActionConfigForFormBeanName(propertyName);
     }
 
     private static boolean isActionFormProperty(String propertyName, ActionMapping mapping) {

@@ -23,7 +23,7 @@ import org.seasar.struts.pojo.config.ActionPropertyConfig;
  */
 public class ActionPropertyConfigImpl implements ActionPropertyConfig {
 
-    private String scope;
+    private String scope = Constants.UNDEFINED;
 
     public ActionPropertyConfigImpl() {
     }
@@ -34,6 +34,10 @@ public class ActionPropertyConfigImpl implements ActionPropertyConfig {
 
     public boolean isSessionScope() {
         return Constants.SESSION.equalsIgnoreCase(this.scope);
+    }
+
+    public boolean isUndefinedScope() {
+        return Constants.UNDEFINED.equalsIgnoreCase(this.scope);
     }
 
 }

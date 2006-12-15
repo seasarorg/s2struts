@@ -36,7 +36,7 @@ public class BeanValidatorFormUtil {
         return bean;
     }
 
-    public static Object toBeanValidatorForm(Object oldForm, Object newForm) {
+    public static BeanValidatorForm toBeanValidatorForm(Object oldForm, Object newForm) {
         if (oldForm == null) {
             return new S2BeanValidatorForm(new BeanValidatorForm(newForm));
         }
