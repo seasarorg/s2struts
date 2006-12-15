@@ -172,7 +172,7 @@ public class BindingUtil {
         ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
         String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
 
-        ActionMapping propertyMapping = getPropertyActionMapping(propertyName, mapping);
+        ActionMapping propertyMapping = BindingUtil.getPropertyActionMapping(propertyName, mapping);
         if (propertyMapping != null) {
             if (propertyConfig.isUndefinedScope()) {
                 ActionFormUtil.setActualForm(request, value, propertyMapping);
