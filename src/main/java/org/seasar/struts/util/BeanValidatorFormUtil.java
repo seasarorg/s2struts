@@ -42,7 +42,7 @@ public class BeanValidatorFormUtil {
         }
 
         if (!(oldForm instanceof BeanValidatorForm)) {
-            return null;
+            return new S2BeanValidatorForm(new BeanValidatorForm(newForm));
         }
         BeanValidatorForm beanForm = (BeanValidatorForm) oldForm;
 
