@@ -177,7 +177,6 @@ public class BindingUtil {
     }
 
     private static ActionMapping getPropertyActionMapping(String propertyName, ActionMapping mapping) {
-
         if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
             return mapping;
         }
