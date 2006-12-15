@@ -23,10 +23,10 @@ import org.seasar.struts.form.S2BeanValidatorForm;
  * @author Katsuhiko Nagashima
  */
 public class BeanValidatorFormUtil {
-    
+
     private BeanValidatorFormUtil() {
     }
-    
+
     public static Object toBean(Object bean) {
         if (bean instanceof BeanValidatorForm) {
             BeanValidatorForm beanValidatorForm = (BeanValidatorForm) bean;
@@ -36,7 +36,7 @@ public class BeanValidatorFormUtil {
         return bean;
     }
 
-    public static Object toBeanValidatorForm(Object oldForm, Object newForm) {
+    public static BeanValidatorForm toBeanValidatorForm(Object oldForm, Object newForm) {
         if (oldForm == null) {
             return new S2BeanValidatorForm(new BeanValidatorForm(newForm));
         }
@@ -45,7 +45,7 @@ public class BeanValidatorFormUtil {
             return null;
         }
         BeanValidatorForm beanForm = (BeanValidatorForm) oldForm;
-        
+
         S2BeanValidatorForm result;
         if (beanForm instanceof S2BeanValidatorForm) {
             result = (S2BeanValidatorForm) oldForm;
@@ -55,5 +55,5 @@ public class BeanValidatorFormUtil {
         result.initBean(newForm);
         return result;
     }
-    
+
 }

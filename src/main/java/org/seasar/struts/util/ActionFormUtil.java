@@ -35,16 +35,31 @@ public class ActionFormUtil {
         Object form = getActionForm(request, mapping);
         return BeanValidatorFormUtil.toBean(form);
     }
-    
-    public static void setActualForm(HttpServletRequest request, Object form, ActionMapping mapping) {
-        if (form instanceof ActionForm) {
-            setActionForm(request, form, mapping);
-        } else {
-            BeanValidatorForm oldForm = (BeanValidatorForm) getActionForm(request, mapping);
-            Object newForm = BeanValidatorFormUtil.toBeanValidatorForm(oldForm, form);
-            setActionForm(request, newForm, mapping);
-        }
 
+    public static void setActualForm(HttpServletRequest request, Object form, ActionMapping mapping) {
+        ActionForm newForm = toActionForm(request, form, mapping);
+        setActionForm(request, newForm, mapping, mapping.getScope());
+    }
+
+    public static void setRequestActualForm(HttpServletRequest request, Object form,
+            ActionMapping mapping) {
+        ActionForm newForm = toActionForm(request, form, mapping);
+        setActionForm(request, newForm, mapping, Constants.REQUEST);
+    }
+
+    public static void setSessionActualForm(HttpServletRequest request, Object form,
+            ActionMapping mapping) {
+        ActionForm newForm = toActionForm(request, form, mapping);
+        setActionForm(request, newForm, mapping, Constants.SESSION);
+    }
+
+    private static ActionForm toActionForm(HttpServletRequest request, Object form,
+            ActionMapping mapping) {
+        if (form instanceof ActionForm) {
+            return (ActionForm) form;
+        }
+        BeanValidatorForm oldForm = (BeanValidatorForm) getActionForm(request, mapping);
+        return BeanValidatorFormUtil.toBeanValidatorForm(oldForm, form);
     }
 
     private static ActionForm getActionForm(HttpServletRequest request, ActionMapping mapping) {
@@ -56,19 +71,18 @@ public class ActionFormUtil {
         }
     }
 
-    private static void setActionForm(HttpServletRequest request, Object form, ActionMapping mapping) {
+    private static void setActionForm(HttpServletRequest request, ActionForm form,
+            ActionMapping mapping, String scope) {
         if (form == null) {
             return;
         }
 
-        String scope = mapping.getScope();
         if (Constants.REQUEST.equals(scope)) {
             request.setAttribute(mapping.getAttribute(), form);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute(mapping.getAttribute(), form);
         }
-
     }
 
 }

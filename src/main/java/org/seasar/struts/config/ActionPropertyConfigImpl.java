@@ -21,18 +21,22 @@ import org.seasar.struts.Constants;
  * @author Katsuhiko Nagashima
  */
 public class ActionPropertyConfigImpl implements ActionPropertyConfig {
-    
-    private String scope;
-    
+
+    private String scope = Constants.UNDEFINED;
+
     public ActionPropertyConfigImpl() {
     }
-    
+
     public ActionPropertyConfigImpl(String scope) {
         this.scope = scope;
     }
-    
+
     public boolean isSessionScope() {
         return Constants.SESSION.equalsIgnoreCase(this.scope);
     }
-    
+
+    public boolean isUndefinedScope() {
+        return Constants.UNDEFINED.equalsIgnoreCase(this.scope);
+    }
+
 }

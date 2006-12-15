@@ -62,14 +62,15 @@ public class BindingUtil {
         if (var != null) {
             return var;
         }
-        
+
         if (container.hasComponentDef(name)) {
             return container.getComponent(name);
         }
         return null;
     }
 
-    public static void importProperties(Object action, S2Container container, BeanDesc beanDesc, ActionMapping mapping) {
+    public static void importProperties(Object action, S2Container container, BeanDesc beanDesc,
+            ActionMapping mapping) {
         importParameter(action, container);
         for (int i = 0; i < beanDesc.getPropertyDescSize(); i++) {
             PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
@@ -77,14 +78,15 @@ public class BindingUtil {
         }
     }
 
-    private static void importProperty(Object action, S2Container container, PropertyDesc propertyDesc, ActionMapping mapping) {
+    private static void importProperty(Object action, S2Container container,
+            PropertyDesc propertyDesc, ActionMapping mapping) {
         if (!propertyDesc.hasWriteMethod()) {
             return;
         }
-        
+
         String propertyName = propertyDesc.getPropertyName();
         Object value = BindingUtil.getValue(container, propertyName);
-        if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
+        if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
             value = ActionFormUtil.getActualForm(container.getRequest(), mapping);
         } else {
             value = BeanValidatorFormUtil.toBean(value);
@@ -92,7 +94,7 @@ public class BindingUtil {
         if (value == null) {
             return;
         }
-        
+
         Class propertyType = propertyDesc.getPropertyType();
         if (propertyType.isPrimitive()) {
             propertyType = getPrimitiveWrappedClass(propertyType);
@@ -120,7 +122,8 @@ public class BindingUtil {
                     continue;
                 }
                 String paramValue = container.getRequest().getParameter(paramName);
-                IndexedPropertyDesc propertyDesc = new IndexedPropertyDescImpl(propertyName, String.class, beanDesc);
+                IndexedPropertyDesc propertyDesc = new IndexedPropertyDescImpl(propertyName,
+                        String.class, beanDesc);
                 if (propertyDesc.hasWriteMethod()) {
                     propertyDesc.setValue(action, index, paramValue);
                 }
@@ -128,39 +131,43 @@ public class BindingUtil {
         }
     }
 
-    public static void exportProperties(Object action, S2Container container, BeanDesc beanDesc, ActionMapping mapping) {
+    public static void exportProperties(Object action, S2Container container, BeanDesc beanDesc,
+            ActionMapping mapping) {
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
             BindingUtil.exportProperty(action, container, beanDesc, propertyDesc, mapping);
         }
     }
 
-    private static void exportProperty(Object action, S2Container container, BeanDesc beanDesc, PropertyDesc propertyDesc, ActionMapping mapping) {
+    private static void exportProperty(Object action, S2Container container, BeanDesc beanDesc,
+            PropertyDesc propertyDesc, ActionMapping mapping) {
         if (!propertyDesc.hasReadMethod()) {
             return;
         }
-        
+
         Object value = propertyDesc.getValue(action);
         if (value == null) {
             return;
         }
-        
+
         HttpServletRequest request = container.getRequest();
-        if (BindingUtil.isActionFormProperty(propertyDesc, mapping)) {
-            ActionFormUtil.setActualForm(request, value, mapping);
-            return;
-        }
-        
+        ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
+        ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc,
+                propertyDesc);
         String propertyName = propertyDesc.getPropertyName();
-        ActionMapping propertyActionMapping = (ActionMapping) ModuleConfigUtil
-                .findActionConfigForFormBeanName(propertyName);
-        if (propertyActionMapping != null) {
-            ActionFormUtil.setActualForm(request, value, propertyActionMapping);
+
+        ActionMapping propertyMapping = getPropertyActionMapping(propertyName, mapping);
+        if (propertyMapping != null) {
+            if (propertyConfig.isUndefinedScope()) {
+                ActionFormUtil.setActualForm(request, value, propertyMapping);
+            } else if (propertyConfig.isSessionScope()) {
+                ActionFormUtil.setSessionActualForm(request, value, propertyMapping);
+            } else {
+                ActionFormUtil.setRequestActualForm(request, value, propertyMapping);
+            }
             return;
         }
 
-        ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
-        ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
         if (propertyConfig.isSessionScope()) {
             request.getSession().setAttribute(propertyName, value);
         } else {
@@ -169,8 +176,16 @@ public class BindingUtil {
 
     }
 
-    private static boolean isActionFormProperty(PropertyDesc propertyDesc, ActionMapping mapping) {
-        return propertyDesc.getPropertyName().equals(mapping.getAttribute());
+    private static ActionMapping getPropertyActionMapping(String propertyName, ActionMapping mapping) {
+
+        if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
+            return mapping;
+        }
+        return (ActionMapping) ModuleConfigUtil.findActionConfigForFormBeanName(propertyName);
+    }
+
+    private static boolean isActionFormProperty(String propertyName, ActionMapping mapping) {
+        return propertyName.equals(mapping.getAttribute());
     }
 
 }

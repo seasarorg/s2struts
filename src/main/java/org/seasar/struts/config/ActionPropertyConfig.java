@@ -22,4 +22,6 @@ public interface ActionPropertyConfig {
 
     boolean isSessionScope();
 
+    boolean isUndefinedScope();
+
 }
