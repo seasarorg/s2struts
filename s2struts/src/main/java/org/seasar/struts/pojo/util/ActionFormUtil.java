@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.struts.Constants;
 
 /**
@@ -55,16 +54,16 @@ public class ActionFormUtil {
         if (form instanceof ActionForm) {
             return (ActionForm) form;
         }
-        BeanValidatorForm oldForm = (BeanValidatorForm) getActionForm(request, mapping);
+        Object oldForm = getActionForm(request, mapping);
         return BeanValidatorFormUtil.toBeanValidatorForm(oldForm, form);
     }
 
-    private static ActionForm getActionForm(HttpServletRequest request, ActionMapping mapping) {
+    private static Object getActionForm(HttpServletRequest request, ActionMapping mapping) {
         if (Constants.REQUEST.equals(mapping.getScope())) {
-            return (ActionForm) request.getAttribute(mapping.getAttribute());
+            return request.getAttribute(mapping.getAttribute());
         } else {
             HttpSession session = request.getSession();
-            return (ActionForm) session.getAttribute(mapping.getAttribute());
+            return session.getAttribute(mapping.getAttribute());
         }
     }
 

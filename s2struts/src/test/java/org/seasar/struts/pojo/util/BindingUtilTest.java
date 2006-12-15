@@ -153,4 +153,31 @@ public class BindingUtilTest extends S2TestCase {
         assertEquals("newPOJO", resultForm.getMessage());
     }
 
+    public void testExportPOJOPropertyNotWrapped() {
+        FormBeanConfig beanConfig = new FormBeanConfig();
+        beanConfig.setName("exportPOJOForm");
+
+        ActionMapping actionConfig = new MockActionMapping();
+        actionConfig.setName("exportPOJOForm");
+        actionConfig.setScope("request");
+
+        ModuleConfig config = new ModuleConfigImpl();
+        config.addFormBeanConfig(beanConfig);
+        config.addActionConfig(actionConfig);
+        getServletContext().setAttribute(Globals.MODULE_KEY, config);
+
+        Object oldPojo = new TestExportPOJOForm("oldPOJO");
+        getRequest().setAttribute("exportPOJOForm", oldPojo);
+
+        TestExportPOJOActionImpl action = new TestExportPOJOActionImpl();
+        action.setExportPOJOForm(new TestExportPOJOForm("newPOJO"));
+
+        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(TestExportPOJOActionImpl.class),
+                new MockActionMapping());
+        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getAttribute("exportPOJOForm");
+        assertNotNull(beanForm);
+        TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
+        assertEquals("newPOJO", resultForm.getMessage());
+    }
+
 }
