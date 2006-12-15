@@ -7,18 +7,20 @@ import java.io.Serializable;
  */
 public class ExportPOJOForm implements Serializable {
 
-	private String message;
-    
+    private static final long serialVersionUID = 1L;
+
+    private String message;
+
     public ExportPOJOForm() {
-        
+
     }
 
-	public ExportPOJOForm(String message) {
-		this.message = message;
-	}
+    public ExportPOJOForm(String message) {
+        this.message = message;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
 }

@@ -7,6 +7,8 @@ import org.apache.struts.action.ActionForm;
  */
 public class TestActionForm extends ActionForm {
 
+    private static final long serialVersionUID = 1L;
+
     private String msg = "new";
 
     public TestActionForm() {
@@ -23,5 +25,5 @@ public class TestActionForm extends ActionForm {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-    
+
 }
