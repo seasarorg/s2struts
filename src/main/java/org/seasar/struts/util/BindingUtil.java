@@ -26,6 +26,7 @@ import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
+import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.struts.beans.IndexedPropertyDesc;
@@ -84,7 +85,7 @@ public class BindingUtil {
             return;
         }
 
-        String propertyName = propertyDesc.getPropertyName();
+        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
         Object value = BindingUtil.getValue(container, propertyName);
         if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
             value = ActionFormUtil.getActualForm(container.getRequest(), mapping);
@@ -154,9 +155,9 @@ public class BindingUtil {
         ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
         ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc,
                 propertyDesc);
-        String propertyName = propertyDesc.getPropertyName();
+        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
 
-        ActionMapping propertyMapping = getPropertyActionMapping(propertyName, mapping);
+        ActionMapping propertyMapping = BindingUtil.getPropertyActionMapping(propertyName, mapping);
         if (propertyMapping != null) {
             if (propertyConfig.isUndefinedScope()) {
                 ActionFormUtil.setActualForm(request, value, propertyMapping);
@@ -185,6 +186,26 @@ public class BindingUtil {
 
     private static boolean isActionFormProperty(String propertyName, ActionMapping mapping) {
         return propertyName.equals(mapping.getAttribute());
+    }
+
+    private static String getComponentPropertyName(S2Container container, PropertyDesc propertyDesc) {
+        String propertyName = propertyDesc.getPropertyName();
+        Class propertyClass = propertyDesc.getPropertyType();
+
+        if (!container.hasComponentDef(propertyClass)) {
+            return propertyName;
+        }
+
+        ComponentDef propertyDef = container.getComponentDef(propertyClass);
+        String componentName = propertyDef.getComponentName();
+        if (componentName == null) {
+            return propertyName;
+        }
+
+        if (componentName.endsWith("_" + propertyName)) {
+            return componentName;
+        }
+        return propertyName;
     }
 
 }
