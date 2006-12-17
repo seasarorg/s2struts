@@ -1,5 +1,5 @@
 <project name="S2StrutsTiger" default="dist" basedir=".">
-	<property name="ver" value="1.2.5"/>
+	<property name="ver" value="1.2.8-SNAPSHOT"/>
 
 	<target name="dist">
 		<mkdir dir="target"/>
