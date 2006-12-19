@@ -35,17 +35,17 @@ public class ValidatorAnnotationForm {
     @Args(keys = "Arg", resource = false)
     public void setArg(String arg) {
     }
-    
+
     @Required
     @Args(keys = "Arg0, Arg1, Arg2", resource = false)
     public void setArgs(String args) {
     }
-    
+
     @Required
     @Args(keys = "Arg")
     public void setArgDefaultResource(String argDefaultResource) {
     }
-    
+
     @Required
     @Args(keys = "Required", resource = false)
     public void setRequired(String required) {
@@ -88,6 +88,16 @@ public class ValidatorAnnotationForm {
     public void setLongRange(String longRange) {
     }
 
+    @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", messageKey = "comma")
+    @Args(keys = "Mask", resource = false)
+    public void setMask(String mask) {
+    }
+
+    @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)")
+    @Args(keys = "Mask2", resource = false)
+    public void setMask2(String mask2) {
+    }
+
     @Required
     @Minlength(10)
     @Maxlength(15)
@@ -113,10 +123,8 @@ public class ValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = {
-                    @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }),
-            @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
             @Validator(name = "maxlength", vars = { @Variable(name = "maxlength", value = "3") }) })
     @Required
     @Args(keys = "form.message1")
@@ -124,10 +132,8 @@ public class ValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = {
-                    @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }),
-            @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
             @Validator(name = "maxlength", value = "3") })
     @Required
     @Args(keys = "form.message2")
@@ -145,23 +151,24 @@ public class ValidatorAnnotationForm {
 
     public void setChild(ValidatorAnnotationChildForm child) {
     }
-    
+
     public void setChildren(ValidatorAnnotationChildForm[] children) {
     }
 
     @NoValidate
     public void setSelf(ValidatorAnnotationForm self) {
     }
-    
+
     @Required
     @Args(keys = "File", resource = false)
     public void setFile(FormFile file) {
     }
-    
+
     public static final String constant_VALIDATOR = "required";
+
     public static final String constant_VALIDATOR_ARGS = "Constant, resource=false";
-    
+
     public void setConstant(String constant) {
     }
-    
+
 }

@@ -29,11 +29,11 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface Mask {
-    
+
     String pattern();
-    
-    String messageKey();
-    
+
+    String messageKey() default "";
+
     boolean resource() default true;
 
 }
