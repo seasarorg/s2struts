@@ -20,10 +20,12 @@ import java.util.Map;
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Msg;
 import org.apache.commons.validator.Var;
+import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class MaskConfigRegisterImpl implements ConfigRegister {
 
@@ -36,10 +38,12 @@ public class MaskConfigRegisterImpl implements ConfigRegister {
         var.setValue(pattern);
         field.addVar(var);
 
-        Msg message = new Msg();
-        message.setName("mask");
-        message.setKey(messageKey);
-        field.addMsg(message);
+        if (!StringUtil.isEmpty(messageKey)) {
+            Msg message = new Msg();
+            message.setName("mask");
+            message.setKey(messageKey);
+            field.addMsg(message);
+        }
     }
 
 }

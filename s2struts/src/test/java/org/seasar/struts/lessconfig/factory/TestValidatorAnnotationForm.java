@@ -27,7 +27,7 @@ public class TestValidatorAnnotationForm {
 
     public void setArgs(String args) {
     }
-    
+
     public static final String argDefaultResource_VALIDATOR = "required";
 
     public static final String argDefaultResource_VALIDATOR_ARGS = "Arg";
@@ -98,6 +98,13 @@ public class TestValidatorAnnotationForm {
     public static final String mask_VALIDATOR = "mask, pattern='(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)', messageKey=comma";
 
     public void setMask(String mask) {
+    }
+
+    public static final String mask2_VALIDATOR = "mask, pattern='(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)'";
+
+    public static final String mask2_VALIDATOR_ARGS = "Mask2, resource=false";
+
+    public void setMask2(String mask2) {
     }
 
     public static final String mix_VALIDATOR = "required";
