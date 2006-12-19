@@ -46,7 +46,7 @@ public class TestValidatorAnnotationForm {
     @Args(keys = "Arg")
     public void setArgDefaultResource(String argDefaultResource) {
     }
-    
+
     @Required
     @Args(keys = "Required", resource = false)
     public void setRequired(String required) {
@@ -89,6 +89,16 @@ public class TestValidatorAnnotationForm {
     public void setLongRange(String longRange) {
     }
 
+    @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", messageKey = "comma")
+    @Args(keys = "Mask", resource = false)
+    public void setMask(String mask) {
+    }
+
+    @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)")
+    @Args(keys = "Mask2", resource = false)
+    public void setMask2(String mask2) {
+    }
+
     @Required
     @Minlength(10)
     @Maxlength(15)
@@ -114,8 +124,10 @@ public class TestValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = {
+                    @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }),
+            @Validator(name = "integer"),
             @Validator(name = "maxlength", vars = { @Variable(name = "maxlength", value = "3") }) })
     @Required
     @Args(keys = "form.message1")
@@ -123,8 +135,10 @@ public class TestValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = {
+                    @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }),
+            @Validator(name = "integer"),
             @Validator(name = "maxlength", value = "3") })
     @Required
     @Args(keys = "form.message2")
