@@ -79,6 +79,34 @@ public class ValidatorAnnotationForm {
     }
 
     /**
+     * @org.seasar.struts.validator.annotation.backport175.FloatRange(min = 5.0F, max = 10.1F)
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Range", resource=false)
+     */
+    public void setRange(String range) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.LongRange(min = 5L, max = 10L)
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="LongRange", resource=false)
+     */
+    public void setLongRange(String longRange) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", messageKey = "comma")
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Mask", resource=false)
+     */
+    public void setMask(String mask) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)")
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Mask2", resource=false)
+     */
+    public void setMask2(String mask2) {
+    }
+    
+    /**
      * @org.seasar.struts.validator.annotation.backport175.Required
      * @org.seasar.struts.validator.annotation.backport175.Minlength(10)
      * @org.seasar.struts.validator.annotation.backport175.Maxlength(15)

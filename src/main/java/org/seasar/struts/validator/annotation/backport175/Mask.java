@@ -17,11 +17,15 @@ package org.seasar.struts.validator.annotation.backport175;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  * @org.seasar.struts.validator.annotation.backport175.ValidatorTarget
  */
 public interface Mask {
     String pattern();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String messageKey();
 
     /**
