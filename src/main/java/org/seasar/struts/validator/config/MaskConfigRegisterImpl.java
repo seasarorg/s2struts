@@ -20,25 +20,29 @@ import java.util.Map;
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Msg;
 import org.apache.commons.validator.Var;
+import org.seasar.framework.util.StringUtil;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class MaskConfigRegisterImpl implements ConfigRegister {
 
     public void register(Field field, Map parameter) {
         String pattern = (String) parameter.get("pattern");
         String messageKey = (String) parameter.get("messageKey");
-        
+
         Var var = new Var();
         var.setName("mask");
         var.setValue(pattern);
         field.addVar(var);
 
-        Msg message = new Msg();
-        message.setName("mask");
-        message.setKey(messageKey);
-        field.addMsg(message);
+        if (!StringUtil.isEmpty(messageKey)) {
+            Msg message = new Msg();
+            message.setName("mask");
+            message.setKey(messageKey);
+            field.addMsg(message);
+        }
     }
 
 }

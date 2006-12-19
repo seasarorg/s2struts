@@ -139,7 +139,16 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         assertNotNull(field);
         assertEquals("mask", field.getDepends());
         assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertNotNull(field.getMessage("mask"));
         assertEquals("comma", field.getMsg("mask"));
+    }
+    
+    public void testMask2() {
+        Field field = form.getField("mask2");
+        assertNotNull(field);
+        assertEquals("mask", field.getDepends());
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertNull(field.getMessage("mask"));
     }
     
     public void testMix() {
