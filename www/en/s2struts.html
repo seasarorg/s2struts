@@ -1745,7 +1745,7 @@ public class ValidateDto implements Serializable {
 }</pre>
 <p>
 S2Struts has annotations prepared for validation configuration.
-All annotation besides ValidateOrder, Args is used in basic validation.
+All annotation besides ValidateOrder, Args, Message is used in basic validation.
 </p>
 <h4>ValidateOrder</h4>
 <p>
@@ -1784,6 +1784,42 @@ The substitute data used in the message is selected.
       <td>Selects if the value defined in keys will be used as a resource key.<br>
           When true, it will use this as a resource key and corresponding values as a substitute parameter.<br>
           When false, it will simply use the value defined in keys as a substitute parameter.</td>
+  </tr>
+</table>
+<h4>Message</h4>
+<p>
+デフォルトメッセージの代わりに個別のメッセージを表示したい場合に指定します。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージのキー又はメッセージを指定します。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージを指定するバリデータの名前を指定します。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keyで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値をメッセージとします。<br>
+      falseの場合はkeyで指定した値をそのままメッセージとします。</td>
   </tr>
 </table>
 <h4>Required</h4>
