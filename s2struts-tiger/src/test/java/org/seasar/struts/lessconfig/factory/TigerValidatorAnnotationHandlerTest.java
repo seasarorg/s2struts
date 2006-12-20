@@ -22,7 +22,8 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     }
 
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", TestValidatorAnnotationForm.class);
+        form = annHandler.createForm("testForm",
+                TestValidatorAnnotationForm.class);
     }
 
     public void testArg() {
@@ -48,6 +49,26 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         assertNotNull(field);
         assertEquals("Arg", field.getArg(0).getKey());
         assertEquals(true, field.getArg(0).isResource());
+    }
+
+    public void testMessage() {
+        Field field = form.getField("message");
+        assertNotNull(field);
+        assertNotNull(field.getMessage("required"));
+        assertEquals("myrequired", field.getMsg("required"));
+        assertEquals("myrequired", field.getMessage("required").getKey());
+        assertNull(field.getMessage("required").getBundle());
+        assertTrue(field.getMessage("required").isResource());
+    }
+
+    public void testMessage2() {
+        Field field = form.getField("message2");
+        assertNotNull(field);
+        assertNotNull(field.getMessage("required"));
+        assertEquals("my2required", field.getMsg("required"));
+        assertEquals("my2required", field.getMessage("required").getKey());
+        assertEquals("myapp", field.getMessage("required").getBundle());
+        assertFalse(field.getMessage("required").isResource());
     }
 
     public void testRequired() {
@@ -101,8 +122,8 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     public void testLength() {
         Field field = form.getField("length");
         assertNotNull(field);
-        assertEquals("minlength,maxlength = " + field.getDepends(), "minlength,maxlength".length(),
-                field.getDepends().length());
+        assertEquals("minlength,maxlength = " + field.getDepends(),
+                "minlength,maxlength".length(), field.getDepends().length());
         assertEquals("3", field.getVarValue("minlength"));
         assertEquals("5", field.getVarValue("maxlength"));
     }
@@ -111,7 +132,8 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         Field field = form.getField("byteLength");
         assertNotNull(field);
         assertEquals("minbytelength,maxbytelength = " + field.getDepends(),
-                "minbytelength,maxbytelength".length(), field.getDepends().length());
+                "minbytelength,maxbytelength".length(), field.getDepends()
+                        .length());
         assertEquals("3", field.getVarValue("minbytelength"));
         assertEquals("5", field.getVarValue("maxbytelength"));
         assertEquals("ISO8859_1", field.getVarValue("charset"));
@@ -137,7 +159,8 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         Field field = form.getField("mask");
         assertNotNull(field);
         assertEquals("mask", field.getDepends());
-        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field
+                .getVarValue("mask"));
         assertEquals("comma", field.getMsg("mask"));
     }
 
@@ -145,15 +168,17 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         Field field = form.getField("mask2");
         assertNotNull(field);
         assertEquals("mask", field.getDepends());
-        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field
+                .getVarValue("mask"));
         assertNull(field.getMessage("mask"));
     }
 
     public void testMix() {
         Field field = form.getField("mix");
         assertNotNull(field);
-        assertEquals("required,minlength,maxlength,mask,email = " + field.getDepends(),
-                "required,minlength,maxlength,mask,email".length(), field.getDepends().length());
+        assertEquals("required,minlength,maxlength,mask,email = "
+                + field.getDepends(), "required,minlength,maxlength,mask,email"
+                .length(), field.getDepends().length());
         assertEquals("10", field.getVarValue("minlength"));
         assertEquals("15", field.getVarValue("maxlength"));
         assertEquals("com$", field.getVarValue("mask"));
@@ -164,7 +189,8 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     public void testFullValidatorField() {
         Field field = form.getField("fullValidatorField");
         assertNotNull(field);
-        assertEquals("intRange,integer,maxlength,required".length(), field.getDepends().length());
+        assertEquals("intRange,integer,maxlength,required".length(), field
+                .getDepends().length());
 
         assertEquals("3", field.getVarValue("maxlength"));
         assertEquals("10", field.getVarValue("min"));
@@ -180,7 +206,8 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
     public void testSimpleValidatorField() {
         Field field = form.getField("simpleValidatorField");
         assertNotNull(field);
-        assertEquals("intRange,integer,maxlength,required".length(), field.getDepends().length());
+        assertEquals("intRange,integer,maxlength,required".length(), field
+                .getDepends().length());
 
         assertEquals("3", field.getVarValue("maxlength"));
         assertEquals("10", field.getVarValue("min"));

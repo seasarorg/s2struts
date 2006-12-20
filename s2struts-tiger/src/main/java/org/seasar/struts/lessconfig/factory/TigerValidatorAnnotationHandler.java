@@ -38,8 +38,9 @@ import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
  * @author Katsuhiko Nagashima
  * 
  */
-public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotationHandler {
-    
+public class TigerValidatorAnnotationHandler extends
+        ConstantValidatorAnnotationHandler {
+
     protected Comparator getPropertyDescComparator(BeanDesc beanDesc) {
         return new TigerPropertyDescComparator(beanDesc);
     }
@@ -49,10 +50,10 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (!hasAnnotation(method)) {
             return super.noValidate(beanDesc, propDesc);
         }
-        
+
         return method.getAnnotation(NoValidate.class) != null;
     }
-    
+
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -86,8 +87,9 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         depends.setLength(depends.length() - 1);
         return depends.toString();
     }
-    
-    protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+
+    protected void registerMessage(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
             super.registerMessage(field, beanDesc, propDesc);
@@ -98,15 +100,18 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (annotation != null) {
             Message message = (Message) annotation;
             Msg msg = new Msg();
-            msg.setBundle(message.bundle());
+            if (!StringUtil.isEmpty(message.bundle())) {
+                msg.setBundle(message.bundle());
+            }
             msg.setKey(message.key());
             msg.setName(message.name());
             msg.setResource(message.resource());
             field.addMsg(msg);
         }
     }
-    
-    protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+
+    protected void registerArgs(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
             super.registerArgs(field, beanDesc, propDesc);
@@ -129,8 +134,9 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             field.addArg(arg);
         }
     }
-    
-    protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+
+    protected void registerConfig(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
             super.registerConfig(field, beanDesc, propDesc);
@@ -145,7 +151,8 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             if (target != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
-                    Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
+                    Map parameter = TigerAnnotationConverter.getInstance()
+                            .toMap(annotation);
                     executeConfigRegister(field, validatorName, parameter);
                 }
             }
@@ -153,7 +160,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     }
 
     // -----------------------------------------------------------------------
-    
+
     private boolean hasAnnotation(Method method) {
         return method.getAnnotations().length != 0;
     }
