@@ -39,7 +39,7 @@ import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
  * 
  */
 public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotationHandler {
-    
+
     protected Comparator getPropertyDescComparator(BeanDesc beanDesc) {
         return new TigerPropertyDescComparator(beanDesc);
     }
@@ -49,10 +49,10 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (!hasAnnotation(method)) {
             return super.noValidate(beanDesc, propDesc);
         }
-        
+
         return method.getAnnotation(NoValidate.class) != null;
     }
-    
+
     protected String getDepends(BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -86,7 +86,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         depends.setLength(depends.length() - 1);
         return depends.toString();
     }
-    
+
     protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -98,14 +98,16 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (annotation != null) {
             Message message = (Message) annotation;
             Msg msg = new Msg();
-            msg.setBundle(message.bundle());
+            if (!StringUtil.isEmpty(message.bundle())) {
+                msg.setBundle(message.bundle());
+            }
             msg.setKey(message.key());
             msg.setName(message.name());
             msg.setResource(message.resource());
             field.addMsg(msg);
         }
     }
-    
+
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -129,7 +131,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             field.addArg(arg);
         }
     }
-    
+
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
@@ -153,7 +155,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
     }
 
     // -----------------------------------------------------------------------
-    
+
     private boolean hasAnnotation(Method method) {
         return method.getAnnotations().length != 0;
     }

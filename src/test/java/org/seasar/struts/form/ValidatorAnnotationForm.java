@@ -14,6 +14,7 @@ import org.seasar.struts.validator.annotation.tiger.LongRange;
 import org.seasar.struts.validator.annotation.tiger.Mask;
 import org.seasar.struts.validator.annotation.tiger.Maxbytelength;
 import org.seasar.struts.validator.annotation.tiger.Maxlength;
+import org.seasar.struts.validator.annotation.tiger.Message;
 import org.seasar.struts.validator.annotation.tiger.Minbytelength;
 import org.seasar.struts.validator.annotation.tiger.Minlength;
 import org.seasar.struts.validator.annotation.tiger.NoValidate;
@@ -44,6 +45,18 @@ public class ValidatorAnnotationForm {
     @Required
     @Args(keys = "Arg")
     public void setArgDefaultResource(String argDefaultResource) {
+    }
+
+    @Required
+    @Message(name = "required", key = "myrequired")
+    @Args(keys = "Message", resource = false)
+    public void setMessage(String message) {
+    }
+
+    @Required
+    @Message(name = "required", key = "my2required", bundle = "myapp", resource = false)
+    @Args(keys = "Message2", resource = false)
+    public void setMessage2(String message) {
     }
 
     @Required

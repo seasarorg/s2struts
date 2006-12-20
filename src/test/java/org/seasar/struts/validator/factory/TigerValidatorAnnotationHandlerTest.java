@@ -51,6 +51,26 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals(true, field.getArg(0).isResource());
     }
 
+    public void testMessage() {
+        Field field = form.getField("message");
+        assertNotNull(field);
+        assertNotNull(field.getMessage("required"));
+        assertEquals("myrequired", field.getMsg("required"));
+        assertEquals("myrequired", field.getMessage("required").getKey());
+        assertNull(field.getMessage("required").getBundle());
+        assertTrue(field.getMessage("required").isResource());
+    }
+
+    public void testMessage2() {
+        Field field = form.getField("message2");
+        assertNotNull(field);
+        assertNotNull(field.getMessage("required"));
+        assertEquals("my2required", field.getMsg("required"));
+        assertEquals("my2required", field.getMessage("required").getKey());
+        assertEquals("myapp", field.getMessage("required").getBundle());
+        assertFalse(field.getMessage("required").isResource());
+    }
+
     public void testRequired() {
         Field field = form.getField("required");
         assertNotNull(field);

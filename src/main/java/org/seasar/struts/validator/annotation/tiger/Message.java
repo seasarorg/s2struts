@@ -33,7 +33,7 @@ public @interface Message {
 
     String name();
 
-    String bundle();
+    String bundle() default "";
 
     boolean resource() default true;
 
