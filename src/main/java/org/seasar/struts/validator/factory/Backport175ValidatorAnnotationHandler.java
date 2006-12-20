@@ -98,7 +98,9 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         if (annotation != null) {
             Message message = (Message) annotation;
             Msg msg = new Msg();
-            msg.setBundle(message.bundle());
+            if (!StringUtil.isEmpty(message.bundle())) {
+                msg.setBundle(message.bundle());
+            }
             msg.setKey(message.key());
             msg.setName(message.name());
             msg.setResource(message.resource());

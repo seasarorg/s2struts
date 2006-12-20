@@ -36,6 +36,22 @@ public class ValidatorAnnotationForm {
     
     /**
      * @org.seasar.struts.validator.annotation.backport175.Required
+     * @org.seasar.struts.validator.annotation.backport175.Message(name = "required", key = "myrequired")
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys = "Message", resource = false)
+     */
+    public void setMessage(String message) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Required
+     * @org.seasar.struts.validator.annotation.backport175.Message(name = "required", key = "my2required", bundle = "myapp", resource = false)
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys = "Message2", resource = false)
+     */
+    public void setMessage2(String message) {
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Required
      * @org.seasar.struts.validator.annotation.backport175.Args(keys="Required", resource=false)
      */
     public void setRequired(String required) {

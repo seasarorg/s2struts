@@ -17,12 +17,16 @@ package org.seasar.struts.validator.annotation.backport175;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public interface Message {
     String key();
 
     String name();
 
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
     String bundle();
 
     /**
