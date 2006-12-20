@@ -32,6 +32,20 @@ public class ValidatorAnnotationForm {
     public void setArgDefaultResource(String argDefaultResource) {
     }
 
+    public static final String message_VALIDATOR = "required";
+    public static final String message_VALIDATOR_MESSAGE = "name=required, key=myrequired";
+    public static final String message_VALIDATOR_ARGS = "Message, resource=false";
+
+    public void setMessage(String message) {
+    }
+
+    public static final String message2_VALIDATOR = "required";
+    public static final String message2_VALIDATOR_MESSAGE = "name=required, key=my2required, bundle=myapp, resource=false";
+    public static final String message2_VALIDATOR_ARGS = "Message2, resource=false";
+
+    public void setMessage2(String message) {
+    }
+
     public static final String required_VALIDATOR = "required";
     public static final String required_VALIDATOR_ARGS = "Required, resource=false";
 
