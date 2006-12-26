@@ -20,7 +20,12 @@ package org.seasar.struts.validator.annotation.backport175;
  */
 public interface Args {
     String keys();
-    
+
+    /**
+     * @org.codehaus.backport175.DefaultValue ("")
+     */
+    String bundle();
+
     /**
      * @org.codehaus.backport175.DefaultValue (true)
      */

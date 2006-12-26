@@ -22,6 +22,13 @@ public class ValidatorAnnotationForm {
     
     /**
      * @org.seasar.struts.validator.annotation.backport175.Required
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Arg2", bundle="myapp", resource=false)
+     */
+    public void setArg2(String arg) {
+    }
+    
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Required
      * @org.seasar.struts.validator.annotation.backport175.Args(keys="Arg0, Arg1, Arg2", resource=false)
      */
     public void setArgs(String args) {
