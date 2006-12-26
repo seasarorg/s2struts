@@ -23,14 +23,16 @@ import java.lang.annotation.Target;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Args {
 
     String keys();
-    
+
+    String bundle() default "";
+
     boolean resource() default true;
 
 }

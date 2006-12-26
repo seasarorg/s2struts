@@ -20,9 +20,7 @@ import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.Map;
 
-import org.apache.commons.validator.Arg;
 import org.apache.commons.validator.Field;
-import org.apache.commons.validator.Msg;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.util.StringUtil;
@@ -38,8 +36,7 @@ import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
  * @author Katsuhiko Nagashima
  * 
  */
-public class TigerValidatorAnnotationHandler extends
-        ConstantValidatorAnnotationHandler {
+public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotationHandler {
 
     protected Comparator getPropertyDescComparator(BeanDesc beanDesc) {
         return new TigerPropertyDescComparator(beanDesc);
@@ -88,8 +85,7 @@ public class TigerValidatorAnnotationHandler extends
         return depends.toString();
     }
 
-    protected void registerMessage(Field field, BeanDesc beanDesc,
-            PropertyDesc propDesc) {
+    protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
             super.registerMessage(field, beanDesc, propDesc);
@@ -97,46 +93,34 @@ public class TigerValidatorAnnotationHandler extends
         }
 
         Annotation annotation = method.getAnnotation(Message.class);
-        if (annotation != null) {
-            Message message = (Message) annotation;
-            Msg msg = new Msg();
-            if (!StringUtil.isEmpty(message.bundle())) {
-                msg.setBundle(message.bundle());
-            }
-            msg.setKey(message.key());
-            msg.setName(message.name());
-            msg.setResource(message.resource());
-            field.addMsg(msg);
+        if (annotation == null) {
+            return;
         }
+        Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
+
+        executeMessageConfigRegister(field, parameter);
     }
 
-    protected void registerArgs(Field field, BeanDesc beanDesc,
-            PropertyDesc propDesc) {
+    protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
             super.registerArgs(field, beanDesc, propDesc);
             return;
         }
 
+        Map parameter = null;
         Annotation annotation = method.getAnnotation(Args.class);
-        String[] keys = { propDesc.getPropertyName() };
-        boolean resource = false;
         if (annotation != null) {
-            Args args = (Args) annotation;
-            keys = toArrays(args.keys());
-            resource = args.resource();
+            parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
         }
-        for (int i = 0; i < keys.length; i++) {
-            Arg arg = new Arg();
-            arg.setKey(keys[i]);
-            arg.setResource(resource);
-            arg.setPosition(i);
-            field.addArg(arg);
+        if (parameter == null) {
+            parameter = getDefaultArgsConfigParameter(propDesc);
         }
+
+        executeArgsConfigRegister(field, parameter);
     }
 
-    protected void registerConfig(Field field, BeanDesc beanDesc,
-            PropertyDesc propDesc) {
+    protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
         Method method = getMethodForValidation(propDesc);
         if (!hasAnnotation(method)) {
             super.registerConfig(field, beanDesc, propDesc);
@@ -151,8 +135,7 @@ public class TigerValidatorAnnotationHandler extends
             if (target != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
-                    Map parameter = TigerAnnotationConverter.getInstance()
-                            .toMap(annotation);
+                    Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
                     executeConfigRegister(field, validatorName, parameter);
                 }
             }
