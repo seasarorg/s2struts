@@ -57,7 +57,7 @@ public abstract class AbstractAnnotationConverter implements AnnotationConverter
                 Map valueMap = toMap(value);
                 result.put(name, valueMap);
             } else {
-                result.put(name, value);
+                result.put(name, value.toString());
             }
         }
         return result;

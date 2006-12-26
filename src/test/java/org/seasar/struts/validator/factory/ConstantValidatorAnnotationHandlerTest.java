@@ -30,6 +30,15 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         Field field = form.getField("arg");
         assertNotNull(field);
         assertEquals("Arg", field.getArg(0).getKey());
+        assertNull(field.getArg(0).getBundle());
+        assertEquals(false, field.getArg(0).isResource());
+    }
+
+    public void testArg2() {
+        Field field = form.getField("arg2");
+        assertNotNull(field);
+        assertEquals("Arg2", field.getArg(0).getKey());
+        assertEquals("myapp", field.getArg(0).getBundle());
         assertEquals(false, field.getArg(0).isResource());
     }
 

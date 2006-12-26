@@ -21,12 +21,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.validator.Arg;
 import org.apache.commons.validator.Field;
-import org.apache.commons.validator.Msg;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.framework.util.BooleanConversionUtil;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.util.ConstantAnnotationUtil;
 import org.seasar.struts.util.ConstantValueUtil;
@@ -93,50 +90,24 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         String value = (String) beanDesc.getFieldValue(fieldName, null);
         Map parameter = ConstantValueUtil.toMap(value);
 
-        String name = (String) parameter.get("name");
-        String key = (String) parameter.get("key");
-        String bundle = (String) parameter.get("bundle");
-        String resourceStr = (String) parameter.get("resource");
-        boolean resource = true;
-        if (!StringUtil.isEmpty(resourceStr)) {
-            resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
-        }
-
-        Msg msg = new Msg();
-        msg.setBundle(bundle);
-        msg.setKey(key);
-        msg.setName(name);
-        msg.setResource(resource);
-        field.addMsg(msg);
+        executeMessageConfigRegister(field, parameter);
     }
 
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
-        String[] keys = { propDesc.getPropertyName() };
-        boolean resource = false;
-
+        Map parameter = null;
         String fieldName = propDesc.getPropertyName() + ARGS_SUFFIX;
         if (beanDesc.hasField(fieldName)) {
             if (ConstantAnnotationUtil
                     .isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
                 String value = (String) beanDesc.getFieldValue(fieldName, null);
-                Map parameter = ConstantValueUtil.toMap(value, "keys");
-                keys = toArrays((String) parameter.get("keys"));
-                String resourceStr = (String) parameter.get("resource");
-                if (!StringUtil.isEmpty(resourceStr)) {
-                    resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
-                } else {
-                    resource = true;
-                }
+                parameter = ConstantValueUtil.toMap(value, "keys");
             }
         }
-
-        for (int i = 0; i < keys.length; i++) {
-            Arg arg = new Arg();
-            arg.setKey(keys[i]);
-            arg.setResource(resource);
-            arg.setPosition(i);
-            field.addArg(arg);
+        if (parameter == null) {
+            parameter = getDefaultArgsConfigParameter(propDesc);
         }
+
+        executeArgsConfigRegister(field, parameter);
     }
 
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {

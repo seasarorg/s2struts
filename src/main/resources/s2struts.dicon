@@ -43,6 +43,16 @@
 	<component name="zeroConfigActionRule"         class="org.seasar.struts.config.rule.ZeroConfigActionRuleImpl"/>
 	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.config.rule.ZeroConfigActionFormRuleImpl"/>
 
+    <!-- Validator ConfigRegister Components -->
+	<component name="argsConfigRegister"           class="org.seasar.struts.validator.config.ArgsConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
+	<component name="messageConfigRegister"        class="org.seasar.struts.validator.config.MessageConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
+	
 	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>
 	</component>

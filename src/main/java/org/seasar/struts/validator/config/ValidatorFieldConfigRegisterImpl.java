@@ -22,6 +22,7 @@ import java.util.Map;
 import org.apache.commons.validator.Arg;
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Var;
+import org.seasar.framework.util.BooleanConversionUtil;
 import org.seasar.framework.util.StringUtil;
 
 /**
@@ -80,10 +81,10 @@ public class ValidatorFieldConfigRegisterImpl implements ConfigRegister {
         String validatorName = (String) validator.get("name");
         String varName = (String) var.get("name");
         String varKey = (String) var.get("key");
-        Boolean varResource = (Boolean) var.get("resource"); 
-        Boolean varArg = (Boolean) var.get("arg"); 
+        boolean varResource = BooleanConversionUtil.toPrimitiveBoolean(var.get("resource")); 
+        boolean varArg = BooleanConversionUtil.toPrimitiveBoolean(var.get("arg")); 
 
-        if (StringUtil.isEmpty(varKey) && !varArg.booleanValue()) {
+        if (StringUtil.isEmpty(varKey) && !varArg) {
             return;
         }
         Arg arg = new Arg();
@@ -93,7 +94,7 @@ public class ValidatorFieldConfigRegisterImpl implements ConfigRegister {
             arg.setResource(false);
         } else {
             arg.setKey(varKey);
-            arg.setResource(varResource.booleanValue());
+            arg.setResource(varResource);
         }
         arg.setPosition(position);
         field.addArg(arg);
