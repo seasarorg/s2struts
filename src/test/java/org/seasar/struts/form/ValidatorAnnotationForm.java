@@ -38,6 +38,11 @@ public class ValidatorAnnotationForm {
     }
 
     @Required
+    @Args(keys = "Arg2", bundle="myapp", resource = false)
+    public void setArg2(String arg) {
+    }
+
+    @Required
     @Args(keys = "Arg0, Arg1, Arg2", resource = false)
     public void setArgs(String args) {
     }
