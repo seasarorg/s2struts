@@ -16,7 +16,6 @@
 package org.seasar.struts.lessconfig.factory;
 
 import java.lang.reflect.Method;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -124,7 +123,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
 
         if (paramType.equals(Byte.class) || paramType.equals(Byte.TYPE)) {
             return false;
-        } else if (paramType.equals(Date.class) || paramType.equals(Timestamp.class)) {
+        } else if (Date.class.isAssignableFrom(paramType)) {
             return false;
         } else if (paramType.equals(Double.class) || paramType.equals(Double.TYPE)) {
             return false;
@@ -205,7 +204,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
 
         if (paramType.equals(Byte.class) || paramType.equals(Byte.TYPE)) {
             return "byte";
-        } else if (paramType.equals(Date.class) || paramType.equals(Timestamp.class)) {
+        } else if (Date.class.isAssignableFrom(paramType)) {
             return "date";
         } else if (paramType.equals(Double.class) || paramType.equals(Double.TYPE)) {
             return "double";
