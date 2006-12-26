@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Form;
@@ -247,22 +246,33 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         register.register(field, parameters);
     }
 
+    protected void executeArgsConfigRegister(Field field, Map parameters) {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        ConfigRegister register = (ConfigRegister) container.getComponent("argsConfigRegister");
+        register.register(field, parameters);
+    }
+
+    protected void executeMessageConfigRegister(Field field, Map parameters) {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        ConfigRegister register = (ConfigRegister) container.getComponent("messageConfigRegister");
+        register.register(field, parameters);
+    }
+
     private String getConfigRegisterName(String validatorName) {
         return validatorName + "ConfigRegister";
     }
 
     protected String getValidatorName(Class clazz) {
-        String validatorName = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(clazz));
+        String validatorName = CommonNamingRule
+                .decapitalizeName(ClassUtil.getShortClassName(clazz));
         return validatorName.replaceFirst(VALIDATOR_TYPE_PREFIX_RE, "");
     }
 
-    protected String[] toArrays(String str) {
-        StringTokenizer tokenizer = new StringTokenizer(str, ",");
-        List list = new ArrayList();
-        while (tokenizer.hasMoreElements()) {
-            list.add(tokenizer.nextToken().trim());
-        }
-        return (String[]) list.toArray(new String[list.size()]);
+    protected Map getDefaultArgsConfigParameter(PropertyDesc propDesc) {
+        Map result = new HashMap();
+        result.put("keys", propDesc.getPropertyName());
+        result.put("resource", "false");
+        return result;
     }
 
 }
