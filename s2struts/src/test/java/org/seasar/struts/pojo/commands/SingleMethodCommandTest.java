@@ -39,7 +39,8 @@ public class SingleMethodCommandTest extends S2TestCase {
         HttpServletRequest request = null;
         HttpServletResponse response = null;
 
-        this.invocation = new PojoInvocationImpl(commands, mapping, actionInterface, actionInstance, form, request, response);
+        this.invocation = new PojoInvocationImpl(commands, mapping, actionInterface, actionInstance, form, request,
+                response);
     }
 
     public void testExecute() {
@@ -61,6 +62,22 @@ public class SingleMethodCommandTest extends S2TestCase {
     public void testNotExecuteBecauseActionIsMultiMethodAction() {
         this.invocation.setActionInterface(TestMultiMethodAction.class);
         this.invocation.setActionInstance(new TestMultiMethodActionImpl());
+
+        String result = this.invocation.execute();
+        assertEquals("notExecute", result);
+    }
+
+    public void testExecuteNoInterfaceAction() {
+        this.invocation.setActionInterface(TestSingleMethodImplementAction.class);
+        this.invocation.setActionInstance(new TestSingleMethodImplementAction());
+
+        String result = this.invocation.execute();
+        assertEquals("success", result);
+    }
+
+    public void testExecuteNoPublicMethodAction() {
+        this.invocation.setActionInterface(TestSingleMethodNoPublicMethodAction.class);
+        this.invocation.setActionInstance(new TestSingleMethodNoPublicMethodAction());
 
         String result = this.invocation.execute();
         assertEquals("notExecute", result);

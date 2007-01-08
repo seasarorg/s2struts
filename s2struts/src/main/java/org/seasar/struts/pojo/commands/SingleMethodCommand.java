@@ -16,6 +16,8 @@
 package org.seasar.struts.pojo.commands;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.seasar.framework.util.MethodUtil;
 import org.seasar.struts.pojo.PojoCommand;
@@ -30,13 +32,30 @@ public class SingleMethodCommand implements PojoCommand {
     public String execute(PojoInvocation invocation) {
         Class actionInterface = invocation.getActionInterface();
         Object action = invocation.getActionInstance();
-        
-        Method[] methods = actionInterface.getMethods();
+
+        Method[] methods = getMethods(actionInterface);
         if (methods.length == 1) {
             return (String) MethodUtil.invoke(methods[0], action, null);
         }
 
         return invocation.execute();
+    }
+
+    private Method[] getMethods(Class actionInterface) {
+        if (actionInterface.isInterface()) {
+            return actionInterface.getMethods();
+        }
+
+        List result = new ArrayList();
+        Method[] methods = actionInterface.getMethods();
+        for (int i = 0; i < methods.length; i++) {
+            String methodName = methods[i].getName();
+            if (methodName.startsWith("do") || methodName.startsWith("go") || methodName.startsWith("execute")) {
+                result.add(methods[i]);
+            }
+        }
+
+        return (Method[]) result.toArray(new Method[result.size()]);
     }
 
 }
