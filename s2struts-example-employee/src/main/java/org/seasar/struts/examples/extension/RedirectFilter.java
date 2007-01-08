@@ -1,4 +1,4 @@
-package org.seasar.struts.examples.filter;
+package org.seasar.struts.examples.extension;
 
 import java.io.IOException;
 
