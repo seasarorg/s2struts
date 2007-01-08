@@ -68,6 +68,15 @@
 	<component name="strutsConfigRegister"         class="org.seasar.struts.lessconfig.autoregister.impl.StrutsConfigRegisterImpl"/>
 
     <!-- Validator ConfigRegister Components -->
+	<component name="argsConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.ArgsConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
+	<component name="messageConfigRegister"        class="org.seasar.struts.lessconfig.validator.config.impl.MessageConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
+
 	<component name="dateConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>
 	</component>
