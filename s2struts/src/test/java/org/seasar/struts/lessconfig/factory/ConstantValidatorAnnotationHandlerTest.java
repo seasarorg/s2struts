@@ -96,6 +96,15 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         assertNotNull(field);
         assertEquals("date", field.getDepends());
         assertEquals("yyyyMMdd", field.getVarValue("datePattern"));
+        assertNull(field.getVarValue("datePatternStrict"));
+    }
+
+    public void testStrictDate() {
+        Field field = form.getField("strictDate");
+        assertNotNull(field);
+        assertEquals("date", field.getDepends());
+        assertNull(field.getVarValue("datePattern"));
+        assertEquals("yyyyMMdd", field.getVarValue("datePatternStrict"));
     }
 
     public void testAutoInteger() {

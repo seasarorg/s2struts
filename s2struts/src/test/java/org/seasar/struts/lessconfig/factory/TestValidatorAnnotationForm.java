@@ -81,6 +81,13 @@ public class TestValidatorAnnotationForm {
     public void setDate(String date) {
     }
 
+    public static final String strictDate_VALIDATOR = "date, pattern=yyyyMMdd, strict=true";
+
+    public static final String strictDate_VALIDATOR_ARGS = "StrictDate, resource=false";
+
+    public void setStrictDate(String date) {
+    }
+
     public static final String creditCard_VALIDATOR = "creditCard";
 
     public static final String creditCard_VALIDATOR_ARGS = "CreditCard, resource=false";
