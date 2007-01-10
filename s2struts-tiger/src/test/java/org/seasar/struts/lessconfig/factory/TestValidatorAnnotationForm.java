@@ -79,6 +79,11 @@ public class TestValidatorAnnotationForm {
     public void setDate(String date) {
     }
 
+    @DateType(pattern = "yyyyMMdd", strict = true)
+    @Args(keys = "StrictDate", resource = false)
+    public void setStrictDate(String date) {
+    }
+
     @CreditCardType
     @Args(keys = "CreditCard", resource = false)
     public void setCreditCard(String creditCard) {

@@ -29,7 +29,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface DateType {
-    
+
     String pattern() default "";
+
+    boolean strict() default false;
 
 }
