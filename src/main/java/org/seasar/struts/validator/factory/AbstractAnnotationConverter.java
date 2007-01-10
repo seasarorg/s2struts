@@ -15,9 +15,9 @@
  */
 package org.seasar.struts.validator.factory;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,18 +41,20 @@ public abstract class AbstractAnnotationConverter implements AnnotationConverter
 
             if (value.getClass().isArray()) {
                 List valueList = new ArrayList();
-                Object[] array = (Object[]) value;
-                if (array.length != 0) {
-                    if (isInstanceOfAnnotation(array[0])) {
-                        for (int j = 0; j < array.length; j++) {
-                            Map valueMap = toMap(array[j]);
+                if (Array.getLength(value) != 0) {
+                    Object arrayValue = Array.get(value, 0);
+                    if (isInstanceOfAnnotation(arrayValue)) {
+                        for (int j = 0; j < Array.getLength(value); j++) {
+                            Map valueMap = toMap(Array.get(value, j));
                             valueList.add(valueMap);
                         }
                     } else {
-                        valueList = Arrays.asList(array);
+                        for (int j = 0; j < Array.getLength(value); j++) {
+                            valueList.add(Array.get(value, j).toString());
+                        }
                     }
+                    result.put(name, valueList);
                 }
-                result.put(name, valueList);
             } else if (isInstanceOfAnnotation(value)) {
                 Map valueMap = toMap(value);
                 result.put(name, valueMap);

@@ -55,6 +55,7 @@
 	
 	<component name="dateConfigRegister"           class="org.seasar.struts.validator.config.DateConfigRegisterImpl">
 		<property name="pattern">"yyyy/MM/dd"</property>
+		<property name="strict">false</property>
 	</component>
 	<component name="maskConfigRegister"           class="org.seasar.struts.validator.config.MaskConfigRegisterImpl"/>
 	<component name="maxlengthConfigRegister"      class="org.seasar.struts.validator.config.MaxlengthConfigRegisterImpl"/>

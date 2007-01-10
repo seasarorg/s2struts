@@ -15,33 +15,58 @@
  */
 package org.seasar.struts.validator.config;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Var;
+import org.seasar.framework.util.BooleanConversionUtil;
+import org.seasar.framework.util.StringUtil;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class DateConfigRegisterImpl implements ConfigRegister {
 
-    private String pattern;
+    private String defaultPattern = null;
+
+    private boolean defaultStrict = false;
 
     public void register(Field field, Map parameter) {
-        String datePattern = (String) parameter.get("pattern");
+        String pattern = (String) parameter.get("pattern");
+        if (StringUtil.isEmpty(pattern)) {
+            pattern = this.defaultPattern;
+        }
+        String strictStr = getString(parameter.get("strict"));
+        boolean strict = this.defaultStrict;
+        if (!StringUtil.isEmpty(strictStr)) {
+            strict = BooleanConversionUtil.toPrimitiveBoolean(strictStr);
+        }
 
         Var var = new Var();
-        var.setName("datePattern");
-        if (datePattern != null) {
-            var.setValue(datePattern);
+        if (strict) {
+            var.setName("datePatternStrict");
         } else {
-            var.setValue(this.pattern);
+            var.setName("datePattern");
         }
+        var.setValue(pattern);
         field.addVar(var);
     }
 
+    private String getString(Object obj) {
+        if (obj instanceof List) {
+            return (String) ((List) obj).get(0);
+        }
+        return (String) obj;
+    }
+
     public void setPattern(String pattern) {
-        this.pattern = pattern;
+        this.defaultPattern = pattern;
+    }
+
+    public void setStrict(boolean strict) {
+        this.defaultStrict = strict;
     }
 
 }
