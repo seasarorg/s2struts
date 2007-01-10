@@ -49,15 +49,20 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
     private static final Logger log = Logger.getLogger(ReloadFindActionConfigInterceptor.class);
 
     public ModuleConfig load(String prefix) throws ServletException {
-        ModuleConfig config;
+        ModuleConfig moduleConfig;
         if ("".equals(prefix)) {
-            config = initModuleConfig(prefix, "/WEB-INF/struts-config.xml");
+            String config = "/WEB-INF/struts-config.xml";
+            String value = getServletConfig().getInitParameter("config");
+            if (value != null) {
+                config = value;
+            }
+            moduleConfig = initModuleConfig(prefix, config);
         } else {
             String name = "config/" + prefix;
-            config = initModuleConfig(prefix, getServletConfig().getInitParameter(name));
+            moduleConfig = initModuleConfig(prefix, getServletConfig().getInitParameter(name));
         }
-        config.freeze();
-        return config;
+        moduleConfig.freeze();
+        return moduleConfig;
     }
 
     //
@@ -91,9 +96,9 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
             "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN",
             "/org/apache/struts/resources/struts-config_1_1.dtd",
             "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN",
-            "/org/apache/struts/resources/struts-config_1_2.dtd", "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN",
-            "/org/apache/struts/resources/web-app_2_2.dtd", "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN",
-            "/org/apache/struts/resources/web-app_2_3.dtd" };
+            "/org/apache/struts/resources/struts-config_1_2.dtd",
+            "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN", "/org/apache/struts/resources/web-app_2_2.dtd",
+            "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN", "/org/apache/struts/resources/web-app_2_3.dtd" };
 
     protected ModuleConfig initModuleConfig(String prefix, String paths) throws ServletException {
 
