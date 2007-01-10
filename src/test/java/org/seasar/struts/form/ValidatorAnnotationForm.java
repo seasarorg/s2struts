@@ -79,6 +79,13 @@ public class ValidatorAnnotationForm {
     }
 
     /**
+     * @org.seasar.struts.validator.annotation.backport175.DateType(pattern="yyyyMMdd", strict=true)
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="StrictDate", resource=false)
+     */
+    public void setStrictDate(String date) {
+    }
+
+    /**
      * @org.seasar.struts.validator.annotation.backport175.CreditCardType
      * @org.seasar.struts.validator.annotation.backport175.Args(keys="CreditCard", resource=false)
      */
