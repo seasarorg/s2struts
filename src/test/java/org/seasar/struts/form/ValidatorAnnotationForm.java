@@ -38,7 +38,7 @@ public class ValidatorAnnotationForm {
     }
 
     @Required
-    @Args(keys = "Arg2", bundle="myapp", resource = false)
+    @Args(keys = "Arg2", bundle = "myapp", resource = false)
     public void setArg2(String arg) {
     }
 
@@ -77,6 +77,11 @@ public class ValidatorAnnotationForm {
     @DateType(pattern = "yyyyMMdd")
     @Args(keys = "Date", resource = false)
     public void setDate(String date) {
+    }
+
+    @DateType(pattern = "yyyyMMdd", strict = true)
+    @Args(keys = "StrictDate", resource = false)
+    public void setStrictDate(String date) {
     }
 
     @CreditCardType
