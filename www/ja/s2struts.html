@@ -1759,7 +1759,8 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td><center><center>○</center></center></td>
       <td><center>-</center></td>
       <td>メッセージで使用される置換パラメータを指定します。<br>
-      ","で区切ることにより複数指定できます。</td>
+      ","で区切ることにより複数指定できます。<br>
+      定数アノテーションで","で区切る方法については<a href="#ConstAnnotationCodicil">「定数アノテーションの補足」</a>を参照してください。</td>
   </tr>
   <tr>
     <td>resource</td>
@@ -2008,7 +2009,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
 値に「,」を指定する場合は以下のように値を「'」(シングルコーテーション)または「"」(ダブルコーテーション)で囲んでください。
 </p>
 <pre>
- pblic static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
+ public static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
 
  public static final String value_VALIDATOR = "mask, pattern=\"(^[0-9]{1,2}$)\", messageKey=comma";
 </pre>
@@ -2114,6 +2115,13 @@ S2Strutsでは、ButtonTagとSubmitTagを用意しています。
       <td><center>-</center></td>
       <td>action="#{component.method}"と記述することによって、サブミット時に実行するコンポーネントとメソッドを指定する事が可能です。
       コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
+  </tr>
+  <tr>
+    <td><center>cancel</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>trueを指定した場合、フォームに関連付けされたActionFormのvalidateを無視し、
+            アクションを呼び出します。</td>
   </tr>
 </table>
 <h3><a name="TagLibCheckbox">checkboxタグ</a></h3>

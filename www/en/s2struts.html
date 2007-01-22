@@ -1775,7 +1775,8 @@ The substitute data used in the message is selected.
       <td><center><center>O</center></center></td>
       <td><center>-</center></td>
       <td>This selects a substitute value used in a message.<br>
-          Multiple values may be delimited by commas ",".</td>
+          Multiple values may be delimited by commas ",".<br>
+          定数アノテーションで","で区切る方法については<a href="#ConstAnnotationCodicil">「定数アノテーションの補足」</a>を参照してください。</td>
   </tr>
   <tr>
     <td>resource</td>
@@ -2021,7 +2022,7 @@ Turns off automatic validation. There are no associated attributes.
 値に「,」を指定する場合は以下のように値を「'」(シングルコーテーション)または「"」(ダブルコーテーション)で囲んでください。
 </p>
 <pre>
- pblic static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
+ public static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
 
  public static final String value_VALIDATOR = "mask, pattern=\"(^[0-9]{1,2}$)\", messageKey=comma";
 </pre>
@@ -2114,6 +2115,13 @@ Additional attributes are shown below to supplement the above information.
       <td><center>-</center></td>
       <td>The component and method run from submit can be selected using action="#{component.method}".<br>
       the component must be registered in S2Container with the name selected in this attribute.</td>
+  </tr>
+  <tr>
+    <td><center>cancel</center></td>
+      <td><center>X</center></td>
+      <td><center>false</center></td>
+      <td>trueを指定した場合、フォームに関連付けされたActionFormのvalidateを無視し、
+            アクションを呼び出します。</td>
   </tr>
 </table>
 <h3><a name="TagLibCheckbox">checkboxタグ</a></h3>
