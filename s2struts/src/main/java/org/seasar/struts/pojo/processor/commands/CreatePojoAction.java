@@ -13,46 +13,46 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.processor.commands;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package org.seasar.struts.pojo.processor.commands;
 
 import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionMapping;
 import org.apache.struts.chain.commands.AbstractCreateAction;
 import org.apache.struts.chain.contexts.ActionContext;
-import org.apache.struts.chain.contexts.ServletActionContext;
 import org.apache.struts.config.ActionConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.action.ActionFactory;
+import org.seasar.struts.action.ClassRegister;
+import org.seasar.struts.pojo.PojoProcessAction;
 
 /**
- * 実行するActionをS2Containerから取得し、ActionContextに設定する。
+ * 実行するActionがPOJO Actionの場合、POJO Actionを実行するためのアダプタとなるPojoProcessActionを生成し、ActionContextに設定する。
  * 
  * @author Katsuhiko Nagashima
  * 
  */
-public class S2CreateAction extends AbstractCreateAction {
+public class CreatePojoAction extends AbstractCreateAction {
 
     protected Action getAction(ActionContext context, String type, ActionConfig actionConfig) throws Exception {
-        ServletActionContext saContext = (ServletActionContext) context;
-        HttpServletRequest request = saContext.getRequest();
-        HttpServletResponse response = saContext.getResponse();
-        ActionMapping mapping = (ActionMapping) actionConfig;
+        if (type != null) {
+            Class action = getClassRegister().getClass(type);
+            if (action.isInterface() || !Action.class.isAssignableFrom(action)) {
+                return getPojoProcessAction();
+            }
+        }
 
-        ActionFactory actionFactory = getActionFactory();
-        return actionFactory.processActionCreate(request, response, mapping, saContext.getLogger(), saContext
-                .getMessageResources(), saContext.getActionServlet());
+        return null;
     }
 
     //
     //
     //
 
-    private ActionFactory getActionFactory() {
-        return (ActionFactory) getContainer().getComponent(ActionFactory.class);
+    private ClassRegister getClassRegister() {
+        return (ClassRegister) getContainer().getComponent(ClassRegister.class);
+    }
+
+    private PojoProcessAction getPojoProcessAction() {
+        return (PojoProcessAction) getContainer().getComponent(PojoProcessAction.class);
     }
 
     private S2Container getContainer() {

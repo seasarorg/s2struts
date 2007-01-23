@@ -13,50 +13,41 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.processor.commands;
+package org.seasar.struts.pojo.processor.commands;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionServlet;
 import org.apache.struts.chain.commands.AbstractCreateAction;
 import org.apache.struts.chain.contexts.ActionContext;
 import org.apache.struts.chain.contexts.ServletActionContext;
 import org.apache.struts.config.ActionConfig;
-import org.seasar.framework.container.S2Container;
-import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.action.ActionFactory;
+import org.seasar.struts.pojo.MethodBindingAction;
+import org.seasar.struts.pojo.MethodBindingActionFactory;
 
 /**
- * 実行するActionをS2Containerから取得し、ActionContextに設定する。
+ * MethodBindingで実行された場合、MethodBindingを実行するためのアダプタとなるMethodBindingActionを生成し、ActionContextに設定する
  * 
  * @author Katsuhiko Nagashima
  * 
  */
-public class S2CreateAction extends AbstractCreateAction {
+public class CreateMethodBindingAction extends AbstractCreateAction {
 
     protected Action getAction(ActionContext context, String type, ActionConfig actionConfig) throws Exception {
         ServletActionContext saContext = (ServletActionContext) context;
+        ActionServlet actionServlet = saContext.getActionServlet();
         HttpServletRequest request = saContext.getRequest();
-        HttpServletResponse response = saContext.getResponse();
         ActionMapping mapping = (ActionMapping) actionConfig;
 
-        ActionFactory actionFactory = getActionFactory();
-        return actionFactory.processActionCreate(request, response, mapping, saContext.getLogger(), saContext
-                .getMessageResources(), saContext.getActionServlet());
-    }
+        MethodBindingAction action = MethodBindingActionFactory.createMethodBindingAction(request, mapping,
+                actionServlet);
+        if (action != null) {
+            return action;
+        }
 
-    //
-    //
-    //
-
-    private ActionFactory getActionFactory() {
-        return (ActionFactory) getContainer().getComponent(ActionFactory.class);
-    }
-
-    private S2Container getContainer() {
-        return SingletonS2ContainerFactory.getContainer();
+        return null;
     }
 
 }

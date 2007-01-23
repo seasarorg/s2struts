@@ -1,7 +1,7 @@
 package org.seasar.struts.processor.commands;
 
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.chain.commands.ActionCommandBase;
+import org.apache.struts.chain.commands.ActionCommand;
 import org.apache.struts.chain.contexts.ActionContext;
 import org.apache.struts.chain.contexts.ServletActionContext;
 import org.apache.struts.config.ActionConfig;
@@ -15,9 +15,11 @@ import org.seasar.struts.processor.MockAction;
  */
 public class S2CreateActionTest extends S2TestCase {
 
+    private ActionCommand command = new S2CreateAction();
+
     protected void setUp() throws Exception {
         super.setUp();
-        include("S2CreateActionTest.dicon");
+        this.include("S2CreateActionTest.dicon");
     }
 
     public void testExecute() throws Exception {
@@ -29,9 +31,7 @@ public class S2CreateActionTest extends S2TestCase {
         context.setFormValid(Boolean.TRUE);
         context.setActionConfig(config);
 
-        ActionCommandBase command = new S2CreateAction();
-
-        boolean result = command.execute(context);
+        boolean result = this.command.execute(context);
 
         assertFalse(result);
         assertEquals(MockAction.class, context.getAction().getClass());
