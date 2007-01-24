@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -30,7 +35,6 @@ import org.apache.commons.digester.RuleSet;
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ConfigRuleSet;
-import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.ModuleConfigFactory;
 import org.apache.struts.util.RequestUtils;
@@ -91,19 +95,17 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
     // Copy from ActionServlet
     //
 
-    protected String registrations[] = { "-//Apache Software Foundation//DTD Struts Configuration 1.0//EN",
+    protected String[] registrations = { "-//Apache Software Foundation//DTD Struts Configuration 1.0//EN",
             "/org/apache/struts/resources/struts-config_1_0.dtd",
             "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN",
             "/org/apache/struts/resources/struts-config_1_1.dtd",
             "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN",
             "/org/apache/struts/resources/struts-config_1_2.dtd",
-            "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN", "/org/apache/struts/resources/web-app_2_2.dtd",
+            "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN",
+            "/org/apache/struts/resources/struts-config_1_3.dtd",
             "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN", "/org/apache/struts/resources/web-app_2_3.dtd" };
 
     protected ModuleConfig initModuleConfig(String prefix, String paths) throws ServletException {
-
-        // :FIXME: Document UnavailableException? (Doesn't actually throw
-        // anything)
 
         if (log.isDebugEnabled()) {
             log.debug("Initializing module path '" + prefix + "' configuration from '" + paths + "'");
@@ -116,51 +118,29 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
         // Configure the Digester instance we will use
         Digester digester = initConfigDigester();
 
-        // Process each specified resource path
-        while (paths.length() > 0) {
+        List urls = splitAndResolvePaths(paths);
+        URL url;
+
+        for (Iterator i = urls.iterator(); i.hasNext();) {
+            url = (URL) i.next();
             digester.push(config);
-            String path = null;
-            int comma = paths.indexOf(',');
-            if (comma >= 0) {
-                path = paths.substring(0, comma).trim();
-                paths = paths.substring(comma + 1);
-            } else {
-                path = paths.trim();
-                paths = "";
-            }
-
-            if (path.length() < 1) {
-                break;
-            }
-
-            this.parseModuleConfigFile(digester, path);
-        }
-
-        // Force creation and registration of DynaActionFormClass instances
-        // for all dynamic form beans we wil be using
-        FormBeanConfig fbs[] = config.findFormBeanConfigs();
-        for (int i = 0; i < fbs.length; i++) {
-            if (fbs[i].getDynamic()) {
-                fbs[i].getDynaActionFormClass();
-            }
+            this.parseModuleConfigFile(digester, url);
         }
 
         return config;
     }
 
     protected Digester initConfigDigester() throws ServletException {
-
-        // :FIXME: Where can ServletException be thrown?
-
         // Create a new Digester instance with standard capabilities
         Digester configDigester = new Digester();
         configDigester.setNamespaceAware(true);
-        configDigester.setValidating(false);
+        configDigester.setValidating(this.isValidating());
         configDigester.setUseContextClassLoader(true);
         configDigester.addRuleSet(new ConfigRuleSet());
 
         for (int i = 0; i < registrations.length; i += 2) {
             URL url = this.getClass().getResource(registrations[i + 1]);
+
             if (url != null) {
                 configDigester.register(registrations[i], url.toString());
             }
@@ -173,16 +153,19 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
     }
 
     private void addRuleSets(Digester configDigester) throws ServletException {
-
         String rulesets = getServletConfig().getInitParameter("rulesets");
+
         if (rulesets == null) {
             rulesets = "";
         }
 
         rulesets = rulesets.trim();
-        String ruleset = null;
+
+        String ruleset;
+
         while (rulesets.length() > 0) {
             int comma = rulesets.indexOf(",");
+
             if (comma < 0) {
                 ruleset = rulesets.trim();
                 rulesets = "";
@@ -197,6 +180,7 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
             try {
                 RuleSet instance = (RuleSet) RequestUtils.applicationInstance(ruleset);
+
                 configDigester.addRuleSet(instance);
             } catch (Exception e) {
                 log.error("Exception configuring custom Digester RuleSet", e);
@@ -205,35 +189,41 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
         }
     }
 
-    protected void parseModuleConfigFile(Digester digester, String path) throws UnavailableException {
+    /**
+     * <p>
+     * Check the status of the <code>validating</code> initialization parameter.
+     * </p>
+     * 
+     * @return true if the module Digester should validate.
+     */
+    private boolean isValidating() {
+        boolean validating = true;
+        String value = getServletConfig().getInitParameter("validating");
 
+        if ("false".equalsIgnoreCase(value) || "no".equalsIgnoreCase(value) || "n".equalsIgnoreCase(value)
+                || "0".equalsIgnoreCase(value)) {
+            validating = false;
+        }
+
+        return validating;
+    }
+
+    protected void parseModuleConfigFile(Digester digester, URL url) throws UnavailableException {
         InputStream input = null;
+
         try {
-            URL url = getServletContext().getResource(path);
-
-            // If the config isn't in the servlet context, try the class loader
-            // which allows the config files to be stored in a jar
-            if (url == null) {
-                url = getClass().getResource(path);
-            }
-
-            if (url == null) {
-                String msg = getActionServlet().getInternal().getMessage("configMissing", path);
-                log.error(msg);
-                throw new UnavailableException(msg);
-            }
-
             InputSource is = new InputSource(url.toExternalForm());
-            input = url.openStream();
+            URLConnection conn = url.openConnection();
+
+            conn.setUseCaches(false);
+            conn.connect();
+            input = conn.getInputStream();
             is.setByteStream(input);
             digester.parse(is);
-
-        } catch (MalformedURLException e) {
-            handleConfigException(path, e);
         } catch (IOException e) {
-            handleConfigException(path, e);
+            handleConfigException(url.toString(), e);
         } catch (SAXException e) {
-            handleConfigException(path, e);
+            handleConfigException(url.toString(), e);
         } finally {
             if (input != null) {
                 try {
@@ -246,10 +236,75 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
     }
 
     private void handleConfigException(String path, Exception e) throws UnavailableException {
-
         String msg = getActionServlet().getInternal().getMessage("configParse", path);
+
         log.error(msg, e);
         throw new UnavailableException(msg);
+    }
+
+    protected List splitAndResolvePaths(String paths) throws ServletException {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+
+        if (loader == null) {
+            loader = this.getClass().getClassLoader();
+        }
+
+        ArrayList resolvedUrls = new ArrayList();
+
+        URL resource;
+        String path = null;
+
+        try {
+            // Process each specified resource path
+            while (paths.length() > 0) {
+                resource = null;
+
+                int comma = paths.indexOf(',');
+
+                if (comma >= 0) {
+                    path = paths.substring(0, comma).trim();
+                    paths = paths.substring(comma + 1);
+                } else {
+                    path = paths.trim();
+                    paths = "";
+                }
+
+                if (path.length() < 1) {
+                    break;
+                }
+
+                if (path.charAt(0) == '/') {
+                    resource = getServletContext().getResource(path);
+                }
+
+                if (resource == null) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("Unable to locate " + path + " in the servlet context, " + "trying classloader.");
+                    }
+
+                    Enumeration e = loader.getResources(path);
+
+                    if (!e.hasMoreElements()) {
+                        String msg = getActionServlet().getInternal().getMessage("configMissing", path);
+
+                        log.error(msg);
+                        throw new UnavailableException(msg);
+                    } else {
+                        while (e.hasMoreElements()) {
+                            resolvedUrls.add(e.nextElement());
+                        }
+                    }
+                } else {
+                    resolvedUrls.add(resource);
+                }
+            }
+        } catch (MalformedURLException e) {
+            handleConfigException(path, e);
+        } catch (IOException e) {
+            handleConfigException(path, e);
+        }
+
+        return resolvedUrls;
     }
 
 }

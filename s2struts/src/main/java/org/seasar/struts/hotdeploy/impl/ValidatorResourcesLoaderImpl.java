@@ -15,11 +15,9 @@
  */
 package org.seasar.struts.hotdeploy.impl;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -99,55 +97,52 @@ public class ValidatorResourcesLoaderImpl implements ValidatorResourcesLoader {
      *             if we cannot initialize these resources
      */
     protected ValidatorResources initResources(String pathnames) throws IOException, ServletException {
-
-        if (pathnames == null || pathnames.length() <= 0) {
+        if ((pathnames == null) || (pathnames.length() <= 0)) {
             return null;
         }
+
         StringTokenizer st = new StringTokenizer(pathnames, RESOURCE_DELIM);
 
-        List streamList = new ArrayList();
+        List urlList = new ArrayList();
+
         try {
             while (st.hasMoreTokens()) {
                 String validatorRules = st.nextToken().trim();
+
                 if (log.isInfoEnabled()) {
                     log.info("Loading validation rules file from '" + validatorRules + "'");
                 }
 
-                InputStream input = getServletContext().getResourceAsStream(validatorRules);
+                URL input = getServletContext().getResource(validatorRules);
 
-                // If the config isn't in the servlet context, try the class loader
-                // which allows the config files to be stored in a jar
+                // If the config isn't in the servlet context, try the class
+                // loader which allows the config files to be stored in a jar
                 if (input == null) {
-                    input = getClass().getResourceAsStream(validatorRules);
+                    input = getClass().getResource(validatorRules);
                 }
 
                 if (input != null) {
-                    BufferedInputStream bis = new BufferedInputStream(input);
-                    streamList.add(bis);
+                    urlList.add(input);
                 } else {
                     throw new ServletException("Skipping validation rules file from '" + validatorRules
-                            + "'.  No stream could be opened.");
+                            + "'.  No url could be located.");
                 }
             }
-            int streamSize = streamList.size();
-            InputStream[] streamArray = new InputStream[streamSize];
-            for (int streamIndex = 0; streamIndex < streamSize; streamIndex++) {
-                InputStream is = (InputStream) streamList.get(streamIndex);
-                streamArray[streamIndex] = is;
+
+            int urlSize = urlList.size();
+            String[] urlArray = new String[urlSize];
+
+            for (int urlIndex = 0; urlIndex < urlSize; urlIndex++) {
+                URL url = (URL) urlList.get(urlIndex);
+
+                urlArray[urlIndex] = url.toExternalForm();
             }
 
-            return new ValidatorResources(streamArray);
+            return new ValidatorResources(urlArray);
         } catch (SAXException sex) {
             log.error("Skipping all validation", sex);
             throw new ServletException(sex);
-        } finally {
-            Iterator streamIterator = streamList.iterator();
-            while (streamIterator.hasNext()) {
-                InputStream is = (InputStream) streamIterator.next();
-                is.close();
-            }
         }
-
     }
 
 }
