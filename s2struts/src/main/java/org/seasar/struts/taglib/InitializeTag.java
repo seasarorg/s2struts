@@ -20,9 +20,11 @@ import org.seasar.struts.pojo.MethodBinding;
 
 /**
  * @author Satoshi Kimura
+ * @author Kazuya Sugimoto
  */
 public class InitializeTag extends BaseTag {
     private String action;
+    private boolean skipPage = false;
 
     public String getAction() {
         return this.action;
@@ -33,13 +35,34 @@ public class InitializeTag extends BaseTag {
     }
 
     public int doStartTag() {
+
+        boolean isCommited = this.pageContext.getResponse().isCommitted();
+        
         // In case of Tomcat4.1, HttpServletRequest is set again,
         // because of the different HttpServletRequest for JSP and Servlet.
         SingletonS2ContainerFactory.getContainer().getExternalContext().setRequest(this.pageContext.getRequest());
 
         MethodBinding methodBinding = new MethodBinding(this.action);
         methodBinding.invoke();
+        
+        if(isCommited != this.pageContext.getResponse().isCommitted()) {
+            
+            skipPage = true;
+        }
+        
         return SKIP_BODY;
+    }
+    
+    public int doEndTag() {
+        
+        if(skipPage) {
+            
+            return SKIP_PAGE;
+            
+        } else {
+            
+            return EVAL_PAGE;
+        }
     }
 
 }
