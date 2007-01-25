@@ -137,12 +137,12 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
 
     private void registerValidations(ModuleConfig config) {
         // Create Forms.
+        ValidatorResources currentResources = getValidatorResources(config);
         FormSet formSet = new FormSet();
-        ValidatorResources resources = getValidatorResources(config);
-        
+
         FormBeanConfig[] formConfigs = config.findFormBeanConfigs();
         for (int i = 0; i < formConfigs.length; i++) {
-            if (!registeredValidation(resources, formConfigs[i])) {
+            if (!registeredValidation(currentResources, formConfigs[i])) {
                 Class clazz = ClassUtil.forName(formConfigs[i].getType());
                 String name = formConfigs[i].getName();
                 Form form = this.validationCreator.createForm(config, clazz, name);
@@ -155,11 +155,13 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
                 }
             }
         }
-        
+
         // Initialize ValidatorResources
         if (formSet.getForms().size() != 0) {
+            ValidatorResources resources = new ValidatorResources();
             resources.addFormSet(formSet);
             resources.process();
+            addValidatorResources(config, resources);
         }
     }
 
@@ -167,9 +169,23 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
         return (resources.getForm(Locale.getDefault(), formConfig.getName()) != null);
     }
 
+    private void addValidatorResources(ModuleConfig config, ValidatorResources resources) {
+        CompositeValidatorResources compositeResources = new CompositeValidatorResources();
+        ValidatorResources current = getValidatorResources(config);
+
+        compositeResources.addResources(current);
+        compositeResources.addResources(resources);
+
+        setValidatorResources(config, compositeResources);
+    }
+
     private ValidatorResources getValidatorResources(ModuleConfig config) {
         return (ValidatorResources) this.servletContext
                 .getAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix());
+    }
+
+    private void setValidatorResources(ModuleConfig config, ValidatorResources resources) {
+        this.servletContext.setAttribute(ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix(), resources);
     }
 
 }

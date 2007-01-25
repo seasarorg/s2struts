@@ -43,7 +43,6 @@ public class OndemandGetFormInterceptor extends AbstractInterceptor {
     }
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        ValidatorResources resources = (ValidatorResources) invocation.getThis();
         String formKey;
         if (invocation.getArguments().length == 2) {
             formKey = (String) invocation.getArguments()[1];
@@ -63,6 +62,7 @@ public class OndemandGetFormInterceptor extends AbstractInterceptor {
             }
 
             // initialize form...
+            ValidatorResources resources = new ValidatorResources();
             FormSet formSet = new FormSet();
             formSet.addForm(form);
             resources.addFormSet(formSet);
