@@ -40,7 +40,6 @@ import org.apache.struts.config.ModuleConfigFactory;
 import org.apache.struts.util.RequestUtils;
 import org.seasar.framework.log.Logger;
 import org.seasar.struts.hotdeploy.ModuleConfigLoader;
-import org.seasar.struts.hotdeploy.ReloadFindActionConfigInterceptor;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -50,7 +49,7 @@ import org.xml.sax.SAXException;
  */
 public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
-    private static final Logger log = Logger.getLogger(ReloadFindActionConfigInterceptor.class);
+    private static final Logger log = Logger.getLogger(ModuleConfigLoaderImpl.class);
 
     public ModuleConfig load(String prefix) throws ServletException {
         ModuleConfig moduleConfig;

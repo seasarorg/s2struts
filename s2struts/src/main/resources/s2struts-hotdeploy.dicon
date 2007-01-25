@@ -123,4 +123,8 @@
 			</component>
 		</aspect>
 	</component>
+
+	<component name="chainConfigLoader"             class="org.seasar.struts.hotdeploy.impl.ChainConfigLoaderImpl">
+		<aspect>traceInterceptor</aspect>
+	</component>
 </components>
