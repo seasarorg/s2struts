@@ -127,10 +127,10 @@
 
 <!-- ===================================== Controller Configuration -->
 
+    <controller catalog="s2struts"/>
+<!--
     <controller
        processorClass="org.seasar.struts.processor.S2RequestProcessor"/>
-<!--
-    <controller catalog="s2struts"/>
 
     <controller
        processorClass="org.seasar.struts.processor.S2TilesRequestProcessor"/>
