@@ -24,7 +24,8 @@ import org.seasar.struts.pojo.MethodBinding;
  */
 public class InitializeTag extends BaseTag {
     private String action;
-    private boolean skipPage = false;
+    private static String SKIP_PAGE_CONTEXT =
+        "org.seasar.struts.taglib.InitializeTag.SKIP_PAGE";
 
     public String getAction() {
         return this.action;
@@ -45,22 +46,29 @@ public class InitializeTag extends BaseTag {
         MethodBinding methodBinding = new MethodBinding(this.action);
         methodBinding.invoke();
         
+        Boolean skipPage = new Boolean(false);
+
         if(isCommited != this.pageContext.getResponse().isCommitted()) {
-            
-            skipPage = true;
+
+                skipPage = new Boolean(true);
         }
-        
+
+        this.pageContext.setAttribute(SKIP_PAGE_CONTEXT, skipPage);
+
         return SKIP_BODY;
     }
     
     public int doEndTag() {
-        
-        if(skipPage) {
-            
+
+        Boolean skipPage = 
+            (Boolean) this.pageContext.getAttribute(SKIP_PAGE_CONTEXT);
+
+        if(skipPage.booleanValue()) {
+
             return SKIP_PAGE;
-            
+
         } else {
-            
+
             return EVAL_PAGE;
         }
     }
