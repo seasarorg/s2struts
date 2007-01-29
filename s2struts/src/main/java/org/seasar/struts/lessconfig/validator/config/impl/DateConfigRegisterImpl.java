@@ -15,7 +15,6 @@
  */
 package org.seasar.struts.lessconfig.validator.config.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.validator.Field;
@@ -39,7 +38,7 @@ public class DateConfigRegisterImpl implements ConfigRegister {
         if (StringUtil.isEmpty(pattern)) {
             pattern = this.defaultPattern;
         }
-        String strictStr = getString(parameter.get("strict"));
+        String strictStr = (String) parameter.get("strict");
         boolean strict = this.defaultStrict;
         if (!StringUtil.isEmpty(strictStr)) {
             strict = BooleanConversionUtil.toPrimitiveBoolean(strictStr);
@@ -53,13 +52,6 @@ public class DateConfigRegisterImpl implements ConfigRegister {
         }
         var.setValue(pattern);
         field.addVar(var);
-    }
-
-    private String getString(Object obj) {
-        if (obj instanceof List) {
-            return (String) ((List) obj).get(0);
-        }
-        return (String) obj;
     }
 
     public void setPattern(String pattern) {
