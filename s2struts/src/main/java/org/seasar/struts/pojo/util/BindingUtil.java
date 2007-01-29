@@ -36,6 +36,7 @@ import org.seasar.struts.bean.impl.IndexedPropertyDescImpl;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandler;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandlerFactory;
+import org.seasar.struts.util.ModuleConfigUtil;
 import org.seasar.struts.util.RequestUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
