@@ -15,6 +15,9 @@
  */
 package org.seasar.struts.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +25,6 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.util.ModuleUtils;
-import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * 
@@ -45,7 +47,7 @@ public class ModuleConfigUtil {
         if (config == null) {
             return null;
         }
-        
+
         FormBeanConfig beanConfig = config.findFormBeanConfig(beanName);
         if (beanConfig == null) {
             return null;
@@ -60,5 +62,27 @@ public class ModuleConfigUtil {
         }
         return null;
     }
-    
+
+    public static ActionConfig[] findActionConfigsForFormBeanName(String beanName) {
+        ModuleConfig config = ModuleConfigUtil.getModuleConfig();
+        if (config == null) {
+            return new ActionConfig[0];
+        }
+
+        FormBeanConfig beanConfig = config.findFormBeanConfig(beanName);
+        if (beanConfig == null) {
+            return new ActionConfig[0];
+        }
+
+        List result = new ArrayList();
+        ActionConfig[] actionConfigs = config.findActionConfigs();
+        for (int i = 0; i < actionConfigs.length; i++) {
+            ActionConfig actionConfig = actionConfigs[i];
+            if (beanConfig.getName().equals(actionConfig.getName())) {
+                result.add(actionConfig);
+            }
+        }
+        return (ActionConfig[]) result.toArray(new ActionConfig[result.size()]);
+    }
+
 }
