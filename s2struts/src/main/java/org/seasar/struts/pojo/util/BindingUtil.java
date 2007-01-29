@@ -24,6 +24,7 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.config.ActionConfig;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
@@ -196,7 +197,33 @@ public class BindingUtil {
         if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
             return mapping;
         }
-        return (ActionMapping) ModuleConfigUtil.findActionConfigForFormBeanName(propertyName);
+
+        //
+        // FormBeanに対して複数のActionMappingが登録されている場合
+        // すべてのScopeが一致していた場合は、最初の1つのActionMappingを返却し
+        // Exportするための情報として利用する
+        // Scopeが異なる場合は、Scopeの設定優先順位は request > session としているため
+        // requestスコープのActionMappingを優先して返却し
+        // Exportするための情報として利用する
+        //
+        ActionMapping result = null;
+        ActionConfig[] configs = ModuleConfigUtil.findActionConfigsForFormBeanName(propertyName);
+        if (configs.length == 0) {
+            return null;
+        }
+
+        result = (ActionMapping) configs[0];
+        for (int i = 1; i < configs.length; i++) {
+            if (!(result.getScope().equals(configs[i].getScope()))) {
+                if (result.getScope().equals("request")) {
+                    return result;
+                } else {
+                    return (ActionMapping) configs[i];
+                }
+            }
+        }
+
+        return result;
     }
 
     private static boolean isActionFormProperty(String propertyName, ActionMapping mapping) {
