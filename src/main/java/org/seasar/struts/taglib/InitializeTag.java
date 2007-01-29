@@ -16,16 +16,18 @@
 package org.seasar.struts.taglib;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.processor.MethodBinding;
 
 /**
  * @author Satoshi Kimura
+ * @author Kazuya Sugimoto
  */
 public class InitializeTag extends BaseTag {
     private String action;
+
+    private static String SKIP_PAGE_CONTEXT = "org.seasar.struts.taglib.InitializeTag.SKIP_PAGE";
 
     public String getAction() {
         return this.action;
@@ -34,16 +36,43 @@ public class InitializeTag extends BaseTag {
     public void setAction(String action) {
         this.action = action;
     }
-    
-    public int doStartTag() throws JspException {
+
+    public int doStartTag() {
+
+        boolean isCommited = this.pageContext.getResponse().isCommitted();
+
         // In case of Tomcat4.1, HttpServletRequest is set again,
         // because of the different HttpServletRequest for JSP and Servlet.
         SingletonS2ContainerFactory.getContainer().setRequest(
                 (HttpServletRequest) this.pageContext.getRequest());
-        
+
         MethodBinding methodBinding = new MethodBinding(this.action);
         methodBinding.invoke();
+
+        Boolean skipPage = new Boolean(false);
+
+        if (isCommited != this.pageContext.getResponse().isCommitted()) {
+
+            skipPage = new Boolean(true);
+        }
+
+        this.pageContext.setAttribute(SKIP_PAGE_CONTEXT, skipPage);
+
         return SKIP_BODY;
+    }
+
+    public int doEndTag() {
+
+        Boolean skipPage = (Boolean) this.pageContext.getAttribute(SKIP_PAGE_CONTEXT);
+
+        if (skipPage.booleanValue()) {
+
+            return SKIP_PAGE;
+
+        } else {
+
+            return EVAL_PAGE;
+        }
     }
 
 }
