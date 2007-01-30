@@ -20,6 +20,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.seasar.struts.annotation.tiger.BoolType;
+
 /**
  * 
  * @author Katsuhiko Nagashima
@@ -33,6 +35,6 @@ public @interface Args {
 
     String bundle() default "";
 
-    boolean resource() default true;
+    BoolType resource() default BoolType.UNDEFINED;
 
 }

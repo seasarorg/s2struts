@@ -15,23 +15,27 @@
  */
 package org.seasar.struts.annotation.tiger;
 
-
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public enum BoolType {
 
-    TRUE,
-    FALSE,
-    UNDEFINED;
-    
+    TRUE, FALSE, UNDEFINED;
+
     public Boolean getBoolean() {
         if (this == UNDEFINED) {
             return null;
         }
         return (this == TRUE);
+    }
+
+    public String toString() {
+        if (this == UNDEFINED) {
+            return null;
+        }
+        return super.toString();
     }
 
 }

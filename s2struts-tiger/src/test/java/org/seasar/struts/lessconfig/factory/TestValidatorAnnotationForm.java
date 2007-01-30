@@ -3,6 +3,7 @@ package org.seasar.struts.lessconfig.factory;
 import java.util.Date;
 
 import org.apache.struts.upload.FormFile;
+import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.CreditCardType;
@@ -33,17 +34,17 @@ public class TestValidatorAnnotationForm {
     }
 
     @Required
-    @Args(keys = "Arg", resource = false)
+    @Args(keys = "Arg", resource = BoolType.FALSE)
     public void setArg(String arg) {
     }
 
     @Required
-    @Args(keys = "Arg2", bundle="myapp", resource = false)
+    @Args(keys = "Arg2", bundle = "myapp", resource = BoolType.FALSE)
     public void setArg2(String arg) {
     }
 
     @Required
-    @Args(keys = "Arg0, Arg1, Arg2", resource = false)
+    @Args(keys = "Arg0, Arg1, Arg2", resource = BoolType.FALSE)
     public void setArgs(String args) {
     }
 
@@ -54,71 +55,76 @@ public class TestValidatorAnnotationForm {
 
     @Required
     @Message(name = "required", key = "myrequired")
-    @Args(keys = "Message", resource = false)
+    @Args(keys = "Message", resource = BoolType.FALSE)
     public void setMessage(String message) {
     }
 
     @Required
-    @Message(name = "required", key = "my2required", bundle = "myapp", resource = false)
-    @Args(keys = "Message2", resource = false)
+    @Message(name = "required", key = "my2required", bundle = "myapp", resource = BoolType.FALSE)
+    @Args(keys = "Message2", resource = BoolType.FALSE)
     public void setMessage2(String message) {
     }
 
     @Required
-    @Args(keys = "Required", resource = false)
+    @Args(keys = "Required", resource = BoolType.FALSE)
     public void setRequired(String required) {
     }
 
     @IntegerType
-    @Args(keys = "Integer", resource = false)
+    @Args(keys = "Integer", resource = BoolType.FALSE)
     public void setInteger(String integer) {
     }
 
     @DateType(pattern = "yyyyMMdd")
-    @Args(keys = "Date", resource = false)
+    @Args(keys = "Date", resource = BoolType.FALSE)
     public void setDate(String date) {
     }
 
-    @DateType(pattern = "yyyyMMdd", strict = true)
-    @Args(keys = "StrictDate", resource = false)
+    @DateType(pattern = "yyyyMMdd", strict = BoolType.TRUE)
+    @Args(keys = "StrictDate", resource = BoolType.FALSE)
     public void setStrictDate(String date) {
     }
 
     @CreditCardType
-    @Args(keys = "CreditCard", resource = false)
+    @Args(keys = "CreditCard", resource = BoolType.FALSE)
     public void setCreditCard(String creditCard) {
     }
 
     @Minlength(3)
     @Maxlength(5)
-    @Args(keys = "Length", resource = false)
+    @Args(keys = "Length", resource = BoolType.FALSE)
     public void setLength(String length) {
     }
 
     @Minbytelength(value = 3, charset = "ISO8859_1")
     @Maxbytelength(value = 5, charset = "ISO8859_1")
-    @Args(keys = "ByteLength", resource = false)
+    @Args(keys = "ByteLength", resource = BoolType.FALSE)
     public void setByteLength(String byteLength) {
     }
 
     @FloatRange(min = 5.0F, max = 10.1F)
-    @Args(keys = "Range", resource = false)
+    @Args(keys = "Range", resource = BoolType.FALSE)
     public void setRange(String range) {
     }
 
     @LongRange(min = 5, max = 10)
-    @Args(keys = "LongRange", resource = false)
+    @Args(keys = "LongRange", resource = BoolType.FALSE)
     public void setLongRange(String longRange) {
     }
 
     @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", messageKey = "comma")
-    @Args(keys = "Mask", resource = false)
+    @Args(keys = "Mask", resource = BoolType.FALSE)
     public void setMask(String mask) {
     }
 
     @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)")
-    @Args(keys = "Mask2", resource = false)
+    @Args(keys = "Mask2", resource = BoolType.FALSE)
     public void setMask2(String mask2) {
+    }
+
+    @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", messageKey = "comma", resource = BoolType.FALSE)
+    @Args(keys = "Mask3", resource = BoolType.FALSE)
+    public void setMask3(String mask3) {
     }
 
     @Required
@@ -126,15 +132,15 @@ public class TestValidatorAnnotationForm {
     @Maxlength(15)
     @Mask(pattern = "com$", messageKey = "mustendcom")
     @EmailType
-    @Args(keys = "mixValue", resource = false)
+    @Args(keys = "mixValue", resource = BoolType.FALSE)
     public void setMix(String mix) {
     }
 
-    @Args(keys = "Integer", resource = false)
+    @Args(keys = "Integer", resource = BoolType.FALSE)
     public void setAutoInteger(int integer) {
     }
 
-    @Args(keys = "Date", resource = false)
+    @Args(keys = "Date", resource = BoolType.FALSE)
     public void setAutoDate(Date date) {
     }
 
@@ -168,11 +174,11 @@ public class TestValidatorAnnotationForm {
     }
 
     @Required
-    @Args(keys = "Array", resource = false)
+    @Args(keys = "Array", resource = BoolType.FALSE)
     public void setArray(String[] array) {
     }
 
-    @Args(keys = "AutoArray", resource = false)
+    @Args(keys = "AutoArray", resource = BoolType.FALSE)
     public void setAutoArray(int[] autoArray) {
     }
 
@@ -187,7 +193,7 @@ public class TestValidatorAnnotationForm {
     }
 
     @Required
-    @Args(keys = "File", resource = false)
+    @Args(keys = "File", resource = BoolType.FALSE)
     public void setFile(FormFile file) {
     }
 

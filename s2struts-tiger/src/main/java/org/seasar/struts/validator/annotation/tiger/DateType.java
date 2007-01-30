@@ -20,6 +20,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.seasar.struts.annotation.tiger.BoolType;
+
 /**
  * 
  * @author Katsuhiko Nagashima
@@ -32,6 +34,6 @@ public @interface DateType {
 
     String pattern() default "";
 
-    boolean strict() default false;
+    BoolType strict() default BoolType.UNDEFINED;
 
 }
