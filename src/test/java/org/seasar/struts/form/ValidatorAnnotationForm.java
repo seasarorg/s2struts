@@ -121,6 +121,11 @@ public class ValidatorAnnotationForm {
     public void setMask2(String mask2) {
     }
 
+    @Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", messageKey = "comma", resource = false)
+    @Args(keys = "Mask3", resource = false)
+    public void setMask3(String mask3) {
+    }
+
     @Required
     @Minlength(10)
     @Maxlength(15)
