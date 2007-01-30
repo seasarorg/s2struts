@@ -137,6 +137,13 @@ public class ValidatorAnnotationForm {
     }
     
     /**
+     * @org.seasar.struts.validator.annotation.backport175.Mask(pattern = "(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", messageKey = "comma", resource = false)
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="Mask", resource=false)
+     */
+    public void setMask3(String mask3) {
+    }
+
+    /**
      * @org.seasar.struts.validator.annotation.backport175.Required
      * @org.seasar.struts.validator.annotation.backport175.Minlength(10)
      * @org.seasar.struts.validator.annotation.backport175.Maxlength(15)
