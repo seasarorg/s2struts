@@ -141,6 +141,13 @@ public class ValidatorAnnotationForm {
     public void setMask2(String mask2) {
     }
 
+    public static final String mask3_VALIDATOR = "mask, pattern='(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)', messageKey=comma, resource=false";
+
+    public static final String mask3_VALIDATOR_ARGS = "Mask3, resource=false";
+
+    public void setMask3(String mask3) {
+    }
+
     public static final String mix_VALIDATOR = "required";
 
     public static final String mix_VALIDATOR_0 = "minlength, value=10";

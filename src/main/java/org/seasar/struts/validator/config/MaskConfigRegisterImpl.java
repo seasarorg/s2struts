@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Msg;
 import org.apache.commons.validator.Var;
+import org.seasar.framework.util.BooleanConversionUtil;
 import org.seasar.framework.util.StringUtil;
 
 /**
@@ -31,6 +32,11 @@ public class MaskConfigRegisterImpl implements ConfigRegister {
     public void register(Field field, Map parameter) {
         String pattern = (String) parameter.get("pattern");
         String messageKey = (String) parameter.get("messageKey");
+        String resourceStr = (String) parameter.get("resource");
+        boolean resource = true;
+        if (!StringUtil.isEmpty(resourceStr)) {
+            resource = BooleanConversionUtil.toPrimitiveBoolean(resourceStr);
+        }
 
         Var var = new Var();
         var.setName("mask");
@@ -41,6 +47,7 @@ public class MaskConfigRegisterImpl implements ConfigRegister {
             Msg message = new Msg();
             message.setName("mask");
             message.setKey(messageKey);
+            message.setResource(resource);
             field.addMsg(message);
         }
     }
