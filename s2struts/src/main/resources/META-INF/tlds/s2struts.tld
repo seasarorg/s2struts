@@ -820,7 +820,7 @@
         </attribute>
         <attribute>
             <name>action</name>
-            <required>false</required>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -833,16 +833,20 @@
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <!--
         <attribute>
             <name>forward</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        -->
+        <!--
         <attribute>
             <name>href</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        -->
         <attribute>
             <name>indexed</name>
             <required>false</required>
@@ -928,11 +932,13 @@
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <!--
         <attribute>
             <name>page</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        -->
         <attribute>
             <name>paramId</name>
             <required>false</required>
