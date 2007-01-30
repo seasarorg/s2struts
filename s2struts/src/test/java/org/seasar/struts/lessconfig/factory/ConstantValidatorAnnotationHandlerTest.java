@@ -177,6 +177,7 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("mask", field.getDepends());
         assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
         assertEquals("comma", field.getMsg("mask"));
+        assertTrue(field.getMessage("mask").isResource());
     }
 
     public void testMask2() {
@@ -185,6 +186,15 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("mask", field.getDepends());
         assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
         assertNull(field.getMessage("mask"));
+    }
+
+    public void testMask3() {
+        Field field = form.getField("mask3");
+        assertNotNull(field);
+        assertEquals("mask", field.getDepends());
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertEquals("comma", field.getMsg("mask"));
+        assertFalse(field.getMessage("mask").isResource());
     }
 
     public void testMix() {

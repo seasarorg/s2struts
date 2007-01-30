@@ -129,6 +129,8 @@ public class TestValidatorAnnotationForm {
 
     public static final String mask_VALIDATOR = "mask, pattern='(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)', messageKey=comma";
 
+    public static final String mask_VALIDATOR_ARGS = "Mask, resource=false";
+
     public void setMask(String mask) {
     }
 
@@ -137,6 +139,13 @@ public class TestValidatorAnnotationForm {
     public static final String mask2_VALIDATOR_ARGS = "Mask2, resource=false";
 
     public void setMask2(String mask2) {
+    }
+
+    public static final String mask3_VALIDATOR = "mask, pattern='(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)', messageKey=comma, resource=false";
+
+    public static final String mask3_VALIDATOR_ARGS = "Mask3, resource=false";
+
+    public void setMask3(String mask3) {
     }
 
     public static final String mix_VALIDATOR = "required";
