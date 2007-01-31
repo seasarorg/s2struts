@@ -17,6 +17,7 @@ package org.seasar.struts.examples.validate;
 
 import java.io.Serializable;
 
+import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.ByteType;
 import org.seasar.struts.validator.annotation.tiger.CreditCardType;
@@ -89,7 +90,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(2)
     @ByteType
-    @Args(keys = "Byte", resource = false)
+    @Args(keys = "Byte", resource = BoolType.FALSE)
     public void setByte(String b) {
         byte_ = b;
     }
@@ -99,7 +100,7 @@ public class ValidateDto implements Serializable {
     }
 
     @ValidateOrder(3)
-    @Args(keys = "Short", resource = false)
+    @Args(keys = "Short", resource = BoolType.FALSE)
     public void setShort(short s) {
         short_ = s;
     }
@@ -110,7 +111,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(4)
     @IntegerType
-    @Args(keys = "Integer", resource = false)
+    @Args(keys = "Integer", resource = BoolType.FALSE)
     public void setInteger(String integer) {
         integer_ = integer;
     }
@@ -121,7 +122,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(5)
     @LongType
-    @Args(keys = "Long", resource = false)
+    @Args(keys = "Long", resource = BoolType.FALSE)
     public void setLong(String l) {
         long_ = l;
     }
@@ -132,7 +133,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(6)
     @FloatType
-    @Args(keys = "Float", resource = false)
+    @Args(keys = "Float", resource = BoolType.FALSE)
     public void setFloat(String f) {
         float_ = f;
     }
@@ -143,7 +144,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(7)
     @DoubleType
-    @Args(keys = "Double", resource = false)
+    @Args(keys = "Double", resource = BoolType.FALSE)
     public void setDouble(String d) {
         double_ = d;
     }
@@ -155,7 +156,7 @@ public class ValidateDto implements Serializable {
     @ValidateOrder(8)
     @Minlength(3)
     @Maxlength(5)
-    @Args(keys = "Length", resource = false)
+    @Args(keys = "Length", resource = BoolType.FALSE)
     public void setLength(String length) {
         length_ = length;
     }
@@ -167,7 +168,7 @@ public class ValidateDto implements Serializable {
     @ValidateOrder(9)
     @Minbytelength(value = 3, charset = "ISO8859_1")
     @Maxbytelength(value = 5, charset = "ISO8859_1")
-    @Args(keys = "Length2", resource = false)
+    @Args(keys = "Length2", resource = BoolType.FALSE)
     public void setLength2(String length2) {
         length2_ = length2;
     }
@@ -178,7 +179,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(10)
     @FloatRange(min = 5.0F, max = 10.1F)
-    @Args(keys = "Range", resource = false)
+    @Args(keys = "Range", resource = BoolType.FALSE)
     public void setRange(String range) {
         range_ = range;
     }
@@ -189,7 +190,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(11)
     @DateType
-    @Args(keys = "Date", resource = false)
+    @Args(keys = "Date", resource = BoolType.FALSE)
     public void setDate(String date) {
         date_ = date;
     }
@@ -200,7 +201,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(12)
     @EmailType
-    @Args(keys = "Email", resource = false)
+    @Args(keys = "Email", resource = BoolType.FALSE)
     public void setEmail(String email) {
         email_ = email;
     }
@@ -211,7 +212,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(13)
     @UrlType
-    @Args(keys = "URL", resource = false)
+    @Args(keys = "URL", resource = BoolType.FALSE)
     public void setUrl(String url) {
         url_ = url;
     }
@@ -222,7 +223,7 @@ public class ValidateDto implements Serializable {
 
     @ValidateOrder(14)
     @CreditCardType
-    @Args(keys = "CreditCard", resource = false)
+    @Args(keys = "CreditCard", resource = BoolType.FALSE)
     public void setCreditCard(String creditCard) {
         creditCard_ = creditCard;
     }
@@ -237,7 +238,7 @@ public class ValidateDto implements Serializable {
     @Maxlength(15)
     @Mask(pattern = "com$", messageKey = "mustendcom")
     @EmailType
-    @Args(keys = "mixValue", resource = false)
+    @Args(keys = "mixValue", resource = BoolType.FALSE)
     public void setMix(String mix) {
         mix_ = mix;
     }

@@ -17,6 +17,7 @@ package org.seasar.struts.examples.indexed;
 
 import java.io.Serializable;
 
+import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.Required;
 
@@ -31,7 +32,7 @@ public class ChildDto implements Serializable {
     }
 
     @Required
-    @Args(keys = "child", resource = false)
+    @Args(keys = "child", resource = BoolType.FALSE)
     public void setValue(String value) {
         this.value = value;
     }

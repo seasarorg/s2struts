@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.Required;
 
@@ -40,7 +41,7 @@ public class IndexedDto implements Serializable {
     public ChildDto[] getChildren() {
         return children.toArray(new ChildDto[children.size()]);
     }
-    
+
     public void setChildren(ChildDto[] children) {
         this.children = Arrays.asList(children);
     }
@@ -57,7 +58,7 @@ public class IndexedDto implements Serializable {
     }
 
     @Required
-    @Args(keys = "array", resource = false)
+    @Args(keys = "array", resource = BoolType.FALSE)
     public void setArray(String[] array) {
         this.array = array;
     }
@@ -71,7 +72,7 @@ public class IndexedDto implements Serializable {
     }
 
     @Required
-    @Args(keys = "list", resource = false)
+    @Args(keys = "list", resource = BoolType.FALSE)
     public void setValues(String[] values) {
         this.values = Arrays.asList(values);
     }
@@ -91,7 +92,7 @@ public class IndexedDto implements Serializable {
         values.add(index, value);
     }
 
-	@Override
+    @Override
     public String toString() {
         StringBuffer buf = new StringBuffer("[");
         buf.append(children).append(",");

@@ -71,9 +71,6 @@
   <!-- Standard Action Servlet Configuration (with debugging) -->
   <servlet>
     <servlet-name>action</servlet-name>
-    <!--
-    <servlet-class>org.seasar.struts.servlet.S2ActionServlet</servlet-class>
-    -->
     <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
     <init-param>
       <param-name>config</param-name>
@@ -81,9 +78,9 @@
     </init-param>
     <init-param>
       <param-name>chainConfig</param-name>
-      <param-value>s2struts-pojo-chain-config.xml, org/apache/struts/chain/chain-config.xml</param-value>
+      <param-value>s2struts-chain-config.xml, org/apache/struts/chain/chain-config.xml</param-value>
       <!--
-      <param-value>s2struts-pojo-chain-config.xml, org/apache/struts/tiles/chain-config.xml</param-value>
+      <param-value>s2struts-chain-config.xml, org/apache/struts/tiles/chain-config.xml</param-value>
       -->
     </init-param>
     <init-param>
