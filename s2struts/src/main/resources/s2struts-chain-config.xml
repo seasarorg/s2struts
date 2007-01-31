@@ -1,35 +1,4 @@
-<?xml version="1.0" ?>
-
-
-<!--
-
- Copyright 2002,2004 The Apache Software Foundation.
- 
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
- 
-      http://www.apache.org/licenses/LICENSE-2.0
- 
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-
--->
-
-
-<!--
-    This file contains definitions of the standard Chain Of Responsibility
-    chains that emulate Struts 1.2 processing functionality.  These chains
-    are defined in a catalog named "struts" so that the application can
-    use the default catalog for its own purposes, without any potential for
-    name clashes.
-
-    $Id: chain-config.xml 420001 2006-07-07 22:32:10Z husted $
--->
-
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <catalog name="s2struts">
 
@@ -115,7 +84,10 @@
                 name="servlet-standard-preprocess"
                 optional="true"/>
 
-
+        <!-- HttpServletRequest を MultipartRequestWrapper にラップされた場合
+             MultipartRequestWrapper を S2Container に設定します。
+             この command は S2Container と連携するために必須です。
+        -->
         <command
                 className="org.seasar.struts.processor.commands.SetHttpServletRequest"/>
 
@@ -153,7 +125,14 @@
         <command
                 className="org.apache.struts.chain.commands.servlet.AuthorizeAction"/>
 
-
+        <!-- BeanValidatorForm でラップされている又はラップされてない POJO Form を
+             入れ替え可能な S2BeanValidatorForm にラップしなおします。
+             この command は POJO Action, POJO Form を利用する場合、必要です。
+             POJO Action, POJO Form を利用しない場合は不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.WrapActionForm"/>
+                
         <!-- Create (if needed) the ActionForm for this request -->
         <command
                 className="org.apache.struts.chain.commands.CreateActionForm"/>
@@ -163,6 +142,29 @@
         <command
                 className="org.apache.struts.chain.commands.servlet.PopulateActionForm"/>
 
+        <!-- S2Struts Checkbox タグを処理します。
+             この command は S2Struts Checkbox タグを利用する場合必要です。
+             S2Struts Checkbox タグを利用しない場合は不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.PopulateCheckboxProperty"/>
+
+        <!-- S2Struts Cancel タグ, Submit タグ等の cancel 属性を処理します。
+             この command は S2Struts Cancel タグ, Submit タグ等の cancel 属性を利用する場合、
+             必要です。
+             S2Struts Cancel タグ, Submit タグ等の cancel 属性を利用しない場合は不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.SetActionConfigCancelled"/>
+
+        <!-- S2Struts Page タグ, 無設定による ActionConfig input 自動設定を処理します。
+             この command は S2Struts Page タグ,
+             無設定による ActionConfig input 自動設定を利用する場合必要です。
+             S2Struts Page タグ, 無設定による ActionConfig input 自動設定を利用しない場合は
+             不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.SetActionConfigInput"/>
 
         <!-- Validate the ActionForm for this request -->
         <command
@@ -201,6 +203,24 @@
         <command
                 className="org.apache.struts.chain.commands.servlet.CreateAction"/>
         -->
+
+        <!-- MethodBinding を処理する Action を生成します。
+             この command は MethodBinding を利用する場合必要です。
+             MethodBinding を利用しない場合は不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.CreateMethodBindingAction"/>
+
+        <!-- POJO Action を処理する Action を生成します。
+             この command は POJO Action を利用する場合必要です。
+             POJO Action を利用しない場合は不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.CreatePojoAction"/>
+
+        <!-- S2Container から Action を取得します。
+             この command は S2Container と連携するために必須です。
+        -->
         <command
                 className="org.seasar.struts.processor.commands.S2CreateAction"/>
 
@@ -208,6 +228,16 @@
         <!-- Execute the Action for this request -->
         <command
                 className="org.apache.struts.chain.commands.servlet.ExecuteAction"/>
+
+        <!-- S2Struts Page タグ, 無設定によるActionConfig input自動設定で利用する
+             urlをSessionに確保します。
+             この command は S2Struts Page タグ,
+             無設定によるActionConfig input自動設定を利用する場合必要です。
+             S2Struts Page タグ, 無設定によるActionConfig input自動設定を利用しない場合は
+             不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.SetInputPathFromForward"/>
     </chain>
 
 </catalog>
