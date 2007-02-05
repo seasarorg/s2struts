@@ -96,7 +96,15 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
 
         Field newField = createField(field, propDesc, depends);
         registerMessage(newField, beanDesc, propDesc);
-        registerArgs(newField, beanDesc, propDesc);
+
+        if (hasArgsAnnotation(beanDesc, propDesc)) {
+            registerArgs(newField, beanDesc, propDesc);
+        } else if (hasArgAnnotation(beanDesc, propDesc)) {
+            registerArg(newField, beanDesc, propDesc);
+        } else {
+            registerDefaultArgs(newField, propDesc);
+        }
+
         registerConfig(newField, beanDesc, propDesc);
 
         form.addField(newField);
@@ -182,7 +190,13 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
 
     protected abstract void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
 
+    protected abstract boolean hasArgsAnnotation(BeanDesc beanDesc, PropertyDesc propDesc);
+
     protected abstract void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+
+    protected abstract boolean hasArgAnnotation(BeanDesc beanDesc, PropertyDesc propDesc);
+
+    protected abstract void registerArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
 
     protected abstract void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
 
@@ -251,6 +265,12 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         register.register(field, parameters);
     }
 
+    protected void executeArgConfigRegister(Field field, Map parameters) {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        ConfigRegister register = (ConfigRegister) container.getComponent("argConfigRegister");
+        register.register(field, parameters);
+    }
+
     protected void executeMessageConfigRegister(Field field, Map parameters) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ConfigRegister register = (ConfigRegister) container.getComponent("messageConfigRegister");
@@ -262,8 +282,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
     }
 
     protected String getValidatorName(Class clazz) {
-        String validatorName = CommonNamingRule
-                .decapitalizeName(ClassUtil.getShortClassName(clazz));
+        String validatorName = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(clazz));
         return validatorName.replaceFirst(VALIDATOR_TYPE_PREFIX_RE, "");
     }
 
@@ -272,6 +291,11 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         result.put("keys", propDesc.getPropertyName());
         result.put("resource", "false");
         return result;
+    }
+
+    protected void registerDefaultArgs(Field field, PropertyDesc propDesc) {
+        Map parameter = getDefaultArgsConfigParameter(propDesc);
+        executeArgsConfigRegister(field, parameter);
     }
 
 }

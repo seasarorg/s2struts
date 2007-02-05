@@ -28,6 +28,17 @@ public class TestValidatorAnnotationForm {
     public void setArg2(String arg) {
     }
 
+    public static final String arg3_VALIDATOR = "required";
+
+    public static final String arg3_VALIDATOR_ARG = "Arg3.1";
+
+    public static final String arg3_VALIDATOR_ARG_0 = "Arg3.2, bundle=myapp, resource=false";
+
+    public static final String arg3_VALIDATOR_ARG_1 = "Arg3.1-other, name=other, bundle=myapp, resource=false, position=0";
+
+    public void setArg3(String arg3) {
+    }
+
     public static final String args_VALIDATOR = "required";
 
     public static final String args_VALIDATOR_ARGS = "Arg0\n Arg1\n Arg2, resource=false";
