@@ -17,6 +17,7 @@ package org.seasar.struts.examples.validate;
 
 import java.io.Serializable;
 
+import org.seasar.struts.validator.annotation.tiger.Arg;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.ByteType;
 import org.seasar.struts.validator.annotation.tiger.CreditCardType;
@@ -30,6 +31,7 @@ import org.seasar.struts.validator.annotation.tiger.LongType;
 import org.seasar.struts.validator.annotation.tiger.Mask;
 import org.seasar.struts.validator.annotation.tiger.Maxbytelength;
 import org.seasar.struts.validator.annotation.tiger.Maxlength;
+import org.seasar.struts.validator.annotation.tiger.Message;
 import org.seasar.struts.validator.annotation.tiger.Minbytelength;
 import org.seasar.struts.validator.annotation.tiger.Minlength;
 import org.seasar.struts.validator.annotation.tiger.Required;
@@ -38,11 +40,14 @@ import org.seasar.struts.validator.annotation.tiger.ValidateOrder;
 
 /**
  * @author Satoshi Kimura
+ * @author Katsuhiko Nagashima
  */
 public class ValidateDto implements Serializable {
     private static final long serialVersionUID = -2918322782862139730L;
 
     private String required_;
+
+    private String requiredOtherMessage_;
 
     private String byte_ = "1111";
 
@@ -76,11 +81,24 @@ public class ValidateDto implements Serializable {
         return required_;
     }
 
-    @ValidateOrder(1)
+    @ValidateOrder(0)
     @Required
     @Args(keys = "validate.required")
     public void setRequired(String required) {
         required_ = required;
+    }
+
+    public String getRequiredOtherMessage() {
+        return requiredOtherMessage_;
+    }
+
+    @ValidateOrder(1)
+    @Required
+    @Message(name = "required", key = "errors.required.other")
+    @Args(args = { @Arg(key = "validate.required.other"), @Arg(key = "defaultArg!", resource = false),
+            @Arg(key = "requiredArg!", name = "required", resource = false, position = 1) })
+    public void setRequiredOtherMessage(String requiredOtherMessage) {
+        requiredOtherMessage_ = requiredOtherMessage;
     }
 
     public String getByte() {
