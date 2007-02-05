@@ -5,6 +5,7 @@ import java.util.Date;
 import org.apache.struts.upload.FormFile;
 import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.validator.annotation.tiger.Arg;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.CreditCardType;
 import org.seasar.struts.validator.annotation.tiger.DateType;
@@ -41,6 +42,12 @@ public class TestValidatorAnnotationForm {
     @Required
     @Args(keys = "Arg2", bundle = "myapp", resource = BoolType.FALSE)
     public void setArg2(String arg) {
+    }
+
+    @Required
+    @Args(args = { @Arg(key = "Arg3.1"), @Arg(key = "Arg3.2", bundle = "myapp", resource = BoolType.FALSE),
+            @Arg(key = "Arg3.1-other", name = "other", bundle = "myapp", resource = BoolType.FALSE, position = 0) })
+    public void setArg3(String arg3) {
     }
 
     @Required
@@ -152,10 +159,8 @@ public class TestValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = {
-                    @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }),
-            @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
             @Validator(name = "maxlength", vars = { @Variable(name = "maxlength", value = "3") }) })
     @Required
     @Args(keys = "form.message1")
@@ -163,10 +168,8 @@ public class TestValidatorAnnotationForm {
     }
 
     @ValidatorField(validators = {
-            @Validator(name = "intRange", vars = {
-                    @Variable(name = "min", value = "10"),
-                    @Variable(name = "max", value = "100") }),
-            @Validator(name = "integer"),
+            @Validator(name = "intRange", vars = { @Variable(name = "min", value = "10"),
+                    @Variable(name = "max", value = "100") }), @Validator(name = "integer"),
             @Validator(name = "maxlength", value = "3") })
     @Required
     @Args(keys = "form.message2")

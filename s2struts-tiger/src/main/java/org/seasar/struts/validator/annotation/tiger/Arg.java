@@ -29,14 +29,16 @@ import org.seasar.struts.annotation.tiger.BoolType;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Args {
+public @interface Arg {
 
-    String keys() default "";
+    String key();
+
+    String name() default "";
 
     String bundle() default "";
 
-    BoolType resource() default BoolType.UNDEFINED;
+    int position() default -1;
 
-    Arg[] args() default {};
+    BoolType resource() default BoolType.UNDEFINED;
 
 }
