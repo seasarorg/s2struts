@@ -48,6 +48,10 @@
 		<property name="bundle">null</property>
 		<property name="resource">true</property>
 	</component>
+	<component name="argConfigRegister"            class="org.seasar.struts.validator.config.ArgConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
 	<component name="messageConfigRegister"        class="org.seasar.struts.validator.config.MessageConfigRegisterImpl">
 		<property name="bundle">null</property>
 		<property name="resource">true</property>
