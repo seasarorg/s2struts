@@ -21,6 +21,8 @@
     
     <html:text m:id="required" property="required" styleClass="text" errorStyleClass="text-error"/>
 
+    <html:text m:id="requiredOtherMessage" property="requiredOtherMessage" styleClass="text" errorStyleClass="text-error"/>
+
     <html:text m:id="byte" property="byte" styleClass="text" errorStyleClass="text-error"/>
 
     <html:text m:id="short" property="short" styleClass="text" errorStyleClass="text-error"/>
