@@ -27,14 +27,16 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Args {
+public @interface Arg {
 
-    String keys() default "";
+    String key();
+
+    String name() default "";
 
     String bundle() default "";
 
-    boolean resource() default true;
+    int position() default -1;
 
-    Arg[] args() default {};
+    boolean resource() default true;
 
 }

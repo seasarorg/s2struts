@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.apache.struts.upload.FormFile;
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.validator.annotation.tiger.Arg;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.CreditCardType;
 import org.seasar.struts.validator.annotation.tiger.DateType;
@@ -40,6 +41,12 @@ public class ValidatorAnnotationForm {
     @Required
     @Args(keys = "Arg2", bundle = "myapp", resource = false)
     public void setArg2(String arg) {
+    }
+
+    @Required
+    @Args(args = { @Arg(key = "Arg3.1"), @Arg(key = "Arg3.2", bundle = "myapp", resource = false),
+            @Arg(key = "Arg3.1-other", name = "other", bundle = "myapp", resource = false, position = 0) })
+    public void setArg3(String arg3) {
     }
 
     @Required

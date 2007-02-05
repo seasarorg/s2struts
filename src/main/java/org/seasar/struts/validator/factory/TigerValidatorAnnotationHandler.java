@@ -24,6 +24,7 @@ import org.apache.commons.validator.Field;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.util.StringUtil;
+import org.seasar.struts.validator.annotation.tiger.Arg;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.Message;
 import org.seasar.struts.validator.annotation.tiger.NoValidate;
@@ -93,12 +94,23 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         }
 
         Annotation annotation = method.getAnnotation(Message.class);
-        if (annotation == null) {
-            return;
+        if (annotation != null) {
+            Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
+            executeMessageConfigRegister(field, parameter);
         }
-        Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
+    }
 
-        executeMessageConfigRegister(field, parameter);
+    protected boolean hasArgsAnnotation(BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.hasArgsAnnotation(beanDesc, propDesc);
+        }
+
+        Args args = method.getAnnotation(Args.class);
+        if (args == null) {
+            return false;
+        }
+        return (!StringUtil.isEmpty(args.keys()));
     }
 
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
@@ -108,16 +120,42 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             return;
         }
 
-        Map parameter = null;
         Annotation annotation = method.getAnnotation(Args.class);
         if (annotation != null) {
-            parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
+            Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
+            executeArgsConfigRegister(field, parameter);
         }
-        if (parameter == null) {
-            parameter = getDefaultArgsConfigParameter(propDesc);
+    }
+
+    protected boolean hasArgAnnotation(BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.hasArgsAnnotation(beanDesc, propDesc);
         }
 
-        executeArgsConfigRegister(field, parameter);
+        Args args = method.getAnnotation(Args.class);
+        if (args == null) {
+            return false;
+        }
+        return (args.args().length > 0);
+    }
+
+    protected void registerArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerArgs(field, beanDesc, propDesc);
+            return;
+        }
+
+        Args args = method.getAnnotation(Args.class);
+        if (args == null) {
+            return;
+        }
+
+        for (Arg arg : args.args()) {
+            Map parameter = TigerAnnotationConverter.getInstance().toMap(arg);
+            executeArgConfigRegister(field, parameter);
+        }
     }
 
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
