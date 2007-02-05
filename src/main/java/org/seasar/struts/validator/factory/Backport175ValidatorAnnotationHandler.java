@@ -93,12 +93,23 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         }
 
         Annotation annotation = Annotations.getAnnotation(Message.class, method);
-        if (annotation == null) {
-            return;
+        if (annotation != null) {
+            Map parameter = Backport175AnnotationConverter.getInstance().toMap(annotation);
+            executeMessageConfigRegister(field, parameter);
         }
-        Map parameter = Backport175AnnotationConverter.getInstance().toMap(annotation);
+    }
 
-        executeMessageConfigRegister(field, parameter);
+    protected boolean hasArgsAnnotation(BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.hasArgsAnnotation(beanDesc, propDesc);
+        }
+
+        Args args = (Args) Annotations.getAnnotation(Args.class, method);
+        if (args == null) {
+            return false;
+        }
+        return (!StringUtil.isEmpty(args.keys()));
     }
 
     protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
@@ -112,12 +123,39 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         Annotation annotation = Annotations.getAnnotation(Args.class, method);
         if (annotation != null) {
             parameter = Backport175AnnotationConverter.getInstance().toMap(annotation);
+            executeArgsConfigRegister(field, parameter);
         }
-        if (parameter == null) {
-            parameter = getDefaultArgsConfigParameter(propDesc);
+    }
+
+    protected boolean hasArgAnnotation(BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            return super.hasArgsAnnotation(beanDesc, propDesc);
         }
 
-        executeArgsConfigRegister(field, parameter);
+        Args args = (Args) Annotations.getAnnotation(Args.class, method);
+        if (args == null) {
+            return false;
+        }
+        return (args.args().length > 0);
+    }
+
+    protected void registerArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+        Method method = getMethodForValidation(propDesc);
+        if (!hasAnnotation(method)) {
+            super.registerArgs(field, beanDesc, propDesc);
+            return;
+        }
+
+        Args args = (Args) Annotations.getAnnotation(Args.class, method);
+        if (args == null) {
+            return;
+        }
+
+        for (int i = 0; i < args.args().length; i++) {
+            Map parameter = Backport175AnnotationConverter.getInstance().toMap(args.args()[i]);
+            executeArgConfigRegister(field, parameter);
+        }
     }
 
     protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
@@ -136,8 +174,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
             if (target != null) {
                 String validatorName = getValidatorName(type);
                 if (hasConfigRegister(validatorName)) {
-                    Map parameter = Backport175AnnotationConverter.getInstance().toMap(
-                            annotations[i]);
+                    Map parameter = Backport175AnnotationConverter.getInstance().toMap(annotations[i]);
                     executeConfigRegister(field, validatorName, parameter);
                 }
             }

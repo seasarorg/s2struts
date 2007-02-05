@@ -16,15 +16,16 @@
 package org.seasar.struts.validator.annotation.backport175;
 
 /**
- * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
-public interface Args {
+public interface Arg {
+
+    String key();
 
     /**
      * @org.codehaus.backport175.DefaultValue ("")
      */
-    String keys();
+    String name();
 
     /**
      * @org.codehaus.backport175.DefaultValue ("")
@@ -32,12 +33,13 @@ public interface Args {
     String bundle();
 
     /**
+     * @org.codehaus.backport175.DefaultValue (-1)
+     */
+    int position();
+
+    /**
      * @org.codehaus.backport175.DefaultValue (true)
      */
     boolean resource();
-    
-    /**
-     * @org.codehaus.backport175.DefaultValue ()
-     */
-    Arg[] args();
+
 }
