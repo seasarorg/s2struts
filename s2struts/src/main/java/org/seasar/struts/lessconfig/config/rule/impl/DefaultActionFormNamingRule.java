@@ -31,6 +31,10 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory
  */
 public class DefaultActionFormNamingRule implements ActionFormNamingRule {
 
+    protected static final String DTO_SUFFIX = "Dto";
+
+    protected static final String FORM_SUFFIX = "Form";
+
     private S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
@@ -43,14 +47,14 @@ public class DefaultActionFormNamingRule implements ActionFormNamingRule {
         }
 
         Class formClass = null;
-        if (name.endsWith("Dto")) {
-            String componentName = name.substring(0, name.length() - 3) + "Form";
+        if (name.endsWith(DTO_SUFFIX)) {
+            String componentName = name.substring(0, name.length() - DTO_SUFFIX.length()) + FORM_SUFFIX;
             if (container.hasComponentDef(componentName)) {
                 formClass = container.getComponentDef(componentName).getComponentClass();
             }
         }
-        if (name.endsWith("Form")) {
-            String componentName = name.substring(0, name.length() - 4) + "Dto";
+        if (name.endsWith(FORM_SUFFIX)) {
+            String componentName = name.substring(0, name.length() - FORM_SUFFIX.length()) + DTO_SUFFIX;
             if (container.hasComponentDef(componentName)) {
                 formClass = container.getComponentDef(componentName).getComponentClass();
             }

@@ -15,95 +15,30 @@
  */
 package org.seasar.struts.lessconfig.config.rule.impl;
 
-import org.apache.struts.config.ModuleConfig;
-import org.seasar.framework.container.S2Container;
-import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.framework.convention.NamingConvention;
-import org.seasar.framework.util.ClassUtil;
 import org.seasar.framework.util.StringUtil;
-import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 
 /**
  * 
  * @author Katsuhiko Nagashima
  * 
  */
-public class QualifiedActionPathNamingRule implements ActionPathNamingRule {
+public class QualifiedActionPathNamingRule extends DefaultActionPathNamingRule {
 
-    private NamingConvention namingConvention;
+    protected static final char PATH_SEPARATOR = '/';
 
-    public void setNamingConvention(NamingConvention namingConvention) {
-        this.namingConvention = namingConvention;
+    protected String fromPathToActionName(String path) {
+        String componentName = super.fromPathToActionName(path);
+        componentName = componentName.replace(PATH_SEPARATOR, PACKAGE_SEPARATOR);
+        int pos = componentName.lastIndexOf(PACKAGE_SEPARATOR);
+        if (pos == -1) {
+            return StringUtil.decapitalize(componentName);
+        }
+        return componentName.substring(0, pos + 1) + StringUtil.decapitalize(componentName.substring(pos + 1));
     }
 
-    private S2Container getContainer() {
-        return SingletonS2ContainerFactory.getContainer();
-    }
-
-    public Class toComponentClass(ModuleConfig config, String path) {
-        S2Container container = getContainer();
-        String componentName = config.getPrefix() + path;
-        if (container.hasComponentDef(componentName)) {
-            return container.getComponentDef(componentName).getComponentClass();
-        }
-
-        componentName = path;
-        if (container.hasComponentDef(componentName)) {
-            return container.getComponentDef(componentName).getComponentClass();
-        }
-
-        if (path.startsWith(this.namingConvention.getViewRootPath())
-                && path.endsWith(this.namingConvention.getViewExtension())) {
-
-            componentName = this.namingConvention.fromPathToActionName(path);
-            if (container.hasComponentDef(componentName)) {
-                Class clazz = container.getComponentDef(componentName).getComponentClass();
-                if (!clazz.getName().endsWith("Impl")) {
-                    return clazz;
-                }
-
-                //
-                // 複数のActionインターフェースが実装されている場合の対応
-                // pathから求めたコンポーネント名と一致したインターフェースか
-                // packageを含まないコンポーネント名と一致したインターフェースを
-                // Actionインターフェースとする
-                //
-                Class[] interfaces = clazz.getInterfaces();
-                for (int i = 0; i < interfaces.length; i++) {
-                    String interfaceName = StringUtil.decapitalize(ClassUtil.getShortClassName(interfaces[i]));
-                    if (componentName.equals(interfaceName)) {
-                        return interfaces[i];
-                    }
-                    if (componentName.endsWith("_" + interfaceName)) {
-                        return interfaces[i];
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    public String toActionPathName(Class actionClass) {
-        S2Container container = getContainer();
-
-        if (!container.hasComponentDef(actionClass)) {
-            return null;
-        }
-
-        String componentName = container.getComponentDef(actionClass).getComponentName();
-        if (componentName == null) {
-            return null;
-        }
-
-        if (componentName.startsWith("/")) {
-            return componentName;
-        }
-
-        if (componentName.endsWith(this.namingConvention.getActionSuffix())) {
-            String result = this.namingConvention.fromActionNameToPath(componentName);
-            return result;
-        }
-        return null;
+    protected String fromActionNameToPath(String actionName) {
+        String name = super.fromActionNameToPath(actionName);
+        return name.replace(PACKAGE_SEPARATOR, PATH_SEPARATOR);
     }
 
 }

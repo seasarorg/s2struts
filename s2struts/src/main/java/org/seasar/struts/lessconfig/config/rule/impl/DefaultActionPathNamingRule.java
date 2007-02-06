@@ -29,6 +29,16 @@ import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
  */
 public class DefaultActionPathNamingRule implements ActionPathNamingRule {
 
+    protected static final String ACTION_SUFFIX = "Action";
+
+    protected static final String IMPL_SUFFIX = "Impl";
+
+    protected static final String VIEW_PREFIX = "/";
+
+    protected static final String VIEW_ROOT_PATH = "" + VIEW_PREFIX;
+
+    protected static final char PACKAGE_SEPARATOR = '_';
+
     private S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
@@ -46,31 +56,40 @@ public class DefaultActionPathNamingRule implements ActionPathNamingRule {
             return container.getComponentDef(componentName).getComponentClass();
         }
 
-        componentName = path.substring(1) + "Action";
-        if (container.hasComponentDef(componentName)) {
-            Class clazz = container.getComponentDef(componentName).getComponentClass();
-            if (!clazz.getName().endsWith("Impl")) {
-                return clazz;
-            }
-
-            //
-            // 複数のActionインターフェースが実装されている場合の対応
-            // pathから求めたコンポーネント名と一致したインターフェースか
-            // packageを含まないコンポーネント名と一致したインターフェースを
-            // Actionインターフェースとする
-            //
-            Class[] interfaces = clazz.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++) {
-                String interfaceName = StringUtil.decapitalize(ClassUtil.getShortClassName(interfaces[i]));
-                if (componentName.equals(interfaceName)) {
-                    return interfaces[i];
+        if (path.startsWith(VIEW_ROOT_PATH)) {
+            componentName = fromPathToActionName(path);
+            if (container.hasComponentDef(componentName)) {
+                Class clazz = container.getComponentDef(componentName).getComponentClass();
+                if (!clazz.getName().endsWith(IMPL_SUFFIX)) {
+                    return clazz;
                 }
-                if (componentName.endsWith("_" + interfaceName)) {
-                    return interfaces[i];
+
+                //
+                // 複数のActionインターフェースが実装されている場合の対応
+                // pathから求めたコンポーネント名と一致したインターフェースか
+                // packageを含まないコンポーネント名と一致したインターフェースを
+                // Actionインターフェースとする
+                //
+                Class[] interfaces = clazz.getInterfaces();
+                for (int i = 0; i < interfaces.length; i++) {
+                    String interfaceName = StringUtil.decapitalize(ClassUtil.getShortClassName(interfaces[i]));
+                    if (componentName.equals(interfaceName)) {
+                        return interfaces[i];
+                    }
+                    if (componentName.endsWith(PACKAGE_SEPARATOR + interfaceName)) {
+                        return interfaces[i];
+                    }
                 }
             }
         }
         return null;
+    }
+
+    protected String fromPathToActionName(String path) {
+        if (!path.startsWith(VIEW_ROOT_PATH)) {
+            throw new IllegalArgumentException(path);
+        }
+        return path.substring(VIEW_ROOT_PATH.length()) + ACTION_SUFFIX;
     }
 
     public String toActionPathName(Class actionClass) {
@@ -85,12 +104,22 @@ public class DefaultActionPathNamingRule implements ActionPathNamingRule {
             return null;
         }
 
-        if (componentName.startsWith("/")) {
+        if (componentName.startsWith(VIEW_PREFIX)) {
             return componentName;
         }
 
-        String result = componentName.replaceFirst("Action$", "");
-        return "/" + result;
+        if (componentName.endsWith(ACTION_SUFFIX)) {
+            return fromActionNameToPath(componentName);
+        }
+        return VIEW_PREFIX + componentName;
+    }
+
+    protected String fromActionNameToPath(String actionName) {
+        if (!actionName.endsWith(ACTION_SUFFIX)) {
+            throw new IllegalArgumentException(actionName);
+        }
+        String name = actionName.substring(0, actionName.length() - ACTION_SUFFIX.length());
+        return VIEW_ROOT_PATH + name;
     }
 
 }
