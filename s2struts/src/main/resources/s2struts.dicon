@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="s2struts">
@@ -11,41 +11,10 @@
 	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
 	<component name="classRegister"                class="org.seasar.struts.action.impl.ClassRegisterImpl"/>
 
-	<!-- New RequestProcessor -->
 	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
 		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
 		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
 		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
-	</component>
-	<component name="requestProcessor"             class="org.seasar.struts.processor.InternalS2RequestProcessor" instance="prototype">
-		<aspect pointcut="processMultipart">
-			<component class="org.seasar.struts.processor.ProcessMultipartInterceptor"/>
-		</aspect>
-		<aspect pointcut="processActionForm">
-			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
-		</aspect>
-		<aspect pointcut="processValidate">
-			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessCancelledValidateInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessSetInputPathValidateInterceptor"/></arg></initMethod>
-			</component>
-		</aspect>
-		<aspect pointcut="processPopulate">
-			<component class="org.seasar.struts.pojo.processor.ProcessCheckboxPopulateInterceptor"/>
-		</aspect>
-		<aspect pointcut="processActionCreate">
-			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
-				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessMethodBindingActionCreatorInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessPojoActionCreateInterceptor"/></arg></initMethod>
-				<initMethod name="add"><arg><component class="org.seasar.struts.processor.ProcessActionCreateInterceptor"/></arg></initMethod>
-			</component>
-		</aspect>
-		<aspect pointcut="processActionPerform">
-			<component class="org.seasar.struts.pojo.processor.ProcessSetInputPathActionPerformInterceptor"/>
-		</aspect>
-		<aspect pointcut="doForward">
-			<component class="org.seasar.struts.pojo.processor.DoSetInputPathForwardInterceptor"/>
-		</aspect>
 	</component>
 
 	<!-- Lessconfig Components  -->

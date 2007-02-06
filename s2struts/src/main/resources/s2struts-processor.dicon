@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components namespace="s2struts">
+	<include path="s2struts.dicon"/>
+
+	<!-- RequestProcessor -->
+	<component name="requestProcessor"             class="org.seasar.struts.processor.InternalS2RequestProcessor" instance="prototype">
+		<aspect pointcut="processMultipart">
+			<component class="org.seasar.struts.processor.ProcessMultipartInterceptor"/>
+		</aspect>
+		<aspect pointcut="processActionForm">
+			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
+		</aspect>
+		<aspect pointcut="processValidate">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessCancelledValidateInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessSetInputPathValidateInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+		<aspect pointcut="processPopulate">
+			<component class="org.seasar.struts.pojo.processor.ProcessCheckboxPopulateInterceptor"/>
+		</aspect>
+		<aspect pointcut="processActionCreate">
+			<component class="org.seasar.framework.aop.interceptors.InterceptorChain">
+				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessMethodBindingActionCreatorInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.pojo.processor.ProcessPojoActionCreateInterceptor"/></arg></initMethod>
+				<initMethod name="add"><arg><component class="org.seasar.struts.processor.ProcessActionCreateInterceptor"/></arg></initMethod>
+			</component>
+		</aspect>
+		<aspect pointcut="processActionPerform">
+			<component class="org.seasar.struts.pojo.processor.ProcessSetInputPathActionPerformInterceptor"/>
+		</aspect>
+		<aspect pointcut="doForward">
+			<component class="org.seasar.struts.pojo.processor.DoSetInputPathForwardInterceptor"/>
+		</aspect>
+	</component>
+</components>
