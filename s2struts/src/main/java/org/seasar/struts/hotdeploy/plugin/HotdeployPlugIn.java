@@ -82,7 +82,7 @@ public class HotdeployPlugIn implements PlugIn {
 
         ReloadMessageResourcesFactory reloadResourcesFactory = (ReloadMessageResourcesFactory) container
                 .getComponent(ReloadMessageResourcesFactory.class);
-        MessageResourcesConfig mrcs[] = config.findMessageResourcesConfigs();
+        MessageResourcesConfig[] mrcs = config.findMessageResourcesConfigs();
         for (int i = 0; i < mrcs.length; i++) {
             MessageResources resources = (MessageResources) context.getAttribute(mrcs[i].getKey() + config.getPrefix());
             MessageResources reloadResources = reloadResourcesFactory.createResources(resources);

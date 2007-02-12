@@ -40,7 +40,7 @@ public class StringDynaActionFormClass extends DynaActionFormClass {
         }
         try {
             super.introspect(formBeanConfig);
-        } catch (Exception e) {
+        } catch (Exception ignore) {
             // ignore
         }
     }

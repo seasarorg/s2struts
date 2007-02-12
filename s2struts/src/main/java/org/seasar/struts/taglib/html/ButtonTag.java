@@ -57,8 +57,9 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
         if (super.property != null) {
             results.append(" name=\"");
             results.append(super.property);
-            if (this.indexed)
+            if (this.indexed) {
                 prepareIndex(results, null);
+            }
             results.append("\"");
         }
         if (super.accesskey != null) {

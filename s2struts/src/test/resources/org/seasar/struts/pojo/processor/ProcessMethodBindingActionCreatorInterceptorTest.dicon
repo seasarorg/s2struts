@@ -3,6 +3,7 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.impl.S2StrutsContextImpl" instance="session"/>
+	<component name="s2strutsApplContext"          class="org.seasar.struts.context.impl.S2StrutsApplContextImpl"/>
 
 	<component class="org.seasar.struts.processor.MockRequestProcessor" instance="prototype">
 		<aspect pointcut="processActionCreate">

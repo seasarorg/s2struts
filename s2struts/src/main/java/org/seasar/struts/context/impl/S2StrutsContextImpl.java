@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,12 @@
  */
 package org.seasar.struts.context.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.util.Base64Util;
 import org.seasar.struts.Constants;
-import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.context.S2StrutsContext;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
@@ -38,20 +34,6 @@ public class S2StrutsContextImpl implements S2StrutsContext {
     private String currentPath;
 
     private String previousPath;
-
-    private Map methodBindingExpressions = new HashMap();
-
-    private Map cancelActions = new HashMap();
-
-    public void clear(ContentsType type) {
-        if (type == ContentsType.MethodBindingExpression) {
-            this.methodBindingExpressions = new HashMap();
-        } else if (type == ContentsType.CancelAction) {
-            this.cancelActions = new HashMap();
-        }
-    }
-
-    //
 
     public void setPath(String path) {
         if (!path.equals(this.currentPath)) {
@@ -86,30 +68,28 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         return (getRequest().getAttribute(Constants.PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK) == null);
     }
 
-    //
+    private static HttpServletRequest getRequest() {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        return S2StrutsContextUtil.getRequest(container);
+    }
 
     public String getMethodBindingExpression(String mappingName, String key, String value) {
-        return (String) this.methodBindingExpressions.get(mappingName + key + value);
+        // TODO Auto-generated method stub
+        return null;
     }
-
-    public void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression) {
-        this.methodBindingExpressions.put(mappingName + key + value, methodBindingExpression);
-    }
-
-    //
 
     public Boolean isCancelAction(String mappingName, String key, String value) {
-        return (Boolean) this.cancelActions.get(mappingName + key + value);
+        // TODO Auto-generated method stub
+        return null;
     }
 
     public void setCancelAction(String mappingName, String key, String value) {
-        this.cancelActions.put(mappingName + key + value, Boolean.TRUE);
+        // TODO Auto-generated method stub
+        
     }
 
-    //
-
-    private static final HttpServletRequest getRequest() {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
-        return S2StrutsContextUtil.getRequest(container);
+    public void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression) {
+        // TODO Auto-generated method stub
+        
     }
 }

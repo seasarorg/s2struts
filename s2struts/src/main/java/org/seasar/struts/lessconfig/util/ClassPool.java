@@ -131,7 +131,7 @@ public class ClassPool {
         }
     }
 
-    private static final Class forResourceName(String classResourceName) {
+    private static Class forResourceName(String classResourceName) {
         String className = classResourceName.substring(0, classResourceName.length()
                 - CLASS_FILE_EXTENTION_LENGTH);
         className = className.replace(FILE_SEPARATOR, '.');

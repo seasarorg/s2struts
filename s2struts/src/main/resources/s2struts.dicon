@@ -6,6 +6,7 @@
 
 	<component name="messageFacade"                class="org.seasar.struts.pojo.impl.MessageFacadeImpl" instance="request"/>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.impl.S2StrutsContextImpl" instance="session"/>
+	<component name="s2strutsApplContext"          class="org.seasar.struts.context.impl.S2StrutsApplContextImpl"/>
 
 	<component name="componentNameCreator"         class="org.seasar.struts.action.impl.ComponentNameCreatorImpl"/>
 	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
@@ -29,7 +30,7 @@
 	<component name="validatorCreator"             class="org.seasar.struts.lessconfig.autoregister.impl.ValidationCreatorImpl"/>
 	<component name="strutsConfigRegister"         class="org.seasar.struts.lessconfig.autoregister.impl.StrutsConfigRegisterImpl"/>
 
-    <!-- Validator ConfigRegister Components -->
+	<!-- Validator ConfigRegister Components -->
 	<component name="argsConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.ArgsConfigRegisterImpl">
 		<property name="bundle">null</property>
 		<property name="resource">true</property>

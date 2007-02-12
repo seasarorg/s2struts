@@ -21,25 +21,69 @@ import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Validator;
 import org.apache.commons.validator.ValidatorAction;
 import org.apache.commons.validator.util.ValidatorUtils;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.validator.Resources;
+import org.seasar.framework.container.ComponentNotFoundRuntimeException;
+import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.util.ClassUtil;
+import org.seasar.struts.validator.exception.ValidatorException;
 
 /**
  * @author Satoshi Kimura
  */
 public class FieldChecks extends org.apache.struts.validator.FieldChecks {
-	private static final long serialVersionUID = -8929484039023790851L;
+    private static final long serialVersionUID = -8929484039023790851L;
 
-	/**
+    public static boolean validateCustom(Object bean, ValidatorAction validatorAction, Field field,
+            ActionMessages errors, Validator validator, HttpServletRequest request) {
+        if (bean == null) {
+            return true;
+        }
+        try {
+            validate(bean, field);
+        } catch (ValidatorException e) {
+            errors.add(field.getKey(), new ActionMessage(e.getResourceKey(), e.getMessageArgs()));
+        } catch (Exception e) {
+            addError(errors, field, validator, validatorAction, request);
+            return false;
+        }
+
+        return true;
+    }
+
+    private static void validate(Object bean,Field field) throws ValidatorException {
+        org.seasar.struts.validator.Validator validator = getValidator(bean,field);
+        validator.validate(bean);
+    }
+
+    private static org.seasar.struts.validator.Validator getValidator(Object bean, Field field) {
+        String componentKey = field.getVarValue("componentKey");
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        try {
+            return (org.seasar.struts.validator.Validator) container.getComponent(componentKey);
+        } catch (ComponentNotFoundRuntimeException e) {
+            return (org.seasar.struts.validator.Validator) container.getComponent(ClassUtil.forName(componentKey));
+        }
+    }
+
+    /**
      * Checks if the field's length of byte is less than or equal to the maximum value. A <code>Null</code> will be
      * considered an error.
      * 
-     * @param bean The bean validation is being performed on.
-     * @param validatorAction The <code>ValidatorAction</code> that is currently being performed.
-     * @param field The <code>Field</code> object associated with the current field being validated.
-     * @param errors The <code>ActionMessages</code> object to add errors to if any validation errors occur.
-     * @param validator The <code>Validator</code> instance, used to access other field values.
-     * @param request Current request object.
+     * @param bean
+     *            The bean validation is being performed on.
+     * @param validatorAction
+     *            The <code>ValidatorAction</code> that is currently being performed.
+     * @param field
+     *            The <code>Field</code> object associated with the current field being validated.
+     * @param errors
+     *            The <code>ActionMessages</code> object to add errors to if any validation errors occur.
+     * @param validator
+     *            The <code>Validator</code> instance, used to access other field values.
+     * @param request
+     *            Current request object.
      * @return True if stated conditions met.
      */
     public static boolean validateMaxByteLength(Object bean, ValidatorAction validatorAction, Field field,

@@ -86,7 +86,7 @@ public class ValidatorResourcesLoaderImpl implements ValidatorResourcesLoader {
     /**
      * Delimitter for Validator resources.
      */
-    private final static String RESOURCE_DELIM = ",";
+    private static final String RESOURCE_DELIM = ",";
 
     /**
      * Initialize the validator resources for this module.

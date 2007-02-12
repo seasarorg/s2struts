@@ -59,13 +59,13 @@ public class IndexedPropertyDescImpl implements IndexedPropertyDesc {
         Method[] getMethods = new Method[0];
         try {
             getMethods = this.beanDesc.getMethods("get" + methodName);
-        } catch (MethodNotFoundRuntimeException e) {
+        } catch (MethodNotFoundRuntimeException ignore) {
             // ignore
         }
         Method[] setMethods = new Method[0];
         try {
             setMethods = this.beanDesc.getMethods("set" + methodName);
-        } catch (MethodNotFoundRuntimeException e) {
+        } catch (MethodNotFoundRuntimeException ignore) {
             // ignore
         }
 

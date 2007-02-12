@@ -65,8 +65,8 @@ public abstract class AbstractAnnotationConverter implements AnnotationConverter
         return result;
     }
 
-    abstract protected Method[] getAnnotationMethods(Object obj);
+    protected abstract Method[] getAnnotationMethods(Object obj);
 
-    abstract protected boolean isInstanceOfAnnotation(Object obj);
+    protected abstract boolean isInstanceOfAnnotation(Object obj);
 
 }

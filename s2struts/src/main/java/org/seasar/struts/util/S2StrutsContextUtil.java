@@ -24,6 +24,7 @@ import org.apache.struts.config.ForwardConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.context.ContentsType;
+import org.seasar.struts.context.S2StrutsApplContext;
 import org.seasar.struts.context.S2StrutsContext;
 
 /**
@@ -33,7 +34,7 @@ import org.seasar.struts.context.S2StrutsContext;
 public abstract class S2StrutsContextUtil {
 
     public static void clear(ContentsType type) {
-        getContext().clear(type);
+        getApplContext().clear(type);
     }
 
     //
@@ -62,27 +63,31 @@ public abstract class S2StrutsContextUtil {
 
     public static void setMethodBindingExpression(String mappingName, String key, String value,
             String methodBindingExpression) {
-        getContext().setMethodBindingExpression(mappingName, key, value, methodBindingExpression);
+        getApplContext().setMethodBindingExpression(mappingName, key, value, methodBindingExpression);
     }
 
     public static String getMethodBindingExpression(String mappingName, String key, String value) {
-        return getContext().getMethodBindingExpression(mappingName, key, value);
+        return getApplContext().getMethodBindingExpression(mappingName, key, value);
     }
 
     //
 
     public static Boolean isCancelAction(String mappingName, String key, String value) {
-        return getContext().isCancelAction(mappingName, key, value);
+        return getApplContext().isCancelAction(mappingName, key, value);
     }
 
     public static void setCancelAction(String mappingName, String key, String value) {
-        getContext().setCancelAction(mappingName, key, value);
+        getApplContext().setCancelAction(mappingName, key, value);
     }
 
     //
 
     private static S2StrutsContext getContext() {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);
+    }
+
+    private static S2StrutsApplContext getApplContext() {
+        return (S2StrutsApplContext) getContainer().getComponent(S2StrutsApplContext.class);
     }
 
     private static S2Container getContainer() {

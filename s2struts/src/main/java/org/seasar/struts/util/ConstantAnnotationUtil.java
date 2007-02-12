@@ -13,11 +13,16 @@ public abstract class ConstantAnnotationUtil {
 		super();
 	}
 
-	public static boolean isConstantAnnotationStringField(Field field) {
-		final int modifiers = field.getModifiers();
-		return Modifier.isFinal(modifiers) && Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers)
-				&& field.getType().equals(String.class);
-	}
+    public static boolean isConstantAnnotationStringField(Field field) {
+        final int modifiers = field.getModifiers();
+        return Modifier.isFinal(modifiers) && Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers)
+                && field.getType().equals(String.class);
+    }
+    public static boolean isConstantAnnotationClassField(Field field) {
+        final int modifiers = field.getModifiers();
+        return Modifier.isFinal(modifiers) && Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers)
+                && field.getType().equals(Class.class);
+    }
 
     public static boolean isConstantAnnotationIntField(Field field) {
         final int modifiers = field.getModifiers();
