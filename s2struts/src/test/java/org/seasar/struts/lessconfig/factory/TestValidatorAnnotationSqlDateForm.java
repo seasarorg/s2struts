@@ -14,4 +14,8 @@ public class TestValidatorAnnotationSqlDateForm {
     public void setAutoSqlDate(Date autoSqlDate) {
     }
 
+    public Date getAutoSqlDate() {
+        return null;
+    }
+
 }

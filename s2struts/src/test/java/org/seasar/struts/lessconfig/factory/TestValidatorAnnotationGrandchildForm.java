@@ -9,12 +9,24 @@ public class TestValidatorAnnotationGrandchildForm {
     public void setRequired(String required) {
     }
 
+    public String getRequired() {
+        return null;
+    }
+
     public static final String integer_VALIDATOR_ARGS = "GrandchildInteger, resource=false";
 
     public void setInteger(int integer) {
     }
 
+    public int getInteger() {
+        return 1;
+    }
+
     public void setNoValidate(String noValidate) {
+    }
+
+    public String getNoValidate() {
+        return null;
     }
 
 }
