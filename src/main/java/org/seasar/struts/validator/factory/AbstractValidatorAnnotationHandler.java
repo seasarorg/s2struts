@@ -129,19 +129,9 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
             paramType = paramType.getComponentType();
         }
 
-        if (paramType.equals(Byte.class) || paramType.equals(Byte.TYPE)) {
+        if (Date.class.isAssignableFrom(paramType)) {
             return false;
-        } else if (Date.class.isAssignableFrom(paramType)) {
-            return false;
-        } else if (paramType.equals(Double.class) || paramType.equals(Double.TYPE)) {
-            return false;
-        } else if (paramType.equals(Float.class) || paramType.equals(Float.TYPE)) {
-            return false;
-        } else if (paramType.equals(Integer.class) || paramType.equals(Integer.TYPE)) {
-            return false;
-        } else if (paramType.equals(Long.class) || paramType.equals(Long.TYPE)) {
-            return false;
-        } else if (paramType.equals(Short.class) || paramType.equals(Short.TYPE)) {
+        } else if (Number.class.isAssignableFrom(paramType)) {
             return false;
         } else if (paramType.equals(String.class)) {
             return false;
@@ -203,7 +193,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
     // -----------------------------------------------------------------------
 
     protected boolean hasMethodForValidation(PropertyDesc propDesc) {
-        return propDesc.hasWriteMethod();
+        return (propDesc.hasWriteMethod() && propDesc.hasReadMethod());
     }
 
     protected Method getMethodForValidation(PropertyDesc propDesc) {
@@ -282,8 +272,7 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
     }
 
     protected String getValidatorName(Class clazz) {
-        String validatorName = CommonNamingRule
-                .decapitalizeName(ClassUtil.getShortClassName(clazz));
+        String validatorName = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(clazz));
         return validatorName.replaceFirst(VALIDATOR_TYPE_PREFIX_RE, "");
     }
 
