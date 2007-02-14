@@ -6,9 +6,12 @@
 	<include path="aop.dicon"/>
 	<include path="dao.dicon"/>
 
-	<include condition="#ENV == 'product'" path="s2struts.dicon"/>
+	<!--
+	<include path="s2struts-processor.dicon"/>
+	-->
+	<include condition="#ENV != 'ut'" path="s2struts.dicon"/>
 	<include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/>
-	
+
 	<include path="org/seasar/struts/examples/dicon/Mod.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Add.dicon"/>
 	<include path="org/seasar/struts/examples/dicon/Subtract.dicon"/>
