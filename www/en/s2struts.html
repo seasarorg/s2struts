@@ -1772,11 +1772,18 @@ The substitute data used in the message is selected.
   </tr>
   <tr>
     <td>keys</td>
-      <td><center><center>O</center></center></td>
+      <td><center><center>X</center></center></td>
       <td><center>-</center></td>
       <td>This selects a substitute value used in a message.<br>
           Multiple values may be delimited by commas ",".<br>
           定数アノテーションで","で区切る方法については<a href="#ConstAnnotationCodicil">「定数アノテーションの補足」</a>を参照してください。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
   </tr>
   <tr>
     <td>resource</td>
@@ -1786,7 +1793,72 @@ The substitute data used in the message is selected.
           When true, it will use this as a resource key and corresponding values as a substitute parameter.<br>
           When false, it will simply use the value defined in keys as a substitute parameter.</td>
   </tr>
+  <tr>
+    <td>args</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>Argアノテーションで個別に置換パラメータを指定する場合に使用します。<br>
+      個別に置換パラメータを指定する場合は、keys、bundle、resourceを指定しないで下さい。</td>
+  </tr>
 </table>
+<h4>Arg</h4>
+<p>
+メッセージで使用される置換パラメータを個別に指定します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージで使用される置換パラメータを指定します。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>置換パラメータを使用するバリデータの名前を指定します。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keyで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値をメッセージとします。<br>
+      falseの場合はkeyで指定した値をそのままメッセージとします。</td>
+  </tr>
+  <tr>
+    <td>position</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>置換パラメータの位置を指定します。</td>
+  </tr>
+</table>
+<p></p>
+<p>
+定数アノテーションでは、以下のように プロパティー名_VALIDATOR_ARG で指定します。
+複数指定する場合は、定数名の最後にゼロからのINDEXをつけます。
+</p>
+<pre>
+    public static final String value_VALIDATOR_0 = "required";
+    public static final String value_VALIDATOR_1 = "integer";
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_0 = "form.value";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_1 = "form.value.def";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_2 = "form.value.req, name = required, position = 1";</font></b>
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+</pre>
 <h4>Message</h4>
 <p>
 デフォルトメッセージの代わりに個別のメッセージを表示したい場合に指定します。<br>
