@@ -1,5 +1,5 @@
 <project name="S2StrutsBackport175" default="dist" basedir=".">
-	<property name="ver" value="1.2.9-SNAPSHOT"/>
+	<property name="ver" value="1.2.9"/>
 
 	<target name="dist">
 		<mkdir dir="target"/>
