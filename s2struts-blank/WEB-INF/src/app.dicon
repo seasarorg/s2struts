@@ -6,6 +6,9 @@
 	<include path="aop.dicon"/>
 	<include path="dao.dicon"/>
 
+	<!--
+	<include path="s2struts-processor.dicon"/>
+	-->
 	<include condition="#ENV != 'ut'" path="s2struts.dicon"/>
 	<include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/>
 	

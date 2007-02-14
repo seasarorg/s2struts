@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 <!DOCTYPE struts-config PUBLIC
-          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
-          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 
 <struts-config>
 
@@ -29,9 +29,14 @@
 
 <!-- ===================================== Controller Configuration -->
 
+    <controller catalog="s2struts"/>
+<!--
     <controller
        processorClass="org.seasar.struts.processor.S2RequestProcessor"/>
-<!--
+
+    <controller
+       processorClass="org.seasar.struts.processor.S2TilesRequestProcessor"/>
+
 	<controller
        processorClass="org.apache.struts.action.RequestProcessor"/>
 -->
