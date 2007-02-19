@@ -16,6 +16,7 @@ import org.seasar.struts.validator.annotation.tiger.Mask;
 import org.seasar.struts.validator.annotation.tiger.Maxbytelength;
 import org.seasar.struts.validator.annotation.tiger.Maxlength;
 import org.seasar.struts.validator.annotation.tiger.Message;
+import org.seasar.struts.validator.annotation.tiger.Messages;
 import org.seasar.struts.validator.annotation.tiger.Minbytelength;
 import org.seasar.struts.validator.annotation.tiger.Minlength;
 import org.seasar.struts.validator.annotation.tiger.NoValidate;
@@ -96,6 +97,16 @@ public class ValidatorAnnotationForm {
     }
 
     public String getMessage2() {
+        return null;
+    }
+
+    @Required
+    @IntegerType
+    @Messages( { @Message(name = "required", key = "myrequired"), @Message(name = "integer", key = "myinteger") })
+    public void setMessages(String messages) {
+    }
+
+    public String getMessages() {
         return null;
     }
 
