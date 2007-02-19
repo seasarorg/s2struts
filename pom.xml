@@ -8,7 +8,7 @@
   <artifactId>s2-struts-backport175</artifactId>
   <packaging>jar</packaging>
   <name>s2-struts-backport175</name>
-  <version>1.2.9</version>
+  <version>1.2.10-SNAPSHOT</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
   <inceptionYear>2005</inceptionYear>
@@ -101,7 +101,7 @@
     <dependency>
       <groupId>org.seasar.struts</groupId>
       <artifactId>s2-struts</artifactId>
-      <version>1.2.9</version>
+      <version>1.2.10-SNAPSHOT</version>
       <type>jar</type>
     </dependency>
     <dependency>
