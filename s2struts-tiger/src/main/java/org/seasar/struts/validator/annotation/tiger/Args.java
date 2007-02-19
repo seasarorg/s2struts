@@ -37,6 +37,6 @@ public @interface Args {
 
     BoolType resource() default BoolType.UNDEFINED;
 
-    Arg[] args() default {};
+    Arg[] value() default {};
 
 }

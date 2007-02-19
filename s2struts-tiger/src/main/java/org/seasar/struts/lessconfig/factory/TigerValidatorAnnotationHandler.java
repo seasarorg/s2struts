@@ -148,7 +148,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         if (args == null) {
             return false;
         }
-        return (args.args().length > 0);
+        return (args.value().length > 0);
     }
 
     protected void registerArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
@@ -163,7 +163,7 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
             return;
         }
 
-        for (Arg arg : args.args()) {
+        for (Arg arg : args.value()) {
             Map parameter = TigerAnnotationConverter.getInstance().toMap(arg);
             executeArgConfigRegister(field, parameter);
         }

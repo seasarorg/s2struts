@@ -54,7 +54,7 @@ public class TestValidatorAnnotationForm {
     }
 
     @Required
-    @Args(args = { @Arg(key = "Arg3.1"), @Arg(key = "Arg3.2", bundle = "myapp", resource = BoolType.FALSE),
+    @Args( { @Arg(key = "Arg3.1"), @Arg(key = "Arg3.2", bundle = "myapp", resource = BoolType.FALSE),
             @Arg(key = "Arg3.1-other", name = "other", bundle = "myapp", resource = BoolType.FALSE, position = 0) })
     public void setArg3(String arg3) {
     }
