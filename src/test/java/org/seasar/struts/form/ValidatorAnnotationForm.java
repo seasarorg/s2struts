@@ -99,6 +99,23 @@ public class ValidatorAnnotationForm {
         return null;
     }
 
+    public static final String messages_VALIDATOR_0 = "required";
+
+    public static final String messages_VALIDATOR_1 = "integer";
+
+    public static final String messages_VALIDATOR_MESSAGE_0 = "name=required, key=myrequired";
+
+    public static final String messages_VALIDATOR_MESSAGE_1 = "name=integer, key=myinteger";
+
+    public static final String messages_VALIDATOR_ARGS = "Messages, resource=false";
+
+    public void setMessages(String messages) {
+    }
+
+    public String getMessages() {
+        return null;
+    }
+
     public static final String required_VALIDATOR = "required";
 
     public static final String required_VALIDATOR_ARGS = "Required, resource=false";
