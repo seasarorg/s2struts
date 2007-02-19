@@ -37,7 +37,7 @@ public class ValidatorAnnotationForm {
 
     /**
      * @org.seasar.struts.validator.annotation.backport175.Required
-     * @org.seasar.struts.validator.annotation.backport175.Args(args=
+     * @org.seasar.struts.validator.annotation.backport175.Args(
      * { @org.seasar.struts.validator.annotation.backport175.Arg(key = "Arg3.1")
      * , @org.seasar.struts.validator.annotation.backport175.Arg(key = "Arg3.2", bundle = "myapp", resource = false)
      * , @org.seasar.struts.validator.annotation.backport175.Arg(key = "Arg3.1-other", name = "other", bundle = "myapp", resource = false, position = 0)

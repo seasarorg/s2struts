@@ -39,5 +39,5 @@ public interface Args {
     /**
      * @org.codehaus.backport175.DefaultValue ()
      */
-    Arg[] args();
+    Arg[] value();
 }

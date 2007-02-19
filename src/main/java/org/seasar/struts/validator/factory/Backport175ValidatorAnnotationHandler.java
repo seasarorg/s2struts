@@ -148,7 +148,7 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         if (args == null) {
             return false;
         }
-        return (args.args().length > 0);
+        return (args.value().length > 0);
     }
 
     protected void registerArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
@@ -163,8 +163,8 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
             return;
         }
 
-        for (int i = 0; i < args.args().length; i++) {
-            Map parameter = Backport175AnnotationConverter.getInstance().toMap(args.args()[i]);
+        for (int i = 0; i < args.value().length; i++) {
+            Map parameter = Backport175AnnotationConverter.getInstance().toMap(args.value()[i]);
             executeArgConfigRegister(field, parameter);
         }
     }
