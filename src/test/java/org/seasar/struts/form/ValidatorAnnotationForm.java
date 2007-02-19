@@ -98,6 +98,21 @@ public class ValidatorAnnotationForm {
 
     /**
      * @org.seasar.struts.validator.annotation.backport175.Required
+     * @org.seasar.struts.validator.annotation.backport175.IntegerType
+     * @org.seasar.struts.validator.annotation.backport175.Messages(
+     * { @org.seasar.struts.validator.annotation.backport175.Message(name = "required", key = "myrequired")
+     * , @org.seasar.struts.validator.annotation.backport175.Message(name = "integer", key="myinteger")
+     * })
+     */
+    public void setMessages(String messages) {
+    }
+
+    public String getMessages() {
+        return null;
+    }
+
+    /**
+     * @org.seasar.struts.validator.annotation.backport175.Required
      * @org.seasar.struts.validator.annotation.backport175.Args(keys="Required", resource=false)
      */
     public void setRequired(String required) {

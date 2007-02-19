@@ -27,6 +27,7 @@ import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.validator.annotation.backport175.Args;
 import org.seasar.struts.validator.annotation.backport175.Message;
+import org.seasar.struts.validator.annotation.backport175.Messages;
 import org.seasar.struts.validator.annotation.backport175.NoValidate;
 import org.seasar.struts.validator.annotation.backport175.Validator;
 import org.seasar.struts.validator.annotation.backport175.ValidatorField;
@@ -95,6 +96,16 @@ public class Backport175ValidatorAnnotationHandler extends ConstantValidatorAnno
         Annotation annotation = Annotations.getAnnotation(Message.class, method);
         if (annotation != null) {
             Map parameter = Backport175AnnotationConverter.getInstance().toMap(annotation);
+            executeMessageConfigRegister(field, parameter);
+        }
+
+        Messages messages = (Messages) Annotations.getAnnotation(Messages.class, method);
+        if (messages == null) {
+            return;
+        }
+
+        for (int i = 0; i < messages.value().length; i++) {
+            Map parameter = Backport175AnnotationConverter.getInstance().toMap(messages.value()[i]);
             executeMessageConfigRegister(field, parameter);
         }
     }

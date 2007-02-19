@@ -97,6 +97,16 @@ public class Backport175ValidatorAnnotationHandlerTest extends S2TestCase {
         assertFalse(field.getMessage("required").isResource());
     }
 
+    public void testMessages() {
+        Field field = form.getField("messages");
+        assertNotNull(field);
+        assertNotNull(field.getMessage("required"));
+        assertEquals("myrequired", field.getMsg("required"));
+        assertEquals("myrequired", field.getMessage("required").getKey());
+        assertEquals("myinteger", field.getMsg("integer"));
+        assertEquals("myinteger", field.getMessage("integer").getKey());
+    }
+
     public void testRequired() {
         Field field = form.getField("required");
         assertNotNull(field);
