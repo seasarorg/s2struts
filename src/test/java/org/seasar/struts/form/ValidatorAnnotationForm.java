@@ -53,7 +53,7 @@ public class ValidatorAnnotationForm {
     }
 
     @Required
-    @Args(args = { @Arg(key = "Arg3.1"), @Arg(key = "Arg3.2", bundle = "myapp", resource = false),
+    @Args( { @Arg(key = "Arg3.1"), @Arg(key = "Arg3.2", bundle = "myapp", resource = false),
             @Arg(key = "Arg3.1-other", name = "other", bundle = "myapp", resource = false, position = 0) })
     public void setArg3(String arg3) {
     }

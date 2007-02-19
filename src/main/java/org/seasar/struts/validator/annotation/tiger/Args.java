@@ -35,6 +35,6 @@ public @interface Args {
 
     boolean resource() default true;
 
-    Arg[] args() default {};
+    Arg[] value() default {};
 
 }
