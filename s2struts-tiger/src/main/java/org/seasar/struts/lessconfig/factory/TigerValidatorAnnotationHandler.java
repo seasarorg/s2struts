@@ -27,6 +27,7 @@ import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.validator.annotation.tiger.Arg;
 import org.seasar.struts.validator.annotation.tiger.Args;
 import org.seasar.struts.validator.annotation.tiger.Message;
+import org.seasar.struts.validator.annotation.tiger.Messages;
 import org.seasar.struts.validator.annotation.tiger.NoValidate;
 import org.seasar.struts.validator.annotation.tiger.Validator;
 import org.seasar.struts.validator.annotation.tiger.ValidatorField;
@@ -96,6 +97,16 @@ public class TigerValidatorAnnotationHandler extends ConstantValidatorAnnotation
         Annotation annotation = method.getAnnotation(Message.class);
         if (annotation != null) {
             Map parameter = TigerAnnotationConverter.getInstance().toMap(annotation);
+            executeMessageConfigRegister(field, parameter);
+        }
+
+        Messages messages = method.getAnnotation(Messages.class);
+        if (messages == null) {
+            return;
+        }
+
+        for (Message message : messages.value()) {
+            Map parameter = TigerAnnotationConverter.getInstance().toMap(message);
             executeMessageConfigRegister(field, parameter);
         }
     }
