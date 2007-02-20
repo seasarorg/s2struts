@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -11,23 +12,55 @@
   <version>1.3.0-beta-4-SNAPSHOT</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
+  <issueManagement>
+    <system>JIRA</system>
+    <url><![CDATA[https://www.seasar.org/issues/browse/STRUTS]]></url>
+  </issueManagement>
   <inceptionYear>2004</inceptionYear>
   <mailingLists>
     <mailingList>
       <name>Seasar-user</name>
-      <subscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-user</subscribe>
-      <unsubscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-user</unsubscribe>
-      <post>seasar-user@lists.sourceforge.jp</post>
-      <archive>http://lists.sourceforge.jp/mailman/archives/seasar-user/</archive>
+      <subscribe>https://www.seasar.org/mailman/listinfo/seasar-user</subscribe>
+      <unsubscribe>https://www.seasar.org/mailman/listinfo/seasar-user</unsubscribe>
+      <post>seasar-user@ml.seasar.org</post>
+      <archive>https://www.seasar.org/mailman/listinfo/seasar-user</archive>
     </mailingList>
     <mailingList>
       <name>Seasar-dev</name>
-      <subscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-dev</subscribe>
-      <unsubscribe>http://lists.sourceforge.jp/mailman/listinfo/seasar-dev</unsubscribe>
-      <post>seasar-user@lists.sourceforge.jp</post>
-      <archive>http://lists.sourceforge.jp/mailman/archives/seasar-dev/</archive>
+      <subscribe>https://www.seasar.org/mailman/listinfo/seasar-dev</subscribe>
+      <unsubscribe>https://www.seasar.org/mailman/listinfo/seasar-dev</unsubscribe>
+      <post>seasar-dev@ml.seasar.org</post>
+      <archive>https://www.seasar.org/mailman/listinfo/seasar-dev</archive>
+    </mailingList>
+    <mailingList>
+      <name>Seasar-user-en</name>
+      <subscribe>https://www.seasar.org/mailman/listinfo/seasar-user-en</subscribe>
+      <unsubscribe>https://www.seasar.org/mailman/listinfo/seasar-user-en</unsubscribe>
+      <post>seasar-user-en@ml.seasar.org</post>
+      <archive>http://ml.seasar.org/archives/seasar-user-en/</archive>
     </mailingList>
   </mailingLists>
+  <developers>
+    <!--
+    <developer>
+      <id></id>
+      <name></name>
+      <email></email>
+      <url></url>
+      <organization></organization>
+      <organizationUrl></organizationUrl>
+      <timezone>+9</timezone>
+    </developer>
+    -->
+  </developers>
+  <contributors>
+    <!--
+    <contributor>
+      <name></name>
+      <url></url>
+    </contributor>
+    -->
+  </contributors>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -35,6 +68,11 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+  <scm>
+    <connection>scm:svn:https://www.seasar.org/svn/s2struts/trunk/s2struts/</connection>
+    <developerConnection>scm:svn:https://www.seasar.org/svn/s2struts/trunk/s2struts/</developerConnection>
+    <url>http://svn.seasar.org/browse/?root=s2struts</url>
+  </scm>
   <organization>
     <name>The Seasar Foundation</name>
     <url>http://www.seasar.org/</url>
@@ -43,6 +81,14 @@
     <defaultGoal>validate</defaultGoal>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.4</source>
+            <target>1.4</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -56,6 +102,14 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <configuration>
             <updateReleaseInfo>true</updateReleaseInfo>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <configuration>
+            <locales>en,ja</locales>
+            <inputEncoding>UTF-8</inputEncoding>
+            <outputEncoding>UTF-8</outputEncoding>
           </configuration>
         </plugin>
       </plugins>
@@ -72,6 +126,35 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <source>1.4</source>
+          <encoding>UTF-8</encoding>
+          <docencoding>UTF-8</docencoding>
+          <charset>UTF-8</charset>
+          <links>
+            <link>http://java.sun.com/j2se/1.5.0/ja/docs/ja/api/</link>
+            <link>http://java.sun.com/j2ee/1.4/docs/api/</link>
+            <link>http://struts.apache.org/1.3.5/struts-core/apidocs/</link>
+            <link>http://struts.apache.org/1.3.5/struts-taglib/apidocs/</link>
+            <link>http://struts.apache.org/1.3.5/struts-tiles/apidocs/</link>
+            <link>http://jakarta.apache.org/commons/validator/api-1.3.0/</link>
+            <link>http://aopalliance.sourceforge.net/doc/</link>
+          </links>
+        </configuration>
+        <!--
+        <executions>
+          <execution>
+            <id>javadoc-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        -->
       </plugin>
     </plugins>
   </build>
@@ -136,7 +219,19 @@
       <uniqueVersion>false</uniqueVersion>
       <id>maven.seasar.org</id>
       <name>The Seasar Foundation Maven2 Repository</name>
-      <url>scp://www.seasar.org/home/groups/s2struts/maven/maven2</url>
+      <url>scp://maven.seasar.org/home/groups/maven/maven/maven2</url>
     </repository>
+    <snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>maven.seasar.org</id>
+      <name>The Seasar Foundation Maven2 Snapshot Repository</name>
+      <url>scp://maven.seasar.org/home/groups/maven/maven/maven2-snapshot</url>
+    </snapshotRepository>
+    <!--
+    <site>
+      <id>maven.seasar.org</id>
+      <url>scp://www.seasar.org/home/groups/s2struts/public_html</url>
+    </site>
+    -->
   </distributionManagement>
 </project>
