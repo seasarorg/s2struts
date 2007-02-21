@@ -57,7 +57,7 @@
     <plug-in className="org.seasar.struts.plugin.RegisterActionClassPlugIn"/>
 -->
 
-    <plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn">
+    <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn">
         <set-property property="enableJar" value="false"/>
     </plug-in>
 
