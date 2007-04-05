@@ -22,6 +22,7 @@ import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.util.BindingUtil;
+import org.seasar.struts.util.MethodBindingUtil;
 
 /**
  * @author Satoshi Kimura
@@ -38,14 +39,14 @@ public class MethodBinding {
     private boolean indexed;
     
     public MethodBinding(String expression) {
-        this.componentName = getComponentName(expression);
-        this.methodName = getMethodName(expression);
+        this.componentName = MethodBindingUtil.getComponentName(expression);
+        this.methodName = MethodBindingUtil.getMethodName(expression);
         this.indexed = false;
     }
     
     public MethodBinding(String expression, int index) {
-        this.componentName = getComponentName(expression);
-        this.methodName = getMethodName(expression);
+        this.componentName = MethodBindingUtil.getComponentName(expression);
+        this.methodName = MethodBindingUtil.getMethodName(expression);
         this.index = index;
         this.indexed = true;
     }
@@ -73,30 +74,6 @@ public class MethodBinding {
             return beanDesc.invoke(component, this.methodName, new Object[] { new Integer(index) });
         } else {
             return beanDesc.invoke(component, this.methodName, null);
-        }
-    }
-
-    private String getComponentName(String expression) {
-        if (expression == null) {
-            return null;
-        }
-        int index = expression.indexOf('.');
-        if (index > 0) {
-            return expression.substring(2, index);
-        } else {
-            throw new IllegalArgumentException("component was not found. arg: " + expression);
-        }
-    }
-
-    private String getMethodName(String expression) {
-        if (expression == null) {
-            return null;
-        }
-        int index = expression.indexOf('.');
-        if (index > 0) {
-            return expression.substring(index + 1, expression.length() - 1);
-        } else {
-            throw new IllegalArgumentException("method was not found. arg: " + expression);
         }
     }
 

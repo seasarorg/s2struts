@@ -25,6 +25,9 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.util.ModuleUtils;
+import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.util.ClassUtil;
 
 /**
  * 
@@ -40,6 +43,10 @@ public class ModuleConfigUtil {
         ServletContext context = S2StrutsContextUtil.getContainer().getServletContext();
         HttpServletRequest request = S2StrutsContextUtil.getContainer().getRequest();
         return ModuleUtils.getInstance().getModuleConfig(request, context);
+    }
+
+    public static ActionConfig findActionConfig(String path) {
+        return ModuleConfigUtil.getModuleConfig().findActionConfig(path);
     }
 
     public static ActionConfig findActionConfigForFormBeanName(String beanName) {
@@ -83,6 +90,34 @@ public class ModuleConfigUtil {
             }
         }
         return (ActionConfig[]) result.toArray(new ActionConfig[result.size()]);
+    }
+
+    public static ActionConfig findActionConfigForComponentName(String componentName) {
+        if (!ModuleConfigUtil.getContainer().hasComponentDef(componentName)) {
+            return null;
+        }
+        Class clazz = ModuleConfigUtil.getContainer().getComponentDef(componentName).getComponentClass();
+
+        ModuleConfig config = ModuleConfigUtil.getModuleConfig();
+        if (config == null) {
+            return null;
+        }
+
+        ActionConfig[] actionConfigs = config.findActionConfigs();
+        for (int i = 0; i < actionConfigs.length; i++) {
+            if (actionConfigs[i].getType() == null) {
+                continue;
+            }
+            Class actionClass = ClassUtil.forName(actionConfigs[i].getType());
+            if (actionClass.isAssignableFrom(clazz)) {
+                return actionConfigs[i];
+            }
+        }
+        return null;
+    }
+
+    private static S2Container getContainer() {
+        return SingletonS2ContainerFactory.getContainer();
     }
 
 }
