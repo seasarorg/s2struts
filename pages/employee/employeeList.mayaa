@@ -47,18 +47,18 @@
     <bean:write m:id="comm" name="employee" property="comm" />
     <bean:write m:id="dept" name="employee" property="dname" />
 
-    <html:link m:id="goEdit" page="/employeeList.do?method=goEditForUpdate"
+    <s2struts:link m:id="goEdit" action="#{employeeListAction.goEditForUpdate}" cancel="true"
                paramId="empno" paramName="employee" paramProperty="empno">
         <bean:message key="button.edit" />
-    </html:link>
-    <html:link m:id="goDelete" page="/employeeList.do?method=goDelete"
+    </s2struts:link>
+    <s2struts:link m:id="goDelete" action="#{employeeListAction.goDelete}" cancel="true"
                paramId="empno" paramName="employee" paramProperty="empno">
         <bean:message key="button.delete" />
-    </html:link>
-    <html:link m:id="goInquire" page="/employeeList.do?method=goInquire"
+    </s2struts:link>
+    <s2struts:link m:id="goInquire" action="#{employeeListAction.goInquire}" cancel="true"
                paramId="empno" paramName="employee" paramProperty="empno">
         <bean:message key="button.inquire" />
-    </html:link>
+    </s2struts:link>
     
     <m:null id="dummy"/>
 

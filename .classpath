@@ -27,7 +27,7 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.3.16.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.3.16.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-dao-1.0.40.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.9.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-tiger-1.2.9.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-1.2.10-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-struts-tiger-1.2.10-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

@@ -95,7 +95,7 @@ public class ValidateDto implements Serializable {
     @ValidateOrder(1)
     @Required
     @Message(name = "required", key = "errors.required.other")
-    @Args(args = { @Arg(key = "validate.required.other"), @Arg(key = "defaultArg!", resource = false),
+    @Args({ @Arg(key = "validate.required.other"), @Arg(key = "defaultArg!", resource = false),
             @Arg(key = "requiredArg!", name = "required", resource = false, position = 1) })
     public void setRequiredOtherMessage(String requiredOtherMessage) {
         requiredOtherMessage_ = requiredOtherMessage;
