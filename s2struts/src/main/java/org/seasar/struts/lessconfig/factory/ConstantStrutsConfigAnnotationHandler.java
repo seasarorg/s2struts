@@ -166,6 +166,30 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 return BooleanConversionUtil.toBoolean(value);
             }
 
+            public String catalog() {
+                String value = (String) parameters.get("catalog");
+                if (value == null) {
+                    return StrutsActionConfig.DEFAULT_CATALOG;
+                }
+                return value;
+            }
+
+            public String command() {
+                String value = (String) parameters.get("command");
+                if (value == null) {
+                    return StrutsActionConfig.DEFAULT_COMMAND;
+                }
+                return value;
+            }
+
+            public String inherit() {
+                String value = (String) parameters.get("inherit");
+                if (value == null) {
+                    return StrutsActionConfig.DEFAULT_INHERIT;
+                }
+                return value;
+            }
+
         };
     }
 
@@ -228,6 +252,14 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                     return StrutsActionFormConfig.DEFAULT_RESTRICTED;
                 }
                 return BooleanConversionUtil.toBoolean(value);
+            }
+
+            public String inherit() {
+                String value = (String) parameters.get("inherit");
+                if (value == null) {
+                    return StrutsActionFormConfig.DEFAULT_INHERIT;
+                }
+                return value;
             }
 
         };

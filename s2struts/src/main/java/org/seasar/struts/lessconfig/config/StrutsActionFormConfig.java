@@ -22,9 +22,17 @@ import org.seasar.struts.Constants;
  * @author Katsuhiko Nagashima
  */
 public interface StrutsActionFormConfig {
+
     String DEFAULT_NAME = Constants.UNDEFINED;
+
     String name();
 
     Boolean DEFAULT_RESTRICTED = null;
+
     Boolean restricted();
+
+    String DEFAULT_INHERIT = Constants.UNDEFINED;
+
+    String inherit();
+
 }

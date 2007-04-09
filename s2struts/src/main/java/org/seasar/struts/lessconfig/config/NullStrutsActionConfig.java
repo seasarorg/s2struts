@@ -75,4 +75,17 @@ public class NullStrutsActionConfig implements StrutsActionConfig {
     public Boolean cancellable() {
         return DEFAULT_CANCELLABLE;
     }
+
+    public String catalog() {
+        return DEFAULT_CATALOG;
+    }
+
+    public String command() {
+        return DEFAULT_COMMAND;
+    }
+
+    public String inherit() {
+        return DEFAULT_INHERIT;
+    }
+
 }

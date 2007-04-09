@@ -119,6 +119,15 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         if (StrutsActionConfig.DEFAULT_CANCELLABLE != strutsAction.cancellable()) {
             actionConfig.setCancellable(strutsAction.cancellable().booleanValue());
         }
+        if (!StrutsActionConfig.DEFAULT_CATALOG.equals(strutsAction.catalog())) {
+            actionConfig.setCatalog(strutsAction.catalog());
+        }
+        if (!StrutsActionConfig.DEFAULT_COMMAND.equals(strutsAction.command())) {
+            actionConfig.setCommand(strutsAction.command());
+        }
+        if (!StrutsActionConfig.DEFAULT_INHERIT.equals(strutsAction.inherit())) {
+            actionConfig.setExtends(strutsAction.inherit());
+        }
 
         return actionConfig;
     }

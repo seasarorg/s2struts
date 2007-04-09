@@ -41,7 +41,11 @@ public class ZeroConfigActionFormRuleImpl implements ZeroConfigActionFormRule {
         if (StrutsActionFormConfig.DEFAULT_RESTRICTED != strutsActionForm.restricted()) {
             formBeanConfig.setRestricted(strutsActionForm.restricted().booleanValue());
         }
-        
+
+        if (!StrutsActionFormConfig.DEFAULT_INHERIT.equals(strutsActionForm.inherit())) {
+            formBeanConfig.setExtends(strutsActionForm.inherit());
+        }
+
         return formBeanConfig;
     }
 

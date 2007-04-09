@@ -9,7 +9,8 @@ public interface TestStrutsConfigAnnotationAction {
             + ", validate=true, input=testinput, parameter=testparameter"
             + ", attribute=testattribute, forward=testforward, include=testinclude"
             + ", prefix=testprefix, suffix=testsuffix, roles=testroles"
-            + ", unknown=false, cancellable=true";
+            + ", unknown=false, cancellable=true"
+            + ", catalog=testcatalog, command=testcommand, inherit=testinherit";
 
     String SUCCESS_FORWARD = "/test.jsp, redirect=false";
 

@@ -30,11 +30,19 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.RuleSet;
 import org.apache.struts.Globals;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
+import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ConfigRuleSet;
+import org.apache.struts.config.ExceptionConfig;
+import org.apache.struts.config.FormBeanConfig;
+import org.apache.struts.config.FormPropertyConfig;
+import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.ModuleConfigFactory;
 import org.apache.struts.util.RequestUtils;
@@ -64,6 +72,10 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
             String name = "config/" + prefix;
             moduleConfig = initModuleConfig(prefix, getServletConfig().getInitParameter(name));
         }
+        initModuleFormBeans(moduleConfig);
+        initModuleForwards(moduleConfig);
+        initModuleExceptionConfigs(moduleConfig);
+        initModuleActions(moduleConfig);
         moduleConfig.freeze();
         return moduleConfig;
     }
@@ -234,11 +246,87 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
         }
     }
 
+    /**
+     * <p>
+     * Simplifies exception handling in the parseModuleConfigFile method.
+     * <p>
+     * 
+     * @param path
+     *            The path to which the exception relates.
+     * @param e
+     *            The exception to be wrapped and thrown.
+     * @throws UnavailableException
+     *             as a wrapper around Exception
+     */
     private void handleConfigException(String path, Exception e) throws UnavailableException {
         String msg = getActionServlet().getInternal().getMessage("configParse", path);
 
         log.error(msg, e);
         throw new UnavailableException(msg);
+    }
+
+    /**
+     * <p>
+     * Handle errors related to creating an instance of the specified class.
+     * </p>
+     * 
+     * @param className
+     *            The className that could not be instantiated.
+     * @param e
+     *            The exception that was caught.
+     * @throws ServletException
+     *             to communicate the error.
+     */
+    private void handleCreationException(String className, Exception e) throws ServletException {
+        String errorMessage = getActionServlet().getInternal().getMessage("configExtends.creation", className);
+
+        log.error(errorMessage, e);
+        throw new UnavailableException(errorMessage);
+    }
+
+    /**
+     * <p>
+     * General handling for exceptions caught while inheriting config information.
+     * </p>
+     * 
+     * @param configType
+     *            The type of configuration object of configName.
+     * @param configName
+     *            The name of the config that could not be extended.
+     * @param e
+     *            The exception that was caught.
+     * @throws ServletException
+     *             to communicate the error.
+     */
+    private void handleGeneralExtensionException(String configType, String configName, Exception e)
+            throws ServletException {
+        String errorMessage = getActionServlet().getInternal().getMessage("configExtends", configType, configName);
+
+        log.error(errorMessage, e);
+        throw new UnavailableException(errorMessage);
+    }
+
+    /**
+     * <p>
+     * Handle errors caused by required fields that were not specified.
+     * </p>
+     * 
+     * @param field
+     *            The name of the required field that was not found.
+     * @param configType
+     *            The type of configuration object of configName.
+     * @param configName
+     *            The name of the config that's missing the required value.
+     * @throws ServletException
+     *             to communicate the error.
+     */
+    private void handleValueRequiredException(String field, String configType, String configName)
+            throws ServletException {
+        String errorMessage = getActionServlet().getInternal().getMessage("configFieldRequired", field, configType,
+                configName);
+
+        log.error(errorMessage);
+        throw new UnavailableException(errorMessage);
     }
 
     protected List splitAndResolvePaths(String paths) throws ServletException {
@@ -304,6 +392,556 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
         }
 
         return resolvedUrls;
+    }
+
+    /**
+     * <p>
+     * Initialize the form beans for the specified module.
+     * </p>
+     * 
+     * @param config
+     *            ModuleConfig information for this module
+     * @throws ServletException
+     *             if initialization cannot be performed
+     * @since Struts 1.3
+     */
+    protected void initModuleFormBeans(ModuleConfig config) throws ServletException {
+        if (log.isDebugEnabled()) {
+            log.debug("Initializing module path '" + config.getPrefix() + "' form beans");
+        }
+
+        // Process form bean extensions.
+        FormBeanConfig[] formBeans = config.findFormBeanConfigs();
+
+        for (int i = 0; i < formBeans.length; i++) {
+            FormBeanConfig beanConfig = formBeans[i];
+
+            processFormBeanExtension(beanConfig, config);
+        }
+
+        for (int i = 0; i < formBeans.length; i++) {
+            FormBeanConfig formBean = formBeans[i];
+
+            // Verify that required fields are all present for the form config
+            if (formBean.getType() == null) {
+                handleValueRequiredException("type", formBean.getName(), "form bean");
+            }
+
+            // ... and the property configs
+            FormPropertyConfig[] fpcs = formBean.findFormPropertyConfigs();
+
+            for (int j = 0; j < fpcs.length; j++) {
+                FormPropertyConfig property = fpcs[j];
+
+                if (property.getType() == null) {
+                    handleValueRequiredException("type", property.getName(), "form property");
+                }
+            }
+
+            // Force creation and registration of DynaActionFormClass instances
+            // for all dynamic form beans
+            if (formBean.getDynamic()) {
+                formBean.getDynaActionFormClass();
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Extend the form bean's configuration as necessary.
+     * </p>
+     * 
+     * @param beanConfig
+     *            the configuration to process.
+     * @param moduleConfig
+     *            the module configuration for this module.
+     * @throws ServletException
+     *             if initialization cannot be performed.
+     */
+    protected void processFormBeanExtension(FormBeanConfig beanConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        try {
+            if (!beanConfig.isExtensionProcessed()) {
+                if (log.isDebugEnabled()) {
+                    log.debug("Processing extensions for '" + beanConfig.getName() + "'");
+                }
+
+                beanConfig = processFormBeanConfigClass(beanConfig, moduleConfig);
+
+                beanConfig.processExtends(moduleConfig);
+            }
+        } catch (ServletException e) {
+            throw e;
+        } catch (Exception e) {
+            handleGeneralExtensionException("FormBeanConfig", beanConfig.getName(), e);
+        }
+    }
+
+    /**
+     * <p>
+     * Checks if the current beanConfig is using the correct class based on the class of its ancestor form bean config.
+     * </p>
+     * 
+     * @param beanConfig
+     *            The form bean to check.
+     * @param moduleConfig
+     *            The config for the current module.
+     * @return The form bean config using the correct class as determined by the config's ancestor and its own
+     *         overridden value.
+     * @throws UnavailableException
+     *             if an instance of the form bean config class cannot be created.
+     * @throws ServletException
+     *             on class creation error
+     */
+    protected FormBeanConfig processFormBeanConfigClass(FormBeanConfig beanConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        String ancestor = beanConfig.getExtends();
+
+        if (ancestor == null) {
+            // Nothing to do, then
+            return beanConfig;
+        }
+
+        // Make sure that this bean is of the right class
+        FormBeanConfig baseConfig = moduleConfig.findFormBeanConfig(ancestor);
+
+        if (baseConfig == null) {
+            throw new UnavailableException("Unable to find " + "form bean '" + ancestor + "' to extend.");
+        }
+
+        // Was our bean's class overridden already?
+        if (beanConfig.getClass().equals(FormBeanConfig.class)) {
+            // Ensure that our bean is using the correct class
+            if (!baseConfig.getClass().equals(beanConfig.getClass())) {
+                // Replace the bean with an instance of the correct class
+                FormBeanConfig newBeanConfig = null;
+                String baseConfigClassName = baseConfig.getClass().getName();
+
+                try {
+                    newBeanConfig = (FormBeanConfig) RequestUtils.applicationInstance(baseConfigClassName);
+
+                    // copy the values
+                    BeanUtils.copyProperties(newBeanConfig, beanConfig);
+
+                    FormPropertyConfig[] fpc = beanConfig.findFormPropertyConfigs();
+
+                    for (int i = 0; i < fpc.length; i++) {
+                        newBeanConfig.addFormPropertyConfig(fpc[i]);
+                    }
+                } catch (Exception e) {
+                    handleCreationException(baseConfigClassName, e);
+                }
+
+                // replace beanConfig with newBeanConfig
+                moduleConfig.removeFormBeanConfig(beanConfig);
+                moduleConfig.addFormBeanConfig(newBeanConfig);
+                beanConfig = newBeanConfig;
+            }
+        }
+
+        return beanConfig;
+    }
+
+    /**
+     * <p>
+     * Initialize the forwards for the specified module.
+     * </p>
+     * 
+     * @param config
+     *            ModuleConfig information for this module
+     * @throws ServletException
+     *             if initialization cannot be performed
+     */
+    protected void initModuleForwards(ModuleConfig config) throws ServletException {
+        if (log.isDebugEnabled()) {
+            log.debug("Initializing module path '" + config.getPrefix() + "' forwards");
+        }
+
+        // Process forwards extensions.
+        ForwardConfig[] forwards = config.findForwardConfigs();
+
+        for (int i = 0; i < forwards.length; i++) {
+            ForwardConfig forward = forwards[i];
+
+            processForwardExtension(forward, config);
+        }
+
+        for (int i = 0; i < forwards.length; i++) {
+            ForwardConfig forward = forwards[i];
+
+            // Verify that required fields are all present for the forward
+            if (forward.getPath() == null) {
+                handleValueRequiredException("path", forward.getName(), "global forward");
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Extend the forward's configuration as necessary.
+     * </p>
+     * 
+     * @param forwardConfig
+     *            the configuration to process.
+     * @param moduleConfig
+     *            the module configuration for this module.
+     * @throws ServletException
+     *             if initialization cannot be performed.
+     */
+    protected void processForwardExtension(ForwardConfig forwardConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        try {
+            if (!forwardConfig.isExtensionProcessed()) {
+                if (log.isDebugEnabled()) {
+                    log.debug("Processing extensions for '" + forwardConfig.getName() + "'");
+                }
+
+                forwardConfig = processForwardConfigClass(forwardConfig, moduleConfig);
+
+                forwardConfig.processExtends(moduleConfig, null);
+            }
+        } catch (ServletException e) {
+            throw e;
+        } catch (Exception e) {
+            handleGeneralExtensionException("Forward", forwardConfig.getName(), e);
+        }
+    }
+
+    /**
+     * <p>
+     * Checks if the current forwardConfig is using the correct class based on the class of its configuration ancestor.
+     * </p>
+     * 
+     * @param forwardConfig
+     *            The forward to check.
+     * @param moduleConfig
+     *            The config for the current module.
+     * @return The forward config using the correct class as determined by the config's ancestor and its own overridden
+     *         value.
+     * @throws UnavailableException
+     *             if an instance of the forward config class cannot be created.
+     * @throws ServletException
+     *             on class creation error
+     */
+    protected ForwardConfig processForwardConfigClass(ForwardConfig forwardConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        String ancestor = forwardConfig.getExtends();
+
+        if (ancestor == null) {
+            // Nothing to do, then
+            return forwardConfig;
+        }
+
+        // Make sure that this config is of the right class
+        ForwardConfig baseConfig = moduleConfig.findForwardConfig(ancestor);
+
+        if (baseConfig == null) {
+            throw new UnavailableException("Unable to find " + "forward '" + ancestor + "' to extend.");
+        }
+
+        // Was our forwards's class overridden already?
+        if (forwardConfig.getClass().equals(ActionForward.class)) {
+            // Ensure that our forward is using the correct class
+            if (!baseConfig.getClass().equals(forwardConfig.getClass())) {
+                // Replace the config with an instance of the correct class
+                ForwardConfig newForwardConfig = null;
+                String baseConfigClassName = baseConfig.getClass().getName();
+
+                try {
+                    newForwardConfig = (ForwardConfig) RequestUtils.applicationInstance(baseConfigClassName);
+
+                    // copy the values
+                    BeanUtils.copyProperties(newForwardConfig, forwardConfig);
+                } catch (Exception e) {
+                    handleCreationException(baseConfigClassName, e);
+                }
+
+                // replace forwardConfig with newForwardConfig
+                moduleConfig.removeForwardConfig(forwardConfig);
+                moduleConfig.addForwardConfig(newForwardConfig);
+                forwardConfig = newForwardConfig;
+            }
+        }
+
+        return forwardConfig;
+    }
+
+    /**
+     * <p>
+     * Initialize the exception handlers for the specified module.
+     * </p>
+     * 
+     * @param config
+     *            ModuleConfig information for this module
+     * @throws ServletException
+     *             if initialization cannot be performed
+     * @since Struts 1.3
+     */
+    protected void initModuleExceptionConfigs(ModuleConfig config) throws ServletException {
+        if (log.isDebugEnabled()) {
+            log.debug("Initializing module path '" + config.getPrefix() + "' forwards");
+        }
+
+        // Process exception config extensions.
+        ExceptionConfig[] exceptions = config.findExceptionConfigs();
+
+        for (int i = 0; i < exceptions.length; i++) {
+            ExceptionConfig exception = exceptions[i];
+
+            processExceptionExtension(exception, config);
+        }
+
+        for (int i = 0; i < exceptions.length; i++) {
+            ExceptionConfig exception = exceptions[i];
+
+            // Verify that required fields are all present for the config
+            if (exception.getKey() == null) {
+                handleValueRequiredException("key", exception.getType(), "global exception config");
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Extend the exception's configuration as necessary.
+     * </p>
+     * 
+     * @param exceptionConfig
+     *            the configuration to process.
+     * @param moduleConfig
+     *            the module configuration for this module.
+     * @throws ServletException
+     *             if initialization cannot be performed.
+     */
+    protected void processExceptionExtension(ExceptionConfig exceptionConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        try {
+            if (!exceptionConfig.isExtensionProcessed()) {
+                if (log.isDebugEnabled()) {
+                    log.debug("Processing extensions for '" + exceptionConfig.getType() + "'");
+                }
+
+                exceptionConfig = processExceptionConfigClass(exceptionConfig, moduleConfig);
+
+                exceptionConfig.processExtends(moduleConfig, null);
+            }
+        } catch (ServletException e) {
+            throw e;
+        } catch (Exception e) {
+            handleGeneralExtensionException("Exception", exceptionConfig.getType(), e);
+        }
+    }
+
+    /**
+     * <p>
+     * Checks if the current exceptionConfig is using the correct class based on the class of its configuration
+     * ancestor.
+     * </p>
+     * 
+     * @param exceptionConfig
+     *            The config to check.
+     * @param moduleConfig
+     *            The config for the current module.
+     * @return The exception config using the correct class as determined by the config's ancestor and its own
+     *         overridden value.
+     * @throws ServletException
+     *             if an instance of the exception config class cannot be created.
+     */
+    protected ExceptionConfig processExceptionConfigClass(ExceptionConfig exceptionConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        String ancestor = exceptionConfig.getExtends();
+
+        if (ancestor == null) {
+            // Nothing to do, then
+            return exceptionConfig;
+        }
+
+        // Make sure that this config is of the right class
+        ExceptionConfig baseConfig = moduleConfig.findExceptionConfig(ancestor);
+
+        if (baseConfig == null) {
+            throw new UnavailableException("Unable to find " + "exception config '" + ancestor + "' to extend.");
+        }
+
+        // Was our config's class overridden already?
+        if (exceptionConfig.getClass().equals(ExceptionConfig.class)) {
+            // Ensure that our config is using the correct class
+            if (!baseConfig.getClass().equals(exceptionConfig.getClass())) {
+                // Replace the config with an instance of the correct class
+                ExceptionConfig newExceptionConfig = null;
+                String baseConfigClassName = baseConfig.getClass().getName();
+
+                try {
+                    newExceptionConfig = (ExceptionConfig) RequestUtils.applicationInstance(baseConfigClassName);
+
+                    // copy the values
+                    BeanUtils.copyProperties(newExceptionConfig, exceptionConfig);
+                } catch (Exception e) {
+                    handleCreationException(baseConfigClassName, e);
+                }
+
+                // replace exceptionConfig with newExceptionConfig
+                moduleConfig.removeExceptionConfig(exceptionConfig);
+                moduleConfig.addExceptionConfig(newExceptionConfig);
+                exceptionConfig = newExceptionConfig;
+            }
+        }
+
+        return exceptionConfig;
+    }
+
+    /**
+     * <p>
+     * Initialize the action configs for the specified module.
+     * </p>
+     * 
+     * @param config
+     *            ModuleConfig information for this module
+     * @throws ServletException
+     *             if initialization cannot be performed
+     * @since Struts 1.3
+     */
+    protected void initModuleActions(ModuleConfig config) throws ServletException {
+        if (log.isDebugEnabled()) {
+            log.debug("Initializing module path '" + config.getPrefix() + "' action configs");
+        }
+
+        // Process ActionConfig extensions.
+        ActionConfig[] actionConfigs = config.findActionConfigs();
+
+        for (int i = 0; i < actionConfigs.length; i++) {
+            ActionConfig actionConfig = actionConfigs[i];
+
+            processActionConfigExtension(actionConfig, config);
+        }
+
+        for (int i = 0; i < actionConfigs.length; i++) {
+            ActionConfig actionConfig = actionConfigs[i];
+
+            // Verify that required fields are all present for the forward
+            // configs
+            ForwardConfig[] forwards = actionConfig.findForwardConfigs();
+
+            for (int j = 0; j < forwards.length; j++) {
+                ForwardConfig forward = forwards[j];
+
+                if (forward.getPath() == null) {
+                    handleValueRequiredException("path", forward.getName(), "action forward");
+                }
+            }
+
+            // ... and the exception configs
+            ExceptionConfig[] exceptions = actionConfig.findExceptionConfigs();
+
+            for (int j = 0; j < exceptions.length; j++) {
+                ExceptionConfig exception = exceptions[j];
+
+                if (exception.getKey() == null) {
+                    handleValueRequiredException("key", exception.getType(), "action exception config");
+                }
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Extend the action's configuration as necessary.
+     * </p>
+     * 
+     * @param actionConfig
+     *            the configuration to process.
+     * @param moduleConfig
+     *            the module configuration for this module.
+     * @throws ServletException
+     *             if initialization cannot be performed.
+     */
+    protected void processActionConfigExtension(ActionConfig actionConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        try {
+            if (!actionConfig.isExtensionProcessed()) {
+                if (log.isDebugEnabled()) {
+                    log.debug("Processing extensions for '" + actionConfig.getPath() + "'");
+                }
+
+                actionConfig = processActionConfigClass(actionConfig, moduleConfig);
+
+                actionConfig.processExtends(moduleConfig);
+            }
+        } catch (ServletException e) {
+            throw e;
+        } catch (Exception e) {
+            handleGeneralExtensionException("Action", actionConfig.getPath(), e);
+        }
+    }
+
+    /**
+     * <p>
+     * Checks if the current actionConfig is using the correct class based on the class of its ancestor ActionConfig.
+     * </p>
+     * 
+     * @param actionConfig
+     *            The action config to check.
+     * @param moduleConfig
+     *            The config for the current module.
+     * @return The config object using the correct class as determined by the config's ancestor and its own overridden
+     *         value.
+     * @throws ServletException
+     *             if an instance of the action config class cannot be created.
+     */
+    protected ActionConfig processActionConfigClass(ActionConfig actionConfig, ModuleConfig moduleConfig)
+            throws ServletException {
+        String ancestor = actionConfig.getExtends();
+
+        if (ancestor == null) {
+            // Nothing to do, then
+            return actionConfig;
+        }
+
+        // Make sure that this config is of the right class
+        ActionConfig baseConfig = moduleConfig.findActionConfig(ancestor);
+
+        if (baseConfig == null) {
+            throw new UnavailableException("Unable to find " + "action config for '" + ancestor + "' to extend.");
+        }
+
+        // Was our actionConfig's class overridden already?
+        if (actionConfig.getClass().equals(ActionMapping.class)) {
+            // Ensure that our config is using the correct class
+            if (!baseConfig.getClass().equals(actionConfig.getClass())) {
+                // Replace the config with an instance of the correct class
+                ActionConfig newActionConfig = null;
+                String baseConfigClassName = baseConfig.getClass().getName();
+
+                try {
+                    newActionConfig = (ActionConfig) RequestUtils.applicationInstance(baseConfigClassName);
+
+                    // copy the values
+                    BeanUtils.copyProperties(newActionConfig, actionConfig);
+
+                    // copy the forward and exception configs, too
+                    ForwardConfig[] forwards = actionConfig.findForwardConfigs();
+
+                    for (int i = 0; i < forwards.length; i++) {
+                        newActionConfig.addForwardConfig(forwards[i]);
+                    }
+
+                    ExceptionConfig[] exceptions = actionConfig.findExceptionConfigs();
+
+                    for (int i = 0; i < exceptions.length; i++) {
+                        newActionConfig.addExceptionConfig(exceptions[i]);
+                    }
+                } catch (Exception e) {
+                    handleCreationException(baseConfigClassName, e);
+                }
+
+                // replace actionConfig with newActionConfig
+                moduleConfig.removeActionConfig(actionConfig);
+                moduleConfig.addActionConfig(newActionConfig);
+                actionConfig = newActionConfig;
+            }
+        }
+
+        return actionConfig;
     }
 
 }

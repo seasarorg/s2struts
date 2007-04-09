@@ -22,46 +22,73 @@ import org.seasar.struts.Constants;
  * @author Katsuhiko Nagashima
  */
 public interface StrutsActionConfig {
+
     String DEFAULT_PATH = Constants.UNDEFINED;
+
     String path();
 
     String DEFAULT_NAME = Constants.UNDEFINED;
+
     String name();
 
     String DEFAULT_SCOPE = Constants.UNDEFINED;
+
     String scope();
 
     Boolean DEFAULT_VALIDATE = null;
+
     Boolean validate();
 
     String DEFAULT_INPUT = Constants.UNDEFINED;
+
     String input();
 
     String DEFAULT_PARAMETER = Constants.UNDEFINED;
+
     String parameter();
 
     String DEFAULT_ATTRIBUTE = Constants.UNDEFINED;
+
     String attribute();
 
     String DEFAULT_FORWARD = Constants.UNDEFINED;
+
     String forward();
 
     String DEFAULT_INCLUDE = Constants.UNDEFINED;
+
     String include();
 
     String DEFAULT_PREFIX = Constants.UNDEFINED;
+
     String prefix();
 
     String DEFAULT_SUFFIX = Constants.UNDEFINED;
+
     String suffix();
 
     Boolean DEFAULT_UNKNOWN = null;
+
     Boolean unknown();
 
     String DEFAULT_ROLES = Constants.UNDEFINED;
+
     String roles();
-    
+
     Boolean DEFAULT_CANCELLABLE = null;
+
     Boolean cancellable();
+
+    String DEFAULT_CATALOG = Constants.UNDEFINED;
+
+    String catalog();
+
+    String DEFAULT_COMMAND = Constants.UNDEFINED;
+
+    String command();
+
+    String DEFAULT_INHERIT = Constants.UNDEFINED;
+
+    String inherit();
 
 }

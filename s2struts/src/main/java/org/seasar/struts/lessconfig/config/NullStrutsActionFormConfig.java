@@ -27,4 +27,8 @@ public class NullStrutsActionFormConfig implements StrutsActionFormConfig {
     public Boolean restricted() {
         return DEFAULT_RESTRICTED;
     }
+
+    public String inherit() {
+        return DEFAULT_INHERIT;
+    }
 }

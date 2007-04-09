@@ -37,6 +37,9 @@ public class ConstantStrutsConfigAnnotationHandlerTest extends S2TestCase {
         assertEquals(Boolean.TRUE, config.validate());
         assertEquals(Boolean.FALSE, config.unknown());
         assertEquals(Boolean.TRUE, config.cancellable());
+        assertEquals("testcatalog", config.catalog());
+        assertEquals("testcommand", config.command());
+        assertEquals("testinherit", config.inherit());
     }
 
     public void testNotCreateStrutsActionConfig() {
@@ -63,6 +66,7 @@ public class ConstantStrutsConfigAnnotationHandlerTest extends S2TestCase {
         assertNotNull(config);
         assertEquals("testFormName", config.name());
         assertEquals(Boolean.FALSE, config.restricted());
+        assertEquals("testinherit", config.inherit());
     }
 
     public void testNotCreateActionFormConfig() {
