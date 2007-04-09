@@ -29,11 +29,13 @@ import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
  * @author Katsuhiko Nagashima
  * 
  */
-public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnnotationHandler {
+public class TigerStrutsConfigAnnotationHandler extends
+        ConstantStrutsConfigAnnotationHandler {
 
     public StrutsActionConfig createStrutsActionConfig(Class clazz) {
         Class<?> actionClass = clazz;
-        final StrutsAction config = actionClass.getAnnotation(StrutsAction.class);
+        final StrutsAction config = actionClass
+                .getAnnotation(StrutsAction.class);
         if (config == null) {
             return super.createStrutsActionConfig(clazz);
         }
@@ -94,11 +96,24 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
                 return config.cancellable().getBoolean();
             }
 
+            public String catalog() {
+                return config.catalog();
+            }
+
+            public String command() {
+                return config.command();
+            }
+
+            public String inherit() {
+                return config.inherit();
+            }
+
         };
     }
 
     public StrutsActionForwardConfig createStrutsActionForwardConfig(Field field) {
-        final StrutsActionForward config = field.getAnnotation(StrutsActionForward.class);
+        final StrutsActionForward config = field
+                .getAnnotation(StrutsActionForward.class);
         if (config == null) {
             return super.createStrutsActionForwardConfig(field);
         }
@@ -117,7 +132,8 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
 
     public StrutsActionFormConfig createStrutsActionFormConfig(Class clazz) {
         Class<?> formClass = clazz;
-        final StrutsActionForm config = formClass.getAnnotation(StrutsActionForm.class);
+        final StrutsActionForm config = formClass
+                .getAnnotation(StrutsActionForm.class);
         if (config == null) {
             return super.createStrutsActionFormConfig(clazz);
         }
@@ -129,6 +145,10 @@ public class TigerStrutsConfigAnnotationHandler extends ConstantStrutsConfigAnno
 
             public Boolean restricted() {
                 return config.restricted().getBoolean();
+            }
+
+            public String inherit() {
+                return config.inherit();
             }
 
         };

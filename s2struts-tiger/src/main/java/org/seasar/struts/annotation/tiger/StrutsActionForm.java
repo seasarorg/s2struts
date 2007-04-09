@@ -35,4 +35,6 @@ public @interface StrutsActionForm {
 
     BoolType restricted() default BoolType.UNDEFINED;
 
+    String inherit() default StrutsActionFormConfig.DEFAULT_INHERIT;
+
 }

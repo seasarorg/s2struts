@@ -6,7 +6,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForm;
 /**
  * @author Katsuhiko Nagashima
  */
-@StrutsActionForm(name = "testFormName", restricted = BoolType.FALSE)
+@StrutsActionForm(name = "testFormName", restricted = BoolType.FALSE, inherit = "testinherit")
 public class TestStrutsConfigAnnotationForm {
 
 }

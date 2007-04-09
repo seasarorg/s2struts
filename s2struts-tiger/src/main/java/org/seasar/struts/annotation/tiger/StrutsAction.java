@@ -59,4 +59,10 @@ public @interface StrutsAction {
 
     BoolType cancellable() default BoolType.UNDEFINED;
 
+    String catalog() default StrutsActionConfig.DEFAULT_CATALOG;
+
+    String command() default StrutsActionConfig.DEFAULT_COMMAND;
+
+    String inherit() default StrutsActionConfig.DEFAULT_INHERIT;
+
 }
