@@ -15,13 +15,13 @@ import org.seasar.struts.lessconfig.config.rule.impl.action.PojoComponentTwoActi
 import org.seasar.struts.lessconfig.config.rule.impl.action.RuleComponentAction;
 import org.seasar.struts.lessconfig.config.rule.impl.action.UndefinedComponentAction;
 
-public class QualifiedActionPathNamingRuleTest extends S2TestCase {
+public class SubApplicationActionPathNamingRuleTest extends S2TestCase {
 
     private ActionPathNamingRule namingRule;
 
     public void setUp() throws Exception {
         super.setUp();
-        include("QualifiedActionPathNamingRuleTest.dicon");
+        include("SubApplicationActionPathNamingRuleTest.dicon");
     }
 
     public void testToComponentClassPathComponentName() {

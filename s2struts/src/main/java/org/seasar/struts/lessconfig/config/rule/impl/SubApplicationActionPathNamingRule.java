@@ -22,7 +22,7 @@ import org.seasar.framework.util.StringUtil;
  * @author Katsuhiko Nagashima
  * 
  */
-public class QualifiedActionPathNamingRule extends DefaultActionPathNamingRule {
+public class SubApplicationActionPathNamingRule extends DefaultActionPathNamingRule {
 
     protected static final char PATH_SEPARATOR = '/';
 

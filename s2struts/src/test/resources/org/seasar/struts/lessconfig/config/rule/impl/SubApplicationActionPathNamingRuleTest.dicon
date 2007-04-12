@@ -2,14 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container//EN"
 "http://www.seasar.org/dtd/components.dtd">
 <components>
-	<component class="org.seasar.framework.convention.impl.NamingConventionImpl">
-		<initMethod name="addRootPackageName">
-			<arg>"org.seasar.struts.lessconfig.config.rule.impl"</arg>
-		</initMethod>
-		<property name="viewExtension">""</property>
-		<property name="viewRootPath">""</property>
-	</component>
-	<component class="org.seasar.struts.lessconfig.config.rule.impl.QualifiedActionPathNamingRule"/>
+	<component class="org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionPathNamingRule"/>
 	<component name="/path"                       class="org.seasar.struts.lessconfig.config.rule.impl.action.PathComponentAction" instance="prototype"/>
 	<component name="/module/modulePath"          class="org.seasar.struts.lessconfig.config.rule.impl.action.ModulePathComponentAction" instance="prototype"/>
 	<component name="/noModulePath"               class="org.seasar.struts.lessconfig.config.rule.impl.action.NoModulePathComponentAction" instance="prototype"/>
