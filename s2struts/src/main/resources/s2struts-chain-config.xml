@@ -226,8 +226,21 @@
 
 
         <!-- Execute the Action for this request -->
+        <!--
         <command
                 className="org.apache.struts.chain.commands.servlet.ExecuteAction"/>
+        -->
+
+        <!-- Actionを実行後、S2Struts Page タグによりつけられた前画面情報urlをクリアする
+             この command は S2Struts Page タグ、
+             無設定によるActionConfig input自動設定を利用する場合必要です。
+             S2Struts Page タグ, 無設定によるActionConfig input自動設定を利用しない場合は
+             Struts が提供している
+             org.apache.struts.chain.commands.servlet.ExecuteAction
+             を利用してください。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.ExecuteActionAndClearPageValue"/>
 
         <!-- S2Struts Page タグ, 無設定によるActionConfig input自動設定で利用する
              urlをSessionに確保します。
