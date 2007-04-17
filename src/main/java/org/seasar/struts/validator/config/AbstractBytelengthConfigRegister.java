@@ -20,15 +20,21 @@ import java.util.Map;
 import org.apache.commons.validator.Arg;
 import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Var;
+import org.seasar.framework.util.StringUtil;
 
 /**
  * @author Katsuhiko Nagashima
  */
 public abstract class AbstractBytelengthConfigRegister implements ConfigRegister {
 
+    private String defaultCharset = null;
+
     public void register(Field field, Map parameter) {
         Object value = parameter.get("value");
         String charset = (String) parameter.get("charset");
+        if (StringUtil.isEmpty(charset)) {
+            charset = this.defaultCharset;
+        }
         String type = getType();
 
         Arg arg = new Arg();
@@ -46,6 +52,10 @@ public abstract class AbstractBytelengthConfigRegister implements ConfigRegister
         var.setName("charset");
         var.setValue(charset);
         field.addVar(var);
+    }
+
+    public void setCharset(String charset) {
+        this.defaultCharset = charset;
     }
 
     protected abstract String getType();

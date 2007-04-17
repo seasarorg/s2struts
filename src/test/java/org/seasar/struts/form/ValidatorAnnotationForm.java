@@ -197,6 +197,19 @@ public class ValidatorAnnotationForm {
         return null;
     }
 
+    public static final String defaultByteLength_VALIDATOR_0 = "minbytelength, value=3";
+
+    public static final String defaultByteLength_VALIDATOR_1 = "maxbytelength, value=5";
+
+    public static final String defaultByteLength_VALIDATOR_ARGS = "DefaultBytelength, resource=false";
+
+    public void setDefaultByteLength(String byteLength) {
+    }
+
+    public String getDefaultByteLength() {
+        return null;
+    }
+
     public static final String range_VALIDATOR = "floatRange, min=5.0, max=10.1";
 
     public static final String range_VALIDATOR_ARGS = "Range, resource=false";
