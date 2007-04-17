@@ -175,6 +175,16 @@ public class ValidatorAnnotationForm {
         return null;
     }
 
+    @Minbytelength(value = 3)
+    @Maxbytelength(value = 5)
+    @Args(keys = "DefaultByteLength", resource = false)
+    public void setDefaultByteLength(String byteLength) {
+    }
+
+    public String getDefaultByteLength() {
+        return null;
+    }
+
     @FloatRange(min = 5.0F, max = 10.1F)
     @Args(keys = "Range", resource = false)
     public void setRange(String range) {
