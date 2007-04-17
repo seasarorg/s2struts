@@ -182,6 +182,16 @@ public class TigerValidatorAnnotationHandlerTest extends S2TestCase {
         assertEquals("ISO8859_1", field.getVarValue("charset"));
     }
 
+    public void testDefaultByteLength() {
+        Field field = form.getField("defaultByteLength");
+        assertNotNull(field);
+        assertEquals("minbytelength,maxbytelength = " + field.getDepends(), "minbytelength,maxbytelength".length(),
+                field.getDepends().length());
+        assertEquals("3", field.getVarValue("minbytelength"));
+        assertEquals("5", field.getVarValue("maxbytelength"));
+        assertNull(field.getVarValue("charset"));
+    }
+
     public void testRange() {
         Field field = form.getField("range");
         assertNotNull(field);
