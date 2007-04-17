@@ -191,6 +191,18 @@ public class ValidatorAnnotationForm {
     }
 
     /**
+     * @org.seasar.struts.validator.annotation.backport175.Minbytelength(value=3)
+     * @org.seasar.struts.validator.annotation.backport175.Maxbytelength(value=5)
+     * @org.seasar.struts.validator.annotation.backport175.Args(keys="DefaultByteLength", resource=false)
+     */
+    public void setDefaultByteLength(String byteLength) {
+    }
+
+    public String getDefaultByteLength() {
+        return null;
+    }
+
+    /**
      * @org.seasar.struts.validator.annotation.backport175.FloatRange(min = 5.0F, max = 10.1F)
      * @org.seasar.struts.validator.annotation.backport175.Args(keys="Range", resource=false)
      */
