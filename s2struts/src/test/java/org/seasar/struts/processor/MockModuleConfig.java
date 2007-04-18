@@ -57,6 +57,11 @@ public class MockModuleConfig implements ModuleConfig {
         return null;
     }
 
+    public ActionConfig findActionConfigId(String actionId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     public ExceptionConfig findExceptionConfig(String arg0) {
         // TODO Auto-generated method stub
         return null;

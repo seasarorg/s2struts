@@ -72,6 +72,10 @@ public class ModuleConfigWrapper implements ModuleConfig, Serializable {
         return config.findActionConfigs();
     }
 
+    public ActionConfig findActionConfigId(String actionId) {
+        return config.findActionConfigId(actionId);
+    }
+
     public ExceptionConfig findExceptionConfig(String arg0) {
         return config.findExceptionConfig(arg0);
     }
