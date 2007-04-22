@@ -188,9 +188,10 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         }
 
         String path = null;
+        String actionPath = getPath(actionClass);
         String[] viewExtension = this.configRule.getViewExtension();
         for (int i = 0; i < viewExtension.length; i++) {
-            String file = getPath(actionClass) + "." + viewExtension[i];
+            String file = actionPath + "." + viewExtension[i];
             path = this.configRule.getDocRoot() + file;
             String packageDir = ClassUtil.getPackageName(actionClass);
             if (packageDir == null) {
