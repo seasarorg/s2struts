@@ -66,4 +66,26 @@ public class ZeroConfigActionRuleImplTest extends S2TestCase {
         assertEquals(0, mapping.findForwardConfigs().length);
     }
 
+    public void testAddFowardConfigSubApplicationComponentName() {
+        ModuleConfig config = new ModuleConfigImpl("");
+        ActionMapping mapping = new MockActionMapping();
+        Class actionClass = TestForwardSubApplicationAction.class;
+
+        this.zeroConfigActionRule.addForwardConfig(config, actionClass, mapping);
+        assertEquals(1, mapping.findForwardConfigs().length);
+
+        ForwardConfig forwardConfig = mapping.findForwardConfigs()[0];
+        assertEquals("success", forwardConfig.getName());
+        assertEquals("/org/seasar/struts/lessconfig/config/rule/impl/test_testForward.jsp", forwardConfig.getPath());
+    }
+
+    public void testNotAddFowardConfigSubApplicationComponentName() {
+        ModuleConfig config = new ModuleConfigImpl("");
+        ActionMapping mapping = new MockActionMapping();
+        Class actionClass = TestNotForwardSubApplicationAction.class;
+
+        this.zeroConfigActionRule.addForwardConfig(config, actionClass, mapping);
+        assertEquals(0, mapping.findForwardConfigs().length);
+    }
+
 }
