@@ -1778,7 +1778,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
   </tr>
   <tr>
-    <td>args</td>
+    <td>value</td>
       <td><center>×</center></td>
       <td><center>-</center></td>
       <td>Argアノテーションで個別に置換パラメータを指定する場合に使用します。<br>
@@ -1843,6 +1843,21 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
         this.value = value;
     }
 </pre>
+<h4>Messages</h4>
+<p>
+複数のMessageアノテーションを指定したい場合に使用します。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>複数のMessageアノテーションを指定します。</td>
+  </tr>
+</table>
 <h4>Message</h4>
 <p>
 デフォルトメッセージの代わりに個別のメッセージを表示したい場合に指定します。<br>
