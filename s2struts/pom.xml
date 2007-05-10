@@ -9,7 +9,7 @@
   <artifactId>s2-struts</artifactId>
   <packaging>jar</packaging>
   <name>s2-struts</name>
-  <version>1.3.0-RC1-SNAPSHOT</version>
+  <version>1.3.0-RC1</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
   <issueManagement>
