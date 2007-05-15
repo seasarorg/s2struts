@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.lessconfig.autoregister;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -26,7 +27,9 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory
 /**
  * @author Satoshi Kimura
  */
-public class ClassComparator implements Comparator {
+public class ClassComparator implements Comparator, Serializable {
+
+    private static final long serialVersionUID = -8018713861613285412L;
 
     public int compare(Object o1, Object o2) {
         Class clazz1 = (Class) o1;

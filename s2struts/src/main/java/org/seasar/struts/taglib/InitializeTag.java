@@ -46,7 +46,7 @@ public class InitializeTag extends BaseTag {
         MethodBinding methodBinding = new MethodBinding(this.action);
         methodBinding.invoke();
         
-        Boolean skipPage = new Boolean(false);
+        Boolean skipPage = Boolean.valueOf(false);
 
         if(isCommited != this.pageContext.getResponse().isCommitted()) {
 
