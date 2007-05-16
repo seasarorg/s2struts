@@ -73,4 +73,7 @@
 	</component>
 	<component name="connectorCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 	</component>
+
+	<component name="formCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+	</component>
 </components>
