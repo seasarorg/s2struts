@@ -37,4 +37,7 @@
 			<arg>s2DaoCustomizer</arg>
 		</initMethod>
 	</component>
+
+	<component name="formCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+	</component>
 </components>
