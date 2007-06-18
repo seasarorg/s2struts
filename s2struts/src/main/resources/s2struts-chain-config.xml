@@ -132,11 +132,17 @@
         -->
         <command
                 className="org.seasar.struts.pojo.processor.commands.WrapActionForm"/>
-                
+
         <!-- Create (if needed) the ActionForm for this request -->
         <command
                 className="org.apache.struts.chain.commands.CreateActionForm"/>
 
+        <!-- BeanValidatorForm を S2BeanValidatorForm にラップしなおします。
+             この command は POJO Action, POJO Form を利用する場合、必要です。
+             POJO Action, POJO Form を利用しない場合は不要です。
+        -->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.WrapS2BeanValidatorForm"/>
 
         <!-- Populate the ActionForm for this request -->
         <command
