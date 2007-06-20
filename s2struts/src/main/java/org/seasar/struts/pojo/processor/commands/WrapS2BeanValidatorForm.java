@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.chain.commands.ActionCommandBase;
 import org.apache.struts.chain.contexts.ActionContext;
+import org.apache.struts.chain.contexts.ServletActionContext;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.struts.pojo.form.S2BeanValidatorForm;
@@ -43,13 +44,17 @@ public class WrapS2BeanValidatorForm extends ActionCommandBase {
             return false;
         }
 
-        form = new S2BeanValidatorForm((BeanValidatorForm) form);
+        ActionForm newForm = new S2BeanValidatorForm((BeanValidatorForm) form);
+        if (actionContext instanceof ServletActionContext) {
+            ServletActionContext sac = (ServletActionContext) actionContext;
+            newForm.setServlet(sac.getActionServlet());
+        }
 
         ActionConfig actionConfig = actionContext.getActionConfig();
         Map scope = actionContext.getScope(actionConfig.getScope());
 
-        actionContext.setActionForm(form);
-        scope.put(actionConfig.getAttribute(), form);
+        actionContext.setActionForm(newForm);
+        scope.put(actionConfig.getAttribute(), newForm);
 
         return false;
     }
