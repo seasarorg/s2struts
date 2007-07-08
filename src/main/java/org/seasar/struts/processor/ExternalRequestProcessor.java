@@ -29,6 +29,7 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.InvalidCancelException;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.apache.struts.util.MessageResources;
 
 /**
  * @author Satoshi Kimura
@@ -184,7 +185,17 @@ public interface ExternalRequestProcessor {
      */
     void setExecuteProcessor(ActionExecuteProcessor executeProcessor);
 
+    /**
+     * @see org.apache.struts.action.RequestProcessor#internalModuleRelativeForward(java.lang.String,
+     *      javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
+    void internalModuleRelativeForward(String path, HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException;
+
     ModuleConfig getModuleConfig();
     
     ActionServlet getActionServlet();
+
+    MessageResources getInternal();
+
 }

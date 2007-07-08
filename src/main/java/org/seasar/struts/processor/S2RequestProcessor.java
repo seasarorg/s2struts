@@ -30,6 +30,7 @@ import org.apache.struts.action.InvalidCancelException;
 import org.apache.struts.action.RequestProcessor;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
+import org.apache.struts.util.MessageResources;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.action.ActionFactory;
 import org.seasar.struts.util.S2StrutsContextUtil;
@@ -247,6 +248,16 @@ public class S2RequestProcessor extends RequestProcessor implements ExternalRequ
         
         S2StrutsContextUtil.setPath(uri);
         super.doForward(uri, request, response);
+    }
+
+    public void internalModuleRelativeForward(String path,
+            HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        super.internalModuleRelativeForward(path, request, response);
+    }
+
+    public MessageResources getInternal() {
+        return super.getInternal();
     }
 
 }
