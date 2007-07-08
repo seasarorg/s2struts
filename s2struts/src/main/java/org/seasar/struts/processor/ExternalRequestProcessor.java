@@ -168,6 +168,14 @@ public interface ExternalRequestProcessor {
      */
     void doInclude(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 
+    /**
+     * @see org.apache.struts.action.RequestProcessor#internalModuleRelativeForward(java.lang.String,
+     *      javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
+    void internalModuleRelativeForward(String path,
+            HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException;
+
     ModuleConfig getModuleConfig();
 
     ActionServlet getActionServlet();
@@ -175,5 +183,4 @@ public interface ExternalRequestProcessor {
     MessageResources getInternal();
 
     Log getLog();
-
 }

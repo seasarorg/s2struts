@@ -267,4 +267,8 @@ public class MockRequestProcessor implements ExternalRequestProcessor {
         return "MockRequestProcessor";
     }
 
+    public void internalModuleRelativeForward(String path, HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+    }
+
 }

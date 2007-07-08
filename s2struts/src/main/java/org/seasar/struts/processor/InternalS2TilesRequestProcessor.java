@@ -149,6 +149,12 @@ public class InternalS2TilesRequestProcessor extends TilesRequestProcessor imple
         return super.processActionCreate(request, response, mapping);
     }
 
+    public void internalModuleRelativeForward(String path,
+            HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        super.internalModuleRelativeForward(path, request, response);
+    }
+
     public ActionForward processException(HttpServletRequest request, HttpServletResponse response, Exception exception,
             ActionForm form, ActionMapping mapping) throws IOException, ServletException {
         return super.processException(request, response, exception, form, mapping);
