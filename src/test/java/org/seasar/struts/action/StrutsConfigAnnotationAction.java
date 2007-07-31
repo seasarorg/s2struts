@@ -11,11 +11,11 @@ public interface StrutsConfigAnnotationAction {
             + ", cancellable=true";
 
     String SUCCESS_FORWARD = "/test.jsp";
-    
+
     String SUCCESS = "success";
 
-    String FAIL_FORWARD = "/fail.jsp, redirect=true"; 
-    
+    String FAIL_FORWARD = "/fail.jsp, redirect=true";
+
     String FAIL = "fail";
 
     String CONST = "const";

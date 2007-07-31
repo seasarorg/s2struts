@@ -33,7 +33,8 @@ public class MethodBindingUtil {
         if (index > 0) {
             return expression.substring(2, index);
         } else {
-            throw new IllegalArgumentException("component was not found. arg: " + expression);
+            throw new IllegalArgumentException("component was not found. arg: "
+                    + expression);
         }
     }
 
@@ -45,7 +46,8 @@ public class MethodBindingUtil {
         if (index > 0) {
             return expression.substring(index + 1, expression.length() - 1);
         } else {
-            throw new IllegalArgumentException("method was not found. arg: " + expression);
+            throw new IllegalArgumentException("method was not found. arg: "
+                    + expression);
         }
     }
 

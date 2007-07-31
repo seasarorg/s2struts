@@ -42,10 +42,9 @@ import org.seasar.struts.processor.ExternalRequestProcessor;
 import org.seasar.struts.util.BeanValidatorFormUtil;
 
 /**
- * <component class="org.seasar.struts.processor.S2RequestProcessor">
- *     <aspect pointcut="processActionForm">
- *         <component class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/>
- *     </aspect>
+ * <component class="org.seasar.struts.processor.S2RequestProcessor"> <aspect
+ * pointcut="processActionForm"> <component
+ * class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/> </aspect>
  * </component>
  * 
  * @author Katsuhiko Nagashima
@@ -53,7 +52,7 @@ import org.seasar.struts.util.BeanValidatorFormUtil;
 public class ProcessPojoFormInterceptor extends AbstractInterceptor {
     private static final long serialVersionUID = 2099594177189105461L;
 
-	public Object invoke(MethodInvocation invocation) throws Throwable {
+    public Object invoke(MethodInvocation invocation) throws Throwable {
         ActionMapping mapping = getMapping(invocation);
         ModuleConfig moduleConfig = getModuleConfig(invocation);
 
@@ -71,33 +70,34 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
 
         FormBeanConfig formConfig = moduleConfig.findFormBeanConfig(mapping
                 .getName());
-        
-        if(formConfig == null) {
+
+        if (formConfig == null) {
             return false;
         }
-        
+
         Class fromClass = RequestUtils.applicationClass(formConfig.getType());
 
         return !(ActionForm.class.isAssignableFrom(fromClass));
     }
-    
+
     private ActionForm processPojoForm(HttpServletRequest request,
             ActionMapping mapping, ModuleConfig moduleConfig,
             ActionServlet servlet) {
-        
-        ActionForm instance = createPojoForm(request, mapping, moduleConfig, servlet);
+
+        ActionForm instance = createPojoForm(request, mapping, moduleConfig,
+                servlet);
         if (instance == null) {
             return null;
         }
-        
+
         if (Constants.REQUEST.equals(mapping.getScope())) {
             request.setAttribute(mapping.getAttribute(), instance);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute(mapping.getAttribute(), instance);
         }
-        return instance; 
-        
+        return instance;
+
     }
 
     private ActionForm createPojoForm(HttpServletRequest request,
@@ -120,19 +120,21 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
             if (instance instanceof SerializeBeanValidatorForm) {
                 return (ActionForm) instance;
             }
-            
+
             if (!(instance instanceof BeanValidatorForm)) {
                 instance = new BeanValidatorForm(instance);
             }
-            return new SerializeBeanValidatorForm((BeanValidatorForm) instance, servlet);
+            return new SerializeBeanValidatorForm((BeanValidatorForm) instance,
+                    servlet);
         }
 
         instance = RequestUtils.createActionForm(config, servlet);
-        return new SerializeBeanValidatorForm((BeanValidatorForm) instance, servlet);
+        return new SerializeBeanValidatorForm((BeanValidatorForm) instance,
+                servlet);
     }
 
-    private Object lookupPojoForm(HttpServletRequest request,
-            String attribute, String scope) {
+    private Object lookupPojoForm(HttpServletRequest request, String attribute,
+            String scope) {
 
         if ("request".equals(scope)) {
             return request.getAttribute(attribute);
@@ -141,7 +143,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
             return session.getAttribute(attribute);
         }
     }
-    
+
     private boolean canReusePojoForm(Object instance, FormBeanConfig config) {
         Class configClass = ClassUtil.forName(config.getType());
         Object bean = BeanValidatorFormUtil.toBean(instance);
@@ -173,20 +175,21 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
     }
 
     //
-    // serialize‰Â”\‚É‚·‚é‚½‚ß‚ÌƒNƒ‰ƒXÄ’è‹`
+    // serializeï¿½Â”\ï¿½É‚ï¿½ï¿½é‚½ï¿½ß‚ÌƒNï¿½ï¿½ï¿½Xï¿½Ä’ï¿½`
     //
 
     public static class SerializeBeanValidatorForm extends S2BeanValidatorForm {
         private static final long serialVersionUID = 7286186270470466966L;
-		protected Object bean = null;
+
+        protected Object bean = null;
 
         public SerializeBeanValidatorForm(BeanValidatorForm form,
                 ActionServlet servlet) {
 
-            // WrapDynaBean‚ğƒtƒB[ƒ‹ƒh‚Å‚Â‚ÆSerialize‚Å‚«‚È‚­‚È‚éB
-            // ‚»‚ê‚ğ‰ñ”ğ‚·‚é‚½‚ß‚É
-            // getDynaBean()‚Ì‚Æ‚«‚É–ˆ‰ñWrapDynaBean‚ğ¶¬‚·‚é‚æ‚¤‚É‚·‚éB
-            // ‚æ‚Á‚ÄAdynaBean‚Í—˜—p‚µ‚È‚¢‚Ì‚ÅAnull‚É‰Šú‰»‚·‚éB
+            // WrapDynaBeanï¿½ï¿½tï¿½Bï¿½[ï¿½ï¿½ï¿½hï¿½Åï¿½ï¿½Â‚ï¿½Serializeï¿½Å‚ï¿½ï¿½È‚ï¿½ï¿½È‚ï¿½B
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â·‚é‚½ï¿½ß‚ï¿½
+            // getDynaBean()ï¿½Ì‚Æ‚ï¿½ï¿½É–ï¿½ï¿½ï¿½WrapDynaBeanï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½B
+            // ï¿½ï¿½BÄAdynaBeanï¿½Í—ï¿½ï¿½pï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚ÅAnullï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½B
             super(form);
             this.dynaBean = null;
 
@@ -195,7 +198,7 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
         }
 
         // ------------------- Public Methods ----------------------------------
-        
+
         public void initBean(Object beanObject) {
             this.bean = beanObject;
         }
@@ -266,8 +269,8 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
                     this.page = ((Integer) value).intValue();
                 } else {
                     try {
-                        this.page = ((Integer) ConvertUtils.convert(
-                                value.toString(), Integer.class)).intValue();
+                        this.page = ((Integer) ConvertUtils.convert(value
+                                .toString(), Integer.class)).intValue();
                     } catch (RuntimeException ignore) {
                         this.page = 0;
                     }

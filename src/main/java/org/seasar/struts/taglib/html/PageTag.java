@@ -33,7 +33,6 @@ public class PageTag extends BaseTag {
         String path = S2StrutsContextUtil.getCurrentInputPath();
         path = new String(Base64Util.encode(path.getBytes()));
 
-
         if (path == null) {
             return SKIP_BODY;
         }

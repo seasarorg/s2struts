@@ -22,9 +22,10 @@ import org.seasar.struts.util.ConstantAnnotationUtil;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
-public class ConstantPropertyDescComparator extends AbstractPropertyDescComparator {
+public class ConstantPropertyDescComparator extends
+        AbstractPropertyDescComparator {
 
     private static final String ORDER_SUFFIX = "_VALIDATOR_ORDER";
 
@@ -37,10 +38,12 @@ public class ConstantPropertyDescComparator extends AbstractPropertyDescComparat
         if (!this.beanDesc.hasField(fieldName)) {
             return 999;
         }
-        if (!ConstantAnnotationUtil.isConstantAnnotationIntField(this.beanDesc.getField(fieldName))) {
+        if (!ConstantAnnotationUtil.isConstantAnnotationIntField(this.beanDesc
+                .getField(fieldName))) {
             return 999;
         }
-        return ((Integer) this.beanDesc.getFieldValue(fieldName, null)).intValue();
+        return ((Integer) this.beanDesc.getFieldValue(fieldName, null))
+                .intValue();
     }
 
 }

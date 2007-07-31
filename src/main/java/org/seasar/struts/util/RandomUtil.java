@@ -44,7 +44,7 @@ public abstract class RandomUtil {
     }
 
     private static void init() {
-        Collection values = (Collection)primary.get();
+        Collection values = (Collection) primary.get();
         if (values == null) {
             primary.set(new HashSet());
         }
@@ -52,7 +52,7 @@ public abstract class RandomUtil {
 
     private static boolean isUsedValue(long value) {
         Long val = new Long(value);
-        Collection values = (Collection)primary.get();
+        Collection values = (Collection) primary.get();
         if (values.contains(val)) {
             return true;
         } else {

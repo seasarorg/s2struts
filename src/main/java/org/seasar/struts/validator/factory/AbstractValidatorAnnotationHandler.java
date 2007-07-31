@@ -42,7 +42,8 @@ import org.seasar.struts.validator.config.ConfigRegister;
 /**
  * @author Katsuhiko Nagashima
  */
-public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnnotationHandler {
+public abstract class AbstractValidatorAnnotationHandler implements
+        ValidatorAnnotationHandler {
 
     private static final String VALIDATOR_TYPE_PREFIX_RE = "Type$";
 
@@ -79,7 +80,8 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         }
     }
 
-    protected void registerField(Form form, Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+    protected void registerField(Form form, Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         String depends = getDepends(beanDesc, propDesc);
         if (depends == null) {
             if (isNestedValidate(propDesc)) {
@@ -88,7 +90,8 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
                 if (nestedClass.isArray()) {
                     nestedClass = nestedClass.getComponentType();
                 }
-                BeanDesc nestedBeanDesc = BeanDescFactory.getBeanDesc(nestedClass);
+                BeanDesc nestedBeanDesc = BeanDescFactory
+                        .getBeanDesc(nestedClass);
                 registerFields(form, nestedField, nestedBeanDesc);
             }
             return;
@@ -110,7 +113,8 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         form.addField(newField);
     }
 
-    protected boolean registeredField(Form form, Field field, PropertyDesc propDesc) {
+    protected boolean registeredField(Form form, Field field,
+            PropertyDesc propDesc) {
         String key = getFieldKey(field, propDesc);
         return form.getField(key) != null;
     }
@@ -140,7 +144,8 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         return true;
     }
 
-    protected Field createField(Field field, PropertyDesc propDesc, String depends) {
+    protected Field createField(Field field, PropertyDesc propDesc,
+            String depends) {
         Field newField = new Field();
         newField.setDepends(depends);
 
@@ -174,21 +179,29 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
 
     protected abstract Comparator getPropertyDescComparator(BeanDesc beanDesc);
 
-    protected abstract boolean noValidate(BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract boolean noValidate(BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
-    protected abstract String getDepends(BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract String getDepends(BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
-    protected abstract void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract void registerMessage(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
-    protected abstract boolean hasArgsAnnotation(BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract boolean hasArgsAnnotation(BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
-    protected abstract void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract void registerArgs(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
-    protected abstract boolean hasArgAnnotation(BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract boolean hasArgAnnotation(BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
-    protected abstract void registerArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract void registerArg(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
-    protected abstract void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc);
+    protected abstract void registerConfig(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc);
 
     // -----------------------------------------------------------------------
 
@@ -210,22 +223,27 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
             return "byte";
         } else if (Date.class.isAssignableFrom(paramType)) {
             return "date";
-        } else if (paramType.equals(Double.class) || paramType.equals(Double.TYPE)) {
+        } else if (paramType.equals(Double.class)
+                || paramType.equals(Double.TYPE)) {
             return "double";
-        } else if (paramType.equals(Float.class) || paramType.equals(Float.TYPE)) {
+        } else if (paramType.equals(Float.class)
+                || paramType.equals(Float.TYPE)) {
             return "float";
-        } else if (paramType.equals(Integer.class) || paramType.equals(Integer.TYPE)) {
+        } else if (paramType.equals(Integer.class)
+                || paramType.equals(Integer.TYPE)) {
             return "integer";
         } else if (paramType.equals(Long.class) || paramType.equals(Long.TYPE)) {
             return "long";
-        } else if (paramType.equals(Short.class) || paramType.equals(Short.TYPE)) {
+        } else if (paramType.equals(Short.class)
+                || paramType.equals(Short.TYPE)) {
             return "short";
         }
 
         return null;
     }
 
-    protected void registerAutoTypeValidatorConfig(Field field, PropertyDesc propDesc) {
+    protected void registerAutoTypeValidatorConfig(Field field,
+            PropertyDesc propDesc) {
         String autoTypeValidatorName = getAutoTypeValidatorName(propDesc);
         if (StringUtil.isEmpty(autoTypeValidatorName)) {
             return;
@@ -242,28 +260,33 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
         return container.hasComponentDef(registerName);
     }
 
-    protected void executeConfigRegister(Field field, String validatorName, Map parameters) {
+    protected void executeConfigRegister(Field field, String validatorName,
+            Map parameters) {
         String registerName = getConfigRegisterName(validatorName);
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        ConfigRegister register = (ConfigRegister) container.getComponent(registerName);
+        ConfigRegister register = (ConfigRegister) container
+                .getComponent(registerName);
         register.register(field, parameters);
     }
 
     protected void executeArgsConfigRegister(Field field, Map parameters) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        ConfigRegister register = (ConfigRegister) container.getComponent("argsConfigRegister");
+        ConfigRegister register = (ConfigRegister) container
+                .getComponent("argsConfigRegister");
         register.register(field, parameters);
     }
 
     protected void executeArgConfigRegister(Field field, Map parameters) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        ConfigRegister register = (ConfigRegister) container.getComponent("argConfigRegister");
+        ConfigRegister register = (ConfigRegister) container
+                .getComponent("argConfigRegister");
         register.register(field, parameters);
     }
 
     protected void executeMessageConfigRegister(Field field, Map parameters) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        ConfigRegister register = (ConfigRegister) container.getComponent("messageConfigRegister");
+        ConfigRegister register = (ConfigRegister) container
+                .getComponent("messageConfigRegister");
         register.register(field, parameters);
     }
 
@@ -272,7 +295,8 @@ public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnn
     }
 
     protected String getValidatorName(Class clazz) {
-        String validatorName = CommonNamingRule.decapitalizeName(ClassUtil.getShortClassName(clazz));
+        String validatorName = CommonNamingRule.decapitalizeName(ClassUtil
+                .getShortClassName(clazz));
         return validatorName.replaceFirst(VALIDATOR_TYPE_PREFIX_RE, "");
     }
 

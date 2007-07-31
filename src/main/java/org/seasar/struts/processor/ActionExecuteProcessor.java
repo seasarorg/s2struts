@@ -28,7 +28,8 @@ import org.apache.struts.action.ActionMapping;
  * @author Satoshi Kimura
  */
 public interface ActionExecuteProcessor {
-    public ActionForward processActionExecute(HttpServletRequest request, HttpServletResponse response, Object action,
-            Object form, ActionMapping mapping) throws IOException, ServletException;
+    public ActionForward processActionExecute(HttpServletRequest request,
+            HttpServletResponse response, Object action, Object form,
+            ActionMapping mapping) throws IOException, ServletException;
 
 }

@@ -37,7 +37,7 @@ public class DispatchPojoActionCommand implements PojoActionCommand {
         if (param == null) {
             return NOT_EXECUTE;
         }
-        
+
         Method[] methods = actionInterface.getMethods();
         if (methods.length < 2) {
             return NOT_EXECUTE;
@@ -50,16 +50,16 @@ public class DispatchPojoActionCommand implements PojoActionCommand {
         }
         return (String) MethodUtil.invoke(method, action, null);
     }
-    
+
     private Method getMethod(Method[] methods, String methodName) {
-    	for (int i = 0; i < methods.length; i++) {
-    		Method method = methods[i];
-    		if (method.getName().equals(methodName)
-					&& method.getParameterTypes().length == 0) {
-    			return method;
-			}
-    	}
-    	return null;
+        for (int i = 0; i < methods.length; i++) {
+            Method method = methods[i];
+            if (method.getName().equals(methodName)
+                    && method.getParameterTypes().length == 0) {
+                return method;
+            }
+        }
+        return null;
     }
 
 }

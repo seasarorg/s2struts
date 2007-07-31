@@ -29,7 +29,7 @@ import org.seasar.framework.util.ClassUtil;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class ClassPool {
 
@@ -37,19 +37,21 @@ public class ClassPool {
 
     private static final String CLASS_FILE_EXTENTION = ".class";
 
-    private static final int CLASS_FILE_EXTENTION_LENGTH = CLASS_FILE_EXTENTION.length();
+    private static final int CLASS_FILE_EXTENTION_LENGTH = CLASS_FILE_EXTENTION
+            .length();
 
     private static final char FILE_SEPARATOR = File.separatorChar;
 
     private Collection classCollection = new ArrayList();
 
-    public void loadAllClass(String classpath, boolean enableJar, String jarFilePattern,
-            String pattern) {
+    public void loadAllClass(String classpath, boolean enableJar,
+            String jarFilePattern, String pattern) {
         File path = new File(classpath);
         loadAllClass(path, enableJar, jarFilePattern, pattern);
     }
-    
-    public void loadAllClass(File path, boolean enableJar, String jarFilePattern, String pattern) {
+
+    public void loadAllClass(File path, boolean enableJar,
+            String jarFilePattern, String pattern) {
         if (!path.exists()) {
             return;
         }
@@ -63,7 +65,8 @@ public class ClassPool {
 
     public void loadFromJar(File path, String jarFilePattern, String pattern) {
         if (jarFilePattern == null || jarFilePattern.length() == 0) {
-            logger.debug("Not load jarFile because of undefineding jarFilePattern.");
+            logger
+                    .debug("Not load jarFile because of undefineding jarFilePattern.");
             return;
         }
 
@@ -114,7 +117,8 @@ public class ClassPool {
             } else {
                 if (files[i].getName().endsWith(CLASS_FILE_EXTENTION)) {
                     String classFilePath = files[i].getAbsolutePath();
-                    String classResourceName = classFilePath.substring(rootPathDirNameLength);
+                    String classResourceName = classFilePath
+                            .substring(rootPathDirNameLength);
                     Class clazz = forResourceName(classResourceName);
                     addToCollection(clazz, pattern);
                 }
@@ -132,7 +136,8 @@ public class ClassPool {
     }
 
     private static final Class forResourceName(String classResourceName) {
-        String className = classResourceName.substring(0, classResourceName.length()
+        String className = classResourceName.substring(0, classResourceName
+                .length()
                 - CLASS_FILE_EXTENTION_LENGTH);
         className = className.replace(FILE_SEPARATOR, '.');
         className = className.replace('/', '.');

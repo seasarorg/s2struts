@@ -7,6 +7,7 @@ import org.apache.struts.action.Action;
  */
 public class Test2Action extends Action implements TestServiceMarker {
     private boolean executedInitMethod = false;
+
     private boolean executedDestroyMethod = false;
 
     public Test2Action() {
@@ -23,6 +24,7 @@ public class Test2Action extends Action implements TestServiceMarker {
     public boolean isExecutedDestroyMethod() {
         return executedDestroyMethod;
     }
+
     public boolean isExecutedInitMethod() {
         return executedInitMethod;
     }

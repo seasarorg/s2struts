@@ -23,7 +23,7 @@ import org.seasar.struts.util.S2StrutsContextUtil;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class CancelTag extends org.apache.struts.taglib.html.CancelTag {
 

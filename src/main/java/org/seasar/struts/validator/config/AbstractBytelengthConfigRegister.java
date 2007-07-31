@@ -25,7 +25,8 @@ import org.seasar.framework.util.StringUtil;
 /**
  * @author Katsuhiko Nagashima
  */
-public abstract class AbstractBytelengthConfigRegister implements ConfigRegister {
+public abstract class AbstractBytelengthConfigRegister implements
+        ConfigRegister {
 
     private String defaultCharset = null;
 

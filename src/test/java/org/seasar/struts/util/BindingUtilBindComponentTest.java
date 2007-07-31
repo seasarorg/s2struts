@@ -25,16 +25,19 @@ public class BindingUtilBindComponentTest extends S2TestCase {
         TestPackageComponentTwoForm packageTwoForm = new TestPackageComponentTwoForm();
 
         getRequest().setAttribute("simpleComponentForm", simpleForm);
-        getRequest().setAttribute("package_packageComponentOneForm", packageOneForm);
-        getRequest().setAttribute("package_packageComponentTwoForm", packageTwoForm);
+        getRequest().setAttribute("package_packageComponentOneForm",
+                packageOneForm);
+        getRequest().setAttribute("package_packageComponentTwoForm",
+                packageTwoForm);
 
         TestBindingComponentActionImpl action = new TestBindingComponentActionImpl();
-        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(TestBindingComponentActionImpl.class),
-                new MockActionMapping());
+        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(
+                TestBindingComponentActionImpl.class), new MockActionMapping());
 
         assertEquals(simpleForm, action.getSimpleComponentForm());
         assertEquals(packageOneForm, action.getPackageComponentOneForm());
-        assertEquals(packageTwoForm, action.getPackage_packageComponentTwoForm());
+        assertEquals(packageTwoForm, action
+                .getPackage_packageComponentTwoForm());
     }
 
     public void testImportNotRegisteredComponent() {
@@ -43,16 +46,19 @@ public class BindingUtilBindComponentTest extends S2TestCase {
         TestPackageComponentTwoForm packageTwoForm = new TestPackageComponentTwoForm();
 
         getRequest().setAttribute("simpleComponentForm", simpleForm);
-        getRequest().setAttribute("package_packageComponentOneForm", packageOneForm);
-        getRequest().setAttribute("package_packageComponentTwoForm", packageTwoForm);
+        getRequest().setAttribute("package_packageComponentOneForm",
+                packageOneForm);
+        getRequest().setAttribute("package_packageComponentTwoForm",
+                packageTwoForm);
 
         TestBindingComponentActionImpl action = new TestBindingComponentActionImpl();
-        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(TestBindingComponentActionImpl.class),
-                new MockActionMapping());
+        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(
+                TestBindingComponentActionImpl.class), new MockActionMapping());
 
         assertEquals(simpleForm, action.getSimpleComponentForm());
         assertNull(action.getPackageComponentOneForm());
-        assertEquals(packageTwoForm, action.getPackage_packageComponentTwoForm());
+        assertEquals(packageTwoForm, action
+                .getPackage_packageComponentTwoForm());
     }
 
     public void setUpExportRegisterdComponent() {
@@ -69,12 +75,15 @@ public class BindingUtilBindComponentTest extends S2TestCase {
         action.setPackageComponentOneForm(packageOneForm);
         action.setPackage_packageComponentTwoForm(packageTwoForm);
 
-        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(TestBindingComponentActionImpl.class),
-                new MockActionMapping());
+        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(
+                TestBindingComponentActionImpl.class), new MockActionMapping());
 
-        assertEquals(simpleForm, getRequest().getAttribute("simpleComponentForm"));
-        assertEquals(packageOneForm, getRequest().getAttribute("package_packageComponentOneForm"));
-        assertEquals(packageTwoForm, getRequest().getAttribute("package_packageComponentTwoForm"));
+        assertEquals(simpleForm, getRequest().getAttribute(
+                "simpleComponentForm"));
+        assertEquals(packageOneForm, getRequest().getAttribute(
+                "package_packageComponentOneForm"));
+        assertEquals(packageTwoForm, getRequest().getAttribute(
+                "package_packageComponentTwoForm"));
     }
 
     public void testExportNotRegisterdComponent() {
@@ -87,12 +96,14 @@ public class BindingUtilBindComponentTest extends S2TestCase {
         action.setPackageComponentOneForm(packageOneForm);
         action.setPackage_packageComponentTwoForm(packageTwoForm);
 
-        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(TestBindingComponentActionImpl.class),
-                new MockActionMapping());
+        BindingUtil.exportProperties(action, getContainer(), new BeanDescImpl(
+                TestBindingComponentActionImpl.class), new MockActionMapping());
 
-        assertEquals(simpleForm, getRequest().getAttribute("simpleComponentForm"));
+        assertEquals(simpleForm, getRequest().getAttribute(
+                "simpleComponentForm"));
         assertNull(getRequest().getAttribute("package_packageComponentOneForm"));
-        assertEquals(packageTwoForm, getRequest().getAttribute("package_packageComponentTwoForm"));
+        assertEquals(packageTwoForm, getRequest().getAttribute(
+                "package_packageComponentTwoForm"));
     }
 
 }

@@ -69,8 +69,8 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
             super.property = Base64Util.encode(this.action.getBytes());
         }
         String mappingName = TagUtil.getActionMappingName(this.pageContext);
-        S2StrutsContextUtil.setMethodBindingExpression(mappingName, super.property, null,
-                this.action);
+        S2StrutsContextUtil.setMethodBindingExpression(mappingName,
+                super.property, null, this.action);
     }
 
     protected void setCancelAction() throws JspException {

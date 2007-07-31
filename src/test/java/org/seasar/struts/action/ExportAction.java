@@ -6,5 +6,5 @@ package org.seasar.struts.action;
 public interface ExportAction {
 
     String exe();
-    
+
 }

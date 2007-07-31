@@ -10,7 +10,8 @@ import org.seasar.struts.form.ValidatorAnnotationBigDecimalForm;
  * @author Katsuhiko Nagashima
  * 
  */
-public class ConstantValidatorAnnotationHandlerBigDecimalTest extends S2TestCase {
+public class ConstantValidatorAnnotationHandlerBigDecimalTest extends
+        S2TestCase {
 
     private ValidatorAnnotationHandler annHandler;
 
@@ -23,7 +24,8 @@ public class ConstantValidatorAnnotationHandlerBigDecimalTest extends S2TestCase
     }
 
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", ValidatorAnnotationBigDecimalForm.class);
+        form = annHandler.createForm("testForm",
+                ValidatorAnnotationBigDecimalForm.class);
     }
 
     public void testFieldCount() {

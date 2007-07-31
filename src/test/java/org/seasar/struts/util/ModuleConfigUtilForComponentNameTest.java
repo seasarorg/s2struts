@@ -33,20 +33,23 @@ public class ModuleConfigUtilForComponentNameTest extends S2TestCase {
     }
 
     public void testFindActionConfigForComponentName() {
-        ActionConfig config = ModuleConfigUtil.findActionConfigForComponentName("testComponent1Action");
+        ActionConfig config = ModuleConfigUtil
+                .findActionConfigForComponentName("testComponent1Action");
 
         assertNotNull(config);
         assertEquals("/testComponent1", config.getPath());
     }
 
     public void testNotFoundActionConfigForComponentName1() {
-        ActionConfig config = ModuleConfigUtil.findActionConfigForComponentName("testComponent2Action");
+        ActionConfig config = ModuleConfigUtil
+                .findActionConfigForComponentName("testComponent2Action");
 
         assertNull(config);
     }
 
     public void testNotFoundActionConfigForComponentName2() {
-        ActionConfig config = ModuleConfigUtil.findActionConfigForComponentName("testComponent3Action");
+        ActionConfig config = ModuleConfigUtil
+                .findActionConfigForComponentName("testComponent3Action");
 
         assertNull(config);
     }

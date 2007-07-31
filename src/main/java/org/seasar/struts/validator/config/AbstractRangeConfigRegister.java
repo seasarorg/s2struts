@@ -30,7 +30,7 @@ public abstract class AbstractRangeConfigRegister implements ConfigRegister {
         Object min = parameter.get("min");
         Object max = parameter.get("max");
         String type = getType();
-        
+
         Arg arg = new Arg();
         arg.setName(type);
         arg.setKey("${var:min}");
@@ -53,7 +53,7 @@ public abstract class AbstractRangeConfigRegister implements ConfigRegister {
         var.setValue(max.toString());
         field.addVar(var);
     }
-    
+
     protected abstract String getType();
 
 }

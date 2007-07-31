@@ -1,6 +1,5 @@
 package org.seasar.struts.action;
 
-
 /**
  * @author Satoshi Kimura
  */

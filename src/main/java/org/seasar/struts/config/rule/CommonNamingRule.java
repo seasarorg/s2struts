@@ -28,7 +28,8 @@ public abstract class CommonNamingRule {
             name = name.replaceFirst("Impl$", "");
         }
 
-        if (name.length() > 1 && Character.isUpperCase(name.charAt(1)) && Character.isUpperCase(name.charAt(0))) {
+        if (name.length() > 1 && Character.isUpperCase(name.charAt(1))
+                && Character.isUpperCase(name.charAt(0))) {
             return name;
         }
         char chars[] = name.toCharArray();

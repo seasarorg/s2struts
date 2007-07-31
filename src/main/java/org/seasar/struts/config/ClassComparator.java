@@ -32,7 +32,8 @@ class ClassComparator implements Comparator {
         Class clazz1 = (Class) o1;
         Class clazz2 = (Class) o2;
 
-        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
+        StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory
+                .getAnnotationHandler();
         Object annotation1 = annHandler.createStrutsActionFormConfig(clazz1);
         Object annotation2 = annHandler.createStrutsActionFormConfig(clazz2);
         if (annotation1 == null) {

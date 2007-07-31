@@ -23,12 +23,12 @@ import org.seasar.framework.beans.PropertyDesc;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public abstract class AbstractPropertyDescComparator implements Comparator {
-    
+
     protected BeanDesc beanDesc;
-    
+
     public AbstractPropertyDescComparator(BeanDesc beanDesc) {
         this.beanDesc = beanDesc;
     }
@@ -38,7 +38,7 @@ public abstract class AbstractPropertyDescComparator implements Comparator {
         int arg1Order = getOrder((PropertyDesc) arg1);
         return arg0Order - arg1Order;
     }
-    
+
     protected abstract int getOrder(PropertyDesc propDesc);
 
 }

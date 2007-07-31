@@ -36,9 +36,9 @@ import org.seasar.struts.util.ClassRegister;
  * @author Katsuhiko Nagashima
  */
 public class ActionFactoryImpl implements ActionFactory {
-    
+
     private ClassRegister classRegister;
-    
+
     private ComponentNameCreator componentNameCreator;
 
     public ActionFactoryImpl() {
@@ -57,8 +57,8 @@ public class ActionFactoryImpl implements ActionFactory {
         }
     }
 
-    public Action getActionWithComponentName(String componentName, ActionServlet servlet)
-            throws ComponentNotFoundRuntimeException {
+    public Action getActionWithComponentName(String componentName,
+            ActionServlet servlet) throws ComponentNotFoundRuntimeException {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         synchronized (container) {
             Action action = (Action) container.getComponent(componentName);
@@ -67,12 +67,15 @@ public class ActionFactoryImpl implements ActionFactory {
         }
     }
 
-    public Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
-            Log log, MessageResources internal, ActionServlet servlet) throws IOException {
+    public Action processActionCreate(HttpServletRequest request,
+            HttpServletResponse response, ActionMapping mapping, Log log,
+            MessageResources internal, ActionServlet servlet)
+            throws IOException {
 
         Action instance = null;
         try {
-            instance = (Action) getActionInstance(request, response, mapping, log, internal, servlet);
+            instance = (Action) getActionInstance(request, response, mapping,
+                    log, internal, servlet);
         } catch (Exception e) {
             processExceptionActionCreate(response, mapping, log, internal, e);
             return null;
@@ -80,24 +83,31 @@ public class ActionFactoryImpl implements ActionFactory {
         return instance;
     }
 
-    public Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
-            Log log, MessageResources internal, ActionServlet servlet) throws IOException {
+    public Object getActionInstance(HttpServletRequest request,
+            HttpServletResponse response, ActionMapping mapping, Log log,
+            MessageResources internal, ActionServlet servlet)
+            throws IOException {
         Object actionInstance = null;
         S2Container container = SingletonS2ContainerFactory.getContainer();
         try {
             if (isCreateActionWithComponentName(mapping)) {
-                String componentName = this.componentNameCreator.createComponentName(container, mapping);
-                actionInstance = getActionWithComponentName(componentName, servlet);
+                String componentName = this.componentNameCreator
+                        .createComponentName(container, mapping);
+                actionInstance = getActionWithComponentName(componentName,
+                        servlet);
             } else {
                 String actionClassName = mapping.getType();
                 if (log.isDebugEnabled()) {
-                    log.debug(" Looking for Action instance for class " + actionClassName);
+                    log.debug(" Looking for Action instance for class "
+                            + actionClassName);
                 }
-                Class componentKey = this.classRegister.getClass(actionClassName);
+                Class componentKey = this.classRegister
+                        .getClass(actionClassName);
                 actionInstance = container.getComponent(componentKey);
             }
         } catch (Exception e) {
-            processExceptionActionCreate(container.getResponse(), mapping, log, internal, e);
+            processExceptionActionCreate(container.getResponse(), mapping, log,
+                    internal, e);
             return null;
         }
 
@@ -111,18 +121,22 @@ public class ActionFactoryImpl implements ActionFactory {
     public void setClassRegister(ClassRegister classRegister) {
         this.classRegister = classRegister;
     }
-    
-    public void setComponentNameCreator(ComponentNameCreator componentNameCreator) {
+
+    public void setComponentNameCreator(
+            ComponentNameCreator componentNameCreator) {
         this.componentNameCreator = componentNameCreator;
     }
 
-    private static void processExceptionActionCreate(HttpServletResponse response, ActionMapping mapping, Log log,
+    private static void processExceptionActionCreate(
+            HttpServletResponse response, ActionMapping mapping, Log log,
             MessageResources internal, Exception e) throws IOException {
-        String internalMessage = internal.getMessage("actionCreate", mapping.getPath());
+        String internalMessage = internal.getMessage("actionCreate", mapping
+                .getPath());
 
         log.error(internalMessage, e);
 
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, internalMessage);
+        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                internalMessage);
     }
 
     private static void setServlet(Action action, ActionServlet servlet) {

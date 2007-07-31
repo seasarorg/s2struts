@@ -17,12 +17,12 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
  */
 public class RequestProcessorFactoryImplTest extends S2TestCase {
     private RequestProcessorFactory requestProcessorFactory;
+
     private ServletContext context;
 
     protected void setUp() throws Exception {
         include("ServletContextMockObject.dicon");
     }
-
 
     public RequestProcessorFactoryImplTest(String name) {
         super(name);
@@ -40,15 +40,18 @@ public class RequestProcessorFactoryImplTest extends S2TestCase {
 
     public void testGetRequestProcessorFromContainer() throws Exception {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        S2RequestProcessor expected = (S2RequestProcessor) container.getComponent(S2RequestProcessor.class);
+        S2RequestProcessor expected = (S2RequestProcessor) container
+                .getComponent(S2RequestProcessor.class);
 
         ModuleConfig config = new ModuleConfigImpl("prefix");
         ActionServlet servlet = null;
 
-        RequestProcessor actual = requestProcessorFactory.getRequestProcessor(config, context, servlet);
+        RequestProcessor actual = requestProcessorFactory.getRequestProcessor(
+                config, context, servlet);
 
         assertSame(expected, actual);
     }
+
     public void testGetRequestProcessorNormal() throws Exception {
         ModuleConfig config = new ModuleConfigImpl("prefix");
         ControllerConfig controllerConfig = new ControllerConfig();
@@ -56,10 +59,12 @@ public class RequestProcessorFactoryImplTest extends S2TestCase {
         config.setControllerConfig(controllerConfig);
         ActionServlet servlet = null;
 
-        RequestProcessor actual = requestProcessorFactory.getRequestProcessor(config, context, servlet);
+        RequestProcessor actual = requestProcessorFactory.getRequestProcessor(
+                config, context, servlet);
 
         assertEquals(RequestProcessor.class, actual.getClass());
     }
+
     public void testGetRequestProcessorException() throws Exception {
         ModuleConfig config = new ModuleConfigImpl("prefix");
         ControllerConfig controllerConfig = new ControllerConfig();
@@ -67,10 +72,11 @@ public class RequestProcessorFactoryImplTest extends S2TestCase {
         config.setControllerConfig(controllerConfig);
         ActionServlet servlet = null;
         try {
-            requestProcessorFactory.getRequestProcessor(config, context, servlet);
+            requestProcessorFactory.getRequestProcessor(config, context,
+                    servlet);
             fail();
         } catch (UnavailableException e) {
-            //success
+            // success
         }
     }
 

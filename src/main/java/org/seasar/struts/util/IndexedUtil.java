@@ -22,28 +22,29 @@ import java.util.regex.Pattern;
  * @author Katsuhiko Nagashima
  */
 public class IndexedUtil {
-    
+
     private static Pattern p = Pattern.compile("\\[([0-9]+)\\]$");
-    
+
     private IndexedUtil() {
     }
-    
+
     public static boolean isIndexedParameter(String parameter) {
         Matcher m = p.matcher(parameter);
         return m.find();
     }
-    
+
     public static String getParameter(String parameter) {
         Matcher m = p.matcher(parameter);
         return m.replaceAll("");
     }
-    
+
     public static int getIndex(String parameter) {
         Matcher m = p.matcher(parameter);
         if (m.find()) {
             return Integer.parseInt(m.group(1));
         } else {
-            throw new IllegalArgumentException("not indexed paramater. arg: " + parameter);
+            throw new IllegalArgumentException("not indexed paramater. arg: "
+                    + parameter);
         }
     }
 

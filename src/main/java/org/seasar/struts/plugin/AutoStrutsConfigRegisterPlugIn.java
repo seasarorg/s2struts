@@ -38,12 +38,11 @@ import org.seasar.struts.util.ClassFinderImpl;
  * <p>
  * 
  * <plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn">
- *   <set-property property="enableJar" value="false"/>
- *   <set-property property="actionClassPattern" value="foo.bar.action.*Action"/>
- *   <set-property property="formClassPattern" value="foo.bar.form.*Form"/>
- *   <set-property property="docRoot" value="/WEB-INF/jsp"/>
- *   <set-property property="viewExtension" value="jsp,html,view"/>
- * </plug-in>
+ * <set-property property="enableJar" value="false"/> <set-property
+ * property="actionClassPattern" value="foo.bar.action.*Action"/> <set-property
+ * property="formClassPattern" value="foo.bar.form.*Form"/> <set-property
+ * property="docRoot" value="/WEB-INF/jsp"/> <set-property
+ * property="viewExtension" value="jsp,html,view"/> </plug-in>
  * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
@@ -55,7 +54,7 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
     private boolean enableJar;
 
     private String jarFilePattern = null;
-    
+
     private String referenceClassName = null;
 
     public AutoStrutsConfigRegisterPlugIn() {
@@ -75,14 +74,16 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
      * @see org.apache.struts.action.PlugIn#init(org.apache.struts.action.ActionServlet,
      *      org.apache.struts.config.ModuleConfig)
      */
-    public void init(ActionServlet actionServlet, ModuleConfig config) throws ServletException {
+    public void init(ActionServlet actionServlet, ModuleConfig config)
+            throws ServletException {
         try {
             this.classFinder.find(isEnableJar(), getJarFilePattern());
 
             if (actionServlet != null) {
-                this.classFinder.find(actionServlet, isEnableJar(), getJarFilePattern());
+                this.classFinder.find(actionServlet, isEnableJar(),
+                        getJarFilePattern());
             }
-            
+
             if (getReferenceClass() != null) {
                 this.classFinder.find(ClassUtil.forName(getReferenceClass()));
             }
@@ -94,14 +95,19 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
     }
 
     private void regist(ActionServlet actionServlet, ModuleConfig config) {
-        AutoActionFormRegister.register(config, this.classFinder.getClassCollection());
-        AutoActionRegister.register(actionServlet.getServletContext(), config, this.classFinder.getClassCollection());
+        AutoActionFormRegister.register(config, this.classFinder
+                .getClassCollection());
+        AutoActionRegister.register(actionServlet.getServletContext(), config,
+                this.classFinder.getClassCollection());
 
-        ValidatorResources resources = getValidatorResources(actionServlet, config);
-        AutoValidationRegister.register(resources, config, this.classFinder.getClassCollection());
+        ValidatorResources resources = getValidatorResources(actionServlet,
+                config);
+        AutoValidationRegister.register(resources, config, this.classFinder
+                .getClassCollection());
     }
 
-    private ValidatorResources getValidatorResources(ActionServlet actionServlet, ModuleConfig config) {
+    private ValidatorResources getValidatorResources(
+            ActionServlet actionServlet, ModuleConfig config) {
         ServletContext servletContext = actionServlet.getServletContext();
         String key = ValidatorPlugIn.VALIDATOR_KEY + config.getPrefix();
         return (ValidatorResources) servletContext.getAttribute(key);
@@ -122,13 +128,13 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
     public void setJarFilePattern(String jarFilePattern) {
         this.jarFilePattern = jarFilePattern;
     }
-    
+
     public String getReferenceClass() {
         return this.referenceClassName;
     }
-    
+
     public void setReferenceClass(String referenceClassName) {
-        this.referenceClassName = referenceClassName; 
+        this.referenceClassName = referenceClassName;
     }
 
     public void setActionClassPattern(String actionClassPattern) {
@@ -149,7 +155,8 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
 
     private static AutoStrutsConfigRule configRule() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (AutoStrutsConfigRule) container.getComponent(AutoStrutsConfigRule.class);
+        return (AutoStrutsConfigRule) container
+                .getComponent(AutoStrutsConfigRule.class);
     }
 
 }

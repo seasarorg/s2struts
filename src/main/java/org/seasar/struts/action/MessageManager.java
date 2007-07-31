@@ -26,7 +26,7 @@ public class MessageManager {
 
     private MessageManager() {
     }
-    
+
     public static void addError(String property, String key, Object[] values) {
         getMessageFacade().addError(property, key, values);
     }
@@ -39,16 +39,20 @@ public class MessageManager {
         getMessageFacade().addError(property, key, value0);
     }
 
-    public static void addError(String property, String key, Object value0, Object value1) {
+    public static void addError(String property, String key, Object value0,
+            Object value1) {
         getMessageFacade().addError(property, key, value0, value1);
     }
 
-    public static void addError(String property, String key, Object value0, Object value1, Object value2) {
+    public static void addError(String property, String key, Object value0,
+            Object value1, Object value2) {
         getMessageFacade().addError(property, key, value0, value1, value2);
     }
 
-    public static void addError(String property, String key, Object value0, Object value1, Object value2, Object value3) {
-        getMessageFacade().addError(property, key, value0, value1, value2, value3);
+    public static void addError(String property, String key, Object value0,
+            Object value1, Object value2, Object value3) {
+        getMessageFacade().addError(property, key, value0, value1, value2,
+                value3);
     }
 
     public static void addGlobalError(String key, Object[] values) {
@@ -58,7 +62,7 @@ public class MessageManager {
     public static void addGlobalError(String key) {
         getMessageFacade().addGlobalError(key);
     }
-    
+
     public static void addGlobalError(String key, Object value0) {
         getMessageFacade().addGlobalError(key, value0);
     }
@@ -67,18 +71,20 @@ public class MessageManager {
         getMessageFacade().addGlobalError(key, value0, value1);
     }
 
-    public static void addGlobalError(String key, Object value0, Object value1, Object value2) {
+    public static void addGlobalError(String key, Object value0, Object value1,
+            Object value2) {
         getMessageFacade().addGlobalError(key, value0, value1, value2);
     }
 
-    public static void addGlobalError(String key, Object value0, Object value1, Object value2, Object value3) {
+    public static void addGlobalError(String key, Object value0, Object value1,
+            Object value2, Object value3) {
         getMessageFacade().addGlobalError(key, value0, value1, value2, value3);
     }
 
     public static void addMessage(String property, String key, Object[] values) {
         getMessageFacade().addMessage(property, key, values);
     }
-    
+
     public static void addMessage(String property, String key) {
         getMessageFacade().addMessage(property, key);
     }
@@ -87,23 +93,26 @@ public class MessageManager {
         getMessageFacade().addMessage(property, key, value0);
     }
 
-    public static void addMessage(String property, String key, Object value0, Object value1) {
+    public static void addMessage(String property, String key, Object value0,
+            Object value1) {
         getMessageFacade().addMessage(property, key, value0, value1);
     }
 
-    public static void addMessage(String property, String key, Object value0, Object value1, Object value2) {
+    public static void addMessage(String property, String key, Object value0,
+            Object value1, Object value2) {
         getMessageFacade().addMessage(property, key, value0, value1, value2);
     }
 
-    public static void addMessage(String property, String key, Object value0, Object value1, Object value2, Object value3) {
-        getMessageFacade().addMessage(property, key, value0, value1, value2, value3);
+    public static void addMessage(String property, String key, Object value0,
+            Object value1, Object value2, Object value3) {
+        getMessageFacade().addMessage(property, key, value0, value1, value2,
+                value3);
     }
-
 
     public static void addGlobalMessage(String key, Object[] values) {
         getMessageFacade().addGlobalMessage(key, values);
     }
-    
+
     public static void addGlobalMessage(String key) {
         getMessageFacade().addGlobalMessage(key);
     }
@@ -116,12 +125,15 @@ public class MessageManager {
         getMessageFacade().addGlobalMessage(key, value0, value1);
     }
 
-    public static void addGlobalMessage(String key, Object value0, Object value1, Object value2) {
+    public static void addGlobalMessage(String key, Object value0,
+            Object value1, Object value2) {
         getMessageFacade().addGlobalMessage(key, value0, value1, value2);
     }
 
-    public static void addGlobalMessage(String key, Object value0, Object value1, Object value2, Object value3) {
-        getMessageFacade().addGlobalMessage(key, value0, value1, value2, value3);
+    public static void addGlobalMessage(String key, Object value0,
+            Object value1, Object value2, Object value3) {
+        getMessageFacade()
+                .addGlobalMessage(key, value0, value1, value2, value3);
     }
 
     public static void addErrors(ActionMessages errors) {
@@ -181,6 +193,7 @@ public class MessageManager {
     }
 
     private static MessageFacade getMessageFacade() {
-        return (MessageFacade) SingletonS2ContainerFactory.getContainer().getComponent(MessageFacade.class);
+        return (MessageFacade) SingletonS2ContainerFactory.getContainer()
+                .getComponent(MessageFacade.class);
     }
 }

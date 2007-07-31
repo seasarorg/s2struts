@@ -25,16 +25,21 @@ import org.seasar.framework.util.IntegerConversionUtil;
  */
 public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
     private static final long serialVersionUID = 2601132488286028174L;
-	protected String type;
+
+    protected String type;
+
     protected String indexId;
+
     /**
      * @return Returns the indexId.
      */
     public String getIndexId() {
         return this.indexId;
     }
+
     /**
-     * @param indexId The indexName to set.
+     * @param indexId
+     *            The indexName to set.
      */
     public void setIndexId(String indexId) {
         this.indexId = indexId;
@@ -92,6 +97,7 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
         return (EVAL_BODY_INCLUDE);
 
     }
+
     public int doEndTag() throws JspException {
         TagUtils.getInstance().write(super.pageContext, "</button>");
         return (EVAL_PAGE);
@@ -102,16 +108,16 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
         return SKIP_BODY;
     }
 
-    //private IterateTag getIterateTag(Tag tag) {
-    //    Tag parentTag = tag.getParent();
-    //    if (parentTag instanceof IterateTag) {
-    //        return (IterateTag) parentTag;
-    //    } else {
-    //        if (parentTag == null) {
-    //            return null;
-    //        } else {
-    //            return getIterateTag(parentTag);
-    //        }
-    //    }
-    //}
+    // private IterateTag getIterateTag(Tag tag) {
+    // Tag parentTag = tag.getParent();
+    // if (parentTag instanceof IterateTag) {
+    // return (IterateTag) parentTag;
+    // } else {
+    // if (parentTag == null) {
+    // return null;
+    // } else {
+    // return getIterateTag(parentTag);
+    // }
+    // }
+    // }
 }

@@ -37,10 +37,11 @@ public interface S2StrutsContext extends Serializable {
 
     //
 
-    String getMethodBindingExpression(String mappingName, String key, String value);
+    String getMethodBindingExpression(String mappingName, String key,
+            String value);
 
-    void setMethodBindingExpression(String mappingName, String key, String value,
-            String methodBindingExpression);
+    void setMethodBindingExpression(String mappingName, String key,
+            String value, String methodBindingExpression);
 
     //
 

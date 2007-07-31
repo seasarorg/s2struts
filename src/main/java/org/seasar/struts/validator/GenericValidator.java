@@ -22,14 +22,17 @@ import org.seasar.framework.util.StringUtil;
 /**
  * @author Satoshi Kimura
  */
-public class GenericValidator extends org.apache.commons.validator.GenericValidator {
+public class GenericValidator extends
+        org.apache.commons.validator.GenericValidator {
     private static final long serialVersionUID = 1146798779925238494L;
 
-	/**
+    /**
      * Checks if the value's length of byte is greater than or equal to the min.
      * 
-     * @param value The value validation is being performed on.
-     * @param min The minimum length.
+     * @param value
+     *            The value validation is being performed on.
+     * @param min
+     *            The minimum length.
      */
     public static boolean minByteLength(String value, int min, String charset) {
         return (getBytes(value, charset).length >= min);
@@ -38,13 +41,15 @@ public class GenericValidator extends org.apache.commons.validator.GenericValida
     /**
      * Checks if the value's length of byte is less than or equal to the max.
      * 
-     * @param value The value validation is being performed on.
-     * @param max The maximum length.
+     * @param value
+     *            The value validation is being performed on.
+     * @param max
+     *            The maximum length.
      */
     public static boolean maxByteLength(String value, int max, String charset) {
         return (getBytes(value, charset).length <= max);
     }
-    
+
     private static byte[] getBytes(String str, String charset) {
         if (StringUtil.isEmpty(charset)) {
             return str.getBytes();

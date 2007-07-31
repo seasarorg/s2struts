@@ -21,7 +21,7 @@ package org.seasar.struts.exception;
 public class MethodNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 5930403637380028788L;
 
-	public MethodNotFoundException() {
+    public MethodNotFoundException() {
         super();
     }
 

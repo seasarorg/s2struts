@@ -108,7 +108,8 @@ public class ConstantValueUtil {
             result = parameter;
         }
         if (result.trim().charAt(result.trim().length() - 1) != encloseChar) {
-            throw new IllegalArgumentException("Illegal separator value. " + parameter);
+            throw new IllegalArgumentException("Illegal separator value. "
+                    + parameter);
         }
         return result;
     }

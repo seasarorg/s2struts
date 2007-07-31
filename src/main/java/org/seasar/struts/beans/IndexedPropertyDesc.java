@@ -24,6 +24,6 @@ public interface IndexedPropertyDesc {
     Object getValue(Object target, int index);
 
     boolean hasReadMethod();
-    
+
     boolean hasWriteMethod();
 }

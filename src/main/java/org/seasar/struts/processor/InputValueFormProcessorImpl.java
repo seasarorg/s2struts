@@ -31,12 +31,11 @@ import org.seasar.struts.form.InputValueForm;
 public class InputValueFormProcessorImpl implements InputValueFormProcessor {
 
     public ActionForm create(HttpServletRequest request,
-            HttpServletResponse response,
-            ActionMapping mapping,
+            HttpServletResponse response, ActionMapping mapping,
             ExternalRequestProcessor processor) throws ServletException {
 
         String attribute = mapping.getAttribute();
-        if(attribute == null) {
+        if (attribute == null) {
             return null;
         }
 
@@ -53,11 +52,12 @@ public class InputValueFormProcessorImpl implements InputValueFormProcessor {
         processor.processPopulate(request, response, actionForm, mapping);
 
         actionForm.freeze();
-        
+
         return actionForm;
     }
 
-    public void delete(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) {
+    public void delete(HttpServletRequest request,
+            HttpServletResponse response, ActionMapping mapping) {
         if (Constants.REQUEST.equals(mapping.getScope())) {
             request.removeAttribute(mapping.getAttribute());
         } else {
@@ -66,7 +66,7 @@ public class InputValueFormProcessorImpl implements InputValueFormProcessor {
             turnbackSessionForm(session, mapping.getAttribute());
         }
     }
-    
+
     private void backupSessionForm(HttpSession session, String attribute) {
         Object form = session.getAttribute(attribute);
         if (form == null) {
@@ -80,7 +80,8 @@ public class InputValueFormProcessorImpl implements InputValueFormProcessor {
     }
 
     private void turnbackSessionForm(HttpSession session, String attribute) {
-        Object form = session.getAttribute(getBackupSessionFormAttribute(attribute));
+        Object form = session
+                .getAttribute(getBackupSessionFormAttribute(attribute));
         session.removeAttribute(getBackupSessionFormAttribute(attribute));
         session.setAttribute(attribute, form);
     }

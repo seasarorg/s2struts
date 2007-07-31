@@ -25,19 +25,21 @@ import java.lang.reflect.Modifier;
  */
 public abstract class ConstantAnnotationUtil {
 
-	protected ConstantAnnotationUtil() {
-		super();
-	}
+    protected ConstantAnnotationUtil() {
+        super();
+    }
 
-	public static boolean isConstantAnnotationStringField(Field field) {
-		final int modifiers = field.getModifiers();
-		return Modifier.isFinal(modifiers) && Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers)
-				&& field.getType().equals(String.class);
-	}
-    
+    public static boolean isConstantAnnotationStringField(Field field) {
+        final int modifiers = field.getModifiers();
+        return Modifier.isFinal(modifiers) && Modifier.isPublic(modifiers)
+                && Modifier.isStatic(modifiers)
+                && field.getType().equals(String.class);
+    }
+
     public static boolean isConstantAnnotationIntField(Field field) {
         final int modifiers = field.getModifiers();
-        return Modifier.isFinal(modifiers) && Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers)
+        return Modifier.isFinal(modifiers) && Modifier.isPublic(modifiers)
+                && Modifier.isStatic(modifiers)
                 && field.getType().equals(Integer.TYPE);
     }
 

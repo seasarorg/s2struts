@@ -30,8 +30,9 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  */
 public class MethodBindingActionCommand implements ActionCommand {
 
-    public String execute(HttpServletRequest request, HttpServletResponse response, Object action,
-            Object form, ActionMapping mapping) {
+    public String execute(HttpServletRequest request,
+            HttpServletResponse response, Object action, Object form,
+            ActionMapping mapping) {
 
         MethodBinding methodBinding = createMethodBinding(request, mapping);
         if (methodBinding == null) {
@@ -40,18 +41,22 @@ public class MethodBindingActionCommand implements ActionCommand {
         return (String) methodBinding.invoke(mapping);
     }
 
-    private MethodBinding createMethodBinding(HttpServletRequest request, ActionMapping mapping) {
-        for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
+    private MethodBinding createMethodBinding(HttpServletRequest request,
+            ActionMapping mapping) {
+        for (Enumeration paramNames = request.getParameterNames(); paramNames
+                .hasMoreElements();) {
             String key = (String) paramNames.nextElement();
             String value = request.getParameter(key);
-            String expression = S2StrutsContextUtil.getMethodBindingExpression(mapping.getPath(), key, value);
+            String expression = S2StrutsContextUtil.getMethodBindingExpression(
+                    mapping.getPath(), key, value);
             if (expression != null) {
                 return new MethodBinding(expression);
             }
 
             // image tag
             String imageKey = key.replaceFirst("(\\.x$)|(\\.y$)", "");
-            expression = S2StrutsContextUtil.getMethodBindingExpression(mapping.getPath(), imageKey, null);
+            expression = S2StrutsContextUtil.getMethodBindingExpression(mapping
+                    .getPath(), imageKey, null);
             if (expression != null) {
                 return new MethodBinding(expression);
             }
@@ -60,7 +65,8 @@ public class MethodBindingActionCommand implements ActionCommand {
             if (IndexedUtil.isIndexedParameter(key)) {
                 String indexedKey = IndexedUtil.getParameter(key);
                 int index = IndexedUtil.getIndex(key);
-                expression = S2StrutsContextUtil.getMethodBindingExpression(mapping.getPath(), indexedKey, value);
+                expression = S2StrutsContextUtil.getMethodBindingExpression(
+                        mapping.getPath(), indexedKey, value);
                 if (expression != null) {
                     return new MethodBinding(expression, index);
                 }

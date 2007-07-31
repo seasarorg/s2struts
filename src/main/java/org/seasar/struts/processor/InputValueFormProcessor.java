@@ -26,11 +26,11 @@ import org.apache.struts.action.ActionMapping;
  * @author Satoshi Kimura
  */
 public interface InputValueFormProcessor {
-    ActionForm create(HttpServletRequest request,
-            HttpServletResponse response,
-            ActionMapping mapping,
-            ExternalRequestProcessor processor) throws ServletException;
+    ActionForm create(HttpServletRequest request, HttpServletResponse response,
+            ActionMapping mapping, ExternalRequestProcessor processor)
+            throws ServletException;
 
-    void delete(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping);
+    void delete(HttpServletRequest request, HttpServletResponse response,
+            ActionMapping mapping);
 
 }

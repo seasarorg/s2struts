@@ -29,18 +29,18 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 public class S2BeanValidatorForm extends BeanValidatorForm {
     private static final long serialVersionUID = 190262930254589604L;
 
-	public S2BeanValidatorForm(BeanValidatorForm form) {
+    public S2BeanValidatorForm(BeanValidatorForm form) {
         super(form.getDynaBean());
         if (form.getMultipartRequestHandler() != null) {
             setMultipartRequestHandler(form.getMultipartRequestHandler());
             setServlet(form.getMultipartRequestHandler().getServlet());
         }
     }
-    
+
     public void initBean(Object bean) {
         super.dynaBean = new WrapDynaBean(bean);
     }
-    
+
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         super.reset(mapping, request);
         Object bean = getInstance();
@@ -49,5 +49,5 @@ public class S2BeanValidatorForm extends BeanValidatorForm {
             beanDesc.invoke(bean, "reset", null);
         }
     }
-    
+
 }

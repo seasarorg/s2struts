@@ -25,16 +25,22 @@ public class ActionFactoryImplTest extends S2TestCase {
         Action secondInstance = null;
 
         ActionServlet servlet = new ActionServlet();
-        firstInstance = actionFactory.getActionWithClassName("org.seasar.struts.action.Test1Action", servlet);
-        secondInstance = actionFactory.getActionWithClassName("org.seasar.struts.action.Test1Action", servlet);
+        firstInstance = actionFactory.getActionWithClassName(
+                "org.seasar.struts.action.Test1Action", servlet);
+        secondInstance = actionFactory.getActionWithClassName(
+                "org.seasar.struts.action.Test1Action", servlet);
         assertTest1Action(firstInstance, secondInstance);
 
-        firstInstance = actionFactory.getActionWithClassName("org.seasar.struts.action.Test2Action", servlet);
-        secondInstance = actionFactory.getActionWithClassName("org.seasar.struts.action.Test2Action", servlet);
+        firstInstance = actionFactory.getActionWithClassName(
+                "org.seasar.struts.action.Test2Action", servlet);
+        secondInstance = actionFactory.getActionWithClassName(
+                "org.seasar.struts.action.Test2Action", servlet);
         assertTest2Action(firstInstance, secondInstance);
 
-        firstInstance = actionFactory.getActionWithClassName("org.seasar.struts.action.Test3Action", servlet);
-        secondInstance = actionFactory.getActionWithClassName("org.seasar.struts.action.Test3Action", servlet);
+        firstInstance = actionFactory.getActionWithClassName(
+                "org.seasar.struts.action.Test3Action", servlet);
+        secondInstance = actionFactory.getActionWithClassName(
+                "org.seasar.struts.action.Test3Action", servlet);
         assertTest3Action(firstInstance, secondInstance);
     }
 
@@ -43,16 +49,21 @@ public class ActionFactoryImplTest extends S2TestCase {
         Action secondInstance = null;
 
         ActionServlet servlet = new ActionServlet();
-        firstInstance = actionFactory.getActionWithComponentName("/test1", servlet);
-        secondInstance = actionFactory.getActionWithComponentName("/test1", servlet);
+        firstInstance = actionFactory.getActionWithComponentName("/test1",
+                servlet);
+        secondInstance = actionFactory.getActionWithComponentName("/test1",
+                servlet);
         assertTest1Action(firstInstance, secondInstance);
 
-        firstInstance = actionFactory.getActionWithComponentName("/test2", servlet);
-        secondInstance = actionFactory.getActionWithComponentName("/test2", servlet);
+        firstInstance = actionFactory.getActionWithComponentName("/test2",
+                servlet);
+        secondInstance = actionFactory.getActionWithComponentName("/test2",
+                servlet);
         assertTest2Action(firstInstance, secondInstance);
 
         try {
-            firstInstance = actionFactory.getActionWithComponentName("/test3", servlet);
+            firstInstance = actionFactory.getActionWithComponentName("/test3",
+                    servlet);
             fail();
         } catch (ComponentNotFoundRuntimeException e) {
             // success
@@ -71,11 +82,13 @@ public class ActionFactoryImplTest extends S2TestCase {
         assertFalse(((Test1Action) firstInstance).isExecutedInitMethod());
         assertTrue(((Test1Action) firstInstance).hasService());
     }
+
     private void assertTest2Action(Action firstInstance, Action secondInstance) {
         assertNotSame(firstInstance, secondInstance);
         assertTrue(firstInstance instanceof org.seasar.struts.action.Test2Action);
         assertTrue(((Test2Action) firstInstance).isExecutedInitMethod());
     }
+
     private void assertTest3Action(Action firstInstance, Action secondInstance) {
         assertSame(firstInstance, secondInstance);
         assertTrue(firstInstance instanceof org.seasar.struts.action.Test3Action);

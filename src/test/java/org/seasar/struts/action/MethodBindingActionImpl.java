@@ -5,7 +5,7 @@ public class MethodBindingActionImpl implements MethodBindingAction {
     public String exe() {
         return "success";
     }
-    
+
     public String exe(int index) {
         return "success" + String.valueOf(index);
     }

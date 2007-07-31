@@ -15,7 +15,7 @@ public class IndexedUtilTest extends TestCase {
     public void testGetParameter() {
         assertEquals("12345[777", IndexedUtil.getParameter("12345[777[88]"));
     }
-    
+
     public void testGetIndex() {
         assertEquals(88, IndexedUtil.getIndex("12345[777[88]"));
     }

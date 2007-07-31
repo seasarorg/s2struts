@@ -24,7 +24,7 @@ import org.apache.struts.action.ActionMapping;
 public class MockActionMapping extends ActionMapping {
     private static final long serialVersionUID = 5138089406949424336L;
 
-	public ActionForward findForward(String name) {
+    public ActionForward findForward(String name) {
         ActionForward actionForward = new ActionForward();
         actionForward.setName(name);
 

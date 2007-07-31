@@ -22,11 +22,11 @@ import javax.servlet.http.HttpSession;
  * @author Katsuhiko Nagashima
  */
 public class RequestUtil {
-    
+
     private RequestUtil() {
-        
+
     }
-    
+
     public static Object getValue(HttpServletRequest request, String name) {
         Object var = request.getParameter(name);
         if (var != null) {

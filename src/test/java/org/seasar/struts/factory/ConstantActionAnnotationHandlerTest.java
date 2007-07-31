@@ -10,30 +10,34 @@ import org.seasar.struts.config.ActionPropertyConfig;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class ConstantActionAnnotationHandlerTest extends S2TestCase {
 
     private ActionAnnotationHandler annHandler;
-    
+
     public void setUp() {
         annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
     }
-    
+
     public void testSessionScopeProperty() throws Exception {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(ActionAnnotationActionImpl.class);
+        BeanDesc beanDesc = BeanDescFactory
+                .getBeanDesc(ActionAnnotationActionImpl.class);
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("bar");
-        ActionPropertyConfig config = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
+        ActionPropertyConfig config = annHandler.createActionPropertyConfig(
+                beanDesc, propertyDesc);
         assertNotNull(config);
         assertEquals(true, config.isSessionScope());
     }
-    
+
     public void testRequestScopeProperty() throws Exception {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(ActionAnnotationActionImpl.class);
+        BeanDesc beanDesc = BeanDescFactory
+                .getBeanDesc(ActionAnnotationActionImpl.class);
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("foo");
-        ActionPropertyConfig config = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
+        ActionPropertyConfig config = annHandler.createActionPropertyConfig(
+                beanDesc, propertyDesc);
         assertNotNull(config);
         assertEquals(false, config.isSessionScope());
     }
-    
+
 }

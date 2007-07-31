@@ -60,9 +60,11 @@ public class ClassFinderImpl implements ClassFinder {
         String cp = System.getProperty("java.class.path");
         String ps = System.getProperty("path.separator");
 
-        for (StringTokenizer tokenizer = new StringTokenizer(cp, ps); tokenizer.hasMoreTokens();) {
+        for (StringTokenizer tokenizer = new StringTokenizer(cp, ps); tokenizer
+                .hasMoreTokens();) {
             String path = tokenizer.nextToken();
-            this.classPool.loadAllClass(path, enableJar, jarFilePattern, pattern);
+            this.classPool.loadAllClass(path, enableJar, jarFilePattern,
+                    pattern);
         }
     }
 
@@ -70,7 +72,8 @@ public class ClassFinderImpl implements ClassFinder {
         find(path, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
     }
 
-    public void find(String path, boolean enableJar, String jarFilePattern, String pattern) {
+    public void find(String path, boolean enableJar, String jarFilePattern,
+            String pattern) {
         this.classPool.loadAllClass(path, enableJar, jarFilePattern, pattern);
     }
 
@@ -78,22 +81,26 @@ public class ClassFinderImpl implements ClassFinder {
         find(file, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
     }
 
-    public void find(File file, boolean enableJar, String jarFilePattern, String pattern) {
+    public void find(File file, boolean enableJar, String jarFilePattern,
+            String pattern) {
         this.classPool.loadAllClass(file, enableJar, jarFilePattern, pattern);
     }
 
-    public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern) {
+    public void find(GenericServlet servlet, boolean enableJar,
+            String jarFilePattern) {
         find(servlet, enableJar, jarFilePattern, ALL_MATCHE_PATTERN);
     }
 
-    public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern,
-            String pattern) {
-        String classesDirPath = servlet.getServletContext().getRealPath(WEB_CLASSES_DIR);
+    public void find(GenericServlet servlet, boolean enableJar,
+            String jarFilePattern, String pattern) {
+        String classesDirPath = servlet.getServletContext().getRealPath(
+                WEB_CLASSES_DIR);
         if (classesDirPath != null) {
             find(classesDirPath, enableJar, jarFilePattern, pattern);
         }
 
-        String libDirPath = servlet.getServletContext().getRealPath(WEB_LIB_DIR);
+        String libDirPath = servlet.getServletContext()
+                .getRealPath(WEB_LIB_DIR);
         if (libDirPath != null) {
             File[] files = new File(libDirPath).listFiles();
             if (files != null) {

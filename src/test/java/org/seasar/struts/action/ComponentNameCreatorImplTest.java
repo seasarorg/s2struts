@@ -30,7 +30,8 @@ public class ComponentNameCreatorImplTest extends S2TestCase {
         String moduleName = "/module";
         String path = "/path";
         setInfo(mapping, moduleName, path);
-        String componentName = componentNameCreator.createComponentName(container, mapping);
+        String componentName = componentNameCreator.createComponentName(
+                container, mapping);
         assertEquals("/module/path", componentName);
     }
 
@@ -46,20 +47,23 @@ public class ComponentNameCreatorImplTest extends S2TestCase {
         String path = "/path";
         setInfo(mapping, moduleName, path);
         container = SingletonS2ContainerFactory.getContainer();
-        String componentName = componentNameCreator.createComponentName(container, mapping);
+        String componentName = componentNameCreator.createComponentName(
+                container, mapping);
         assertEquals("/path", componentName);
     }
 
     public void setUpCreateComponentNameOnluPath() {
         include("ComponentNameCreatorImplTest.dicon");
     }
+
     public void testCreateComponentNameOnluPath() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ActionMapping mapping = new ActionMapping();
         String moduleName = "";
         String path = "/path";
         setInfo(mapping, moduleName, path);
-        String componentName = new ComponentNameCreatorImpl().createComponentName(container, mapping);
+        String componentName = new ComponentNameCreatorImpl()
+                .createComponentName(container, mapping);
         assertEquals("/path", componentName);
     }
 

@@ -28,15 +28,17 @@ public class ConstantActionAnnotationHandler implements ActionAnnotationHandler 
 
     private static final String EXPORT_SUFFIX = "_EXPORT";
 
-    public ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc) {
+    public ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc,
+            PropertyDesc propertyDesc) {
         String fieldName = propertyDesc.getPropertyName() + EXPORT_SUFFIX;
         if (!beanDesc.hasField(fieldName)) {
             return new ActionPropertyConfigImpl();
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
-			return new ActionPropertyConfigImpl();
-		}
-		String value = (String) beanDesc.getFieldValue(fieldName, null);
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc
+                .getField(fieldName))) {
+            return new ActionPropertyConfigImpl();
+        }
+        String value = (String) beanDesc.getFieldValue(fieldName, null);
         return new ActionPropertyConfigImpl(value);
     }
 

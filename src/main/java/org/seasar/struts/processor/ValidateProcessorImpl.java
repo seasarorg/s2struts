@@ -44,11 +44,14 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  */
 public class ValidateProcessorImpl implements ValidateProcessor {
 
-    private static final Logger log = Logger.getLogger(ValidateProcessorImpl.class);
+    private static final Logger log = Logger
+            .getLogger(ValidateProcessorImpl.class);
 
-    public boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
-            ActionMapping mapping, ExternalRequestProcessor requestProcessor) throws IOException, ServletException, InvalidCancelException {
-        
+    public boolean processValidate(HttpServletRequest request,
+            HttpServletResponse response, ActionForm form,
+            ActionMapping mapping, ExternalRequestProcessor requestProcessor)
+            throws IOException, ServletException, InvalidCancelException {
+
         if (isCancel(request, mapping)) {
             log.debug(" Cancelled transaction, skipping validation");
             return true;
@@ -61,43 +64,53 @@ public class ValidateProcessorImpl implements ValidateProcessor {
             try {
                 PropertyUtils.copyProperties(newMapping, mapping);
             } catch (IllegalAccessException e) {
-                throw new IllegalAccessRuntimeException(newMapping.getClass(), e);
+                throw new IllegalAccessRuntimeException(newMapping.getClass(),
+                        e);
             } catch (InvocationTargetException e) {
-                throw new InvocationTargetRuntimeException(newMapping.getClass(), e);
+                throw new InvocationTargetRuntimeException(newMapping
+                        .getClass(), e);
             } catch (NoSuchMethodException e) {
-                throw new NoSuchMethodRuntimeException(newMapping.getClass(), null, null, e);
+                throw new NoSuchMethodRuntimeException(newMapping.getClass(),
+                        null, null, e);
             }
 
             input = S2StrutsContextUtil.getPreviousInputPath();
             newMapping.setInput(input);
             mapping = newMapping;
         }
-        
-        boolean valid = requestProcessor.processValidate(request, response, form, mapping);
+
+        boolean valid = requestProcessor.processValidate(request, response,
+                form, mapping);
         if (valid && form instanceof InputValueForm) {
             ModuleConfig moduleConfig = requestProcessor.getModuleConfig();
             ActionServlet servlet = requestProcessor.getActionServlet();
-            ActionForm instance = RequestUtils.createActionForm(request, mapping, moduleConfig, servlet);
-            requestProcessor.processPopulate(request, response, instance, mapping);
+            ActionForm instance = RequestUtils.createActionForm(request,
+                    mapping, moduleConfig, servlet);
+            requestProcessor.processPopulate(request, response, instance,
+                    mapping);
 
-            valid = requestProcessor.processValidate(request, response, instance, mapping);
+            valid = requestProcessor.processValidate(request, response,
+                    instance, mapping);
         }
-        
+
         return valid;
     }
 
     private boolean isCancel(HttpServletRequest request, ActionMapping mapping) {
-        for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
+        for (Enumeration paramNames = request.getParameterNames(); paramNames
+                .hasMoreElements();) {
             String key = (String) paramNames.nextElement();
             String value = request.getParameter(key);
-            Boolean cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), key, value);
+            Boolean cancel = S2StrutsContextUtil.isCancelAction(mapping
+                    .getPath(), key, value);
             if (cancel != null) {
                 return cancel.booleanValue();
             }
 
             // image tag
             String imageKey = key.replaceFirst("(\\.x$)|(\\.y$)", "");
-            cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), imageKey, null);
+            cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(),
+                    imageKey, null);
             if (cancel != null) {
                 return cancel.booleanValue();
             }
@@ -105,7 +118,8 @@ public class ValidateProcessorImpl implements ValidateProcessor {
             // indexed
             if (IndexedUtil.isIndexedParameter(key)) {
                 String indexedKey = IndexedUtil.getParameter(key);
-                cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), indexedKey, value);
+                cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(),
+                        indexedKey, value);
                 if (cancel != null) {
                     return cancel.booleanValue();
                 }

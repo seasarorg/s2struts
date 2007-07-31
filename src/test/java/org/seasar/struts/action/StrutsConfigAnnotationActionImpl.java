@@ -1,10 +1,10 @@
 package org.seasar.struts.action;
 
-
 /**
  * @author Satoshi Kimura
  */
-public class StrutsConfigAnnotationActionImpl implements StrutsConfigAnnotationAction {
+public class StrutsConfigAnnotationActionImpl implements
+        StrutsConfigAnnotationAction {
 
     public StrutsConfigAnnotationActionImpl() {
     }

@@ -28,7 +28,7 @@ import org.apache.struts.validator.BeanValidatorForm;
 public class InputValueForm extends BeanValidatorForm {
     private static final long serialVersionUID = 2950008729706264463L;
 
-	private Map map = new HashMap();
+    private Map map = new HashMap();
 
     private boolean freeze = false;
 
@@ -63,7 +63,7 @@ public class InputValueForm extends BeanValidatorForm {
         for (Iterator ite = this.map.values().iterator(); ite.hasNext();) {
             Object value = ite.next();
             if (value instanceof InputValueForm) {
-                ((InputValueForm)value).freeze();
+                ((InputValueForm) value).freeze();
             }
         }
     }

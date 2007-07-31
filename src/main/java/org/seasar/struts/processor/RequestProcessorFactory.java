@@ -33,7 +33,8 @@ public interface RequestProcessorFactory {
      * @return RequestProcessor
      * @throws ServletException
      */
-    public RequestProcessor getRequestProcessor(ModuleConfig config, ServletContext context, ActionServlet actionServlet)
+    public RequestProcessor getRequestProcessor(ModuleConfig config,
+            ServletContext context, ActionServlet actionServlet)
             throws ServletException;
 
 }

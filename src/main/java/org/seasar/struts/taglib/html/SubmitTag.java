@@ -88,7 +88,8 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
         this.cancel = cancel;
     }
 
-    protected void prepareIndex(StringBuffer handlers, String name) throws JspException {
+    protected void prepareIndex(StringBuffer handlers, String name)
+            throws JspException {
         if (this.indexId == null) {
             super.prepareIndex(handlers, name);
             return;
@@ -114,7 +115,8 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
             val = getDefaultValue();
         }
         String mappingName = TagUtil.getActionMappingName(this.pageContext);
-        S2StrutsContextUtil.setMethodBindingExpression(mappingName, super.property, val, this.action);
+        S2StrutsContextUtil.setMethodBindingExpression(mappingName,
+                super.property, val, this.action);
     }
 
     protected void setCancelAction() throws JspException {

@@ -27,8 +27,9 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 /**
- * diconƒtƒ@ƒCƒ‹‚É‹Lq‚³‚ê‚½ActionƒNƒ‰ƒX‚ğg—p‚µ‚ÄAˆ—‚ğÀs‚·‚éB <br>
- * struts-config‚É‹Lq‚µ‚½action‚Ìpath‚ÆAdiconƒtƒ@ƒCƒ‹‚É‹Lq‚µ‚½component‚Ìname‚ğˆê’v‚³‚¹‚é–‚É‚æ‚èA diconƒtƒ@ƒCƒ‹‚É‹Lq‚µ‚½ActionƒNƒ‰ƒX‚Åˆ—‚·‚é–‚ªo—ˆ‚éB
+ * diconï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½É‹Lï¿½qï¿½ï¿½ï¿½ê‚½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ÄAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sï¿½ï¿½ï¿½ï¿½B <br>
+ * struts-configï¿½É‹Lï¿½qï¿½ï¿½ï¿½ï¿½actionï¿½ï¿½pathï¿½ÆAdiconï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½É‹Lï¿½qï¿½ï¿½ï¿½ï¿½componentï¿½ï¿½nameï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½é–ï¿½É‚ï¿½ï¿½A
+ * diconï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½É‹Lï¿½qï¿½ï¿½ï¿½ï¿½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é–ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½B
  * 
  * @author Satoshi Kimura
  */
@@ -38,11 +39,13 @@ public final class ProxyAction extends Action {
      * @see ComponentNameCreator#createComponentName(S2Container, ActionMapping)
      * @see ActionUtil#getActionWithComponentName(String, ActionServlet)
      * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      org.apache.struts.action.ActionForm,
+     *      javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
-    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public ActionForward execute(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
 
         Action delegateAction = createAction(mapping);
         return delegateAction.execute(mapping, form, request, response);
@@ -52,8 +55,10 @@ public final class ProxyAction extends Action {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ComponentNameCreator componentNameCreator = (ComponentNameCreator) container
                 .getComponent(ComponentNameCreator.class);
-        String componentName = componentNameCreator.createComponentName(container, mapping);
-        Action action = getActionCreator().getActionWithComponentName(componentName, getServlet());
+        String componentName = componentNameCreator.createComponentName(
+                container, mapping);
+        Action action = getActionCreator().getActionWithComponentName(
+                componentName, getServlet());
         return action;
     }
 

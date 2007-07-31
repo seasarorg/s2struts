@@ -24,6 +24,7 @@ import org.seasar.struts.config.ActionPropertyConfig;
  */
 public interface ActionAnnotationHandler {
 
-    public ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc);
+    public ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc,
+            PropertyDesc propertyDesc);
 
 }

@@ -35,12 +35,14 @@ import org.seasar.struts.validator.factory.ValidatorAnnotationHandlerFactory;
  */
 public class AutoValidationRegister {
 
-    private static final Logger log = Logger.getLogger(AutoValidationRegister.class);
+    private static final Logger log = Logger
+            .getLogger(AutoValidationRegister.class);
 
     private AutoValidationRegister() {
     }
 
-    public static void register(ValidatorResources resources, ModuleConfig config, Collection classes) {
+    public static void register(ValidatorResources resources,
+            ModuleConfig config, Collection classes) {
         FormSet formSet = new FormSet();
         for (Iterator iterator = classes.iterator(); iterator.hasNext();) {
             Class clazz = (Class) iterator.next();
@@ -52,13 +54,14 @@ public class AutoValidationRegister {
         }
     }
 
-    private static void registerValidation(ValidatorResources resources, ModuleConfig config, FormSet formSet, Class formClass) {
+    private static void registerValidation(ValidatorResources resources,
+            ModuleConfig config, FormSet formSet, Class formClass) {
         String[] formNames = getFormNames(formClass, config);
         for (int i = 0; i < formNames.length; i++) {
             registerForm(resources, formSet, formClass, formNames[i]);
         }
     }
-    
+
     private static String[] getFormNames(Class formClass, ModuleConfig config) {
         List list = new ArrayList();
         FormBeanConfig[] formBeanConfigs = config.findFormBeanConfigs();
@@ -67,11 +70,12 @@ public class AutoValidationRegister {
                 list.add(formBeanConfigs[i].getName());
             }
         }
-        
+
         return (String[]) list.toArray(new String[list.size()]);
     }
 
-    private static void registerForm(ValidatorResources resources, FormSet formSet, Class formClass, String formName) {
+    private static void registerForm(ValidatorResources resources,
+            FormSet formSet, Class formClass, String formName) {
         if (registeredValidation(resources, formName)) {
             return;
         }
@@ -79,7 +83,8 @@ public class AutoValidationRegister {
             return;
         }
 
-        ValidatorAnnotationHandler annHandler = ValidatorAnnotationHandlerFactory.getAnnotationHandler();
+        ValidatorAnnotationHandler annHandler = ValidatorAnnotationHandlerFactory
+                .getAnnotationHandler();
         Form form = annHandler.createForm(formName, formClass);
         if (form != null && form.getFields().size() != 0) {
             formSet.addForm(form);
@@ -88,7 +93,8 @@ public class AutoValidationRegister {
         }
     }
 
-    private static boolean registeredValidation(ValidatorResources resources, String formName) {
+    private static boolean registeredValidation(ValidatorResources resources,
+            String formName) {
         return resources.getForm(Locale.getDefault(), formName) != null;
     }
 

@@ -12,7 +12,8 @@ public class TestBindingComponentActionImpl {
         return simpleComponentForm;
     }
 
-    public void setSimpleComponentForm(TestSimpleComponentForm simpleConponentForm) {
+    public void setSimpleComponentForm(
+            TestSimpleComponentForm simpleConponentForm) {
         this.simpleComponentForm = simpleConponentForm;
     }
 
@@ -20,7 +21,8 @@ public class TestBindingComponentActionImpl {
         return packageComponentOneForm;
     }
 
-    public void setPackageComponentOneForm(TestPackageComponentOneForm packageComponentOneForm) {
+    public void setPackageComponentOneForm(
+            TestPackageComponentOneForm packageComponentOneForm) {
         this.packageComponentOneForm = packageComponentOneForm;
     }
 
@@ -28,7 +30,8 @@ public class TestBindingComponentActionImpl {
         return package_packageComponentTwoForm;
     }
 
-    public void setPackage_packageComponentTwoForm(TestPackageComponentTwoForm package_packageComponentTwoForm) {
+    public void setPackage_packageComponentTwoForm(
+            TestPackageComponentTwoForm package_packageComponentTwoForm) {
         this.package_packageComponentTwoForm = package_packageComponentTwoForm;
     }
 

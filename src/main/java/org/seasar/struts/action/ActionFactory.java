@@ -32,40 +32,56 @@ import org.seasar.framework.container.ComponentNotFoundRuntimeException;
  */
 public interface ActionFactory {
     /**
-     * S2ƒRƒ“ƒeƒi‚©‚çActionƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚µ‚Ü‚·B <br>
-     * S2ƒRƒ“ƒeƒi‚Éæ“¾‘ÎÛ‚ÌƒNƒ‰ƒX‚ª“o˜^‚³‚ê‚Ä‚¢‚È‚¢ê‡AƒCƒ“ƒXƒ^ƒ“ƒXæ“¾‚Ì‘O‚ÉA S2ƒRƒ“ƒeƒi‚ÉActionƒNƒ‰ƒX‚Ì“o˜^‚ğs‚¢‚Ü‚·B
+     * S2ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½æ“¾ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B <br>
+     * S2ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½Éæ“¾ï¿½ÎÛ‚ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Aï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½æ“¾ï¿½Ì‘Oï¿½ÉA
+     * S2ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½Ì“oï¿½^ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
      * 
-     * @param className æ“¾‘ÎÛ‚ÌƒNƒ‰ƒX–¼
-     * @param servlet Action‚ÉƒZƒbƒg‚·‚éActionServletBnull‚Ìê‡‚ÍAnull‚ÍƒZƒbƒg‚³‚ê‚Ü‚¹‚ñB
-     * @return S2ƒRƒ“ƒeƒi‚©‚çæ“¾‚µ‚½ActionƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+     * @param className
+     *            ï¿½æ“¾ï¿½ÎÛ‚ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½
+     * @param servlet
+     *            Actionï¿½ÉƒZï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ActionServletï¿½Bnullï¿½Ìê‡ï¿½ÍAnullï¿½ÍƒZï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B
+     * @return S2ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
      */
     Action getActionWithClassName(String className, ActionServlet servlet);
 
     /**
-     * S2ƒRƒ“ƒeƒi‚©‚çActionƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚µ‚Ü‚·B <br>
+     * S2ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½æ“¾ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B <br>
      * 
-     * @param componentName æ“¾‘ÎÛ‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg–¼
-     * @param servlet Action‚ÉƒZƒbƒg‚·‚éActionServletBnull‚Ìê‡‚ÍAnull‚ÍƒZƒbƒg‚³‚ê‚Ü‚¹‚ñB
-     * @return S2ƒRƒ“ƒeƒi‚©‚çæ“¾‚µ‚½ActionƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
-     * @throws ComponentNotFoundRuntimeException ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡
+     * @param componentName
+     *            ï¿½æ“¾ï¿½ÎÛ‚ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½
+     * @param servlet
+     *            Actionï¿½ÉƒZï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ActionServletï¿½Bnullï¿½Ìê‡ï¿½ÍAnullï¿½ÍƒZï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B
+     * @return S2ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
+     * @throws ComponentNotFoundRuntimeException
+     *             ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡
      */
-    Action getActionWithComponentName(String componentName, ActionServlet servlet)
-            throws ComponentNotFoundRuntimeException;
+    Action getActionWithComponentName(String componentName,
+            ActionServlet servlet) throws ComponentNotFoundRuntimeException;
 
     /**
-     * ActionMapping‚ğQÆ‚µ‚ÄAƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é‚Ì‚©AƒNƒ‰ƒX–¼‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é‚Ì‚©‚ğ”»’f‚µ‚ÄA Action‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚éB
+     * ActionMappingï¿½ï¿½Qï¿½Æ‚ï¿½ï¿½ÄAï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½Aï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ğ”»’fï¿½ï¿½ï¿½ÄA
+     * Actionï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½B
      * 
-     * @param request ˆ—‚µ‚Ä‚¢‚éHTTPƒŠƒNƒGƒXƒg
-     * @param response ¶¬’†‚ÌHTTPƒŒƒXƒ|ƒ“ƒX
-     * @param mapping Action‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é‚½‚ß‚Ég—p‚·‚é
-     * @param log ƒƒO
-     * @param internal ƒƒbƒZ[ƒWƒŠƒ\[ƒX
-     * @param servlet ¶¬‚³‚ê‚éAction‚ÉŠÖ˜A‚Ã‚¯‚ç‚ê‚Ä‚¢‚éServlet‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
-     * @return S2ƒRƒ“ƒeƒi‚©‚çæ“¾‚µ‚½ActionƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
-     * @throws IOException ƒCƒ“ƒXƒ^ƒ“ƒX¶¬‚É¸”s‚µ‚½ê‡‚ÉAƒŒƒXƒ|ƒ“ƒX‚ğ‘€ì‚É”­¶‚·‚é—áŠO
+     * @param request
+     *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½HTTPï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½g
+     * @param response
+     *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½HTTPï¿½ï¿½ï¿½Xï¿½|ï¿½ï¿½ï¿½X
+     * @param mapping
+     *            Actionï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚Égï¿½pï¿½ï¿½ï¿½ï¿½
+     * @param log
+     *            ï¿½ï¿½ï¿½O
+     * @param internal
+     *            ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½\ï¿½[ï¿½X
+     * @param servlet
+     *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Actionï¿½ÉŠÖ˜Aï¿½Ã‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Servletï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
+     * @return S2ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½Actionï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
+     * @throws IOException
+     *             ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ÉAï¿½ï¿½ï¿½Xï¿½|ï¿½ï¿½ï¿½Xï¿½ğ‘€ìï¿½É”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½O
      */
-    Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
-            Log log, MessageResources internal, ActionServlet servlet) throws IOException;
+    Action processActionCreate(HttpServletRequest request,
+            HttpServletResponse response, ActionMapping mapping, Log log,
+            MessageResources internal, ActionServlet servlet)
+            throws IOException;
 
     /**
      * Get action instance from S2Container.
@@ -77,6 +93,8 @@ public interface ActionFactory {
      * @return POJO instance or {@see Action}instance.
      * @throws IOException
      */
-    Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping, Log log,
-            MessageResources internal, ActionServlet servlet) throws IOException;
+    Object getActionInstance(HttpServletRequest request,
+            HttpServletResponse response, ActionMapping mapping, Log log,
+            MessageResources internal, ActionServlet servlet)
+            throws IOException;
 }

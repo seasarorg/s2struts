@@ -40,8 +40,10 @@ public class ModuleConfigUtil {
     }
 
     public static ModuleConfig getModuleConfig() {
-        ServletContext context = S2StrutsContextUtil.getContainer().getServletContext();
-        HttpServletRequest request = S2StrutsContextUtil.getContainer().getRequest();
+        ServletContext context = S2StrutsContextUtil.getContainer()
+                .getServletContext();
+        HttpServletRequest request = S2StrutsContextUtil.getContainer()
+                .getRequest();
         return ModuleUtils.getInstance().getModuleConfig(request, context);
     }
 
@@ -70,7 +72,8 @@ public class ModuleConfigUtil {
         return null;
     }
 
-    public static ActionConfig[] findActionConfigsForFormBeanName(String beanName) {
+    public static ActionConfig[] findActionConfigsForFormBeanName(
+            String beanName) {
         ModuleConfig config = ModuleConfigUtil.getModuleConfig();
         if (config == null) {
             return new ActionConfig[0];
@@ -92,11 +95,13 @@ public class ModuleConfigUtil {
         return (ActionConfig[]) result.toArray(new ActionConfig[result.size()]);
     }
 
-    public static ActionConfig findActionConfigForComponentName(String componentName) {
+    public static ActionConfig findActionConfigForComponentName(
+            String componentName) {
         if (!ModuleConfigUtil.getContainer().hasComponentDef(componentName)) {
             return null;
         }
-        Class clazz = ModuleConfigUtil.getContainer().getComponentDef(componentName).getComponentClass();
+        Class clazz = ModuleConfigUtil.getContainer().getComponentDef(
+                componentName).getComponentClass();
 
         ModuleConfig config = ModuleConfigUtil.getModuleConfig();
         if (config == null) {

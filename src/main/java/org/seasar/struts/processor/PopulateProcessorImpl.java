@@ -37,8 +37,9 @@ import org.seasar.struts.servlet.http.S2ServletRequestWrapper;
  */
 public class PopulateProcessorImpl implements PopulateProcessor {
 
-    public void processPopulate(HttpServletRequest request, HttpServletResponse response,
-            ActionForm form, ActionMapping mapping, ExternalRequestProcessor requestProcessor)
+    public void processPopulate(HttpServletRequest request,
+            HttpServletResponse response, ActionForm form,
+            ActionMapping mapping, ExternalRequestProcessor requestProcessor)
             throws ServletException {
 
         if (request instanceof MultipartRequestWrapper) {
@@ -56,7 +57,8 @@ public class PopulateProcessorImpl implements PopulateProcessor {
         } else {
             Map parameters = getCheckBoxParameters(request);
             if (!parameters.isEmpty()) {
-                S2ServletRequestWrapper s2request = new S2ServletRequestWrapper(request);
+                S2ServletRequestWrapper s2request = new S2ServletRequestWrapper(
+                        request);
                 addParameter(s2request, parameters);
                 request = s2request;
             }
@@ -66,10 +68,12 @@ public class PopulateProcessorImpl implements PopulateProcessor {
 
     private Map getCheckBoxParameters(HttpServletRequest request) {
         Map result = new HashMap();
-        for (Iterator i = request.getParameterMap().keySet().iterator(); i.hasNext();) {
+        for (Iterator i = request.getParameterMap().keySet().iterator(); i
+                .hasNext();) {
             String paramName = (String) i.next();
             if (paramName.startsWith(Constants.CHECKBOX_NAME)) {
-                String checkboxParamName = paramName.substring(Constants.CHECKBOX_NAME.length());
+                String checkboxParamName = paramName
+                        .substring(Constants.CHECKBOX_NAME.length());
                 String checkboxValue = request.getParameter(checkboxParamName);
                 if (checkboxValue == null) {
                     result.put(checkboxParamName, Boolean.FALSE.toString());
@@ -82,7 +86,8 @@ public class PopulateProcessorImpl implements PopulateProcessor {
     private void addParameter(S2ServletRequestWrapper request, Map parameters) {
         for (Iterator i = parameters.entrySet().iterator(); i.hasNext();) {
             Map.Entry parameter = (Map.Entry) i.next();
-            request.addParameterValue((String) parameter.getKey(), (String) parameter.getValue());
+            request.addParameterValue((String) parameter.getKey(),
+                    (String) parameter.getValue());
         }
     }
 

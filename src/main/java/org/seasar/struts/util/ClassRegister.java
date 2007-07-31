@@ -20,7 +20,10 @@ package org.seasar.struts.util;
  */
 public interface ClassRegister {
     void register(String type);
+
     void register(Class clazz);
+
     Class getClass(String type);
+
     void destroy();
 }

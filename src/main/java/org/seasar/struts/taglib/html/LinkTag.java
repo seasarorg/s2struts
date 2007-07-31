@@ -73,16 +73,20 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
 
         ActionMapping mapping = null;
         if (this.path == null) {
-            String componentName = MethodBindingUtil.getComponentName(this.expression);
-            mapping = (ActionMapping) ModuleConfigUtil.findActionConfigForComponentName(componentName);
+            String componentName = MethodBindingUtil
+                    .getComponentName(this.expression);
+            mapping = (ActionMapping) ModuleConfigUtil
+                    .findActionConfigForComponentName(componentName);
         } else {
-            mapping = (ActionMapping) ModuleConfigUtil.findActionConfig(this.path);
+            mapping = (ActionMapping) ModuleConfigUtil
+                    .findActionConfig(this.path);
         }
         if (mapping == null) {
             throw new JspException("Not found ActionMapping.");
         }
 
-        setMethodBindingExpression(mapping, this.encodeExpression, this.expression);
+        setMethodBindingExpression(mapping, this.encodeExpression,
+                this.expression);
         setCancelAction(mapping, this.encodeExpression, this.expression);
         this.action = mapping.getPath();
 
@@ -90,10 +94,11 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     }
 
     protected String calculateURL() throws JspException {
-        Map params = TagUtils.getInstance().computeParameters(pageContext, paramId, paramName, paramProperty,
-                paramScope, name, property, scope, transaction);
+        Map params = TagUtils.getInstance().computeParameters(pageContext,
+                paramId, paramName, paramProperty, paramScope, name, property,
+                scope, transaction);
 
-        // MethodBindigÇÃExpressionÇurlÇÃÉpÉâÉÅÅ[É^Ç…í«â¡Ç∑ÇÈ
+        // MethodBindigÔøΩÔøΩExpressionÔøΩÔøΩurlÔøΩÃÉpÔøΩÔøΩÔøΩÔøΩÔøΩ[ÔøΩ^ÔøΩ…í«âBÔøΩÔøΩÔøΩ
         if (params == null) {
             params = new HashMap();
         }
@@ -112,22 +117,27 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
         String url = null;
 
         try {
-            url = TagUtils.getInstance().computeURLWithCharEncoding(pageContext, forward, href, page, action, module,
-                    params, anchor, false, useLocalEncoding);
+            url = TagUtils.getInstance().computeURLWithCharEncoding(
+                    pageContext, forward, href, page, action, module, params,
+                    anchor, false, useLocalEncoding);
         } catch (MalformedURLException e) {
             TagUtils.getInstance().saveException(pageContext, e);
-            throw new JspException(messages.getMessage("rewrite.url", e.toString()));
+            throw new JspException(messages.getMessage("rewrite.url", e
+                    .toString()));
         }
 
         return (url);
     }
 
-    protected void setMethodBindingExpression(ActionMapping mapping, String encodeExpression, String expression) {
+    protected void setMethodBindingExpression(ActionMapping mapping,
+            String encodeExpression, String expression) {
         String mappingName = mapping.getPath();
-        S2StrutsContextUtil.setMethodBindingExpression(mappingName, encodeExpression, "", expression);
+        S2StrutsContextUtil.setMethodBindingExpression(mappingName,
+                encodeExpression, "", expression);
     }
 
-    protected void setCancelAction(ActionMapping mapping, String encodeExpression, String expression) {
+    protected void setCancelAction(ActionMapping mapping,
+            String encodeExpression, String expression) {
         if (!this.cancel) {
             return;
         }

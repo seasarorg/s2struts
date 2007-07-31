@@ -60,7 +60,8 @@ public class S2StrutsContextImpl implements S2StrutsContext {
 
     public String getCurrentInputPath() {
         if (isClearPageNameElementValue()) {
-            String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
+            String param = getRequest().getParameter(
+                    Constants.PAGE_NAME_ELEMENT_VALUE);
             if (param != null) {
                 return new String(Base64Util.decode(param));
             }
@@ -69,7 +70,8 @@ public class S2StrutsContextImpl implements S2StrutsContext {
     }
 
     public String getPreviousInputPath() {
-        String param = getRequest().getParameter(Constants.PAGE_NAME_ELEMENT_VALUE);
+        String param = getRequest().getParameter(
+                Constants.PAGE_NAME_ELEMENT_VALUE);
         if (param != null) {
             return new String(Base64Util.decode(param));
         }
@@ -77,22 +79,27 @@ public class S2StrutsContextImpl implements S2StrutsContext {
     }
 
     public void clearPageNameElementValue() {
-        getRequest().setAttribute(Constants.PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK, Boolean.TRUE);
+        getRequest().setAttribute(Constants.PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK,
+                Boolean.TRUE);
     }
 
     private boolean isClearPageNameElementValue() {
-        return (getRequest().getAttribute(Constants.PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK) == null);
+        return (getRequest().getAttribute(
+                Constants.PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK) == null);
     }
 
     //
 
-    public String getMethodBindingExpression(String mappingName, String key, String value) {
-        return (String) this.methodBindingExpressions.get(mappingName + key + value);
+    public String getMethodBindingExpression(String mappingName, String key,
+            String value) {
+        return (String) this.methodBindingExpressions.get(mappingName + key
+                + value);
     }
 
-    public void setMethodBindingExpression(String mappingName, String key, String value,
-            String methodBindingExpression) {
-        this.methodBindingExpressions.put(mappingName + key + value, methodBindingExpression);
+    public void setMethodBindingExpression(String mappingName, String key,
+            String value, String methodBindingExpression) {
+        this.methodBindingExpressions.put(mappingName + key + value,
+                methodBindingExpression);
     }
 
     //

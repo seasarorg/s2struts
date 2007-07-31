@@ -36,8 +36,9 @@ public class AcceptorImpl implements Acceptor {
     public AcceptorImpl() {
     }
 
-    public void process(ExternalRequestProcessor processor, HttpServletRequest request, HttpServletResponse response,
-            Log log) throws IOException, ServletException {
+    public void process(ExternalRequestProcessor processor,
+            HttpServletRequest request, HttpServletResponse response, Log log)
+            throws IOException, ServletException {
 
         // Wrap multipart requests with a special wrapper
         request = processor.processMultipart(request);
@@ -49,7 +50,8 @@ public class AcceptorImpl implements Acceptor {
         }
 
         if (log.isDebugEnabled()) {
-            log.debug("Processing a '" + request.getMethod() + "' for path '" + path + "'");
+            log.debug("Processing a '" + request.getMethod() + "' for path '"
+                    + path + "'");
         }
 
         // Select a Locale for the current user if requested
@@ -67,7 +69,8 @@ public class AcceptorImpl implements Acceptor {
         processor.processCachedMessages(request, response);
 
         // Identify the mapping for this request
-        ActionMapping mapping = processor.processMapping(request, response, path);
+        ActionMapping mapping = processor.processMapping(request, response,
+                path);
         if (mapping == null) {
             return;
         }
@@ -78,14 +81,16 @@ public class AcceptorImpl implements Acceptor {
         }
 
         // Validate Form for this request
-        //ActionForm form = processor.processInputValueFormCreate(request, response, mapping);
-        //if (!processor.processS2Validate(request, response, form, mapping)) {
-        //    return;
-        //}
-        //processor.processInputValueFormDelete(request, response, mapping);
-        
+        // ActionForm form = processor.processInputValueFormCreate(request,
+        // response, mapping);
+        // if (!processor.processS2Validate(request, response, form, mapping)) {
+        // return;
+        // }
+        // processor.processInputValueFormDelete(request, response, mapping);
+
         // Process any ActionForm bean related to this request
-        ActionForm form = processor.processActionForm(request, response, mapping);
+        ActionForm form = processor.processActionForm(request, response,
+                mapping);
         processor.processS2Populate(request, response, form, mapping);
 
         // Validate any fields of the ActionForm bean, if applicable
@@ -94,7 +99,8 @@ public class AcceptorImpl implements Acceptor {
                 return;
             }
         } catch (InvalidCancelException e) {
-            ActionForward forward = processor.processException(request, response, e, form, mapping);
+            ActionForward forward = processor.processException(request,
+                    response, e, form, mapping);
             processor.processForwardConfig(request, response, forward);
             return;
         } catch (IOException e) {
@@ -113,7 +119,8 @@ public class AcceptorImpl implements Acceptor {
         }
 
         // Create or acquire the Action instance to process this request
-        //Action action = processor.processActionCreate(request, response, mapping);
+        // Action action = processor.processActionCreate(request, response,
+        // mapping);
         Object action = processor.getActionInstance(request, response, mapping);
         if (action == null) {
             return;
@@ -123,13 +130,16 @@ public class AcceptorImpl implements Acceptor {
         ActionForward forward = null;
         try {
             if (action instanceof Action) {
-                forward = processor.processActionPerform(request, response, (Action) action, form, mapping);
+                forward = processor.processActionPerform(request, response,
+                        (Action) action, form, mapping);
             } else {
-                forward = processor.processActionExecute(request, response, action, form, mapping);
+                forward = processor.processActionExecute(request, response,
+                        action, form, mapping);
             }
         } catch (Exception e) {
             log.error("Execute action", e);
-            forward = processor.processException(request, response, e, form, mapping);
+            forward = processor.processException(request, response, e, form,
+                    mapping);
         }
         if (forward != null) {
             processor.processSetPath(forward);

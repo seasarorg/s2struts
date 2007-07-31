@@ -23,7 +23,8 @@ public class ConstantValidatorAnnotationHandlerSqlDateTest extends S2TestCase {
     }
 
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", ValidatorAnnotationSqlDateForm.class);
+        form = annHandler.createForm("testForm",
+                ValidatorAnnotationSqlDateForm.class);
     }
 
     public void testFieldCount() {

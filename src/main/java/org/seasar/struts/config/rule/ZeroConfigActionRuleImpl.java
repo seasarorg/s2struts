@@ -41,7 +41,8 @@ import org.seasar.struts.config.StrutsActionForwardConfig;
  * @author Katsuhiko Nagashima
  */
 public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
-    private static final Logger logger = Logger.getLogger(ZeroConfigActionRuleImpl.class);
+    private static final Logger logger = Logger
+            .getLogger(ZeroConfigActionRuleImpl.class);
 
     private AutoStrutsConfigRule configRule;
 
@@ -151,7 +152,8 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
 
     public void addFowardConfig(Class actionClass, ActionConfig actionConfig,
             ServletContext servletContext) {
-        ForwardConfig forwardConfig = actionConfig.findForwardConfig(Constants.SUCCESS);
+        ForwardConfig forwardConfig = actionConfig
+                .findForwardConfig(Constants.SUCCESS);
         if (forwardConfig != null) {
             return;
         }
@@ -168,9 +170,11 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             packageDir = "/" + packageDir.replace('.', '/');
 
             String docRoot = this.configRule.getDocRoot();
-            path = getExistFilePath(docRoot, packageDir, file, actionConfig, servletContext);
+            path = getExistFilePath(docRoot, packageDir, file, actionConfig,
+                    servletContext);
             if (path == null) {
-                path = getExistResourcePath(docRoot, packageDir, file, actionConfig, servletContext);
+                path = getExistResourcePath(docRoot, packageDir, file,
+                        actionConfig, servletContext);
             }
             if (path != null) {
                 addFowardConfig(path, actionConfig);
@@ -178,7 +182,8 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             }
         }
 
-        String message = "View file was not found. " + getPath(actionClass, null) + "."
+        String message = "View file was not found. "
+                + getPath(actionClass, null) + "."
                 + viewExtension[this.configRule.getViewExtension().length - 1];
         logger.info(message);
     }
@@ -191,8 +196,9 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         actionConfig.addForwardConfig(forwardConfig);
     }
 
-    private String getExistFilePath(String docRoot, String packageDir, String file,
-            ActionConfig actionConfig, ServletContext servletContext) {
+    private String getExistFilePath(String docRoot, String packageDir,
+            String file, ActionConfig actionConfig,
+            ServletContext servletContext) {
         if (servletContext.getRealPath("/") == null) {
             return null;
         }
@@ -212,12 +218,14 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             } else {
                 packageDir = "/" + packageDir;
             }
-            return getExistFilePath(docRoot, packageDir, file, actionConfig, servletContext);
+            return getExistFilePath(docRoot, packageDir, file, actionConfig,
+                    servletContext);
         }
     }
 
-    private String getExistResourcePath(String docRoot, String packageDir, String file,
-            ActionConfig actionConfig, ServletContext servletContext) {
+    private String getExistResourcePath(String docRoot, String packageDir,
+            String file, ActionConfig actionConfig,
+            ServletContext servletContext) {
         String path = docRoot + packageDir + file;
         URL resourceUrl;
         try {
@@ -238,7 +246,8 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             } else {
                 packageDir = "/" + packageDir;
             }
-            return getExistResourcePath(docRoot, packageDir, file, actionConfig, servletContext);
+            return getExistResourcePath(docRoot, packageDir, file,
+                    actionConfig, servletContext);
         }
     }
 

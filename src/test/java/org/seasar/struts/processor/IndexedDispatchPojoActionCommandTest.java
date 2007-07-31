@@ -14,7 +14,7 @@ import org.seasar.struts.mock.MockActionMapping;
  */
 public class IndexedDispatchPojoActionCommandTest extends S2TestCase {
 
-	private PojoActionCommand command = new IndexedDispatchPojoActionCommand();
+    private PojoActionCommand command = new IndexedDispatchPojoActionCommand();
 
     Class actionInterface = MultiMethodPojoAction.class;
 
@@ -27,7 +27,7 @@ public class IndexedDispatchPojoActionCommandTest extends S2TestCase {
     public void testExecute() {
         mapping.setParameter("method");
         getRequest().setParameter("method[10]", "exe");
-        
+
         String forward = command.execute(getRequest(), getResponse(),
                 actionInterface, action, form, mapping);
         assertEquals("success10", forward);
@@ -42,7 +42,7 @@ public class IndexedDispatchPojoActionCommandTest extends S2TestCase {
     public void testNotExecute2() {
         mapping.setParameter("method");
         getRequest().setParameter("method[10]", "exe");
-        
+
         Class actionInterface = SingleMethodPojoAction.class;
         Object action = new SingleMethodPojoActionImpl();
 
@@ -54,7 +54,7 @@ public class IndexedDispatchPojoActionCommandTest extends S2TestCase {
     public void testNotExecute3() {
         mapping.setParameter("method");
         getRequest().setParameter("method[10]", "notExe");
-        
+
         String forward = command.execute(getRequest(), getResponse(),
                 actionInterface, action, form, mapping);
         assertEquals(PojoActionCommand.NOT_EXECUTE, forward);

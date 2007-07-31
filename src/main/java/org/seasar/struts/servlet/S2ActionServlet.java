@@ -30,7 +30,8 @@ import org.seasar.struts.processor.RequestProcessorFactory;
  */
 public class S2ActionServlet extends ActionServlet {
 
-    private static final long serialVersionUID = S2ActionServlet.class.hashCode();
+    private static final long serialVersionUID = S2ActionServlet.class
+            .hashCode();
 
     /**
      * 
@@ -41,15 +42,20 @@ public class S2ActionServlet extends ActionServlet {
 
     /**
      * <p>
-     * Look up and return the {@link RequestProcessor}responsible for the specified module, creating a new one if
-     * necessary.
+     * Look up and return the {@link RequestProcessor}responsible for the
+     * specified module, creating a new one if necessary.
      * </p>
      * 
-     * @param config The module configuration for which to acquire and return a RequestProcessor.
-     * @exception ServletException if we cannot instantiate a RequestProcessor instance
+     * @param config
+     *            The module configuration for which to acquire and return a
+     *            RequestProcessor.
+     * @exception ServletException
+     *                if we cannot instantiate a RequestProcessor instance
      */
-    protected synchronized RequestProcessor getRequestProcessor(ModuleConfig moduleConfig) throws ServletException {
-        return getRequestProcessorFactory().getRequestProcessor(moduleConfig, getServletContext(), this);
+    protected synchronized RequestProcessor getRequestProcessor(
+            ModuleConfig moduleConfig) throws ServletException {
+        return getRequestProcessorFactory().getRequestProcessor(moduleConfig,
+                getServletContext(), this);
     }
 
     /**
@@ -71,6 +77,7 @@ public class S2ActionServlet extends ActionServlet {
 
     private static RequestProcessorFactory getRequestProcessorFactory() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        return (RequestProcessorFactory) container.getComponent(RequestProcessorFactory.class);
+        return (RequestProcessorFactory) container
+                .getComponent(RequestProcessorFactory.class);
     }
 }

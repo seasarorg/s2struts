@@ -23,7 +23,7 @@ public class DispatchPojoActionCommandTest extends S2TestCase {
     public void testExecute() {
         mapping.setParameter("method");
         getRequest().setParameter("method", "exe");
-        
+
         String forward = command.execute(getRequest(), getResponse(),
                 actionInterface, action, form, mapping);
         assertEquals("success", forward);
@@ -38,7 +38,7 @@ public class DispatchPojoActionCommandTest extends S2TestCase {
     public void testNotExecute2() {
         mapping.setParameter("method");
         getRequest().setParameter("method", "exe");
-        
+
         Class actionInterface = SingleMethodPojoAction.class;
         Object action = new SingleMethodPojoActionImpl();
 
@@ -50,7 +50,7 @@ public class DispatchPojoActionCommandTest extends S2TestCase {
     public void testNotExecute3() {
         mapping.setParameter("method");
         getRequest().setParameter("method", "notExe");
-        
+
         String forward = command.execute(getRequest(), getResponse(),
                 actionInterface, action, form, mapping);
         assertEquals(PojoActionCommand.NOT_EXECUTE, forward);

@@ -25,10 +25,10 @@ import org.apache.struts.action.ActionMapping;
  * @author Katsuhiko Nagashima
  */
 public interface ActionCommand {
-    
+
     String NOT_EXECUTE = "org.seasar.struts.processor.ActionCommand.NOT_EXECUTE";
 
     String execute(HttpServletRequest request, HttpServletResponse response,
             Object action, Object form, ActionMapping mapping);
-    
+
 }

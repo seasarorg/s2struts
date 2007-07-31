@@ -32,11 +32,11 @@ public class ClassRegisterImpl implements ClassRegister {
     public void register(String type) {
         getClass(type);
     }
-    
+
     public void register(Class clazz) {
         getClass(clazz.getName());
     }
-    
+
     public synchronized Class getClass(String type) {
         Class clazz = (Class) this.classes.get(type);
         if (clazz == null) {

@@ -25,14 +25,15 @@ public class ConstantValidatorAnnotationHandlerOrderTest extends S2TestCase {
     }
 
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", ValidatorAnnotationOrderForm.class);
+        form = annHandler.createForm("testForm",
+                ValidatorAnnotationOrderForm.class);
     }
 
     public void testOrder() {
         List fields = form.getFields();
         assertNotNull(fields);
         assertEquals(3, fields.size());
-        
+
         assertEquals("classType", ((Field) fields.get(0)).getKey());
         assertEquals("className", ((Field) fields.get(1)).getKey());
         assertEquals("arg", ((Field) fields.get(2)).getKey());

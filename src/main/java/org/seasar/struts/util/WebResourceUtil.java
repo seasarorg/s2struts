@@ -29,7 +29,7 @@ import org.seasar.framework.util.URLUtil;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class WebResourceUtil {
 
@@ -43,7 +43,7 @@ public class WebResourceUtil {
 
     private WebResourceUtil() {
     }
-    
+
     public static File createFile(Class referenceClass) {
         String baseClassPath = ResourceUtil.getResourcePath(referenceClass);
         URL url = ResourceUtil.getResource(baseClassPath);
@@ -54,7 +54,7 @@ public class WebResourceUtil {
     //
     //
     //
-    
+
     protected interface Strategy {
         File createFile(final Class referenceClass, final URL url);
     }
@@ -81,7 +81,7 @@ public class WebResourceUtil {
             String jarFileName = path.substring(0, pos);
             return new File(decode(jarFileName));
         }
-        
+
         private String decode(String jarFileName) {
             try {
                 return URLDecoder.decode(jarFileName, "UTF8");
@@ -93,14 +93,15 @@ public class WebResourceUtil {
     }
 
     /**
-     * WebLogicŒÅ—L‚Ì<code>zip:</code>ƒvƒƒgƒRƒ‹‚Å•\Œ»‚³‚ê‚éURL‚ğƒTƒ|[ƒg‚·‚éƒXƒgƒ‰ƒeƒW‚Å‚·B
+     * WebLogicï¿½Å—Lï¿½ï¿½<code>zip:</code>ï¿½vï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½Å•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½URLï¿½ï¿½Tï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½eï¿½Wï¿½Å‚ï¿½ï¿½B
      */
     protected static class ZipFileStrategy implements Strategy {
 
         public File createFile(final Class referenceClass, final URL url) {
             final String urlString = ResourceUtil.toExternalForm(url);
             final int pos = urlString.lastIndexOf('!');
-            final String jarFileName = urlString.substring("zip:".length(), pos);
+            final String jarFileName = urlString
+                    .substring("zip:".length(), pos);
             return new File(jarFileName);
         }
     }

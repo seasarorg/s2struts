@@ -34,7 +34,7 @@ import org.apache.struts.action.ActionMapping;
 public class ActionExecuteProcessorImpl implements ActionExecuteProcessor {
 
     private List commandList = new ArrayList();
-    
+
     public void addActionCommand(ActionCommand actionCommand) {
         commandList.add(actionCommand);
     }
@@ -45,7 +45,8 @@ public class ActionExecuteProcessorImpl implements ActionExecuteProcessor {
 
         for (Iterator it = commandList.iterator(); it.hasNext();) {
             ActionCommand command = (ActionCommand) it.next();
-            String forward = command.execute(request, response, action, form, mapping);
+            String forward = command.execute(request, response, action, form,
+                    mapping);
             if (!ActionCommand.NOT_EXECUTE.equals(forward)) {
                 if (forward != null) {
                     return mapping.findForward(forward);

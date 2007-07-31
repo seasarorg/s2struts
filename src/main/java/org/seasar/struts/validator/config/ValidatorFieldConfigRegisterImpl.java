@@ -81,8 +81,10 @@ public class ValidatorFieldConfigRegisterImpl implements ConfigRegister {
         String validatorName = (String) validator.get("name");
         String varName = (String) var.get("name");
         String varKey = (String) var.get("key");
-        boolean varResource = BooleanConversionUtil.toPrimitiveBoolean(var.get("resource")); 
-        boolean varArg = BooleanConversionUtil.toPrimitiveBoolean(var.get("arg")); 
+        boolean varResource = BooleanConversionUtil.toPrimitiveBoolean(var
+                .get("resource"));
+        boolean varArg = BooleanConversionUtil.toPrimitiveBoolean(var
+                .get("arg"));
 
         if (StringUtil.isEmpty(varKey) && !varArg) {
             return;

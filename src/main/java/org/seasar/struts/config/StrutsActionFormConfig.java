@@ -20,8 +20,10 @@ package org.seasar.struts.config;
  */
 public interface StrutsActionFormConfig {
     String DEFAULT_NAME = "";
+
     String name();
 
     boolean DEFAULT_RESTRICTED = false;
+
     boolean restricted();
 }

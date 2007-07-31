@@ -10,7 +10,8 @@ import org.seasar.struts.form.ValidatorAnnotationActionForm;
  * @author Katsuhiko Nagashima
  * 
  */
-public class ConstantValidatorAnnotationHandlerNestedActionFormTest extends S2TestCase {
+public class ConstantValidatorAnnotationHandlerNestedActionFormTest extends
+        S2TestCase {
 
     private ValidatorAnnotationHandler annHandler;
 
@@ -23,7 +24,8 @@ public class ConstantValidatorAnnotationHandlerNestedActionFormTest extends S2Te
     }
 
     public void setUpAfterContainerInit() {
-        form = annHandler.createForm("testForm", ValidatorAnnotationActionForm.class);
+        form = annHandler.createForm("testForm",
+                ValidatorAnnotationActionForm.class);
     }
 
     public void testNestedActionForm() {
@@ -33,5 +35,5 @@ public class ConstantValidatorAnnotationHandlerNestedActionFormTest extends S2Te
         assertEquals("Value", field.getArg(0).getKey());
         assertEquals(false, field.getArg(0).isResource());
     }
-    
+
 }

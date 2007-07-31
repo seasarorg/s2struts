@@ -29,32 +29,32 @@ import org.seasar.struts.util.MethodBindingUtil;
  * @author Katsuhiko Nagashima
  */
 public class MethodBinding {
-    
+
     private String componentName;
-    
+
     private String methodName;
-    
+
     private int index;
-    
+
     private boolean indexed;
-    
+
     public MethodBinding(String expression) {
         this.componentName = MethodBindingUtil.getComponentName(expression);
         this.methodName = MethodBindingUtil.getMethodName(expression);
         this.indexed = false;
     }
-    
+
     public MethodBinding(String expression, int index) {
         this.componentName = MethodBindingUtil.getComponentName(expression);
         this.methodName = MethodBindingUtil.getMethodName(expression);
         this.index = index;
         this.indexed = true;
     }
-    
+
     public Object invoke() {
         return invoke(new ActionMapping());
     }
-    
+
     public Object invoke(ActionMapping mapping) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
 
@@ -71,7 +71,8 @@ public class MethodBinding {
 
     private Object invoke(Object component, BeanDesc beanDesc) {
         if (indexed) {
-            return beanDesc.invoke(component, this.methodName, new Object[] { new Integer(index) });
+            return beanDesc.invoke(component, this.methodName,
+                    new Object[] { new Integer(index) });
         } else {
             return beanDesc.invoke(component, this.methodName, null);
         }

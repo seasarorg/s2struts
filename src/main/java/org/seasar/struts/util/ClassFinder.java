@@ -34,15 +34,18 @@ public interface ClassFinder {
 
     void find(String path, boolean enableJar, String jarFilePattern);
 
-    void find(String path, boolean enableJar, String jarFilePattern, String pattern);
+    void find(String path, boolean enableJar, String jarFilePattern,
+            String pattern);
 
     void find(File file, boolean enableJar, String jarFilePattern);
 
-    void find(File file, boolean enableJar, String jarFilePattern, String pattern);
+    void find(File file, boolean enableJar, String jarFilePattern,
+            String pattern);
 
     void find(GenericServlet servlet, boolean enableJar, String jarFilePattern);
 
-    void find(GenericServlet servlet, boolean enableJar, String jarFilePattern, String pattern);
+    void find(GenericServlet servlet, boolean enableJar, String jarFilePattern,
+            String pattern);
 
     void find(Class referenceClass);
 

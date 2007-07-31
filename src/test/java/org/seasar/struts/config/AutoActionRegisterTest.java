@@ -13,7 +13,7 @@ import org.seasar.extension.unit.S2TestCase;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class AutoActionRegisterTest extends S2TestCase {
 
@@ -61,7 +61,7 @@ public class AutoActionRegisterTest extends S2TestCase {
         ActionConfig actionConfig = config.findActionConfigs()[0];
         assertEquals("/testNoRegisteredComponent", actionConfig.getPath());
     }
-    
+
     public void testNotRegister() {
         ServletContext context = getServletContext();
         ModuleConfig config = new ModuleConfigImpl("");

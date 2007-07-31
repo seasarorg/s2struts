@@ -167,8 +167,8 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
     public void testLength() {
         Field field = form.getField("length");
         assertNotNull(field);
-        assertEquals("minlength,maxlength = " + field.getDepends(), "minlength,maxlength".length(), field.getDepends()
-                .length());
+        assertEquals("minlength,maxlength = " + field.getDepends(),
+                "minlength,maxlength".length(), field.getDepends().length());
         assertEquals("3", field.getVarValue("minlength"));
         assertEquals("5", field.getVarValue("maxlength"));
     }
@@ -176,8 +176,9 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
     public void testByteLength() {
         Field field = form.getField("byteLength");
         assertNotNull(field);
-        assertEquals("minbytelength,maxbytelength = " + field.getDepends(), "minbytelength,maxbytelength".length(),
-                field.getDepends().length());
+        assertEquals("minbytelength,maxbytelength = " + field.getDepends(),
+                "minbytelength,maxbytelength".length(), field.getDepends()
+                        .length());
         assertEquals("3", field.getVarValue("minbytelength"));
         assertEquals("5", field.getVarValue("maxbytelength"));
         assertEquals("ISO8859_1", field.getVarValue("charset"));
@@ -186,8 +187,9 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
     public void testDefaultByteLength() {
         Field field = form.getField("defaultByteLength");
         assertNotNull(field);
-        assertEquals("minbytelength,maxbytelength = " + field.getDepends(), "minbytelength,maxbytelength".length(),
-                field.getDepends().length());
+        assertEquals("minbytelength,maxbytelength = " + field.getDepends(),
+                "minbytelength,maxbytelength".length(), field.getDepends()
+                        .length());
         assertEquals("3", field.getVarValue("minbytelength"));
         assertEquals("5", field.getVarValue("maxbytelength"));
         assertNull(field.getVarValue("charset"));
@@ -213,7 +215,8 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         Field field = form.getField("mask");
         assertNotNull(field);
         assertEquals("mask", field.getDepends());
-        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field
+                .getVarValue("mask"));
         assertNotNull(field.getMessage("mask"));
         assertEquals("comma", field.getMsg("mask"));
         assertTrue(field.getMessage("mask").isResource());
@@ -223,7 +226,8 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         Field field = form.getField("mask2");
         assertNotNull(field);
         assertEquals("mask", field.getDepends());
-        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field
+                .getVarValue("mask"));
         assertNull(field.getMessage("mask"));
     }
 
@@ -231,7 +235,8 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
         Field field = form.getField("mask3");
         assertNotNull(field);
         assertEquals("mask", field.getDepends());
-        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field.getVarValue("mask"));
+        assertEquals("(^[0-9]{1,3}\\.{1}[0-9]{1,2}$)", field
+                .getVarValue("mask"));
         assertEquals("comma", field.getMsg("mask"));
         assertFalse(field.getMessage("mask").isResource());
     }
@@ -239,8 +244,9 @@ public class ConstantValidatorAnnotationHandlerTest extends S2TestCase {
     public void testMix() {
         Field field = form.getField("mix");
         assertNotNull(field);
-        assertEquals("required,minlength,maxlength,mask,email = " + field.getDepends(),
-                "required,minlength,maxlength,mask,email".length(), field.getDepends().length());
+        assertEquals("required,minlength,maxlength,mask,email = "
+                + field.getDepends(), "required,minlength,maxlength,mask,email"
+                .length(), field.getDepends().length());
         assertEquals("10", field.getVarValue("minlength"));
         assertEquals("15", field.getVarValue("maxlength"));
         assertEquals("com$", field.getVarValue("mask"));

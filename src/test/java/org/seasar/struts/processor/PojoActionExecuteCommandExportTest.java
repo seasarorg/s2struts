@@ -18,8 +18,8 @@ import org.seasar.struts.mock.MockActionMapping;
  * @author Katsuhiko Nagashima
  */
 public class PojoActionExecuteCommandExportTest extends S2TestCase {
-	
-	private PojoActionExecuteCommand pojoActionExecuteCommand;
+
+    private PojoActionExecuteCommand pojoActionExecuteCommand;
 
     protected void setUp() throws Exception {
         super.setUp();
@@ -34,18 +34,20 @@ public class PojoActionExecuteCommandExportTest extends S2TestCase {
         mapping.setType(ExportPOJOAction.class.getName());
         mapping.setName("exportPOJOForm");
         mapping.setScope("request");
-        
+
         getRequest().setAttribute("exportPOJOForm", form);
 
         String forward = pojoActionExecuteCommand.execute(getRequest(),
-				getResponse(), action, form, mapping);
+                getResponse(), action, form, mapping);
         assertEquals("success", forward);
 
-        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getAttribute("exportPOJOForm");
-        ExportPOJOForm resultForm = (ExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
+        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest()
+                .getAttribute("exportPOJOForm");
+        ExportPOJOForm resultForm = (ExportPOJOForm) ((WrapDynaBean) beanForm
+                .getDynaBean()).getInstance();
         assertEquals("updated", resultForm.getMessage());
     }
-    
+
     public void testExecuteExportPOJOFormFromSession() throws Exception {
         ExportPOJOAction action = new ExportPOJOActionImpl();
         Object form = new BeanValidatorForm(new ExportPOJOForm("old"));
@@ -53,18 +55,20 @@ public class PojoActionExecuteCommandExportTest extends S2TestCase {
         mapping.setType(ExportPOJOAction.class.getName());
         mapping.setName("exportPOJOForm");
         mapping.setScope("session");
-        
+
         getRequest().getSession().setAttribute("exportPOJOForm", form);
 
         String forward = pojoActionExecuteCommand.execute(getRequest(),
-				getResponse(), action, form, mapping);
+                getResponse(), action, form, mapping);
         assertEquals("success", forward);
 
-        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest().getSession().getAttribute("exportPOJOForm");
-        ExportPOJOForm resultForm = (ExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
+        BeanValidatorForm beanForm = (BeanValidatorForm) getRequest()
+                .getSession().getAttribute("exportPOJOForm");
+        ExportPOJOForm resultForm = (ExportPOJOForm) ((WrapDynaBean) beanForm
+                .getDynaBean()).getInstance();
         assertEquals("updated", resultForm.getMessage());
     }
-    
+
     public void testExecuteExportFormFromRequest() throws Exception {
         ExportAction action = new ExportActionImpl();
         Object form = new BeanValidatorForm(new ExportForm("old"));
@@ -72,14 +76,15 @@ public class PojoActionExecuteCommandExportTest extends S2TestCase {
         mapping.setType(ExportAction.class.getName());
         mapping.setName("exportForm");
         mapping.setScope("request");
-        
+
         getRequest().setAttribute("exportForm", form);
 
         String forward = pojoActionExecuteCommand.execute(getRequest(),
-				getResponse(), action, form, mapping);
+                getResponse(), action, form, mapping);
         assertEquals("success", forward);
 
-        ExportForm resultForm = (ExportForm) getRequest().getAttribute("exportForm");
+        ExportForm resultForm = (ExportForm) getRequest().getAttribute(
+                "exportForm");
         assertEquals("updated", resultForm.getMessage());
     }
 
@@ -90,17 +95,18 @@ public class PojoActionExecuteCommandExportTest extends S2TestCase {
         mapping.setType(ExportAction.class.getName());
         mapping.setName("exportForm");
         mapping.setScope("session");
-        
+
         getRequest().getSession().setAttribute("exportForm", form);
 
         String forward = pojoActionExecuteCommand.execute(getRequest(),
-				getResponse(), action, form, mapping);
+                getResponse(), action, form, mapping);
         assertEquals("success", forward);
 
-        ExportForm resultForm = (ExportForm) getRequest().getSession().getAttribute("exportForm");
+        ExportForm resultForm = (ExportForm) getRequest().getSession()
+                .getAttribute("exportForm");
         assertEquals("updated", resultForm.getMessage());
     }
-    
-    // TODO ÉäÉNÉGÉXÉg ÉZÉbÉVÉáÉì ÉtÉHÅ[ÉÄ
+
+    // TODO ÔøΩÔøΩÔøΩNÔøΩGÔøΩXÔøΩg ÔøΩZÔøΩbÔøΩVÔøΩÔøΩÔøΩÔøΩ ÔøΩtÔøΩHÔøΩ[ÔøΩÔøΩ
 
 }

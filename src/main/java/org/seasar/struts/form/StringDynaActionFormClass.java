@@ -26,10 +26,10 @@ import org.apache.struts.config.FormBeanConfig;
 public class StringDynaActionFormClass extends DynaActionFormClass {
     private static final long serialVersionUID = -6780598674384267875L;
 
-	public StringDynaActionFormClass() {
+    public StringDynaActionFormClass() {
         super(null);
     }
-    
+
     protected StringDynaActionFormClass(FormBeanConfig config) {
         super(config);
     }
@@ -57,7 +57,8 @@ public class StringDynaActionFormClass extends DynaActionFormClass {
         throw new UnsupportedOperationException();
     }
 
-    public DynaBean newInstance() throws IllegalAccessException, InstantiationException {
+    public DynaBean newInstance() throws IllegalAccessException,
+            InstantiationException {
         throw new UnsupportedOperationException();
     }
 

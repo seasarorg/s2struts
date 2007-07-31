@@ -30,13 +30,15 @@ public class BeanValidatorFormUtil {
     public static Object toBean(Object bean) {
         if (bean instanceof BeanValidatorForm) {
             BeanValidatorForm beanValidatorForm = (BeanValidatorForm) bean;
-            WrapDynaBean dynaBean = (WrapDynaBean) beanValidatorForm.getDynaBean();
+            WrapDynaBean dynaBean = (WrapDynaBean) beanValidatorForm
+                    .getDynaBean();
             return dynaBean.getInstance();
         }
         return bean;
     }
 
-    public static BeanValidatorForm toBeanValidatorForm(Object oldForm, Object newForm) {
+    public static BeanValidatorForm toBeanValidatorForm(Object oldForm,
+            Object newForm) {
         if (oldForm == null) {
             return new S2BeanValidatorForm(new BeanValidatorForm(newForm));
         }

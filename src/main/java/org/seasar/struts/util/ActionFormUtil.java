@@ -30,30 +30,32 @@ public class ActionFormUtil {
     private ActionFormUtil() {
     }
 
-    public static Object getActualForm(HttpServletRequest request, ActionMapping mapping) {
+    public static Object getActualForm(HttpServletRequest request,
+            ActionMapping mapping) {
         Object form = getActionForm(request, mapping);
         return BeanValidatorFormUtil.toBean(form);
     }
 
-    public static void setActualForm(HttpServletRequest request, Object form, ActionMapping mapping) {
+    public static void setActualForm(HttpServletRequest request, Object form,
+            ActionMapping mapping) {
         ActionForm newForm = toActionForm(request, form, mapping);
         setActionForm(request, newForm, mapping, mapping.getScope());
     }
 
-    public static void setRequestActualForm(HttpServletRequest request, Object form,
-            ActionMapping mapping) {
+    public static void setRequestActualForm(HttpServletRequest request,
+            Object form, ActionMapping mapping) {
         ActionForm newForm = toActionForm(request, form, mapping);
         setActionForm(request, newForm, mapping, Constants.REQUEST);
     }
 
-    public static void setSessionActualForm(HttpServletRequest request, Object form,
-            ActionMapping mapping) {
+    public static void setSessionActualForm(HttpServletRequest request,
+            Object form, ActionMapping mapping) {
         ActionForm newForm = toActionForm(request, form, mapping);
         setActionForm(request, newForm, mapping, Constants.SESSION);
     }
 
-    private static ActionForm toActionForm(HttpServletRequest request, Object form,
-            ActionMapping mapping) {
+    private static ActionForm toActionForm(HttpServletRequest request,
+            Object form, ActionMapping mapping) {
         if (form instanceof ActionForm) {
             return (ActionForm) form;
         }
@@ -61,7 +63,8 @@ public class ActionFormUtil {
         return BeanValidatorFormUtil.toBeanValidatorForm(oldForm, form);
     }
 
-    private static Object getActionForm(HttpServletRequest request, ActionMapping mapping) {
+    private static Object getActionForm(HttpServletRequest request,
+            ActionMapping mapping) {
         if (Constants.REQUEST.equals(mapping.getScope())) {
             return request.getAttribute(mapping.getAttribute());
         } else {
@@ -70,8 +73,8 @@ public class ActionFormUtil {
         }
     }
 
-    private static void setActionForm(HttpServletRequest request, ActionForm form,
-            ActionMapping mapping, String scope) {
+    private static void setActionForm(HttpServletRequest request,
+            ActionForm form, ActionMapping mapping, String scope) {
         if (form == null) {
             return;
         }

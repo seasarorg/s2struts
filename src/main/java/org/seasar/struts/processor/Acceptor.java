@@ -27,6 +27,7 @@ import org.apache.commons.logging.Log;
  * @author Satoshi Kimura
  */
 public interface Acceptor {
-    void process(ExternalRequestProcessor processor, HttpServletRequest request, HttpServletResponse response, Log log)
+    void process(ExternalRequestProcessor processor,
+            HttpServletRequest request, HttpServletResponse response, Log log)
             throws IOException, ServletException;
 }

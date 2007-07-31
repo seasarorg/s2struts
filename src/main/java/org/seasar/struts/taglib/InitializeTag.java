@@ -63,7 +63,8 @@ public class InitializeTag extends BaseTag {
 
     public int doEndTag() {
 
-        Boolean skipPage = (Boolean) this.pageContext.getAttribute(SKIP_PAGE_CONTEXT);
+        Boolean skipPage = (Boolean) this.pageContext
+                .getAttribute(SKIP_PAGE_CONTEXT);
 
         if (skipPage.booleanValue()) {
 

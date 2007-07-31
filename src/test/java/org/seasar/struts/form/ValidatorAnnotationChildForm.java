@@ -36,7 +36,8 @@ public class ValidatorAnnotationChildForm {
         return null;
     }
 
-    public void setGrandchildren(ValidatorAnnotationGrandchildForm[] grandchildren) {
+    public void setGrandchildren(
+            ValidatorAnnotationGrandchildForm[] grandchildren) {
     }
 
     public ValidatorAnnotationGrandchildForm[] getGrandchildren() {

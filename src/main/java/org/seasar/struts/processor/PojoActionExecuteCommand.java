@@ -72,8 +72,8 @@ public class PojoActionExecuteCommand implements ActionCommand {
         }
         for (Iterator it = commandList.iterator(); it.hasNext();) {
             PojoActionCommand command = (PojoActionCommand) it.next();
-            String forward = command.execute(request, response, actionInterface,
-                    action, form, mapping);
+            String forward = command.execute(request, response,
+                    actionInterface, action, form, mapping);
             if (!PojoActionCommand.NOT_EXECUTE.equals(forward)) {
                 return forward;
             }

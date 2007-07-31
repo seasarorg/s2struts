@@ -3,7 +3,8 @@ package org.seasar.struts.action;
 /**
  * @author Katsuhiko Nagashima
  */
-public class ExportPOJOAnnotationActionImpl implements ExportPOJOAnnotationAction {
+public class ExportPOJOAnnotationActionImpl implements
+        ExportPOJOAnnotationAction {
 
     public static final String exportPOJOAnnotationForm_EXPORT = "session";
 
@@ -13,7 +14,8 @@ public class ExportPOJOAnnotationActionImpl implements ExportPOJOAnnotationActio
         return exportPOJOAnnotationForm;
     }
 
-    public void setExportPOJOAnnotationForm(ExportPOJOAnnotationForm exportPOJOAnnotationForm) {
+    public void setExportPOJOAnnotationForm(
+            ExportPOJOAnnotationForm exportPOJOAnnotationForm) {
         this.exportPOJOAnnotationForm = exportPOJOAnnotationForm;
     }
 

@@ -9,19 +9,19 @@ import org.seasar.struts.action.SingleMethodPojoActionImpl;
 import org.seasar.struts.mock.MockActionMapping;
 
 public class SingleMethodPojoActionCommandTest extends S2TestCase {
-    
+
     private PojoActionCommand command = new SingleMethodPojoActionCommand();
-    
+
     private Object form = null;
-    
+
     private ActionMapping mapping = new MockActionMapping();
-    
+
     public void testExecute() {
         Class actionInterface = SingleMethodPojoAction.class;
         Object action = new SingleMethodPojoActionImpl();
 
         String forward = command.execute(getRequest(), getResponse(),
-                actionInterface, action, form, mapping); 
+                actionInterface, action, form, mapping);
         assertEquals("success", forward);
     }
 
@@ -30,7 +30,7 @@ public class SingleMethodPojoActionCommandTest extends S2TestCase {
         Object action = new MultiMethodPojoActionImpl();
 
         String forward = command.execute(getRequest(), getResponse(),
-                actionInterface, action, form, mapping); 
+                actionInterface, action, form, mapping);
         assertEquals(PojoActionCommand.NOT_EXECUTE, forward);
     }
 

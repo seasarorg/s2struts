@@ -52,7 +52,8 @@ public class ConstantValueUtilTest extends TestCase {
     }
 
     public void testToMapValueEnclosedWithSingleCortation() {
-        Map result = ConstantValueUtil.toMap("value1 = 'aaa, bbb', value2='bbb, ccc'");
+        Map result = ConstantValueUtil
+                .toMap("value1 = 'aaa, bbb', value2='bbb, ccc'");
 
         assertEquals(2, result.size());
         assertEquals("aaa, bbb", result.get("value1"));
@@ -68,7 +69,8 @@ public class ConstantValueUtilTest extends TestCase {
     }
 
     public void testToMapValueEnclosedWithDoubleCortation() {
-        Map result = ConstantValueUtil.toMap("value1 = \"aaa, bbb\", value2=\"bbb, ccc\"");
+        Map result = ConstantValueUtil
+                .toMap("value1 = \"aaa, bbb\", value2=\"bbb, ccc\"");
 
         assertEquals(2, result.size());
         assertEquals("aaa, bbb", result.get("value1"));
@@ -97,7 +99,9 @@ public class ConstantValueUtilTest extends TestCase {
             ConstantValueUtil.toMap("value1 = 'aaa, bbb, value2='bbb, ccc'");
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Illegal separator value. 'aaa, bbb, value2='bbb, ccc'", e.getMessage());
+            assertEquals(
+                    "Illegal separator value. 'aaa, bbb, value2='bbb, ccc'", e
+                            .getMessage());
         }
     }
 

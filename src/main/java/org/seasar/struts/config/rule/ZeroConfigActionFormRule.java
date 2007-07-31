@@ -22,7 +22,7 @@ import org.apache.struts.config.ModuleConfig;
  */
 public interface ZeroConfigActionFormRule {
     String getName(Class formClass, ModuleConfig config);
-    
+
     boolean getRestricted(Class formClass, ModuleConfig config);
-    
+
 }

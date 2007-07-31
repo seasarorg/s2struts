@@ -50,7 +50,8 @@ public class ModuleConfigUtilForFormBeanNameTest extends S2TestCase {
     }
 
     public void testFindActionConfigForFormBeanName() {
-        ActionConfig config = ModuleConfigUtil.findActionConfigForFormBeanName("findForm");
+        ActionConfig config = ModuleConfigUtil
+                .findActionConfigForFormBeanName("findForm");
 
         assertNotNull(config);
         assertEquals("findForm", config.getName());
@@ -58,19 +59,22 @@ public class ModuleConfigUtilForFormBeanNameTest extends S2TestCase {
     }
 
     public void testNotFoundActionConfigForFormBeanName1() {
-        ActionConfig config = ModuleConfigUtil.findActionConfigForFormBeanName("noActionForm");
+        ActionConfig config = ModuleConfigUtil
+                .findActionConfigForFormBeanName("noActionForm");
 
         assertNull(config);
     }
 
     public void testNotFoundActionConfigForFormBeanName2() {
-        ActionConfig config = ModuleConfigUtil.findActionConfigForFormBeanName("noForm");
+        ActionConfig config = ModuleConfigUtil
+                .findActionConfigForFormBeanName("noForm");
 
         assertNull(config);
     }
 
     public void testFindActionConfigsForFormBeanName() {
-        ActionConfig[] configs = ModuleConfigUtil.findActionConfigsForFormBeanName("findForm");
+        ActionConfig[] configs = ModuleConfigUtil
+                .findActionConfigsForFormBeanName("findForm");
 
         assertEquals(2, configs.length);
         assertEquals("findForm", configs[0].getName());
@@ -80,13 +84,15 @@ public class ModuleConfigUtilForFormBeanNameTest extends S2TestCase {
     }
 
     public void testNotFoundActionConfigsForFormBeanName1() {
-        ActionConfig[] configs = ModuleConfigUtil.findActionConfigsForFormBeanName("noActionForm");
+        ActionConfig[] configs = ModuleConfigUtil
+                .findActionConfigsForFormBeanName("noActionForm");
 
         assertEquals(0, configs.length);
     }
 
     public void testNotFoundActionConfigsForFormBeanName2() {
-        ActionConfig[] configs = ModuleConfigUtil.findActionConfigsForFormBeanName("noForm");
+        ActionConfig[] configs = ModuleConfigUtil
+                .findActionConfigsForFormBeanName("noForm");
 
         assertEquals(0, configs.length);
     }

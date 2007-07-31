@@ -27,7 +27,8 @@ import org.seasar.framework.util.MethodUtil;
 /**
  * @author Katsuhiko Nagashima
  */
-public abstract class AbstractAnnotationConverter implements AnnotationConverter {
+public abstract class AbstractAnnotationConverter implements
+        AnnotationConverter {
 
     public Map toMap(Object obj) {
         Map result = new HashMap();

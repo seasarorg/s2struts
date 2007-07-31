@@ -31,9 +31,8 @@ import org.apache.struts.action.InvalidCancelException;
 public interface ValidateProcessor {
 
     boolean processValidate(HttpServletRequest request,
-            HttpServletResponse response,
-            ActionForm form,
-            ActionMapping mapping,
-            ExternalRequestProcessor requestProcessor) throws IOException, ServletException, InvalidCancelException;
+            HttpServletResponse response, ActionForm form,
+            ActionMapping mapping, ExternalRequestProcessor requestProcessor)
+            throws IOException, ServletException, InvalidCancelException;
 
 }

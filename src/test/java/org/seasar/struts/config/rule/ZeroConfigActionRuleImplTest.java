@@ -27,12 +27,14 @@ public class ZeroConfigActionRuleImplTest extends S2TestCase {
         ActionMapping mapping = new MockActionMapping();
         Class actionClass = TestForwardSimpleAction.class;
 
-        this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
+        this.zeroConfigActionRule
+                .addFowardConfig(actionClass, mapping, context);
         assertEquals(1, mapping.findForwardConfigs().length);
 
         ForwardConfig forwardConfig = mapping.findForwardConfigs()[0];
         assertEquals("success", forwardConfig.getName());
-        assertEquals("/org/seasar/struts/config/rule/testForward.jsp", forwardConfig.getPath());
+        assertEquals("/org/seasar/struts/config/rule/testForward.jsp",
+                forwardConfig.getPath());
     }
 
     public void testAddFowardConfigSlashComponentName() {
@@ -40,12 +42,14 @@ public class ZeroConfigActionRuleImplTest extends S2TestCase {
         ActionMapping mapping = new MockActionMapping();
         Class actionClass = TestForwardSlashAction.class;
 
-        this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
+        this.zeroConfigActionRule
+                .addFowardConfig(actionClass, mapping, context);
         assertEquals(1, mapping.findForwardConfigs().length);
 
         ForwardConfig forwardConfig = mapping.findForwardConfigs()[0];
         assertEquals("success", forwardConfig.getName());
-        assertEquals("/org/seasar/struts/config/rule/testForward.jsp", forwardConfig.getPath());
+        assertEquals("/org/seasar/struts/config/rule/testForward.jsp",
+                forwardConfig.getPath());
     }
 
     public void testAddFowardConfigNoRegisteredComponent() {
@@ -53,44 +57,46 @@ public class ZeroConfigActionRuleImplTest extends S2TestCase {
         ActionMapping mapping = new MockActionMapping();
         Class actionClass = TestForwardNoRegisteredComponentAction.class;
 
-        this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
+        this.zeroConfigActionRule
+                .addFowardConfig(actionClass, mapping, context);
         assertEquals(1, mapping.findForwardConfigs().length);
 
         ForwardConfig forwardConfig = mapping.findForwardConfigs()[0];
         assertEquals("success", forwardConfig.getName());
-        assertEquals("/org/seasar/struts/config/rule/testForwardNoRegisteredComponent.jsp",
+        assertEquals(
+                "/org/seasar/struts/config/rule/testForwardNoRegisteredComponent.jsp",
                 forwardConfig.getPath());
     }
 
-// MockServletContext#getRealPath()Ç≈ë∂ç›ÇµÇ»Ç¢ÉtÉ@ÉCÉãÇéwíËÇµÇΩèÍçáÅA
-// nullÇ≈ÇÕÇ»Ç≠ExceptionÇ™î≠ê∂Ç∑ÇÈÇΩÇﬂ
-// Ç∆ÇËÇ†Ç¶Ç∏ÉRÉÅÉìÉgâªÅBS2 2.3.16Ç™ÉäÉäÅ[ÉXÇ≥ÇÍÇΩÇÁÅAÇ±ÇÃÉeÉXÉgÇóLå¯Ç…Ç∑ÇÈÇ±Ç∆
-//
-//    public void testNotAddFowardConfigSimpleComponentName() {
-//        ServletContext context = getServletContext();
-//        ActionMapping mapping = new MockActionMapping();
-//        Class actionClass = TestNotForwardSimpleAction.class;
-//
-//        this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
-//        assertEquals(0, mapping.findForwardConfigs().length);
-//    }
-//
-//    public void testNotAddFowardConfigSlashComponentName() {
-//        ServletContext context = getServletContext();
-//        ActionMapping mapping = new MockActionMapping();
-//        Class actionClass = TestNotForwardSlashAction.class;
-//
-//        this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
-//        assertEquals(0, mapping.findForwardConfigs().length);
-//    }
-//
-//    public void testNotAddFowardConfigNoRegisteredComponent() {
-//        ServletContext context = getServletContext();
-//        ActionMapping mapping = new MockActionMapping();
-//        Class actionClass = TestNotForwardNoRegisteredComponentAction.class;
-//
-//        this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
-//        assertEquals(0, mapping.findForwardConfigs().length);
-//    }
+    // MockServletContext#getRealPath()ÔøΩ≈ëÔøΩÔøΩ›ÇÔøΩÔøΩ»ÇÔøΩÔøΩtÔøΩ@ÔøΩCÔøΩÔøΩÔøΩÔøΩwÔøΩËÇµÔøΩÔøΩÔøΩÍçáÔøΩA
+    // nullÔøΩ≈ÇÕÇ»ÇÔøΩExceptionÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÈÇΩÔøΩÔøΩ
+    // ÔøΩ∆ÇËÇ†ÔøΩÔøΩÔøΩÔøΩÔøΩRÔøΩÔøΩÔøΩÔøΩÔøΩgÔøΩÔøΩÔøΩBS2 2.3.16ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ[ÔøΩXÔøΩÔøΩÔøΩÍÇΩÔøΩÔøΩAÔøΩÔøΩÔøΩÃÉeÔøΩXÔøΩgÔøΩÔøΩLÔøΩÔøΩ…ÇÔøΩÔøΩÈÇ±ÔøΩÔøΩ
+    //
+    // public void testNotAddFowardConfigSimpleComponentName() {
+    // ServletContext context = getServletContext();
+    // ActionMapping mapping = new MockActionMapping();
+    // Class actionClass = TestNotForwardSimpleAction.class;
+    //
+    // this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
+    // assertEquals(0, mapping.findForwardConfigs().length);
+    // }
+    //
+    // public void testNotAddFowardConfigSlashComponentName() {
+    // ServletContext context = getServletContext();
+    // ActionMapping mapping = new MockActionMapping();
+    // Class actionClass = TestNotForwardSlashAction.class;
+    //
+    // this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
+    // assertEquals(0, mapping.findForwardConfigs().length);
+    // }
+    //
+    // public void testNotAddFowardConfigNoRegisteredComponent() {
+    // ServletContext context = getServletContext();
+    // ActionMapping mapping = new MockActionMapping();
+    // Class actionClass = TestNotForwardNoRegisteredComponentAction.class;
+    //
+    // this.zeroConfigActionRule.addFowardConfig(actionClass, mapping, context);
+    // assertEquals(0, mapping.findForwardConfigs().length);
+    // }
 
 }

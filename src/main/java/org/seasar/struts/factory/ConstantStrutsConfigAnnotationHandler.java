@@ -30,10 +30,11 @@ import org.seasar.struts.util.ConstantValueUtil;
 /**
  * @author Katsuhiko Nagashima
  */
-public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnotationHandler {
+public class ConstantStrutsConfigAnnotationHandler implements
+        StrutsConfigAnnotationHandler {
 
     private static final String ACTION = "ACTION";
-    
+
     private static final String FORM = "FORM";
 
     private static final String FORWARD_SUFFIX = "_FORWARD";
@@ -46,9 +47,10 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (clazz != beanDesc.getField(ACTION).getDeclaringClass()) {
             return null;
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(ACTION))) {
-			return null;
-		}
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc
+                .getField(ACTION))) {
+            return null;
+        }
         String value = (String) beanDesc.getFieldValue(ACTION, null);
         final Map parameters = ConstantValueUtil.toMap(value);
 
@@ -157,7 +159,7 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 }
                 return value;
             }
-            
+
             public boolean cancellable() {
                 String value = (String) parameters.get("cancellable");
                 if (value == null) {
@@ -171,13 +173,15 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
 
     public StrutsActionForwardConfig createStrutsActionForwardConfig(Field field) {
         String fieldName = field.getName() + FORWARD_SUFFIX;
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(field.getDeclaringClass());
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(field
+                .getDeclaringClass());
         if (!beanDesc.hasField(fieldName)) {
             return null;
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
-			return null;
-		}
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc
+                .getField(fieldName))) {
+            return null;
+        }
         String value = (String) beanDesc.getFieldValue(fieldName, null);
         final Map parameters = ConstantValueUtil.toMap(value, "path");
 
@@ -205,13 +209,14 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
         if (clazz != beanDesc.getField(FORM).getDeclaringClass()) {
             return null;
         }
-		if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(FORM))) {
-			return null;
-		}
-        
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc
+                .getField(FORM))) {
+            return null;
+        }
+
         String value = (String) beanDesc.getFieldValue(FORM, null);
         final Map parameters = ConstantValueUtil.toMap(value, "name");
-        
+
         return new StrutsActionFormConfig() {
 
             public String name() {
@@ -229,7 +234,7 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
                 }
                 return BooleanConversionUtil.toPrimitiveBoolean(value);
             }
-            
+
         };
     }
 

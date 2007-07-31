@@ -19,17 +19,18 @@ public class S2BeanValidatorFormTest extends S2TestCase {
         S2BeanValidatorForm form = new S2BeanValidatorForm(
                 new BeanValidatorForm(new ResetPojoForm()));
         form.reset(mapping, getRequest());
-        
-        ResetPojoForm resultForm = (ResetPojoForm) BeanValidatorFormUtil.toBean(form);
+
+        ResetPojoForm resultForm = (ResetPojoForm) BeanValidatorFormUtil
+                .toBean(form);
         assertEquals("calledReset", resultForm.getMessage());
     }
-    
+
     public void testNotDefinedRest() {
         ActionMapping mapping = new MockActionMapping();
         S2BeanValidatorForm form = new S2BeanValidatorForm(
                 new BeanValidatorForm(new ResetNotDefinedPojoForm()));
         form.reset(mapping, getRequest());
-        
+
         // Confirm that Exception don't happen.
     }
 

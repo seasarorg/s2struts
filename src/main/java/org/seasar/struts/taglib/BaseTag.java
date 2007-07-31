@@ -24,6 +24,7 @@ import javax.servlet.jsp.tagext.Tag;
  */
 public abstract class BaseTag implements Tag {
     protected PageContext pageContext;
+
     private Tag parentTag;
 
     public void setPageContext(PageContext pageContext) {

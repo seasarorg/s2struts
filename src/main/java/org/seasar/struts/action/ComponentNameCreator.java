@@ -19,17 +19,20 @@ import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.container.S2Container;
 
 /**
- * ActionMapping‚©‚çAƒRƒ“ƒ|[ƒg–¼‚ğì¬‚·‚é‚½‚ß‚ÌƒCƒ“ƒ^[ƒtƒF[ƒXB
+ * ActionMappingï¿½ï¿½ï¿½ï¿½Aï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½é‚½ï¿½ß‚ÌƒCï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½B
  * 
  * @author Satoshi Kimura
  */
 public interface ComponentNameCreator {
     /**
-     * ActionMapping‚©‚çƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ğAì¬‚µA‚»‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚ªg—p‘ÎÛ‚ÌƒRƒ“ƒeƒi‚ÉŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎA path‚ğƒRƒ“ƒ|[ƒlƒ“ƒg–¼‚Æ‚µ‚Ä•Ô‚·B
+     * ActionMappingï¿½ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½Aï¿½ì¬ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½gï¿½pï¿½ÎÛ‚ÌƒRï¿½ï¿½ï¿½eï¿½iï¿½ÉŒï¿½ï¿½Â‚ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ÎA
+     * pathï¿½ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ä•Ô‚ï¿½ï¿½B
      * 
-     * @param container ŒŸõ‘ÎÛ‚ÌƒRƒ“ƒeƒi
-     * @param mapping ƒRƒ“ƒeƒi–¼‚ğì¬‚·‚é‚Ì‚Ég—p‚·‚éƒ}ƒbƒsƒ“ƒO
-     * @return ƒRƒ“ƒeƒi–¼
+     * @param container
+     *            ï¿½ï¿½ï¿½ï¿½ÎÛ‚ÌƒRï¿½ï¿½ï¿½eï¿½i
+     * @param mapping
+     *            ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½ï¿½Ì‚Égï¿½pï¿½ï¿½ï¿½ï¿½}ï¿½bï¿½sï¿½ï¿½ï¿½O
+     * @return ï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½
      */
     String createComponentName(S2Container container, ActionMapping mapping);
 }

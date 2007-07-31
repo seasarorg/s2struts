@@ -52,6 +52,7 @@ public interface ZeroConfigActionRule {
 
     boolean getCancellable(Class actionClass, ModuleConfig config);
 
-    void addFowardConfig(Class actionClass, ActionConfig actionConfig, ServletContext servletContext);
+    void addFowardConfig(Class actionClass, ActionConfig actionConfig,
+            ServletContext servletContext);
 
 }

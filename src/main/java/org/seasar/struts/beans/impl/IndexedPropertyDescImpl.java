@@ -30,26 +30,35 @@ import org.seasar.struts.beans.IndexedPropertyDesc;
  */
 public class IndexedPropertyDescImpl implements IndexedPropertyDesc {
     private String propertyName;
+
     private Class propertyType;
+
     private BeanDesc beanDesc;
+
     private Method writeMethod;
+
     private Method readMethod;
+
     private PropertyDesc propertyDesc;
 
     /**
      * 
      */
-    public IndexedPropertyDescImpl(String propertyName, Class propertyType, BeanDesc beanDesc) {
+    public IndexedPropertyDescImpl(String propertyName, Class propertyType,
+            BeanDesc beanDesc) {
         this.propertyName = propertyName;
         this.propertyType = propertyType;
         this.beanDesc = beanDesc;
 
         setupMethods();
 
-        this.propertyDesc = new PropertyDescImpl(propertyName, propertyType, this.readMethod, this.writeMethod, beanDesc);
+        this.propertyDesc = new PropertyDescImpl(propertyName, propertyType,
+                this.readMethod, this.writeMethod, beanDesc);
     }
+
     private void setupMethods() {
-        String methodName = this.propertyName.substring(0, 1).toUpperCase() + this.propertyName.substring(1);
+        String methodName = this.propertyName.substring(0, 1).toUpperCase()
+                + this.propertyName.substring(1);
         Method[] getMethods = new Method[0];
         try {
             getMethods = this.beanDesc.getMethods("get" + methodName);
@@ -65,33 +74,40 @@ public class IndexedPropertyDescImpl implements IndexedPropertyDesc {
 
         for (int i = 0; i < getMethods.length; i++) {
             Class[] parameterTypes = getMethods[i].getParameterTypes();
-            if (parameterTypes.length == 1 && parameterTypes[0].equals(Integer.TYPE)) {
+            if (parameterTypes.length == 1
+                    && parameterTypes[0].equals(Integer.TYPE)) {
                 this.readMethod = getMethods[i];
             }
         }
         for (int i = 0; i < setMethods.length; i++) {
             Class[] parameterTypes = setMethods[i].getParameterTypes();
-            if (parameterTypes.length == 2 && parameterTypes[0].equals(Integer.TYPE)
+            if (parameterTypes.length == 2
+                    && parameterTypes[0].equals(Integer.TYPE)
                     && parameterTypes[1].equals(this.propertyType)) {
                 this.writeMethod = setMethods[i];
             }
         }
     }
+
     public void setValue(Object target, int index, Object value) {
         try {
-            MethodUtil.invoke(this.writeMethod, target, new Object[]{new Integer(index), convertIfNeed(value)});
+            MethodUtil.invoke(this.writeMethod, target, new Object[] {
+                    new Integer(index), convertIfNeed(value) });
         } catch (Throwable t) {
-            throw new IllegalPropertyRuntimeException(this.beanDesc.getBeanClass(), this.propertyName, t);
+            throw new IllegalPropertyRuntimeException(this.beanDesc
+                    .getBeanClass(), this.propertyName, t);
         }
     }
 
     public Object getValue(Object target, int index) {
-        return MethodUtil.invoke(this.readMethod, target, new Object[]{new Integer(index)});
+        return MethodUtil.invoke(this.readMethod, target,
+                new Object[] { new Integer(index) });
     }
 
     public boolean hasReadMethod() {
         return this.readMethod != null;
     }
+
     public boolean hasWriteMethod() {
         return this.writeMethod != null;
     }

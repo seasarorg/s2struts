@@ -13,8 +13,9 @@ public class ValidatorAnnotationNextedActionForm extends ValidatorForm {
     }
 
     public static final String value_VALIDATOR = "required";
+
     public static final String value_VALIDATOR_ARGS = "Value, resource=false";
-    
+
     public void setValue(String value) {
         this.value = value;
     }

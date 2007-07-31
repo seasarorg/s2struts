@@ -25,7 +25,7 @@ public class CommonNamingRuleTest extends TestCase {
         assertNull(CommonNamingRule.decapitalizeName(null));
 
         assertEquals("", CommonNamingRule.decapitalizeName(""));
-        
+
         assertEquals("ID", CommonNamingRule.decapitalizeName("ID"));
         assertEquals("id", CommonNamingRule.decapitalizeName("Id"));
 
@@ -33,10 +33,12 @@ public class CommonNamingRuleTest extends TestCase {
         assertEquals("fooDto", CommonNamingRule.decapitalizeName("FooDto"));
         assertEquals("foo", CommonNamingRule.decapitalizeName("FooImpl"));
 
-        assertEquals("fooImpl", CommonNamingRule.decapitalizeName("FooImplImpl"));
-        assertEquals("fooImplBar", CommonNamingRule.decapitalizeName("FooImplBarImpl"));
+        assertEquals("fooImpl", CommonNamingRule
+                .decapitalizeName("FooImplImpl"));
+        assertEquals("fooImplBar", CommonNamingRule
+                .decapitalizeName("FooImplBarImpl"));
 
         assertEquals("FOO", CommonNamingRule.decapitalizeName("FOO"));
-}
+    }
 
 }

@@ -25,11 +25,12 @@ import org.apache.struts.taglib.html.FormTag;
 /**
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public abstract class TagUtil {
 
-    public static String getActionMappingName(PageContext pageContext) throws JspException {
+    public static String getActionMappingName(PageContext pageContext)
+            throws JspException {
         FormTag form = (FormTag) pageContext.getAttribute(Constants.FORM_KEY,
                 PageContext.REQUEST_SCOPE);
         if (form == null) {

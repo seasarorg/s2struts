@@ -31,7 +31,8 @@ import org.seasar.struts.util.ConstantValueUtil;
 /**
  * @author Katsuhiko Nagashima
  */
-public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotationHandler {
+public class ConstantValidatorAnnotationHandler extends
+        AbstractValidatorAnnotationHandler {
 
     private static final String VALIDATOR_SUFFIX = "_VALIDATOR";
 
@@ -87,7 +88,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         return depends.toString();
     }
 
-    protected void registerMessage(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+    protected void registerMessage(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         List parameters = getMessageParameters(beanDesc, propDesc);
         for (Iterator it = parameters.iterator(); it.hasNext();) {
             Map parameter = (Map) it.next();
@@ -100,7 +102,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         return hasAnnotation(beanDesc, fieldName);
     }
 
-    protected void registerArgs(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+    protected void registerArgs(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         Map parameter = null;
         String fieldName = propDesc.getPropertyName() + ARGS_SUFFIX;
         if (hasAnnotation(beanDesc, fieldName)) {
@@ -120,7 +123,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         return hasIndexedAnnotation(beanDesc, fieldName, 0);
     }
 
-    protected void registerArg(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+    protected void registerArg(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         List parameters = getArgParameters(beanDesc, propDesc);
         for (Iterator it = parameters.iterator(); it.hasNext();) {
             Map parameter = (Map) it.next();
@@ -128,7 +132,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         }
     }
 
-    protected void registerConfig(Field field, BeanDesc beanDesc, PropertyDesc propDesc) {
+    protected void registerConfig(Field field, BeanDesc beanDesc,
+            PropertyDesc propDesc) {
         registerAutoTypeValidatorConfig(field, propDesc);
 
         List parameters = getValidatorParameters(beanDesc, propDesc);
@@ -153,7 +158,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         }
 
         for (int i = 0; hasIndexedAnnotation(beanDesc, fieldName, i); i++) {
-            parameter = getIndexedParameter(beanDesc, fieldName, VALIDATOR_DEFAULT_KEY, i);
+            parameter = getIndexedParameter(beanDesc, fieldName,
+                    VALIDATOR_DEFAULT_KEY, i);
             if (parameter != null) {
                 result.add(parameter);
             }
@@ -172,7 +178,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         }
 
         for (int i = 0; hasIndexedAnnotation(beanDesc, fieldName, i); i++) {
-            parameter = getIndexedParameter(beanDesc, fieldName, ARG_DEFAULT_KEY, i);
+            parameter = getIndexedParameter(beanDesc, fieldName,
+                    ARG_DEFAULT_KEY, i);
             if (parameter != null) {
                 result.add(parameter);
             }
@@ -191,7 +198,8 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
         }
 
         for (int i = 0; hasIndexedAnnotation(beanDesc, fieldName, i); i++) {
-            parameter = getIndexedParameter(beanDesc, fieldName, MESSAGE_DEFAULT_KEY, i);
+            parameter = getIndexedParameter(beanDesc, fieldName,
+                    MESSAGE_DEFAULT_KEY, i);
             if (parameter != null) {
                 result.add(parameter);
             }
@@ -202,28 +210,36 @@ public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotat
 
     private boolean hasAnnotation(BeanDesc beanDesc, String fieldName) {
         if (beanDesc.hasField(fieldName)) {
-            return ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName));
+            return ConstantAnnotationUtil
+                    .isConstantAnnotationStringField(beanDesc
+                            .getField(fieldName));
         }
         return false;
     }
 
-    private Map getParameter(BeanDesc beanDesc, String fieldName, String defaultKey) {
+    private Map getParameter(BeanDesc beanDesc, String fieldName,
+            String defaultKey) {
         if (!beanDesc.hasField(fieldName)) {
             return null;
         }
-        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(fieldName))) {
+        if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc
+                .getField(fieldName))) {
             return null;
         }
         String value = (String) beanDesc.getFieldValue(fieldName, null);
         return ConstantValueUtil.toMap(value, defaultKey);
     }
 
-    private boolean hasIndexedAnnotation(BeanDesc beanDesc, String fieldName, int index) {
-        return hasAnnotation(beanDesc, fieldName + "_" + Integer.toString(index));
+    private boolean hasIndexedAnnotation(BeanDesc beanDesc, String fieldName,
+            int index) {
+        return hasAnnotation(beanDesc, fieldName + "_"
+                + Integer.toString(index));
     }
 
-    private Map getIndexedParameter(BeanDesc beanDesc, String fieldName, String defaultKey, int index) {
-        return getParameter(beanDesc, fieldName + "_" + Integer.toString(index), defaultKey);
+    private Map getIndexedParameter(BeanDesc beanDesc, String fieldName,
+            String defaultKey, int index) {
+        return getParameter(beanDesc,
+                fieldName + "_" + Integer.toString(index), defaultKey);
     }
 
 }
