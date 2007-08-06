@@ -60,7 +60,7 @@ public class BindingUtil {
     }
 
     private static Object getValue(S2Container container, String name) {
-        Object var = RequestUtil.getValue(container.getRequest(), name);
+        Object var = RequestUtil.getValue(getRequest(container), name);
         if (var != null) {
             return var;
         }
@@ -91,8 +91,8 @@ public class BindingUtil {
                 propertyDesc);
         Object value = BindingUtil.getValue(container, propertyName);
         if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
-            value = ActionFormUtil.getActualForm(container.getRequest(),
-                    mapping);
+            value = ActionFormUtil
+                    .getActualForm(getRequest(container), mapping);
         } else {
             value = BeanValidatorFormUtil.toBean(value);
         }
@@ -110,7 +110,7 @@ public class BindingUtil {
     }
 
     private static void importParameter(Object action, S2Container container) {
-        Enumeration paramNames = container.getRequest().getParameterNames();
+        Enumeration paramNames = getRequest(container).getParameterNames();
         BeanDesc beanDesc = new BeanDescImpl(action.getClass());
         while (paramNames.hasMoreElements()) {
             String paramName = (String) paramNames.nextElement();
@@ -127,7 +127,7 @@ public class BindingUtil {
                 } catch (NumberFormatException e) {
                     continue;
                 }
-                String paramValue = container.getRequest().getParameter(
+                String paramValue = getRequest(container).getParameter(
                         paramName);
                 IndexedPropertyDesc propertyDesc = new IndexedPropertyDescImpl(
                         propertyName, String.class, beanDesc);
@@ -158,7 +158,7 @@ public class BindingUtil {
             return;
         }
 
-        HttpServletRequest request = container.getRequest();
+        HttpServletRequest request = getRequest(container);
         ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory
                 .getAnnotationHandler();
         ActionPropertyConfig propertyConfig = annHandler
@@ -248,6 +248,10 @@ public class BindingUtil {
             return componentName;
         }
         return propertyName;
+    }
+
+    private static HttpServletRequest getRequest(S2Container container) {
+        return S2Util.getRequest(container);
     }
 
 }

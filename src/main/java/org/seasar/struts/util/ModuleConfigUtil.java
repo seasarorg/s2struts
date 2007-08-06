@@ -40,10 +40,10 @@ public class ModuleConfigUtil {
     }
 
     public static ModuleConfig getModuleConfig() {
-        ServletContext context = S2StrutsContextUtil.getContainer()
-                .getServletContext();
-        HttpServletRequest request = S2StrutsContextUtil.getContainer()
-                .getRequest();
+        ServletContext context = S2Util.getServletContext(S2StrutsContextUtil
+                .getContainer());
+        HttpServletRequest request = S2Util.getRequest(S2StrutsContextUtil
+                .getContainer());
         return ModuleUtils.getInstance().getModuleConfig(request, context);
     }
 

@@ -5,7 +5,7 @@
 	<component name="requestProcessorFactory" class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
 	<component name="componentNameCreator"    class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="classRegister"           class="org.seasar.struts.util.ClassRegisterImpl"/>
-	<component name="actionFactory"           class="org.seasar.struts.action.ActionFactoryImpl"/>
+	<component name="actionFactory"           class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
 	<component name="acceptor"                class="org.seasar.struts.processor.AcceptorImpl"/>
 	<component name="executeProcessor"        class="org.seasar.struts.processor.ActionExecuteProcessorImpl"/>
 	<component name="validateProcessor"       class="org.seasar.struts.processor.ValidateProcessorImpl"/>

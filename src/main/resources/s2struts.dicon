@@ -2,11 +2,11 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="s2struts">
-	<component name="messageFacade"                class="org.seasar.struts.action.MessageFacadeImpl" instance="request"/>
+	<component name="messageFacade"                class="org.seasar.struts.action.impl.MessageFacadeImpl" instance="request"/>
 	<component name="s2strutsContext"              class="org.seasar.struts.context.S2StrutsContextImpl" instance="session"/>
 
 	<component name="componentNameCreator"         class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
-	<component name="actionFactory"                class="org.seasar.struts.action.ActionFactoryImpl"/>
+	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
 	<component name="classRegister"                class="org.seasar.struts.util.ClassRegisterImpl"/>
 	<component name="requestProcessorFactory"      class="org.seasar.struts.processor.RequestProcessorFactoryImpl"/>
 	<component name="acceptor"                     class="org.seasar.struts.processor.AcceptorImpl"/>

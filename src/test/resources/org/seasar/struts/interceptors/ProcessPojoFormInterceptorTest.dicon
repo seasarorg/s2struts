@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
-	<component name="actionFactory"           class="org.seasar.struts.action.ActionFactoryImpl"/>
+	<component name="actionFactory"           class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
 	<component name="componentNameCreator"    class="org.seasar.struts.action.ComponentNameCreatorImpl"/>
 	<component name="classRegister"           class="org.seasar.struts.util.ClassRegisterImpl"/>
 	<component name="acceptor"                class="org.seasar.struts.processor.AcceptorImpl"/>

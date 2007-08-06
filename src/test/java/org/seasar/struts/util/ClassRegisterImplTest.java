@@ -56,7 +56,7 @@ public class ClassRegisterImplTest extends S2TestCase {
         long secondTime = endTime - startTime;
 
         assertTrue("firstTime =" + firstTime + " secondTime =" + secondTime,
-                secondTime < firstTime);
+                secondTime <= firstTime);
     }
 
     public void testDestroy() {

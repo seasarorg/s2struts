@@ -33,9 +33,11 @@ import org.seasar.framework.util.FieldUtil;
 import org.seasar.struts.config.rule.ZeroConfigActionRule;
 import org.seasar.struts.factory.StrutsConfigAnnotationHandler;
 import org.seasar.struts.factory.StrutsConfigAnnotationHandlerFactory;
+import org.seasar.struts.util.URLEncoder;
 
 /**
  * @author Katsuhiko Nagashima
+ * @author Satsohi Kimura
  */
 public class AutoActionRegister {
 
@@ -138,7 +140,7 @@ public class AutoActionRegister {
                 String name = FieldUtil.get(fields[i], actionClass).toString();
                 ForwardConfig forwardConfig = new ActionForward();
                 forwardConfig.setName(name);
-                forwardConfig.setPath(actionForward.path());
+                forwardConfig.setPath(getPath(actionForward));
                 forwardConfig.setRedirect(actionForward.redirect());
                 actionConfig.addForwardConfig(forwardConfig);
             }
@@ -146,6 +148,14 @@ public class AutoActionRegister {
         if (matchesActionClassPattern(actionClass)) {
             rule().addFowardConfig(actionClass, actionConfig, servletContext);
         }
+    }
+
+    private static String getPath(StrutsActionForwardConfig actionForward) {
+        String path = actionForward.path();
+        if (actionForward.redirect()) {
+            path = URLEncoder.encode(path);
+        }
+        return path;
     }
 
     private static AutoStrutsConfigRule configRule() {

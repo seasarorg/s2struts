@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.struts.action.impl.MessageFacadeImpl;
 
 /**
  * @author Satoshi Kimura

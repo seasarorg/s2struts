@@ -34,6 +34,7 @@ import org.apache.struts.util.MessageResources;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.action.ActionFactory;
 import org.seasar.struts.util.S2StrutsContextUtil;
+import org.seasar.struts.util.S2Util;
 
 /**
  * @author Satoshi Kimura
@@ -75,7 +76,7 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor implements
 
     public HttpServletRequest processMultipart(HttpServletRequest request) {
         HttpServletRequest result = super.processMultipart(request);
-        SingletonS2ContainerFactory.getContainer().setRequest(result);
+        S2Util.setRequest(SingletonS2ContainerFactory.getContainer(), result);
         return result;
     }
 
