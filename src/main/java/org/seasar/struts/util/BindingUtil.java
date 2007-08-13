@@ -28,7 +28,9 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
 import org.seasar.framework.container.ComponentDef;
+import org.seasar.framework.container.ComponentNotFoundRuntimeException;
 import org.seasar.framework.container.S2Container;
+import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.struts.beans.IndexedPropertyDesc;
 import org.seasar.struts.beans.impl.IndexedPropertyDescImpl;
@@ -106,6 +108,15 @@ public class BindingUtil {
         }
         if (propertyType.isInstance(value)) {
             propertyDesc.setValue(action, value);
+        } else {
+            Class destClass = propertyDesc.getPropertyType();
+            try {
+                value = DxoUtil.convert(value, destClass);
+                propertyDesc.setValue(action, value);
+            } catch (ClassNotFoundRuntimeException ignore) {
+            } catch (ComponentNotFoundRuntimeException ignore) {
+            } catch (NullPointerException ignore) {
+            }
         }
     }
 
