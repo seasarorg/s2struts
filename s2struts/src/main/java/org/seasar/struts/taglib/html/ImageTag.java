@@ -35,12 +35,7 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
     public int doEndTag() throws JspException {
         setMethodBindingExpression();
         setCancelAction();
-
-        try {
-            return super.doEndTag();
-        } finally {
-            release();
-        }
+        return super.doEndTag();
     }
 
     public void release() {
@@ -69,8 +64,7 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
             super.property = Base64Util.encode(this.action.getBytes());
         }
         String mappingName = TagUtil.getActionMappingName(this.pageContext);
-        S2StrutsContextUtil.setMethodBindingExpression(mappingName, super.property, null,
-                this.action);
+        S2StrutsContextUtil.setMethodBindingExpression(mappingName, super.property, null, this.action);
     }
 
     protected void setCancelAction() throws JspException {

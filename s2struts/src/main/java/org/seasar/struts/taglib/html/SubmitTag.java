@@ -38,12 +38,7 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     public int doEndTag() throws JspException {
         setMethodBindingExpression();
         setCancelAction();
-
-        try {
-            return super.doEndTag();
-        } finally {
-            release();
-        }
+        return super.doEndTag();
     }
 
     public void release() {
