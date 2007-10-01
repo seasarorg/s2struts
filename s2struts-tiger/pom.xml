@@ -137,8 +137,8 @@
     <!-- provided -->
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.3</version>
+      <artifactId>jsp-api</artifactId>
+      <version>2.0</version>
       <type>jar</type>
       <scope>provided</scope>
     </dependency>

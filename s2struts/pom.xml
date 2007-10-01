@@ -193,7 +193,7 @@
     <dependency>
       <groupId>org.seasar.container</groupId>
       <artifactId>s2-extension</artifactId>
-      <version>2.4.12</version>
+      <version>2.4.17</version>
       <type>jar</type>
     </dependency>
     <!--
@@ -207,8 +207,8 @@
     <!-- provided -->
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.3</version>
+      <artifactId>jsp-api</artifactId>
+      <version>2.0</version>
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
