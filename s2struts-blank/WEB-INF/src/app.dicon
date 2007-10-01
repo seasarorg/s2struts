@@ -9,8 +9,6 @@
 	<!--
 	<include path="s2struts-processor.dicon"/>
 	-->
-	<include condition="#ENV != 'ut'" path="s2struts.dicon"/>
-	<include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/>
-	
-	<include condition="#ENV != 'ut'" path="cooldeploy.dicon"/>
+	<include condition="#ENV != 'ct'" path="s2struts.dicon"/>
+	<include condition="#ENV == 'ct'" path="s2struts-hotdeploy.dicon"/>	
 </components>
