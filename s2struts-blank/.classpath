@@ -34,6 +34,7 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-dao-1.0.46.jar" sourcepath="libsrc/s2-dao-1.0.46-sources.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-extension-2.4.17.jar" sourcepath="libsrc/s2-extension-2.4.17-sources.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.4.17.jar" sourcepath="libsrc/s2-framework-2.4.17-sources.jar"/>
-	<classpathentry kind="lib" path="lib/geronimo-j2ee_1.4_spec-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jsp-api-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
