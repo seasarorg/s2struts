@@ -37,8 +37,15 @@ public class S2StrutsFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse res,
             FilterChain chain) throws IOException, ServletException {
-        S2StrutsContextUtil
-                .setPath(((HttpServletRequest) req).getServletPath());
+
+        HttpServletRequest request = (HttpServletRequest) req;
+        String path = request.getPathInfo();
+        if (path == null) {
+            path = request.getServletPath();
+        }
+        if (path != null) {
+            S2StrutsContextUtil.setPath(path);
+        }
 
         chain.doFilter(req, res);
     }
