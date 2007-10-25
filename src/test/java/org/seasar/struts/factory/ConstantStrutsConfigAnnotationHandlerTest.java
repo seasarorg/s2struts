@@ -5,11 +5,13 @@ import java.lang.reflect.Field;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.action.StrutsConfigAnnotationAction;
 import org.seasar.struts.action.StrutsConfigAnnotationActionImpl;
+import org.seasar.struts.config.NullStrutsActionConfig;
+import org.seasar.struts.config.NullStrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionConfig;
 import org.seasar.struts.config.StrutsActionFormConfig;
 import org.seasar.struts.config.StrutsActionForwardConfig;
-import org.seasar.struts.form.StrutsConfigAnnotationForm;
 import org.seasar.struts.form.NoStrutsConfigAnnotationForm;
+import org.seasar.struts.form.StrutsConfigAnnotationForm;
 
 /**
  * 
@@ -48,7 +50,7 @@ public class ConstantStrutsConfigAnnotationHandlerTest extends S2TestCase {
     public void testNotCreateStrutsActionConfig() {
         StrutsActionConfig config = annHandler
                 .createStrutsActionConfig(StrutsConfigAnnotationActionImpl.class);
-        assertNull(config);
+        assertEquals(NullStrutsActionConfig.INSTANCE, config);
     }
 
     public void testCreateStrutsActionForwardConfig() throws Exception {
@@ -78,7 +80,7 @@ public class ConstantStrutsConfigAnnotationHandlerTest extends S2TestCase {
     public void testNotCreateActionFormConfig() {
         StrutsActionFormConfig config = annHandler
                 .createStrutsActionFormConfig(NoStrutsConfigAnnotationForm.class);
-        assertNull(config);
+        assertEquals(NullStrutsActionFormConfig.INSTANCE, config);
     }
 
 }

@@ -53,12 +53,9 @@ public class AutoActionFormRegister {
                 .getAnnotationHandler();
         StrutsActionFormConfig strutsActionForm = annHandler
                 .createStrutsActionFormConfig(formClass);
-        if (strutsActionForm == null) {
-            if (matchesFormClassPattern(formClass)) {
-                strutsActionForm = new NullStrutsActionFormConfig();
-            } else {
-                return;
-            }
+
+        if (!matchesFormClassPattern(formClass)) {
+            return;
         }
 
         if (registeredFormBeanConfig(strutsActionForm, formClass, config)) {

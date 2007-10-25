@@ -63,12 +63,9 @@ public class AutoActionRegister {
                 .getAnnotationHandler();
         StrutsActionConfig strutsAction = annHandler
                 .createStrutsActionConfig(actionClass);
-        if (strutsAction == null) {
-            if (matchesActionClassPattern(actionClass)) {
-                strutsAction = new NullStrutsActionConfig();
-            } else {
-                return;
-            }
+
+        if (!matchesActionClassPattern(actionClass)) {
+            return;
         }
 
         if (registeredActionConfig(strutsAction, actionClass, config)) {

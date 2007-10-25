@@ -15,6 +15,8 @@ import org.seasar.extension.unit.S2TestCase;
  */
 public class AutoActionFormRegisterTest extends S2TestCase {
 
+    private AutoStrutsConfigRule configRule;
+
     protected void setUp() throws Exception {
         super.setUp();
         include("s2struts.dicon");
@@ -48,6 +50,26 @@ public class AutoActionFormRegisterTest extends S2TestCase {
         ModuleConfig config = new ModuleConfigImpl("");
         List classes = new ArrayList();
         classes.add(TestIgnoreTarget.class);
+
+        AutoActionFormRegister.register(config, classes);
+        assertEquals(0, config.findFormBeanConfigs().length);
+    }
+
+    public void testRegister_match() throws Exception {
+        ModuleConfig config = new ModuleConfigImpl("");
+        List classes = new ArrayList();
+        classes.add(TestHogeForm.class);
+        configRule.setFormClassPattern(".*HogeForm$");
+
+        AutoActionFormRegister.register(config, classes);
+        assertEquals(1, config.findFormBeanConfigs().length);
+    }
+
+    public void testRegister_unmatch() throws Exception {
+        ModuleConfig config = new ModuleConfigImpl("");
+        List classes = new ArrayList();
+        classes.add(TestHogeForm.class);
+        configRule.setFormClassPattern(".*FooForm$");
 
         AutoActionFormRegister.register(config, classes);
         assertEquals(0, config.findFormBeanConfigs().length);

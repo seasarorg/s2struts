@@ -19,6 +19,9 @@ package org.seasar.struts.config;
  * @author Satoshi Kimura
  */
 public class NullStrutsActionFormConfig implements StrutsActionFormConfig {
+
+    public static final StrutsActionFormConfig INSTANCE = new NullStrutsActionFormConfig();
+
     public String name() {
         return DEFAULT_NAME;
     }

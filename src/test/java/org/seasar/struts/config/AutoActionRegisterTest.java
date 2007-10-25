@@ -17,6 +17,8 @@ import org.seasar.extension.unit.S2TestCase;
  */
 public class AutoActionRegisterTest extends S2TestCase {
 
+    private AutoStrutsConfigRule configRule;
+
     protected void setUp() throws Exception {
         super.setUp();
         include("s2struts.dicon");
@@ -72,4 +74,25 @@ public class AutoActionRegisterTest extends S2TestCase {
         assertEquals(0, config.findActionConfigs().length);
     }
 
+    public void testRegister_match() throws Exception {
+        ServletContext context = getServletContext();
+        ModuleConfig config = new ModuleConfigImpl("");
+        List classes = new ArrayList();
+        classes.add(TestHogeAction.class);
+        configRule.setActionClassPattern(".*HogeAction$");
+
+        AutoActionRegister.register(context, config, classes);
+        assertEquals(1, config.findActionConfigs().length);
+    }
+
+    public void testRegister_unmatch() throws Exception {
+        ServletContext context = getServletContext();
+        ModuleConfig config = new ModuleConfigImpl("");
+        List classes = new ArrayList();
+        classes.add(TestHogeAction.class);
+        configRule.setActionClassPattern(".*FooAction$");
+
+        AutoActionRegister.register(context, config, classes);
+        assertEquals(0, config.findActionConfigs().length);
+    }
 }
