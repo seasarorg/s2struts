@@ -5,6 +5,7 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.impl.ModuleConfigImpl;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
+import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 
 /**
  * 
@@ -14,6 +15,8 @@ import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
 public class ActionFormConfigCreatorImplTest extends S2TestCase {
 
     private ActionFormConfigCreator actionFormConfigCreator;
+
+    private AutoStrutsConfigRule configRule;
 
     public void setUp() throws Exception {
         super.setUp();
@@ -34,7 +37,7 @@ public class ActionFormConfigCreatorImplTest extends S2TestCase {
         FormBeanConfig beanConfig = this.actionFormConfigCreator.createFormBeanConfig(config, name);
         assertNull(beanConfig);
     }
-    
+
     public void testCreateFormBeanConfigByClass() {
         Class clazz = TestConfigCreatorDto.class;
         ModuleConfig config = new ModuleConfigImpl();
@@ -48,6 +51,20 @@ public class ActionFormConfigCreatorImplTest extends S2TestCase {
         ModuleConfig config = new ModuleConfigImpl();
         FormBeanConfig beanConfig = this.actionFormConfigCreator.createFormBeanConfig(config, clazz);
         assertNull(beanConfig);
+    }
+
+    public void testRegister_match() throws Exception {
+        configRule.setFormClassPattern(".*HogeForm$");
+        ModuleConfig config = new ModuleConfigImpl();
+        FormBeanConfig actionConfig = actionFormConfigCreator.createFormBeanConfig(config, TestHogeForm.class);
+        assertNotNull(actionConfig);
+    }
+
+    public void testRegister_unmatch() throws Exception {
+        configRule.setFormClassPattern(".*FooForm$");
+        ModuleConfig config = new ModuleConfigImpl();
+        FormBeanConfig actionConfig = actionFormConfigCreator.createFormBeanConfig(config, TestHogeForm.class);
+        assertNull(actionConfig);
     }
 
 }

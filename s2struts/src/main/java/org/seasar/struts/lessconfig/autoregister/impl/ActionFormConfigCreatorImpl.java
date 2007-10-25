@@ -19,7 +19,6 @@ import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
-import org.seasar.struts.lessconfig.config.NullStrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRule;
@@ -69,12 +68,8 @@ public class ActionFormConfigCreatorImpl implements ActionFormConfigCreator {
     private FormBeanConfig createFormBeanConfig(ModuleConfig config, Class formClass, String name) {
         StrutsConfigAnnotationHandler annHandler = StrutsConfigAnnotationHandlerFactory.getAnnotationHandler();
         StrutsActionFormConfig strutsActionForm = annHandler.createStrutsActionFormConfig(formClass);
-        if (strutsActionForm == null) {
-            if (formClass.getName().matches(this.configRule.getFormClassPattern())) {
-                strutsActionForm = new NullStrutsActionFormConfig();
-            } else {
-                return null;
-            }
+        if (!formClass.getName().matches(this.configRule.getFormClassPattern())) {
+            return null;
         }
 
         FormBeanConfig formBeanConfig = this.defaultRule

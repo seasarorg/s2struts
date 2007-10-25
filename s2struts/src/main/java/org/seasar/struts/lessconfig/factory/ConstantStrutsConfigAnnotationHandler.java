@@ -21,6 +21,8 @@ import java.util.Map;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.util.BooleanConversionUtil;
+import org.seasar.struts.lessconfig.config.NullStrutsActionConfig;
+import org.seasar.struts.lessconfig.config.NullStrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
@@ -41,13 +43,13 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
     public StrutsActionConfig createStrutsActionConfig(Class clazz) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(clazz);
         if (!beanDesc.hasField(ACTION)) {
-            return null;
+            return NullStrutsActionConfig.INSTANCE;
         }
         if (clazz != beanDesc.getField(ACTION).getDeclaringClass()) {
-            return null;
+            return NullStrutsActionConfig.INSTANCE;
         }
         if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(ACTION))) {
-            return null;
+            return NullStrutsActionConfig.INSTANCE;
         }
         String value = (String) beanDesc.getFieldValue(ACTION, null);
         final Map parameters = ConstantValueUtil.toMap(value);
@@ -224,13 +226,13 @@ public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnota
     public StrutsActionFormConfig createStrutsActionFormConfig(Class clazz) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(clazz);
         if (!beanDesc.hasField(FORM)) {
-            return null;
+            return NullStrutsActionFormConfig.INSTANCE;
         }
         if (clazz != beanDesc.getField(FORM).getDeclaringClass()) {
-            return null;
+            return NullStrutsActionFormConfig.INSTANCE;
         }
         if (!ConstantAnnotationUtil.isConstantAnnotationStringField(beanDesc.getField(FORM))) {
-            return null;
+            return NullStrutsActionFormConfig.INSTANCE;
         }
 
         String value = (String) beanDesc.getFieldValue(FORM, null);

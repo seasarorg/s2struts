@@ -8,4 +8,5 @@
 	<component class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionPathNamingRule"/>
 
 	<component name="testConfigCreatorAction" class="org.seasar.struts.lessconfig.autoregister.impl.TestConfigCreatorAction"/>
+	<component name="testHogeAction" class="org.seasar.struts.lessconfig.autoregister.impl.TestHogeAction"/>
 </components>
