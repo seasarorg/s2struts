@@ -25,11 +25,10 @@ public class ClassComparatorTest extends TestCase {
 		list.add(ActionForm.class);
 		Object[] objects = list.toArray();
 		Arrays.sort(objects, new ClassComparator());
-		assertEquals(Action.class, objects[0]);
-		assertEquals(StrutsConfigAnnotationAction.class, objects[1]);
-		assertEquals(ValidatorAnnotationForm.class, objects[2]);
+		assertEquals(StrutsConfigAnnotationAction.class, objects[0]);
+		assertEquals(ValidatorAnnotationForm.class, objects[1]);
+		assertEquals(Action.class, objects[2]);
 		assertEquals(ActionForm.class, objects[3]);
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -39,12 +38,10 @@ public class ClassComparatorTest extends TestCase {
 		list.add(StrutsConfigAnnotationAction.class);
 		list.add(ValidatorAnnotationForm.class);
 		list.add(ActionForm.class);
-
 		list = ClassComparator.sort(list);
-
-		assertEquals(Action.class, list.get(0));
-		assertEquals(StrutsConfigAnnotationAction.class, list.get(1));
-		assertEquals(ValidatorAnnotationForm.class, list.get(2));
+		assertEquals(StrutsConfigAnnotationAction.class, list.get(0));
+		assertEquals(ValidatorAnnotationForm.class, list.get(1));
+		assertEquals(Action.class, list.get(2));
 		assertEquals(ActionForm.class, list.get(3));
 	}
 
