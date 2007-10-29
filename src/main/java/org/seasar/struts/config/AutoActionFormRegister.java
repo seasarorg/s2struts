@@ -57,7 +57,9 @@ public class AutoActionFormRegister {
         if (!matchesFormClassPattern(formClass)) {
             return;
         }
-
+        if (strutsActionForm == null) {
+            strutsActionForm = new NullStrutsActionFormConfig();
+        }
         if (registeredFormBeanConfig(strutsActionForm, formClass, config)) {
             return;
         }

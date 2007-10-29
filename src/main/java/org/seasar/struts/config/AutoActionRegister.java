@@ -67,7 +67,9 @@ public class AutoActionRegister {
         if (!matchesActionClassPattern(actionClass)) {
             return;
         }
-
+        if (strutsAction == null) {
+            strutsAction = new NullStrutsActionConfig();
+        }
         if (registeredActionConfig(strutsAction, actionClass, config)) {
             return;
         }
