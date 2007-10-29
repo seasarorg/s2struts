@@ -3,7 +3,6 @@ package org.seasar.struts.lessconfig.factory;
 import java.lang.reflect.Field;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.lessconfig.config.NullStrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 
@@ -42,7 +41,7 @@ public class ConstantStrutsConfigAnnotationHandlerNoInterfaceTest extends S2Test
 
     public void testNotCreateStrutsActionConfig() {
         StrutsActionConfig config = annHandler.createStrutsActionConfig(TestStrutsConfigAnnotationActionImpl.class);
-        assertEquals(NullStrutsActionConfig.INSTANCE, config);
+        assertNull(config);
     }
 
     public void testCreateStrutsActionForwardConfig() throws Exception {

@@ -23,6 +23,7 @@ import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.util.FieldUtil;
 import org.seasar.struts.lessconfig.autoregister.ActionConfigCreator;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
+import org.seasar.struts.lessconfig.config.NullStrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
@@ -75,6 +76,9 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
         StrutsActionConfig strutsAction = annHandler.createStrutsActionConfig(actionClass);
         if (!actionClass.getName().matches(this.configRule.getActionClassPattern())) {
             return null;
+        }
+        if (strutsAction == null) {
+            strutsAction = new NullStrutsActionConfig();
         }
 
         ActionConfig actionConfig = this.defaultRule.createActionConfig(config, actionClass, path, strutsAction);

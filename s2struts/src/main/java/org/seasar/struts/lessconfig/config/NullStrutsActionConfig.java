@@ -21,8 +21,6 @@ package org.seasar.struts.lessconfig.config;
  */
 public class NullStrutsActionConfig implements StrutsActionConfig {
 
-    public static final StrutsActionConfig INSTANCE = new NullStrutsActionConfig();
-
     public String path() {
         return DEFAULT_PATH;
     }
