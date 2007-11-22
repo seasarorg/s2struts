@@ -15,12 +15,13 @@
  */
 package org.seasar.struts.config;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.struts.Globals;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.impl.ModuleConfigImpl;
-import org.seasar.framework.convention.NamingConvention;
 
 /**
  * Seasar2用のモジュール設定です。
@@ -33,9 +34,9 @@ public class S2ModuleConfig extends ModuleConfigImpl {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 命名規約です。
+     * サーブレットのマッピングです。
      */
-    protected NamingConvention namingConvention;
+    protected String servletMapping;
 
     /**
      * アクション設定のキャッシュです。
@@ -46,11 +47,12 @@ public class S2ModuleConfig extends ModuleConfigImpl {
     /**
      * インスタンスを構築します。
      * 
-     * @param namingConvention
-     *            命名規約
+     * @param applicationScope
+     *            applicationスコープ
+     * 
      */
-    public S2ModuleConfig(NamingConvention namingConvention) {
-        this.namingConvention = namingConvention;
+    public S2ModuleConfig(Map<String, Object> applicationScope) {
+        setup(applicationScope);
     }
 
     @Override
@@ -66,6 +68,36 @@ public class S2ModuleConfig extends ModuleConfigImpl {
     }
 
     protected ActionMapping createActionMapping(String path) {
-        String actionName = namingConvention.fromPathToActionName(path);
+        return null;
+    }
+
+    /**
+     * パスをアクション名に変換します。
+     * 
+     * @param path
+     *            パス
+     * @return アクション名
+     */
+    protected String fromPathToActionName(String path) {
+        if (servletMapping.startsWith("*.")) {
+            path = path.substring(1, path.length() - servletMapping.length()
+                    + 1);
+        } else if (servletMapping.endsWith("/*")) {
+            path = path.substring(servletMapping.length() - 1);
+        } else if (servletMapping.equals("/") || servletMapping.equals("*")) {
+            path = path.substring(1);
+        }
+        return path.replace('/', '_') + "Action";
+    }
+
+    /**
+     * セットアップをします。
+     * 
+     * @param applicationScope
+     *            applicationスコープです。
+     * 
+     */
+    protected void setup(Map<String, Object> applicationScope) {
+        servletMapping = (String) applicationScope.get(Globals.SERVLET_KEY);
     }
 }
