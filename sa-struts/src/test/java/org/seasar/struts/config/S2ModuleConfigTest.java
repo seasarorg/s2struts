@@ -59,4 +59,26 @@ public class S2ModuleConfigTest extends TestCase {
         assertEquals("aaa_bbbAction", moduleConfig
                 .fromPathToActionName("/do/aaa/bbb"));
     }
+
+    /**
+     * @throws Exception
+     */
+    public void testFromPathToActionName_slash() throws Exception {
+        Map<String, Object> applicationScope = new HashMap<String, Object>();
+        applicationScope.put(Globals.SERVLET_KEY, "/");
+        S2ModuleConfig moduleConfig = new S2ModuleConfig(applicationScope);
+        assertEquals("aaa_bbbAction", moduleConfig
+                .fromPathToActionName("/aaa/bbb"));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public void testFromPathToActionName_slash_asta() throws Exception {
+        Map<String, Object> applicationScope = new HashMap<String, Object>();
+        applicationScope.put(Globals.SERVLET_KEY, "/*");
+        S2ModuleConfig moduleConfig = new S2ModuleConfig(applicationScope);
+        assertEquals("aaa_bbbAction", moduleConfig
+                .fromPathToActionName("/aaa/bbb"));
+    }
 }
