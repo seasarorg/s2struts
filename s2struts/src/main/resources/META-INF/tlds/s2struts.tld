@@ -3,7 +3,7 @@
 "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
 <taglib>
 <tlibversion>1.2</tlibversion>
-<jspversion>1.1</jspversion>
+<jspversion>1.2</jspversion>
 <shortname>s2struts</shortname>
 <uri>http://www.seasar.org/tags-s2struts</uri>
 <tag>
