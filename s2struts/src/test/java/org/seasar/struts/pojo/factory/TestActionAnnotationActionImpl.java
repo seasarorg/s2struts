@@ -12,8 +12,10 @@ public class TestActionAnnotationActionImpl implements TestActionAnnotationActio
     private String baz;
 
     private String foo;
-    
+
     public static final String bar_EXPORT = Constants.SESSION;
+
+    public static final String exe_BINDING_METHOD = "path=/hoge";
 
     private static final int foo_EXPORT = 0;
 
@@ -26,7 +28,7 @@ public class TestActionAnnotationActionImpl implements TestActionAnnotationActio
     }
 
     public static final String baz_EXPORT = Constants.SESSION;
-    
+
     public String getBaz() {
         return baz;
     }

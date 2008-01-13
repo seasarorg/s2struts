@@ -15,8 +15,11 @@
  */
 package org.seasar.struts.pojo.factory;
 
+import java.lang.reflect.Method;
+
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
 import org.seasar.struts.pojo.config.impl.ActionPropertyConfigImpl;
 import org.seasar.struts.util.ConstantAnnotationUtil;
@@ -27,6 +30,8 @@ import org.seasar.struts.util.ConstantAnnotationUtil;
 public class ConstantActionAnnotationHandler implements ActionAnnotationHandler {
 
     private static final String EXPORT_SUFFIX = "_EXPORT";
+
+    private static final String BINDING_METHOD_SUFFIX = "_BINDING_METHOD";
 
     public ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc) {
         String fieldName = propertyDesc.getPropertyName() + EXPORT_SUFFIX;
@@ -40,4 +45,14 @@ public class ConstantActionAnnotationHandler implements ActionAnnotationHandler 
         return new ActionPropertyConfigImpl(value);
     }
 
+    public String getPath(Method method) {
+        Class clazz = method.getDeclaringClass();
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(clazz);
+        String fieldName = method.getName() + BINDING_METHOD_SUFFIX;
+        if (beanDesc.hasField(fieldName)) {
+            String value = (String) beanDesc.getFieldValue(fieldName, null);
+            return value.replaceFirst("path\\s*=\\s*", "");
+        }
+        return null;
+    }
 }

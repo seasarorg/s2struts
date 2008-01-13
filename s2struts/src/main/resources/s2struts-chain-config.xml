@@ -118,7 +118,7 @@
 
         <!-- Identify the ActionConfig for this request -->
         <command
-                className="org.apache.struts.chain.commands.servlet.SelectAction"/>
+                className="org.seasar.struts.pojo.processor.commands.S2SelectAction"/>
 
 
         <!-- Authorize the selected ActionConfig for this request -->

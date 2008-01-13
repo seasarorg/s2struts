@@ -15,6 +15,8 @@
  */
 package org.seasar.struts.pojo.factory;
 
+import java.lang.reflect.Method;
+
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
@@ -25,5 +27,7 @@ import org.seasar.struts.pojo.config.ActionPropertyConfig;
 public interface ActionAnnotationHandler {
 
     ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc);
+
+    String getPath(Method method);
 
 }

@@ -33,7 +33,7 @@ public class MethodBindingActionFactory {
     public static MethodBindingAction createMethodBindingAction(HttpServletRequest request, ActionMapping mapping,
             ActionServlet servlet) {
 
-        MethodBinding methodBinding = createMethodBinding(request, mapping);
+        MethodBinding methodBinding = createMethodBinding(request, mapping.getPath());
         if (methodBinding == null) {
             return null;
         }
@@ -42,18 +42,18 @@ public class MethodBindingActionFactory {
         return action;
     }
 
-    private static MethodBinding createMethodBinding(HttpServletRequest request, ActionMapping mapping) {
+    public static MethodBinding createMethodBinding(HttpServletRequest request, String path) {
         for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
             String key = (String) paramNames.nextElement();
             String value = request.getParameter(key);
-            String expression = S2StrutsContextUtil.getMethodBindingExpression(mapping.getPath(), key, value);
+            String expression = S2StrutsContextUtil.getMethodBindingExpression(path, key, value);
             if (expression != null) {
                 return new MethodBinding(expression);
             }
 
             // image tag
             String imageKey = key.replaceFirst("(\\.x$)|(\\.y$)", "");
-            expression = S2StrutsContextUtil.getMethodBindingExpression(mapping.getPath(), imageKey, null);
+            expression = S2StrutsContextUtil.getMethodBindingExpression(path, imageKey, null);
             if (expression != null) {
                 return new MethodBinding(expression);
             }
@@ -62,7 +62,7 @@ public class MethodBindingActionFactory {
             if (IndexedUtil.isIndexedParameter(key)) {
                 String indexedKey = IndexedUtil.getParameter(key);
                 int index = IndexedUtil.getIndex(key);
-                expression = S2StrutsContextUtil.getMethodBindingExpression(mapping.getPath(), indexedKey, value);
+                expression = S2StrutsContextUtil.getMethodBindingExpression(path, indexedKey, value);
                 if (expression != null) {
                     return new MethodBinding(expression, index);
                 }

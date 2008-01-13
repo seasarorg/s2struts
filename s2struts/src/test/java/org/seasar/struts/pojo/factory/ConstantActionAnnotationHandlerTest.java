@@ -1,12 +1,12 @@
 package org.seasar.struts.pojo.factory;
 
+import java.lang.reflect.Method;
+
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
-import org.seasar.struts.pojo.factory.ActionAnnotationHandler;
-import org.seasar.struts.pojo.factory.ActionAnnotationHandlerFactory;
 
 /**
  * 
@@ -35,6 +35,11 @@ public class ConstantActionAnnotationHandlerTest extends S2TestCase {
         ActionPropertyConfig config = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
         assertNotNull(config);
         assertEquals(false, config.isSessionScope());
+    }
+
+    public void testGetPath() throws Exception {
+        Method method = TestActionAnnotationActionImpl.class.getMethod("exe", (Class[]) null);
+        assertEquals("/hoge", annHandler.getPath(method));
     }
 
 }
