@@ -2160,7 +2160,10 @@ S2Strutsでは、ButtonTagとSubmitTagを用意しています。
       例えば、&lt;s2struts:submit action="{hogeAction.create}" indexId="index"&gt;
        と記述して表示されたボタンを押した場合、
        String create(int index)
-       メソッドが呼び出されます<br>
+       メソッドが呼び出されます。</br></br>
+       S2Struts1.3-RC3以降では、指定したコンポーネントに対応するActionMappingが使用されます。
+       ActionMappingは、デフォルトではActionPathNamingRuleコンポーネントから求められるpathをキーにして決定されます。
+       明示的に指定する場合は呼び出すメソッドに<a href="#BindingMethod">BINDING_METHODアノテーション</a>を指定してください。
       </td>
   </tr>
   <tr>
@@ -2201,7 +2204,11 @@ S2Strutsでは、ButtonTagとSubmitTagを用意しています。
       <td><center>×</center></td>
       <td><center>-</center></td>
       <td>action="#{component.method}"と記述することによって、サブミット時に実行するコンポーネントとメソッドを指定する事が可能です。
-      コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
+      コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</br></br>
+       S2Struts1.3-RC3以降では、指定したコンポーネントに対応するActionMappingが使用されます。
+       ActionMappingは、デフォルトではActionPathNamingRuleコンポーネントから求められるpathをキーにして決定されます。
+       明示的に指定する場合は呼び出すメソッドに<a href="#BindingMethod">BINDING_METHODアノテーション</a>を指定してください。
+      </td>
   </tr>
   <tr>
     <td><center>cancel</center></td>
@@ -2252,6 +2259,46 @@ formタグの中に記述する必要があります。複数のformが存在する場合には、それぞれに記
       コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
   </tr>
 </table>
+
+<h3><a name="BindingMethod">BINDING_METHODアノテーション</a></h3>
+<p>
+S2Struts1.3-RC3以降で利用できます。
+</p>
+<p>
+BINDING_METHODアノテーションは、sumitタグやimageタグで指定されたactionに対するActionMappingを明示的に指定するために使用します。
+</p>
+<h4>定数アノテーション</h4>
+次の形式でstaticフィールドとしてActionに定義します。
+<p>
+public static final String <i>メソッド名</i>_BINDING_METHOD = "path=<i>ActionMappingのpath</i>"
+</p>
+タグとJavaの定義例は次の通りです。
+<pre>
+&lt;s2struts:submit action="#{modAction.mod}" property="submit" value="サブミット"/&gt;
+</pre>
+<pre>
+public static final String mod_BINDING_METHOD = "path=/hoge";
+
+public String mod() {
+  ．．．
+}
+</pre>
+<h4>Tigerアノテーション</h4>
+次の形式でActionメソッドにアノテーションを指定します。
+<p>
+@BindingMethod(path = "<i>ActionMappingのパス</i>")
+</p>
+タグとJavaの定義例は次の通りです。
+<pre>
+&lt;s2struts:submit action="#{modAction.mod}" property="submit" value="サブミット"/&gt;
+</pre>
+<pre>
+@BindingMethod(path = "/hoge")
+public String mod() {
+  ．．．
+}
+</pre>
+
 
 <!-- document end -->
 <!-- don't edit start -->
