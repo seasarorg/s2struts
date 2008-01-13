@@ -1,5 +1,6 @@
 package org.seasar.struts.pojo.factory;
 
+import org.seasar.struts.annotation.tiger.BindingMethod;
 import org.seasar.struts.annotation.tiger.Export;
 import org.seasar.struts.annotation.tiger.ExportToSession;
 import org.seasar.struts.annotation.tiger.ScopeType;
@@ -7,42 +8,49 @@ import org.seasar.struts.annotation.tiger.ScopeType;
 /**
  * @author Katsuhiko Nagashima
  */
-public class TestActionAnnotationActionImpl implements TestActionAnnotationAction {
+public class TestActionAnnotationActionImpl implements
+		TestActionAnnotationAction {
 
-    private String bar;
+	private String bar;
 
-    private String baz;
+	private String baz;
 
-    private String foo;
+	private String foo;
 
-    @ExportToSession
-    public String getBar() {
-        return bar;
-    }
+	public static final String exe2_BINDING_METHOD = "path=/foo";
 
-    public void setBar(String bar) {
-        this.bar = bar;
-    }
+	@ExportToSession
+	public String getBar() {
+		return bar;
+	}
 
-    @Export(ScopeType.SESSION)
-    public String getBaz() {
-        return baz;
-    }
+	public void setBar(String bar) {
+		this.bar = bar;
+	}
 
-    public void setBaz(String baz) {
-        this.baz = baz;
-    }
+	@Export(ScopeType.SESSION)
+	public String getBaz() {
+		return baz;
+	}
 
-    public String getFoo() {
-        return foo;
-    }
+	public void setBaz(String baz) {
+		this.baz = baz;
+	}
 
-    public void setFoo(String foo) {
-        this.foo = foo;
-    }
+	public String getFoo() {
+		return foo;
+	}
 
-    public String exe() {
-        return "success";
-    }
+	public void setFoo(String foo) {
+		this.foo = foo;
+	}
 
+	@BindingMethod(path = "/hoge")
+	public String exe() {
+		return "success";
+	}
+
+	public String exe2() {
+		return "success";
+	}
 }
