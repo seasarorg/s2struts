@@ -2,14 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry output="target/test-classes" kind="src" path="src/test/java"/>
-	<classpathentry output="target/test-classes" kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/s2struts"/>
 	<classpathentry kind="lib" path="/s2struts/lib/commons-validator-1.1.4.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="/s2struts/lib/struts-1.2.9.jar"/>
-	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.3.19.jar"/>
-	<classpathentry kind="lib" path="/s2struts/lib/s2-framework-2.3.19.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-extension-2.3.23.jar" sourcepath="/s2struts/libsrc/s2-extension-2.3.23-sources.jar"/>
+	<classpathentry kind="lib" path="/s2struts/lib/s2-framework-2.3.23.jar" sourcepath="/s2struts/libsrc/s2-framework-2.3.23-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
