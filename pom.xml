@@ -8,7 +8,7 @@
   <artifactId>s2-struts</artifactId>
   <packaging>jar</packaging>
   <name>s2-struts</name>
-  <version>1.2.11-SNAPSHOT</version>
+  <version>1.2.11</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
   <inceptionYear>2004-2007</inceptionYear>
@@ -98,7 +98,7 @@
     <dependency>
       <groupId>org.seasar.container</groupId>
       <artifactId>s2-extension</artifactId>
-      <version>2.3.19</version>
+      <version>2.3.23</version>
       <type>jar</type>
     </dependency>
     <!--
