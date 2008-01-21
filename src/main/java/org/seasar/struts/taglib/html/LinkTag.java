@@ -76,10 +76,10 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
             String componentName = MethodBindingUtil
                     .getComponentName(this.expression);
             mapping = (ActionMapping) ModuleConfigUtil
-                    .findActionConfigForComponentName(componentName);
+                    .findActionConfigForComponentName(module, componentName);
         } else {
-            mapping = (ActionMapping) ModuleConfigUtil
-                    .findActionConfig(this.path);
+            mapping = (ActionMapping) ModuleConfigUtil.findActionConfig(module,
+                    this.path);
         }
         if (mapping == null) {
             throw new JspException("Not found ActionMapping.");
