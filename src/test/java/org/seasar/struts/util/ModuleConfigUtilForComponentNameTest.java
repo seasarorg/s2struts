@@ -49,13 +49,13 @@ public class ModuleConfigUtilForComponentNameTest extends S2TestCase {
     }
 
     public void setUpFindActionConfigForComponentName_module() {
-        moduleKey = Globals.MODULE_KEY + "hoge";
+        moduleKey = Globals.MODULE_KEY + "/hoge";
         useServletContext = true;
     }
 
     public void testFindActionConfigForComponentName_module() {
         ActionConfig config = ModuleConfigUtil
-                .findActionConfigForComponentName("hoge",
+                .findActionConfigForComponentName("/hoge",
                         "testComponent1Action");
 
         assertNotNull(config);
