@@ -40,13 +40,21 @@ public class ModuleConfigUtil {
     }
 
     public static ModuleConfig getModuleConfig() {
+        return getModuleConfig(null);
+    }
+
+    public static ModuleConfig getModuleConfig(String module) {
         ServletContext context = S2StrutsContextUtil.getServletContext();
         HttpServletRequest request = S2StrutsContextUtil.getRequest();
-        return ModuleUtils.getInstance().getModuleConfig(request, context);
+        return ModuleUtils.getInstance().getModuleConfig(module, request, context);
     }
 
     public static ActionConfig findActionConfig(String path) {
-        return ModuleConfigUtil.getModuleConfig().findActionConfig(path);
+        return findActionConfig(null, path);
+    }
+
+    public static ActionConfig findActionConfig(String module, String path) {
+        return ModuleConfigUtil.getModuleConfig(module).findActionConfig(path);
     }
 
     public static ActionConfig findActionConfigForFormBeanName(String beanName) {
@@ -93,12 +101,16 @@ public class ModuleConfigUtil {
     }
 
     public static ActionConfig findActionConfigForComponentName(String componentName) {
+        return findActionConfigForComponentName(null, componentName);
+    }
+
+    public static ActionConfig findActionConfigForComponentName(String module, String componentName) {
         if (!ModuleConfigUtil.getContainer().hasComponentDef(componentName)) {
             return null;
         }
         Class clazz = ModuleConfigUtil.getContainer().getComponentDef(componentName).getComponentClass();
 
-        ModuleConfig config = ModuleConfigUtil.getModuleConfig();
+        ModuleConfig config = ModuleConfigUtil.getModuleConfig(module);
         if (config == null) {
             return null;
         }
