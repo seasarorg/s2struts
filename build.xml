@@ -12,4 +12,16 @@
          excludes="**/.DS_Store , ${projectDir}/work/**"/>
   </target>
 
+  <target name="copy-jar">
+    <copy file="../s2struts/target/s2-struts-${version}.jar"
+      todir="WEB-INF/lib"/>
+    <copy file="../s2struts/target/s2-struts-${version}-sources.jar"
+      todir="libsrc"/>
+
+    <copy file="../s2struts-tiger/target/s2-struts-tiger-${version}.jar"
+      todir="WEB-INF/lib"/>
+    <copy file="../s2struts-tiger/target/s2-struts-tiger-${version}-sources.jar"
+      todir="libsrc"/>
+  </target>
+
 </project>
