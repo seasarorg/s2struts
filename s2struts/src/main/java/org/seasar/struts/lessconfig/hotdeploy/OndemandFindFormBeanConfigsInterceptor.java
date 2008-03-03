@@ -62,6 +62,9 @@ public class OndemandFindFormBeanConfigsInterceptor extends AbstractInterceptor 
             public Object processContainer(S2Container container) {
                 for (int i = 0; i < container.getComponentDefSize(); i++) {
                     Class clazz = container.getComponentDef(i).getComponentClass();
+                    if (clazz == null) {
+                        continue;
+                    }
                     FormBeanConfig formBeanConfig = creator.createFormBeanConfig(config, clazz);
                     if (formBeanConfig != null) {
                         formBeanConfigs.add(formBeanConfig);

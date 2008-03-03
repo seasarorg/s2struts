@@ -62,6 +62,9 @@ public class OndemandFindActionConfigsInterceptor extends AbstractInterceptor {
             public Object processContainer(S2Container container) {
                 for (int i = 0; i < container.getComponentDefSize(); i++) {
                     Class clazz = container.getComponentDef(i).getComponentClass();
+                    if (clazz == null) {
+                        continue;
+                    }
                     ActionConfig actionConfig = creator.createActionConfig(config, clazz);
                     if (actionConfig != null) {
                         actionConfigs.add(actionConfig);

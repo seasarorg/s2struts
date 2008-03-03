@@ -7,4 +7,7 @@
         
 	<component name="testOndemandAction" class="org.seasar.struts.lessconfig.hotdeploy.TestOndemandAction"/>
 	<component name="testOndemandDto" class="org.seasar.struts.lessconfig.hotdeploy.TestOndemandDto"/>
+	<component name="noClassAttributeComponent">
+		"hoge"
+	</component>
 </components>
