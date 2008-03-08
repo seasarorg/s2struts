@@ -1,5 +1,7 @@
 package org.seasar.struts.factory;
 
+import java.lang.reflect.Method;
+
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -38,6 +40,20 @@ public class ConstantActionAnnotationHandlerTest extends S2TestCase {
                 beanDesc, propertyDesc);
         assertNotNull(config);
         assertEquals(false, config.isSessionScope());
+    }
+
+    public void testGetPath() throws Exception {
+        Method method = Hoge.class.getMethod("execute", new Class[] {});
+        String path = annHandler.getPath(method);
+        assertEquals("/hoge", path);
+    }
+
+    public static class Hoge {
+        public static final String execute_BINDING_METHOD = "path=/hoge";
+
+        public String execute() {
+            return null;
+        }
     }
 
 }
