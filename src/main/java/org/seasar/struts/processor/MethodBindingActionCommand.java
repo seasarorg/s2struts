@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionMapping;
+import org.seasar.struts.Constants;
 
 /**
  * 
@@ -30,12 +31,16 @@ public class MethodBindingActionCommand implements ActionCommand {
             HttpServletResponse response, Object action, Object form,
             ActionMapping mapping) {
 
-        MethodBinding methodBinding = MethodBindingFactory.getMethodBinding(
-                request, mapping.getPath());
-        if (methodBinding == null) {
-            return NOT_EXECUTE;
+        String path = (String) request
+                .getAttribute(Constants.ORIGINAL_PATH_KEY);
+        if (path != null) {
+            MethodBinding methodBinding = MethodBindingFactory
+                    .getMethodBinding(request, path);
+            if (methodBinding != null) {
+                return (String) methodBinding.invoke(mapping);
+            }
         }
-        return (String) methodBinding.invoke(mapping);
+        return NOT_EXECUTE;
     }
 
 }

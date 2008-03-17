@@ -4,7 +4,7 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.framework.mock.servlet.MockHttpServletRequest;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
-public class PathResolverImplTest extends S2TestCase {
+public class BindingMethodPathResolverTest extends S2TestCase {
 
     private PathResolver resolver;
 

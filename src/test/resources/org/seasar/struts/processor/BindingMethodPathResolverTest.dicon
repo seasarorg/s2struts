@@ -3,6 +3,6 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<include path="s2struts.dicon"/>
-	<component class="org.seasar.struts.processor.PathResolverImpl"/>
-	<component name="hoge" class="org.seasar.struts.processor.PathResolverImplTest$Hoge"/>
+	<component class="org.seasar.struts.processor.BindingMethodPathResolver"/>
+	<component name="hoge" class="org.seasar.struts.processor.BindingMethodPathResolverTest$Hoge"/>
 </components>

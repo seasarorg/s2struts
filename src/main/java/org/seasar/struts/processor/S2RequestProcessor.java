@@ -43,8 +43,6 @@ import org.seasar.struts.util.S2Util;
 public class S2RequestProcessor extends RequestProcessor implements
         ExternalRequestProcessor {
 
-    public static final String pathResolver_BINDING = "bindingType=may";
-
     private ActionExecuteProcessor executeProcessor;
 
     private ActionFactory actionFactory;
@@ -56,8 +54,6 @@ public class S2RequestProcessor extends RequestProcessor implements
     private InputValueFormProcessor inputValueFormCreator;
 
     private PopulateProcessor populateProcessor;
-
-    private PathResolver pathResolver;
 
     /**
      * <p>
@@ -87,11 +83,7 @@ public class S2RequestProcessor extends RequestProcessor implements
 
     public String processPath(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
-        String path = super.processPath(request, response);
-        if (pathResolver != null) {
-            return pathResolver.resolve(request, path);
-        }
-        return path;
+        return super.processPath(request, response);
     }
 
     public void processLocale(HttpServletRequest request,
@@ -290,10 +282,6 @@ public class S2RequestProcessor extends RequestProcessor implements
 
     public void setPopulateProcessor(PopulateProcessor populateProcessor) {
         this.populateProcessor = populateProcessor;
-    }
-
-    public void setPathResolver(PathResolver pathResolver) {
-        this.pathResolver = pathResolver;
     }
 
     public ModuleConfig getModuleConfig() {
