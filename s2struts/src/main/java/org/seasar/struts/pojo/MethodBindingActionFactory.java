@@ -15,14 +15,11 @@
  */
 package org.seasar.struts.pojo;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
-import org.seasar.struts.pojo.util.IndexedUtil;
-import org.seasar.struts.util.S2StrutsContextUtil;
+import org.seasar.struts.Constants;
 
 /**
  * 
@@ -33,39 +30,13 @@ public class MethodBindingActionFactory {
     public static MethodBindingAction createMethodBindingAction(HttpServletRequest request, ActionMapping mapping,
             ActionServlet servlet) {
 
-        MethodBinding methodBinding = createMethodBinding(request, mapping.getPath());
-        if (methodBinding == null) {
-            return null;
-        }
-        MethodBindingAction action = new MethodBindingAction(methodBinding);
-        action.setServlet(servlet);
-        return action;
-    }
-
-    public static MethodBinding createMethodBinding(HttpServletRequest request, String path) {
-        for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
-            String key = (String) paramNames.nextElement();
-            String value = request.getParameter(key);
-            String expression = S2StrutsContextUtil.getMethodBindingExpression(path, key, value);
-            if (expression != null) {
-                return new MethodBinding(expression);
-            }
-
-            // image tag
-            String imageKey = key.replaceFirst("(\\.x$)|(\\.y$)", "");
-            expression = S2StrutsContextUtil.getMethodBindingExpression(path, imageKey, null);
-            if (expression != null) {
-                return new MethodBinding(expression);
-            }
-
-            // indexed
-            if (IndexedUtil.isIndexedParameter(key)) {
-                String indexedKey = IndexedUtil.getParameter(key);
-                int index = IndexedUtil.getIndex(key);
-                expression = S2StrutsContextUtil.getMethodBindingExpression(path, indexedKey, value);
-                if (expression != null) {
-                    return new MethodBinding(expression, index);
-                }
+        String path = (String) request.getAttribute(Constants.ORIGINAL_PATH_KEY);
+        if (path != null) {
+            MethodBinding methodBinding = MethodBindingFactory.getMethodBinding(request, path);
+            if (methodBinding != null) {
+                MethodBindingAction action = new MethodBindingAction(methodBinding);
+                action.setServlet(servlet);
+                return action;
             }
         }
         return null;

@@ -37,4 +37,5 @@ public interface Constants {
 
     String BACKUP_SESSION_FORM_KEY = "org.seasar.struts.BACKUP_SESSION_FORM";
 
+    String ORIGINAL_PATH_KEY = "org.seasar.struts.ORIGINAL_PATH";
 }

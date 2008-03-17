@@ -4,6 +4,7 @@ import org.apache.struts.chain.commands.ActionCommand;
 import org.apache.struts.chain.contexts.ActionContext;
 import org.apache.struts.chain.contexts.ServletActionContext;
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.struts.Constants;
 import org.seasar.struts.mock.MockActionMapping;
 import org.seasar.struts.pojo.MethodBindingAction;
 import org.seasar.struts.util.S2StrutsContextUtil;
@@ -36,10 +37,9 @@ public class CreateMethodBindingActionTest extends S2TestCase {
     }
 
     public void testCreateMethodBinding() throws Exception {
-        this.mapping.setPath("/test");
+        this.getRequest().setAttribute(Constants.ORIGINAL_PATH_KEY, "/test");
         this.getRequest().setParameter("1234567890", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression(this.mapping.getPath(), "1234567890", "TEST",
-                "#{bindingAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression("/test", "1234567890", "TEST", "#{bindingAction.exe}");
 
         boolean result = this.command.execute(this.context);
 
@@ -48,10 +48,9 @@ public class CreateMethodBindingActionTest extends S2TestCase {
     }
 
     public void testCreateMethodBindingForImageTag() throws Exception {
-        this.mapping.setPath("/test");
+        this.getRequest().setAttribute(Constants.ORIGINAL_PATH_KEY, "/test");
         this.getRequest().setParameter("1234567890.y", "");
-        S2StrutsContextUtil.setMethodBindingExpression(this.mapping.getPath(), "1234567890", null,
-                "#{bindingAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression("/test", "1234567890", null, "#{bindingAction.exe}");
 
         boolean result = this.command.execute(this.context);
 
@@ -60,10 +59,9 @@ public class CreateMethodBindingActionTest extends S2TestCase {
     }
 
     public void testCreateMethodBindingForIndexed() throws Exception {
-        this.mapping.setPath("/test");
+        this.getRequest().setAttribute(Constants.ORIGINAL_PATH_KEY, "/test");
         this.getRequest().setParameter("1234567890[10]", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression(this.mapping.getPath(), "1234567890", "TEST",
-                "#{bindingAction.exe}");
+        S2StrutsContextUtil.setMethodBindingExpression("/test", "1234567890", "TEST", "#{bindingAction.exe}");
 
         boolean result = this.command.execute(this.context);
 
