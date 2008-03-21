@@ -13,7 +13,7 @@ import org.seasar.struts.mock.MockActionMapping;
 public class MethodBindingTest extends S2TestCase {
 
     private ActionMapping mapping = new MockActionMapping();
-    
+
     protected void setUp() throws Exception {
         super.setUp();
         include("MethodBindingTest.dicon");
@@ -49,6 +49,21 @@ public class MethodBindingTest extends S2TestCase {
 
         String forward = (String) methodBinding.invoke(this.mapping);
         assertEquals("success10", forward);
+    }
+
+    public void testGetComponent() {
+        MethodBinding methodBinding = new MethodBinding("#{bindingAction.exe}");
+        assertNotNull(methodBinding.getComponentClass());
+    }
+
+    public void testGetMethod() {
+        MethodBinding methodBinding = new MethodBinding("#{bindingAction.exe}");
+        assertNotNull(methodBinding.getMethod());
+    }
+
+    public void testGetIndexedMethod() {
+        MethodBinding methodBinding = new MethodBinding("#{bindingAction.exe}", 10);
+        assertNotNull(methodBinding.getMethod());
     }
 
 }

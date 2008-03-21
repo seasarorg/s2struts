@@ -100,7 +100,7 @@ public class MethodBinding {
     public Method getMethod() {
         Class componentClass = getComponentClass();
         if (indexed) {
-            return ClassUtil.getMethod(componentClass, methodName, new Class[] { Integer.class });
+            return ClassUtil.getMethod(componentClass, methodName, new Class[] { int.class });
         }
         return ClassUtil.getMethod(componentClass, methodName, null);
     }
