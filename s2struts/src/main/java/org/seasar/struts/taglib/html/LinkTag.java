@@ -29,6 +29,17 @@ import org.seasar.struts.util.ModuleConfigUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link org.apache.struts.taglib.html.LinkTag}を拡張したS2Struts用のタグです。
+ * <p>
+ * {@link org.apache.struts.taglib.html.LinkTag}の属性に加え次の3つの属性に対応しています。
+ * <ul>
+ * <li>path</li>
+ * <li>cancel</li>
+ * </ul>
+ * </p>
+ * <p>
+ * action属性にはメソッドバインディング式を設定できます。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  * 
@@ -45,18 +56,38 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
 
     protected boolean cancel = false;
 
+    /**
+     * パスを返します。
+     * 
+     * @return
+     */
     public String getPath() {
         return this.path;
     }
 
+    /**
+     * パスを設定します。
+     * 
+     * @param path
+     */
     public void setPath(String path) {
         this.path = path;
     }
 
+    /**
+     * ActionFormの検証をキャンセルする場合<code>true</code>を返します。
+     * 
+     * @return
+     */
     public boolean isCancel() {
         return this.cancel;
     }
 
+    /**
+     * ActionFormの検証をキャンセルする場合<code>true</code>を設定します。
+     * 
+     * @param cancel
+     */
     public void setCancel(boolean cancel) {
         this.cancel = cancel;
     }

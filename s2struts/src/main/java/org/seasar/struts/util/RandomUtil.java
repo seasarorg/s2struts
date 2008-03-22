@@ -20,6 +20,8 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
+ * ランダムな数値を返すユーティリティクラスです。
+ * 
  * @author Satoshi Kimura
  */
 public abstract class RandomUtil {
@@ -30,6 +32,11 @@ public abstract class RandomUtil {
     protected RandomUtil() {
     }
 
+    /**
+     * ランダムな<code>long</code>の値を返します。
+     * 
+     * @return
+     */
     public static long randomLong() {
         init();
         long value = Math.abs(random.nextLong());
@@ -39,12 +46,17 @@ public abstract class RandomUtil {
         return value;
     }
 
+    /**
+     * ランダムな<code>long</code>の値を文字列に変換して返します。
+     * 
+     * @return
+     */
     public static String randomString() {
         return Long.toString(randomLong());
     }
 
     private static void init() {
-        Collection values = (Collection)primary.get();
+        Collection values = (Collection) primary.get();
         if (values == null) {
             primary.set(new HashSet());
         }
@@ -52,7 +64,7 @@ public abstract class RandomUtil {
 
     private static boolean isUsedValue(long value) {
         Long val = new Long(value);
-        Collection values = (Collection)primary.get();
+        Collection values = (Collection) primary.get();
         if (values.contains(val)) {
             return true;
         } else {

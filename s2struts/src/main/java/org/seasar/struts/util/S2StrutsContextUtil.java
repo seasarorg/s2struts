@@ -28,59 +28,112 @@ import org.seasar.struts.context.S2StrutsApplContext;
 import org.seasar.struts.context.S2StrutsContext;
 
 /**
+ * {@link S2StrutsContext}のためのユーティリティクラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public abstract class S2StrutsContextUtil {
 
+    /**
+     * <code>type</code>に対応するコンテキスト情報をクリアします。
+     * 
+     * @param type
+     */
     public static void clear(ContentsType type) {
         getApplContext().clear(type);
     }
 
-    //
-
+    /**
+     * フォワード先のパスを設定します。
+     * 
+     * @param forward
+     */
     public static void setPath(ForwardConfig forward) {
         getContext().setPath(forward.getPath());
     }
 
+    /**
+     * パスを設定します。
+     * 
+     * @param path
+     */
     public static void setPath(String path) {
         getContext().setPath(path);
     }
 
+    /**
+     * 現在の入力パスを設定します。
+     * 
+     * @return
+     */
     public static String getCurrentInputPath() {
         return getContext().getCurrentInputPath();
     }
 
+    /**
+     * 前回の入力パスを設定します。
+     * 
+     * @return
+     */
     public static String getPreviousInputPath() {
         return getContext().getPreviousInputPath();
     }
 
+    /**
+     * ページ名をクリアします。
+     */
     public static void clearPageNameElementValue() {
         getContext().clearPageNameElementValue();
     }
 
-    //
-
+    /**
+     * メソッドバインディング式を設定します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     * @param methodBindingExpression
+     */
     public static void setMethodBindingExpression(String mappingName, String key, String value,
             String methodBindingExpression) {
         getApplContext().setMethodBindingExpression(mappingName, key, value, methodBindingExpression);
     }
 
+    /**
+     * メソッドバインディング式を返します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     * @return
+     */
     public static String getMethodBindingExpression(String mappingName, String key, String value) {
         return getApplContext().getMethodBindingExpression(mappingName, key, value);
     }
 
-    //
-
+    /**
+     * 検証がキャンセルされたかどうかを返します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     * @return
+     */
     public static Boolean isCancelAction(String mappingName, String key, String value) {
         return getApplContext().isCancelAction(mappingName, key, value);
     }
 
+    /**
+     * 検証がキャンセルされたかどうかを設定します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     */
     public static void setCancelAction(String mappingName, String key, String value) {
         getApplContext().setCancelAction(mappingName, key, value);
     }
-
-    //
 
     private static S2StrutsContext getContext() {
         return (S2StrutsContext) getContainer().getComponent(S2StrutsContext.class);
@@ -93,41 +146,88 @@ public abstract class S2StrutsContextUtil {
     private static S2Container getContainer() {
         return SingletonS2ContainerFactory.getContainer();
     }
-    
-    //
 
+    /**
+     * {@link ServletContext}を返します。
+     * 
+     * @return
+     */
     public static ServletContext getServletContext() {
         return (ServletContext) getContainer().getComponent(ServletContext.class);
     }
-    
+
+    /**
+     * {@link HttpServletResponse}を返します。
+     * 
+     * @param container
+     * @return
+     */
     public static HttpServletResponse getResponse(S2Container container) {
         return (HttpServletResponse) container.getExternalContext().getResponse();
     }
 
+    /**
+     * {@link HttpServletResponse}を返します。
+     * 
+     * @return
+     */
     public static HttpServletResponse getResponse() {
         return getResponse(getContainer());
     }
 
+    /**
+     * {@link HttpServletRequest}を返します。
+     * 
+     * @param container
+     * @return
+     */
     public static HttpServletRequest getRequest(S2Container container) {
         return (HttpServletRequest) container.getExternalContext().getRequest();
     }
 
+    /**
+     * {@link HttpServletRequest}を返します。
+     * 
+     * @return
+     */
     public static HttpServletRequest getRequest() {
         return getRequest(getContainer());
     }
 
+    /**
+     * {@link HttpSession}を返します。
+     * 
+     * @param container
+     * @return
+     */
     public static HttpSession getSession(S2Container container) {
         return (HttpSession) container.getExternalContext().getSession();
     }
 
+    /**
+     * {@link HttpSession}を返します。
+     * 
+     * @return
+     */
     public static HttpSession getSession() {
         return getSession(getContainer());
     }
 
+    /**
+     * リクエストコンテキストを設定します。
+     * 
+     * @param container
+     * @param request
+     */
     public static void setRequest(S2Container container, Object request) {
         container.getExternalContext().setRequest(request);
     }
 
+    /**
+     * リクエストコンテキストを設定します。
+     * 
+     * @param request
+     */
     public static void setRequest(Object request) {
         setRequest(getContainer(), request);
     }

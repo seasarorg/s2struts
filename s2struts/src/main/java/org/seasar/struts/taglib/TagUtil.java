@@ -18,20 +18,27 @@ package org.seasar.struts.taglib;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.taglib.TagUtils;
 import org.apache.struts.taglib.html.Constants;
 import org.apache.struts.taglib.html.FormTag;
 
 /**
+ * {@link Tag}に関するユーティリティです。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 public abstract class TagUtil {
 
+    /**
+     * {@link ActionMapping}の名前を返します。
+     * 
+     * @param pageContext
+     * @return
+     * @throws JspException
+     */
     public static String getActionMappingName(PageContext pageContext) throws JspException {
-        FormTag form = (FormTag) pageContext.getAttribute(Constants.FORM_KEY,
-                PageContext.REQUEST_SCOPE);
+        FormTag form = (FormTag) pageContext.getAttribute(Constants.FORM_KEY, PageContext.REQUEST_SCOPE);
         if (form == null) {
             throw new JspException("Tag is not defined in FormTag.");
         }

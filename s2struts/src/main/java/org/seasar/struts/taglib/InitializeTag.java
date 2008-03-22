@@ -19,18 +19,30 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.pojo.MethodBinding;
 
 /**
+ * {{@link #setAction(String)}で指定されたメソッドバインディング式を使ってActionコンポーネントのメソッドを実行します。
+ * 
  * @author Satoshi Kimura
  * @author Kazuya Sugimoto
  */
 public class InitializeTag extends BaseTag {
     private String action;
-    private static String SKIP_PAGE_CONTEXT =
-        "org.seasar.struts.taglib.InitializeTag.SKIP_PAGE";
 
+    private static String SKIP_PAGE_CONTEXT = "org.seasar.struts.taglib.InitializeTag.SKIP_PAGE";
+
+    /**
+     * メソッドバインディング式を返します。
+     * 
+     * @return
+     */
     public String getAction() {
         return this.action;
     }
 
+    /**
+     * メソッドバインディング式を設定します。
+     * 
+     * @param action
+     */
     public void setAction(String action) {
         this.action = action;
     }
@@ -38,32 +50,31 @@ public class InitializeTag extends BaseTag {
     public int doStartTag() {
 
         boolean isCommited = this.pageContext.getResponse().isCommitted();
-        
+
         // In case of Tomcat4.1, HttpServletRequest is set again,
         // because of the different HttpServletRequest for JSP and Servlet.
         SingletonS2ContainerFactory.getContainer().getExternalContext().setRequest(this.pageContext.getRequest());
 
         MethodBinding methodBinding = new MethodBinding(this.action);
         methodBinding.invoke();
-        
+
         Boolean skipPage = Boolean.valueOf(false);
 
-        if(isCommited != this.pageContext.getResponse().isCommitted()) {
+        if (isCommited != this.pageContext.getResponse().isCommitted()) {
 
-                skipPage = new Boolean(true);
+            skipPage = new Boolean(true);
         }
 
         this.pageContext.setAttribute(SKIP_PAGE_CONTEXT, skipPage);
 
         return SKIP_BODY;
     }
-    
+
     public int doEndTag() {
 
-        Boolean skipPage = 
-            (Boolean) this.pageContext.getAttribute(SKIP_PAGE_CONTEXT);
+        Boolean skipPage = (Boolean) this.pageContext.getAttribute(SKIP_PAGE_CONTEXT);
 
-        if(skipPage.booleanValue()) {
+        if (skipPage.booleanValue()) {
 
             return SKIP_PAGE;
 

@@ -20,10 +20,13 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
 /**
+ * {@link Tag}の実装クラスのための基盤を提供します。
+ * 
  * @author Satoshi Kimura
  */
 public abstract class BaseTag implements Tag {
     protected PageContext pageContext;
+
     private Tag parentTag;
 
     public void setPageContext(PageContext pageContext) {

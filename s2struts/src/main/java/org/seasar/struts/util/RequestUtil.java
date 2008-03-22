@@ -15,10 +15,13 @@
  */
 package org.seasar.struts.util;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
+ * {@link HttpServletRequest}のためのユーティリティです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class RequestUtil {
@@ -27,6 +30,24 @@ public class RequestUtil {
 
     }
 
+    /**
+     * <code>request</code>を使って、<code>name</code>をキーとする値を取り出します。
+     * <p>
+     * 次の順番で取得を試み、<code>null</code>以外の値が取得できたらそれを返します。
+     * <ul>
+     * <li>{@link ServletRequest#getAttribute(String)}</li>
+     * <li>{@link ServletRequest#getParameter(String)}</li>
+     * <li>{@link HttpSession#getAttribute(String)}</li>
+     * </ul>
+     * </p>
+     * <p>
+     * 何も取得できない場合は<code>null</code>を返します。
+     * </p>
+     * 
+     * @param request
+     * @param name
+     * @return
+     */
     public static Object getValue(HttpServletRequest request, String name) {
         Object var = request.getAttribute(name);
         if (var != null) {

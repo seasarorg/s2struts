@@ -24,6 +24,8 @@ import org.seasar.struts.taglib.BaseTag;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * ページ名をhiddenタグに埋め込むクラスです。
+ * 
  * @author Satoshi Kimura
  */
 public class PageTag extends BaseTag {
@@ -32,7 +34,6 @@ public class PageTag extends BaseTag {
 
         String path = S2StrutsContextUtil.getCurrentInputPath();
         path = new String(Base64Util.encode(path.getBytes()));
-
 
         if (path == null) {
             return SKIP_BODY;

@@ -24,6 +24,16 @@ import org.seasar.struts.taglib.TagUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link org.apache.struts.taglib.html.SubmitTag}を拡張したS2Struts用のタグです。
+ * <p>
+ * {@link org.apache.struts.taglib.html.SubmitTag}の属性に加え次の3つの属性に対応しています。
+ * <ul>
+ * <li>indexId</li>
+ * <li>action</li>
+ * <li>cancel</li>
+ * </ul>
+ * </p>
+ * 
  * @author Satoshi Kimura
  */
 public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
@@ -51,6 +61,8 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     }
 
     /**
+     * インデックスIDを返します。
+     * 
      * @return Returns the indexId.
      */
     public String getIndexId() {
@@ -58,6 +70,8 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
     }
 
     /**
+     * インデックスIDを設定します。
+     * 
      * @param indexId
      *            The indexName to set.
      */
@@ -69,18 +83,38 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
         }
     }
 
+    /**
+     * メソッドバインディング式を返します。
+     * 
+     * @return
+     */
     public String getAction() {
         return this.action;
     }
 
+    /**
+     * メソッドバインディング式を設定します。
+     * 
+     * @param action
+     */
     public void setAction(String action) {
         this.action = action;
     }
 
+    /**
+     * ActionFormの検証をキャンセルする場合<code>true</code>を返します。
+     * 
+     * @return
+     */
     public boolean isCancel() {
         return this.cancel;
     }
 
+    /**
+     * ActionFormの検証をキャンセルする場合<code>true</code>を設定します。
+     * 
+     * @param cancel
+     */
     public void setCancel(boolean cancel) {
         this.cancel = cancel;
     }

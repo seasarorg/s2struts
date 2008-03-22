@@ -21,25 +21,55 @@ import org.apache.struts.taglib.TagUtils;
 import org.seasar.framework.util.IntegerConversionUtil;
 
 /**
+ * {@link org.apache.struts.taglib.html.ButtonTag}を拡張したS2Struts用のタグです。
+ * <p>
+ * {@link org.apache.struts.taglib.html.ButtonTag}の属性に加え次の2つの属性に対応しています。
+ * <ul>
+ * <li>type</li>
+ * <li>indexId</li>
+ * </ul>
+ * </p>
+ * 
  * @author Satoshi Kimura
  */
 public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
     private static final long serialVersionUID = 2601132488286028174L;
-	protected String type;
+
+    protected String type;
+
     protected String indexId;
+
     /**
+     * インデックスIDを返します。
+     * 
      * @return Returns the indexId.
      */
     public String getIndexId() {
         return this.indexId;
     }
+
     /**
-     * @param indexId The indexName to set.
+     * インデックスIDを設定します。
+     * 
+     * @param indexId
      */
     public void setIndexId(String indexId) {
         this.indexId = indexId;
     }
 
+    /**
+     * ボタンの種別を設定します。
+     * <p>
+     * 設定可能な値は次のとおりです。
+     * <ul>
+     * <li>button</li>
+     * <li>submit</li>
+     * <li>reset</li>
+     * </ul>
+     * </p>
+     * 
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
@@ -93,6 +123,7 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
         return (EVAL_BODY_INCLUDE);
 
     }
+
     public int doEndTag() throws JspException {
         TagUtils.getInstance().write(super.pageContext, "</button>");
         return (EVAL_PAGE);
@@ -103,16 +134,16 @@ public class ButtonTag extends org.apache.struts.taglib.html.ButtonTag {
         return SKIP_BODY;
     }
 
-    //private IterateTag getIterateTag(Tag tag) {
-    //    Tag parentTag = tag.getParent();
-    //    if (parentTag instanceof IterateTag) {
-    //        return (IterateTag) parentTag;
-    //    } else {
-    //        if (parentTag == null) {
-    //            return null;
-    //        } else {
-    //            return getIterateTag(parentTag);
-    //        }
-    //    }
-    //}
+    // private IterateTag getIterateTag(Tag tag) {
+    // Tag parentTag = tag.getParent();
+    // if (parentTag instanceof IterateTag) {
+    // return (IterateTag) parentTag;
+    // } else {
+    // if (parentTag == null) {
+    // return null;
+    // } else {
+    // return getIterateTag(parentTag);
+    // }
+    // }
+    // }
 }

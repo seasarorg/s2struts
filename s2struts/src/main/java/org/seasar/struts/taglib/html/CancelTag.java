@@ -21,9 +21,13 @@ import org.seasar.struts.taglib.TagUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link org.apache.struts.taglib.html.CancelTag}を拡張したS2Struts用のタグです。
+ * <p>
+ * {@link org.apache.struts.taglib.html.CancelTag}と異なり、リクエストパラメータを使用することなくCancel機能を実現します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class CancelTag extends org.apache.struts.taglib.html.CancelTag {
 
@@ -31,6 +35,9 @@ public class CancelTag extends org.apache.struts.taglib.html.CancelTag {
 
     private static final String DEFAULT_PROPERTY = "org.seasar.struts.taglib.html.CancelTag.CANCEL";
 
+    /**
+     * インスタンスを生成します。
+     */
     public CancelTag() {
         super();
         property = DEFAULT_PROPERTY;

@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 定数アノテーションの値のためのユーティリティクラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ConstantValueUtil {
@@ -32,10 +34,26 @@ public class ConstantValueUtil {
     private ConstantValueUtil() {
     }
 
+    /**
+     * 定数アノテーションの値を{@link Map}に変換します。
+     * 
+     * @param parameters
+     *            定数アノテーションの値
+     * @return
+     */
     public static Map toMap(String parameters) {
         return toMap(parameters, null);
     }
 
+    /**
+     * 定数アノテーションの値を{@link Map}に変換します。
+     * 
+     * @param parameters
+     *            定数アノテーションの値
+     * @param defaultKey
+     *            デフォルトのキー
+     * @return
+     */
     public static Map toMap(String parameters, String defaultKey) {
         Map result = new HashMap();
         if (parameters == null) {

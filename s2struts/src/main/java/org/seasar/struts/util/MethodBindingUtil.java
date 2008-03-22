@@ -16,15 +16,22 @@
 package org.seasar.struts.util;
 
 /**
+ * メソッドバインディング式のためのユーティリティクラスです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class MethodBindingUtil {
 
     private MethodBindingUtil() {
     }
 
+    /**
+     * メソッドバインディング式からコンポーネント名部分を返します。
+     * 
+     * @param expression
+     *            メソッドバインディング式
+     * @return
+     */
     public static String getComponentName(String expression) {
         if (expression == null) {
             return null;
@@ -37,6 +44,12 @@ public class MethodBindingUtil {
         }
     }
 
+    /**
+     * メソッドバインディング式からメソッド名部分を返します。
+     * 
+     * @param expression
+     * @return
+     */
     public static String getMethodName(String expression) {
         if (expression == null) {
             return null;

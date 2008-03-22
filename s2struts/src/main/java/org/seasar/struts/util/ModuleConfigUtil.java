@@ -21,6 +21,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionForm;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
@@ -30,33 +31,63 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.util.ClassUtil;
 
 /**
+ * {@link ModuleConfig}のためのユーティリティクラスです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class ModuleConfigUtil {
 
     private ModuleConfigUtil() {
     }
 
+    /**
+     * デフォルトの{@link ModuleConfig}を返します。
+     * 
+     * @return
+     */
     public static ModuleConfig getModuleConfig() {
         return getModuleConfig(null);
     }
 
+    /**
+     * 指定されたモジュール名の{@link ModuleConfig}を返します。
+     * 
+     * @param module
+     * @return
+     */
     public static ModuleConfig getModuleConfig(String module) {
         ServletContext context = S2StrutsContextUtil.getServletContext();
         HttpServletRequest request = S2StrutsContextUtil.getRequest();
         return ModuleUtils.getInstance().getModuleConfig(module, request, context);
     }
 
+    /**
+     * {@link ActionConfig}を返します。
+     * 
+     * @param path
+     * @return
+     */
     public static ActionConfig findActionConfig(String path) {
         return findActionConfig(null, path);
     }
 
+    /**
+     * 指定されたモジュール名の{@link ActionConfig}を返します。
+     * 
+     * @param module
+     * @param path
+     * @return
+     */
     public static ActionConfig findActionConfig(String module, String path) {
         return ModuleConfigUtil.getModuleConfig(module).findActionConfig(path);
     }
 
+    /**
+     * 指定された{@link ActionForm}の名前に対応付けられた最初の{@link ActionConfig}を返します。
+     * 
+     * @param beanName
+     * @return
+     */
     public static ActionConfig findActionConfigForFormBeanName(String beanName) {
         ModuleConfig config = ModuleConfigUtil.getModuleConfig();
         if (config == null) {
@@ -78,6 +109,12 @@ public class ModuleConfigUtil {
         return null;
     }
 
+    /**
+     * 指定された{@link ActionForm}の名前に対応付けられた複数の{@link ActionConfig}を返します。
+     * 
+     * @param beanName
+     * @return
+     */
     public static ActionConfig[] findActionConfigsForFormBeanName(String beanName) {
         ModuleConfig config = ModuleConfigUtil.getModuleConfig();
         if (config == null) {
@@ -100,10 +137,23 @@ public class ModuleConfigUtil {
         return (ActionConfig[]) result.toArray(new ActionConfig[result.size()]);
     }
 
+    /**
+     * 指定されたActionのコンポーネント名に対応付けられた{@link ActionConfig}を返します。
+     * 
+     * @param componentName
+     * @return
+     */
     public static ActionConfig findActionConfigForComponentName(String componentName) {
         return findActionConfigForComponentName(null, componentName);
     }
 
+    /**
+     * 指定されたモジュールに属し、指定されたActionのコンポーネント名に対応付けられた{@link ActionConfig}を返します。
+     * 
+     * @param module
+     * @param componentName
+     * @return
+     */
     public static ActionConfig findActionConfigForComponentName(String module, String componentName) {
         if (!ModuleConfigUtil.getContainer().hasComponentDef(componentName)) {
             return null;

@@ -21,26 +21,34 @@ import org.apache.struts.taglib.TagUtils;
 import org.seasar.struts.Constants;
 
 /**
+ * {@link org.apache.struts.taglib.html.CheckboxTag}を拡張したS2Struts用のタグです。
+ * <p>
+ * チェックの有無をhiddenのタグに埋め込みます。
+ * </p>
+ * 
  * @author Satoshi Kimura
  */
 public class CheckboxTag extends org.apache.struts.taglib.html.CheckboxTag {
-	private static final long serialVersionUID = 5387589565117383287L;
+    private static final long serialVersionUID = 5387589565117383287L;
 
-	public CheckboxTag() {
-		super();
-	}
+    /**
+     * インスタンスを生成します。
+     */
+    public CheckboxTag() {
+        super();
+    }
 
-	public int doStartTag() throws JspException {
-		int ret = super.doStartTag();
+    public int doStartTag() throws JspException {
+        int ret = super.doStartTag();
 
-		StringBuffer hidden = new StringBuffer();
-		hidden.append("<input");
-		prepareAttribute(hidden, "type", "hidden");
-		prepareAttribute(hidden, "name", Constants.CHECKBOX_NAME + prepareName());
-		prepareAttribute(hidden, "value", Boolean.TRUE);
-		hidden.append(getElementClose());
+        StringBuffer hidden = new StringBuffer();
+        hidden.append("<input");
+        prepareAttribute(hidden, "type", "hidden");
+        prepareAttribute(hidden, "name", Constants.CHECKBOX_NAME + prepareName());
+        prepareAttribute(hidden, "value", Boolean.TRUE);
+        hidden.append(getElementClose());
 
-		TagUtils.getInstance().write(super.pageContext, hidden.toString());
-		return ret;
-	}
+        TagUtils.getInstance().write(super.pageContext, hidden.toString());
+        return ret;
+    }
 }
