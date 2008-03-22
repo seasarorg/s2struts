@@ -25,6 +25,8 @@ import org.seasar.struts.context.S2StrutsContext;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link S2StrutsContext}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
@@ -73,23 +75,4 @@ public class S2StrutsContextImpl implements S2StrutsContext {
         return S2StrutsContextUtil.getRequest(container);
     }
 
-    public String getMethodBindingExpression(String mappingName, String key, String value) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public Boolean isCancelAction(String mappingName, String key, String value) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public void setCancelAction(String mappingName, String key, String value) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression) {
-        // TODO Auto-generated method stub
-        
-    }
 }

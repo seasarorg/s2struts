@@ -28,6 +28,8 @@ import org.apache.struts.util.MessageResources;
 import org.seasar.framework.container.ComponentNotFoundRuntimeException;
 
 /**
+ * {@link Action}のファクトリです。
+ * 
  * @author Satoshi Kimura
  */
 public interface ActionFactory {
@@ -54,12 +56,11 @@ public interface ActionFactory {
      * @throws ComponentNotFoundRuntimeException
      *             コンポーネントが見つからない場合
      */
-    Action getActionWithComponentName(String componentName,
-            ActionServlet servlet) throws ComponentNotFoundRuntimeException;
+    Action getActionWithComponentName(String componentName, ActionServlet servlet)
+            throws ComponentNotFoundRuntimeException;
 
     /**
-     * ActionMappingを参照して、コンポーネント名からインスタンスを生成するのか、クラス名からインスタンスを生成するのかを判断して、
-     * Actionのインスタンスを生成する。
+     * ActionMappingを参照して、コンポーネント名からインスタンスを生成するのか、クラス名からインスタンスを生成するのかを判断して、 Actionのインスタンスを生成する。
      * 
      * @param request
      *            処理しているHTTPリクエスト
@@ -77,10 +78,8 @@ public interface ActionFactory {
      * @throws IOException
      *             インスタンス生成に失敗した場合に、レスポンスを操作時に発生する例外
      */
-    Action processActionCreate(HttpServletRequest request,
-            HttpServletResponse response, ActionMapping mapping, Log log,
-            MessageResources internal, ActionServlet servlet)
-            throws IOException;
+    Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
+            Log log, MessageResources internal, ActionServlet servlet) throws IOException;
 
     /**
      * Get action instance from S2Container.
@@ -92,8 +91,6 @@ public interface ActionFactory {
      * @return POJO instance or {@see Action}instance.
      * @throws IOException
      */
-    Object getActionInstance(HttpServletRequest request,
-            HttpServletResponse response, ActionMapping mapping, Log log,
-            MessageResources internal, ActionServlet servlet)
-            throws IOException;
+    Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping, Log log,
+            MessageResources internal, ActionServlet servlet) throws IOException;
 }

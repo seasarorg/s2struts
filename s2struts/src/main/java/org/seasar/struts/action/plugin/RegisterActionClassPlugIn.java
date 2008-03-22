@@ -15,32 +15,39 @@
  */
 package org.seasar.struts.action.plugin;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 import org.seasar.struts.S2StrutsInitializer;
 
 /**
+ * {@link Action}のコンポーネント定義をS2コンテナに自動登録するクラスです。
+ * <p>
+ * S2Strtus1.2との下位互換性を維持するために存在します。 S2Strtus1.2との互換性が重要ではない場合、このクラスは使わないことをお勧めします。
+ * </p>
+ * <p>
+ * {@link Action}のコンポーネント定義をS2コンテナに登録するには、代わりに次の方法のいずれかを使用してください。
+ * <ul>
+ * <li>diconファイルで明示的にコンポーネントを定義する</li>
+ * <li>AutoRegisterでコンポーネントを自動登録する</li>
+ * <li>SMART deployでコンポーネントを自動登録する</li>
+ * </ul>
+ * </p>
+ * 
  * @author Satoshi Kimura
  */
 public class RegisterActionClassPlugIn implements PlugIn {
 
+    /**
+     * インスタンスを構築します。
+     */
     public RegisterActionClassPlugIn() {
     }
 
-    /**
-     * empty.
-     * 
-     * @see org.apache.struts.action.PlugIn#destroy()
-     */
     public void destroy() {
     }
 
-    /**
-     * @see org.apache.struts.action.PlugIn#init(org.apache.struts.action.ActionServlet,
-     *      org.apache.struts.config.ModuleConfig)
-     * @see S2StrutsInitializer#registerActionClass(ActionServlet, ModuleConfig)
-     */
     public void init(ActionServlet servlet, ModuleConfig config) {
         S2StrutsInitializer.registerActionClass(servlet, config);
     }

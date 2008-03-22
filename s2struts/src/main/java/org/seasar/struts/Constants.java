@@ -15,27 +15,62 @@
  */
 package org.seasar.struts;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.config.ForwardConfig;
+import org.seasar.struts.taglib.html.PageTag;
+
 /**
+ * S2Strutsで使用する定数を集めたクラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public interface Constants {
 
+    /**
+     * 無設定Strutsにおける{@link ForwardConfig}のデフォルトの名前
+     */
     String SUCCESS = "success";
 
+    /**
+     * {@link ActionMapping#getScope()}で返されるrequestのスコープ名
+     */
     String REQUEST = "request";
 
+    /**
+     * {@link ActionMapping#getScope()}で返されるsessionのスコープ名
+     */
     String SESSION = "session";
 
+    /**
+     * 無設定Strutsにおける未設定の値
+     */
     String UNDEFINED = "org.seasar.struts.UNDEFINED";
 
+    /**
+     * {@link PageTag}で埋め込まれるページ名のリクエストパラメータ名
+     */
     String PAGE_NAME_ELEMENT_VALUE = "org.seasar.struts.page";
 
+    /**
+     * {@link PageTag}で埋め込まれるページ名をクリアすることを示す{@link Boolean}を{@link HttpServletRequest}に格納するためのキー
+     */
     String PAGE_NAME_ELEMENT_VALUE_CLEAR_MARK = "org.seasar.struts.page.CLEAR_MARK";
 
+    /**
+     * {@link CheckboxTag}で埋め込まれるチェックボックスのリクエストパラメータ名
+     */
     String CHECKBOX_NAME = "org.seasar.struts.checkbox.";
 
+    /**
+     * 使用されていません。
+     */
     String BACKUP_SESSION_FORM_KEY = "org.seasar.struts.BACKUP_SESSION_FORM";
 
+    /**
+     * リクエストされたパスを{@link HttpServletRequest}に格納するためのキー
+     */
     String ORIGINAL_PATH_KEY = "org.seasar.struts.ORIGINAL_PATH";
 }

@@ -20,7 +20,8 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.struts.action.ComponentNameCreator;
 
 /**
- * @see org.seasar.struts.ComponentNameCreator
+ * {@link ComponentNameCreator}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  */
 public class ComponentNameCreatorImpl implements ComponentNameCreator {

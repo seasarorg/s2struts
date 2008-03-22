@@ -17,10 +17,27 @@ package org.seasar.struts.servlet;
 
 import javax.servlet.ServletException;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionServlet;
 import org.seasar.struts.S2StrutsInitializer;
 
 /**
+ * S2Struts用に{@link ActionServlet}を拡張したクラスです。
+ * <p>
+ * このクラスは、初期化時に{@link Action}のコンポーネント定義をS2コンテナに自動登録します。
+ * </p>
+ * <p>
+ * S2Strtus1.2との下位互換性を維持するために存在します。 S2Strtus1.2との互換性が重要ではない場合、このクラスは使わないことをお勧めします。
+ * </p>
+ * <p>
+ * 代わりに{@link ActionServlet}を使用してください。また、{@link Action}のコンポーネント定義の登録には次のいずれかの方法を使用してください。
+ * <ul>
+ * <li>diconファイルで明示的にコンポーネントを定義する</li>
+ * <li>AutoRegisterでコンポーネントを自動登録する</li>
+ * <li>SMART deployでコンポーネントを自動登録する</li>
+ * </ul>
+ * </p>
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
@@ -29,7 +46,7 @@ public class S2ActionServlet extends ActionServlet {
     private static final long serialVersionUID = -6821902706517242158L;
 
     /**
-     * 
+     * インスタンスを構築します。
      */
     public S2ActionServlet() {
         super();

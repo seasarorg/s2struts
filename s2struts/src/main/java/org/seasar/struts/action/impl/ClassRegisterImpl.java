@@ -24,6 +24,8 @@ import org.seasar.framework.util.DisposableUtil;
 import org.seasar.struts.action.ClassRegister;
 
 /**
+ * {@link ClassRegister}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
@@ -33,9 +35,12 @@ public class ClassRegisterImpl implements ClassRegister {
 
     private boolean initialized;
 
+    /**
+     * インスタンスを構築します。
+     */
     public ClassRegisterImpl() {
     }
-    
+
     public void register(String type) {
         getClass(type);
     }
@@ -57,6 +62,9 @@ public class ClassRegisterImpl implements ClassRegister {
         return clazz;
     }
 
+    /**
+     * 初期化します。
+     */
     public void initialize() {
         DisposableUtil.add(new Disposable() {
             public void dispose() {
@@ -71,6 +79,11 @@ public class ClassRegisterImpl implements ClassRegister {
         this.initialized = false;
     }
 
+    /**
+     * 登録されたクラスの数を返します。
+     * 
+     * @return 登録されたクラスの数
+     */
     public int getCacheSize() {
         return this.classes.size();
     }

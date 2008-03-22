@@ -17,18 +17,41 @@ package org.seasar.struts.context;
 
 import java.io.Serializable;
 
+import javax.servlet.http.HttpSession;
+
 /**
+ * {@link HttpSession}ごとのコンテキスト情報を扱うインタフェースです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public interface S2StrutsContext extends Serializable {
 
+    /**
+     * パスを設定します。
+     * 
+     * @param path
+     *            パス
+     */
     void setPath(String path);
 
+    /**
+     * 現在の入力パスを返します。
+     * 
+     * @return 入力パス
+     */
     String getCurrentInputPath();
 
+    /**
+     * 前回の入力パスを返します。
+     * 
+     * @return 入力パス
+     */
     String getPreviousInputPath();
 
+    /**
+     * ページ名をクリアします。
+     */
     void clearPageNameElementValue();
 
 }

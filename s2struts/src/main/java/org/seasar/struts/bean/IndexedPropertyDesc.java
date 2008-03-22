@@ -16,14 +16,46 @@
 package org.seasar.struts.bean;
 
 /**
+ * インデックスつきプロパティを扱うインタフェースです。
+ * 
  * @author Satoshi Kimura
  */
 public interface IndexedPropertyDesc {
+
+    /**
+     * プロパティに値を設定します。
+     * 
+     * @param target
+     *            プロパティをもつインスタンス
+     * @param index
+     *            インデックス
+     * @param value
+     *            値
+     */
     void setValue(Object target, int index, Object value);
 
+    /**
+     * プロパティの値を返します。
+     * 
+     * @param target
+     *            プロパティをもつインスタンス
+     * @param index
+     *            インデックス
+     * @return 値
+     */
     Object getValue(Object target, int index);
 
+    /**
+     * getterメソッドを持つならば<code>true</code>を返します。
+     * 
+     * @return getterメソッドを持つならば<code>true</code>、そうでなければ<code>false</code>
+     */
     boolean hasReadMethod();
 
+    /**
+     * setterメソッドを持つならば<code>true</code>を返します。
+     * 
+     * @return setterメソッドを持つならば<code>true</code>、そうでなければ<code>false</code>
+     */
     boolean hasWriteMethod();
 }

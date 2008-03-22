@@ -22,7 +22,9 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionServlet;
+import org.apache.struts.action.RequestProcessor;
 import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ControllerConfig;
 import org.apache.struts.config.ModuleConfig;
@@ -38,7 +40,10 @@ import org.seasar.struts.action.ProxyAction;
 import org.seasar.struts.processor.ExternalRequestProcessor;
 
 /**
- * initialize for use S2Struts.
+ * S2Strutsを初期化するクラスです。
+ * <p>
+ * Strutsの設定情報を参照し、{@link Action}と{@link RequestProcessor}のコンポーネントをS2コンテナに自動登録します。
+ * </p>
  * 
  * @author Satoshi Kimura
  */
@@ -68,11 +73,28 @@ public abstract class S2StrutsInitializer {
 
     }
 
+    /**
+     * Strutsのサーブレットを使い初期化します。
+     * 
+     * @param servlet
+     *            {@link ActionServlet}
+     */
     public static void initServlet(ActionServlet servlet) {
         registerActionClass(servlet);
         registerRequestProcessor(servlet);
     }
 
+    /**
+     * Strtusの設定情報から{@link Action}のコンポーネント定義を作成しS2コンテナに自動登録します。
+     * <p>
+     * ただし、同一クラスのコンポーネントがすでに登録されている場合は登録を行いません。
+     * </p>
+     * 
+     * @param servlet
+     *            {@link ActionServlet}
+     * @param config
+     *            {@link ModuleConfig}
+     */
     public static void registerActionClass(ActionServlet servlet, ModuleConfig config) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ActionConfig[] actionConfigs = config.findActionConfigs();

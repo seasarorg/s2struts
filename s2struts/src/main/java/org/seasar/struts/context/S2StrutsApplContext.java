@@ -18,18 +18,57 @@ package org.seasar.struts.context;
 import java.io.Serializable;
 
 /**
+ * アプリケーションごとのコンテキスト情報を扱うインタフェースです。
+ * 
  * @author Satoshi Kimura
  */
 public interface S2StrutsApplContext extends Serializable {
 
+    /**
+     * <code>type</code>に対応するコンテキスト情報をクリアします。
+     * 
+     * @param type
+     *            コンテキスト情報のタイプ
+     */
     void clear(ContentsType type);
 
+    /**
+     * メソッドバインディング式を返します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     * @return
+     */
     String getMethodBindingExpression(String mappingName, String key, String value);
 
+    /**
+     * メソッドバインディング式を設定します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     * @param methodBindingExpression
+     */
     void setMethodBindingExpression(String mappingName, String key, String value, String methodBindingExpression);
 
+    /**
+     * 検証がキャンセルされたかどうかを返します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     * @return
+     */
     Boolean isCancelAction(String mappingName, String key, String value);
 
+    /**
+     * 検証をキャンセルするかどうを設定します。
+     * 
+     * @param mappingName
+     * @param key
+     * @param value
+     */
     void setCancelAction(String mappingName, String key, String value);
 
 }

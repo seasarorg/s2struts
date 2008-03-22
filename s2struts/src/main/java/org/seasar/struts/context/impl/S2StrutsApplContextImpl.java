@@ -22,6 +22,8 @@ import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.context.S2StrutsApplContext;
 
 /**
+ * {@link S2StrutsApplContext}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  */
 public class S2StrutsApplContextImpl implements S2StrutsApplContext {

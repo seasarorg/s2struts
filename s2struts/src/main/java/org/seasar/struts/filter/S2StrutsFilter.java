@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * S2Struts用のサーブレットフィルタです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */

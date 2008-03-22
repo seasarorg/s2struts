@@ -15,13 +15,23 @@
  */
 package org.seasar.struts.context;
 
+import org.apache.struts.action.Action;
+
 /**
+ * {@link S2StrutsApplContext}で管理されるコンテキスト情報を識別する列挙型です。
+ * 
  * @author Satoshi Kimura
  */
 public interface ContentsType {
+    /**
+     * メソッドバインディング式を表します。
+     */
     ContentsType MethodBindingExpression = new ContentsType() {
     };
 
+    /**
+     * {@link Action}実行前に行われる検証のキャンセルを表します。
+     */
     ContentsType CancelAction = new ContentsType() {
     };
 

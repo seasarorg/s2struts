@@ -16,11 +16,41 @@
 package org.seasar.struts.action;
 
 /**
+ * クラスのレジスタです。
+ * 
  * @author Satoshi Kimura
  */
 public interface ClassRegister {
+    /**
+     * クラス名でクラスを登録します。
+     * 
+     * @param type
+     *            クラス名
+     */
     void register(String type);
+
+    /**
+     * クラスを登録します。
+     * 
+     * @param clazz
+     *            クラス
+     */
     void register(Class clazz);
+
+    /**
+     * クラス名でクラスを取得します。
+     * <p>
+     * 登録されたクラスがレジスタに存在しない場合、レジスタに登録してからクラスを返します。
+     * </p>
+     * 
+     * @param type
+     *            クラス名
+     * @return
+     */
     Class getClass(String type);
+
+    /**
+     * 登録されたクラスを破棄します。
+     */
     void destroy();
 }

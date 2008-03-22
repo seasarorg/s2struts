@@ -34,6 +34,8 @@ import org.seasar.struts.action.ComponentNameCreator;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link ActionFactory}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  * @author higa
  * @author Katsuhiko Nagashima
@@ -44,6 +46,9 @@ public class ActionFactoryImpl implements ActionFactory {
 
     private ComponentNameCreator componentNameCreator;
 
+    /**
+     * インスタンスを構築します。
+     */
     public ActionFactoryImpl() {
     }
 
@@ -70,8 +75,8 @@ public class ActionFactoryImpl implements ActionFactory {
         }
     }
 
-    public Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping, Log log,
-            MessageResources internal, ActionServlet servlet) throws IOException {
+    public Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
+            Log log, MessageResources internal, ActionServlet servlet) throws IOException {
 
         Action instance = null;
         try {
@@ -83,8 +88,8 @@ public class ActionFactoryImpl implements ActionFactory {
         return instance;
     }
 
-    public Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping, Log log,
-            MessageResources internal, ActionServlet servlet) throws IOException {
+    public Object getActionInstance(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping,
+            Log log, MessageResources internal, ActionServlet servlet) throws IOException {
         Object actionInstance = null;
         S2Container container = SingletonS2ContainerFactory.getContainer();
         try {
@@ -111,10 +116,20 @@ public class ActionFactoryImpl implements ActionFactory {
         return actionInstance;
     }
 
+    /**
+     * {@link ClassRegister}を設定します。
+     * 
+     * @param classRegister
+     */
     public void setClassRegister(ClassRegister classRegister) {
         this.classRegister = classRegister;
     }
 
+    /**
+     * {@link ComponentNameCreator}を設定します。
+     * 
+     * @param componentNameCreator
+     */
     public void setComponentNameCreator(ComponentNameCreator componentNameCreator) {
         this.componentNameCreator = componentNameCreator;
     }
