@@ -20,6 +20,8 @@ import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.struts.pojo.form.S2BeanValidatorForm;
 
 /**
+ * {@link BeanValidatorForm}に関するユーティリティクラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class BeanValidatorFormUtil {
@@ -27,6 +29,12 @@ public class BeanValidatorFormUtil {
     private BeanValidatorFormUtil() {
     }
 
+    /**
+     * {@link BeanValidatorForm}の内部のインスタンスへ変換します。
+     * 
+     * @param bean
+     * @return
+     */
     public static Object toBean(Object bean) {
         if (bean instanceof BeanValidatorForm) {
             BeanValidatorForm beanValidatorForm = (BeanValidatorForm) bean;
@@ -36,6 +44,13 @@ public class BeanValidatorFormUtil {
         return bean;
     }
 
+    /**
+     * <code>newForm</code>を {@link BeanValidatorForm}でラップします。
+     * 
+     * @param oldForm
+     * @param newForm
+     * @return
+     */
     public static BeanValidatorForm toBeanValidatorForm(Object oldForm, Object newForm) {
         if (oldForm == null) {
             return new S2BeanValidatorForm(new BeanValidatorForm(newForm));

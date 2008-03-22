@@ -18,29 +18,47 @@ package org.seasar.struts.pojo.form;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.WrapDynaBean;
+import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 
 /**
+ * S2Strutsにて、{@link ActionForm}相当のPOJOをラップするクラスです。
+ * <p>
+ * ラップされるPOJOに引数なしのresetという名前のメソッドが存在する場合、{@link ActionForm#reset(ActionMapping, HttpServletRequest)}
+ * が実行されるタイミングで自動的に呼び出されます。
+ * </p>
+ * 
  * @author Katsuhiko Nagashima
  */
 public class S2BeanValidatorForm extends BeanValidatorForm {
     private static final long serialVersionUID = 190262930254589604L;
 
-	public S2BeanValidatorForm(BeanValidatorForm form) {
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param form
+     */
+    public S2BeanValidatorForm(BeanValidatorForm form) {
         super(form.getDynaBean());
         if (form.getMultipartRequestHandler() != null) {
             setMultipartRequestHandler(form.getMultipartRequestHandler());
             setServlet(form.getMultipartRequestHandler().getServlet());
         }
     }
-    
+
+    /**
+     * ラップ対象のPOJOを設定します。
+     * 
+     * @param bean
+     *            {@link ActionForm}相当のPOJO
+     */
     public void initBean(Object bean) {
         super.dynaBean = new WrapDynaBean(bean);
     }
-    
+
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         super.reset(mapping, request);
         Object bean = getInstance();
@@ -49,5 +67,5 @@ public class S2BeanValidatorForm extends BeanValidatorForm {
             beanDesc.invoke(bean, "reset", null);
         }
     }
-    
+
 }

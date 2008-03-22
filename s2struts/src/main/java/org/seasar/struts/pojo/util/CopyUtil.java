@@ -13,12 +13,22 @@ import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.exception.IORuntimeException;
 
 /**
+ * コピーのユーティリティクラスです。
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class CopyUtil {
 
+    /**
+     * <code>obj</code>をシリアライズ/逆シリアライズすることでコピーします。
+     * 
+     * @param obj
+     * @param loader
+     * @return
+     * @throws IORuntimeException
+     * @throws ClassNotFoundRuntimeException
+     */
     public static Object deepCopy(Serializable obj, ClassLoader loader) throws IORuntimeException,
             ClassNotFoundRuntimeException {
         if (obj == null) {
@@ -38,10 +48,20 @@ public class CopyUtil {
         }
     }
 
+    /**
+     * 特定の{@link ClassLoader}でオブジェクトを逆シリアライズする{@link ObjectInputStream}の拡張クラスです。
+     */
     public static class ClassLoaderSpecifiedObjectInputStream extends ObjectInputStream {
 
         private final ClassLoader loader;
 
+        /**
+         * インスタンスを構築します。
+         * 
+         * @param in
+         * @param loader
+         * @throws IOException
+         */
         public ClassLoaderSpecifiedObjectInputStream(InputStream in, ClassLoader loader) throws IOException {
             super(in);
             this.loader = loader;

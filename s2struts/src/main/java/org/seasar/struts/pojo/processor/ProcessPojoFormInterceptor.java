@@ -165,15 +165,23 @@ public class ProcessPojoFormInterceptor extends AbstractInterceptor {
         return processor.getActionServlet();
     }
 
-    //
-    // serialize可能にするためのクラス再定義
-    //
-
+    /**
+     * {@link S2BeanValidatorForm}を拡張し、シリアライズ可能にしたクラスです。
+     * <p>
+     * {@link S2BeanValidatorForm}がシリアライズ可能でない理由は{@link BeanValidatorForm}のJavaDocコメントを参照してください。
+     * </p>
+     */
     public static class SerializeBeanValidatorForm extends S2BeanValidatorForm {
         private static final long serialVersionUID = 7286186270470466966L;
 
         protected Object bean = null;
 
+        /**
+         * インスタンスを構築します。
+         * 
+         * @param form
+         * @param servlet
+         */
         public SerializeBeanValidatorForm(BeanValidatorForm form, ActionServlet servlet) {
 
             // WrapDynaBeanをフィールドで持つとSerializeできなくなる。

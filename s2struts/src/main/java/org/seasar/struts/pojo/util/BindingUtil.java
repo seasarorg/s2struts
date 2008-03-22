@@ -42,6 +42,8 @@ import org.seasar.struts.util.RequestUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * 値をプロパティへバインディングすることに関するユーティリティクラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
@@ -80,6 +82,14 @@ public class BindingUtil {
         return null;
     }
 
+    /**
+     * Actionのプロパティに外部コンテキストの値をインポート（バインディング）します。
+     * 
+     * @param action
+     * @param container
+     * @param beanDesc
+     * @param mapping
+     */
     public static void importProperties(Object action, S2Container container, BeanDesc beanDesc, ActionMapping mapping) {
         importParameter(action, container);
         for (int i = 0; i < beanDesc.getPropertyDescSize(); i++) {
@@ -151,6 +161,14 @@ public class BindingUtil {
         }
     }
 
+    /**
+     * Actionのプロパティの値を外部コンテキストにエクスポートします。
+     * 
+     * @param action
+     * @param container
+     * @param beanDesc
+     * @param mapping
+     */
     public static void exportProperties(Object action, S2Container container, BeanDesc beanDesc, ActionMapping mapping) {
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);

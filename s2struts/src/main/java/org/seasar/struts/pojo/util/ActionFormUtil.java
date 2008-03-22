@@ -23,6 +23,8 @@ import org.apache.struts.action.ActionMapping;
 import org.seasar.struts.Constants;
 
 /**
+ * {@link ActionForm}に関するユーティリティクラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ActionFormUtil {
@@ -30,21 +32,49 @@ public class ActionFormUtil {
     private ActionFormUtil() {
     }
 
+    /**
+     * 外部コンテキストに格納されたActionFormを返します。
+     * 
+     * @param request
+     * @param mapping
+     * @return
+     */
     public static Object getActualForm(HttpServletRequest request, ActionMapping mapping) {
         Object form = getActionForm(request, mapping);
         return BeanValidatorFormUtil.toBean(form);
     }
 
+    /**
+     * ActionFormを外部コンテキストに設定します。
+     * 
+     * @param request
+     * @param form
+     * @param mapping
+     */
     public static void setActualForm(HttpServletRequest request, Object form, ActionMapping mapping) {
         ActionForm newForm = toActionForm(request, form, mapping);
         setActionForm(request, newForm, mapping, mapping.getScope());
     }
 
+    /**
+     * ActionFormをリクエストコンテキストに設定します。
+     * 
+     * @param request
+     * @param form
+     * @param mapping
+     */
     public static void setRequestActualForm(HttpServletRequest request, Object form, ActionMapping mapping) {
         ActionForm newForm = toActionForm(request, form, mapping);
         setActionForm(request, newForm, mapping, Constants.REQUEST);
     }
 
+    /**
+     * ActionFormをセッションコンテキストに設定します。
+     * 
+     * @param request
+     * @param form
+     * @param mapping
+     */
     public static void setSessionActualForm(HttpServletRequest request, Object form, ActionMapping mapping) {
         ActionForm newForm = toActionForm(request, form, mapping);
         setActionForm(request, newForm, mapping, Constants.SESSION);

@@ -19,25 +19,48 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * インデックスつきパラメータに対するユーティリティクラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class IndexedUtil {
-    
+
     private static Pattern p = Pattern.compile("\\[([0-9]+)\\]$");
-    
+
     private IndexedUtil() {
     }
-    
+
+    /**
+     * インデックスつきパラメータであれば<code>true</code>を返します。
+     * 
+     * @param parameter
+     *            パラメータ名
+     * @return
+     */
     public static boolean isIndexedParameter(String parameter) {
         Matcher m = p.matcher(parameter);
         return m.find();
     }
-    
+
+    /**
+     * インデックスを除いたパラメータ名のみを返します。
+     * 
+     * @param parameter
+     *            パラメータ名
+     * @return
+     */
     public static String getParameter(String parameter) {
         Matcher m = p.matcher(parameter);
         return m.replaceAll("");
     }
-    
+
+    /**
+     * パラメータ名からインデックスのみ返します。
+     * 
+     * @param parameter
+     *            パラメータ名
+     * @return
+     */
     public static int getIndex(String parameter) {
         Matcher m = p.matcher(parameter);
         if (m.find()) {

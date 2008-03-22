@@ -26,13 +26,19 @@ import org.seasar.struts.pojo.MessageFacade;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link MessageFacade}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public class MessageFacadeImpl implements MessageFacade {
     private ActionMessages actionMessages = new ActionMessages();
+
     private ActionErrors actionErrors = new ActionErrors();
 
+    /**
+     * インスタンスを構築します。
+     */
     public MessageFacadeImpl() {
     }
 
@@ -45,19 +51,19 @@ public class MessageFacadeImpl implements MessageFacade {
     }
 
     public void addError(String property, String key, Object value0) {
-        addError(property, key, new Object[] {value0});
+        addError(property, key, new Object[] { value0 });
     }
 
     public void addError(String property, String key, Object value0, Object value1) {
-        addError(property, key, new Object[] {value0, value1});
+        addError(property, key, new Object[] { value0, value1 });
     }
 
     public void addError(String property, String key, Object value0, Object value1, Object value2) {
-        addError(property, key, new Object[] {value0, value1, value2});
+        addError(property, key, new Object[] { value0, value1, value2 });
     }
 
     public void addError(String property, String key, Object value0, Object value1, Object value2, Object value3) {
-        addError(property, key, new Object[] {value0, value1, value2, value3});
+        addError(property, key, new Object[] { value0, value1, value2, value3 });
     }
 
     public void addGlobalError(String key, Object[] values) {
@@ -69,19 +75,19 @@ public class MessageFacadeImpl implements MessageFacade {
     }
 
     public void addGlobalError(String key, Object value0) {
-        addGlobalError(key, new Object[] {value0});
+        addGlobalError(key, new Object[] { value0 });
     }
 
     public void addGlobalError(String key, Object value0, Object value1) {
-        addGlobalError(key, new Object[] {value0, value1});
+        addGlobalError(key, new Object[] { value0, value1 });
     }
 
     public void addGlobalError(String key, Object value0, Object value1, Object value2) {
-        addGlobalError(key, new Object[] {value0, value1, value2});
+        addGlobalError(key, new Object[] { value0, value1, value2 });
     }
 
     public void addGlobalError(String key, Object value0, Object value1, Object value2, Object value3) {
-        addGlobalError(key, new Object[] {value0, value1, value2, value3});
+        addGlobalError(key, new Object[] { value0, value1, value2, value3 });
     }
 
     public void addMessage(String property, String key, Object[] values) {
@@ -93,19 +99,19 @@ public class MessageFacadeImpl implements MessageFacade {
     }
 
     public void addMessage(String property, String key, Object value0) {
-        addMessage(property, key, new Object[] {value0});
+        addMessage(property, key, new Object[] { value0 });
     }
 
     public void addMessage(String property, String key, Object value0, Object value1) {
-        addMessage(property, key, new Object[] {value0, value1});
+        addMessage(property, key, new Object[] { value0, value1 });
     }
 
     public void addMessage(String property, String key, Object value0, Object value1, Object value2) {
-        addMessage(property, key, new Object[] {value0, value1, value2});
+        addMessage(property, key, new Object[] { value0, value1, value2 });
     }
 
     public void addMessage(String property, String key, Object value0, Object value1, Object value2, Object value3) {
-        addMessage(property, key, new Object[] {value0, value1, value2, value3});
+        addMessage(property, key, new Object[] { value0, value1, value2, value3 });
     }
 
     public void addGlobalMessage(String key, Object[] values) {
@@ -117,19 +123,19 @@ public class MessageFacadeImpl implements MessageFacade {
     }
 
     public void addGlobalMessage(String key, Object value0) {
-        addGlobalMessage(key, new Object[] {value0});
+        addGlobalMessage(key, new Object[] { value0 });
     }
 
     public void addGlobalMessage(String key, Object value0, Object value1) {
-        addGlobalMessage(key, new Object[] {value0, value1});
+        addGlobalMessage(key, new Object[] { value0, value1 });
     }
 
     public void addGlobalMessage(String key, Object value0, Object value1, Object value2) {
-        addGlobalMessage(key, new Object[] {value0, value1, value2});
+        addGlobalMessage(key, new Object[] { value0, value1, value2 });
     }
 
     public void addGlobalMessage(String key, Object value0, Object value1, Object value2, Object value3) {
-        addGlobalMessage(key, new Object[] {value0, value1, value2, value3});
+        addGlobalMessage(key, new Object[] { value0, value1, value2, value3 });
     }
 
     public void addErrors(ActionMessages errors) {
@@ -245,11 +251,11 @@ public class MessageFacadeImpl implements MessageFacade {
         if (args != null && args.length >= 10) {
             return args;
         }
-        Object[] ret = {"", "", "", "", "", "", "", "", "", ""};
+        Object[] ret = { "", "", "", "", "", "", "", "", "", "" };
         if (args == null) {
             return ret;
         }
-        
+
         for (int i = 0; i < args.length; i++) {
             ret[i] = args[i];
         }
