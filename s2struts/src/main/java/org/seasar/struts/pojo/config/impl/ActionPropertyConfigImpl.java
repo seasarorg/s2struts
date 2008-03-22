@@ -19,15 +19,25 @@ import org.seasar.struts.Constants;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
 
 /**
+ * {@link ActionPropertyConfig}の実装クラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ActionPropertyConfigImpl implements ActionPropertyConfig {
 
     private String scope = Constants.UNDEFINED;
 
+    /**
+     * インスタンスを構築します。
+     */
     public ActionPropertyConfigImpl() {
     }
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param scope
+     */
     public ActionPropertyConfigImpl(String scope) {
         this.scope = scope;
     }

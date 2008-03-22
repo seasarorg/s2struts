@@ -48,6 +48,24 @@ public class PojoInvocationImpl implements PojoInvocation {
 
     private int index = 0;
 
+    /**
+     * インスタンスを生成します。
+     * 
+     * @param pojoCommands
+     *            POJOを処理するコマンドのリスト
+     * @param mapping
+     *            {@link ActionMapping}
+     * @param actionInterface
+     *            POJO Actionのインタフェース
+     * @param actionInstance
+     *            POJO Actionのインスタンス
+     * @param form
+     *            {@link ActionForm}
+     * @param request
+     *            リクエスト
+     * @param response
+     *            レスポンス
+     */
     public PojoInvocationImpl(List pojoCommands, ActionMapping mapping, Class actionInterface, Object actionInstance,
             ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 

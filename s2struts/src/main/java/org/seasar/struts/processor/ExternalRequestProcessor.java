@@ -33,12 +33,15 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.util.MessageResources;
 
 /**
+ * {@link RequestProcessor}の拡張ポイントに外部からアクセスするためのインタフェースです。
+ * 
  * @author Satoshi Kimura
  */
 public interface ExternalRequestProcessor {
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#init(ActionServlet, ModuleConfig)
+     * @see org.apache.struts.action.RequestProcessor#init(ActionServlet,
+     *      ModuleConfig)
      */
     void init(ActionServlet servlet, ModuleConfig config) throws ServletException;
 
@@ -48,7 +51,8 @@ public interface ExternalRequestProcessor {
     void destroy();
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#process(HttpServletRequest, HttpServletResponse)
+     * @see org.apache.struts.action.RequestProcessor#process(HttpServletRequest,
+     *      HttpServletResponse)
      */
     void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 
@@ -58,129 +62,168 @@ public interface ExternalRequestProcessor {
     HttpServletRequest processMultipart(HttpServletRequest request);
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processPath(HttpServletRequest, HttpServletResponse)
+     * @see org.apache.struts.action.RequestProcessor#processPath(HttpServletRequest,
+     *      HttpServletResponse)
      */
     String processPath(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processLocale(HttpServletRequest, HttpServletResponse)
+     * @see org.apache.struts.action.RequestProcessor#processLocale(HttpServletRequest,
+     *      HttpServletResponse)
      */
     void processLocale(HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processContent(HttpServletRequest, HttpServletResponse)
+     * @see org.apache.struts.action.RequestProcessor#processContent(HttpServletRequest,
+     *      HttpServletResponse)
      */
     void processContent(HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processNoCache(HttpServletRequest, HttpServletResponse)
+     * @see org.apache.struts.action.RequestProcessor#processNoCache(HttpServletRequest,
+     *      HttpServletResponse)
      */
     void processNoCache(HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processPreprocess(HttpServletRequest, HttpServletResponse)
+     * @see org.apache.struts.action.RequestProcessor#processPreprocess(HttpServletRequest,
+     *      HttpServletResponse)
      */
     boolean processPreprocess(HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processCachedMessages(HttpServletRequest, HttpServletResponse)
+     * @see org.apache.struts.action.RequestProcessor#processCachedMessages(HttpServletRequest,
+     *      HttpServletResponse)
      */
     void processCachedMessages(HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processMapping(HttpServletRequest, HttpServletResponse, String)
+     * @see org.apache.struts.action.RequestProcessor#processMapping(HttpServletRequest,
+     *      HttpServletResponse, String)
      */
-    ActionMapping processMapping(HttpServletRequest request, HttpServletResponse response, String path) throws IOException;
+    ActionMapping processMapping(HttpServletRequest request, HttpServletResponse response, String path)
+            throws IOException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processRoles(HttpServletRequest, HttpServletResponse, ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processRoles(HttpServletRequest,
+     *      HttpServletResponse, ActionMapping)
      */
-    boolean processRoles(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) throws IOException,
-            ServletException;
+    boolean processRoles(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
+            throws IOException, ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processActionForm(HttpServletRequest, HttpServletResponse, ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processActionForm(HttpServletRequest,
+     *      HttpServletResponse, ActionMapping)
      */
     ActionForm processActionForm(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping);
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processValidate(HttpServletRequest, HttpServletResponse, ActionForm,
-     *      ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processValidate(HttpServletRequest,
+     *      HttpServletResponse, ActionForm, ActionMapping)
      */
-    boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form, ActionMapping mapping)
-            throws IOException, ServletException, InvalidCancelException;
+    boolean processValidate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+            ActionMapping mapping) throws IOException, ServletException, InvalidCancelException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processActionPerform(HttpServletRequest, HttpServletResponse, Action,
-     *      ActionForm, ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processActionPerform(HttpServletRequest,
+     *      HttpServletResponse, Action, ActionForm, ActionMapping)
      */
-    ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response, Action action, ActionForm form,
-            ActionMapping mapping) throws IOException, ServletException;
+    ActionForward processActionPerform(HttpServletRequest request, HttpServletResponse response, Action action,
+            ActionForm form, ActionMapping mapping) throws IOException, ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processPopulate(HttpServletRequest, HttpServletResponse, ActionForm,
-     *      ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processPopulate(HttpServletRequest,
+     *      HttpServletResponse, ActionForm, ActionMapping)
      */
-    void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form, ActionMapping mapping)
-            throws ServletException;
+    void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+            ActionMapping mapping) throws ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processForward(HttpServletRequest, HttpServletResponse, ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processForward(HttpServletRequest,
+     *      HttpServletResponse, ActionMapping)
      */
-    boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) throws IOException,
-            ServletException;
+    boolean processForward(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
+            throws IOException, ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processInclude(HttpServletRequest, HttpServletResponse, ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processInclude(HttpServletRequest,
+     *      HttpServletResponse, ActionMapping)
      */
-    boolean processInclude(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping) throws IOException,
-            ServletException;
+    boolean processInclude(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
+            throws IOException, ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processForwardConfig(HttpServletRequest, HttpServletResponse, ForwardConfig)
+     * @see org.apache.struts.action.RequestProcessor#processForwardConfig(HttpServletRequest,
+     *      HttpServletResponse, ForwardConfig)
      */
     void processForwardConfig(HttpServletRequest request, HttpServletResponse response, ForwardConfig forward)
             throws IOException, ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#processActionCreate(HttpServletRequest, HttpServletResponse, ActionMapping)
+     * @see org.apache.struts.action.RequestProcessor#processActionCreate(HttpServletRequest,
+     *      HttpServletResponse, ActionMapping)
      */
     Action processActionCreate(HttpServletRequest request, HttpServletResponse response, ActionMapping mapping)
             throws IOException;
 
     /**
      * @see org.apache.struts.action.RequestProcessor#processException(javax.servlet.http.HttpServletRequest,
-     *      javax.servlet.http.HttpServletResponse, java.lang.Exception, org.apache.struts.action.ActionForm,
+     *      javax.servlet.http.HttpServletResponse, java.lang.Exception,
+     *      org.apache.struts.action.ActionForm,
      *      org.apache.struts.action.ActionMapping)
      */
     ActionForward processException(HttpServletRequest request, HttpServletResponse response, Exception exception,
             ActionForm form, ActionMapping mapping) throws IOException, ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#doForward(java.lang.String, javax.servlet.http.HttpServletRequest,
+     * @see org.apache.struts.action.RequestProcessor#doForward(java.lang.String,
+     *      javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
-    void doForward(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
+    void doForward(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException,
+            ServletException;
 
     /**
-     * @see org.apache.struts.action.RequestProcessor#doInclude(java.lang.String, javax.servlet.http.HttpServletRequest,
+     * @see org.apache.struts.action.RequestProcessor#doInclude(java.lang.String,
+     *      javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
-    void doInclude(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
+    void doInclude(String uri, HttpServletRequest request, HttpServletResponse response) throws IOException,
+            ServletException;
 
     /**
      * @see org.apache.struts.action.RequestProcessor#internalModuleRelativeForward(java.lang.String,
-     *      javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    void internalModuleRelativeForward(String path,
-            HttpServletRequest request, HttpServletResponse response)
+    void internalModuleRelativeForward(String path, HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException;
 
+    /**
+     * {@link ModuleConfig}を返します。
+     * 
+     * @return
+     */
     ModuleConfig getModuleConfig();
 
+    /**
+     * {@link ActionServlet}を返します。
+     * 
+     * @return
+     */
     ActionServlet getActionServlet();
 
+    /**
+     * {@link MessageResources}を返します。
+     * 
+     * @return
+     */
     MessageResources getInternal();
 
+    /**
+     * {@link Log}を返します。
+     * 
+     * @return
+     */
     Log getLog();
 }

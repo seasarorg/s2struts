@@ -19,16 +19,18 @@ import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 /**
+ * {@link ActionAnnotationHandler}のファクトリです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ActionAnnotationHandlerFactory {
 
     private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.pojo.factory.TigerActionAnnotationHandler";
-    
+
     private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.struts.pojo.factory.Backport175ActionAnnotationHandler";
 
     private static ActionAnnotationHandler annotationHandler;
-    
+
     static {
         Class clazz = ConstantActionAnnotationHandler.class;
         try {
@@ -44,11 +46,21 @@ public class ActionAnnotationHandlerFactory {
 
     protected ActionAnnotationHandlerFactory() {
     }
-    
+
+    /**
+     * {@link ActionAnnotationHandler}を返します。
+     * 
+     * @return
+     */
     public static ActionAnnotationHandler getAnnotationHandler() {
         return annotationHandler;
     }
-    
+
+    /**
+     * {@link ActionAnnotationHandler}を設定します。
+     * 
+     * @param handler
+     */
     public static void setAnnotationHandler(ActionAnnotationHandler handler) {
         annotationHandler = handler;
     }

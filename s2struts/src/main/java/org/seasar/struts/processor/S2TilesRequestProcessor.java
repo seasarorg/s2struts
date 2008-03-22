@@ -27,15 +27,19 @@ import org.apache.struts.tiles.TilesRequestProcessor;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
-
 /**
+ * S2Struts用に{@link TilesRequestProcessor}を拡張したクラスです。
+ * 
  * @author Satoshi Kimura
  * @author higa
  */
 public class S2TilesRequestProcessor extends TilesRequestProcessor {
-    
+
     private ExternalRequestProcessor processor;
 
+    /**
+     * インスタンスを構築します。
+     */
     public S2TilesRequestProcessor() {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         this.processor = (ExternalRequestProcessor) container.getComponent(ExternalRequestProcessor.class);
@@ -49,8 +53,7 @@ public class S2TilesRequestProcessor extends TilesRequestProcessor {
         this.processor.destroy();
     }
 
-    public void process(HttpServletRequest arg0, HttpServletResponse arg1) throws IOException,
-            ServletException {
+    public void process(HttpServletRequest arg0, HttpServletResponse arg1) throws IOException, ServletException {
         this.processor.process(arg0, arg1);
     }
 

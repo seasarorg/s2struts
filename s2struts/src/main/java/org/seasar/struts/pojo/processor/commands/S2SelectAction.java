@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionForm;
 import org.apache.struts.chain.commands.servlet.SelectAction;
 import org.apache.struts.chain.contexts.ActionContext;
 import org.apache.struts.chain.contexts.ServletActionContext;
@@ -16,7 +17,18 @@ import org.seasar.struts.pojo.MethodBinding;
 import org.seasar.struts.pojo.MethodBindingFactory;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandler;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandlerFactory;
+import org.seasar.struts.taglib.html.ImageTag;
+import org.seasar.struts.taglib.html.SubmitTag;
 
+/**
+ * {@link SubmitTag#setAction(String)}や{@link ImageTag#setAction(String)}で式が指定された場合、
+ * パスをBINDING_METHODアノテーションや{@link ActionPathNamingRule}から求めます。
+ * <p>
+ * こうするとことで、バリデーション対象の{@link ActionForm}を適切に選択できるようになります。
+ * </p>
+ * 
+ * @author taedium
+ */
 public class S2SelectAction extends SelectAction {
 
     private static final Logger log = Logger.getLogger(StrutsConfigRegisterImpl.class);

@@ -40,6 +40,11 @@ public class ActionMappingWrapper extends ActionMapping {
 
     private ActionMapping mapping;
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param mapping
+     */
     public ActionMappingWrapper(ActionMapping mapping) {
         this.mapping = mapping;
     }

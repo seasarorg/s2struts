@@ -22,19 +22,25 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.MultipartRequestWrapper;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.Constants;
+import org.seasar.struts.processor.ExternalRequestProcessor;
 import org.seasar.struts.servlet.http.S2ServletRequestWrapper;
 
 /**
+ * {@link ExternalRequestProcessor#processPopulate(HttpServletRequest, HttpServletResponse, ActionForm, ActionMapping)}に対するインターセプタです。
+ * <p>
+ * 非チェックのチェックボックスに対応するパラメータを設定します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class ProcessCheckboxPopulateInterceptor extends AbstractInterceptor {
 

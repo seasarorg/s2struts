@@ -24,6 +24,21 @@ import org.seasar.struts.pojo.PojoCommand;
 import org.seasar.struts.pojo.PojoInvocation;
 
 /**
+ * POJO Actionのインタフェースに、次のいずれか名前で始まるメソッドが1つだけ定義されている場合にそのメソッドを実行します。
+ * <p>
+ * <ul>
+ * <li><code>do</code></li>
+ * <li><code>go</code></li>
+ * <li><code>execute</code></li>
+ * </ul>
+ * </p>
+ * 
+ * <p>
+ * 実行されるメソッドは、引数を持っていてはいけません。
+ * </p>
+ * <p>
+ * 適切なメソッドが存在しない場合、{@link PojoInvocation#execute()}を実行し、別の{@link PojoCommand}に処理を任せます。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */

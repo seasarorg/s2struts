@@ -7,11 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import org.seasar.struts.pojo.util.IndexedUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
+/**
+ * {@link MethodBinding}のファクトリです。
+ * 
+ * @author taedium
+ */
 public class MethodBindingFactory {
 
     private MethodBindingFactory() {
     }
 
+    /**
+     * {@link MethodBinding}を返します。
+     * 
+     * @param request
+     * @param path
+     * @return
+     */
     public static MethodBinding getMethodBinding(HttpServletRequest request, String path) {
         for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
             String key = (String) paramNames.nextElement();

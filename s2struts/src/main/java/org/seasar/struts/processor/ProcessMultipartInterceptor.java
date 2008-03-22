@@ -22,6 +22,10 @@ import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link ExternalRequestProcessor#processMultipart}に対するインターセプタです。
+ * <p>
+ * {@link HttpServletRequest}のインスタンスをS2Strutsのコンテキストに設定します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */

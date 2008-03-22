@@ -23,6 +23,10 @@ import org.seasar.struts.action.ClassRegister;
 import org.seasar.struts.pojo.PojoProcessAction;
 
 /**
+ * {@link ExternalRequestProcessor#processActionCreate(HttpServletRequest, javax.servlet.http.HttpServletResponse, ActionMapping)に対するインターセプタです。
+ * <p>
+ * 可能ならば{@link PojoProcessAction}を返します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -32,12 +36,22 @@ public class ProcessPojoActionCreateInterceptor extends AbstractInterceptor {
 
     private ClassRegister classRegister;
 
+    /**
+     * {@link ClassRegister}を設定します。
+     * 
+     * @param classRegister
+     */
     public void setClassRegister(ClassRegister classRegister) {
         this.classRegister = classRegister;
     }
 
     private PojoProcessAction pojoProcessAction;
 
+    /**
+     * {@link PojoProcessAction}を設定します。
+     * 
+     * @param pojoProcessAction
+     */
     public void setPojoProcessAction(PojoProcessAction pojoProcessAction) {
         this.pojoProcessAction = pojoProcessAction;
     }

@@ -22,11 +22,20 @@ import org.apache.struts.action.ActionServlet;
 import org.seasar.struts.Constants;
 
 /**
+ * {@link MethodBindingAction}のファクトリです。
  * 
  * @author Katsuhiko Nagashima
  */
 public class MethodBindingActionFactory {
 
+    /**
+     * {@link MethodBindingAction}を作成します。
+     * 
+     * @param request
+     * @param mapping
+     * @param servlet
+     * @return {@link MethodBindingAction}
+     */
     public static MethodBindingAction createMethodBindingAction(HttpServletRequest request, ActionMapping mapping,
             ActionServlet servlet) {
 

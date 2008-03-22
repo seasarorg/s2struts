@@ -22,12 +22,27 @@ import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
 
 /**
+ * Actionに指定されたアノテーションを扱うインタフェースです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public interface ActionAnnotationHandler {
 
+    /**
+     * {@link ActionPropertyConfig}を取得します。
+     * 
+     * @param beanDesc
+     * @param propertyDesc
+     * @return
+     */
     ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc, PropertyDesc propertyDesc);
 
+    /**
+     * パスを取得します。
+     * 
+     * @param method
+     * @return
+     */
     String getPath(Method method);
 
 }

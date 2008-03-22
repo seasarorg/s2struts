@@ -18,18 +18,24 @@ package org.seasar.struts.pojo.processor;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.framework.log.Logger;
 import org.seasar.struts.pojo.util.IndexedUtil;
+import org.seasar.struts.processor.ExternalRequestProcessor;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link ExternalRequestProcessor#processValidate(HttpServletRequest, HttpServletResponse, ActionForm, ActionMapping)}に対するインターセプタです。
+ * <p>
+ * 検証をスキップするかどうかの判定を行います。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class ProcessCancelledValidateInterceptor extends AbstractInterceptor {
 

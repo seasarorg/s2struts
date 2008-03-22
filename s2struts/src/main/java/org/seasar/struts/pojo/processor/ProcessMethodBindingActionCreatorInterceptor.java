@@ -25,6 +25,10 @@ import org.seasar.struts.pojo.MethodBindingActionFactory;
 import org.seasar.struts.processor.ExternalRequestProcessor;
 
 /**
+ * {@link ExternalRequestProcessor#processActionCreate(HttpServletRequest, javax.servlet.http.HttpServletResponse, ActionMapping)に対するインターセプタです。
+ * <p>
+ * 可能ならば{@link MethodBindingAction}を生成し返します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */

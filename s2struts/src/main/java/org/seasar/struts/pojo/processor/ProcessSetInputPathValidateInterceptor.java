@@ -17,16 +17,25 @@ package org.seasar.struts.pojo.processor;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.framework.exception.IllegalAccessRuntimeException;
 import org.seasar.framework.exception.InvocationTargetRuntimeException;
 import org.seasar.framework.exception.NoSuchMethodRuntimeException;
+import org.seasar.struts.processor.ExternalRequestProcessor;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link ExternalRequestProcessor#processValidate(HttpServletRequest, HttpServletResponse, ActionForm, ActionMapping)}に対するインターセプタです。
+ * <p>
+ * 検証に失敗した場合の遷移先パスを自動で設定します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -36,7 +45,7 @@ public class ProcessSetInputPathValidateInterceptor extends AbstractInterceptor 
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
         ActionMapping mapping = (ActionMapping) invocation.getArguments()[3];
-        
+
         String input = mapping.getInput();
         if (input == null && S2StrutsContextUtil.getPreviousInputPath() != null) {
             ActionMapping newMapping = new ActionMapping();

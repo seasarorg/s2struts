@@ -16,14 +16,17 @@
 package org.seasar.struts.pojo.exception;
 
 /**
+ * Actionのメソッドが実行されなかった場合にスローされる実行時例外です。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 public class NotCalledActionRuntimeException extends RuntimeException {
 
     private static final long serialVersionUID = 7963592157999151321L;
 
+    /**
+     * インスタンスを構築します。
+     */
     public NotCalledActionRuntimeException() {
         super("Action can not be called.");
     }

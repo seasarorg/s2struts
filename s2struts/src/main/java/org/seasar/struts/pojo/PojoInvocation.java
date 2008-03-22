@@ -22,35 +22,101 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
+ * POJO Actionのメソッド実行を表すインタフェースです。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface PojoInvocation {
-    
+
+    /**
+     * {@link HttpServletRequest}を設定します。
+     * 
+     * @param request
+     */
     void setRequest(HttpServletRequest request);
 
+    /**
+     * {@link HttpServletRequest}を返します。
+     * 
+     * @return
+     */
     HttpServletRequest getRequest();
-    
+
+    /**
+     * {@link HttpServletResponse}を設定します。
+     * 
+     * @param response
+     */
     void setResponse(HttpServletResponse response);
 
+    /**
+     * {@link HttpServletResponse}を返します。
+     * 
+     * @return
+     */
     HttpServletResponse getResponse();
-    
+
+    /**
+     * POJO Actionのインタフェースを設定します。
+     * 
+     * @param actionInterface
+     */
     void setActionInterface(Class actionInterface);
 
+    /**
+     * POJO Actionのインタフェースを返します。
+     * 
+     * @return
+     */
     Class getActionInterface();
-    
+
+    /**
+     * POJO Actionのインスタンスを設定します。
+     * 
+     * @param actionInstance
+     */
     void setActionInstance(Object actionInstance);
 
+    /**
+     * POJO Actionのインスタンスを返します。
+     * 
+     * @return
+     */
     Object getActionInstance();
-    
+
+    /**
+     * {@link ActionForm}を設定します。
+     * 
+     * @param form
+     */
     void setActionForm(ActionForm form);
 
+    /**
+     * {@link ActionForm}を返します。
+     * 
+     * @return
+     */
     ActionForm getActionForm();
-    
+
+    /**
+     * {@link ActionMapping}を設定します。
+     * 
+     * @param mapping
+     */
     void setActionMapping(ActionMapping mapping);
 
+    /**
+     * {@link ActionMapping}を返します。
+     * 
+     * @return
+     */
     ActionMapping getActionMapping();
 
+    /**
+     * 実行します。
+     * 
+     * @return 実行した結果
+     */
     String execute();
 
 }

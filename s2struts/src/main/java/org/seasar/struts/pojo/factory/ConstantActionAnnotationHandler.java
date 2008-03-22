@@ -25,6 +25,8 @@ import org.seasar.struts.pojo.config.impl.ActionPropertyConfigImpl;
 import org.seasar.struts.util.ConstantAnnotationUtil;
 
 /**
+ * 定数アノテーションを扱う{@link ActionAnnotationHandler}の実装クラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ConstantActionAnnotationHandler implements ActionAnnotationHandler {

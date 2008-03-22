@@ -19,11 +19,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.action.ActionFactory;
 
 /**
+ * {@link ExternalRequestProcessor#processActionCreate(HttpServletRequest, javax.servlet.http.HttpServletResponse, ActionMapping)に対するインターセプタです。
+ * <p>
+ * Strutsの{@link Action}を返します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -33,6 +38,11 @@ public class ProcessActionCreateInterceptor extends AbstractInterceptor {
 
     private ActionFactory actionFactory;
 
+    /**
+     * {@link ActionFactory}を返します。
+     * 
+     * @param actionFactory
+     */
     public void setActionFactory(ActionFactory actionFactory) {
         this.actionFactory = actionFactory;
     }
@@ -43,8 +53,8 @@ public class ProcessActionCreateInterceptor extends AbstractInterceptor {
         ActionMapping mapping = (ActionMapping) invocation.getArguments()[2];
         ExternalRequestProcessor processor = (ExternalRequestProcessor) invocation.getThis();
 
-        return this.actionFactory.processActionCreate(request, response, mapping,
-                processor.getLog(), processor.getInternal(), processor.getActionServlet());
+        return this.actionFactory.processActionCreate(request, response, mapping, processor.getLog(), processor
+                .getInternal(), processor.getActionServlet());
     }
 
 }

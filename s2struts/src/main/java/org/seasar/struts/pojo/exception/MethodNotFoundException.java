@@ -16,23 +16,44 @@
 package org.seasar.struts.pojo.exception;
 
 /**
+ * メソッドが見つからない場合にスローされる実行時例外です。
+ * 
  * @author Satoshi Kimura
  */
 public class MethodNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 5930403637380028788L;
 
-	public MethodNotFoundException() {
+    /**
+     * インスタンスを構築します。
+     */
+    public MethodNotFoundException() {
         super();
     }
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param message
+     */
     public MethodNotFoundException(String message) {
         super(message);
     }
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param message
+     * @param cause
+     */
     public MethodNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param cause
+     */
     public MethodNotFoundException(Throwable cause) {
         super(cause);
     }

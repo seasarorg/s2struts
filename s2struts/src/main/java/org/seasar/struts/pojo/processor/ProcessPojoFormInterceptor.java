@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.aopalliance.intercept.MethodInvocation;
@@ -42,8 +43,10 @@ import org.seasar.struts.pojo.util.BeanValidatorFormUtil;
 import org.seasar.struts.processor.ExternalRequestProcessor;
 
 /**
- * <component class="org.seasar.struts.processor.S2RequestProcessor"> <aspect pointcut="processActionForm"> <component
- * class="org.seasar.struts.interceptors.ProcessPojoFormInterceptor"/> </aspect> </component>
+ * {@link ExternalRequestProcessor#processActionForm(HttpServletRequest, HttpServletResponse, ActionMapping)}に対するインターセプタです。
+ * <p>
+ * {@link ActionForm}相当のPOJOを処理します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */

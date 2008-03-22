@@ -16,12 +16,24 @@
 package org.seasar.struts.pojo.config;
 
 /**
+ * Actionのプロパティの設定を表すインタフェースです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public interface ActionPropertyConfig {
 
+    /**
+     * プロパティのスコープがsessionである場合<code>true</code>
+     * 
+     * @return プロパティのスコープがsessionである場合<code>true</code>
+     */
     boolean isSessionScope();
 
+    /**
+     * プロパティのスコープが未定義である場合<code>true</code>
+     * 
+     * @return プロパティのスコープが未定義である場合<code>true</code>
+     */
     boolean isUndefinedScope();
 
 }

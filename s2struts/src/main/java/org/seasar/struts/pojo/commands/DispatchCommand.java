@@ -25,6 +25,10 @@ import org.seasar.struts.pojo.PojoCommand;
 import org.seasar.struts.pojo.PojoInvocation;
 
 /**
+ * {@link ActionMapping#getParameter()}で返される値をキーとして取得できるリクエストパラメータと同じ名前のメソッドを実行します。
+ * <p>
+ * 適切なメソッドが存在しない場合、{@link PojoInvocation#execute()}を実行し、別の{@link PojoCommand}に処理を任せます。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -35,12 +39,12 @@ public class DispatchCommand implements PojoCommand {
         ActionMapping mapping = invocation.getActionMapping();
         Class actionInterface = invocation.getActionInterface();
         Object action = invocation.getActionInstance();
-        
+
         String param = mapping.getParameter();
         if (param == null) {
             return invocation.execute();
         }
-        
+
         Method[] methods = actionInterface.getMethods();
         if (methods.length < 2) {
             return invocation.execute();
@@ -53,12 +57,11 @@ public class DispatchCommand implements PojoCommand {
         }
         return (String) MethodUtil.invoke(method, action, null);
     }
-    
+
     private Method getMethod(Method[] methods, String methodName) {
         for (int i = 0; i < methods.length; i++) {
             Method method = methods[i];
-            if (method.getName().equals(methodName)
-                    && method.getParameterTypes().length == 0) {
+            if (method.getName().equals(methodName) && method.getParameterTypes().length == 0) {
                 return method;
             }
         }

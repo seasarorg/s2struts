@@ -35,6 +35,8 @@ import org.apache.struts.tiles.TilesRequestProcessor;
 import org.apache.struts.util.MessageResources;
 
 /**
+ * Tiles用の{@link ExternalRequestProcessor}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  * @author higa
  * @author Katsuhiko Nagashima
@@ -44,8 +46,8 @@ public class InternalS2TilesRequestProcessor extends TilesRequestProcessor imple
 
     /**
      * <p>
-     * Process an <code>HttpServletRequest</code> and create the corresponding <code>HttpServletResponse</code> or dispatch to
-     * another resource.
+     * Process an <code>HttpServletRequest</code> and create the corresponding
+     * <code>HttpServletResponse</code> or dispatch to another resource.
      * </p>
      * 
      * @param request
@@ -89,7 +91,8 @@ public class InternalS2TilesRequestProcessor extends TilesRequestProcessor imple
         super.processCachedMessages(request, response);
     }
 
-    public ActionMapping processMapping(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+    public ActionMapping processMapping(HttpServletRequest request, HttpServletResponse response, String path)
+            throws IOException {
         return super.processMapping(request, response, path);
     }
 
@@ -112,8 +115,8 @@ public class InternalS2TilesRequestProcessor extends TilesRequestProcessor imple
         return super.processActionPerform(request, response, action, form, mapping);
     }
 
-    public void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form, ActionMapping mapping)
-            throws ServletException {
+    public void processPopulate(HttpServletRequest request, HttpServletResponse response, ActionForm form,
+            ActionMapping mapping) throws ServletException {
         super.processPopulate(request, response, form, mapping);
     }
 
@@ -133,7 +136,8 @@ public class InternalS2TilesRequestProcessor extends TilesRequestProcessor imple
     }
 
     /**
-     * Return an <code>Action</code> instance that will be used to process the current request, creating a new one if necessary.
+     * Return an <code>Action</code> instance that will be used to process the
+     * current request, creating a new one if necessary.
      * 
      * @param request
      *            The servlet request we are processing
@@ -149,14 +153,13 @@ public class InternalS2TilesRequestProcessor extends TilesRequestProcessor imple
         return super.processActionCreate(request, response, mapping);
     }
 
-    public void internalModuleRelativeForward(String path,
-            HttpServletRequest request, HttpServletResponse response)
+    public void internalModuleRelativeForward(String path, HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         super.internalModuleRelativeForward(path, request, response);
     }
 
-    public ActionForward processException(HttpServletRequest request, HttpServletResponse response, Exception exception,
-            ActionForm form, ActionMapping mapping) throws IOException, ServletException {
+    public ActionForward processException(HttpServletRequest request, HttpServletResponse response,
+            Exception exception, ActionForm form, ActionMapping mapping) throws IOException, ServletException {
         return super.processException(request, response, exception, form, mapping);
     }
 

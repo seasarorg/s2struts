@@ -25,16 +25,17 @@ import org.seasar.struts.pojo.PojoInvocation;
 import org.seasar.struts.pojo.util.BindingUtil;
 
 /**
+ * POJO Actionの実行前に外部コンテキストから値をプロパティにインポートし、実行後にプロパティの値を外部コンテキストにエクスポートします。
  * 
  * @author Katsuhiko Nagashima
  */
 public class PropertyBindingCommand implements PojoCommand {
-    
+
     public String execute(PojoInvocation invocation) {
         S2Container container = SingletonS2ContainerFactory.getContainer();
         ActionMapping mapping = invocation.getActionMapping();
         Object action = invocation.getActionInstance();
-        
+
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(action.getClass());
         BindingUtil.importProperties(action, container, beanDesc, mapping);
         String forward = invocation.execute();

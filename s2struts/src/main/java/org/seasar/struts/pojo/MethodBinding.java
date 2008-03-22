@@ -17,6 +17,7 @@ package org.seasar.struts.pojo;
 
 import java.lang.reflect.Method;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -28,6 +29,7 @@ import org.seasar.struts.pojo.util.BindingUtil;
 import org.seasar.struts.util.MethodBindingUtil;
 
 /**
+ * S2コンテナに管理された{@link Action}コンポーネントの1メソッドを表します。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -43,6 +45,11 @@ public class MethodBinding {
 
     private boolean indexed;
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param expression
+     */
     public MethodBinding(String expression) {
         this.expression = expression;
         this.componentName = MethodBindingUtil.getComponentName(expression);
@@ -50,6 +57,12 @@ public class MethodBinding {
         this.indexed = false;
     }
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param expression
+     * @param index
+     */
     public MethodBinding(String expression, int index) {
         this.expression = expression;
         this.componentName = MethodBindingUtil.getComponentName(expression);
@@ -58,10 +71,21 @@ public class MethodBinding {
         this.indexed = true;
     }
 
+    /**
+     * メソッドを実行します。
+     * 
+     * @return メソッドの戻り値
+     */
     public Object invoke() {
         return invoke(new ActionMapping());
     }
 
+    /**
+     * メソッドを実行します。
+     * 
+     * @param mapping
+     * @return メソッドの戻り値
+     */
     public Object invoke(ActionMapping mapping) {
         S2Container container = getContainer();
 
@@ -88,15 +112,30 @@ public class MethodBinding {
         return SingletonS2ContainerFactory.getContainer();
     }
 
+    /**
+     * 式を返します。
+     * 
+     * @return 式
+     */
     public String getExpression() {
         return expression;
     }
 
+    /**
+     * S2コンテナに管理された{@link Action}コンポーネントのクラスを返します。
+     * 
+     * @return {@link Action}コンポーネントのクラス
+     */
     public Class getComponentClass() {
         ComponentDef componentDef = getContainer().getComponentDef(componentName);
         return componentDef.getComponentClass();
     }
 
+    /**
+     * このインスタンスが表すメソッドを返します。
+     * 
+     * @return このインスタンスが表すメソッド
+     */
     public Method getMethod() {
         Class componentClass = getComponentClass();
         if (indexed) {

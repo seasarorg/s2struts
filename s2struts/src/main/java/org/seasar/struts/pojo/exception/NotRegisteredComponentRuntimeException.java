@@ -16,14 +16,19 @@
 package org.seasar.struts.pojo.exception;
 
 /**
+ * 動作に必要なコンポーネントがS2コンテナに登録されていない場合にスローされる例外です。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class NotRegisteredComponentRuntimeException extends RuntimeException {
 
     private static final long serialVersionUID = 5313009570580017157L;
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param clazz
+     */
     public NotRegisteredComponentRuntimeException(Class clazz) {
         super("Component(" + clazz.getName() + ") not registered.");
     }

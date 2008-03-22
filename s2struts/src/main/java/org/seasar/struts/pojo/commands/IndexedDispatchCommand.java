@@ -27,6 +27,10 @@ import org.seasar.struts.pojo.PojoInvocation;
 import org.seasar.struts.pojo.util.IndexedUtil;
 
 /**
+ * {@link ActionMapping#getParameter()}で返される値をキーとして取得できるリクエストパラメータと同じ名前で、かつ引数がint型であるメソッドを実行します。
+ * <p>
+ * 適切なメソッドが存在しない場合、{@link PojoInvocation#execute()}を実行し、別の{@link PojoCommand}に処理を任せます。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -57,8 +61,7 @@ public class IndexedDispatchCommand implements PojoCommand {
                     int index = IndexedUtil.getIndex(key);
                     Method method = getMethod(methods, methodName);
                     if (method != null) {
-                        return (String) MethodUtil.invoke(method, action,
-                                new Object[] { new Integer(index) });
+                        return (String) MethodUtil.invoke(method, action, new Object[] { new Integer(index) });
                     }
                 }
             }

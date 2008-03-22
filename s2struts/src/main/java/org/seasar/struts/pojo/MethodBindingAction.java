@@ -24,6 +24,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
+ * {@link MethodBinding}を実行する{@link Action}です。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -31,12 +32,17 @@ public class MethodBindingAction extends Action {
 
     private MethodBinding methodBinding;
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param methodBinding
+     */
     public MethodBindingAction(MethodBinding methodBinding) {
         this.methodBinding = methodBinding;
     }
 
-    public ActionForward execute(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
         String forward = (String) this.methodBinding.invoke(mapping);
         if (forward != null) {

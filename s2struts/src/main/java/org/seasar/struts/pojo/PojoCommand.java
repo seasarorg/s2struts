@@ -16,11 +16,19 @@
 package org.seasar.struts.pojo;
 
 /**
+ * POJO Actionの呼び出し時に適用されるコマンドを表すインタフェースです。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface PojoCommand {
-    
+
+    /**
+     * コマンドを実行します。
+     * 
+     * @param invocation
+     *            POJO Actionのメソッド実行を表す情報
+     * @return コマンドの実行結果
+     */
     String execute(PojoInvocation invocation);
 
 }
