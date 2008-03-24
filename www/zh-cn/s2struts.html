@@ -1,0 +1,2322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('en')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/en/index.html"><img src="images/menu01_b_en.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/en/projects.html"><img src="images/menu02_b_en.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/en/products.html"><img src="images/menu06_b_en.gif" height="30" width="110" border="0" alt="" id="menu06" onmouseover="swap(6)" onmouseout="restore(6)"></a></td>
+<td><a href="http://www.seasar.org/en/documents.html"><img src="images/menu04_b_en.gif" height="30" width="109" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><a href="http://www.seasar.org/en/resources.html"><img src="images/menu05_b_en.gif" height="30" width="113" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></a></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+	<li><a href="#Summary">S2Struts概要</a></li>
+	<li><a href="#Setup">安装</a></li>
+	<li><a href="#Quickstart">快速上手</a></li>
+	<li><a href="#Reference">S2Struts指南</a></li>
+	<ul>
+		<li><a href="#Usage">基本用法</a></li>
+		<li><a href="#POJOAction">POJO作为Action时的用法</a></li>
+		<li><a href="#ProxyAction">ProxyAction类的用法</a></li>
+		<li><a href="#NoType">在struts-config的action中，不使用type属性指定一个Action类</a></li>
+		<li><a href="#Mapping">关于path属性和Action类的映射</a></li>
+		<li><a href="#Hint">用法提示</a></li>
+		<li><a href="#RequestProcessor">从组件得到RequestProcessor</a></li>
+		<li><a href="#Message">从任意的组件对错误信息的显示进行管理</a></li>
+	</ul>
+	<li><a href="#ZeroConfigReference">无设定S2Struts指南</a></li>
+	<ul>
+		<li><a href="#ZoroConfig">无设定S2Struts</a></li>
+		<li><a href="#Annotation">使用注释（annotation）的struts-config的设定</a></li>
+		<li><a href="#AnnotationValidation">使用注释（annotation）的validation的设定</a></li>
+		<li><a href="#ConstAnnotationCodicil">关于常量注释的补充说明</a></li>
+	</ul>
+	<li><a href="#TagLibReference">S2Struts标签库（tag library）指南</a></li>
+	<ul>
+		<li><a href="#TagLibButton">button标签</a></li>
+		<li><a href="#TagLibSubmit">submit标签</a></li>
+		<li><a href="#TagLibCancel">cancel标签</a></li>
+		<li><a href="#TagLibImage">image标签</a></li>
+		<li><a href="#TagLibCheckbox">checkbox标签</a></li>
+		<li><a href="#TagLibPage">page标签</a></li>
+		<li><a href="#TagLibInit">init标签</a></li>
+	</ul>
+</ul>
+<h2><a name="Summary">S2Struts概要</a></h2>
+<p>
+使用S2Struts，可以容易地实现S2和<a href="http://struts.apache.org/">Struts</a>的连动。
+因为在Action类中，service组件是自动地被设定的，所以Action类的作用仅仅是调用适当的service组件。
+Action类自始自终被用作控制器，从而使得表现层和服务层（service）的角色分担也变得明确。
+而且，对于Action可以实现<a href="http://s2container.seasar.org/ja/aop.html">AOP</a>的应用。
+</p>
+<h2><a name="Setup">安装</a></h2>
+<p>
+与S2同样，S2Struts也需要JDK1.4 或者 JDK1.5的系统环境。使用Eclipse3.1环境进行动作确认。
+</p><p>
+把S2StrutsVx.x.x.zip解压缩，将得到的s2struts目录作为一个完整的Java项目引入（import）Eclipse。
+当Eclipse提示是否要覆写（overwrite）.classpath时，选择 '全部「Yes」' ，引入所有的内容。
+这样将生成一个与本资料中提示的完全相同的开发环境。
+</p><p>
+本案例以使用
+<a href="http://tomcat.apache.org/">Tomcat</a>和
+<a href="http://www.sysdeo.com/sysdeo/eclipse/tomcatplugin">Tomcat Plugin</a>为前提条件。
+请预先安装好。
+</p><p>
+案例是用S2StrutsExampleVx.x.x.zip另外提供的，请下载并解压缩。使用Eclipse，以s2struts-example为名作成一个Java项目。
+请注意这不是一个Tomcat项目。将解压缩得到的s2struts-example目录完全引入这个项目中。
+当Eclipse提示是否要覆写.classpath时，选择 '全部「Yes」' ，引入所有的内容。
+选中s2struts-example项目，单击右键，选择属性-&gt;Tomcat。选中Tomcat项目，
+应用程序URI设定为/s2struts-example。然后重新启动Tomcat，从浏览器访问
+<a href="http://localhost:8080/s2struts-example/">http://localhost:8080/s2struts-example/</a>
+可以看到使用S2Struts的案例。
+不过如果要想看Employee Management案例的场合，请使用WEB-INF/bin目录下的runHsqldb.bat启动HSQLDB。
+</p>
+<p>
+在S2StrutsBlankVx.x.x.zip里，含有为了使用S2Struts的所有必要的文件。
+进一步而言，包括了在<a href="http://mayaa.sandbox.seasar.org/">Mayaa</a>，S2Dao等Web应用程序开发中用到的便利的文件。
+作为开发Web应用程序的雏形利用的场合，请参照以下的文件一览表，删掉不需要的文件。
+</p>
+<pre>
+・使用S2Struts时的必要文件。
+WEB-INF/
+        struts-config.xml             
+        tiles-defs.xml                
+        validation.xml                
+        validator-rules.xml           
+        web.xml                       
+
+WEB-INF/lib
+        javassist-3.0.jar                 
+        commons-logging-1.0.4.jar           
+        log4j-1.2.8.jar               
+        ognl-2.6.5.jar                
+        aopalliance-1.0.jar               
+        s2-framework-2.x.x.jar        
+        
+        commons-beanutils-1.7.0.jar         
+        commons-digester-1.6.jar          
+        commons-fileupload-1.0.jar        
+        commons-validator-1.0.4.jar         
+        oro-2.0.8.jar               
+        struts-1.2.8.jar                    
+        
+        s2-struts-x.x.x.jar           
+
+WEB-INF/src
+        log4j.properties              
+        application.properties        
+        app.dicon                     
+        s2struts.dicon                
+
+
+・为使用S2扩张功能追加的文件。
+WEB-INF/lib
+        jta.jar                       
+        junit-3.8.1.jar               
+        poi-2.5-final-20040804.jar    
+        s2-extension-2.x.x.jar
+
+WEB-INF/src
+        j2ee.dicon                    
+        aop.dicon                     
+
+
+・为使用Mayaa追加的文件。不用的话请删除。
+WEB-INF/lib
+        jaxen-1.1-beta-8.jar          
+        nekohtml-0.9.5.jar            
+        rhino-1.6r2.jar               
+        xercesImpl-2.7.1.jar          
+        xml-apis-1.3.jar              
+        mayaa-x.x.x.jar                
+
+
+・为使用S2Dao追加的文件。不用的话请删除。
+WEB-INF/lib
+        s2-dao-x.x.x.jar              
+
+WEB-INF/src
+        dao.dicon                     
+
+
+・为使用HSQLDB追加的文件。不用的话请删除。
+WEB-INF/lib
+        hsqldb.jar                    
+</pre>
+<p>
+如果想用Tiger注释（annotation）的话，请把S2StrutsTigerVx.x.x.zip解压缩，得到s2struts-tiger目录。将此目录下的
+</p>
+<ul>
+<li>lib/s2-struts-tiger-x.x.x.jar</li>
+</ul>
+<p>
+复制到WEB-INF/lib目录下，并且在CLASSPATH中设定该路经。
+</p>
+<p>
+如果想用backport175注释的话，请把S2StrutsBackport175Vx.x.x.zip解压缩，得到s2struts-backport175目录，将此目录下的
+</p>
+<ul>
+<li>lib/s2-struts-backport175-x.x.x.jar</li>
+<li>lib/backport175-1.0.jar</li>
+</ul>
+<p>
+复制到WEB-INF/lib目录下，并且在CLASSPATH中设定该路经。
+</p>
+<h2><a name="Quickstart">快速上手</a></h2>
+<p>
+让我们快点来试试看吧。
+</p>
+<p>
+快速上手，以使用
+<a href="http://tomcat.apache.org/">Tomcat</a>和
+<a href="http://www.sysdeo.com/sysdeo/eclipse/tomcatplugin">Tomcat Plugin</a>为前提。
+请预先安装好。
+</p>
+<p>
+为了简单的利用S2Struts，我们使用S2StrutsBlankVx.x.x.zip。
+把S2StrutsBlankVx.x.x.zip解压缩，得到s2struts-blank目录，作为Eclipse的一个Java项目而引入所有内容。
+当Eclipse提示是否要覆写.classpath时，选择 '全部「Yes」' ，引入所有的内容。
+选择s2struts-blank项目，点击右键，选择プロパティ-&gt;Tomcat。到此为止准备工作完毕。
+</p>
+<p>
+首先做一个用于演示画面的HTML。在s2struts-blank目录下作成greetingInput.html、greeting.html。
+<h4>greetingInput.html</h4>
+<p>指定时间带的画面。</p>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form method="GET" action="greeting.html"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th&gt;time&lt;/th&gt;
+        &lt;td&gt;
+          &lt;select name="time"&gt;
+            &lt;option value="" selected&gt;Please select&lt;/option&gt;
+            &lt;option value="a.m."&gt;a.m.&lt;/option&gt;
+            &lt;option value="p.m."&gt;p.m.&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type="submit" value="greeting"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h4>greeting.html</h4>
+<p>根据时间带显示不同问候语的画面。</p>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;td&gt;a.m.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;greeting&lt;/th&gt;
+      &lt;td&gt;Good morning&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;a href="greetingInput.html"&gt;back&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+浏览器上如果显示出greetingInput.html的话，就可以开始看应用程序的演出了。
+</p>
+<p>
+你是否已想象得出要制作的是什么吗？
+</p>
+<p>
+那么就开始制作吧。制作流程如下所示。
+</p>
+<ul>
+<li>作一个接口（interface）</li>
+<li>实装（implement）接口，作成组件</li>
+<li>连接组件</li>
+</ul>
+<p>
+这次，我们用POJO作一个Action，并使用<a href="http://mayaa.sandbox.seasar.org/">Mayaa</a>生成view。
+在S2Struts中，用POJO生成Action的场合，必须将接口（interface）和实装（implement）分开。
+详细情况请参阅<a href="#POJOAction">「POJO作为Action时的用法」</a>。
+</p>
+<p>
+首先，定义GreetingInputInitAction、GreetingAction、GreetingService接口。
+作为与画面的接口，还要生成一个作为ActionForm(DTO)的GreetingDto。
+</p>
+<h4>GreetingDto</h4>
+<p>我们将使用POJO的DTO作为ActionForm，。这一DTO将保持来自画面的项目信息内容。</p>
+<pre>
+package examples.dto;
+
+public class GreetingDto {
+    private String time = "";
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+}
+</pre>
+<h4>GreetingInputInitAction</h4>
+<p>这是为了显示greetingInput.html画面，提供必要信息的Action接口。</p>
+<pre>
+package examples.action;
+
+public interface GreetingInputInitAction {
+    String initialize();
+}
+</pre>
+<h4>GreetingAction</h4>
+<p>这是进行问候处理的的Action接口。</p>
+<pre>
+package examples.action;
+
+public interface GreetingAction {
+    String SUCCESS = "success";
+    
+    String goGreeting();
+}
+</pre>
+<h4>GreetingService</h4>
+<p>这个接口提供不依存于Struts等表现层framework的服务（service）</p>
+<pre>
+package examples.service;
+
+import java.util.List;
+import examples.dto.GreetingDto;
+
+public interface GreetingService {
+    List getTimeList();
+
+    String getGreeting(GreetingDto dto);
+}
+</pre>
+<p>到此为止，一系列的接口就作好了。下面，生成实装接口的组件。</p>
+
+<h4>GreetingInputInitActionImpl</h4>
+<p>
+setGreetingService是为了注入GreetingService的setter方法。
+getTimeList是为了将信息传递给画面的getter方法。	
+</p>
+<pre>
+package examples.action.impl;
+
+import java.util.List;
+import examples.action.GreetingInputInitAction;
+import examples.service.GreetingService;
+
+public class GreetingInputInitActionImpl implements GreetingInputInitAction {
+    private GreetingService service;
+    private List timeList;
+
+    public String initialize() {
+        timeList = service.getTimeList();
+        return null;
+    }
+    
+    <b>public void setGreetingService(GreetingService service)</b> {
+        this.service = service;
+    }
+
+    <b>public List getTimeList()</b> {
+        return timeList;
+    }
+}
+</pre>
+<h4>GreetingActionImpl</h4>
+<p>
+setGreetingService是为了注入GreetingService的setter方法。
+setGreetingDto是为了从画面接收ActionForm的setter方法，getGreetingDto是为了把ActionForm传递给画面的getter方法。
+getGreeting是把信息传递给画面的fetter方法。
+</p>
+<pre>
+package examples.action.impl;
+
+import examples.action.GreetingAction;
+import examples.dto.GreetingDto;
+import examples.service.GreetingService;
+
+public class GreetingActionImpl implements GreetingAction {
+    private GreetingService service;
+    private GreetingDto greetingDto;
+    private String greeting;
+
+    public String goGreeting() {
+        greeting = service.getGreeting(greetingDto);
+        return SUCCESS;
+    }
+
+    <b>public void setGreetingService(GreetingService service)</b> {
+        this.service = service;
+    }
+
+    <b>public GreetingDto getGreetingDto()</b> {
+        return greetingDto;
+    }
+
+    <b>public void setGreetingDto(GreetingDto greetingDto)</b> {
+        this.greetingDto = greetingDto;
+    }
+
+    <b>public String getGreeting()</b> {
+        return greeting;
+    }
+}
+</pre>
+<h4>GreetingServiceImpl</h4>
+<p></p>
+<pre>
+package examples.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import examples.dto.GreetingDto;
+import examples.service.GreetingService;
+
+public class GreetingServiceImpl implements GreetingService {
+    private static final String AM = "a.m.";
+    private static final String PM = "p.m.";
+
+    public List getTimeList() {
+        List result = new ArrayList();
+        result.add(AM);
+        result.add(PM);
+        return result;
+    }
+
+    public String getGreeting(GreetingDto dto) {
+        if (AM.equals(dto.getTime())) {
+            return "Good morning";
+        }
+        if (PM.equals(dto.getTime())) {
+            return "Good evening";
+        }
+        return "";
+    }
+}
+</pre>
+<p>到此为止，所有的实装已完成，全部组件都准备好了。下一步是将所有的组件连起来。</p>
+<h4>greeting.dicon</h4>
+<p>为了把Action和Service连起来，在examples/dicon的目录下生成greeting.dicon。</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="aop.dicon"/&gt;
+
+  &lt;component name="actionInterceptorChain"
+      class="org.seasar.framework.aop.interceptors.InterceptorChain"&gt;
+    &lt;initMethod name="add"&gt;&lt;arg&gt;aop.traceInterceptor&lt;/arg&gt;&lt;/initMethod&gt;
+  &lt;/component&gt;
+
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;<b>"examples.service.impl"</b>&lt;/arg&gt;
+      &lt;arg&gt;<b>".*ServiceImpl"</b>&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  
+  &lt;component
+    class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="instanceDef"&gt;
+      @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+    &lt;/property&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;<b>"examples.action.impl"</b>&lt;/arg&gt;
+      &lt;arg&gt;<b>".*ActionImpl"</b>&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component class="org.seasar.framework.container.autoregister.AspectAutoRegister"&gt;
+    &lt;property name="interceptor"&gt;actionInterceptorChain&lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;<b>"examples.action.impl"</b>&lt;/arg&gt;
+      &lt;arg&gt;<b>".*ActionImpl"</b>&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+
+&lt;/components&gt;
+</pre>
+<p>在app.dicon里追加include以便读取greeting.dicon。</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="s2struts.dicon"/&gt;
+  <b><font color="red">&lt;include path="examples/dicon/greeting.dicon"/&gt;</font></b>
+&lt;/components&gt;
+</pre>
+<p>
+今后，即使要追加新的Action，也无需修改greeting.dicon。因为可以利用由S2提供的<a href="http://s2container.seasar.org/ja/DIContainer.html#ComponentAutoRegister">组件自动登录</a>功能。
+</p>
+<p>
+最后，为了把画面和Action，ActionForm连接起来，我们将修改greetingInput.html、greeting.html，生成相应的mayaa文件。
+关于Mayaa的详细情况，请参照<a href="http://mayaa.sandbox.seasar.org/">「JavaServer Templates "Mayaa"」</a>的章节。
+</p>
+<h4>greetingInput.html</h4>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+<b><font color="red">&lt;div id="appBody"&gt;</font></b>
+  &lt;form method="GET" action="greeting.html" <b><font color="red">id="appForm"</font></b>&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th&gt;time&lt;/th&gt;
+        &lt;td&gt;
+          &lt;select name="time" <b><font color="red">id="time"</font></b>&gt;
+            &lt;option value="" selected&gt;Please select&lt;/option&gt;
+            &lt;option value="a.m."&gt;a.m.&lt;/option&gt;
+            &lt;option value="p.m."&gt;p.m.&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type="submit" value="greeting" <b><font color="red">id="goGreeting"</font></b>&gt;
+  &lt;/form&gt;
+<b><font color="red">&lt;/div&gt;</font></b>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h4>greetingInput.mayaa</h4>
+<p>
+我们使用S2Struts提供的<a href="#TagLibInit">init标签</a>，调用GreetingInputInitAction#initialize()。
+通过执行initialize()，得到显示画面所必需的timeList。
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"&gt;
+
+    &lt;m:with id="appBody" replace="false"&gt;
+        <b>&lt;s2struts:init action="#{greetingInputInitAction.initialize}"/&gt;</b>
+        &lt;m:doBody /&gt;
+    &lt;/m:with&gt;
+
+    &lt;html:form m:id="appForm" action="/greeting" method="POST" /&gt;
+    &lt;html:select m:id="time" property="time"&gt;
+        &lt;html:option value=""&gt;Please select&lt;/html:option&gt;
+        <b>&lt;html:options name="timeList" /&gt;</b>
+    &lt;/html:select&gt;
+    &lt;html:submit m:id="goGreeting" &gt;greeting&lt;/html:submit&gt;
+
+&lt;/m:mayaa&gt;
+</pre>
+<h4>greeting.html</h4>
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=Windows-31j"&gt;
+  &lt;title&gt;Greeting Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+<b><font color="red">&lt;div id="appBody"&gt;</font></b>
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;time&lt;/th&gt;
+      &lt;td&gt;<b><font color="red">&lt;span id="time"&gt;</font></b>a.m.<b><font color="red">&lt;/span&gt;</font></b>&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;greeting&lt;/th&gt;
+      &lt;td&gt;<b><font color="red">&lt;span id="greeting"&gt;</font></b>Good morning<b><font color="red">&lt;/span&gt;</font></b>&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;a href="greetingInput.html" <b><font color="red">id="goBack"</font></b>&gt;back&lt;/a&gt;
+<b><font color="red">&lt;/div&gt;</font></b>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<h4>greeting.mayaa</h4>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;m:mayaa xmlns:m="http://mayaa.seasar.org"
+        xmlns:html="http://struts.apache.org/tags-html"
+        xmlns:bean="http://struts.apache.org/tags-bean"
+        xmlns:s2struts="http://www.seasar.org/tags-s2struts"
+        m:noCache="true"&gt;
+
+    &lt;m:ignore id="appBody" /&gt;
+
+    &lt;bean:write m:id="time" name="greetingDto" property="time" /&gt;
+    &lt;bean:write m:id="greeting" name="greeting" /&gt;
+    &lt;html:link m:id="goBack" page="/greetingInput.html"&gt;back&lt;/html:link&gt;
+
+&lt;/m:mayaa&gt;
+</pre>
+<p>到此为止，处理流程就结束了。</p>
+<p>
+重新启动Tomcat，
+请从浏览器访问<a href="http://localhost:8080/s2struts-blank/greetingInput.html">http://localhost:8080/s2struts-blank/greetingInput.html</a>确认动作是否正常。
+</p>
+<p>
+虽然没有编辑struts-config.xml，但是系统动作是正常的。
+之所以如此是因为，执行时S2Struts遵循规约，生成了struts-config信息。
+在生成GreetingDto和GreetingAction的同时，也就等于完成了以下的struts-config配置。
+</p>
+<pre>
+...
+&lt;form-beans&gt;
+    ...
+    &lt;form-bean
+        name="greetingDto"
+        type="examples.dto.GreetingDto" /&gt;
+    ...
+&lt;/form-beans&gt;
+...
+&lt;action-mappings&gt;
+    ...
+    &lt;action
+        path="/greeting"
+        type="examples.action.GreetingAction"
+        name="greetingDto"
+        scope="request"
+        validate="true"&gt;
+        &lt;forward name="success" path="/greeting.html" /&gt;
+    &lt;/action&gt;
+    ...
+&lt;/action-mappings&gt;
+...
+</pre>
+<p>
+这次因为遵循规约所以不需要设定，不过也有不遵守规约的场合。
+这种场合，可以使用注释直接指定。
+关于规约和注释请参照<a href="#ZoroConfig">「无设定S2Struts」</a>的章节。
+</p>
+<p>
+S2Struts的世界如何？
+POJO的Action看起来是不是很容易测试呢？
+从此我们不用再为随着应用规模的增大而不断增大的struts-config.xml文件而烦恼了。
+如果想更详细地了解S2Struts的场合，请参照以下的指南。
+</p>
+<h2><a name="Reference">S2Struts指南</a></h2>
+<h3><a name="Usage">基本用法</a></h3>
+<p>
+首先，为了起动S2Container，在web.xml里要对S2ContainerServlet进行登录。
+并请像下面这样设定S2ContainerFilter和S2StrutsFilter。
+</p>
+<p>
+其次，如果是代替org.apache.struts.action.ActionServlet，请对org.seasar.struts.servlet.S2ActionServlet进行登录，
+如果是代替org.apache.struts.actions.RedeployableActionServlet，请对org.seasar.struts.servlet.S2RedeployableActionServlet进行登录。
+</p>
+<h4>web.xml</h4>
+<pre>&lt;web-app&gt;
+  &lt;display-name&gt;Struts Application&lt;/display-name&gt;
+
+  <b>&lt;filter&gt;
+    &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+    &lt;filter-class&gt;
+      <font color="red">org.seasar.framework.container.filter.S2ContainerFilter</font>
+    &lt;/filter-class&gt;
+  &lt;/filter&gt;
+
+  &lt;filter&gt;
+    &lt;filter-name&gt;s2strutsfilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;<font color="red">org.seasar.struts.filter.S2StrutsFilter</font>&lt;/filter-class&gt;
+  &lt;/filter&gt;
+
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;<font color="red">/*</font>&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;s2strutsfilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;<font color="red">/*</font>&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;</b>
+
+  <b>&lt;servlet&gt;
+    &lt;servlet-name&gt;s2container&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;
+      <font color="red">org.seasar.framework.container.servlet.S2ContainerServlet</font>
+    &lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;</b>
+
+  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    <b>&lt;servlet-class&gt;<font color="red">org.seasar.struts.servlet.S2ActionServlet</font>&lt;/servlet-class&gt;</b>
+    &lt;init-param&gt;
+      &lt;param-name&gt;config&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;debug&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;detail&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;s2container&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/s2container&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+  &lt;!-- Standard Action Servlet Mapping --&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+  &lt;!-- The Usual Welcome File List --&gt;
+  &lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+
+&lt;/web-app&gt;
+</pre>
+<p>
+为了使S2和Struts连动，必须在struts-config.xml里，对S2用的RequestProcessor进行登录。
+我们提供了S2RequestProcessor和S2TilesRequestProcessor。
+它们分别对应于Struts的RequestProcessor和TilesRequestProcessor。
+</p>
+<h4>struts-config.xml</h4>
+<pre>
+&lt;struts-config&gt;
+  ...
+  <b>&lt;controller processorClass=&quot;<font color="red">org.seasar.struts.processor.S2RequestProcessor</font>&quot;/&gt;</b>
+  ...
+&lt;/struts-config&gt;
+</pre>
+<p>
+希望连动的Action类必须在组件定义中登录。
+Action类也可以个别的进行登录，不过个别登录的话，在追加Action类的时候，必须修改组件定义文件。
+为了回避这一问题，推荐使用<a href="http://s2container.seasar.org/ja/DIContainer.html#ComponentAutoRegister">组件的自动登录</a>功能。
+</p>
+<h4>Multiply.dicon</h4>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;component name="traceInterceptor"
+      class="org.seasar.framework.aop.interceptors.TraceInterceptor"/&gt;
+
+  &lt;component
+      class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.multiply"&lt;/arg&gt;
+      &lt;arg&gt;".*ServiceImpl"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  
+  &lt;component
+      class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+    &lt;property name="instanceDef"&gt;
+      @org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST
+    &lt;/property&gt;
+    &lt;property name="autoNaming"&gt;
+      &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+    &lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.multiply"&lt;/arg&gt;
+      &lt;arg&gt;".*Action"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component class="org.seasar.framework.container.autoregister.AspectAutoRegister"&gt;
+    &lt;property name="interceptor"&gt;traceInterceptor&lt;/property&gt;
+    &lt;initMethod name="addClassPattern"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.multiply"&lt;/arg&gt;
+      &lt;arg&gt;".*Action"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+&lt;/components&gt;
+</pre>
+<p>
+并且这一组件定义文件必须在全体应用程序的定义<a href="http://s2container.seasar.org/ja/DIContainer.html#app.dicon">app.dicon</a>中进行登录。
+</p>
+<h4><a name="app.dicon"></a>app.dicon</h4>
+<pre>
+&lt;components&gt;
+  ...
+  &lt;include path=&quot;org/seasar/struts/examples/dicon/Multiply.dicon&quot;/&gt;
+  ...
+&lt;/components&gt;
+</pre>
+<p>
+到此为止，由RequestProcessor生成的所有Action类才和S2形成了连动。
+</p>
+<p>
+如果事先对接口定义setter方法，
+将会自动地进行<a href="http://s2container.seasar.org/ja/DIContainer.html#SetterInjection">settert・注入</a>。
+还有，只有接口定义了有参数的Constructor的场合，会自动进行
+<a href="http://s2container.seasar.org/ja/DIContainer.html#ConstructorInjection">Constructor・注入</a>。
+</p>
+<p>为了取得service组件，Action类要事先定义Constructor或者是setter方法。
+execute()方法，由于只是将处理委托给service，所以源程序看起来非常简洁。</p>
+<h4>MultiplyAction</h4>
+<pre>
+package org.seasar.struts.examples.multiply;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.seasar.struts.examples.form.CalculationForm;
+
+public class MultiplyAction extends Action {
+
+    private MultiplyService multiplyService_;
+
+    public MultiplyAction(MultiplyService multiplyService) {
+        multiplyService_ = multiplyService;
+    }
+
+    public ActionForward execute(
+            ActionMapping mapping,
+            ActionForm form,
+            HttpServletRequest request,
+            HttpServletResponse response) {
+
+        CalculationForm calForm = (CalculationForm) form;
+        int result = multiplyService_.multiply(calForm.getArg1(), calForm.getArg2());
+        calForm.setResult(result);
+        return (mapping.findForward("success"));
+    }
+}
+</pre>
+
+<h3><a name="POJOAction">POJO作为Action时的用法</a></h3>
+<p>
+我们可以把没有继承org.apache.struts.action.Action的POJO作为Action使用。
+</p>
+<p>
+向下面这样，生成接口和实装类，在组件定义文件中定义实装类。
+Action方法返回一个String类型的forward名。
+并且在struts-config里，在action标签的type属性中指定接口名。
+<h4>EchoAction</h4>
+<pre>public interface EchoAction {
+	String echo();
+}</pre>
+<h4>EchoActionImpl</h4>
+<pre>public class EchoActionImpl implements EchoAction {
+    private StringForm strForm;
+    
+    public EchoActionImpl() {
+    }
+
+    public String echo() {
+        strForm.setResult(strForm.getInput());
+        
+        return FowardNameConstants.SUCCESS;
+    }
+
+    public StringForm getStrForm() {
+        return strForm;
+    }
+    public void setStrForm(StringForm strForm) {
+        this.strForm = strForm;
+    }
+}</pre>
+<p>
+POJO的Action类中，如果是有setter方法的场合，HttpServletRequest或者HttpSession的值会被自动绑定。<br/>
+参照时的优先顺序如下所示。<br/>
+(1)HttpServletRequest#getParameter(属性名)<br/>
+(2)HttpServletRequest#getAttribute(属性名)<br/>
+(3)HttpSession#getAttribute(属性名)<br/>
+</p>
+<p>
+1.3.0-RC3以后，优先顺序发生了变化，如下所示（第一和第二的优先顺序互换）。<br/>
+(1)HttpServletRequest#getAttribute(属性名)<br/>
+(2)HttpServletRequest#getParameter(属性名)<br/>
+(3)HttpSession#getAttribute(属性名)<br/>
+</p>
+<p>
+还有，如果接收的参数带有[]，类似于foo[0]=fooVal0,foo[1]=fooVal1的参数的场合，
+第一参数类型为int，第二参数为含有index值的setter方法会成为自动绑定的对象。如下所示。<br>
+<pre>
+setFoo(int index, Object value);
+</pre>
+</p>
+<p>
+getter方法的场合也是同样的，HttpServletRequest或者HttpSession会自动地被绑定到一个值。<br>
+(1)缺省时执行HttpServletRequest#setAttribute(属性名,属性值)。<br>
+(2)如果想执行HttpSession#setAttribute(属性名,属性值)的场合，必须在Action类中声明常量注释，如下所示。
+<pre>
+public final static String 属性名_EXPORT = org.seasar.struts.Constants.SESSION;
+</pre>
+</p>
+<p>
+我们也可以使用注释。如果使用注释的话，如下所示，对getter方法指定注释。
+<pre>
+@ExportToSession()
+public String getFoo() {
+    return foo;
+}
+</pre>
+也可以象下面这样，使用backport175注释。
+<pre>
+/**
+ * @org.seasar.struts.annotation.backport175.ExportToSession()
+ */
+public String getFoo() {
+    return foo;
+}
+</pre>
+</p>
+<h4>Echo.dicon</h4>
+<pre>
+&lt;components&gt;
+	&lt;component class=&quot;org.seasar.struts.examples.echo.EchoActionImpl&quot; instance=&quot;request&quot;/&gt;
+&lt;/components&gt;
+</pre>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;/echo&quot;
+      type=&quot;<b>org.seasar.struts.examples.echo.EchoAction</b>&quot;
+      name=&quot;strForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;false&quot;
+      input=&quot;/pages/echoInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/strResult.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<p>
+通过在web.xml中事先登录S2ContainerFilter，实装类的属性会自动地被绑定到request或session以及Action。
+至于request和session之中的哪一个会被绑定，将根据组件定义文件中的instance属性决定的。关于ActionForm，则是由
+struts-config.xml中定义的scope属性决定的。
+</p>
+<p>
+还有，接口中有复数方法存在的场合，则与使用org.apache.struts.actions.DispatchAction的场合同样，
+在struts-config.xml的action标签里，追加parameter属性，对于JSP的submit按钮，通过name属性和value属性这２个属性指定方法。
+<h4>ChangeCaseAction</h4>
+<pre>
+public interface ChangeCaseAction {
+    String toLowerCase();
+
+    String toUpperCase();
+}
+</pre>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;/changeCase&quot;
+      type=&quot;org.seasar.struts.examples.changecase.ChangeCaseAction&quot;
+      name=&quot;strForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;true&quot;
+      <b>parameter=&quot;command&quot;</b>
+      input=&quot;/pages/changeCaseInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/strResult.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>changeCaseInput.jsp</h4>
+<pre>
+...
+&lt;html:submit property=&quot;<b>command</b>&quot;&gt;&lt;bean:message key=&quot;<b>toLowerCase</b>&quot;/&gt;&lt;/html:submit&gt;
+&lt;p&gt;
+&lt;html:submit property=&quot;<b>command</b>&quot;&gt;&lt;bean:message key=&quot;<b>toUpperCase</b>&quot;/&gt;&lt;/html:submit&gt;
+...
+</pre>
+<p>
+变换成HTML，如下所示。
+</p>
+<pre>
+&lt;input type=&quot;submit&quot; name=&quot;<b>command</b>&quot; value=&quot;<b>toLowerCase</b>&quot;&gt;
+&lt;p>
+&lt;input type=&quot;submit&quot; name=&quot;<b>command</b>&quot; value=&quot;<b>toUpperCase</b>&quot;&gt;
+</pre>
+</p>
+<h3><a name="ProxyAction">ProxyAction类的用法</a></h3>
+<p>
+使用ProxyAction类，可以调用在组件定义文件中的Action，也可以进行委托处理。
+这种情况下，struts-config和组件定义文件无需对同一类名进行定义/同期。
+<b>在struts-config的action的path属性和组件定义文件中定义的component的name属性必须一致。</b>
+详细情况请参照<a href="#Mapping">「关于path属性和Action类的映射」</a>的章节。
+</p>
+如果只有ProxyAction类，那么在struts-config里，即使不登录S2用的RequestProcessor，也可以和S2连动。
+但是，如果希望其他的Action类也和S2连动的场合，则如前所述，必须在struts-config.xml里登录S2用的RequestProcessor。
+也即，为了和S2连动，只有特定的Action类是有效的。
+<p>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;<b>/subtract</b>&quot;
+      type=&quot;org.seasar.struts.action.ProxyAction&quot;
+      name=&quot;calcForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;false&quot;
+      input=&quot;/pages/subtractInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/result.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>Subtract.dicon</h4>
+<pre>
+&lt;components&gt;
+  &lt;component name=&quot;<b>/subtract</b>&quot; class=&quot;org.seasar.struts.examples.SubtractAction&quot;/&gt;
+  &lt;component class=&quot;org.seasar.struts.examples.SubtractServiceImpl&quot;/&gt;
+&lt;/components&gt;
+</pre>
+</p>
+<h3><a name="NoType">在struts-config的action中，不使用type属性指定一个Action类</a></h3>
+<p>
+和ProxyAction类的用法同样，只要struts-config的action的path属性和
+组件定义文件中定义的component的name属性相一致，那么不使用type属性，也可以调用Action类。
+详细情况请参照<a href="#Mapping">「关于path属性和Action类的映射」</a>的章节。
+利用这一手法是有条件的。也即，调用时不存在type属性，forward属性，include属性这3个属性。
+这种情况下，struts-config和组件定义文件无需对同一个类名进行定义/同期。
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action
+      path=&quot;<b>/divide</b>&quot;
+      name=&quot;calcForm&quot;
+      scope=&quot;request&quot;
+      validate=&quot;false&quot;
+      input=&quot;/pages/divideInput.jsp&quot;&gt;
+      &lt;forward name=&quot;success&quot; path=&quot;/pages/result.jsp&quot; /&gt;
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>Divide.dicon</h4>
+<pre>
+&lt;components&gt;
+  &lt;component name=&quot;<b>/divide</b>&quot; class=&quot;org.seasar.struts.examples.DivideAction&quot;/&gt;
+  &lt;component class=&quot;org.seasar.struts.examples.DivideServiceImpl&quot;/&gt;
+&lt;/components&gt;
+</pre>
+</p>
+<h3><a name="Mapping">关于path属性和Action类的映射</a></h3>
+<p>
+在此，我们对前面提到的，<a href="#ProxyAction">「ProxyAction类的用法」</a>和
+<a href="#NoType">「在struts-config的action中，不使用type属性指定一个Action类」</a>里，
+关于path属性和Action类的映射关系，做一详细介绍。
+</p><p>
+假定存在以下的web.xml，struts-config，还有组件定义文件。
+<h4>web.xml</h4>
+<pre>&lt;web-app&gt;
+  ...
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;<b>config</b>&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;<b>config<font color="red">/foo</font></b>&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config-foo.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    ...
+  &lt;/servlet&gt;
+  ...
+&lt;/web-app&gt;
+</pre>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action <b>path=&quot;<font color="red">/bar</font>&quot;</b>
+      ...
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>struts-config-foo.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;action-mappings&gt;
+    ...
+    &lt;action <b>path=&quot;<font color="red">/baz</font>&quot;</b>
+      ...
+    &lt;/action&gt;
+    ...
+  &lt;action-mappings&gt;
+  ...
+&lt;/struts-config&gt;
+</pre>
+<h4>组件定义文件</h4>
+<pre>
+&lt;components&gt;
+  &lt;component <b>name=&quot;<font color="red">/bar</font>&quot;</b> class=&quot;BarAction&quot;/&gt;
+  &lt;component <b>name=&quot;<font color="red">/foo/baz</font>&quot;</b> class=&quot;BazAction&quot;/&gt;
+&lt;/components&gt;
+</pre>
+</p><p>
+如果是缺省的模块module（用struts-config.xml动作的模块），将在struts-config的action标签的path属性和
+组件定义文件中定义的component标签的name属性之间进行映射。映射方式为下记的子模块（subModule）中的(2)的模式（pattern）。
+</p><p>
+如果是子模块（此例中，用struts-config-foo.xml动作的模块），映射方式则有２种。
+<ul>
+(1)模块(prefix)名（<b><font color="red">/foo</font></b>）+path属性（<b><font color="red">/baz</font></b>）=name属性（<b><font color="red">/foo/baz</font></b>）<br>
+(2)path属性（<b><font color="red">/baz</font></b>）=name属性（<b><font color="red">/baz</font></b>）
+</ul>
+取得组件的优先顺序为(1)、(2)的顺序。也即，如果没有找到名字为/foo/baz的组件，那么就取得名字为/baz的组件。
+</p>
+<p>
+还有，作成org.seasar.struts.ComponentNameCreator的实装类，经由app.dicon登录，可以替换上述的缺省映射方式。</p>
+
+<h3><a name="Hint">用法提示</a></h3>
+<p>优点・缺点</p>
+<table border="1">
+  <tr>
+    <td><br></td>
+    <td>优点</td>
+    <td>缺点</td>
+  </tr>
+  <tr>
+    <td>POJOAction<b>(推荐)</b></td>
+    <td>提高了可测试性<br>Action类的模块切换很容易<br>向S2JSF等的移植很容易</td>
+    <td>接口定义文件有可能增加
+    (不过，The Seasar Foundation认为，对外接口越明确，说明可维护性越好)</td>
+  </tr>
+  <tr>
+    <td>Multiply的例子</td>
+    <td>现有的Action，struts-config的action-mapping无需修改即可使用</td>
+    <td><br><center>―</center><br></td>
+  </tr>
+  <tr>
+    <td>Subtract(ProxyAction)的例子</td>
+    <td>为了从ActionMapping的信息(缺省为路径名)检索组件，
+        无需对struts-config和组件定义文件里记载的Action的类名进行同期<br>
+        有着继承关系的Action类可以登录到container中</td>
+    <td>必须对ActionMapping的信息和组件名进行同期</td>
+  </tr>
+  <tr>
+    <td>Divide的例子</td>
+    <td>同上。在struts-config里，不必使用type属性(Action的类名)，减少了设定内容</td>
+    <td>同上。但是，从Struts而言，由于是非正规的struts-config的定义方法，有可能无法取得与定义struts-config的工具之间的协调关系</td>
+  </tr>
+</table>
+<p></p>
+<p>
+<b>如果没有特别的理由，推荐使用POJOAction。</b>
+</p>
+
+<h3><a name="RequestProcessor">从组件得到RequestProcessor</a></h3>
+<p>
+正如可以对Action类实施共通的aspect一样，可以从组件取得RequestProcessor。
+并且，除了实施aspect之外，也可以实施与其他的组件同样的用法。
+</p>
+<p>
+首先，必须在web.xml里登录S2ActionServlet。
+在web.xml里定义的servlet并非是org.apache.struts.action.ActionServlet，而是
+org.seasar.struts.action.S2ActionServlet或者是org.seasar.struts.action.S2RedeployableActionServlet。
+（S2ActionServlet继承的是ActionServlet，S2RedeployableActionServlet继承的是RedeployableActionServlet。）
+</p>
+<h4>web.xml</h4>
+<pre>&lt;web-app&gt;
+  ...
+  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;<b>org.seasar.struts.action.S2ActionServlet</b>&lt;/servlet-class&gt;
+    ...
+  &lt;/servlet&gt;
+  ...
+&lt;/web-app&gt;
+</pre>
+<p>
+这次的案例，是对S2RequestProcessor实施被称为MeasureTimeInterceptor的aspect，
+能够测出各请求（request）的处理时间，并输出到stdout。
+</p>
+
+<h4><a name="RequestProcessor.dicon"></a>RequestProcessor.dicon</h4>
+<pre>
+&lt;components&gt;
+  &lt;include path=&quot;s2struts.dicon&quot;/&gt;
+  &lt;component class=&quot;org.seasar.struts.S2RequestProcessor&quot;&gt;
+    &lt;aspect pointcut=&quot;process&quot;&gt;
+      &lt;component class=&quot;org.seasar.struts.examples.MeasureTimeInterceptor&quot;&gt;
+    &lt;/aspect&gt;
+  &lt;/component&gt;
+&lt;/components&gt;
+</pre>
+
+<h3><a name="Message">从任意的组件管理错误信息的显示</a></h3>
+<p>
+使用org.seasar.struts.action.MessageManager类，可以从任意的组件管理错误信息的显示。
+<p>
+<h4>MessageActionImpl.java</h4>
+<pre>
+public class MessageActionImpl implements MessageAction {
+
+    public String execute() {
+        MessageManager.addGlobalError("examplemessage");
+        MessageManager.addGlobalError("examplemessage", "foo");
+        MessageManager.addGlobalError("examplemessage", "bar", "baz", "qux");
+        MessageManager.addError("property", "examplemessage");
+        MessageManager.addError("property", "examplemessage", "foo");
+        MessageManager.addError("property", "examplemessage", "bar", "baz", "qux");
+        MessageManager.saveErrors();
+
+        return FowardNameConstants.SUCCESS;
+    }
+
+}
+</pre>
+<p>
+这与Struts的Action类实装的代码几乎完全相同。
+</p>
+<pre>
+  ActionMessages errors = new ActionMessages();
+  errors.add(ActionErrors.GLOBAL_MESSAGE,new ActionMessage("examplemessage"));
+  errors.add(ActionErrors.GLOBAL_MESSAGE,new ActionMessage("examplemessage", "foo"));
+  errors.add(ActionErrors.GLOBAL_MESSAGE,new ActionMessage("examplemessage", "bar", "baz", "qux"));
+  errors.add("property",new ActionMessage("examplemessage"));
+  errors.add("property",new ActionMessage("examplemessage", "foo"));
+  errors.add("property",new ActionMessage("examplemessage", "bar", "baz", "qux"));
+  if(!errors.isEmpty()) {
+      saveErrors(request,errors);
+  }
+</pre>
+<p>
+说二者"几乎"相同，是因为上述利用资源（resource）中的关键字examplemessage里，在包含{4}的场合，其删除功能，在MessageManager里也具备。
+</p>
+<p>
+并且，MessageManager还具有管理信息用的addGlobalMessage()，addMessage()方法和saveMessages()方法。其参数与处理错误信息的场合相同。
+</p>
+
+<h2><a name="ZeroConfigReference">无设定S2Struts指南</a></h2>
+<p>
+一旦使用S2Struts，只要遵循规约就可以对struts-config实现自动补齐功能（<a href="#ZoroConfig">无设定S2Struts</a>）。
+使用<a href="#Annotation">注释</a>指定struts-config，也有可能实现补齐功能。
+由此，通过struts-config而省略设定成为可能。
+</p>
+<h3><a name="ZoroConfig">无设定S2Struts</a></h3>
+<p>
+为了利用无设定S2Struts的功能，必须在struts-config里登录AutoStrutsConfigRegisterPlugIn。
+在PlugIn里因为有读取的先后顺序，所以请在ValidatorPlugIn之后再进行登录。
+</p>
+<h4>struts-config.xml</h4>
+<pre>&lt;struts-config&gt;
+  ...
+  &lt;plug-in className="org.apache.struts.validator.ValidatorPlugIn"&gt;
+    ...
+  &lt;/plug-in&gt;
+    
+  <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn</font>&quot;&gt;
+    &lt;set-property property="enableJar" value="false"/&gt;
+    &lt;set-property property="jarFilePattern" value="^My.*\.jar$"/&gt;
+    &lt;set-property property="actionClassPattern" value="foo.bar.action.*Action"/&gt;
+    &lt;set-property property="formClassPattern" value="foo.bar.form.*Form"/&gt;
+    &lt;set-property property="docRoot" value="/WEB-INF/jsp"/&gt;
+    &lt;set-property property="viewExtension" value="jsp,html,view"/&gt;
+  &lt;/plug-in&gt;</b>
+  ...
+&lt;/struts-config&gt;
+</pre>
+<p>
+插件（plugin）的属性里可以进行值的设定。各属性的说明如下所示。各属性的定义省略时将使用缺省值。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td>
+    <td>说明</td>
+    <td>缺省值</td>
+  </tr>
+  <tr>
+    <td>enableJar</td>
+    <td>在检索无设定S2Struts里包含的类时，指定是否要检索classpath中包含的jar文件。检索的话，值为true。</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>jarFilePattern</td>
+    <td>enableJar的值为true时，指定检索对象jar文件的文件名类型。</td>
+    <td>无<br>（什么样的jar文件都是非检索对象）</td>
+  </tr>
+  <tr>
+    <td>referenceClass</td>
+    <td>检索指定的类所在的目录或者是以jar文件为基点的自动登录类。</td>
+    <td>无</td>
+  </tr>
+  <tr>
+    <td>actionClassPattern</td>
+    <td>在无设定S2Struts中，指定Action类名的类型以便特定action标签的值。</td>
+    <td>.*Action$</td>
+  </tr>
+  <tr>
+    <td>formClassPattern</td>
+    <td>在无设定S2Struts中，指定ActionForm类名的类型以便特定form-bean标签的值。</td>
+    <td>(.*Form$)|(.*Dto$)</td>
+  </tr>
+  <tr>
+    <td>docRoot</td>
+    <td>指定View模板文件的储存位置的首目录。</td>
+    <td>无</td>
+  </tr>
+  <tr>
+    <td>viewExtension</td>
+    <td>指定View模板文件的扩张子。</td>
+    <td>jsp,html</td>
+  </tr>
+</table><br/>
+<p>
+在无设定S2Struts中，省略可能的值将成为form-bean标签的属性，或者是action标签和该action标签内的forward标签的属性。
+缺省时遵循提供的规约的场合，各属性值如下所示。
+</p>
+<h4>form-bean标签的属性值</h4>
+<p>
+以"Form"或者是"Dto"结尾的类为基准补齐设定。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td>
+    <td>缺省值规约定义的值</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>类名</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>从类名检索在S2中的登录的组件，使用组件名。</td>
+  </tr>
+  <tr>
+    <td>restricted</td>
+    <td>false</td>
+  </tr>
+</table>
+
+<h4>action标签的属性值</h4>
+<p>
+以"Action"结尾的类为基准补齐设定。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td>
+    <td>缺省值规约定义的值</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>类名</td>
+  </tr>
+  <tr>
+    <td>path</td>
+    <td>从类名检索在S2中登录的组件。<br/>
+    如果组件名以"/"开始的话使用该组件名。<br/>
+    不是以"/"开始的话在先头加上"/"，
+    结尾如果是以下的值就将其删除。这些值是，"ActionImpl"，"Impl"，"Action"共3个。<br/>
+    没找到组件名的话，将类名的开头设定为小写文字得到的值作为组件名做如上设定。
+    </td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>删除path属性的先头的"/"的值。</td>
+  </tr>
+  <tr>
+    <td>scope</td>
+    <td>request</td>
+  </tr>
+  <tr>
+    <td>validate</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>input</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>parameter</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>attribute</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>forward</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>include</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>prefix</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>suffix</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>unknown</td>
+    <td>无设定(false)</td>
+  </tr>
+  <tr>
+    <td>roles</td>
+    <td>无设定(null)</td>
+  </tr>
+  <tr>
+    <td>cancellable</td>
+    <td>false</td>
+  </tr>
+</table>
+<h4>action标签内的forward标签的属性値</h4>
+以"Action"结尾的类为基准补齐设定。
+<table border="1">
+  <tr>
+    <td>属性</td>
+    <td>缺省值规约定义的值</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>success(不可变更)</td>
+  </tr>
+  <tr>
+    <td>path</td>
+    <td>请按以下说明的顺序设定path。<br/>
+    1.把包（package）名的"."更改为"/"，，用该值与类名相连结(Action名的连结)。<br/>
+    2.类名的最后如果是以下的值删除。这些值是，"ActionImpl"，"Impl"，"Action"共3个。连结时类名的先头设为小写文字。<br/>
+    3.在AutoStrutsConfigRegisterPlugIn的docRoot里指定的值附加在path的先头。<br/>
+    4.检索以".html"和".jsp"为扩张子的文件，如果文件存在设定到path中。<br/>
+    5.没找到文件的场合，将package中直到第2个"/"之前的文字列全部删掉，再返回步骤"4"进行操作。<br/>
+    6.如果到最后还没有找到的话，不再进行设定而是输出到log。<br/>
+    <br/>
+    例<br />
+    类：aaa.bbb.ccc.HogeAction<br />
+    AutoStrutsConfigRegisterPlugIn的docRoot：/jsp<br />
+    的场合，在path里设定的文字检索顺序为<br />
+    1)/jsp/aaa/bbb/ccc/hoge.jsp<br />
+    2)/jsp/bbb/ccc/hoge.jsp<br />
+    3)/jsp/ccc/hoge.jsp<br />
+    4)/jsp/hoge.jsp<br />
+    如上述步骤操作。<br />
+    </td>
+  </tr>
+  <tr>
+    <td>redirect</td>
+    <td>不设定(false)</td>
+  </tr>
+</table>
+
+<h3><a name="Annotation">使用注释的struts-configの設定</a></h3>
+<p>
+使用Tiger注释的定义方法和使用backport175注释的定义方法都可以使用。但是不能同时使用这2种注释。
+使用这两种注释时，分别需要有下表中的jar文件。
+</p>
+<table border="1">
+  <tr>
+    <td>Annotation</td><td>必要的jar文件(x.x.x表示版本)</td>
+  </tr>
+  <tr>
+    <td>Tiger</td><td>s2-struts-tiger-x.x.x.jar</td>
+  </tr>
+  <tr>
+    <td>backport175</td><td>s2-struts-backport175-x.x.x.jar</td>
+  </tr>
+</table><br/>
+<p>
+<a name="AnnotationAction"></a>如下所示，在Action里通过定义注释可以对struts-config进行设定。
+</p>
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+import org.seasar.struts.annotation.tiger.StrutsAction;
+import org.seasar.struts.annotation.tiger.StrutsActionForward;
+
+<b><font color="red">@StrutsAction(name="employeeForm", validate=false)</font></b>
+public interface EmployeeEditAction {
+
+	<b><font color="red">@StrutsActionForward(path="/pages/employee/employeeEdit.jsp")</font></b>
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
+使用backport175注释时的定义如下所示。
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+<b>/**
+ * <font color="red">@org.seasar.struts.annotation.backport175.StrutsAction(</font>
+ *   <font color="red">name="employeeForm", validate=false)</font>
+ */</b>
+public interface EmployeeEditAction {
+
+	<b>/**
+	 * <font color="red">@org.seasar.struts.annotation.backport175.StrutsActionForward(</font>
+	 *         <font color="red">path="/pages/employee/employeeEdit.jsp")</font>
+	 */</b>
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
+使用常量注释时的定义如下所示。
+<pre>
+package org.seasar.struts.examples.employee.action;
+
+public interface EmployeeEditAction {
+
+	<b>public static final String <font color="red">ACTION = "name=employeeForm, validate=false";</font></b>
+
+	<b>public static final String <font color="red">SUCCESS_FORWARD = "path=/pages/employee/employeeEdit.jsp";</font></b>
+
+	public String SUCCESS = "success";
+
+	public String execute();
+
+}
+</pre>
+这与以下的定义具有相同的效果。
+<pre>
+...
+&lt;action-mappings&gt;
+    ...
+    &lt;action
+        path="/employeeEdit"
+        type="org.seasar.struts.examples.employee.action.EmployeeEditAction"
+        name="employeeForm"
+        scope="request"
+        validate="true"&gt;
+        &lt;forward name="success" path="/pages/employee/employeeEdit.jsp" /&gt;
+    &lt;/action&gt;
+    ...
+</pre>
+<h4>用StrutsAction（ACTION）可能指定的属性</h4>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td>
+  </tr>
+  <tr>
+    <td>path</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>name</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>scope</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>validate</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>input</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>parameter</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>attribute</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>forward</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>include</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>prefix</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>suffix</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>unknown</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>roles</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>cancellable</td><td><center>×</center></td>
+  </tr>
+</table>
+注释与struts-config的action标签的属性为1对。并且，各属性的缺省值，为无设定S2Struts中定义的值。
+<h4>用StrutsActionForward（FORWARD）可能指定的属性</h4>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td>
+  </tr>
+  <tr>
+    <td>path</td><td><center>○</center></td><td><center>-</center></td>
+  </tr>
+  <tr>
+    <td>redirect</td><td><center>×</center></td><td><center>false</center></td>
+  </tr>
+</table>
+注释与struts-config的forward标签的属性为1对。用常量值指定name属性。
+<br/><br/>
+<p>
+<a name="AnnotationForm"></a>并且如下所示，在Form(DTO)里通过定义注释可以对struts-config进行设定。
+</p>
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
+
+<b><font color="red">@StrutsActionForm(name="employeeForm")</font></b>
+public class EmployeeDto extends Employee {
+	...
+}
+</pre>
+使用backport175注释的定义如下所示。
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+<b>/**
+ * <font color="red">@org.seasar.struts.annotation.backport175.StrutsActionForm(name="employeeForm")</font>
+ */</b>
+public class EmployeeDto extends Employee {
+	...
+}
+</pre>
+常量注释的定义如下所示。
+<pre>
+package org.seasar.struts.examples.employee.dto;
+
+public class EmployeeDto extends Employee {
+
+	<b>public static final <font color="red">String FORM = "name=employeeForm"</font></b>;
+	...
+}
+</pre>
+这些和以下的定义具有相同效果。
+<pre>
+...
+&lt;form-beans&gt;
+    ...
+    &lt;form-bean
+        name="employeeForm"
+        type="org.seasar.struts.examples.employee.dto.EmployeeDto" /&gt;
+    ...
+</pre>
+<h4>用StrutsActionForm（FORM）可能指定的属性</h4>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td>
+  </tr>
+  <tr>
+    <td>name</td><td><center>×</center></td>
+  </tr>
+  <tr>
+    <td>restricted</td><td><center>×</center></td>
+  </tr>
+</table>
+注释与struts-config的form-bean标签的属性为1对。并且，各属性的缺省值，是无设定S2Struts中定义的值。
+
+<h3><a name="AnnotationValidation">使用注释的validationの設定</a></h3>
+<p>
+如下所示，在ActionForm的setter方法中，通过定义注释可以对validation进行设定。
+</p>
+<pre>
+public class ValidateDto implements Serializable {
+
+    private String value;
+
+    <b><font color="red">@ValidateOrder(1)
+    @Required
+    @Minlength(10)
+    @Maxlength(15)
+    @Mask(pattern="com$",messageKey="mustendcom")
+    @EmailType
+    @Args(keys="mixValue",resource=false)</font></b>
+    public void setValue(String value) {
+        this.value = value;
+    }
+</pre>
+使用backport175注释的定义，如下所示。
+<pre>
+public class ValidateDto implements Serializable {
+
+    private String value;
+
+    <b>/**
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.ValidateOrder(1)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Required</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Minlength(value=10)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Maxlength(value=15)</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Mask(</font>
+     *    <font color="red">pattern="com$",messageKey="mustendcom")</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Email</font>
+     * <font color="red">@org.seasar.struts.validator.annotation.backport175.Args(</font>
+     *    <font color="red">keys="mixValue",resource=false)</font>
+     */</b>
+    public void setValue(String value) {
+        this.value = value;
+    }
+}</pre>
+使用常量注释的定义如下所示。
+<pre>
+public class ValidateDto implements Serializable {
+
+    private String value;
+
+    <b>public static final <font color="red">int value_VALIDATOR_ORDER = 1;</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR = "required";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_0 = "minlength, value=10";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_1 = "maxlength, value=15";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_2 = "mask, pattern=com$, messageKey=mustendcom";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_3 = "email";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARGS = "keys=mixValue, resource=false";</font></b>
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+}</pre>
+<p>
+S2Struts中，为了设定validation提供了各种注释。
+除了ValidateOrder、Args、Message以外，其余的注释在基本校验时都会用到。
+</p>
+<h4>ValidateOrder</h4>
+<p>
+用于控制验证顺序。按指定顺序显示错误信息。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>×</center></center></td>
+      <td><center>999</center></td>
+      <td>指定验证顺序。</td>
+  </tr>
+</table>
+<h4>Args</h4>
+<p>
+指定信息中用到的置换参数。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>keys</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>指定信息中用到的置换参数。<br>
+      用","分隔符可以进行复数个参数的指定。<br>
+      常量注释中关于用","进行分隔的方法请参照<a href="#ConstAnnotationCodicil">「常量注释的补充」</a>。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>使用缺省值以外的信息资源的场合，
+          指定所用到的信息资源的key。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>指定是否利用由keys指定的值作为资源key。<br>
+      true的场合，作为资源key使用，该值被作为置换参数。<br>
+      false的场合，用keys指定的值直接被当作置换参数。</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>用Arg注释个别指定置换参数的场合使用。<br>
+      个别指定置换参数的场合，请不要指定keys，bundle，resource。</td>
+  </tr>
+</table>
+<h4>Arg</h4>
+<p>
+个别指定信息中用到的置换参数。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>指定信息中用到的置换参数。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>指定使用置换参数的校验名。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>使用缺省值以外的信息资源的场合，
+          指定使用信息资源的key。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>指定是否把key指定的值作为资源key使用。<br>
+      true的场合作为资源key使用，使用该值作为信息。<br>
+      false的场合用key指定的值直接作为信息。</td>
+  </tr>
+  <tr>
+    <td>position</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>指定置换参数的位置。</td>
+  </tr>
+</table>
+<p></p>
+<p>
+常量注释如下所示，用属性名_VALIDATOR_ARG进行指定。
+复数指定的场合，常量名的最后附上以0开头的INDEX。
+</p>
+<pre>
+    public static final String value_VALIDATOR_0 = "required";
+    public static final String value_VALIDATOR_1 = "integer";
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_0 = "form.value";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_1 = "form.value.def";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_2 = "form.value.req, name = required, position = 1";</font></b>
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+</pre>
+<h4>Messages</h4>
+<p>
+想指定复数个Message注释的场合使用。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>指定复数个Message注释。</td>
+  </tr>
+</table>
+<h4>Message</h4>
+<p>
+想显示个别信息以代替缺省信息的场合指定。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>指定信息key或者信息。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>指定一个指定信息的校验名。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>使用缺省值以外的信息资源的场合，
+          指定使用信息资源的key。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>指定是否把key指定的值作为资源key使用。<br>
+      true的场合作为资源key使用，使用该值作为信息。<br>
+      false的场合使用key指定的值直接作为信息。</td>
+  </tr>
+</table>
+<h4>Required</h4>
+<p>
+确认该值是否含有空白以外的文字。
+无参数。
+</p>
+<h4>Mask</h4>
+<p>
+确认该值是否与pattern指定的正规表现一致。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>指定正规表现。</td>
+  </tr>
+  <tr>
+    <td>messageKey</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>指定取得信息用的key。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>指定是否把key指定的值作为资源key使用。<br>
+      true的场合作为资源key使用，使用该值作为置换参数。<br>
+      false的场合使用key指定的值直接作为置换参数。</td>
+  </tr>
+</table>
+<h4>IntRange, LongRange, FloatRange, DoubleRange</h4>
+<p>
+确认值是否处于min和max指定的范围内。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>min</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>指定值范围内的最小值。</td>
+  </tr>
+  <tr>
+    <td>max</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>指定值范围内的最大值。</td>
+  </tr>
+</table>
+<h4>Maxlength</h4>
+<p>
+确认值的文字数是否在value以下。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>指定值的长度的上限值。</td>
+  </tr>
+</table>
+<h4>Minlength</h4>
+<p>
+确认值的文字数是否在value以上。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>指定值的长度的下限值。</td>
+  </tr>
+</table>
+<h4>Maxbytelength</h4>
+<p>
+确认值的字节数是否在value以下。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>指定值的长度的上限值。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>指定用字节数验证时的文字set。<br/>不指定的场合，使用platform的缺省文字set。</td>
+  </tr>
+</table>
+<h4>Minbytelength</h4>
+<p>
+确认值的字节数是否在value以上。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>指定值的长度的下限值。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>指定用字节数验证时的文字set。<br/>不指定的场合，使用platform的缺省文字set。</td>
+  </tr>
+</table>
+<h4>ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</h4>
+<p>
+确认值是否能够变换成指定的型。
+无属性。
+</p>
+<h4>DateType</h4>
+<p>
+确认值是否可表示有效的日期。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+      <td><center>×</center></td>
+      <td><center>s2struts.dion的dateConfigRegister组件定义时指定的类型（pattern）</center></td>
+      <td>指定日期的类型（pattern）。</td>
+  </tr>
+</table>
+<h4>CreditCardType</h4>
+<p>
+确认值是否为有效的信用卡号码。
+无属性。
+</p>
+<h4>EmailType</h4>
+<p>
+确认值是否为有效的邮件地址。
+无属性。
+</p>
+<h4>UrlType</h4>
+<p>
+确认值是否为有效的URL。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必须</td><td>缺省值</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>allowallschemes</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>指定是否允许scheme。<br/>如果设定为true，全部的scheme都得到允许。<br></td>
+  </tr>
+  <tr>
+    <td>allow2slashes</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>指定是否允许双斜线（//）。<br/>如果为true，允许。<br></td>
+  </tr>
+  <tr>
+    <td>nofragments</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>指定是否允许URL的分割。<br/>如果为false，允许。<br></td>
+  </tr>
+  <tr>
+    <td>schemes</td>
+      <td><center>×</center></td>
+      <td><center>http,https,ftp</center></td>
+      <td>指定用,（逗号）分隔允许的scheme。<br></td>
+  </tr>
+</table>
+<h4>NoValidate</h4>
+<p>
+指定不要自动校验。
+无属性。
+</p>
+<h3><a name="ConstAnnotationCodicil">常量注释的补充</a></h3>
+<p>
+常量注释，利用「,」(逗号)作为属性的分割文字。
+在值里，指定「,」的场合，像下面这样，把値用「'」(单引号)或者「"」(双引号)括起来。
+</p>
+<pre>
+ public static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
+
+ public static final String value_VALIDATOR = "mask, pattern=\"(^[0-9]{1,2}$)\", messageKey=comma";
+</pre>
+
+<h2><a name="TagLibReference">S2Struts标签库（tag library）指南</a></h2>
+<p>
+S2Struts中，提供了ButtonTag和SubmitTag。
+二者均为Struts的标签的扩张形式。
+</p>
+<h3><a name="TagLibButton">button标签</a></h3>
+<h4>org.seasar.struts.taglib.html.ButtonTag(标签名：button)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#button">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#button</a><br>
+在上述基础上追加的属性，如下所示。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必须</td><td>rtexprvalue</td><td>说明</td>
+  </tr>
+  <tr>
+    <td>type</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>以下的值，指定按钮的种类。<br>
+        "button"：一般按钮。<br>
+        "submit"：执行按钮。<br>
+        "reset"：复位按钮。<br>
+        在HTML4.01 中 submit是作为规定值被定义的，<br>在IE6.0 或 Netscape 的实装中，规定值是 button 。</td>
+  </tr>
+  <tr>
+    <td><center>indexId</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>用logic:iterate标签的id属性等指定变量名。<br>
+      在button的value属性的值里，设定为这一变量值。<br>
+      (变量值为32位的Integer的话，变换后的html例子：&lt;button ... value="32" ...&gt;)</td>
+  </tr>
+</table>
+<h3><a name="TagLibSubmit">submit标签</a></h3>
+<h4>org.seasar.struts.taglib.html.SubmitTag(标签名：submit)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit</a><br>
+在上述基础上追加的属性，如下所示。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必须</td><td>rtexprvalue</td><td>说明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>根据action="#{component.method}"的定义，submit时可以指定执行的组件和方法。
+      组件必须用这一属性指定的名字在S2Container中登录。<br>
+      没有指定indexId属性的场合，调用无参数的指定method。<br>
+      例如，定义为&lt;s2struts:submit action="{hogeAction.create}"&gt;
+       的按钮被按下的场合，
+       会调用String create()
+       方法<br>
+      指定indexId属性的场合，调用int型的index为参数的方法。<br>
+      例如，定义为&lt;s2struts:submit action="{hogeAction.create}" indexId="index"&gt;
+       的按钮被按下的场合，
+       会调用String create(int index)
+       方法。</br></br>
+       S2Struts1.3.0-RC3以后，将使用与指定组件对应的ActionMapping。
+       ActionMapping指的是，缺省时从ActionPathNamingRule组件得到path作为keye而被决定。
+       明确指定的场合在调用方法（method）中，请指定<a href="#BindingMethod">BINDING_METHOD注释</a>。
+      </td>
+  </tr>
+  <tr>
+    <td><center>indexId</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>用logic:iterate标签的id属性指定已定义了的变量名。<br>
+      将被变换成propertyName[变量值]那样。<br>
+      (变量值是32位的Integer的场合，变换后的html例子：&lt;... foo[32]="bar"...&gt;)</td>
+  </tr>
+  <tr>
+    <td><center>cancel</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>指定为true的场合，将无视与form相关的ActionForm的validate，
+            调用Action。</td>
+  </tr>
+</table>
+<h3><a name="TagLibCancel">cancel标签</a></h3>
+<h4>org.seasar.struts.taglib.html.CancelTag(标签名：cancel)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#cancel">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#cancel</a><br>
+对上述cancel进行扩张，不利用Request参数实现Cancel功能的标签。
+没有追加的属性。
+</p>
+<h3><a name="TagLibImage">image标签</a></h3>
+<h4>org.seasar.struts.taglib.html.ImageTag(标签名：image)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#image">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#image</a><br>
+在上述基础上追加的属性，如下所示。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必须</td><td>rtexprvalue</td><td>说明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>根据action="#{component.method}"的定义，提交（submit）时可以指定执行组件和方法。
+      组件必须用这一属性指定的名字在S2Container中进行登录。</br></br>
+       S2Struts1.3.0-RC3以后，使用与指定的组件相对应的ActionMapping。
+       ActionMapping指的是，缺省时从ActionPathNamingRule组件得到path作为key而决定。
+       明确指定的场合在调用方法（method）中，请指定<a href="#BindingMethod">BINDING_METHOD注释</a>。
+      </td>
+  </tr>
+  <tr>
+    <td><center>cancel</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>指定为true的场合，将无视与form相关的ActionForm的validate，
+            调用Action。</td>
+  </tr>
+</table>
+<h3><a name="TagLibCheckbox">checkbox标签</a></h3>
+<h4>org.seasar.struts.taglib.html.CheckboxTag(标签名：checkbox)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#checkbox">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#checkbox</a><br>
+对上述checkbox进行扩张，即使没有check的场合，与form相关连的ActionForm的属性里也可以设定为false。
+没有追加的属性。
+</p>
+<h3><a name="TagLibPage">page标签</a></h3>
+<h4>org.seasar.struts.taglib.html.PageTag(标签名：page)</h4>
+<p>
+根据这个标签在JSP里的定义，可以对struts-config的input属性进行无设定化处理(错误时重新显示自身画面)。
+需要在form标签中进行定义。如果有复数个form存在的场合，必须分别定义。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必须</td><td>rtexprvalue</td><td>说明</td>
+  </tr>
+  <tr>
+    <td><center>-</center></td>
+      <td><center>-</center></td>
+      <td><center>-</center></td>
+      <td>无属性。</td>
+  </tr>
+</table>
+<h3><a name="TagLibInit">init标签</a></h3>
+<h4>org.seasar.struts.taglib.InitializeTag(标签名：init)</h4>
+<p>
+使用这一标签，可以进行画面的初始化处理。在显示JSP的时候，执行action属性中定义的MethodBinding。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必须</td><td>rtexprvalue</td><td>说明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>根据action="#{component.method}"里的定义，显示JSP时，可以指定执行组件和方法。
+      组件必须用这一属性指定的名字在S2Container中进行登录。</td>
+  </tr>
+</table>
+
+<h3><a name="BindingMethod">BINDING_METHOD注释</a></h3>
+<p>
+S2Struts1.3.0-RC3以后可以利用。
+</p>
+<p>
+BINDING_METHOD注释，对于用submit标签或者image标签指定的action，为了显示指定ActionMapping而被使用。
+</p>
+<h4>常量注释</h4>
+在Action里，以下列形式作为static字段定义。
+<p>
+public static final String <i>方法名</i>_BINDING_METHOD = "path=<i>ActionMapping的path</i>"
+</p>
+标签和Java的定义例子如下所示。
+<pre>
+&lt;s2struts:submit action="#{modAction.mod}" property="submit" value="提交（submit）"/&gt;
+</pre>
+<pre>
+public static final String mod_BINDING_METHOD = "path=/hoge";
+
+public String mod() {
+  ．．．
+}
+</pre>
+<h4>Tiger注释</h4>
+在Action方法中以下列形式指定注释。
+<p>
+@BindingMethod(path = "<i>ActionMapping的路径</i>")
+</p>
+标签和Java的定义例子如下所示。
+<pre>
+&lt;s2struts:submit action="#{modAction.mod}" property="submit" value="提交（submit）"/&gt;
+</pre>
+<pre>
+@BindingMethod(path = "/hoge")
+public String mod() {
+  ．．．
+}
+</pre>
+
+
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Foundation and the others 2004-2005, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
