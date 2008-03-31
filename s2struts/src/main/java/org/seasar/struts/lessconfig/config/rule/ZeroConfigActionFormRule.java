@@ -20,11 +20,22 @@ import org.apache.struts.config.ModuleConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 
 /**
+ * 無設定StrutsでActionFormに関する設定を扱うインタフェースです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public interface ZeroConfigActionFormRule {
 
+    /**
+     * {@link FormBeanConfig}を作成します。
+     * 
+     * @param config
+     * @param formClass
+     * @param name
+     * @param strutsActionForm
+     * @return
+     */
     FormBeanConfig createFormBeanConfig(ModuleConfig config, Class formClass, String name,
             StrutsActionFormConfig strutsActionForm);
 

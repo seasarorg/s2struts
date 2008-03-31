@@ -23,6 +23,7 @@ import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.ValidatorAnnotationHandlerFactory;
 
 /**
+ * {@link ValidationCreator}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -30,6 +31,11 @@ public class ValidationCreatorImpl implements ValidationCreator {
 
     private ActionFormNamingRule namingRule;
 
+    /**
+     * {@link ActionFormNamingRule}を設定します。
+     * 
+     * @param namingRule
+     */
     public void setNamingRule(ActionFormNamingRule namingRule) {
         this.namingRule = namingRule;
     }

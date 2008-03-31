@@ -22,16 +22,43 @@ import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 
 /**
+ * 無設定StrutsでActionに関する設定を扱うインタフェースです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public interface ZeroConfigActionRule {
-    
+
+    /**
+     * {@link ActionConfig}を作成します。
+     * 
+     * @param config
+     * @param actionClass
+     * @param path
+     * @param strutsAction
+     * @return
+     */
     ActionConfig createActionConfig(ModuleConfig config, Class actionClass, String path, StrutsActionConfig strutsAction);
 
+    /**
+     * {@link ForwardConfig}を作成します。
+     * 
+     * @param config
+     * @param actionClass
+     * @param name
+     * @param actionForward
+     * @return
+     */
     ForwardConfig createActionForwardConfig(ModuleConfig config, Class actionClass, String name,
             StrutsActionForwardConfig actionForward);
 
+    /**
+     * <code>actionConfig</code>に{@link ForwardConfig}を追加します。
+     * 
+     * @param config
+     * @param actionClass
+     * @param actionConfig
+     */
     void addForwardConfig(ModuleConfig config, Class actionClass, ActionConfig actionConfig);
 
 }

@@ -37,6 +37,8 @@ import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionRule;
 
 /**
+ * {@link ZeroConfigActionRule}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
@@ -45,18 +47,33 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
 
     private ServletContext servletContext;
 
+    /**
+     * {@link ServletContext}を設定します。
+     * 
+     * @param servletContext
+     */
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 
     private ActionPathNamingRule namingRule;
 
+    /**
+     * {@link ActionPathNamingRule}を設定します。
+     * 
+     * @param namingRule
+     */
     public void setNamingRule(ActionPathNamingRule namingRule) {
         this.namingRule = namingRule;
     }
 
     private AutoStrutsConfigRule configRule;
 
+    /**
+     * {@link AutoStrutsConfigRule}を設定します。
+     * 
+     * @param configRule
+     */
     public void setAutoStrutsConfigPattern(AutoStrutsConfigRule configRule) {
         this.configRule = configRule;
     }

@@ -20,11 +20,20 @@ import java.util.Collection;
 import org.apache.struts.config.ModuleConfig;
 
 /**
+ * Strutsの設定情報を登録するためのインタフェースです。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface StrutsConfigRegister {
-    
+
+    /**
+     * Strutsの設定情報を登録します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param classes
+     *            設定の対象となり得るクラス群
+     */
     void register(ModuleConfig config, Collection classes);
-	
+
 }

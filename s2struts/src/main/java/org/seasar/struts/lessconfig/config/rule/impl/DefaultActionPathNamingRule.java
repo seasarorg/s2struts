@@ -23,9 +23,9 @@ import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.lessconfig.config.rule.ActionPathNamingRule;
 
 /**
+ * {@link ActionPathNamingRule}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class DefaultActionPathNamingRule implements ActionPathNamingRule {
 

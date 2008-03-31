@@ -19,13 +19,32 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ModuleConfig;
 
 /**
+ * {@link ActionConfig}を作成するためのインタフェースです。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface ActionConfigCreator {
 
+    /**
+     * {@link ActionConfig}を作成します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param path
+     *            Actionのパス
+     * @return 作成された場合はその{@link ActionConfig}、作成されなかった場合は<code>null</code>
+     */
     ActionConfig createActionConfig(ModuleConfig config, String path);
 
+    /**
+     * {@link ActionConfig}を作成します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param actionClass
+     *            Actionのクラス
+     * @return 作成された場合はその{@link ActionConfig}、作成されなかった場合は<code>null</code>
+     */
     ActionConfig createActionConfig(ModuleConfig config, Class actionClass);
 
 }

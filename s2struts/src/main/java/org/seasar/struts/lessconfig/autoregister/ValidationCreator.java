@@ -19,13 +19,34 @@ import org.apache.commons.validator.Form;
 import org.apache.struts.config.ModuleConfig;
 
 /**
+ * {@link Form}を作成するためのインタフェースです。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface ValidationCreator {
-    
+
+    /**
+     * {@link Form}を作成します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param name
+     *            ActionFormの名前
+     * @return 作成された場合はその{@link Form}、作成されなかった場合は<code>null</code>
+     */
     Form createForm(ModuleConfig config, String name);
-    
+
+    /**
+     * {@link Form}を作成します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param formClass
+     *            ActionFormのクラス
+     * @param name
+     *            ActionFormの名前
+     * @return 作成された場合はその{@link Form}、作成されなかった場合は<code>null</code>
+     */
     Form createForm(ModuleConfig config, Class formClass, String name);
 
 }

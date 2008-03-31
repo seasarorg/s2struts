@@ -31,16 +31,21 @@ import org.seasar.struts.lessconfig.util.ClassFinder;
 import org.seasar.struts.lessconfig.util.ClassFinderImpl;
 
 /**
- * Example.
+ * 無設定Strutsを利用するために必要な{@link PlugIn}の実装クラスです。
  * <p>
+ * 使用するには、struts-config.xmlに次のように設定します。
+ * </p>
  * 
- * <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn">
- *   <set-property property="enableJar" value="false"/>
- *   <set-property property="actionClassPattern" value="foo.bar.action.*Action"/>
- *   <set-property property="formClassPattern" value="foo.bar.form.*Form"/>
- *   <set-property property="docRoot" value="/WEB-INF/jsp"/>
- *   <set-property property="viewExtension" value="jsp,html,view"/>
- * </plug-in>
+ * <pre>
+ * &lt;plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn"&gt;
+ *     &lt;set-property property="enableJar" value="false"/&gt;
+ *     &lt;set-property property="jarFilePattern" value="^My.*\.jar$"/&gt;
+ *     &lt;set-property property="actionClassPattern" value="foo.bar.action.*Action"/&gt;
+ *     &lt;set-property property="formClassPattern" value="foo.bar.form.*Form"/&gt;
+ *     &lt;set-property property="docRoot" value="/WEB-INF/jsp"/&gt;
+ *     &lt;set-property property="viewExtension" value="jsp,html,view"/&gt;
+ * &lt;/plug-in&gt;
+ * </pre>
  * 
  * @author Satoshi Kimura
  */
@@ -54,6 +59,9 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
 
     private String referenceClassName = null;
 
+    /**
+     * インスタンスを構築します。
+     */
     public AutoStrutsConfigRegisterPlugIn() {
     }
 
@@ -86,6 +94,12 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
         }
     }
 
+    /**
+     * Strutsに必要な設定を自動登録します。
+     * 
+     * @param actionServlet
+     * @param config
+     */
     public void register(ActionServlet actionServlet, ModuleConfig config) {
         try {
             this.classFinder.find(isEnableJar(), getJarFilePattern());
@@ -107,42 +121,108 @@ public class AutoStrutsConfigRegisterPlugIn implements PlugIn {
     // -----------------------------------------------------------------------
     // set-property
 
+    /**
+     * 自動登録対象のクラスをクラスパスに含まれているjarファイル内からも検索する場合<code>true</code>を返します。
+     * 
+     * @return 自動登録対象のクラスをクラスパスに含まれているjarファイル内からも検索する場合<code>true</code>、そうでない場合<code>false</code>
+     */
     public boolean isEnableJar() {
         return this.enableJar;
     }
 
+    /**
+     * 自動登録対象のクラスをクラスパスに含まれているjarファイル内からも検索する場合<code>true</code>を設定します。
+     * 
+     * @param enableJar
+     *            自動登録対象のクラスをクラスパスに含まれているjarファイル内からも検索する場合<code>true</code>
+     */
     public void setEnableJar(boolean enableJar) {
         this.enableJar = enableJar;
     }
 
+    /**
+     * {@link #setEnableJar(boolean)}にtrueを設定したときに検索するjarファイルのファイル名パターンを返します。
+     * 
+     * @return {@link #setEnableJar(boolean)}にtrueを設定したときに検索するjarファイルのファイル名パターン
+     */
     public String getJarFilePattern() {
         return this.jarFilePattern;
     }
 
+    /**
+     * {@link #setEnableJar(boolean)}にtrueを設定したときに検索するjarファイルのファイル名パターンを指定します。
+     * <p>
+     * ファイル名パターンは正規表現で設定します。
+     * </p>
+     * 
+     * @param jarFilePattern
+     *            使用するJARファイルのパターン
+     */
     public void setJarFilePattern(String jarFilePattern) {
         this.jarFilePattern = jarFilePattern;
     }
 
+    /**
+     * 自動登録対象のディレクトリまたはjarファイルを特定するための基点となるクラスを返します。
+     * 
+     * @return 自動登録対象のディレクトリまたはjarファイルを特定するための基点となるクラス
+     */
     public String getReferenceClass() {
         return this.referenceClassName;
     }
-    
+
+    /**
+     * 自動登録対象のディレクトリまたはjarファイルを特定するための基点となるクラスを設定します。
+     * 
+     * @param referenceClassName
+     *            自動登録対象のディレクトリまたはjarファイルを特定するための基点となるクラス
+     */
     public void setReferenceClass(String referenceClassName) {
-        this.referenceClassName = referenceClassName; 
+        this.referenceClassName = referenceClassName;
     }
 
+    /**
+     * 無設定S2StrutsのActionを特定するためのクラス名パターンを設定します。
+     * <p>
+     * パターンは正規表現で設定します。
+     * </p>
+     * 
+     * @param actionClassPattern
+     *            Actionクラス名のパターン
+     */
     public void setActionClassPattern(String actionClassPattern) {
         configRule().setActionClassPattern(actionClassPattern);
     }
 
+    /**
+     * 無設定S2StrutsのActionFormを特定するためのクラス名パターンを設定します。
+     * <p>
+     * パターンは正規表現で設定します。
+     * </p>
+     * 
+     * @param formClassPattern
+     *            ActionFormクラス名のパターン
+     */
     public void setFormClassPattern(String formClassPattern) {
         configRule().setFormClassPattern(formClassPattern);
     }
 
+    /**
+     * Viewテンプレートとなるファイルの置き場所のトップディレクトリを設定します。
+     * 
+     * @param docRoot
+     *            Viewテンプレートとなるファイルの置き場所のトップディレクトリ
+     */
     public void setDocRoot(String docRoot) {
         configRule().setDocRoot(docRoot);
     }
 
+    /**
+     * Viewテンプレートとなるファイルの拡張子を指定します。
+     * 
+     * @param viewExtension
+     *            Viewテンプレートとなるファイルの拡張子
+     */
     public void setViewExtension(String viewExtension) {
         configRule().setViewExtension(viewExtension);
     }

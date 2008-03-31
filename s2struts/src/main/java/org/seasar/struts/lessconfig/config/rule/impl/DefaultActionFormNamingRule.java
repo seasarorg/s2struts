@@ -25,9 +25,9 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
 
 /**
+ * {@link ActionFormNamingRule}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class DefaultActionFormNamingRule implements ActionFormNamingRule {
 

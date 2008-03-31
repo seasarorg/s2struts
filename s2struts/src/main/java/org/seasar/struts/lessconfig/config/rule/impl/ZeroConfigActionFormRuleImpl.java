@@ -22,6 +22,8 @@ import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.rule.ZeroConfigActionFormRule;
 
 /**
+ * {@link ZeroConfigActionFormRule}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */

@@ -16,14 +16,29 @@
 package org.seasar.struts.lessconfig.config.rule;
 
 /**
+ * ActionFormの命名ルールを扱うインタフェースです。
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public interface ActionFormNamingRule {
 
+    /**
+     * ActionFormの名前をActionFormのクラスに変換します。
+     * 
+     * @param name
+     *            ActionFormの名前
+     * @return ActionFormのクラス
+     */
     Class toComponentClass(String name);
 
+    /**
+     * ActionFormのクラスをActionFormの名前に変換します。
+     * 
+     * @param formClass
+     *            ActionFormのクラス
+     * @return ActionFormの名前
+     */
     String toActionFormName(Class formClass);
 
 }

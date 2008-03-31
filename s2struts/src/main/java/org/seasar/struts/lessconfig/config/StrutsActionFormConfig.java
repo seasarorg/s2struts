@@ -15,24 +15,45 @@
  */
 package org.seasar.struts.lessconfig.config;
 
+import org.apache.struts.config.FormBeanConfig;
 import org.seasar.struts.Constants;
 
 /**
+ * 無設定Strutsで{@link FormBeanConfig}に関する設定情報を扱うインタフェースです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public interface StrutsActionFormConfig {
 
+    /** {@link #name()}のデフォルト値 */
     String DEFAULT_NAME = Constants.UNDEFINED;
 
+    /**
+     * {@link FormBeanConfig#setName(String)}に設定すべき値を返します。
+     * 
+     * @return {@link FormBeanConfig#setName(String)}に設定すべき値
+     */
     String name();
 
+    /** {@link #restricted()}のデフォルト値 */
     Boolean DEFAULT_RESTRICTED = null;
 
+    /**
+     * {@link FormBeanConfig#setRestricted(boolean)}に設定すべき値を返します。
+     * 
+     * @return {@link FormBeanConfig#setRestricted(boolean)}に設定すべき値
+     */
     Boolean restricted();
 
+    /** {@link #inherit()}のデフォルト値 */
     String DEFAULT_INHERIT = Constants.UNDEFINED;
 
+    /**
+     * {@link FormBeanConfig#setExtends(String)}に設定すべき値を返します。
+     * 
+     * @return {@link FormBeanConfig#setExtends(String)}に設定すべき値
+     */
     String inherit();
 
 }

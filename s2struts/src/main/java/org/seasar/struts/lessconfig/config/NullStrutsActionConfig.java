@@ -16,6 +16,8 @@
 package org.seasar.struts.lessconfig.config;
 
 /**
+ * {@link StrutsActionConfig}のデフォルトの実装です。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */

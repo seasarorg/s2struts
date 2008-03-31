@@ -15,13 +15,30 @@
  */
 package org.seasar.struts.lessconfig.config;
 
+import org.apache.struts.config.ForwardConfig;
+
 /**
+ * 無設定Strutsで{@link ForwardConfig}の設定情報を扱うインタフェースです。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
 public interface StrutsActionForwardConfig {
+
+    /**
+     * {@link ForwardConfig#setPath(String)}に設定すべき値を返します。
+     * 
+     * @return {@link ForwardConfig#setPath(String)}に設定すべき値
+     */
     String path();
 
+    /** {@link #redirect()}の設定クラス */
     Boolean DEFAULT_REDIRECT = null;
+
+    /**
+     * {@link ForwardConfig#setRedirect(boolean)}に設定すべき値を返します。
+     * 
+     * @return {@link ForwardConfig#setRedirect(boolean)}に設定すべき値
+     */
     Boolean redirect();
 }

@@ -18,9 +18,18 @@ package org.seasar.struts.lessconfig.config.rule;
 import org.seasar.framework.util.StringUtil;
 
 /**
+ * 共通の命名ルールのためのユーティリティクラスです。
+ * 
  * @author Satoshi Kimura
  */
 public abstract class CommonNamingRule {
+
+    /**
+     * <code>name</code>が「Impl」で終わっている場合、「Impl」を取り除き、先頭文字を小文字にして返します。
+     * 
+     * @param name
+     * @return
+     */
     public static String decapitalizeName(String name) {
         if (StringUtil.isEmpty(name)) {
             return name;

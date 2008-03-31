@@ -22,6 +22,8 @@ import java.util.StringTokenizer;
 import org.seasar.struts.lessconfig.config.AutoStrutsConfigRule;
 
 /**
+ * {@link AutoStrutsConfigRule}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  */
 public class AutoStrutsConfigRuleImpl implements AutoStrutsConfigRule {

@@ -18,6 +18,7 @@ package org.seasar.struts.lessconfig.config.rule.impl;
 import org.seasar.framework.util.StringUtil;
 
 /**
+ * パスの区切り文字<code>/</code>とS2Struts内のパッケージ区切り文字である<code>_</code>を相互に変換します。
  * 
  * @author Katsuhiko Nagashima
  * 

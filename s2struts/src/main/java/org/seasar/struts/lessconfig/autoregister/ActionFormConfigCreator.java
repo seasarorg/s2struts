@@ -19,13 +19,32 @@ import org.apache.struts.config.FormBeanConfig;
 import org.apache.struts.config.ModuleConfig;
 
 /**
+ * {@link FormBeanConfig}を作成するためのインタフェースです。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface ActionFormConfigCreator {
 
+    /**
+     * {@link FormBeanConfig}を作成します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param name
+     *            ActionFormの名前
+     * @return 作成された場合はその{@link FormBeanConfig}、作成されなかった場合は<code>null</code>
+     */
     FormBeanConfig createFormBeanConfig(ModuleConfig config, String name);
 
+    /**
+     * {@link FormBeanConfig}を作成します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param formClass
+     *            ActionFormのクラス
+     * @return 作成された場合はその{@link FormBeanConfig}、作成されなかった場合は<code>null</code>
+     */
     FormBeanConfig createFormBeanConfig(ModuleConfig config, Class formClass);
 
 }

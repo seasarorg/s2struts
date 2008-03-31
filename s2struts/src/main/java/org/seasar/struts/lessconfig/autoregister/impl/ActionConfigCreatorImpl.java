@@ -32,6 +32,7 @@ import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandler;
 import org.seasar.struts.lessconfig.factory.StrutsConfigAnnotationHandlerFactory;
 
 /**
+ * {@link ActionConfigCreator}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -39,18 +40,33 @@ public class ActionConfigCreatorImpl implements ActionConfigCreator {
 
     private ZeroConfigActionRule defaultRule;
 
+    /**
+     * {@link ZeroConfigActionRule}を設定します。
+     * 
+     * @param defaultRule
+     */
     public void setDefaultRule(ZeroConfigActionRule defaultRule) {
         this.defaultRule = defaultRule;
     }
 
     private AutoStrutsConfigRule configRule;
 
+    /**
+     * {@link AutoStrutsConfigRule}を設定します。
+     * 
+     * @param configRule
+     */
     public void setConfigRule(AutoStrutsConfigRule configRule) {
         this.configRule = configRule;
     }
 
     private ActionPathNamingRule namingRule;
 
+    /**
+     * {@link ActionPathNamingRule}を設定します。
+     * 
+     * @param namingRule
+     */
     public void setNamingRule(ActionPathNamingRule namingRule) {
         this.namingRule = namingRule;
     }

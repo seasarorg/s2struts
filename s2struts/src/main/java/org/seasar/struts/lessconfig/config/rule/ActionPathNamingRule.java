@@ -18,14 +18,30 @@ package org.seasar.struts.lessconfig.config.rule;
 import org.apache.struts.config.ModuleConfig;
 
 /**
+ * Actionのパスの命名ルールを扱うインタフェースです。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 public interface ActionPathNamingRule {
 
+    /**
+     * ActionのパスをActionのクラスに変換します。
+     * 
+     * @param config
+     *            {@link ModuleConfig}
+     * @param path
+     *            Actionのパス
+     * @return Actionのクラス
+     */
     Class toComponentClass(ModuleConfig config, String path);
 
+    /**
+     * ActionのクラスをActionのパスに変換します。
+     * 
+     * @param actionClass
+     *            Actionのクラス
+     * @return Actionの
+     */
     String toActionPathName(Class actionClass);
 
 }

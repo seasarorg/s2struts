@@ -22,6 +22,7 @@ import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.util.StringUtil;
 
 /**
+ * 大文字をパスの区切り文字<code>/</code>とその文字の小文字の組み合わせに変換したり、その逆を行ったりします。
  * 
  * @author Katsuhiko Nagashima
  * @author Jun Futagawa

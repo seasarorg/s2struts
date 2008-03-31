@@ -47,24 +47,44 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
 
     private ServletContext servletContext;
 
+    /**
+     * {@link ServletContext}を設定します。
+     * 
+     * @param servletContext
+     */
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 
     private ActionConfigCreator actionConfigCreator;
 
+    /**
+     * {@link ActionConfigCreator}を設定します。
+     * 
+     * @param actionConfigCreator
+     */
     public void setActionConfigCreator(ActionConfigCreator actionConfigCreator) {
         this.actionConfigCreator = actionConfigCreator;
     }
 
     private ActionFormConfigCreator formConfigCreator;
 
+    /**
+     * {@link ActionFormConfigCreator}を設定します。
+     * 
+     * @param formConfigCreator
+     */
     public void setFormConfigCreator(ActionFormConfigCreator formConfigCreator) {
         this.formConfigCreator = formConfigCreator;
     }
 
     private ValidationCreator validationCreator;
 
+    /**
+     * {@link ValidationCreator}を設定します。
+     * 
+     * @param validationCreator
+     */
     public void setValidationConfigCreator(ValidationCreator validationCreator) {
         this.validationCreator = validationCreator;
     }
@@ -125,6 +145,13 @@ public class StrutsConfigRegisterImpl implements StrutsConfigRegister {
         }
     }
 
+    /**
+     * {@link ActionConfig}を登録します。
+     * 
+     * @param config
+     * @param actionConfig
+     * @return
+     */
     public static boolean registeredActionConfig(ModuleConfig config, ActionConfig actionConfig) {
         ActionConfig[] actionConfigs = config.findActionConfigs();
         for (int i = 0; i < actionConfigs.length; ++i) {
