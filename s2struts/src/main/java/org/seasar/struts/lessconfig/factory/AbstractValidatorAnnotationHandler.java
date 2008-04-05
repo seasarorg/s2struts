@@ -40,6 +40,8 @@ import org.seasar.struts.lessconfig.config.rule.CommonNamingRule;
 import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
 
 /**
+ * {@link ValidatorAnnotationHandler}の実装のための抽象クラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public abstract class AbstractValidatorAnnotationHandler implements ValidatorAnnotationHandler {

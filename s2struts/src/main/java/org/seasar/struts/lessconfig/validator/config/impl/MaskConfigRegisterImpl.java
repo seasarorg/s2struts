@@ -25,6 +25,8 @@ import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
 
 /**
+ * 標準検証ルールのmask用の設定を{@link Field}に登録します。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */

@@ -29,6 +29,8 @@ import org.seasar.struts.util.ConstantAnnotationUtil;
 import org.seasar.struts.util.ConstantValueUtil;
 
 /**
+ * バリデーション用の定数アノテーションを扱います。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ConstantValidatorAnnotationHandler extends AbstractValidatorAnnotationHandler {

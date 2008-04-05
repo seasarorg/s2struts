@@ -20,14 +20,19 @@ import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.struts.util.ConstantAnnotationUtil;
 
 /**
+ * プロパティに指定された定数アノテーション<code>ValidateOrder</code>を使い、{@link PropertyDesc}を比較します。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 public class ConstantPropertyDescComparator extends AbstractPropertyDescComparator {
 
     private static final String ORDER_SUFFIX = "_VALIDATOR_ORDER";
 
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param beanDesc
+     */
     public ConstantPropertyDescComparator(BeanDesc beanDesc) {
         super(beanDesc);
     }

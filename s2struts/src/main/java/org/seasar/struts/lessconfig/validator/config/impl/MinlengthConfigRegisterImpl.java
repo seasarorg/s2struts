@@ -15,9 +15,12 @@
  */
 package org.seasar.struts.lessconfig.validator.config.impl;
 
+import org.apache.commons.validator.Field;
 import org.seasar.struts.lessconfig.validator.config.AbstractLengthConfigRegister;
 
 /**
+ * 標準検証ルールのminlength用の設定を{@link Field}に登録します。
+ * 
  * @author Satoshi Kimura
  */
 public class MinlengthConfigRegisterImpl extends AbstractLengthConfigRegister {

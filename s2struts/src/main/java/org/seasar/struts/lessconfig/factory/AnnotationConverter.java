@@ -18,10 +18,21 @@ package org.seasar.struts.lessconfig.factory;
 import java.util.Map;
 
 /**
+ * アノテーションを{@link Map}に変換するインタフェースです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public interface AnnotationConverter {
-    
+
+    /**
+     * アノテーションを{@link Map}に変換します。
+     * <p>
+     * アノテーションの属性が{@linkplain Map}のキーとなり、アノテーションの属性の値が{@linkplain Map}の値になります。
+     * </p>
+     * 
+     * @param obj
+     * @return
+     */
     Map toMap(Object obj);
 
 }

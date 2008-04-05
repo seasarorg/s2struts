@@ -27,9 +27,10 @@ import org.seasar.framework.util.ResourceUtil;
 import org.seasar.framework.util.URLUtil;
 
 /**
+ * Webアプリケーションのリソースに関するユーティリティクラスです。
  * 
  * @author Katsuhiko Nagashima
- *
+ * 
  */
 public class WebResourceUtil {
 
@@ -43,7 +44,14 @@ public class WebResourceUtil {
 
     private WebResourceUtil() {
     }
-    
+
+    /**
+     * 指定されたクラスを含むクラスパスを表現する{@link File}を作成します。
+     * 
+     * @param referenceClass
+     *            参照クラス
+     * @return
+     */
     public static File createFile(Class referenceClass) {
         String baseClassPath = ResourceUtil.getResourcePath(referenceClass);
         URL url = ResourceUtil.getResource(baseClassPath);
@@ -54,8 +62,15 @@ public class WebResourceUtil {
     //
     //
     //
-    
+
     protected interface Strategy {
+        /**
+         * クラスパスを表現する{@link File}を作成します。
+         * 
+         * @param referenceClass
+         * @param url
+         * @return
+         */
         File createFile(final Class referenceClass, final URL url);
     }
 
@@ -81,7 +96,7 @@ public class WebResourceUtil {
             String jarFileName = path.substring(0, pos);
             return new File(decode(jarFileName));
         }
-        
+
         private String decode(String jarFileName) {
             try {
                 return URLDecoder.decode(jarFileName, "UTF8");

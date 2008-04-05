@@ -19,6 +19,8 @@ import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 /**
+ * 無設定Struts用のアノテーションハンドラを作成するファクトリです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class StrutsConfigAnnotationHandlerFactory {
@@ -45,10 +47,20 @@ public class StrutsConfigAnnotationHandlerFactory {
     protected StrutsConfigAnnotationHandlerFactory() {
     }
 
+    /**
+     * {@link StrutsConfigAnnotationHandler}を返します。
+     * 
+     * @return
+     */
     public static StrutsConfigAnnotationHandler getAnnotationHandler() {
         return annotationHandler;
     }
 
+    /**
+     * {@link StrutsConfigAnnotationHandler}を設定します。
+     * 
+     * @param handler
+     */
     public static void setAnnotationHandler(StrutsConfigAnnotationHandler handler) {
         annotationHandler = handler;
     }

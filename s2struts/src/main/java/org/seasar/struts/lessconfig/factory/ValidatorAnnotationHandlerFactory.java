@@ -19,6 +19,8 @@ import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 /**
+ * バリデーション用のアノテーションハンドラを作成するファクトリです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ValidatorAnnotationHandlerFactory {
@@ -45,10 +47,20 @@ public class ValidatorAnnotationHandlerFactory {
     protected ValidatorAnnotationHandlerFactory() {
     }
 
+    /**
+     * {@link ValidatorAnnotationHandler}を返します。
+     * 
+     * @return
+     */
     public static ValidatorAnnotationHandler getAnnotationHandler() {
         return annotationHandler;
     }
 
+    /**
+     * {@link ValidatorAnnotationHandler}を設定します。
+     * 
+     * @param handler
+     */
     public static void setAnnotationHandler(ValidatorAnnotationHandler handler) {
         annotationHandler = handler;
     }

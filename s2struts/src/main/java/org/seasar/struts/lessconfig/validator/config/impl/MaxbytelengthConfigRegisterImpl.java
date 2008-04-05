@@ -15,9 +15,12 @@
  */
 package org.seasar.struts.lessconfig.validator.config.impl;
 
+import org.apache.commons.validator.Field;
 import org.seasar.struts.lessconfig.validator.config.AbstractBytelengthConfigRegister;
 
 /**
+ * 検証ルールのmaxbytelength用の設定を{@link Field}に登録します。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class MaxbytelengthConfigRegisterImpl extends AbstractBytelengthConfigRegister {

@@ -22,6 +22,8 @@ import org.apache.commons.validator.Field;
 import org.apache.commons.validator.Var;
 
 /**
+ * 長さの設定を{@link Field}に登録する{@link ConfigRegister}の抽象クラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public abstract class AbstractLengthConfigRegister implements ConfigRegister {

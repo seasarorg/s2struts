@@ -24,9 +24,9 @@ import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
 
 /**
+ * {@link Msg}を{@link Field}に登録します。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class MessageConfigRegisterImpl implements ConfigRegister {
 
@@ -55,10 +55,22 @@ public class MessageConfigRegisterImpl implements ConfigRegister {
         field.addMsg(msg);
     }
 
+    /**
+     * リソースバンドルの名前を設定します。
+     * 
+     * @param bundle
+     *            リソースバンドルの名前
+     */
     public void setBundle(String bundle) {
         this.defaultBundle = bundle;
     }
 
+    /**
+     * キーがリソースかどうかを設定します。
+     * 
+     * @param resource
+     *            キーがリソースならば<code>true</code>
+     */
     public void setResource(boolean resource) {
         this.defaultResource = resource;
     }

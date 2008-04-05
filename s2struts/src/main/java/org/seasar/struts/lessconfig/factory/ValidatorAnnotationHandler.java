@@ -18,10 +18,19 @@ package org.seasar.struts.lessconfig.factory;
 import org.apache.commons.validator.Form;
 
 /**
+ * バリデータ用のアノテーションを扱うインタフェースです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public interface ValidatorAnnotationHandler {
 
+    /**
+     * {@link Form}を返します。
+     * 
+     * @param formName
+     * @param formClass
+     * @return
+     */
     Form createForm(String formName, Class formClass);
 
 }

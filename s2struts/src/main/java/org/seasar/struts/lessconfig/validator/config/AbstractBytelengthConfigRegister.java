@@ -23,6 +23,8 @@ import org.apache.commons.validator.Var;
 import org.seasar.framework.util.StringUtil;
 
 /**
+ * バイトの長さの設定を{@link Field}に登録する{@link ConfigRegister}の抽象クラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public abstract class AbstractBytelengthConfigRegister implements ConfigRegister {
@@ -54,6 +56,11 @@ public abstract class AbstractBytelengthConfigRegister implements ConfigRegister
         field.addVar(var);
     }
 
+    /**
+     * 文字セットを設定します。
+     * 
+     * @param charset
+     */
     public void setCharset(String charset) {
         this.defaultCharset = charset;
     }

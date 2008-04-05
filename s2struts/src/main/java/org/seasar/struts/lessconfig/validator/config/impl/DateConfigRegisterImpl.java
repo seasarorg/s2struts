@@ -24,6 +24,8 @@ import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
 
 /**
+ * 標準検証ルールのdate用の設定を{@link Field}に登録します。
+ * 
  * @author Satoshi Kimura
  * @author Katsuhiko Nagashima
  */
@@ -54,10 +56,22 @@ public class DateConfigRegisterImpl implements ConfigRegister {
         field.addVar(var);
     }
 
+    /**
+     * 日付のパターンを設定します。
+     * 
+     * @param pattern
+     *            日付のパターン
+     */
     public void setPattern(String pattern) {
         this.defaultPattern = pattern;
     }
 
+    /**
+     * 厳密な検証をするかどうかを設定します。
+     * 
+     * @param strict
+     *            厳密な検証をするならば<code>true</code>
+     */
     public void setStrict(boolean strict) {
         this.defaultStrict = strict;
     }

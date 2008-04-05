@@ -22,6 +22,8 @@ import java.util.StringTokenizer;
 import javax.servlet.GenericServlet;
 
 /**
+ * {@link ClassFinder}の実装クラスです。
+ * 
  * @author Satoshi Kimura
  */
 public class ClassFinderImpl implements ClassFinder {
@@ -85,8 +87,7 @@ public class ClassFinderImpl implements ClassFinder {
         find(servlet, enableJar, jarFilePattern, ALL_MATCH_PATTERN);
     }
 
-    public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern,
-            String pattern) {
+    public void find(GenericServlet servlet, boolean enableJar, String jarFilePattern, String pattern) {
         String classesDirPath = servlet.getServletContext().getRealPath(WEB_CLASSES_DIR);
         if (classesDirPath != null) {
             find(classesDirPath, enableJar, jarFilePattern, pattern);

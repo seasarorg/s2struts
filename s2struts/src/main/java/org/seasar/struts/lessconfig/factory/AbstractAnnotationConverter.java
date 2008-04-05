@@ -25,6 +25,8 @@ import java.util.Map;
 import org.seasar.framework.util.MethodUtil;
 
 /**
+ * {@link AnnotationConverter}の実装のための抽象クラスです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public abstract class AbstractAnnotationConverter implements AnnotationConverter {

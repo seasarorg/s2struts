@@ -21,34 +21,125 @@ import java.util.Collection;
 import javax.servlet.GenericServlet;
 
 /**
+ * パターンにマッチするクラスをクラスパスから見つけるためのインタフェースです。
+ * <p>
+ * 見つけたクラスは{@link #getClassCollection()}で返します。
+ * </p>
+ * 
  * @author Satoshi Kimura
  */
 public interface ClassFinder {
+
+    /**
+     * デフォルトの条件でクラスを見つけます。
+     */
     void find();
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param pattern
+     */
     void find(String pattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param enableJar
+     * @param jarFilePattern
+     */
     void find(boolean enableJar, String jarFilePattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param enableJar
+     * @param jarFilePattern
+     * @param pattern
+     */
     void find(boolean enableJar, String jarFilePattern, String pattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param path
+     * @param enableJar
+     * @param jarFilePattern
+     */
     void find(String path, boolean enableJar, String jarFilePattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param path
+     * @param enableJar
+     * @param jarFilePattern
+     * @param pattern
+     */
     void find(String path, boolean enableJar, String jarFilePattern, String pattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param file
+     * @param enableJar
+     * @param jarFilePattern
+     */
     void find(File file, boolean enableJar, String jarFilePattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param file
+     * @param enableJar
+     * @param jarFilePattern
+     * @param pattern
+     */
     void find(File file, boolean enableJar, String jarFilePattern, String pattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param servlet
+     * @param enableJar
+     * @param jarFilePattern
+     */
     void find(GenericServlet servlet, boolean enableJar, String jarFilePattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param servlet
+     * @param enableJar
+     * @param jarFilePattern
+     * @param pattern
+     */
     void find(GenericServlet servlet, boolean enableJar, String jarFilePattern, String pattern);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param referenceClass
+     */
     void find(Class referenceClass);
 
+    /**
+     * クラスを見つけます。
+     * 
+     * @param referenceClass
+     * @param pattern
+     */
     void find(Class referenceClass, String pattern);
 
+    /**
+     * 見つけたクラスのコレクションを返します。
+     * 
+     * @return 見つけたクラスのコレクション
+     */
     Collection getClassCollection();
 
+    /**
+     * 破棄します。
+     */
     void destroy();
 }

@@ -28,6 +28,8 @@ import org.seasar.struts.util.ConstantAnnotationUtil;
 import org.seasar.struts.util.ConstantValueUtil;
 
 /**
+ * 無設定Struts用の定数アノテーションを扱います。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class ConstantStrutsConfigAnnotationHandler implements StrutsConfigAnnotationHandler {

@@ -22,14 +22,34 @@ import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 
 /**
+ * 無設定Struts用のアノテーションを扱うインタフェースです。
+ * 
  * @author Katsuhiko Nagashima
  */
 public interface StrutsConfigAnnotationHandler {
 
+    /**
+     * {@link StrutsActionConfig}を作成します。
+     * 
+     * @param clazz
+     * @return
+     */
     StrutsActionConfig createStrutsActionConfig(Class clazz);
 
+    /**
+     * {@link StrutsActionForwardConfig}を作成します。
+     * 
+     * @param field
+     * @return
+     */
     StrutsActionForwardConfig createStrutsActionForwardConfig(Field field);
 
+    /**
+     * {@link StrutsActionFormConfig}を作成します。
+     * 
+     * @param clazz
+     * @return
+     */
     StrutsActionFormConfig createStrutsActionFormConfig(Class clazz);
 
 }

@@ -27,9 +27,9 @@ import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.ClassUtil;
 
 /**
+ * 特定のクラスをロードしそれをプールします。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 public class ClassPool {
 
@@ -43,12 +43,27 @@ public class ClassPool {
 
     private Collection classCollection = new ArrayList();
 
-    public void loadAllClass(String classpath, boolean enableJar, String jarFilePattern,
-            String pattern) {
+    /**
+     * 指定された条件に合致するクラスをロードします。
+     * 
+     * @param classpath
+     * @param enableJar
+     * @param jarFilePattern
+     * @param pattern
+     */
+    public void loadAllClass(String classpath, boolean enableJar, String jarFilePattern, String pattern) {
         File path = new File(classpath);
         loadAllClass(path, enableJar, jarFilePattern, pattern);
     }
-    
+
+    /**
+     * 指定された条件に合致するクラスをロードします。
+     * 
+     * @param path
+     * @param enableJar
+     * @param jarFilePattern
+     * @param pattern
+     */
     public void loadAllClass(File path, boolean enableJar, String jarFilePattern, String pattern) {
         if (!path.exists()) {
             return;
@@ -61,6 +76,13 @@ public class ClassPool {
         }
     }
 
+    /**
+     * JARファイルからクラスをロードします。
+     * 
+     * @param path
+     * @param jarFilePattern
+     * @param pattern
+     */
     public void loadFromJar(File path, String jarFilePattern, String pattern) {
         if (jarFilePattern == null || jarFilePattern.length() == 0) {
             logger.debug("Not load jarFile because of undefineding jarFilePattern.");
@@ -105,6 +127,13 @@ public class ClassPool {
         }
     }
 
+    /**
+     * ディレクトリからクラスをロードします。
+     * 
+     * @param rootPath
+     * @param path
+     * @param pattern
+     */
     public void loadFromDir(File rootPath, File path, String pattern) {
         File[] files = path.listFiles();
         int rootPathDirNameLength = rootPath.getAbsolutePath().length() + 1;
@@ -132,8 +161,7 @@ public class ClassPool {
     }
 
     private static Class forResourceName(String classResourceName) {
-        String className = classResourceName.substring(0, classResourceName.length()
-                - CLASS_FILE_EXTENTION_LENGTH);
+        String className = classResourceName.substring(0, classResourceName.length() - CLASS_FILE_EXTENTION_LENGTH);
         className = className.replace(FILE_SEPARATOR, '.');
         className = className.replace('/', '.');
         try {
@@ -148,10 +176,18 @@ public class ClassPool {
         }
     }
 
+    /**
+     * プールしているクラスのコレクションを返します。
+     * 
+     * @return プールしているクラスのコレクション
+     */
     public synchronized Collection getClassCollection() {
         return this.classCollection;
     }
 
+    /**
+     * 破棄します。
+     */
     public synchronized void destroy() {
         this.classCollection = new ArrayList();
     }

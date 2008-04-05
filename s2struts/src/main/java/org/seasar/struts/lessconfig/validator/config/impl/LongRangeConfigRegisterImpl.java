@@ -15,9 +15,12 @@
  */
 package org.seasar.struts.lessconfig.validator.config.impl;
 
+import org.apache.commons.validator.Field;
 import org.seasar.struts.lessconfig.validator.config.AbstractRangeConfigRegister;
 
 /**
+ * 標準検証ルールのlongRange用の設定を{@link Field}に登録します。
+ * 
  * @author Katsuhiko Nagashima
  */
 public class LongRangeConfigRegisterImpl extends AbstractRangeConfigRegister {

@@ -20,8 +20,17 @@ import java.util.Map;
 import org.apache.commons.validator.Field;
 
 /**
+ * バリデータの設定を登録するインタフェースです。
+ * 
  * @author Satoshi Kimura
  */
 public interface ConfigRegister {
+
+    /**
+     * バリデータの設定を<code>field</code>に設定します。
+     * 
+     * @param field
+     * @param parameter
+     */
     void register(Field field, Map parameter);
 }
