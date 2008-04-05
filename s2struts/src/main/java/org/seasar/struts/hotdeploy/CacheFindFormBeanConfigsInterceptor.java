@@ -16,8 +16,10 @@
 package org.seasar.struts.hotdeploy;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.config.ModuleConfig;
 
 /**
+ * 同一リクエスト内で{@link ModuleConfig#findFormBeanConfigs()}の実行結果をキャッシュするインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */

@@ -16,15 +16,17 @@
 package org.seasar.struts.hotdeploy;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.config.ModuleConfig;
 
 /**
+ * 同一リクエスト内で{@link ModuleConfig#findFormBeanConfig(String)}の実行結果をキャッシュするインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */
 public class CacheFindFormBeanConfigInterceptor extends AbstractRequestCacheInterceptor {
 
     private static final long serialVersionUID = -154203133170461515L;
-    
+
     private static final String REQUEST_KEY = "org.seasar.struts.hotdeploy.CacheFindFormBeanConfigInterceptor.REQUEST_KEY";
 
     public Object invoke(MethodInvocation invocation) throws Throwable {

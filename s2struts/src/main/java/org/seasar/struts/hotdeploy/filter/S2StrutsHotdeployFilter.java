@@ -29,9 +29,12 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.hotdeploy.ChainConfigLoader;
 
 /**
+ * S2StrutsでHOT deployを実現するために必要な{@link Filter}です。
+ * <p>
+ * リクエストの度にCommons Chainの設定の再ロードを実行します。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class S2StrutsHotdeployFilter implements Filter {
 

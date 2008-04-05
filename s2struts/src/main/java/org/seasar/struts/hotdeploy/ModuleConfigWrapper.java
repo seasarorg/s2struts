@@ -27,6 +27,10 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.PlugInConfig;
 
 /**
+ * {@link ModuleConfig}のラッパークラスです。
+ * <p>
+ * ラップの目的はHOT deploy用のアスペクトを適用することにあります。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -36,6 +40,11 @@ public class ModuleConfigWrapper implements ModuleConfig, Serializable {
 
     private ModuleConfig config;
 
+    /**
+     * ラップの対象の{@link ModuleConfig}を設定します。
+     * 
+     * @param config
+     */
     public void init(ModuleConfig config) {
         this.config = config;
     }

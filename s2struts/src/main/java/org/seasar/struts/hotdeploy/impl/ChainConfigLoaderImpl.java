@@ -35,9 +35,9 @@ import org.seasar.framework.log.Logger;
 import org.seasar.struts.hotdeploy.ChainConfigLoader;
 
 /**
+ * {@link ChainConfigLoader}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class ChainConfigLoaderImpl implements ChainConfigLoader {
 
@@ -53,6 +53,11 @@ public class ChainConfigLoaderImpl implements ChainConfigLoader {
 
     private ServletContext servletContext;
 
+    /**
+     * {@link ServletContext}を設定します。
+     * 
+     * @param servletContext
+     */
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }

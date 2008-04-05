@@ -25,21 +25,33 @@ import org.apache.commons.validator.Form;
 import org.apache.commons.validator.FormSet;
 import org.apache.commons.validator.ValidatorAction;
 import org.apache.commons.validator.ValidatorResources;
+import org.apache.struts.validator.ValidatorPlugIn;
 
 /**
+ * 複数の{@link ValidatorResources}を扱います。
+ * <p>
+ * {@link ValidatorPlugIn}で作成される{@link ValidatorResources}と、S2Strutsの自動登録機能で作成される{@link ValidatorResources}を扱います。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class CompositeValidatorResources extends ValidatorResources {
 
     private static final long serialVersionUID = -2473704615510071543L;
 
+    /**
+     * インスタンスを構築します。
+     */
     public CompositeValidatorResources() {
     }
 
     private List resourcesList = new ArrayList();
 
+    /**
+     * {@link ValidatorResources}を追加します。
+     * 
+     * @param resources
+     */
     public void addResources(ValidatorResources resources) {
         this.resourcesList.add(resources);
     }
@@ -96,6 +108,9 @@ public class CompositeValidatorResources extends ValidatorResources {
     //
     //
 
+    /**
+     * {@link ValidatorResources}を設定します。
+     */
     public void init(ValidatorResources resources) {
         throw new UnsupportedOperationException();
     }

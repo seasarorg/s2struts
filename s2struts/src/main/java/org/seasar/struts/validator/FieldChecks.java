@@ -31,11 +31,32 @@ import org.seasar.framework.util.ClassUtil;
 import org.seasar.struts.validator.exception.ValidatorException;
 
 /**
+ * 標準検証ルールで使用される{@link FieldChecks}をS2Struts用に拡張したクラスです。
+ * 
  * @author Satoshi Kimura
  */
 public class FieldChecks extends org.apache.struts.validator.FieldChecks {
     private static final long serialVersionUID = -8929484039023790851L;
 
+    /**
+     * 独自に作成したバリデータを実行します。
+     * <p>
+     * このメソッドを呼び出すにはあらかじめ次の設定が必要です。
+     * <ul>
+     * <li>実際の検証処理は{@link org.seasar.struts.validator.Validator}の実装クラスに記述する</li>
+     * <li>作成した<code>Validator</code>の実装クラスはコンポーネントとしてS2コンテナに登録する</li>
+     * <li>バリデータの設定で{@link Field}に<code>componentKey</code>という文字列をキー、<code>Validator</code>コンポーネントの名前もしくはクラス名を値として登録する</li>
+     * </ul>
+     * </p>
+     * 
+     * @param bean
+     * @param validatorAction
+     * @param field
+     * @param errors
+     * @param validator
+     * @param request
+     * @return
+     */
     public static boolean validateCustom(Object bean, ValidatorAction validatorAction, Field field,
             ActionMessages errors, Validator validator, HttpServletRequest request) {
         if (bean == null) {
@@ -53,8 +74,8 @@ public class FieldChecks extends org.apache.struts.validator.FieldChecks {
         return true;
     }
 
-    private static void validate(Object bean,Field field) throws ValidatorException {
-        org.seasar.struts.validator.Validator validator = getValidator(bean,field);
+    private static void validate(Object bean, Field field) throws ValidatorException {
+        org.seasar.struts.validator.Validator validator = getValidator(bean, field);
         validator.validate(bean);
     }
 
@@ -69,19 +90,23 @@ public class FieldChecks extends org.apache.struts.validator.FieldChecks {
     }
 
     /**
-     * Checks if the field's length of byte is less than or equal to the maximum value. A <code>Null</code> will be
-     * considered an error.
+     * Checks if the field's length of byte is less than or equal to the maximum
+     * value. A <code>Null</code> will be considered an error.
      * 
      * @param bean
      *            The bean validation is being performed on.
      * @param validatorAction
-     *            The <code>ValidatorAction</code> that is currently being performed.
+     *            The <code>ValidatorAction</code> that is currently being
+     *            performed.
      * @param field
-     *            The <code>Field</code> object associated with the current field being validated.
+     *            The <code>Field</code> object associated with the current
+     *            field being validated.
      * @param errors
-     *            The <code>ActionMessages</code> object to add errors to if any validation errors occur.
+     *            The <code>ActionMessages</code> object to add errors to if
+     *            any validation errors occur.
      * @param validator
-     *            The <code>Validator</code> instance, used to access other field values.
+     *            The <code>Validator</code> instance, used to access other
+     *            field values.
      * @param request
      *            Current request object.
      * @return True if stated conditions met.
@@ -110,15 +135,25 @@ public class FieldChecks extends org.apache.struts.validator.FieldChecks {
     }
 
     /**
-     * Checks if the field's length of byte is greater than or equal to the minimum value. A <code>Null</code> will be
-     * considered an error.
+     * Checks if the field's length of byte is greater than or equal to the
+     * minimum value. A <code>Null</code> will be considered an error.
      * 
-     * @param bean The bean validation is being performed on.
-     * @param validatorAction The <code>ValidatorAction</code> that is currently being performed.
-     * @param field The <code>Field</code> object associated with the current field being validated.
-     * @param errors The <code>ActionMessages</code> object to add errors to if any validation errors occur.
-     * @param validator The <code>Validator</code> instance, used to access other field values.
-     * @param request Current request object.
+     * @param bean
+     *            The bean validation is being performed on.
+     * @param validatorAction
+     *            The <code>ValidatorAction</code> that is currently being
+     *            performed.
+     * @param field
+     *            The <code>Field</code> object associated with the current
+     *            field being validated.
+     * @param errors
+     *            The <code>ActionMessages</code> object to add errors to if
+     *            any validation errors occur.
+     * @param validator
+     *            The <code>Validator</code> instance, used to access other
+     *            field values.
+     * @param request
+     *            Current request object.
      * @return True if stated conditions met.
      */
     public static boolean validateMinByteLength(Object bean, ValidatorAction validatorAction, Field field,

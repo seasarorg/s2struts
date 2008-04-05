@@ -29,6 +29,7 @@ import org.seasar.framework.container.util.Traversal;
 import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
 
 /**
+ * {@link ModuleConfig#findFormBeanConfigs()}実行時に{@link FormBeanConfig}の配列をオンデマンドで作成するインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -38,6 +39,11 @@ public class OndemandFindFormBeanConfigsInterceptor extends AbstractInterceptor 
 
     private ActionFormConfigCreator formConfigCreator;
 
+    /**
+     * {@link ActionFormConfigCreator}を設定します。
+     * 
+     * @param formBeanConfigCreator
+     */
     public void setFormConfigCreator(ActionFormConfigCreator formBeanConfigCreator) {
         this.formConfigCreator = formBeanConfigCreator;
     }

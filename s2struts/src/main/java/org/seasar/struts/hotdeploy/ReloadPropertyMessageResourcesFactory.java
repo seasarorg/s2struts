@@ -4,9 +4,9 @@ import org.apache.struts.util.MessageResources;
 import org.apache.struts.util.MessageResourcesFactory;
 
 /**
+ * {@link ReloadMessageResourcesFactory}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class ReloadPropertyMessageResourcesFactory extends MessageResourcesFactory implements
         ReloadMessageResourcesFactory {

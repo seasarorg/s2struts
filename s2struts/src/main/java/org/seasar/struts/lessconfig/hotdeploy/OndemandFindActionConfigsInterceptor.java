@@ -29,6 +29,7 @@ import org.seasar.framework.container.util.Traversal;
 import org.seasar.struts.lessconfig.autoregister.ActionConfigCreator;
 
 /**
+ * {@link ModuleConfig#findActionConfigs()}実行時に{@link ActionConfig}の配列をオンデマンドで作成するインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -38,6 +39,11 @@ public class OndemandFindActionConfigsInterceptor extends AbstractInterceptor {
 
     private ActionConfigCreator actionConfigCreator;
 
+    /**
+     * {@link ActionConfigCreator}を設定します。
+     * 
+     * @param actionConfigCreator
+     */
     public void setActionConfigCreator(ActionConfigCreator actionConfigCreator) {
         this.actionConfigCreator = actionConfigCreator;
     }

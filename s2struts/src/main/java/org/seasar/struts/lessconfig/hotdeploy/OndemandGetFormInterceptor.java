@@ -27,6 +27,7 @@ import org.seasar.struts.lessconfig.autoregister.ValidationCreator;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * {@link ValidatorResources#getForm()}実行時に{@link Form}をオンデマンドで作成します。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -38,6 +39,11 @@ public class OndemandGetFormInterceptor extends AbstractInterceptor {
 
     private ValidationCreator validationCreator;
 
+    /**
+     * {@link ValidationCreator}を作成します。
+     * 
+     * @param validationCreator
+     */
     public void setValidationCreator(ValidationCreator validationCreator) {
         this.validationCreator = validationCreator;
     }
@@ -53,8 +59,7 @@ public class OndemandGetFormInterceptor extends AbstractInterceptor {
             return invocation.proceed();
         }
 
-        ModuleConfig config = ModuleUtils.getInstance().getModuleConfig(
-                S2StrutsContextUtil.getRequest());
+        ModuleConfig config = ModuleUtils.getInstance().getModuleConfig(S2StrutsContextUtil.getRequest());
         Form form = this.validationCreator.createForm(config, formKey);
         if (form != null) {
             if (log.isDebugEnabled()) {

@@ -25,6 +25,7 @@ import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
+ * 同一リクエスト内でメソッド呼び出し結果をキャッシュするインターセプタの抽象クラスです。
  * 
  * @author Katsuhiko Nagashima
  * 
@@ -48,5 +49,5 @@ public abstract class AbstractRequestCacheInterceptor extends AbstractIntercepto
         }
         return result;
     }
-    
+
 }

@@ -25,6 +25,7 @@ import org.apache.struts.config.ModuleConfig;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 
 /**
+ * {@link ModuleConfig#findActionConfigs()}実行時に{@link ActionConfig}の配列を再ロードするインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -34,6 +35,11 @@ public class ReloadFindActionConfigsInterceptor extends AbstractInterceptor {
 
     private ModuleConfigLoader moduleConfigLoader;
 
+    /**
+     * {@link ModuleConfigLoader}を設定します。
+     * 
+     * @param moduleConfigLoader
+     */
     public void setModuleConfigLoader(ModuleConfigLoader moduleConfigLoader) {
         this.moduleConfigLoader = moduleConfigLoader;
     }

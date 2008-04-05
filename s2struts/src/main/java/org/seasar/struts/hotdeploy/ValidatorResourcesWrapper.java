@@ -24,6 +24,11 @@ import org.apache.commons.validator.ValidatorAction;
 import org.apache.commons.validator.ValidatorResources;
 
 /**
+ * {@link ValidatorResources}のラッパークラスです。
+ * 
+ * <p>
+ * ラップの目的はHOT deploy用のアスペクトを適用することにあります。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
  */
@@ -33,6 +38,11 @@ public class ValidatorResourcesWrapper extends ValidatorResources {
 
     private ValidatorResources resources;
 
+    /**
+     * ラップの対象となる{@link ValidatorResources}を設定します。
+     * 
+     * @param resources
+     */
     public void init(ValidatorResources resources) {
         this.resources = resources;
     }

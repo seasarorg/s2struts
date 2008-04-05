@@ -52,6 +52,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
+ * {@link ModuleConfigLoader}をロードします。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -86,6 +87,11 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
     private ServletContext servletContext;
 
+    /**
+     * {@link ServletContext}を設定します。
+     * 
+     * @param servletContext
+     */
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
@@ -202,7 +208,8 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
     /**
      * <p>
-     * Check the status of the <code>validating</code> initialization parameter.
+     * Check the status of the <code>validating</code> initialization
+     * parameter.
      * </p>
      * 
      * @return true if the module Digester should validate.
@@ -286,7 +293,8 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
     /**
      * <p>
-     * General handling for exceptions caught while inheriting config information.
+     * General handling for exceptions caught while inheriting config
+     * information.
      * </p>
      * 
      * @param configType
@@ -479,17 +487,19 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
     /**
      * <p>
-     * Checks if the current beanConfig is using the correct class based on the class of its ancestor form bean config.
+     * Checks if the current beanConfig is using the correct class based on the
+     * class of its ancestor form bean config.
      * </p>
      * 
      * @param beanConfig
      *            The form bean to check.
      * @param moduleConfig
      *            The config for the current module.
-     * @return The form bean config using the correct class as determined by the config's ancestor and its own
-     *         overridden value.
+     * @return The form bean config using the correct class as determined by the
+     *         config's ancestor and its own overridden value.
      * @throws UnavailableException
-     *             if an instance of the form bean config class cannot be created.
+     *             if an instance of the form bean config class cannot be
+     *             created.
      * @throws ServletException
      *             on class creation error
      */
@@ -609,15 +619,16 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
     /**
      * <p>
-     * Checks if the current forwardConfig is using the correct class based on the class of its configuration ancestor.
+     * Checks if the current forwardConfig is using the correct class based on
+     * the class of its configuration ancestor.
      * </p>
      * 
      * @param forwardConfig
      *            The forward to check.
      * @param moduleConfig
      *            The config for the current module.
-     * @return The forward config using the correct class as determined by the config's ancestor and its own overridden
-     *         value.
+     * @return The forward config using the correct class as determined by the
+     *         config's ancestor and its own overridden value.
      * @throws UnavailableException
      *             if an instance of the forward config class cannot be created.
      * @throws ServletException
@@ -734,18 +745,19 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
     /**
      * <p>
-     * Checks if the current exceptionConfig is using the correct class based on the class of its configuration
-     * ancestor.
+     * Checks if the current exceptionConfig is using the correct class based on
+     * the class of its configuration ancestor.
      * </p>
      * 
      * @param exceptionConfig
      *            The config to check.
      * @param moduleConfig
      *            The config for the current module.
-     * @return The exception config using the correct class as determined by the config's ancestor and its own
-     *         overridden value.
+     * @return The exception config using the correct class as determined by the
+     *         config's ancestor and its own overridden value.
      * @throws ServletException
-     *             if an instance of the exception config class cannot be created.
+     *             if an instance of the exception config class cannot be
+     *             created.
      */
     protected ExceptionConfig processExceptionConfigClass(ExceptionConfig exceptionConfig, ModuleConfig moduleConfig)
             throws ServletException {
@@ -876,15 +888,16 @@ public class ModuleConfigLoaderImpl implements ModuleConfigLoader {
 
     /**
      * <p>
-     * Checks if the current actionConfig is using the correct class based on the class of its ancestor ActionConfig.
+     * Checks if the current actionConfig is using the correct class based on
+     * the class of its ancestor ActionConfig.
      * </p>
      * 
      * @param actionConfig
      *            The action config to check.
      * @param moduleConfig
      *            The config for the current module.
-     * @return The config object using the correct class as determined by the config's ancestor and its own overridden
-     *         value.
+     * @return The config object using the correct class as determined by the
+     *         config's ancestor and its own overridden value.
      * @throws ServletException
      *             if an instance of the action config class cannot be created.
      */

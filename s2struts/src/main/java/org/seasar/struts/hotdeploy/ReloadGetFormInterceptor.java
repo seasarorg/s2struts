@@ -23,6 +23,7 @@ import org.apache.commons.validator.ValidatorResources;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
 
 /**
+ * {@link ValidatorResources#getForm()}実行時に{@link Form}を再ロードします。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -32,6 +33,11 @@ public class ReloadGetFormInterceptor extends AbstractInterceptor {
 
     private ValidatorResourcesLoader validatorResourcesLoader;
 
+    /**
+     * {@link ValidatorResourcesLoader}を設定します。
+     * 
+     * @param validatorResourcesLoader
+     */
     public void setValidatorResourcesLoader(ValidatorResourcesLoader validatorResourcesLoader) {
         this.validatorResourcesLoader = validatorResourcesLoader;
     }

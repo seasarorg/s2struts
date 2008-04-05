@@ -20,11 +20,19 @@ import javax.servlet.ServletException;
 import org.apache.struts.config.ModuleConfig;
 
 /**
+ * {@link ModuleConfig}をロードします。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface ModuleConfigLoader {
 
+    /**
+     * {@link ModuleConfig}をロードし返します。
+     * 
+     * @param prefix
+     * @return
+     * @throws ServletException
+     */
     ModuleConfig load(String prefix) throws ServletException;
 
 }

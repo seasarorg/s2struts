@@ -16,17 +16,19 @@
 package org.seasar.struts.hotdeploy;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.struts.config.ModuleConfig;
 
 /**
+ * 同一リクエスト内で{@link ModuleConfig#findActionConfig(String)}の実行結果をキャッシュするインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */
 public class CacheFindActionConfigInterceptor extends AbstractRequestCacheInterceptor {
 
     private static final long serialVersionUID = 1157133465367256300L;
-    
+
     private static final String REQUEST_KEY = "org.seasar.struts.hotdeploy.CacheFindActionConfigInterceptor.REQUEST_KEY";
-    
+
     public Object invoke(MethodInvocation invocation) throws Throwable {
         String cacheKey = (String) invocation.getArguments()[0];
         return this.invokeAndCache(invocation, REQUEST_KEY, cacheKey);

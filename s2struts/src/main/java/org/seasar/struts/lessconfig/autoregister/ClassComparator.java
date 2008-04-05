@@ -55,6 +55,12 @@ public class ClassComparator implements Comparator, Serializable {
         }
     }
 
+    /**
+     * クラスのコレクションをソートします。
+     * 
+     * @param collection
+     * @return
+     */
     public static List sort(Collection collection) {
         Object[] objects = collection.toArray();
         Arrays.sort(objects, new ClassComparator());

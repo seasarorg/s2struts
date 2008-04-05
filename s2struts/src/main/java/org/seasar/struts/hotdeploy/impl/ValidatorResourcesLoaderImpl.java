@@ -35,6 +35,7 @@ import org.seasar.struts.util.S2StrutsContextUtil;
 import org.xml.sax.SAXException;
 
 /**
+ * {@link ValidatorResourcesLoader}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -53,6 +54,11 @@ public class ValidatorResourcesLoaderImpl implements ValidatorResourcesLoader {
         return resources;
     }
 
+    /**
+     * {@link PlugInConfig}を返します。
+     * 
+     * @return
+     */
     public PlugInConfig getPlugInConfig() {
         ModuleConfig config = ModuleUtils.getInstance().getModuleConfig(S2StrutsContextUtil.getRequest());
 
@@ -71,6 +77,11 @@ public class ValidatorResourcesLoaderImpl implements ValidatorResourcesLoader {
 
     private ServletContext servletContext;
 
+    /**
+     * {@link ServletContext}を返します。
+     * 
+     * @param servletContext
+     */
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }

@@ -22,11 +22,19 @@ import javax.servlet.ServletException;
 import org.apache.commons.validator.ValidatorResources;
 
 /**
+ * {@link ValidatorResources}をロードします。
  * 
  * @author Katsuhiko Nagashima
  */
 public interface ValidatorResourcesLoader {
 
+    /**
+     * {@link ValidatorResources}をロードし返します。
+     * 
+     * @return
+     * @throws IOException
+     * @throws ServletException
+     */
     ValidatorResources load() throws IOException, ServletException;
 
 }

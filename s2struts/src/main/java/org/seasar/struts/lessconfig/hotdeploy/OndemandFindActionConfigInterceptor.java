@@ -24,6 +24,7 @@ import org.seasar.framework.log.Logger;
 import org.seasar.struts.lessconfig.autoregister.ActionConfigCreator;
 
 /**
+ * {@link ModuleConfig#findActionConfig(String)}実行時に{@link ActionConfig}をオンデマンドで作成するインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -35,6 +36,11 @@ public class OndemandFindActionConfigInterceptor extends AbstractInterceptor {
 
     private ActionConfigCreator actionConfigCreator;
 
+    /**
+     * {@link ActionConfigCreator}を設定します。
+     * 
+     * @param actionConfigCreator
+     */
     public void setActionConfigCreator(ActionConfigCreator actionConfigCreator) {
         this.actionConfigCreator = actionConfigCreator;
     }

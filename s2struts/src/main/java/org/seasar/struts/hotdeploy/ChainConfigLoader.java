@@ -18,12 +18,18 @@ package org.seasar.struts.hotdeploy;
 import javax.servlet.ServletException;
 
 /**
+ * Commons Chainの設定をロードします。
  * 
  * @author Katsuhiko Nagashima
  * 
  */
 public interface ChainConfigLoader {
 
+    /**
+     * Commons Chainの設定をロードします。
+     * 
+     * @throws ServletException
+     */
     void load() throws ServletException;
 
 }

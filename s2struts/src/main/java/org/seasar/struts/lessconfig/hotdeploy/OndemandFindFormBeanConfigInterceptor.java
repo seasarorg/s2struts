@@ -23,6 +23,7 @@ import org.seasar.framework.log.Logger;
 import org.seasar.struts.lessconfig.autoregister.ActionFormConfigCreator;
 
 /**
+ * {@link ModuleConfig#findFormBeanConfig(String)}実行時に{@link FormBeanConfig}をオンデマンドで作成するインターセプタです。
  * 
  * @author Katsuhiko Nagashima
  */
@@ -34,6 +35,11 @@ public class OndemandFindFormBeanConfigInterceptor extends AbstractInterceptor {
 
     private ActionFormConfigCreator formConfigCreator;
 
+    /**
+     * {@link ActionFormConfigCreator}を設定します。
+     * 
+     * @param formConfigCreator
+     */
     public void setActionFormConfigCreator(ActionFormConfigCreator formConfigCreator) {
         this.formConfigCreator = formConfigCreator;
     }
