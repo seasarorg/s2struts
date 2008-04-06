@@ -21,16 +21,22 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * struts-config.xmlのforward要素に対応するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface StrutsActionForward {
 
-    String path();
+	/**
+	 * path属性
+	 */
+	String path();
 
-    BoolType redirect() default BoolType.UNDEFINED;
+	/**
+	 * redirect属性
+	 */
+	BoolType redirect() default BoolType.UNDEFINED;
 
 }

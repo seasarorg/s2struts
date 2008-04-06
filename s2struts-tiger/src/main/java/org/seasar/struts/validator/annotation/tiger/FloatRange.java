@@ -21,17 +21,25 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 標準検証ルールのfloatRangeを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface FloatRange {
 
-    float min();
-    
-    float max();
+	/**
+	 * 最小値
+	 */
+	float min();
+
+	/**
+	 * 最大値
+	 * 
+	 * @return
+	 */
+	float max();
 
 }

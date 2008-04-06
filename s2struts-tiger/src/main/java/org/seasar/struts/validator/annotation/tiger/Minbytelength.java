@@ -21,17 +21,23 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 検証ルールのmaxbytelengthを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface Minbytelength {
 
-    int value();
+	/**
+	 * 最小値
+	 */
+	int value();
 
-    String charset() default "";
+	/**
+	 * 文字セット
+	 */
+	String charset() default "";
 
 }

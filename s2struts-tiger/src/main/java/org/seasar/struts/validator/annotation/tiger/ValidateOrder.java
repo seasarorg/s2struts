@@ -21,14 +21,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 検証の順序を示すアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface ValidateOrder {
 
-    int value() default 999;
+	/**
+	 * 検証の順序
+	 */
+	int value() default 999;
 
 }

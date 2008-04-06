@@ -16,26 +16,45 @@
 package org.seasar.struts.annotation.tiger;
 
 /**
+ * 「真」、「偽」、「未定義」の3値を表す列挙型です。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public enum BoolType {
 
-    TRUE, FALSE, UNDEFINED;
+	/**
+	 * 真
+	 */
+	TRUE,
 
-    public Boolean getBoolean() {
-        if (this == UNDEFINED) {
-            return null;
-        }
-        return (this == TRUE);
-    }
+	/**
+	 * 偽
+	 */
+	FALSE,
 
-    public String toString() {
-        if (this == UNDEFINED) {
-            return null;
-        }
-        return super.toString();
-    }
+	/**
+	 * 未定義
+	 */
+	UNDEFINED;
+
+	/**
+	 * {@link Boolean}として返します。
+	 * 
+	 * @return 真ならば<code>true</code>、偽ならば<code>false</code>、未定義ならば<code>null</code>
+	 */
+	public Boolean getBoolean() {
+		if (this == UNDEFINED) {
+			return null;
+		}
+		return (this == TRUE);
+	}
+
+	@Override
+	public String toString() {
+		if (this == UNDEFINED) {
+			return null;
+		}
+		return super.toString();
+	}
 
 }

@@ -27,6 +27,7 @@ import org.seasar.struts.pojo.config.ActionPropertyConfig;
 import org.seasar.struts.pojo.config.impl.ActionPropertyConfigImpl;
 
 /**
+ * Tigerアノテーションを扱う{@link ActionAnnotationHandler}の実装クラスです。
  * 
  * @author Katsuhiko Nagashima
  */

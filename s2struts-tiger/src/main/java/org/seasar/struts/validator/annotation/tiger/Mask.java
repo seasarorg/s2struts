@@ -23,19 +23,30 @@ import java.lang.annotation.Target;
 import org.seasar.struts.annotation.tiger.BoolType;
 
 /**
+ * 標準検証ルールのmaskを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface Mask {
 
-    String pattern();
+	/**
+	 * 正規表現で示されるパターン
+	 */
+	String pattern();
 
-    String messageKey() default "";
+	/**
+	 * validation.xmlのmsg要素のkey属性
+	 * 
+	 * @return
+	 */
+	String messageKey() default "";
 
-    BoolType resource() default BoolType.UNDEFINED;
+	/**
+	 * validation.xmlのmsg要素のresource属性
+	 */
+	BoolType resource() default BoolType.UNDEFINED;
 
 }

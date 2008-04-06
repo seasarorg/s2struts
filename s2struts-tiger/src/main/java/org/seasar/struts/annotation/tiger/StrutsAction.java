@@ -23,46 +23,97 @@ import java.lang.annotation.Target;
 import org.seasar.struts.lessconfig.config.StrutsActionConfig;
 
 /**
+ * struts-config.xmlのaction要素に対応するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface StrutsAction {
 
-    String path() default StrutsActionConfig.DEFAULT_PATH;
+	/**
+	 * path属性
+	 */
+	String path() default StrutsActionConfig.DEFAULT_PATH;
 
-    String name() default StrutsActionConfig.DEFAULT_NAME;
+	/**
+	 * name属性
+	 */
+	String name() default StrutsActionConfig.DEFAULT_NAME;
 
-    ScopeType scope() default ScopeType.UNDEFINED;
+	/**
+	 * scope属性
+	 */
+	ScopeType scope() default ScopeType.UNDEFINED;
 
-    BoolType validate() default BoolType.UNDEFINED;
+	/**
+	 * validate属性
+	 */
+	BoolType validate() default BoolType.UNDEFINED;
 
-    String input() default StrutsActionConfig.DEFAULT_INPUT;
+	/**
+	 * input属性
+	 */
+	String input() default StrutsActionConfig.DEFAULT_INPUT;
 
-    String parameter() default StrutsActionConfig.DEFAULT_PARAMETER;
+	/**
+	 * parameter属性
+	 */
+	String parameter() default StrutsActionConfig.DEFAULT_PARAMETER;
 
-    String attribute() default StrutsActionConfig.DEFAULT_ATTRIBUTE;
+	/**
+	 * attribute属性
+	 */
+	String attribute() default StrutsActionConfig.DEFAULT_ATTRIBUTE;
 
-    String forward() default StrutsActionConfig.DEFAULT_FORWARD;
+	/**
+	 * forward属性
+	 */
+	String forward() default StrutsActionConfig.DEFAULT_FORWARD;
 
-    String include() default StrutsActionConfig.DEFAULT_INCLUDE;
+	/**
+	 * include属性
+	 */
+	String include() default StrutsActionConfig.DEFAULT_INCLUDE;
 
-    String prefix() default StrutsActionConfig.DEFAULT_PREFIX;
+	/**
+	 * prefix属性
+	 */
+	String prefix() default StrutsActionConfig.DEFAULT_PREFIX;
 
-    String suffix() default StrutsActionConfig.DEFAULT_SUFFIX;
+	/**
+	 * suffix属性
+	 */
+	String suffix() default StrutsActionConfig.DEFAULT_SUFFIX;
 
-    BoolType unknown() default BoolType.UNDEFINED;
+	/**
+	 * unknown属性
+	 */
+	BoolType unknown() default BoolType.UNDEFINED;
 
-    String roles() default StrutsActionConfig.DEFAULT_ROLES;
+	/**
+	 * roles属性
+	 */
+	String roles() default StrutsActionConfig.DEFAULT_ROLES;
 
-    BoolType cancellable() default BoolType.UNDEFINED;
+	/**
+	 * cancellable属性
+	 */
+	BoolType cancellable() default BoolType.UNDEFINED;
 
-    String catalog() default StrutsActionConfig.DEFAULT_CATALOG;
+	/**
+	 * catalog属性
+	 */
+	String catalog() default StrutsActionConfig.DEFAULT_CATALOG;
 
-    String command() default StrutsActionConfig.DEFAULT_COMMAND;
+	/**
+	 * command属性
+	 */
+	String command() default StrutsActionConfig.DEFAULT_COMMAND;
 
-    String inherit() default StrutsActionConfig.DEFAULT_INHERIT;
+	/**
+	 * extends属性
+	 */
+	String inherit() default StrutsActionConfig.DEFAULT_INHERIT;
 
 }

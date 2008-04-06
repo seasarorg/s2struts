@@ -21,20 +21,31 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.struts.validator.annotation.tiger.ValidateOrder;
 
+/**
+ * プロパティに指定された{@link ValidateOrder}を使い同一のJavaBean内の{@link PropertyDesc}を比較します。
+ * 
+ * @author taedium
+ */
 public class TigerPropertyDescComparator extends ConstantPropertyDescComparator {
 
-    public TigerPropertyDescComparator(BeanDesc beanDesc) {
-        super(beanDesc);
-    }
+	/**
+	 * インスタンスを構築します。
+	 * 
+	 * @param beanDesc
+	 *            {@link PropertyDesc}が属する{@link BeanDesc}
+	 */
+	public TigerPropertyDescComparator(BeanDesc beanDesc) {
+		super(beanDesc);
+	}
 
-    @Override
-    protected int getOrder(PropertyDesc propDesc) {
-        Method method = propDesc.getWriteMethod();
-        ValidateOrder order = method.getAnnotation(ValidateOrder.class);
-        if (order == null) {
-            return super.getOrder(propDesc);
-        }
-        return order.value();
-    }
+	@Override
+	protected int getOrder(PropertyDesc propDesc) {
+		Method method = propDesc.getWriteMethod();
+		ValidateOrder order = method.getAnnotation(ValidateOrder.class);
+		if (order == null) {
+			return super.getOrder(propDesc);
+		}
+		return order.value();
+	}
 
 }

@@ -23,18 +23,27 @@ import java.lang.annotation.Target;
 import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 
 /**
+ * struts-config.xmlのform-beans要素に対応するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface StrutsActionForm {
 
-    String name() default StrutsActionFormConfig.DEFAULT_NAME;
+	/**
+	 * name属性
+	 */
+	String name() default StrutsActionFormConfig.DEFAULT_NAME;
 
-    BoolType restricted() default BoolType.UNDEFINED;
+	/**
+	 * restricted属性
+	 */
+	BoolType restricted() default BoolType.UNDEFINED;
 
-    String inherit() default StrutsActionFormConfig.DEFAULT_INHERIT;
+	/**
+	 * extends属性
+	 */
+	String inherit() default StrutsActionFormConfig.DEFAULT_INHERIT;
 
 }

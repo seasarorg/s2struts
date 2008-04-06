@@ -21,17 +21,25 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 標準検証ルールのlongRangeを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface LongRange {
 
-    long min();
+	/**
+	 * 最小値
+	 */
+	long min();
 
-    long max();
+	/**
+	 * 最大値
+	 * 
+	 * @return
+	 */
+	long max();
 
 }

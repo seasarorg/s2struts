@@ -21,15 +21,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 標準検証ルールのminlengthを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface Minlength {
-    
-    int value();
-    
+
+	/**
+	 * 最小値
+	 */
+	int value();
+
 }

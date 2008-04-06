@@ -21,17 +21,23 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 標準検証ルールのintRangeを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface IntRange {
 
-    int min();
-    
-    int max();
+	/**
+	 * 最小値
+	 */
+	int min();
+
+	/**
+	 * 最大値
+	 */
+	int max();
 
 }

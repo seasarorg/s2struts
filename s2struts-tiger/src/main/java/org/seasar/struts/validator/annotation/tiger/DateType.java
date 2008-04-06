@@ -23,17 +23,23 @@ import java.lang.annotation.Target;
 import org.seasar.struts.annotation.tiger.BoolType;
 
 /**
+ * 標準検証ルールのdateを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface DateType {
 
-    String pattern() default "";
+	/**
+	 * 日付のパターン
+	 */
+	String pattern() default "";
 
-    BoolType strict() default BoolType.UNDEFINED;
+	/**
+	 * 厳密な検証をするかどうか
+	 */
+	BoolType strict() default BoolType.UNDEFINED;
 
 }

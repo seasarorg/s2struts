@@ -23,20 +23,44 @@ import java.lang.annotation.Target;
 import org.seasar.struts.annotation.tiger.BoolType;
 
 /**
+ * validation.xmlの複数のarg要素に対応するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Args {
 
-    String keys() default "";
+	/**
+	 * 複数のarg要素に対するキー
+	 * <p>
+	 * カンマ区切りで値を指定することで複数のarg要素を表すことができます。 それぞれのarg要素に対し{@link #bundle()}と{@link #resource()}の値が適用されます。
+	 * </p>
+	 * <p>
+	 * ここに値を指定した場合、{@link #value()}の指定は参照されません。
+	 * </p>
+	 */
+	String keys() default "";
 
-    String bundle() default "";
+	/**
+	 * {@link #keys()}に指定した複数のarg要素に共通のbundle属性
+	 */
+	String bundle() default "";
 
-    BoolType resource() default BoolType.UNDEFINED;
+	/**
+	 * {@link #keys()}に指定した複数のarg要素に共通のresource属性
+	 */
+	BoolType resource() default BoolType.UNDEFINED;
 
-    Arg[] value() default {};
+	/**
+	 * {@link Arg}の配列
+	 * <p>
+	 * {@link #keys()}に値を指定した場合、ここに指定した値は使用されません。
+	 * </p>
+	 * <p>
+	 * 個々のarg要素を別々に設定したい場合に使用します。 {@link #bundle()}と{@link #resource()}の値は使用されません。
+	 * </p>
+	 */
+	Arg[] value() default {};
 
 }

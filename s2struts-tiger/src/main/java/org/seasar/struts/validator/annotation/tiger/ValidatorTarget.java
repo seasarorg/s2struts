@@ -21,12 +21,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * バリデータ用アノテーションを示すメタアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)
 public @interface ValidatorTarget {
-    
+
 }

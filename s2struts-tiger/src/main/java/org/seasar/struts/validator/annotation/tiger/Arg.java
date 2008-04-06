@@ -23,22 +23,40 @@ import java.lang.annotation.Target;
 import org.seasar.struts.annotation.tiger.BoolType;
 
 /**
+ * validation.xmlのarg要素に対応するアノテーションです。
+ * <p>
+ * 単独では使用できません。使用するには{@link Args#value()}に指定してください。
+ * </p>
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Arg {
 
-    String key();
+	/**
+	 * key属性
+	 */
+	String key();
 
-    String name() default "";
+	/**
+	 * name属性
+	 */
+	String name() default "";
 
-    String bundle() default "";
+	/**
+	 * bundle属性
+	 */
+	String bundle() default "";
 
-    int position() default -1;
+	/**
+	 * position属性
+	 */
+	int position() default -1;
 
-    BoolType resource() default BoolType.UNDEFINED;
+	/**
+	 * resource属性
+	 */
+	BoolType resource() default BoolType.UNDEFINED;
 
 }

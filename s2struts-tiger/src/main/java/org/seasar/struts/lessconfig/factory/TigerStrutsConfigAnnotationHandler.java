@@ -25,133 +25,140 @@ import org.seasar.struts.lessconfig.config.StrutsActionFormConfig;
 import org.seasar.struts.lessconfig.config.StrutsActionForwardConfig;
 
 /**
+ * 無設定Struts用のTigerアノテーションを扱います。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 public class TigerStrutsConfigAnnotationHandler extends
-        ConstantStrutsConfigAnnotationHandler {
+		ConstantStrutsConfigAnnotationHandler {
 
-    public StrutsActionConfig createStrutsActionConfig(Class clazz) {
-        Class<?> actionClass = clazz;
-        final StrutsAction config = actionClass
-                .getAnnotation(StrutsAction.class);
-        if (config == null) {
-            return super.createStrutsActionConfig(clazz);
-        }
-        return new StrutsActionConfig() {
-            public String path() {
-                return config.path();
-            }
+	@Override
+	public StrutsActionConfig createStrutsActionConfig(
+			@SuppressWarnings("unchecked")
+			Class clazz) {
+		Class<?> actionClass = clazz;
+		final StrutsAction config = actionClass
+				.getAnnotation(StrutsAction.class);
+		if (config == null) {
+			return super.createStrutsActionConfig(clazz);
+		}
+		return new StrutsActionConfig() {
+			public String path() {
+				return config.path();
+			}
 
-            public String name() {
-                return config.name();
-            }
+			public String name() {
+				return config.name();
+			}
 
-            public String scope() {
-                return config.scope().getScopeMode();
-            }
+			public String scope() {
+				return config.scope().getScopeMode();
+			}
 
-            public Boolean validate() {
-                return config.validate().getBoolean();
-            }
+			public Boolean validate() {
+				return config.validate().getBoolean();
+			}
 
-            public String input() {
-                return config.input();
-            }
+			public String input() {
+				return config.input();
+			}
 
-            public String parameter() {
-                return config.parameter();
-            }
+			public String parameter() {
+				return config.parameter();
+			}
 
-            public String attribute() {
-                return config.attribute();
-            }
+			public String attribute() {
+				return config.attribute();
+			}
 
-            public String forward() {
-                return config.forward();
-            }
+			public String forward() {
+				return config.forward();
+			}
 
-            public String include() {
-                return config.include();
-            }
+			public String include() {
+				return config.include();
+			}
 
-            public String prefix() {
-                return config.prefix();
-            }
+			public String prefix() {
+				return config.prefix();
+			}
 
-            public String suffix() {
-                return config.suffix();
-            }
+			public String suffix() {
+				return config.suffix();
+			}
 
-            public Boolean unknown() {
-                return config.unknown().getBoolean();
-            }
+			public Boolean unknown() {
+				return config.unknown().getBoolean();
+			}
 
-            public String roles() {
-                return config.roles();
-            }
+			public String roles() {
+				return config.roles();
+			}
 
-            public Boolean cancellable() {
-                return config.cancellable().getBoolean();
-            }
+			public Boolean cancellable() {
+				return config.cancellable().getBoolean();
+			}
 
-            public String catalog() {
-                return config.catalog();
-            }
+			public String catalog() {
+				return config.catalog();
+			}
 
-            public String command() {
-                return config.command();
-            }
+			public String command() {
+				return config.command();
+			}
 
-            public String inherit() {
-                return config.inherit();
-            }
+			public String inherit() {
+				return config.inherit();
+			}
 
-        };
-    }
+		};
+	}
 
-    public StrutsActionForwardConfig createStrutsActionForwardConfig(Field field) {
-        final StrutsActionForward config = field
-                .getAnnotation(StrutsActionForward.class);
-        if (config == null) {
-            return super.createStrutsActionForwardConfig(field);
-        }
-        return new StrutsActionForwardConfig() {
+	@Override
+	public StrutsActionForwardConfig createStrutsActionForwardConfig(Field field) {
+		final StrutsActionForward config = field
+				.getAnnotation(StrutsActionForward.class);
+		if (config == null) {
+			return super.createStrutsActionForwardConfig(field);
+		}
+		return new StrutsActionForwardConfig() {
 
-            public String path() {
-                return config.path();
-            }
+			public String path() {
+				return config.path();
+			}
 
-            public Boolean redirect() {
-                return config.redirect().getBoolean();
-            }
+			public Boolean redirect() {
+				return config.redirect().getBoolean();
+			}
 
-        };
-    }
+		};
+	}
 
-    public StrutsActionFormConfig createStrutsActionFormConfig(Class clazz) {
-        Class<?> formClass = clazz;
-        final StrutsActionForm config = formClass
-                .getAnnotation(StrutsActionForm.class);
-        if (config == null) {
-            return super.createStrutsActionFormConfig(clazz);
-        }
-        return new StrutsActionFormConfig() {
+	@Override
+	public StrutsActionFormConfig createStrutsActionFormConfig(
+			@SuppressWarnings("unchecked")
+			Class clazz) {
+		Class<?> formClass = clazz;
+		final StrutsActionForm config = formClass
+				.getAnnotation(StrutsActionForm.class);
+		if (config == null) {
+			return super.createStrutsActionFormConfig(clazz);
+		}
+		return new StrutsActionFormConfig() {
 
-            public String name() {
-                return config.name();
-            }
+			public String name() {
+				return config.name();
+			}
 
-            public Boolean restricted() {
-                return config.restricted().getBoolean();
-            }
+			public Boolean restricted() {
+				return config.restricted().getBoolean();
+			}
 
-            public String inherit() {
-                return config.inherit();
-            }
+			public String inherit() {
+				return config.inherit();
+			}
 
-        };
-    }
+		};
+	}
 
 }

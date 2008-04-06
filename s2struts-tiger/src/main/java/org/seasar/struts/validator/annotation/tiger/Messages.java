@@ -21,14 +21,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * validation.xmlの複数のmsg要素に対応するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Messages {
 
-    Message[] value();
+	/**
+	 * {@link Message}の配列
+	 */
+	Message[] value();
 
 }

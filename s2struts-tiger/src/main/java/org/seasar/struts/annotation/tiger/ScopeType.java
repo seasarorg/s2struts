@@ -18,21 +18,37 @@ package org.seasar.struts.annotation.tiger;
 import org.seasar.struts.Constants;
 
 /**
+ * 外部コンテキストのスコープを表す列挙型です。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 public enum ScopeType {
-    
-    REQUEST,
-    SESSION,
-    UNDEFINED;
-    
-    public String getScopeMode() {
-        if (this == UNDEFINED) {
-            return Constants.UNDEFINED;
-        }
-        return toString().toLowerCase();
-    }
+
+	/**
+	 * リクエスト
+	 */
+	REQUEST,
+
+	/**
+	 * セッション
+	 */
+	SESSION,
+
+	/**
+	 * 未定義
+	 */
+	UNDEFINED;
+
+	/**
+	 * スコープを示す文字列を返します。
+	 * 
+	 * @return スコープを示す文字列
+	 */
+	public String getScopeMode() {
+		if (this == UNDEFINED) {
+			return Constants.UNDEFINED;
+		}
+		return toString().toLowerCase();
+	}
 
 }

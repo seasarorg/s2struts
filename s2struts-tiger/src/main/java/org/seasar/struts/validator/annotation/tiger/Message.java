@@ -23,20 +23,32 @@ import java.lang.annotation.Target;
 import org.seasar.struts.annotation.tiger.BoolType;
 
 /**
+ * validation.xmlのmsg要素に対応するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Message {
 
-    String key();
+	/**
+	 * key属性
+	 */
+	String key();
 
-    String name();
+	/**
+	 * name属性
+	 */
+	String name();
 
-    String bundle() default "";
+	/**
+	 * bundle属性
+	 */
+	String bundle() default "";
 
-    BoolType resource() default BoolType.UNDEFINED;
+	/**
+	 * resource属性
+	 */
+	BoolType resource() default BoolType.UNDEFINED;
 
 }

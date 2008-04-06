@@ -21,14 +21,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Actionのプロパティを外部コンテキストにエキスポートすることを示します。
  * 
  * @author Katsuhiko Nagashima
- *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Export {
-    
-    ScopeType value();
+
+	/**
+	 * 外部コンテキストのスコープ
+	 */
+	ScopeType value();
 
 }

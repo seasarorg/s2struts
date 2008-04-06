@@ -21,17 +21,25 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 標準検証ルールのdoubleRangeを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface DoubleRange {
 
-    double min();
-    
-    double max();
+	/**
+	 * 最小値
+	 */
+	double min();
+
+	/**
+	 * 最大値
+	 * 
+	 * @return
+	 */
+	double max();
 
 }

@@ -21,15 +21,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 標準検証ルールのmaxlengthを利用するアノテーションです。
  * 
  * @author Katsuhiko Nagashima
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @ValidatorTarget
 public @interface Maxlength {
-    
-    int value();
-    
+
+	/**
+	 * 最大値
+	 */
+	int value();
+
 }
