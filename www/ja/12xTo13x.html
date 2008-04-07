@@ -23,61 +23,82 @@
 <!-- document start -->
 <ul>
 	<li><a href="#Summary">ŠT—v</a></li>
-	<li><a href="#ToS24">S2.4‚Ö‚ÌˆÚs</a></li>
-	<li><a href="#ToS2Struts13">S2Struts1.3.x‚Ö‚ÌˆÚs</a></li>
-	<li><a href="#S2StrutsHotdeploy">S2Struts‚ÌHOTdeploy‘Î‰</a></li>
-	<li><a href="#LessconfigHotdeploy">–³İ’èS2Struts‚ÌHOTdeploy‘Î‰</a></li>
+	<li><a href="#FromS2Struts12ToS2Struts13">S2Struts1.2.x‚©‚çS2Struts1.3.x‚Ö‚ÌˆÚs</a>
+		<ul>
+			<li><a href="#ToStruts13">Struts1.3.8‚Ö‚ÌˆÚs</a></li>
+			<li><a href="#ToS24">S2.4.x‚Ö‚ÌˆÚs</a></li>
+			<li><a href="#ToS2Struts13">S2Struts1.3.x‚Ö‚ÌˆÚs</a></li>
+		</ul>
+	</li>
+	<li><a href="#S2StrutsHotdeploy">S2Struts‚ÌHOT deploy‘Î‰</a></li>
+	<li><a href="#LessconfigHotdeploy">–³İ’èS2Struts‚ÌHOT deploy‘Î‰</a></li>
 </ul>
 <h2><a name="Summary">ŠT—v</a></h2>
 <p>
 S2Struts1.2.x‚©‚ç1.3.x‚ÖˆÚs‚·‚éè‡‚É‚Â‚¢‚ÄAS2StrutsExample‚ÌˆÚs‚ğ’Ê‚µ‚Äà–¾‚µ‚Ü‚·B
 ˆÚs‚·‚é‚½‚ß‚É•K—v‚Æ‚È‚éƒtƒ@ƒCƒ‹‚ÍS2StrutsBlank V1.3.x‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·‚Ì‚ÅA‚ ‚ç‚©‚¶‚ßƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä‚­‚¾‚³‚¢B
 </p>
-<h2><a name="ToS24">S2.4‚Ö‚ÌˆÚs</a></h2>
 <p>
-S2Struts1.3.x‚ÍS2.4‚Å“®ì‚·‚é‚½‚ßAS2.3‚©‚çS2.4‚Ö‚ÌˆÚs‚ª•K—v‚Å‚·BˆÚs‚ÍˆÈ‰º‚Ìè‡‚Ås‚¢‚Ü‚·B
+ˆÈ~‚Å‚ÍAS2Struts1.2‚Ì”CˆÓ‚Ìƒo[ƒWƒ‡ƒ“‚©‚çS2Struts1.3.0-RC6‚ÖˆÚs‚·‚é‚à‚Ì‚Æ‚µ‚Äà–¾‚µ‚Ü‚·BuS2Struts1.3.xv‚Æ‚¢‚¤•\‹L‚ÍAuS2Struts1.3.0-RC5v‚Æ“Ç‚İ‘Ö‚¦‚Ä‚­‚¾‚³‚¢B
+</p>
+<h2><a name="FromS2Struts12ToS2Struts13">S2Struts1.2.x‚©‚çS2Struts1.3.x‚Ö‚ÌˆÚs</a></h2>
+<p>
+S2Struts1.3‚ÍStruts1.3.8‚ÆSeasar2.4.x‚ğ‘g‚İ‡‚í‚¹‚½ŠÂ‹«‚Å“®ì‚µ‚Ü‚·B
+‚µ‚½‚ª‚Á‚ÄAStruts1.2.9‚ÆSeasar2.3‚ğg—p‚·‚éStruts1.2.x‚ğS2Struts1.3.x‚ÖˆÚs‚·‚é‚É‚ÍAStruts‚ÆSeasar2‚ÌˆÚs‚à•K{‚Æ‚È‚è‚Ü‚·BˆÚs‚ÍŸ‚Ìè‡‚Ås‚¢‚Ü‚·B
 </p>
 <ol>
-  <li>jarƒtƒ@ƒCƒ‹‚Ì’u‚«Š·‚¦@ˆÈ‰º‚Ìjarƒtƒ@ƒCƒ‹‚ğ’u‚«Š·‚¦‚Ü‚·</li>
-  <ul>
-    <li>s2-framework-2.4.0-rc-2-SNAPSHOT.jar</li>
-    <li>s2-extension-2.4.0-rc-2-SNAPSHOT.jar</li>
-  </ul>
-  <li>diconƒtƒ@ƒCƒ‹‚Ì’Ç‰Á@ˆÈ‰º‚Ìdiconƒtƒ@ƒCƒ‹‚ğWEB-INF/src‚ÖƒRƒs[‚µ‚Ü‚·</li>
-  <ul>
-    <li>convention.dicon</li>
-    <li>jdbc.dicon</li>
-  </ul>
-  <li>•s—v‚Èdiconƒtƒ@ƒCƒ‹‚Ìíœ@ˆÈ‰º‚Ìdiconƒtƒ@ƒCƒ‹‚ğWEB-INF/src‚©‚çíœ‚µ‚Ü‚·</li>
-  <ul>
-    <li>j2ee.diconis2-extension-2.4.0-rc-2-SNAPSHOT.jar‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚½‚ßíœ‚µ‚Ä‚­‚¾‚³‚¢j</li>
-  </ul>
+  <li>Struts1.3.8‚Ö‚ÌˆÚs</li>
+  <li>Seasar2.4.x‚Ö‚ÌˆÚs</li>
+  <li>S2Struts1.3.x‚Ö‚ÌˆÚs</li>
 </ol>
-<h2><a name="ToS2Struts13">S2Struts1.3.x‚Ö‚ÌˆÚs</a></h2>
+
+<h3><a name="ToStruts13">Struts1.3.8‚Ö‚ÌˆÚs</a></h3>
+<p>
+Struts1.3.8‚Ö‚ÌˆÚs‚ÍˆÈ‰º‚Ìè‡‚Ås‚¢‚Ü‚·B
+</p>
+  <ul>
+    <li>Struts1.2.9–{‘Ì‚Ìjarƒtƒ@ƒCƒ‹‚Æ‚»‚ÌˆË‘¶jarƒtƒ@ƒCƒ‹‚ğíœ‚µ‚Ü‚·B</li>
+    <li>Struts1.3.8–{‘Ì‚Ìjarƒtƒ@ƒCƒ‹‚Æ‚»‚ÌˆË‘¶jarƒtƒ@ƒCƒ‹‚ğ’Ç‰Á‚µ‚Ü‚·B</li>
+  </ul>
+  
+<h3><a name="ToS24">Seasar2.4.x‚Ö‚ÌˆÚs</a></h3>
+<p>
+Seasar2.4.x‚Ö‚ÌˆÚs‚ÍˆÈ‰º‚Ìè‡‚Ås‚¢‚Ü‚·B
+</p>
+  <ul>
+    <li>Seasar2.3.x–{‘Ì‚Ìjarƒtƒ@ƒCƒ‹is2-framework-2.3.x.jar‚Æs2-extension-2.3.x.jarj‚Æ‚»‚ÌˆË‘¶jarƒtƒ@ƒCƒ‹‚ğíœ‚µ‚Ü‚·B</li>
+    <li>Seasar2.4.x–{‘Ì‚Ìjarƒtƒ@ƒCƒ‹is2-framework-2.4.x.jar‚Æs2-extension-2.4.x.jarj‚Æ‚»‚ÌˆË‘¶jarƒtƒ@ƒCƒ‹‚ğ’Ç‰Á‚µ‚Ü‚·B</li>
+    <li>j2ee.dicon‚ğíœ‚µ‚Ü‚·Bi‚±‚Ìƒtƒ@ƒCƒ‹‚Ís2-extension-2.4.x.jar‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·Bj</li>
+    <li>jdbc.dicon‚ğ’Ç‰Á‚µ‚Ü‚·B</li>
+  </ul>
+  
+<h3><a name="ToS2Struts13">S2Struts1.3.x‚Ö‚ÌˆÚs</a></h3>
 <p>
 S2Struts1.3.x‚Ö‚ÌˆÚs‚ÍˆÈ‰º‚Ìè‡‚Ås‚¢‚Ü‚·B
 </p>
 <ol>
   <li>jarƒtƒ@ƒCƒ‹‚Ì’u‚«Š·‚¦@ˆÈ‰º‚Ìjarƒtƒ@ƒCƒ‹‚ğ’u‚«Š·‚¦‚Ü‚·</li>
   <ul>
-    <li>s2-struts-1.3.0-beta-2.jar</li>
+    <li>S2Struts1.2.x–{‘Ì‚Ìjarƒtƒ@ƒCƒ‹is2-struts-1.2.x.jar‚Æs2-struts-tiger-1.2.x.jarj‚ğíœ‚µ‚Ü‚·B</li>
+    <li>S2Struts1.3.x–{‘Ì‚Ìjarƒtƒ@ƒCƒ‹is2-struts-1.3.x.jar‚Æs2-struts-tiger-1.3.x.jarj‚ğ’Ç‰Á‚µ‚Ü‚·B</li>
 <p>
-s2-struts-1.3.0-beta-2.jar‚Å‚ÍAMessageManagerƒNƒ‰ƒX‚ÌƒpƒbƒP[ƒW‚ğˆÚ“®‚µ‚½‚½‚ßjar‚ğ“ü‚ê‘Ö‚¦‚é‚ÆƒRƒ“ƒpƒCƒ‹ƒGƒ‰[‚ª”­¶‚µ‚Ü‚·B
-import•¶‚ğorg.seasar.struts.MessageManager‚©‚çorg.seasar.struts.pojo.MessageManager‚ÖC³‚µ‚Ä‚­‚¾‚³‚¢B
+1.2.x‚©‚ç1.3.x‚ÅƒNƒ‰ƒX‚ÌƒpƒbƒP[ƒW–¼‚âƒƒ\ƒbƒh‚ÌƒVƒOƒlƒ`ƒƒ‚ªˆê•”•ÏX‚³‚ê‚Ä‚¢‚é‚Ì‚ÅƒRƒ“ƒpƒCƒ‹ƒGƒ‰[‚ª”­¶‚µ‚Ü‚·BŸ‚ÌC³‚ğs‚Á‚Ä‚­‚¾‚³‚¢B
+  <ul>
+    <li><code>org.seasar.struts.action.MessageManager</code>‚ÌƒpƒbƒP[ƒW–¼‚ğ•ÏX‚µA<code>org.seasar.struts.pojo.MessageManager</code>‚Æ‚·‚éB</li>
+    <li><code>org.seasar.struts.annotation.tiger</code>ƒpƒbƒP[ƒW‚É‘®‚·‚éƒAƒmƒe[ƒVƒ‡ƒ“‚Ì<code>boolean</code>Œ^‚Ì‘®«‚ğ<code>org.seasar.struts.annotation.tiger.BoolType</code>Œ^‚É•ÏX‚·‚éB</li>
+  </ul>
 </p>
-    <li>s2-struts-tiger-1.3.0-beta-2.jariTigerƒAƒmƒe[ƒVƒ‡ƒ“‚ğ—˜—p‚µ‚Ä‚¢‚éê‡A’u‚«Š·‚¦‚Ä‚­‚¾‚³‚¢j</li>
-    <!--
-    <li>s2-struts-backport175-1.3.0-beta-2.jariBackport175ƒAƒmƒe[ƒVƒ‡ƒ“‚ğ—˜—p‚µ‚Ä‚¢‚éê‡A’u‚«Š·‚¦‚Ä‚­‚¾‚³‚¢j</li>
-    -->
+  </ul>
   </ul>
   <li>•s—v‚Èdiconƒtƒ@ƒCƒ‹‚Ìíœ@ˆÈ‰º‚Ìdiconƒtƒ@ƒCƒ‹‚ğWEB-INF/src‚©‚çíœ‚µ‚Ü‚·</li>
   <ul>
-    <li>s2struts.diconis2-struts-1.3.0-beta-2.jar‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚½‚ßíœ‚µ‚Ä‚­‚¾‚³‚¢j</li>
+    <li>s2struts.diconis2-struts-1.3.x.jar‚Å‚Íjarƒtƒ@ƒCƒ‹‚ÉŠÜ‚Ü‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚µ‚½j</li>
   </ul>
+  <p></p>
   <li>struts-config.xml‚ÌC³</li>
   <ul>
-    <li>org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn‚ğ
-        org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn‚É•ÏX‚µ‚Ü‚·B
+    <li><code>org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn</code>‚ğ
+        <code>org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn</code>‚É•ÏX‚µ‚Ü‚·B
     </li>
 <pre>
 &lt;struts-config&gt;
@@ -97,18 +118,24 @@ import•¶‚ğorg.seasar.struts.MessageManager‚©‚çorg.seasar.struts.pojo.MessageMana
   </ul>
   <li>web.xml‚ÌC³</li>
   <ul>
-    <li>S2ActionServlet‚ğ—˜—p‚µ‚Ä‚¢‚½‚Æ‚±‚ë‚ğorg.apache.struts.action.ActionServlet‚É–ß‚µ‚Ü‚·B
-        S2ActionServlet‚É‚ÍAction‚ğ©“®“I‚ÉS2‚Ö“o˜^‚·‚é‹@”\‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·‚ªA‚±‚Ì‹@”\‚Íg‚í‚¸A
-        S2.4‚ÌHOTdeploy / COOLdeploy‹@”\‚ğ—˜—p‚µAction‚ğ“o˜^‚·‚é‚½‚ß‚Å‚·B
+    <li><code>S2ActionServlet</code>‚ğStruts‚Ì<code>ActionServlet</code>‚É•ÏX‚µA<code>init-param</code>‚ÅS2Struts—p‚Ìchain-config.xml‚ğw’è‚µ‚Ü‚·B
+    <p>
+    <code>S2ActionServlet</code>‚ÍAAction‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ğS2ƒRƒ“ƒeƒi‚É©“®“o˜^‚·‚é‹@”\‚ğ‚Á‚Ä‚¢‚Ü‚·‚ªA‚±‚Ì•ÏX‚ğ‰Á‚¦‚é‚±‚Æ‚ÅA‚±‚Ì‹@”\‚Íg‚¦‚È‚­‚È‚è‚Ü‚·B
+    ‘ã‚í‚è‚ÉŸ‚Ì‚¢‚¸‚ê‚©‚Ì•û–@‚ÅƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ“o˜^‚·‚é‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢B
+    </p>
+    <ul>
+      <li>diconƒtƒ@ƒCƒ‹‚Å–¾¦“I‚ÉƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’è‹`‚·‚é</li>
+      <li><a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#ComponentAutoRegister">Seasar2‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg©“®“o˜^‹@”\</a>‚ğg—p‚·‚é</li>
+      <li><a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#SMARTdeploy">SMART deploy</a>‚ğg—p‚·‚é</li>
+    </ul>
     </li>
 <pre>
 &lt;web-app&gt;
     :
     :
-  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
   &lt;servlet&gt;
     &lt;servlet-name&gt;action&lt;/servlet-name&gt;
-    <b><font color="red">&lt;!-- S2ActionServlet‚ğActionServlet‚É–ß‚·
+    <b><font color="red">&lt;!-- ActionServlet‚É•ÏX 
     &lt;servlet-class&gt;org.seasar.struts.servlet.S2ActionServlet&lt;/servlet-class&gt;
     --&gt;
     &lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;</font></b>
@@ -116,14 +143,11 @@ import•¶‚ğorg.seasar.struts.MessageManager‚©‚çorg.seasar.struts.pojo.MessageMana
       &lt;param-name&gt;config&lt;/param-name&gt;
       &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
     &lt;/init-param&gt;
-    &lt;init-param&gt;
-      &lt;param-name&gt;debug&lt;/param-name&gt;
-      &lt;param-value&gt;2&lt;/param-value&gt;
-    &lt;/init-param&gt;
-    &lt;init-param&gt;
-      &lt;param-name&gt;detail&lt;/param-name&gt;
-      &lt;param-value&gt;2&lt;/param-value&gt;
-    &lt;/init-param&gt;
+    <b><font color="red">&lt;init-param&gt;
+      &lt;param-name&gt;chainConfig&lt;/param-name&gt;
+      &lt;param-value&gt;s2struts-chain-config.xml, 
+        org/apache/struts/chain/chain-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;</font></b>
     &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
   &lt;/servlet&gt;
     :
@@ -131,22 +155,35 @@ import•¶‚ğorg.seasar.struts.MessageManager‚©‚çorg.seasar.struts.pojo.MessageMana
 &lt;/web-app&gt;
 </pre>
   </ul>
-<!-- commons-validator-1.2.0‚Ö‚ÌˆÚs‚Í•K{‚Å‚Í‚È‚¢
-  <li>commons-validator‚ğ1.1.4‚©‚ç1.2.0‚ÖˆÚs</li>
+  <li>struts-config.xml‚ÌC³</li>
   <ul>
-    <li>commons-validator-1.2.0.jar‚Ö’u‚«Š·‚¦‚Ä‚­‚¾‚³‚¢B</li>
-    <li>validator-rule.xmlAvalidation.xml‚ÌDOCTYPE‚ğC³‚µ‚Ä‚­‚¾‚³‚¢B</li>
+    <li>DOCTYPEéŒ¾‚Æcontroller—v‘f‚Ì’è‹`‚ğ•ÏX‚µ‚Ü‚·B</li>
 <pre>
-&lt;!DOCTYPE form-validation PUBLIC
-  "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.2.0//EN"
-  "http://jakarta.apache.org/commons/dtds/validator_1_2_0.dtd"&gt;
+<b><font color="red">&lt;!-- DOCTYPEéŒ¾‚ÌC³
+&lt;!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd"&gt;
+--&gt;
+&lt;!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd"&gt;</font></b>
+
+&lt;struts-config&gt;
+  :
+  :
+    <b><font color="red">&lt;!-- controller‚ÌC³
+    &lt;controller
+       processorClass="org.seasar.struts.processor.S2RequestProcessor"/&gt;
+    --&gt;
+    &lt;controller catalog="s2struts"/&gt;</font></b>
+  :
+  :
+&lt;/struts-config&gt;
 </pre>
   </ul>
--->
+  </ul>
   <li>S2StrutsExample‚Å‚Í‚³‚ç‚É...</li>
   <ul>
-    <li>S2ActionServlet‚Å©“®“o˜^‚³‚ê‚Ä‚¢‚½AddAction‚ğAdd.diconƒtƒ@ƒCƒ‹‚ÉƒRƒ“ƒ|[ƒlƒ“ƒg’è‹`‚ğ’Ç‰Á‚µ‚Ü‚·B
-    </li>
     <li>S2Struts1.3.x‚æ‚èRequestProcessor‚Ì’è‹`‚ª•Ï‚í‚è‚Ü‚µ‚½B
         ‚»‚Ì‚½‚ßRequestProcessor.dicon‚ªƒGƒ‰[‚É‚È‚é‚Ì‚ÅAƒRƒƒ“ƒgƒAƒEƒg‚µ‚Ü‚·B
     </li>
@@ -154,19 +191,20 @@ import•¶‚ğorg.seasar.struts.MessageManager‚©‚çorg.seasar.struts.pojo.MessageMana
 </ol>
 <p>
 ˆÈã‚ÅS2Struts1.3.x‚Ö‚ÌˆÚs‚ÍŠ®—¹‚Å‚·BTomcat‚ğ‹N“®‚µ“®ì‚É–â‘è‚ª‚È‚¢‚±‚Æ‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B
-Ÿ‚©‚ç‚ÍAHOTdeploy‘Î‰‚·‚é‚½‚ß‚Ìì‹Æ‚Å‚·B
+Ÿ‚©‚ç‚ÍAHOT deploy‘Î‰‚·‚é‚½‚ß‚Ìì‹Æ‚Å‚·B
 </p>
-<h2><a name="S2StrutsHotdeploy">S2Struts‚ÌHOTdeploy‘Î‰</a></h2>
+<h2><a name="S2StrutsHotdeploy">S2Struts‚ÌHOT deploy‘Î‰</a></h2>
 <p>
 HOTdeploy‰»‚ğs‚¤ê‡‚ÍAFilter‚ğFORWARD‚É“K—p‚·‚é‚½‚ß<b>Servlet2.4</b>‚ª•K—v‚Æ‚È‚è‚Ü‚·B
 struts-config.xmlAvalidation.xmlAapplication.properties‚Ì•ÏX‚ğ‚·‚®‚É”½‰f‚³‚¹‚é‚½‚ß‚É‚ÍˆÈ‰º‚ÌC³‚ª•K—v‚Å‚·B
 </p>
 <ol>
-  <li>diconƒtƒ@ƒCƒ‹‚Ì’Ç‰Á@ˆÈ‰º‚Ìdiconƒtƒ@ƒCƒ‹‚ğWEB-INF/src‚ÖƒRƒs[‚µ‚Ü‚·</li>
+  <li>diconƒtƒ@ƒCƒ‹‚Ì’Ç‰Á ˆÈ‰º‚Ìdiconƒtƒ@ƒCƒ‹‚ğWEB-INF/src‚ÖƒRƒs[‚µ‚Ü‚·</li>
   <ul>
+    <li>s2container.dicon</li>
     <li>creator.dicon</li>
     <li>customizer.dicon</li>
-    <li>s2container.dicon</li>
+    <li>convention.dicon</li>
   </ul>
   <li>app.dicon‚ÌC³</li>
   <ul>
@@ -177,8 +215,8 @@ struts-config.xmlAvalidation.xmlAapplication.properties‚Ì•ÏX‚ğ‚·‚®‚É”½‰f‚³‚¹‚
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
   "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
-  <b><font color="red">&lt;include condition="#ENV != 'ut'" path="s2struts.dicon"/&gt;
-  &lt;include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/&gt;</font></b>
+  <b><font color="red">&lt;include condition="#ENV != 'ct'" path="s2struts.dicon"/&gt;
+  &lt;include condition="#ENV == 'ct'" path="s2struts-hotdeploy.dicon"/&gt;</font></b>
     :
     :
 &lt;/components&gt;
@@ -187,7 +225,7 @@ struts-config.xmlAvalidation.xmlAapplication.properties‚Ì•ÏX‚ğ‚·‚®‚É”½‰f‚³‚¹‚
   <li>env.txt‚Ì’Ç‰Á</li>
   <ul>
     <li>ğŒ•tinclude‚Å—˜—p‚·‚éŠÂ‹«–¼‚ğenv.txt‚É‘‚«AWEB-INF/src‚Ö’Ç‰Á‚µ‚Ü‚·B
-        HOTdeploy‚ğ—˜—p‚·‚é‚½‚ßŠÂ‹«–¼‚Íuutv‚Æ‚µ‚Ü‚·B
+        HOTdeploy‚ğ—˜—p‚·‚é‚½‚ßŠÂ‹«–¼‚Íuctv‚Æ‚µ‚Ü‚·B
     </li>
   </ul>
   <li>struts-config.xml‚ÌC³</li>
@@ -204,10 +242,11 @@ struts-config.xmlAvalidation.xmlAapplication.properties‚Ì•ÏX‚ğ‚·‚®‚É”½‰f‚³‚¹‚
 &lt;/struts-config&gt;
 </pre>
   </ul>
-  <li>web.xml‚ÖHotdeployFilter‚Ì’Ç‰Á</li>
+  <li>web.xml‚ÌC³
   <ul>
-    <li>HotdeployFilter‚ÍAREQUEST‚ÆFORWARD‚É“K—p‚µ‚Ü‚·
-        iFORWARD‚É‚àFilter‚ğ“K—p‚·‚é‚½‚ß<b>Servlet2.4</b>‚ª•K—v‚Æ‚È‚è‚Ü‚·jB
+    <li><code>HotdeployFilter</code>‚Æ<code>S2StrutsHotdeployFilter</code>‚Ì’Ç‰Á</li>‚µ‚Ü‚·B
+       <code>HotdeployFilter</code>‚ÍAREQUEST‚ÆFORWARD‚É“K—p‚µ‚Ü‚·iFORWARD‚É‚àFilter‚ğ“K—p‚·‚é‚½‚ß<b>Servlet2.4</b>‚ª•K—v‚Æ‚È‚è‚Ü‚·jB
+       <code>S2StrutsHotdeployFilter</code>‚Í<code>HotdeployFilter</code>‚ÌŒã‚ë‚É’è‹`‚µ‚Ü‚·B
     </li>
 <pre>
 &lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
@@ -218,18 +257,28 @@ struts-config.xmlAvalidation.xmlAapplication.properties‚Ì•ÏX‚ğ‚·‚®‚É”½‰f‚³‚¹‚
   version="2.4"&gt;
     :
     :
-  &lt;filter&gt;
+  <b><font color="red">&lt;filter&gt;
     &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
     &lt;filter-class&gt;org.seasar.framework.container.hotdeploy.HotdeployFilter&lt;/filter-class&gt;
   &lt;/filter&gt;
+  
+  &lt;filter&gt;
+    &lt;filter-name&gt;s2strutshotdeployfilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.seasar.struts.hotdeploy.filter.S2StrutsHotdeployFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;</font></b>
     :
     :
-  &lt;filter-mapping&gt;
+  <b><font color="red">&lt;filter-mapping&gt;
     &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
     &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-    <b><font color="red">&lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;</font></b>
-    <b><font color="red">&lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;</font></b>
+    &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
+    &lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
   &lt;/filter-mapping&gt;
+  
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;s2strutshotdeployfilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;</font></b>
     :
     :
 &lt;/web-app&gt;
@@ -247,7 +296,7 @@ FAQu<a href="http://www.seasar.org/wiki/index.php?FAQ%2FS2Container#e4624d2e">H
 </p>
 <h2><a name="LessconfigHotdeploy">–³İ’èS2Struts‚ÌHOTdeploy‘Î‰</a></h2>
 <p>
-–³İ’èS2Struts‚ÌHOTdeploy‰»‚ğs‚¢‚Ü‚·B
+–³İ’èS2Struts‚ÌHOTdeploy‰»‚ğs‚¢‚Ü‚·B‚±‚Ìİ’è‚Ì‘O‚Éu<a href="#S2StrutsHotdeploy">S2Struts‚ÌHOTdeploy‘Î‰</a>v‚Ìİ’è‚ğŠ®—¹‚³‚¹‚Ä‚­‚¾‚³‚¢B
 </p>
 <p>
 S2.4‚ª„§‚·‚éƒfƒBƒŒƒNƒgƒŠ\¬‚É‹ß‚¢
@@ -271,132 +320,75 @@ Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º
   </ul>
   <li>customizer.dicon‚ÌC³</li>
   <ul>
-    <li>Employee‹@”\‚Å‚ÍAAction/DTO/Logic/Dao‚ğ—˜—p‚µ‚Ä‚¢‚Ü‚·B‚»‚ê‚¼‚ê‚ÌCustomizer‚ªˆÈ‰º‚Ì‚æ‚¤‚É’è‹`‚µ‚Ü‚·B
+    <li>Employee‹@”\‚Å‚ÍAAction/Logic/Dao‚ğ—˜—p‚µ‚Ä‚¢‚Ü‚·B‚»‚ê‚¼‚ê‚ÌCustomizer‚ğˆÈ‰º‚Ì‚æ‚¤‚É’è‹`‚µ‚Ü‚·B
+    ‚±‚±‚Å‚ÍLogic‚ğƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‹«ŠE‚Æ‚µ‚Ä‚¢‚Ü‚·B
     </li>
 <pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
-  "http://www.seasar.org/dtd/components24.dtd"&gt;
+    "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
-  &lt;component name="defaultCustomizer"
-      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
-    &lt;property name="interceptorName"&gt;"aop.traceInterceptor"&lt;/property&gt;
-  &lt;/component&gt;
-  &lt;component name="commandAspectCustomizer"
-      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
-    &lt;property name="interceptorName"&gt;"aop.traceInterceptor"&lt;/property&gt;
-    &lt;property name="pointcut"&gt;"do.*, go.*, initialize"&lt;/property&gt;
-  &lt;/component&gt;
-  &lt;component name="traceThrowsAspectCustomizer"
-      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
-    &lt;property name="interceptorName"&gt;"aop.traceThrowsInterceptor"&lt;/property&gt;
-  &lt;/component&gt;
-  <b><font color="red">&lt;component name="txAspectCustomizer"
-      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
-    &lt;property name="interceptorName"&gt;"j2ee.requiredTx"&lt;/property&gt;
-  &lt;/component&gt;</font></b>
-  <b><font color="red">&lt;component name="daoAspectCustomizer"
-      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
-    &lt;property name="interceptorName"&gt;"dao.interceptor"&lt;/property&gt;
-  &lt;/component&gt;</font></b>
+  &lt;include path="default-customizer.dicon"/&gt;
 
-  <b><font color="red">&lt;component name="actionCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;component name="txAspectCustomizer" 
+    class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
+    &lt;property name="interceptorName"&gt;"j2ee.requiredTx"&lt;/property&gt;
+  &lt;/component&gt;
+
+  &lt;component name="actionCustomizer" 
+    class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
     &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;commandAspectCustomizer&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;</font></b>
-  <b><font color="red">&lt;component name="daoCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-    &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
-    &lt;/initMethod&gt;
-    &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;daoAspectCustomizer&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;</font></b>
-  <b><font color="red">&lt;component name="dtoCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-  &lt;/component&gt;</font></b>
-  &lt;component name="dxoCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-    &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
+      &lt;arg&gt;traceCustomizer&lt;/arg&gt;
     &lt;/initMethod&gt;
   &lt;/component&gt;
-  &lt;component name="helperCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;component name="logicCustomizer" 
+    class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
     &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;
-  <b><font color="red">&lt;component name="logicCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-    &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
-    &lt;/initMethod&gt;
-    &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;txAspectCustomizer&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;</font></b>
-  &lt;component name="pageCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-    &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;commandAspectCustomizer&lt;/arg&gt;
-    &lt;/initMethod&gt;
-  &lt;/component&gt;
-  &lt;component name="serviceCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-    &lt;initMethod name="addCustomizer"&gt;
-      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
+      &lt;arg&gt;traceCustomizer&lt;/arg&gt;
     &lt;/initMethod&gt;
     &lt;initMethod name="addCustomizer"&gt;
       &lt;arg&gt;txAspectCustomizer&lt;/arg&gt;
     &lt;/initMethod&gt;
   &lt;/component&gt;
-  &lt;component name="interceptorCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;component name="daoCustomizer" 
+    class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;traceCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;s2DaoCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
   &lt;/component&gt;
-  &lt;component name="validatorCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-  &lt;/component&gt;
-  &lt;component name="converterCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-  &lt;/component&gt;
-  &lt;component name="connectorCustomizer"
-      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
-  &lt;/component&gt;
-&lt;/components&gt;</pre>
+
+&lt;/components&gt;
+</pre>
   </ul>
   <li>creator.dicon‚ÌC³</li>
   <ul>
-    <li>Action/DTO/Logic/Dao‚ÌCreator‚ªˆÈ‰º‚Ì‚æ‚¤‚É’è‹`‚µ‚Ü‚·B
+    <li>ˆÈ‰º‚Ì‚æ‚¤‚É’è‹`‚µ‚Ü‚·B
         Employee‹@”\‚Å‚ÍADTO‚ğActionForm‚Æ‚µ‚Ä—˜—p‚µ‚Ä‚¢‚Ü‚·B
         DTOiActionFormj‚ÌƒCƒ“ƒXƒ^ƒ“ƒXŠÇ—‚ÍS2Container‚Å‚Í‚È‚­Struts‚ªs‚¢‚Ü‚·B
-        ‚»‚Ì‚½‚ßADtoOndemandCreator‚ÌinstanceDef‚ğREQUESTiƒfƒtƒHƒ‹ƒgj‚©‚çPROTOTYPE‚É•ÏX‚µ‚Ü‚·B
+        ‚»‚Ì‚½‚ßA<b><font color="red">DtoCreator‚Ì’è‹`‚ğŠÜ‚ß‚È‚¢‚æ‚¤‚µ</b></font>ADTO‚ğSMART deploy‘ÎÛŠO‚Æ‚µ‚Ü‚·B<br/>
+        ‚±‚±‚Å‚ÍADtoCreator‚Ì’è‹`‚ğœ‹‚·‚é•û–@‚ğÌ‚è‚Ü‚·‚ªASMART deploy‚Ì‘ÎÛŠO‚Æ‚·‚é‚É‚ÍActionForm‚Æ‚µ‚Ä‚ÌDTO‚ğSMART deploy‚Ì‹K–ñŠO‚ÌƒpƒbƒP[ƒW‚É‚¨‚­•û–@‚à—LŒø‚Å‚·B
     </li>
 <pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
-  "http://www.seasar.org/dtd/components24.dtd"&gt;
+    "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
-  &lt;include path="convention.dicon"/&gt;
+    &lt;include path="convention.dicon"/&gt;
   &lt;include path="customizer.dicon"/&gt;
   &lt;component class="org.seasar.framework.container.creator.ActionCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.DaoCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.DtoCreator"&gt;
-    <b><font color="red">&lt;property name="instanceDef"&gt;
-      @org.seasar.framework.container.deployer.InstanceDefFactory@PROTOTYPE
-    &lt;/property&gt;</font></b>
-  &lt;/component&gt;
   &lt;component class="org.seasar.framework.container.creator.DxoCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.HelperCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.LogicCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.PageCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.ServiceCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.InterceptorCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.ValidatorCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.ConverterCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.ConnectorCreator"/&gt;
-&lt;/components&gt;</pre>
+&lt;/components&gt;
+</pre>
   </ul>
   <li>s2container.dicon‚ÌC³</li>
   <ul>
@@ -405,13 +397,15 @@ Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
   "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
-  <b><font color="red">&lt;include condition="#ENV == 'ut'" path="hotdeploy.dicon"/&gt;</font></b>
+  &lt;include condition="#ENV == 'ut'" path="warmdeploy.dicon"/&gt;
+  &lt;include condition="#ENV == 'ct'" path="hotdeploy.dicon"/&gt;
+  &lt;include condition="#ENV != 'ut' and #ENV != 'ct'" path="cooldeploy.dicon"/&gt;
 &lt;/components&gt;
 </pre>
   </ul>
   <li>app.dicon‚ÌC³</li>
   <ul>
-    <li>employee.dicon‚Í•s—v‚Æ‚È‚é‚½‚ßƒRƒƒ“ƒgƒAƒEƒg‚µAcooldeploy.dicon‚ğƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B
+    <li>employee.dicon‚Í•s—v‚Æ‚È‚é‚½‚ßƒRƒƒ“ƒgƒAƒEƒg‚µ‚µ‚Ü‚·B
         convention.diconAaop.diconAdao.dicon‚ğƒCƒ“ƒNƒ‹[ƒh‚µ‚Ü‚·B
     </li>
 <pre>
@@ -422,15 +416,14 @@ Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º
   &lt;include path="aop.dicon"/&gt;
   &lt;include path="dao.dicon"/&gt;
 
-  &lt;include condition="#ENV != 'ut'" path="s2struts.dicon"/&gt;
-  &lt;include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/&gt;
+  &lt;include condition="#ENV != 'ct'" path="s2struts.dicon"/&gt;
+  &lt;include condition="#ENV == 'ct'" path="s2struts-hotdeploy.dicon"/&gt;
     :
     :
   <b><font color="red">&lt;!--
   &lt;include path="org/seasar/struts/examples/dicon/employee.dicon"/&gt;
-  --&gt;
-  &lt;include condition="#ENV != 'ut'" path="cooldeploy.dicon"/&gt;</font></b>
-&lt;/components&gt;
+  --&gt;</b></font>
+    :
 </pre>
   </ul>
   <li>S2StrutsExample‚Å‚Í‚³‚ç‚É...</li>
@@ -441,16 +434,16 @@ Employee‹@”\iorg.seasar.struts.examples.employeeƒpƒbƒP[ƒWj‚ÌHOTdeploy‰»‚ÍˆÈ‰º
     </li>
     <li>Employee‹@”\‚Å‚ÍAS2Dao‚ğ—˜—p‚µ‚Ä‚¢‚é‚½‚ßA
         HOTdeploy‚É‘Î‰‚µ‚Ä‚¢‚éS2Dao‚É’u‚«Š·‚¦‚é•K—v‚ª‚ ‚è‚Ü‚·B
-        s2-dao-1.0.36-SNAPSHOT.jar‚É’u‚«Š·‚¦Adao.dicon‚ğ/WEB-INF/src‚©‚çíœ‚µ‚Ü‚·B
+        s2-dao-1.0.47.jar‚É’u‚«Š·‚¦Adao.dicon‚ğ/WEB-INF/src‚©‚çíœ‚µ‚Ü‚·Bidao.dicon‚Ís2-dao-1.0.47.jar‚ÉŠÜ‚Ü‚ê‚Ü‚·Bj
     </li>
   </ul>
 </ol>
 <p>
-‚±‚ê‚ÅEmployee‹@”\‚ÌHOTdeploy‰»‚ÍŠ®—¹‚Å‚·B
-Tomcat‚ğ‹N“®‚µHOTdeploy‚ğ‚µ‚Ä‚­‚¾‚³‚¢B
+‚±‚ê‚ÅEmployee‹@”\‚ÌHOT deploy‰»‚ÍŠ®—¹‚Å‚·B
+Tomcat‚ğ‹N“®‚µHOT deploy‚ğ‚µ‚Ä‚­‚¾‚³‚¢B
 </p>
 <p>
-‚Ü‚½ACOOLdeploy‚ğ‚µ‚½‚¢ê‡‚ÍAenv.txt‚Ì“à—e‚ğuitviuutvˆÈŠO‚Ì’lj“™‚É•ÏXŒãATomcat‚ğ‹N“®‚µ‚Ä‚­‚¾‚³‚¢B
+COOL deploy‚ğ‚µ‚½‚¢ê‡‚ÍAenv.txt‚Ì“à—e‚ğuproductv‚âuitv“™‚É•ÏXŒãATomcat‚ğ‹N“®‚µ‚Ä‚­‚¾‚³‚¢B
 </p>
 <!-- document end -->
 <!-- don't edit start -->
