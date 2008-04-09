@@ -376,17 +376,13 @@ Employee機能（org.seasar.struts.examples.employeeパッケージ）のHOTdeploy化は以下
 &lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
     "http://www.seasar.org/dtd/components24.dtd"&gt;
 &lt;components&gt;
-    &lt;include path="convention.dicon"/&gt;
+  &lt;include path="convention.dicon"/&gt;
   &lt;include path="customizer.dicon"/&gt;
   &lt;component class="org.seasar.framework.container.creator.ActionCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.DaoCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.DxoCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.HelperCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.LogicCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.ServiceCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.DaoCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.HelperCreator"/&gt;
   &lt;component class="org.seasar.framework.container.creator.InterceptorCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.ValidatorCreator"/&gt;
-  &lt;component class="org.seasar.framework.container.creator.ConverterCreator"/&gt;
 &lt;/components&gt;
 </pre>
   </ul>
