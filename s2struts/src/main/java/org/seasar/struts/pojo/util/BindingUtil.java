@@ -71,15 +71,7 @@ public class BindingUtil {
     }
 
     private static Object getValue(S2Container container, String name) {
-        Object var = RequestUtil.getValue(S2StrutsContextUtil.getRequest(container), name);
-        if (var != null) {
-            return var;
-        }
-
-        if (container.hasComponentDef(name)) {
-            return container.getComponent(name);
-        }
-        return null;
+        return RequestUtil.getValue(S2StrutsContextUtil.getRequest(container), name);
     }
 
     /**

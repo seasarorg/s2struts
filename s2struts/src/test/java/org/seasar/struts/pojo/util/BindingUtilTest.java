@@ -17,8 +17,11 @@ import org.seasar.struts.mock.MockActionMapping;
  */
 public class BindingUtilTest extends S2TestCase {
 
+    private TestPOJOActionImpl testPOJOAction;
+
     protected void setUp() throws Exception {
         super.setUp();
+        register(TestPOJOActionImpl.class, "testPOJOAction");
     }
 
     /*
@@ -39,18 +42,17 @@ public class BindingUtilTest extends S2TestCase {
         getRequest().setParameter("qux[0]", "quxValue");
         getRequest().setParameter("qux[3]", "quxValue3");
 
-        TestPOJOActionImpl action = new TestPOJOActionImpl();
-        BindingUtil.importProperties(action, getContainer(), new BeanDescImpl(TestPOJOActionImpl.class),
+        BindingUtil.importProperties(testPOJOAction, getContainer(), new BeanDescImpl(TestPOJOActionImpl.class),
                 new MockActionMapping());
 
-        assertEquals("fooVal", action.getFoo());
-        assertEquals(100, action.getBar());
-        assertNull(action.getBaz());
-        assertEquals("quxValue", action.getQux()[0]);
-        assertEquals("", action.getQux()[1]);
-        assertNull(action.getQux()[2]);
-        assertEquals("quxValue3", action.getQux()[3]);
-        assertNotNull(action.getRequest());
+        assertEquals("fooVal", testPOJOAction.getFoo());
+        assertEquals(100, testPOJOAction.getBar());
+        assertNull(testPOJOAction.getBaz());
+        assertEquals("quxValue", testPOJOAction.getQux()[0]);
+        assertEquals("", testPOJOAction.getQux()[1]);
+        assertNull(testPOJOAction.getQux()[2]);
+        assertEquals("quxValue3", testPOJOAction.getQux()[3]);
+        assertNotNull(testPOJOAction.getRequest());
     }
 
     public void testExportProperties() {
