@@ -13,14 +13,6 @@
 			<arg>traceCustomizer</arg>
 		</initMethod>
 	</component>
-	<component name="serviceCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>traceCustomizer</arg>
-		</initMethod>
-		<initMethod name="addCustomizer">
-			<arg>txAspectCustomizer</arg>
-		</initMethod>
-	</component>
 	<component name="logicCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 		<initMethod name="addCustomizer">
 			<arg>traceCustomizer</arg>
@@ -38,6 +30,4 @@
 		</initMethod>
 	</component>
 
-	<component name="formCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-	</component>
 </components>
