@@ -9,4 +9,5 @@
 	<component class="org.seasar.framework.container.creator.DaoCreator"/>
 	<component class="org.seasar.framework.container.creator.HelperCreator"/>
 	<component class="org.seasar.framework.container.creator.InterceptorCreator"/>
+	<component class="org.seasar.struts.creator.FormCreator"/>
 </components>
