@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components>
+	<include path="convention.dicon"/>
+	<include path="aop.dicon"/>
+	<include path="dao.dicon"/>
+
+	<!--
+	<include path="s2struts-processor.dicon"/>
+	-->
+	<include condition="#ENV != 'ct'" path="s2struts.dicon"/>
+	<include condition="#ENV == 'ct'" path="s2struts-hotdeploy.dicon"/>	
+
+</components>
