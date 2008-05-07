@@ -15,10 +15,12 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.seasar.framework.container.annotation.tiger.Binding;
+import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.examples.entity.Department;
+import org.seasar.struts.examples.web.employee.EmployeeLogic;
 import org.seasar.struts.examples.web.employee.SearchInitAction;
 
 /**
@@ -27,26 +29,21 @@ import org.seasar.struts.examples.web.employee.SearchInitAction;
  */
 public class SearchInitActionImpl implements SearchInitAction {
 
+    private EmployeeLogic employeeLogic;
+
     private List<Department> departments;
+
+    @Binding(bindingType = BindingType.MUST)
+    public void setEmployeeLogic(EmployeeLogic employeeLogic) {
+        this.employeeLogic = employeeLogic;
+    }
+
+    public void initialize() {
+        departments = employeeLogic.getAllDepartments();
+    }
 
     public List<Department> getDepartments() {
         return departments;
     }
 
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
-    }
-
-    public String initialize() {
-        departments = new ArrayList<Department>();
-        Department department = new Department();
-        department.setDeptno("10");
-        department.setDname("Aaa");
-        departments.add(department);
-        Department department2 = new Department();
-        department2.setDeptno("20");
-        department2.setDname("Bbb");
-        departments.add(department2);
-        return null;
-    }
 }

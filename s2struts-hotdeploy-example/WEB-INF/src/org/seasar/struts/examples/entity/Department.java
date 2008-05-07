@@ -15,32 +15,33 @@
  */
 package org.seasar.struts.examples.entity;
 
+import org.seasar.dao.annotation.tiger.Bean;
+import org.seasar.dao.annotation.tiger.Id;
+
 /**
  * @author taedium
  * 
  */
+@Bean(table = "DEPT")
 public class Department {
 
-    private static final long serialVersionUID = -415252834769980814L;
+    @Id
+    private int deptno;
 
-    public static final String TABLE = "DEPT";
+    private String dname;
 
-    private String deptno = "";
-
-    private String dname = "";
-
-    private String loc = "";
+    private String loc;
 
     private int versionNo;
 
     public Department() {
     }
 
-    public String getDeptno() {
+    public int getDeptno() {
         return deptno;
     }
 
-    public void setDeptno(String deptno) {
+    public void setDeptno(int deptno) {
         this.deptno = deptno;
     }
 

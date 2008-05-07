@@ -15,12 +15,11 @@
  */
 package org.seasar.struts.examples.web.employee;
 
-
 /**
  * @author taedium
  * 
  */
 public interface SearchInitAction {
 
-    String initialize();
+    void initialize();
 }

@@ -4,15 +4,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <link href="../../css/global.css" rel="stylesheet" type="text/css"></link>
   <script type="text/javascript" src="../../js/execute.js"></script>
-  <title id="pageTitle">
+  <title>
     Search - Employee Management Demo
   </title>
 </head>
 <body>
 <s2struts:init action="#{employee_searchInitAction.initialize}"/>
 <html:errors/>
-<div id="appBody">
-  <div id="errorMessage"></div>
   <html:form method="GET" action="employee_list">
     <table class="tablebg">
       <tr>
@@ -63,11 +61,8 @@
         </td>
       </tr>
     </table>
-
-    <input type="submit" value="create" id="goCreate"/>
-    <input type="submit" value="search" id="goSearch"/>
+    <html:submit action="#{employee_searchAction.goEditForCreate}"/>
+    <html:submit action="#{employee_searchAction.goList}"/>
   </html:form>
-</div>
-
 </body>
 </html>

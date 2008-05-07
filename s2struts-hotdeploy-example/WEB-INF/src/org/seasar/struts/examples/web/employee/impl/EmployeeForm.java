@@ -15,8 +15,6 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
-import java.io.Serializable;
-
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
 /**
@@ -24,11 +22,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForm;
  * 
  */
 @StrutsActionForm(name = "employeeForm")
-public class EmployeeForm implements Serializable {
-
-    private static final long serialVersionUID = -1L;
-
-    public static final String TABLE = "EMP";
+public class EmployeeForm {
 
     private String empno = "";
 
@@ -46,7 +40,7 @@ public class EmployeeForm implements Serializable {
 
     private String deptno = "";
 
-    private int versionNo;
+    private String versionNo;
 
     public String getEmpno() {
         return empno;
@@ -112,11 +106,11 @@ public class EmployeeForm implements Serializable {
         this.deptno = deptno;
     }
 
-    public int getVersionNo() {
+    public String getVersionNo() {
         return versionNo;
     }
 
-    public void setVersionNo(int versionNo) {
+    public void setVersionNo(String versionNo) {
         this.versionNo = versionNo;
     }
 
