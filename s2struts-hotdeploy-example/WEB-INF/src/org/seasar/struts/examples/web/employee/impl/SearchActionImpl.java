@@ -16,32 +16,33 @@
 package org.seasar.struts.examples.web.employee.impl;
 
 import org.seasar.struts.examples.web.CrudType;
-import org.seasar.struts.examples.web.employee.ListAction;
+import org.seasar.struts.examples.web.employee.SearchAction;
 
 /**
  * @author taedium
  * 
  */
-public class ListActionImpl implements ListAction {
+public class SearchActionImpl implements SearchAction {
 
-    private char crudType = CrudType.READ;
+    private SearchForm searchForm;
+
+    private char crudType;
+
+    public void setSearchForm(SearchForm searchForm) {
+        this.searchForm = searchForm;
+    }
 
     public char getCrudType() {
         return crudType;
     }
 
-    public String goDelete() {
-        crudType = CrudType.DELETE;
-        return CONFIRM;
+    public String goList() {
+        return LIST;
     }
 
-    public String goEditForUpdate() {
-        crudType = CrudType.UPDATE;
+    public String goEditForCreate() {
+        crudType = CrudType.CREATE;
         return EDIT;
-    }
-
-    public String goInquire() {
-        return CONFIRM;
     }
 
 }

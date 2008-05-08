@@ -1,4 +1,4 @@
-package org.seasar.struts.examples.web.employee;
+package org.seasar.struts.examples.dao;
 
 import java.util.List;
 

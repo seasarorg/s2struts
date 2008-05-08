@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <html:base />
   <link href="../../css/global.css" rel="stylesheet" type="text/css"></link>
   <script type="text/javascript" src="../../js/execute.js"></script>
   <title>
@@ -11,7 +12,7 @@
 <body>
 <s2struts:init action="#{employee_searchInitAction.initialize}"/>
 <html:errors/>
-  <html:form method="GET" action="employee_list">
+  <html:form method="POST" action="employee_search">
     <table class="tablebg">
       <tr>
         <td class="label"><span id="labelEmpno">EmployeeNo</span></td>
@@ -55,14 +56,14 @@
         <td class="label"><span id="labelDeptno">Department</span></td>
         <td>
           <html:select property="deptno" errorStyleClass="error">
-            <html:option value="Please select"/>
-            <html:options collection="departments" property="deptno" labelProperty="dname" />
+            <html:option value="" key="messages.select.space" />
+            <html:options collection="deptItems" property="deptno" labelProperty="dname" />
           </html:select>
         </td>
       </tr>
     </table>
-    <html:submit action="#{employee_searchAction.goEditForCreate}"/>
-    <html:submit action="#{employee_searchAction.goList}"/>
+    <s2struts:submit action="#{employee_searchAction.goEditForCreate}" value="create"/>
+    <s2struts:submit action="#{employee_searchAction.goList}" value="search"/>
   </html:form>
 </body>
 </html>

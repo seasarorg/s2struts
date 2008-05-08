@@ -15,7 +15,6 @@
  */
 package org.seasar.struts.examples.web.employee;
 
-import org.seasar.struts.annotation.tiger.BoolType;
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
@@ -24,13 +23,13 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.SESSION)
+@StrutsAction(name = "searchForm", scope = ScopeType.SESSION)
 public interface SearchAction {
 
     @StrutsActionForward(path = "/pages/employee/list.jsp")
     public String LIST = "list";
 
-    @StrutsActionForward(path = "/pages/employee/edit.jsp", redirect = BoolType.TRUE)
+    @StrutsActionForward(path = "/pages/employee/edit.jsp")
     public String EDIT = "edit";
 
     public String goList();

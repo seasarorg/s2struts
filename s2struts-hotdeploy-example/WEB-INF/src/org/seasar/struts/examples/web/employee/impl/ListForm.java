@@ -15,33 +15,27 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
-import org.seasar.struts.examples.web.CrudType;
-import org.seasar.struts.examples.web.employee.ListAction;
+import java.io.Serializable;
+
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
 /**
  * @author taedium
  * 
  */
-public class ListActionImpl implements ListAction {
+@StrutsActionForm(name = "listForm")
+public class ListForm implements Serializable {
 
-    private char crudType = CrudType.READ;
+    private static final long serialVersionUID = 1L;
 
-    public char getCrudType() {
-        return crudType;
+    private String empno;
+
+    public String getEmpno() {
+        return empno;
     }
 
-    public String goDelete() {
-        crudType = CrudType.DELETE;
-        return CONFIRM;
-    }
-
-    public String goEditForUpdate() {
-        crudType = CrudType.UPDATE;
-        return EDIT;
-    }
-
-    public String goInquire() {
-        return CONFIRM;
+    public void setEmpno(String empno) {
+        this.empno = empno;
     }
 
 }

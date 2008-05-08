@@ -15,30 +15,34 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
+import java.io.Serializable;
+
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
 /**
  * @author taedium
  * 
  */
-@StrutsActionForm(name = "employeeForm")
-public class EmployeeForm {
+@StrutsActionForm
+public class EditForm implements Serializable {
 
-    private String empno = "";
+    private static final long serialVersionUID = 1L;
 
-    private String ename = "";
+    private String empno;
 
-    private String job = "";
+    private String ename;
 
-    private String mgr = "";
+    private String job;
 
-    private String hiredateDisplay = "";
+    private String mgr;
 
-    private String sal = "";
+    private String hiredate;
 
-    private String comm = "";
+    private String sal;
 
-    private String deptno = "";
+    private String deptno;
+
+    private String crudType;
 
     private String versionNo;
 
@@ -74,12 +78,12 @@ public class EmployeeForm {
         this.mgr = mgr;
     }
 
-    public String getHiredateDisplay() {
-        return hiredateDisplay;
+    public String getHiredate() {
+        return hiredate;
     }
 
-    public void setHiredateDisplay(String hiredateDisplay) {
-        this.hiredateDisplay = hiredateDisplay;
+    public void setHiredate(String hiredate) {
+        this.hiredate = hiredate;
     }
 
     public String getSal() {
@@ -90,20 +94,20 @@ public class EmployeeForm {
         this.sal = sal;
     }
 
-    public String getComm() {
-        return comm;
-    }
-
-    public void setComm(String comm) {
-        this.comm = comm;
-    }
-
     public String getDeptno() {
         return deptno;
     }
 
     public void setDeptno(String deptno) {
         this.deptno = deptno;
+    }
+
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
     }
 
     public String getVersionNo() {

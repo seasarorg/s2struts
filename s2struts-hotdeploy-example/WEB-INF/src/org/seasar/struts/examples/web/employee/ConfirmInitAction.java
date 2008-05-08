@@ -13,35 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.employee.impl;
-
-import org.seasar.struts.examples.web.CrudType;
-import org.seasar.struts.examples.web.employee.ListAction;
+package org.seasar.struts.examples.web.employee;
 
 /**
  * @author taedium
  * 
  */
-public class ListActionImpl implements ListAction {
+public interface ConfirmInitAction {
 
-    private char crudType = CrudType.READ;
-
-    public char getCrudType() {
-        return crudType;
-    }
-
-    public String goDelete() {
-        crudType = CrudType.DELETE;
-        return CONFIRM;
-    }
-
-    public String goEditForUpdate() {
-        crudType = CrudType.UPDATE;
-        return EDIT;
-    }
-
-    public String goInquire() {
-        return CONFIRM;
-    }
-
+    void initialize();
 }

@@ -15,11 +15,14 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import org.seasar.struts.annotation.tiger.StrutsAction;
+
 /**
  * @author taedium
  * 
  */
+@StrutsAction(name = "listInitForm")
 public interface ListInitAction {
 
-    String initialize();
+    void initialize();
 }

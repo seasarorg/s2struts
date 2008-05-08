@@ -19,31 +19,57 @@ import java.util.List;
 
 import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
+import org.seasar.struts.examples.dto.EmployeeDto;
 import org.seasar.struts.examples.entity.Department;
+import org.seasar.struts.examples.web.employee.EditInitAction;
 import org.seasar.struts.examples.web.employee.EmployeeLogic;
-import org.seasar.struts.examples.web.employee.SearchInitAction;
 
 /**
  * @author taedium
  * 
  */
-public class SearchInitActionImpl implements SearchInitAction {
+public class EditInitActionImpl implements EditInitAction {
 
     private EmployeeLogic employeeLogic;
 
+    private ListForm listForm;
+
+    private EmployeeDto employeeDto;
+
     private List<Department> deptItems;
+
+    private char crudType;
 
     @Binding(bindingType = BindingType.MUST)
     public void setEmployeeLogic(EmployeeLogic employeeLogic) {
         this.employeeLogic = employeeLogic;
     }
 
-    public void initialize() {
-        deptItems = employeeLogic.getAllDepartments();
+    public void setListForm(ListForm listForm) {
+        this.listForm = listForm;
     }
 
     public List<Department> getDeptItems() {
         return deptItems;
     }
 
+    public void setCrudType(char crudType) {
+        this.crudType = crudType;
+    }
+
+    public char getCrudType() {
+        return crudType;
+    }
+
+    public EmployeeDto getEmployeeDto() {
+        return employeeDto;
+    }
+
+    public void initialize() {
+        if (crudType == 'u' && listForm != null) {
+            int empno = Integer.valueOf(listForm.getEmpno());
+            employeeDto = employeeLogic.getEmployeeDto(empno);
+        }
+        deptItems = employeeLogic.getAllDepartments();
+    }
 }

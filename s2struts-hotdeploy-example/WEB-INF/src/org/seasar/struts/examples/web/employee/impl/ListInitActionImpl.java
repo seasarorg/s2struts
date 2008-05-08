@@ -17,33 +17,44 @@ package org.seasar.struts.examples.web.employee.impl;
 
 import java.util.List;
 
+import org.seasar.framework.beans.util.Beans;
 import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
-import org.seasar.struts.examples.entity.Department;
+import org.seasar.struts.examples.dto.EmployeeSearchDto;
+import org.seasar.struts.examples.entity.Employee;
 import org.seasar.struts.examples.web.employee.EmployeeLogic;
-import org.seasar.struts.examples.web.employee.SearchInitAction;
+import org.seasar.struts.examples.web.employee.ListInitAction;
 
 /**
  * @author taedium
  * 
  */
-public class SearchInitActionImpl implements SearchInitAction {
+public class ListInitActionImpl implements ListInitAction {
 
     private EmployeeLogic employeeLogic;
 
-    private List<Department> deptItems;
+    private SearchForm searchForm;
+
+    private List<Employee> empItems;
 
     @Binding(bindingType = BindingType.MUST)
     public void setEmployeeLogic(EmployeeLogic employeeLogic) {
         this.employeeLogic = employeeLogic;
     }
 
-    public void initialize() {
-        deptItems = employeeLogic.getAllDepartments();
+    public void setSearchForm(SearchForm searchForm) {
+        this.searchForm = searchForm;
     }
 
-    public List<Department> getDeptItems() {
-        return deptItems;
+    public List<Employee> getEmpItems() {
+        return empItems;
+    }
+
+    public void initialize() {
+        EmployeeSearchDto searchDto = new EmployeeSearchDto();
+        Beans.copy(searchForm, searchDto).excludesNull().excludesWhitespace()
+                .execute();
+        empItems = employeeLogic.getEmployees(searchDto);
     }
 
 }

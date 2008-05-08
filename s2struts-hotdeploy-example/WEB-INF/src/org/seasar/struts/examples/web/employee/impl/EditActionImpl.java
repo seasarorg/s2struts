@@ -15,33 +15,22 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
-import org.seasar.struts.examples.web.CrudType;
-import org.seasar.struts.examples.web.employee.ListAction;
+import org.seasar.struts.examples.web.employee.EditAction;
 
 /**
  * @author taedium
  * 
  */
-public class ListActionImpl implements ListAction {
+public class EditActionImpl implements EditAction {
 
-    private char crudType = CrudType.READ;
-
-    public char getCrudType() {
-        return crudType;
+    public String goConfirm() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
-    public String goDelete() {
-        crudType = CrudType.DELETE;
-        return CONFIRM;
-    }
-
-    public String goEditForUpdate() {
-        crudType = CrudType.UPDATE;
-        return EDIT;
-    }
-
-    public String goInquire() {
-        return CONFIRM;
+    public String goPrevious() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
