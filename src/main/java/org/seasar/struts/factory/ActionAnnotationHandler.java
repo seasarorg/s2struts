@@ -15,8 +15,6 @@
  */
 package org.seasar.struts.factory;
 
-import java.lang.reflect.Method;
-
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.struts.config.ActionPropertyConfig;
@@ -28,7 +26,5 @@ public interface ActionAnnotationHandler {
 
     public ActionPropertyConfig createActionPropertyConfig(BeanDesc beanDesc,
             PropertyDesc propertyDesc);
-
-    public String getPath(Method method);
 
 }

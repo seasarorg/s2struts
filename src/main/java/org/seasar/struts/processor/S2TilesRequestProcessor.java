@@ -42,7 +42,6 @@ import org.seasar.struts.util.S2Util;
  */
 public class S2TilesRequestProcessor extends TilesRequestProcessor implements
         ExternalRequestProcessor {
-
     private ActionExecuteProcessor executeProcessor;
 
     private ActionFactory actionFactory;

@@ -27,20 +27,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.InvalidCancelException;
-import org.seasar.struts.Constants;
 
 /**
  * @author Satoshi Kimura
  */
 public class AcceptorImpl implements Acceptor {
-
-    public static final String pathResolver_BINDING = "bindingType=may";
-
-    private PathResolver pathResolver;
-
-    public void setPathResolver(PathResolver pathResolver) {
-        this.pathResolver = pathResolver;
-    }
 
     public AcceptorImpl() {
     }
@@ -57,8 +48,6 @@ public class AcceptorImpl implements Acceptor {
         if (path == null) {
             return;
         }
-        request.setAttribute(Constants.ORIGINAL_PATH_KEY, path);
-        path = pathResolver.resolve(request, path);
 
         if (log.isDebugEnabled()) {
             log.debug("Processing a '" + request.getMethod() + "' for path '"
@@ -159,4 +148,5 @@ public class AcceptorImpl implements Acceptor {
         // Process the returned ActionForward instance
         processor.processForwardConfig(request, response, forward);
     }
+
 }
