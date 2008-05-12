@@ -10,9 +10,9 @@ import org.seasar.struts.examples.dto.EmployeeDto;
 import org.seasar.struts.examples.dto.EmployeeSearchDto;
 import org.seasar.struts.examples.entity.Department;
 import org.seasar.struts.examples.entity.Employee;
-import org.seasar.struts.examples.web.employee.EmployeeLogic;
+import org.seasar.struts.examples.web.employee.EmployeeService;
 
-public class EmployeeLogicImpl implements EmployeeLogic {
+public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeDao employeeDao;
 

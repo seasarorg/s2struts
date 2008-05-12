@@ -11,15 +11,16 @@
 </head>
 <body>
 <html:errors/>
-<html:form action="employee_confirm">
+<html:form action="/employee/confirm">
+  <s2struts:page />
   <s2struts:init action="#{employee_confirmInitAction.initialize}"/>
-  <bean:define id="form" name="confirmForm" />
+  <bean:define id="form" name="employee_confirmForm" />
   <html:hidden property="crudType" value="${crudType}" />
   <table class="tablebg">
     <tr>
       <td class="label"><span id="labelEmpno">EmployeeNo</span></td>
       <td class="number">
-        <bean:write name="confirmForm" property="empno" />
+        <bean:write name="form" property="empno" />
         <html:hidden property="empno" />
       </td>
     </tr>

@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.employee.impl;
+package org.seasar.struts.examples.web.employee;
 
 import java.io.Serializable;
 
@@ -23,7 +23,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForm;
  * @author taedium
  * 
  */
-@StrutsActionForm(name = "listForm")
+@StrutsActionForm
 public class ListForm implements Serializable {
 
     private static final long serialVersionUID = 1L;

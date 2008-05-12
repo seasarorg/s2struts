@@ -23,7 +23,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(name = "confirmForm", scope = ScopeType.REQUEST)
+@StrutsAction(scope = ScopeType.REQUEST)
 public interface ConfirmAction {
 
     @StrutsActionForward(path = "/pages/employee/edit.jsp")

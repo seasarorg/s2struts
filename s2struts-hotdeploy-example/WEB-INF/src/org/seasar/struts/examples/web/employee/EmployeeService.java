@@ -7,7 +7,7 @@ import org.seasar.struts.examples.dto.EmployeeSearchDto;
 import org.seasar.struts.examples.entity.Department;
 import org.seasar.struts.examples.entity.Employee;
 
-public interface EmployeeLogic {
+public interface EmployeeService {
 
     List<EmployeeDto> getEmployeeDtoList(EmployeeSearchDto dto);
 

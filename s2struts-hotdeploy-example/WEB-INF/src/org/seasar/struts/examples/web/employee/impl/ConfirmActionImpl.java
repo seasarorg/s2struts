@@ -21,7 +21,8 @@ import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.examples.entity.Employee;
 import org.seasar.struts.examples.web.CrudType;
 import org.seasar.struts.examples.web.employee.ConfirmAction;
-import org.seasar.struts.examples.web.employee.EmployeeLogic;
+import org.seasar.struts.examples.web.employee.ConfirmForm;
+import org.seasar.struts.examples.web.employee.EmployeeService;
 
 /**
  * @author taedium
@@ -29,7 +30,7 @@ import org.seasar.struts.examples.web.employee.EmployeeLogic;
  */
 public class ConfirmActionImpl implements ConfirmAction {
 
-    private EmployeeLogic employeeLogic;
+    private EmployeeService employeeService;
 
     private ConfirmForm confirmForm;
 
@@ -44,29 +45,25 @@ public class ConfirmActionImpl implements ConfirmAction {
     }
 
     @Binding(bindingType = BindingType.MUST)
-    public void setEmployeeLogic(EmployeeLogic employeeLogic) {
-        this.employeeLogic = employeeLogic;
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     public void setConfirmForm(ConfirmForm confirmForm) {
         this.confirmForm = confirmForm;
     }
 
-    public ConfirmForm getConfirmForm() {
-        return confirmForm;
-    }
-
     public String goStore() {
         Employee employee = Beans.createAndCopy(Employee.class, confirmForm)
                 .excludesWhitespace().excludesNull().execute();
         if (CrudType.CREATE.equals(crudType)) {
-            employeeLogic.insert(employee);
+            employeeService.insert(employee);
             return SEARCH;
         } else if (CrudType.UPDATE.equals(crudType)) {
-            employeeLogic.update(employee);
+            employeeService.update(employee);
             return LIST;
         } else if (CrudType.DELETE.equals(crudType)) {
-            employeeLogic.delete(employee);
+            employeeService.delete(employee);
             return LIST;
         }
         return SEARCH;

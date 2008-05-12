@@ -23,7 +23,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(name = "searchForm", scope = ScopeType.SESSION)
+@StrutsAction(scope = ScopeType.SESSION)
 public interface SearchAction {
 
     @StrutsActionForward(path = "/pages/employee/list.jsp")

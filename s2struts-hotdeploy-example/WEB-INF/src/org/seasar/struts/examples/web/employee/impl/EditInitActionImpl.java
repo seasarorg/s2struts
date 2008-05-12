@@ -23,8 +23,11 @@ import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.examples.dto.EmployeeDto;
 import org.seasar.struts.examples.entity.Department;
 import org.seasar.struts.examples.web.CrudType;
+import org.seasar.struts.examples.web.employee.ConfirmForm;
+import org.seasar.struts.examples.web.employee.EditForm;
 import org.seasar.struts.examples.web.employee.EditInitAction;
-import org.seasar.struts.examples.web.employee.EmployeeLogic;
+import org.seasar.struts.examples.web.employee.EmployeeService;
+import org.seasar.struts.examples.web.employee.ListForm;
 
 /**
  * @author taedium
@@ -32,7 +35,7 @@ import org.seasar.struts.examples.web.employee.EmployeeLogic;
  */
 public class EditInitActionImpl implements EditInitAction {
 
-    private EmployeeLogic employeeLogic;
+    private EmployeeService employeeService;
 
     private ListForm listForm;
 
@@ -47,8 +50,8 @@ public class EditInitActionImpl implements EditInitAction {
     private String crudType;
 
     @Binding(bindingType = BindingType.MUST)
-    public void setEmployeeLogic(EmployeeLogic employeeLogic) {
-        this.employeeLogic = employeeLogic;
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     public void setListForm(ListForm listForm) {
@@ -77,13 +80,13 @@ public class EditInitActionImpl implements EditInitAction {
 
     public void initialize() {
         if (CrudType.UPDATE.equals(crudType) && listForm != null) {
-            int empno = Integer.parseInt(listForm.getEmpno());
-            employeeDto = employeeLogic.getEmployeeDto(empno);
+            int empno = Integer.valueOf(listForm.getEmpno());
+            employeeDto = employeeService.getEmployeeDto(empno);
             Beans.copy(employeeDto, editForm).dateConverter("yyyy/MM/dd",
                     "hiredate").execute();
         } else if (confirmForm != null) {
             Beans.copy(confirmForm, editForm).execute();
         }
-        deptItems = employeeLogic.getDepartmentList();
+        deptItems = employeeService.getDepartmentList();
     }
 }

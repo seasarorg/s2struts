@@ -20,7 +20,7 @@ import java.util.List;
 import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.examples.entity.Department;
-import org.seasar.struts.examples.web.employee.EmployeeLogic;
+import org.seasar.struts.examples.web.employee.EmployeeService;
 import org.seasar.struts.examples.web.employee.SearchInitAction;
 
 /**
@@ -29,17 +29,17 @@ import org.seasar.struts.examples.web.employee.SearchInitAction;
  */
 public class SearchInitActionImpl implements SearchInitAction {
 
-    private EmployeeLogic employeeLogic;
+    private EmployeeService employeeService;
 
     private List<Department> deptItems;
 
     @Binding(bindingType = BindingType.MUST)
-    public void setEmployeeLogic(EmployeeLogic employeeLogic) {
-        this.employeeLogic = employeeLogic;
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     public void initialize() {
-        deptItems = employeeLogic.getDepartmentList();
+        deptItems = employeeService.getDepartmentList();
     }
 
     public List<Department> getDeptItems() {

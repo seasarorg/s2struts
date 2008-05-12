@@ -22,8 +22,9 @@ import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.examples.dto.EmployeeDto;
 import org.seasar.struts.examples.dto.EmployeeSearchDto;
-import org.seasar.struts.examples.web.employee.EmployeeLogic;
+import org.seasar.struts.examples.web.employee.EmployeeService;
 import org.seasar.struts.examples.web.employee.ListInitAction;
+import org.seasar.struts.examples.web.employee.SearchForm;
 
 /**
  * @author taedium
@@ -31,15 +32,15 @@ import org.seasar.struts.examples.web.employee.ListInitAction;
  */
 public class ListInitActionImpl implements ListInitAction {
 
-    private EmployeeLogic employeeLogic;
+    private EmployeeService employeeService;
 
     private SearchForm searchForm;
 
     private List<EmployeeDto> empItems;
 
     @Binding(bindingType = BindingType.MUST)
-    public void setEmployeeLogic(EmployeeLogic employeeLogic) {
-        this.employeeLogic = employeeLogic;
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     public void setSearchForm(SearchForm searchForm) {
@@ -56,7 +57,7 @@ public class ListInitActionImpl implements ListInitAction {
                     EmployeeSearchDto.class, searchForm).excludesNull()
                     .excludesWhitespace().dateConverter("yyyy/MM/dd",
                             "hiredate").execute();
-            empItems = employeeLogic.getEmployeeDtoList(searchDto);
+            empItems = employeeService.getEmployeeDtoList(searchDto);
         }
 
     }

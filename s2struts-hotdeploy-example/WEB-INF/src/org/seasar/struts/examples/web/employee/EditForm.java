@@ -13,20 +13,21 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.employee.impl;
+package org.seasar.struts.examples.web.employee;
 
 import java.io.Serializable;
 
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 import org.seasar.struts.validator.annotation.tiger.DateType;
 import org.seasar.struts.validator.annotation.tiger.IntegerType;
+import org.seasar.struts.validator.annotation.tiger.Required;
 
 /**
  * @author taedium
  * 
  */
 @StrutsActionForm
-public class SearchForm implements Serializable {
+public class EditForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,20 +39,24 @@ public class SearchForm implements Serializable {
 
     private String mgr;
 
-    private String fromHiredate;
+    private String hiredate;
 
-    private String toHiredate;
+    private String sal;
 
-    private String fromSal;
-
-    private String toSal;
+    private String comm;
 
     private String deptno;
+
+    private String versionNo;
+
+    public EditForm() {
+    }
 
     public String getEmpno() {
         return empno;
     }
 
+    @Required
     @IntegerType
     public void setEmpno(String empno) {
         this.empno = empno;
@@ -61,6 +66,7 @@ public class SearchForm implements Serializable {
         return ename;
     }
 
+    @Required
     public void setEname(String ename) {
         this.ename = ename;
     }
@@ -82,49 +88,49 @@ public class SearchForm implements Serializable {
         this.mgr = mgr;
     }
 
-    public String getFromHiredate() {
-        return fromHiredate;
+    public String getHiredate() {
+        return hiredate;
     }
 
-    @DateType
-    public void setFromHiredate(String fromHiredate) {
-        this.fromHiredate = fromHiredate;
+    @DateType(pattern = "yyyy/MM/dd")
+    public void setHiredate(String hiredate) {
+        this.hiredate = hiredate;
     }
 
-    public String getToHiredate() {
-        return toHiredate;
-    }
-
-    @DateType
-    public void setToHiredate(String toHiredate) {
-        this.toHiredate = toHiredate;
-    }
-
-    public String getFromSal() {
-        return fromSal;
+    public String getSal() {
+        return sal;
     }
 
     @IntegerType
-    public void setFromSal(String fromSal) {
-        this.fromSal = fromSal;
+    public void setSal(String sal) {
+        this.sal = sal;
     }
 
-    public String getToSal() {
-        return toSal;
+    public String getComm() {
+        return comm;
     }
 
     @IntegerType
-    public void setToSal(String toSal) {
-        this.toSal = toSal;
+    public void setComm(String comm) {
+        this.comm = comm;
     }
 
     public String getDeptno() {
         return deptno;
     }
 
+    @Required
     @IntegerType
     public void setDeptno(String deptno) {
         this.deptno = deptno;
+    }
+
+    public String getVersionNo() {
+        return versionNo;
+    }
+
+    public void setVersionNo(String versionNo) {
+        this.versionNo = versionNo;
     }
 
 }

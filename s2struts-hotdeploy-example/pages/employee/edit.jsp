@@ -11,9 +11,10 @@
 </head>
 <body>
 <html:errors/>
-<html:form action="employee_edit">
+<html:form action="/employee/edit">
+  <s2struts:page />
   <s2struts:init action="#{employee_editInitAction.initialize}"/>
-  <bean:define id="form" name="editForm" />
+  <bean:define id="form" name="employee_editForm" />
   <html:hidden property="crudType" value="${crudType}" />
   <table class="tablebg">
     <tr>

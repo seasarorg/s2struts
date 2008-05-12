@@ -10,9 +10,10 @@
   </title>
 </head>
 <body>
-<html:errors/>
-  <html:form action="employee_search">
-  <s2struts:init action="#{employee_searchInitAction.initialize}"/>
+  <html:errors/>
+  <html:form action="/employee/search">
+    <s2struts:page />
+    <s2struts:init action="#{employee_searchInitAction.initialize}"/>
     <table class="tablebg">
       <tr>
         <td class="label"><span id="labelEmpno">EmployeeNo</span></td>

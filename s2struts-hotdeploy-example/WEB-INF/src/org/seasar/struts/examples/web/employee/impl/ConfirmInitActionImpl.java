@@ -20,8 +20,11 @@ import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.examples.dto.EmployeeDto;
 import org.seasar.struts.examples.web.CrudType;
+import org.seasar.struts.examples.web.employee.ConfirmForm;
 import org.seasar.struts.examples.web.employee.ConfirmInitAction;
-import org.seasar.struts.examples.web.employee.EmployeeLogic;
+import org.seasar.struts.examples.web.employee.EditForm;
+import org.seasar.struts.examples.web.employee.EmployeeService;
+import org.seasar.struts.examples.web.employee.ListForm;
 
 /**
  * @author taedium
@@ -29,7 +32,7 @@ import org.seasar.struts.examples.web.employee.EmployeeLogic;
  */
 public class ConfirmInitActionImpl implements ConfirmInitAction {
 
-    private EmployeeLogic employeeLogic;
+    private EmployeeService employeeService;
 
     private ConfirmForm confirmForm;
 
@@ -40,8 +43,8 @@ public class ConfirmInitActionImpl implements ConfirmInitAction {
     private String crudType;
 
     @Binding(bindingType = BindingType.MUST)
-    public void setEmployeeLogic(EmployeeLogic employeeLogic) {
-        this.employeeLogic = employeeLogic;
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     public void setListForm(ListForm listForm) {
@@ -50,10 +53,6 @@ public class ConfirmInitActionImpl implements ConfirmInitAction {
 
     public void setEditForm(EditForm editForm) {
         this.editForm = editForm;
-    }
-
-    public ConfirmForm getConfirmForm() {
-        return confirmForm;
     }
 
     public void setConfirmForm(ConfirmForm confirmForm) {
@@ -72,7 +71,7 @@ public class ConfirmInitActionImpl implements ConfirmInitAction {
         int deptno = 0;
         if (CrudType.READ.equals(crudType) || CrudType.DELETE.equals(crudType)) {
             int empno = Integer.valueOf(listForm.getEmpno());
-            EmployeeDto employeeDto = employeeLogic.getEmployeeDto(empno);
+            EmployeeDto employeeDto = employeeService.getEmployeeDto(empno);
             Beans.copy(employeeDto, confirmForm).dateConverter("yyyy/MM/dd",
                     "hiredate").execute();
             deptno = employeeDto.getDeptno();
@@ -81,7 +80,7 @@ public class ConfirmInitActionImpl implements ConfirmInitAction {
             Beans.copy(editForm, confirmForm).execute();
             deptno = Integer.valueOf(editForm.getDeptno());
         }
-        String dname = employeeLogic.getDeptno(deptno);
+        String dname = employeeService.getDeptno(deptno);
         confirmForm.setDname(dname);
     }
 }
