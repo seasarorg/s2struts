@@ -97,7 +97,7 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     }
 
     /**
-     * 検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を返します。
+     * ActionFormの検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を返します。
      * 
      * @return
      */
@@ -106,7 +106,7 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     }
 
     /**
-     * 検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を設定します。
+     * ActionFormの検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を設定します。
      * 
      * @param input
      */
@@ -152,9 +152,11 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
         }
         params.put(this.encodeExpression, "");
 
-        String path = S2StrutsContextUtil.getCurrentInputPath();
-        path = new String(Base64Util.encode(path.getBytes()));
-        params.put(Constants.PAGE_NAME_ELEMENT_VALUE, path);
+        if (input) {
+            String path = S2StrutsContextUtil.getCurrentInputPath();
+            path = new String(Base64Util.encode(path.getBytes()));
+            params.put(Constants.PAGE_NAME_ELEMENT_VALUE, path);
+        }
 
         if (indexed) {
             int indexValue = getIndexValue();
