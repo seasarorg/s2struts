@@ -10,46 +10,46 @@
   </title>
 </head>
 <body>
-<s2struts:init action="#{employee_searchInitAction.initialize}"/>
 <html:errors/>
-  <html:form method="POST" action="employee_search">
+  <html:form action="employee_search">
+  <s2struts:init action="#{employee_searchInitAction.initialize}"/>
     <table class="tablebg">
       <tr>
         <td class="label"><span id="labelEmpno">EmployeeNo</span></td>
         <td>
-          <input type="text" name="empno" value="" class="number" id="empno"/>
+          <html:text property="empno" styleClass="number" errorStyleClass="number-error" />
         </td>
       </tr>
       <tr>
         <td class="label"><span id="labelEname">EmployeeName</span></td>
         <td>
-          <input type="text" name="ename" value="" class="text" id="ename"/>
+          <html:text property="ename" styleClass="text" errorStyleClass="text-error" />
         </td>
       </tr>
       <tr>
         <td class="label"><span id="labelJob">Job</span></td>
         <td>
-          <input type="text" name="job" value="" class="text" id="job"/>
+          <html:text property="job" styleClass="text" errorStyleClass="text-error" />
         </td>
       </tr>
       <tr>
         <td class="label"><span id="labelMgr">Manager</span></td>
         <td>
-          <input type="text" name="mgr" value="" class="number" id="mgr"/>
+          <html:text property="mgr" styleClass="number" errorStyleClass="number-error" />
         </td>
       </tr>
       <tr>
         <td class="label"><span id="labelHiredate">HireDate</span></td>
         <td>
-          <input type="text" name="fromHiredateDisplay" value="" class="date" id="fromHiredate"/> ～
-          <input type="text" name="toHiredateDisplay" value="" class="date" id="toHiredate"/>
+          <html:text property="fromHiredate" styleClass="date" errorStyleClass="date-error" /> ～
+          <html:text property="toHiredate" styleClass="date" errorStyleClass="date-error" />
         </td>
       </tr>
       <tr>
         <td class="label"><span id="labelSal">Salary</span></td>
         <td>
-          <input type="text" name="fromSal" value="" class="number" id="fromSal"/> ～
-          <input type="text" name="toSal" value="" class="number" id="toSal"/>
+          <html:text property="fromSal" styleClass="number" errorStyleClass="number-error" /> ～
+          <html:text property="toSal" styleClass="number" errorStyleClass="number-error" />
         </td>
       </tr>
       <tr>
@@ -62,8 +62,8 @@
         </td>
       </tr>
     </table>
-    <s2struts:submit action="#{employee_searchAction.goEditForCreate}" value="create"/>
-    <s2struts:submit action="#{employee_searchAction.goList}" value="search"/>
+    <s2struts:submit action="#{employee_searchAction.goEdit}" cancel="true"><bean:message key="button.create" /></s2struts:submit>
+    <s2struts:submit action="#{employee_searchAction.goList}"><bean:message key="button.search" /></s2struts:submit>
   </html:form>
 </body>
 </html>

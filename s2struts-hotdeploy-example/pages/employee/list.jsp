@@ -14,7 +14,7 @@
 <html:errors/>
   <table class="tablebg">
     <tr class="label">
-      <th><span id="labelEmpno">EmployeeNo</span></th>
+      <th><bean:message key="button.edit" /><span id="labelEmpno">EmployeeNo</span></th>
       <th><span id="labelEname">EmployeeName</span></th>
       <th><span id="labelJob">Job</span></th>
       <th><span id="labelMgr">Manager</span></th>
@@ -27,17 +27,17 @@
     <c:forEach var="e" varStatus="s" items="${empItems}">
       <tr class="${s.index %2 == 0 ? 'row-0' : 'row-1'}">
         <td class="number"><c:out value="${e.empno}" /></td>
-        <td class="text"><span id="ename"><c:out value="${e.ename}" /></span></td>
-        <td class="text"><span id="job"><c:out value="${e.job}" /></span></td>
-        <td class="number"><span id="mgr"><c:out value="${e.mgr}" /></span></td>
-        <td class="date"><span id="hiredate"><c:out value="${e.hiredate}" /></span></td>
-        <td class="number"><span id="sal"><c:out value="${e.sal}" /></span></td>
-        <td class="number"><span id="comm"></span></td>
-        <td class="text"><span id="dept"></span></td>
+        <td class="text"><c:out value="${e.ename}" /></span></td>
+        <td class="text"><c:out value="${e.job}" /></span></td>
+        <td class="number"><c:out value="${e.mgr}" /></span></td>
+        <td class="date"><fmt:formatDate value="${e.hiredate}" pattern="yyyy/MM/dd" var="hiredate" /><c:out value="${hiredate}" /></span></td>
+        <td class="number"><c:out value="${e.sal}" /></span></td>
+        <td class="number"><c:out value="${e.comm}" /></td>
+        <td class="text"><c:out value="${e.dname}" /></td>
         <td>
-          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goEditForUpdate}" cancel="true">edit</s2struts:link>
-          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goDelete}" cancel="true">delete</s2struts:link>
-          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goInquire}" cancel="true">inquiry</s2struts:link>
+          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goEdit}" cancel="true"><bean:message key="button.edit" /></s2struts:link>
+          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goDelete}" cancel="true"><bean:message key="button.delete" /></s2struts:link>
+          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goInquire}" cancel="true"><bean:message key="button.inquire" /></s2struts:link>
         </td>
       </tr>
     </c:forEach>

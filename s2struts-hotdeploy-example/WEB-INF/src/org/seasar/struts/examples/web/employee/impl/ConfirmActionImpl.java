@@ -33,6 +33,16 @@ public class ConfirmActionImpl implements ConfirmAction {
 
     private ConfirmForm confirmForm;
 
+    private String crudType;
+
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
+    }
+
     @Binding(bindingType = BindingType.MUST)
     public void setEmployeeLogic(EmployeeLogic employeeLogic) {
         this.employeeLogic = employeeLogic;
@@ -42,35 +52,32 @@ public class ConfirmActionImpl implements ConfirmAction {
         this.confirmForm = confirmForm;
     }
 
-    public String goPrevious() {
-        char crudType = confirmForm.getCrudType().charAt(0);
-        switch (crudType) {
-        case CrudType.CREATE:
-        case CrudType.UPDATE:
-            return EDIT;
-        default:
-            return LIST;
-        }
+    public ConfirmForm getConfirmForm() {
+        return confirmForm;
     }
 
-    public String store() {
-        Employee employee = new Employee();
-        Beans.copy(confirmForm, employee).excludesWhitespace().excludesNull()
-                .execute();
-        char crudType = confirmForm.getCrudType().charAt(0);
-        switch (crudType) {
-        case CrudType.CREATE:
+    public String goStore() {
+        Employee employee = Beans.createAndCopy(Employee.class, confirmForm)
+                .excludesWhitespace().excludesNull().execute();
+        if (CrudType.CREATE.equals(crudType)) {
             employeeLogic.insert(employee);
             return SEARCH;
-        case CrudType.UPDATE:
+        } else if (CrudType.UPDATE.equals(crudType)) {
             employeeLogic.update(employee);
             return LIST;
-        case CrudType.DELETE:
+        } else if (CrudType.DELETE.equals(crudType)) {
             employeeLogic.delete(employee);
             return LIST;
-        default:
-            return SEARCH;
         }
+        return SEARCH;
+    }
+
+    public String goPrevious() {
+        if (CrudType.CREATE.equals(crudType)
+                || CrudType.UPDATE.equals(crudType)) {
+            return EDIT;
+        }
+        return LIST;
     }
 
 }

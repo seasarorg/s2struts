@@ -9,11 +9,13 @@ import org.seasar.struts.examples.entity.Employee;
 
 public interface EmployeeLogic {
 
-    List<Employee> getEmployees(EmployeeSearchDto dto);
+    List<EmployeeDto> getEmployeeDtoList(EmployeeSearchDto dto);
 
     EmployeeDto getEmployeeDto(int empno);
 
-    List<Department> getAllDepartments();
+    List<Department> getDepartmentList();
+
+    String getDeptno(int deptno);
 
     void insert(Employee employee);
 

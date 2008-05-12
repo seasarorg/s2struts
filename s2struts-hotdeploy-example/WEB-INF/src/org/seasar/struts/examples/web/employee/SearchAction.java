@@ -34,5 +34,5 @@ public interface SearchAction {
 
     public String goList();
 
-    public String goEditForCreate();
+    public String goEdit();
 }

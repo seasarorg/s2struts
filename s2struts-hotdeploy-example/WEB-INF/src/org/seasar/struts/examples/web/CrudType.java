@@ -21,11 +21,11 @@ package org.seasar.struts.examples.web;
  */
 public class CrudType {
 
-    public static final char CREATE = 'c';
+    public static final String CREATE = "c";
 
-    public static final char READ = 'r';
+    public static final String READ = "r";
 
-    public static final char UPDATE = 'u';
+    public static final String UPDATE = "u";
 
-    public static final char DELETE = 'd';
+    public static final String DELETE = "d";
 }

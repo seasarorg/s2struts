@@ -15,9 +15,11 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
+import org.seasar.framework.beans.util.Beans;
 import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.examples.dto.EmployeeDto;
+import org.seasar.struts.examples.web.CrudType;
 import org.seasar.struts.examples.web.employee.ConfirmInitAction;
 import org.seasar.struts.examples.web.employee.EmployeeLogic;
 
@@ -29,11 +31,13 @@ public class ConfirmInitActionImpl implements ConfirmInitAction {
 
     private EmployeeLogic employeeLogic;
 
+    private ConfirmForm confirmForm;
+
     private ListForm listForm;
 
-    private EmployeeDto employeeDto;
+    private EditForm editForm;
 
-    private char crudType;
+    private String crudType;
 
     @Binding(bindingType = BindingType.MUST)
     public void setEmployeeLogic(EmployeeLogic employeeLogic) {
@@ -44,20 +48,40 @@ public class ConfirmInitActionImpl implements ConfirmInitAction {
         this.listForm = listForm;
     }
 
-    public EmployeeDto getEmployeeDto() {
-        return employeeDto;
+    public void setEditForm(EditForm editForm) {
+        this.editForm = editForm;
     }
 
-    public void setCrudType(char crudType) {
+    public ConfirmForm getConfirmForm() {
+        return confirmForm;
+    }
+
+    public void setConfirmForm(ConfirmForm confirmForm) {
+        this.confirmForm = confirmForm;
+    }
+
+    public void setCrudType(String crudType) {
         this.crudType = crudType;
     }
 
-    public char getCrudType() {
+    public String getCrudType() {
         return crudType;
     }
 
     public void initialize() {
-        int empno = Integer.valueOf(listForm.getEmpno());
-        employeeDto = employeeLogic.getEmployeeDto(empno);
+        int deptno = 0;
+        if (CrudType.READ.equals(crudType) || CrudType.DELETE.equals(crudType)) {
+            int empno = Integer.valueOf(listForm.getEmpno());
+            EmployeeDto employeeDto = employeeLogic.getEmployeeDto(empno);
+            Beans.copy(employeeDto, confirmForm).dateConverter("yyyy/MM/dd",
+                    "hiredate").execute();
+            deptno = employeeDto.getDeptno();
+        } else if (CrudType.CREATE.equals(crudType)
+                || CrudType.UPDATE.equals(crudType)) {
+            Beans.copy(editForm, confirmForm).execute();
+            deptno = Integer.valueOf(editForm.getDeptno());
+        }
+        String dname = employeeLogic.getDeptno(deptno);
+        confirmForm.setDname(dname);
     }
 }

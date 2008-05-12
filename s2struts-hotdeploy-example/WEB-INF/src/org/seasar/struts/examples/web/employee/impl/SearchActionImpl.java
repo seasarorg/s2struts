@@ -24,23 +24,18 @@ import org.seasar.struts.examples.web.employee.SearchAction;
  */
 public class SearchActionImpl implements SearchAction {
 
-    private SearchForm searchForm;
+    private String crudType;
 
-    private char crudType;
-
-    public void setSearchForm(SearchForm searchForm) {
-        this.searchForm = searchForm;
-    }
-
-    public char getCrudType() {
+    public String getCrudType() {
         return crudType;
     }
 
     public String goList() {
+        crudType = CrudType.READ;
         return LIST;
     }
 
-    public String goEditForCreate() {
+    public String goEdit() {
         crudType = CrudType.CREATE;
         return EDIT;
     }

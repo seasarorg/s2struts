@@ -15,8 +15,6 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
-import java.io.Serializable;
-
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
 /**
@@ -24,108 +22,18 @@ import org.seasar.struts.annotation.tiger.StrutsActionForm;
  * 
  */
 @StrutsActionForm
-public class ConfirmForm implements Serializable {
+public class ConfirmForm extends EditForm {
 
     private static final long serialVersionUID = 1L;
 
-    private String empno;
+    private String dname;
 
-    private String ename;
-
-    private String job;
-
-    private String mgr;
-
-    private String fromHiredate;
-
-    private String toHiredate;
-
-    private String fromSal;
-
-    private String toSal;
-
-    private String deptno;
-
-    private String crudType;
-
-    public String getEmpno() {
-        return empno;
+    public String getDname() {
+        return dname;
     }
 
-    public void setEmpno(String empno) {
-        this.empno = empno;
-    }
-
-    public String getEname() {
-        return ename;
-    }
-
-    public void setEname(String ename) {
-        this.ename = ename;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getMgr() {
-        return mgr;
-    }
-
-    public void setMgr(String mgr) {
-        this.mgr = mgr;
-    }
-
-    public String getFromHiredate() {
-        return fromHiredate;
-    }
-
-    public void setFromHiredate(String fromHiredate) {
-        this.fromHiredate = fromHiredate;
-    }
-
-    public String getToHiredate() {
-        return toHiredate;
-    }
-
-    public void setToHiredate(String toHiredate) {
-        this.toHiredate = toHiredate;
-    }
-
-    public String getFromSal() {
-        return fromSal;
-    }
-
-    public void setFromSal(String fromSal) {
-        this.fromSal = fromSal;
-    }
-
-    public String getToSal() {
-        return toSal;
-    }
-
-    public void setToSal(String toSal) {
-        this.toSal = toSal;
-    }
-
-    public String getDeptno() {
-        return deptno;
-    }
-
-    public void setDeptno(String deptno) {
-        this.deptno = deptno;
-    }
-
-    public String getCrudType() {
-        return crudType;
-    }
-
-    public void setCrudType(String crudType) {
-        this.crudType = crudType;
+    public void setDname(String dname) {
+        this.dname = dname;
     }
 
 }

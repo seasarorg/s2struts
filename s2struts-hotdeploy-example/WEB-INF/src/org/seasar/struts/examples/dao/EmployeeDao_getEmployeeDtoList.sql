@@ -1,11 +1,11 @@
 select 
-  empno,
-  ename,
-  job,
-  mgr,
-  hiredate,
-  sal,
-  comm,
+  e.empno,
+  e.ename,
+  e.job,
+  e.mgr,
+  e.hiredate,
+  e.sal,
+  e.comm,
   e.deptno,
   d.dname
 from 
@@ -16,8 +16,8 @@ from
 /*BEGIN*/
 where 
 /*IF dto.empno != null*/empno = /*dto.empno*/7788/*END*/
-/*IF dto.ename != null*/and ename = /*dto.ename*/'SCOTT'/*END*/
-/*IF dto.job != null*/and job = /*dto.job*/'ANALYST'/*END*/
+/*IF dto.ename != null*/and ename like (/*dto.ename*/'SCOTT' + '%')/*END*/
+/*IF dto.job != null*/and job like (/*dto.job*/'ANALYST' + '%')/*END*/
 /*IF dto.mgr != null*/and mgr = /*dto.mgr*/7566/*END*/
 /*IF dto.fromHiredate != null*/and hiredate >= /*dto.fromHiredate*/'1982-12-01'/*END*/
 /*IF dto.toHiredate != null*/and hiredate <= /*dto.toHiredate*/'1982-12-31'/*END*/

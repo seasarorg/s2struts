@@ -18,6 +18,8 @@ package org.seasar.struts.examples.web.employee.impl;
 import java.io.Serializable;
 
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.validator.annotation.tiger.DateType;
+import org.seasar.struts.validator.annotation.tiger.IntegerType;
 
 /**
  * @author taedium
@@ -50,6 +52,7 @@ public class SearchForm implements Serializable {
         return empno;
     }
 
+    @IntegerType
     public void setEmpno(String empno) {
         this.empno = empno;
     }
@@ -74,6 +77,7 @@ public class SearchForm implements Serializable {
         return mgr;
     }
 
+    @IntegerType
     public void setMgr(String mgr) {
         this.mgr = mgr;
     }
@@ -82,6 +86,7 @@ public class SearchForm implements Serializable {
         return fromHiredate;
     }
 
+    @DateType
     public void setFromHiredate(String fromHiredate) {
         this.fromHiredate = fromHiredate;
     }
@@ -90,6 +95,7 @@ public class SearchForm implements Serializable {
         return toHiredate;
     }
 
+    @DateType
     public void setToHiredate(String toHiredate) {
         this.toHiredate = toHiredate;
     }
@@ -98,6 +104,7 @@ public class SearchForm implements Serializable {
         return fromSal;
     }
 
+    @IntegerType
     public void setFromSal(String fromSal) {
         this.fromSal = fromSal;
     }
@@ -106,6 +113,7 @@ public class SearchForm implements Serializable {
         return toSal;
     }
 
+    @IntegerType
     public void setToSal(String toSal) {
         this.toSal = toSal;
     }
@@ -114,6 +122,7 @@ public class SearchForm implements Serializable {
         return deptno;
     }
 
+    @IntegerType
     public void setDeptno(String deptno) {
         this.deptno = deptno;
     }

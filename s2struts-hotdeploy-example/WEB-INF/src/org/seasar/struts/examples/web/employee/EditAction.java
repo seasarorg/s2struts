@@ -15,7 +15,7 @@
  */
 package org.seasar.struts.examples.web.employee;
 
-import org.seasar.struts.annotation.tiger.BoolType;
+import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
@@ -23,7 +23,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(name = "editForm")
+@StrutsAction(name = "editForm", scope = ScopeType.REQUEST, input = "/pages/employee/edit.jsp")
 public interface EditAction {
 
     @StrutsActionForward(path = "/pages/employee/error.jsp")
@@ -32,10 +32,10 @@ public interface EditAction {
     @StrutsActionForward(path = "/pages/employee/confirm.jsp")
     public String CONFIRM = "confirm";
 
-    @StrutsActionForward(path = "/pages/employee/search.jsp", redirect = BoolType.TRUE)
+    @StrutsActionForward(path = "/pages/employee/search.jsp")
     public String SEARCH = "search";
 
-    @StrutsActionForward(path = "/pages/employee/list.jsp", redirect = BoolType.TRUE)
+    @StrutsActionForward(path = "/pages/employee/list.jsp")
     public String LIST = "list";
 
     public String goConfirm();

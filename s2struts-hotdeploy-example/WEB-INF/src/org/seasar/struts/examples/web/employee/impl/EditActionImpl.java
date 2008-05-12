@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.examples.web.employee.impl;
 
+import org.seasar.struts.examples.web.CrudType;
 import org.seasar.struts.examples.web.employee.EditAction;
 
 /**
@@ -23,14 +24,26 @@ import org.seasar.struts.examples.web.employee.EditAction;
  */
 public class EditActionImpl implements EditAction {
 
+    private String crudType;
+
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
+    }
+
     public String goConfirm() {
-        // TODO Auto-generated method stub
-        return null;
+        return CONFIRM;
     }
 
     public String goPrevious() {
-        // TODO Auto-generated method stub
-        return null;
+        if (CrudType.CREATE.equals(crudType)) {
+            return SEARCH;
+        } else if (CrudType.UPDATE.equals(crudType)) {
+            return LIST;
+        }
+        throw new IllegalStateException(String.valueOf(crudType));
     }
-
 }

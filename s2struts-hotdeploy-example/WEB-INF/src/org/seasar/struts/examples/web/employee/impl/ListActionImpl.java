@@ -24,9 +24,9 @@ import org.seasar.struts.examples.web.employee.ListAction;
  */
 public class ListActionImpl implements ListAction {
 
-    private char crudType = CrudType.READ;
+    private String crudType;
 
-    public char getCrudType() {
+    public String getCrudType() {
         return crudType;
     }
 
@@ -35,12 +35,13 @@ public class ListActionImpl implements ListAction {
         return CONFIRM;
     }
 
-    public String goEditForUpdate() {
+    public String goEdit() {
         crudType = CrudType.UPDATE;
         return EDIT;
     }
 
     public String goInquire() {
+        crudType = CrudType.READ;
         return CONFIRM;
     }
 

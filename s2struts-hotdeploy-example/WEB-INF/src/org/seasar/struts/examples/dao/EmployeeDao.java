@@ -13,7 +13,7 @@ import org.seasar.struts.examples.entity.Employee;
 public interface EmployeeDao {
 
     @SqlFile
-    List<Employee> getEmployees(EmployeeSearchDto dto);
+    List<EmployeeDto> getEmployeeDtoList(EmployeeSearchDto dto);
 
     @Arguments("empno")
     EmployeeDto getEmployeeDto(int empno);

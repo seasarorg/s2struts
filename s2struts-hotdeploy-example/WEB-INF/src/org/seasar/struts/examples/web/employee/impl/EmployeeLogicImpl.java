@@ -28,16 +28,20 @@ public class EmployeeLogicImpl implements EmployeeLogic {
         this.departmentDao = departmentDao;
     }
 
-    public List<Employee> getEmployees(EmployeeSearchDto dto) {
-        return employeeDao.getEmployees(dto);
+    public List<EmployeeDto> getEmployeeDtoList(EmployeeSearchDto dto) {
+        return employeeDao.getEmployeeDtoList(dto);
     }
 
     public EmployeeDto getEmployeeDto(int empno) {
         return employeeDao.getEmployeeDto(empno);
     }
 
-    public List<Department> getAllDepartments() {
-        return departmentDao.getAllDepartments();
+    public List<Department> getDepartmentList() {
+        return departmentDao.getDepartmentList();
+    }
+
+    public String getDeptno(int deptno) {
+        return departmentDao.getDepartment(deptno).getDname();
     }
 
     public void delete(Employee employee) {

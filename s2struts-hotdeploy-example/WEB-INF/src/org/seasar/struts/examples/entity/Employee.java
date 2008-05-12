@@ -20,6 +20,8 @@ public class Employee {
 
     private BigDecimal sal;
 
+    private BigDecimal comm;
+
     private int deptno;
 
     private int versionNo;
@@ -70,6 +72,14 @@ public class Employee {
 
     public void setSal(BigDecimal sal) {
         this.sal = sal;
+    }
+
+    public BigDecimal getComm() {
+        return comm;
+    }
+
+    public void setComm(BigDecimal comm) {
+        this.comm = comm;
     }
 
     public int getDeptno() {

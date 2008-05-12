@@ -18,6 +18,9 @@ package org.seasar.struts.examples.web.employee.impl;
 import java.io.Serializable;
 
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.validator.annotation.tiger.DateType;
+import org.seasar.struts.validator.annotation.tiger.IntegerType;
+import org.seasar.struts.validator.annotation.tiger.Required;
 
 /**
  * @author taedium
@@ -40,16 +43,21 @@ public class EditForm implements Serializable {
 
     private String sal;
 
+    private String comm;
+
     private String deptno;
 
-    private String crudType;
-
     private String versionNo;
+
+    public EditForm() {
+    }
 
     public String getEmpno() {
         return empno;
     }
 
+    @Required
+    @IntegerType
     public void setEmpno(String empno) {
         this.empno = empno;
     }
@@ -58,6 +66,7 @@ public class EditForm implements Serializable {
         return ename;
     }
 
+    @Required
     public void setEname(String ename) {
         this.ename = ename;
     }
@@ -74,6 +83,7 @@ public class EditForm implements Serializable {
         return mgr;
     }
 
+    @IntegerType
     public void setMgr(String mgr) {
         this.mgr = mgr;
     }
@@ -82,6 +92,7 @@ public class EditForm implements Serializable {
         return hiredate;
     }
 
+    @DateType(pattern = "yyyy/MM/dd")
     public void setHiredate(String hiredate) {
         this.hiredate = hiredate;
     }
@@ -90,24 +101,28 @@ public class EditForm implements Serializable {
         return sal;
     }
 
+    @IntegerType
     public void setSal(String sal) {
         this.sal = sal;
+    }
+
+    public String getComm() {
+        return comm;
+    }
+
+    @IntegerType
+    public void setComm(String comm) {
+        this.comm = comm;
     }
 
     public String getDeptno() {
         return deptno;
     }
 
+    @Required
+    @IntegerType
     public void setDeptno(String deptno) {
         this.deptno = deptno;
-    }
-
-    public String getCrudType() {
-        return crudType;
-    }
-
-    public void setCrudType(String crudType) {
-        this.crudType = crudType;
     }
 
     public String getVersionNo() {

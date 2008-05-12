@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
@@ -22,7 +23,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(name = "listForm", parameter = "method")
+@StrutsAction(name = "listForm", scope = ScopeType.REQUEST)
 public interface ListAction {
 
     @StrutsActionForward(path = "/pages/employee/edit.jsp")
@@ -31,7 +32,7 @@ public interface ListAction {
     @StrutsActionForward(path = "/pages/employee/confirm.jsp")
     public String CONFIRM = "confirm";
 
-    public String goEditForUpdate();
+    public String goEdit();
 
     public String goDelete();
 

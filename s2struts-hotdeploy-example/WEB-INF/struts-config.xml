@@ -24,12 +24,12 @@
         <exception
             key="errors.global.runtime"
             type="java.lang.RuntimeException"
-            path="/pages/error.html"/>
+            path="/pages/error.jsp"/>
 
         <exception
             key="errors.global.runtime.sql"
             type="org.seasar.framework.exception.SQLRuntimeException"
-            path="/pages/error.html"/>
+            path="/pages/error.jsp"/>
 
     </global-exceptions>
 

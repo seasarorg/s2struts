@@ -39,7 +39,7 @@ public class SearchInitActionImpl implements SearchInitAction {
     }
 
     public void initialize() {
-        deptItems = employeeLogic.getAllDepartments();
+        deptItems = employeeLogic.getDepartmentList();
     }
 
     public List<Department> getDeptItems() {
