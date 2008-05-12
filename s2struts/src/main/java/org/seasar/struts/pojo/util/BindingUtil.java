@@ -34,6 +34,7 @@ import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.struts.bean.IndexedPropertyDesc;
 import org.seasar.struts.bean.impl.IndexedPropertyDescImpl;
+import org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionFormNamingRule;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandler;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandlerFactory;
@@ -245,6 +246,10 @@ public class BindingUtil {
         Class propertyClass = propertyDesc.getPropertyType();
 
         if (!container.hasComponentDef(propertyClass)) {
+            String actionFormPropertyName = getActionFormPropertyName(container, propertyClass);
+            if (actionFormPropertyName != null) {
+                return actionFormPropertyName;
+            }
             return propertyName;
         }
 
@@ -258,6 +263,18 @@ public class BindingUtil {
             return componentName;
         }
         return propertyName;
+    }
+
+    protected static String getActionFormPropertyName(S2Container container, Class clazz) {
+        if (container.hasComponentDef(SubApplicationActionFormNamingRule.class)) {
+            SubApplicationActionFormNamingRule rule = (SubApplicationActionFormNamingRule) container
+                    .getComponent(SubApplicationActionFormNamingRule.class);
+            String name = rule.toActionFormName(clazz);
+            if (rule.toComponentClass(name) != null) {
+                return name;
+            }
+        }
+        return null;
     }
 
 }

@@ -9,7 +9,11 @@ import org.apache.struts.config.impl.ModuleConfigImpl;
 import org.apache.struts.validator.BeanValidatorForm;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.framework.beans.impl.BeanDescImpl;
+import org.seasar.framework.convention.impl.NamingConventionImpl;
+import org.seasar.framework.util.ClassUtil;
+import org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionFormNamingRule;
 import org.seasar.struts.mock.MockActionMapping;
+import org.seasar.struts.pojo.util.web.aaa.TestForm;
 
 /**
  * @author Satoshi Kimura
@@ -242,6 +246,22 @@ public class BindingUtilTest extends S2TestCase {
         assertNotNull(beanForm);
         TestExportPOJOForm resultForm = (TestExportPOJOForm) ((WrapDynaBean) beanForm.getDynaBean()).getInstance();
         assertEquals("newPOJO", resultForm.getMessage());
+    }
+
+    public void testGetActionFormPropertyName() throws Exception {
+        String name = BindingUtil.getActionFormPropertyName(getContainer(), TestForm.class);
+        assertNull(name);
+    }
+
+    public void setUpGetActionFormPropertyName_subApplication() throws Exception {
+        NamingConventionImpl convention = (NamingConventionImpl) getNamingConvention();
+        convention.addRootPackageName(ClassUtil.getPackageName(getClass()));
+        register(SubApplicationActionFormNamingRule.class);
+    }
+
+    public void testGetActionFormPropertyName_subApplication() throws Exception {
+        String name = BindingUtil.getActionFormPropertyName(getContainer(), TestForm.class);
+        assertNotNull(name);
     }
 
 }
