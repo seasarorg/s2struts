@@ -814,6 +814,10 @@
             <rtexprvalue>false</rtexprvalue>
         </attribute>
         <attribute>
+            <name>input</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>        <attribute>
             <name>accesskey</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>

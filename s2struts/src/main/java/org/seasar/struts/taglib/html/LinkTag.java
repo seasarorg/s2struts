@@ -24,6 +24,7 @@ import javax.servlet.jsp.JspException;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.taglib.TagUtils;
 import org.seasar.framework.util.Base64Util;
+import org.seasar.struts.Constants;
 import org.seasar.struts.util.MethodBindingUtil;
 import org.seasar.struts.util.ModuleConfigUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
@@ -35,6 +36,7 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  * <ul>
  * <li>path</li>
  * <li>cancel</li>
+ * <li>input</li>
  * </ul>
  * </p>
  * <p>
@@ -55,6 +57,8 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     protected String path = null;
 
     protected boolean cancel = false;
+
+    protected boolean input = false;
 
     /**
      * パスを返します。
@@ -90,6 +94,24 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
      */
     public void setCancel(boolean cancel) {
         this.cancel = cancel;
+    }
+
+    /**
+     * 検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を返します。
+     * 
+     * @return
+     */
+    public boolean isInput() {
+        return input;
+    }
+
+    /**
+     * 検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を設定します。
+     * 
+     * @param input
+     */
+    public void setInput(boolean input) {
+        this.input = input;
     }
 
     public void release() {
@@ -129,6 +151,10 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
             params = new HashMap();
         }
         params.put(this.encodeExpression, "");
+
+        String path = S2StrutsContextUtil.getCurrentInputPath();
+        path = new String(Base64Util.encode(path.getBytes()));
+        params.put(Constants.PAGE_NAME_ELEMENT_VALUE, path);
 
         if (indexed) {
             int indexValue = getIndexValue();
