@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.employee;
+package org.seasar.struts.examples.web.index;
 
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
@@ -24,18 +24,11 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * 
  */
 @StrutsAction(scope = ScopeType.REQUEST)
-public interface EditAction {
+public interface IndexAction {
 
-    @StrutsActionForward(path = "employee.confirm")
-    public String CONFIRM = "confirm";
+    @StrutsActionForward(path = "index")
+    public String INDEX = "index";
 
-    @StrutsActionForward(path = "employee.search")
-    public String SEARCH = "search";
+    String index();
 
-    @StrutsActionForward(path = "employee.list")
-    public String LIST = "list";
-
-    public String goConfirm();
-
-    public String goPrevious();
 }

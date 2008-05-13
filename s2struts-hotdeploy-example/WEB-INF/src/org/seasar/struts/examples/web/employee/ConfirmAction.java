@@ -26,13 +26,13 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 @StrutsAction(scope = ScopeType.REQUEST)
 public interface ConfirmAction {
 
-    @StrutsActionForward(path = "/pages/employee/edit.jsp")
+    @StrutsActionForward(path = "employee.edit")
     public String EDIT = "edit";
 
-    @StrutsActionForward(path = "/pages/employee/search.jsp")
+    @StrutsActionForward(path = "employee.search")
     public String SEARCH = "search";
 
-    @StrutsActionForward(path = "/pages/employee/list.jsp")
+    @StrutsActionForward(path = "employee.list")
     public String LIST = "list";
 
     public String goStore();

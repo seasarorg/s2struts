@@ -7,6 +7,15 @@
   <display-name>Struts Application</display-name>
 
   <filter>
+    <filter-name>encodingfilter</filter-name>
+    <filter-class>org.seasar.extension.filter.EncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter>
     <filter-name>s2filter</filter-name>
     <filter-class>org.seasar.framework.container.filter.S2ContainerFilter</filter-class>
   </filter>
@@ -27,17 +36,21 @@
   </filter>
 
   <filter>
-    <filter-name>encodingfilter</filter-name>
-    <filter-class>org.seasar.extension.filter.EncodingFilter</filter-class>
-    <init-param>
-      <param-name>encoding</param-name>
-      <param-value>UTF-8</param-value>
-    </init-param>
+      <filter-name>requestDumpFilter</filter-name>
+      <filter-class>org.seasar.extension.filter.RequestDumpFilter</filter-class>
   </filter>
 
   <filter-mapping>
+    <filter-name>encodingfilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
     <filter-name>s2filter</filter-name>
     <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
 
   <filter-mapping>
@@ -46,7 +59,6 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>ERROR</dispatcher>
   </filter-mapping>
 
   <filter-mapping>
@@ -60,8 +72,11 @@
   </filter-mapping>
 
   <filter-mapping>
-    <filter-name>encodingfilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <filter-name>requestDumpFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
 
   <servlet>
@@ -84,10 +99,7 @@
     </init-param>
     <init-param>
       <param-name>chainConfig</param-name>
-      <param-value>s2struts-chain-config.xml, org/apache/struts/chain/chain-config.xml</param-value>
-      <!--
       <param-value>s2struts-chain-config.xml, org/apache/struts/tiles/chain-config.xml</param-value>
-      -->
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>
@@ -115,7 +127,7 @@
             <el-ignored>false</el-ignored>
             <page-encoding>UTF-8</page-encoding>
             <scripting-invalid>false</scripting-invalid>
-            <include-prelude>/pages/common.jsp</include-prelude>
+            <include-prelude>/pages/common/common.jsp</include-prelude>
         </jsp-property-group>
     </jsp-config>
     

@@ -1,0 +1,1 @@
+<h1>S2Struts HOT deploy Example</h1>

@@ -13,29 +13,18 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.employee;
+package org.seasar.struts.examples.web.employee.impl;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
-import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.examples.web.employee.IndexAction;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public interface EditAction {
+public class IndexActionImpl implements IndexAction {
 
-    @StrutsActionForward(path = "employee.confirm")
-    public String CONFIRM = "confirm";
+    public String index() {
+        return INDEX;
+    }
 
-    @StrutsActionForward(path = "employee.search")
-    public String SEARCH = "search";
-
-    @StrutsActionForward(path = "employee.list")
-    public String LIST = "list";
-
-    public String goConfirm();
-
-    public String goPrevious();
 }

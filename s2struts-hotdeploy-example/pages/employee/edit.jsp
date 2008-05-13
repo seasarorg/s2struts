@@ -1,16 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <html:base />
-  <link href="../../css/global.css" rel="stylesheet" type="text/css"></link>
-  <script type="text/javascript" src="../../js/execute.js"></script>
-  <title id="pageTitle">
-    Edit - Employee Management Demo
-  </title>
-</head>
-<body>
-<html:errors/>
 <html:form action="/employee/edit">
   <s2struts:page />
   <s2struts:init action="#{employee_editInitAction.initialize}"/>
@@ -79,5 +66,3 @@
   <s2struts:submit action="#{employee_editAction.goConfirm}"><bean:message key="button.confirm"/></s2struts:submit>
   <s2struts:submit action="#{employee_editAction.goPrevious}" cancel="true"><bean:message key="button.prev"/></s2struts:submit>
 </html:form>
-</body>
-</html>

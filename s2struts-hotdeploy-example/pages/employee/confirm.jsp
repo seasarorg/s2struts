@@ -1,15 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <html:base />
-  <link href="../../css/global.css" rel="stylesheet" type="text/css"></link>
-  <script type="text/javascript" src="../../js/execute.js"></script>
-  <title id="pageTitle">
-    Confirm - Employee Management Demo
-  </title>
-</head>
-<body>
 <html:errors/>
 <html:form action="/employee/confirm">
   <s2struts:page />
@@ -22,6 +10,7 @@
       <td class="number">
         <bean:write name="form" property="empno" />
         <html:hidden property="empno" />
+        <html:hidden property="versionNo" />
       </td>
     </tr>
     <tr>
@@ -79,5 +68,3 @@
   </c:if>
   <s2struts:submit action="#{employee_confirmAction.goPrevious}"><bean:message key="button.prev" /></s2struts:submit>
 </html:form>
-</body>
-</html>

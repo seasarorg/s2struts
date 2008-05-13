@@ -1,10 +1,10 @@
-<project name="S2StrutsExample" default="dist" basedir=".">
+<project name="S2StrutsHotDeployExample" default="dist" basedir=".">
 
   <property file="project.properties"/>
 
-  <property name="releaseFile" value="S2StrutsExample-V${version}.zip" />
+  <property name="releaseFile" value="S2StrutsHotDeployExample-V${version}.zip" />
   
-  <property name="projectDir" value="s2struts-example" />
+  <property name="projectDir" value="s2struts-hotdeploy-example" />
 
   <target name="dist">
     <zip destfile="../${releaseFile}"

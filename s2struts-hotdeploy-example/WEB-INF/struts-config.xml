@@ -9,12 +9,6 @@
 <!-- ======================================== Form Bean Definitions -->
 
     <form-beans>
-		<form-bean
-			name="calcForm"
-			type="org.seasar.struts.examples.form.CalculationForm"/>
-		<form-bean
-			name="strForm"
-			type="org.seasar.struts.examples.form.StringForm"/>
     </form-beans>
 
 <!-- ================================= Global Exception Definitions -->
@@ -24,12 +18,12 @@
         <exception
             key="errors.global.runtime"
             type="java.lang.RuntimeException"
-            path="/pages/error.jsp"/>
+            path="/pages/error/error.jsp"/>
 
         <exception
             key="errors.global.runtime.sql"
             type="org.seasar.framework.exception.SQLRuntimeException"
-            path="/pages/error.jsp"/>
+            path="/pages/error/error.jsp"/>
 
     </global-exceptions>
 
@@ -60,6 +54,12 @@
           value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
     </plug-in>
 
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property
+          property="definitions-config"
+          value="/WEB-INF/tiles-defs.xml"/>
+    </plug-in>
+    
     <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn">
         <set-property property="enableJar" value="false"/>
         <set-property property="docRoot" value="/pages"/>
