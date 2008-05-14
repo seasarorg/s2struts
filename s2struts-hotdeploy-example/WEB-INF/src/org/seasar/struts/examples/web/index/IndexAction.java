@@ -26,7 +26,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 @StrutsAction(scope = ScopeType.REQUEST)
 public interface IndexAction {
 
-    @StrutsActionForward(path = "index")
+    @StrutsActionForward(path = "/pages/index/index.jsp")
     public String INDEX = "index";
 
     String index();

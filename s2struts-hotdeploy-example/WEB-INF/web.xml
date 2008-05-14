@@ -99,7 +99,7 @@
     </init-param>
     <init-param>
       <param-name>chainConfig</param-name>
-      <param-value>s2struts-chain-config.xml, org/apache/struts/tiles/chain-config.xml</param-value>
+      <param-value>s2struts-chain-config.xml, org/apache/struts/chain/chain-config.xml</param-value>
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>

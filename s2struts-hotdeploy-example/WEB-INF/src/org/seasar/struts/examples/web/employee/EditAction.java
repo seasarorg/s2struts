@@ -26,16 +26,16 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 @StrutsAction(scope = ScopeType.REQUEST)
 public interface EditAction {
 
-    @StrutsActionForward(path = "employee.confirm")
-    public String CONFIRM = "confirm";
+    @StrutsActionForward(path = EmployeePaths.CONFIRM)
+    String CONFIRM = "confirm";
 
-    @StrutsActionForward(path = "employee.search")
-    public String SEARCH = "search";
+    @StrutsActionForward(path = EmployeePaths.SEARCH)
+    String SEARCH = "search";
 
-    @StrutsActionForward(path = "employee.list")
-    public String LIST = "list";
+    @StrutsActionForward(path = EmployeePaths.LIST)
+    String LIST = "list";
 
-    public String goConfirm();
+    String goConfirm();
 
-    public String goPrevious();
+    String goPrevious();
 }

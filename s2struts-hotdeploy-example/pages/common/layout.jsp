@@ -8,7 +8,6 @@
 </head>
 
 <body>
-<html:errors />
 <table border="0" cellspacing="5" width="97%">
 <tr>
   <td colspan="2">
@@ -20,6 +19,7 @@
     <tiles:insert attribute="menu" />
   </td>
   <td valign="top" align="left">
+    <tiles:insert attribute="errors" />
     <tiles:insert attribute="body" />
   </td>
 </tr>

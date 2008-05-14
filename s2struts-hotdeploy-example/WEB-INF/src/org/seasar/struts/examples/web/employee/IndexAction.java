@@ -26,8 +26,8 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 @StrutsAction(scope = ScopeType.REQUEST)
 public interface IndexAction {
 
-    @StrutsActionForward(path = "employee.index")
-    public String INDEX = "index";
+    @StrutsActionForward(path = EmployeePaths.SEARCH)
+    String INDEX = "index";
 
     String index();
 
