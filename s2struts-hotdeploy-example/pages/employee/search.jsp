@@ -3,7 +3,6 @@
   <tiles:put name="title" value="Employee Management" />
   <tiles:put name="body" type="string">
   <html:form action="/employee/search">
-    <s2struts:page />
     <s2struts:init action="#{employee_searchInitAction.init}"/>
     <table class="tablebg">
       <tr>

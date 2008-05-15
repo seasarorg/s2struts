@@ -13,32 +13,27 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.add;
+package org.seasar.struts.examples.web.download;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
-import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.validator.annotation.tiger.Required;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public class AddAction {
+@StrutsActionForm
+public class DownloadForm {
 
-    @StrutsActionForward(path = Paths.ADD)
-    public static String ADD = "add";
+    private String text;
 
-    private AddForm addForm;
-
-    public void setAddForm(AddForm addForm) {
-        this.addForm = addForm;
+    public String getText() {
+        return text;
     }
 
-    public String calculate() {
-        int result = Integer.valueOf(addForm.getArg1())
-                + Integer.valueOf(addForm.getArg2());
-        addForm.setResult(String.valueOf(result));
-        return ADD;
+    @Required
+    public void setText(String text) {
+        this.text = text;
     }
+
 }

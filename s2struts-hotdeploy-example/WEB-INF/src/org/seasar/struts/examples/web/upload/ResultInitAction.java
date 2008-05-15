@@ -13,32 +13,31 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.add;
+package org.seasar.struts.examples.web.upload;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
-import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.apache.struts.upload.FormFile;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public class AddAction {
+public class ResultInitAction {
 
-    @StrutsActionForward(path = Paths.ADD)
-    public static String ADD = "add";
+    private UploadForm uploadForm;
 
-    private AddForm addForm;
+    private ResultForm resultForm;
 
-    public void setAddForm(AddForm addForm) {
-        this.addForm = addForm;
+    public void setUploadForm(UploadForm uploadForm) {
+        this.uploadForm = uploadForm;
     }
 
-    public String calculate() {
-        int result = Integer.valueOf(addForm.getArg1())
-                + Integer.valueOf(addForm.getArg2());
-        addForm.setResult(String.valueOf(result));
-        return ADD;
+    public void setResultForm(ResultForm resultForm) {
+        this.resultForm = resultForm;
+    }
+
+    public void init() {
+        FormFile file = uploadForm.getFile();
+        resultForm.setName(file.getFileName());
+        resultForm.setSize(String.valueOf(file.getFileSize()));
     }
 }

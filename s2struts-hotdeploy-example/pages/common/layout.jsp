@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<s2struts:page />
 <table border="0" cellspacing="5" width="97%">
 <tr>
   <td colspan="2">
