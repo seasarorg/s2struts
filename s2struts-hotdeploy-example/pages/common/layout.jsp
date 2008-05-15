@@ -19,7 +19,7 @@
     <tiles:insert attribute="menu" />
   </td>
   <td valign="top" align="left">
-    <tiles:insert attribute="errors" />
+    <html:errors/>
     <tiles:insert attribute="body" />
   </td>
 </tr>

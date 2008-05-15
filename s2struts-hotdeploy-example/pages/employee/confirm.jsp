@@ -4,7 +4,7 @@
   <tiles:put name="body" type="string">
   <html:form action="/employee/confirm">
     <s2struts:page />
-    <s2struts:init action="#{employee_confirmInitAction.initialize}"/>
+    <s2struts:init action="#{employee_confirmInitAction.init}"/>
     <bean:define id="form" name="employee_confirmForm" />
     <html:hidden property="crudType" value="${crudType}" />
     <table class="tablebg">

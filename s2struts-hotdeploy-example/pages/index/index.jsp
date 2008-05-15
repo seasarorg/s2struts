@@ -1,4 +1,4 @@
-<%@ include file="/pages/common/layout-defs.jsp" %>
+<%@ include file="/pages/common/tails-defs.jsp" %>
 <tiles:insert beanName="main">
   <tiles:put name="title" value="S2Struts HOT deploy Example" />
   <tiles:put name="body" type="string">

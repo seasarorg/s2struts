@@ -15,11 +15,73 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import java.util.List;
+
+import org.seasar.framework.beans.util.Beans;
+import org.seasar.framework.container.annotation.tiger.Binding;
+import org.seasar.framework.container.annotation.tiger.BindingType;
+import org.seasar.struts.examples.dto.EmployeeDto;
+import org.seasar.struts.examples.entity.Department;
+import org.seasar.struts.examples.web.CrudType;
+
 /**
  * @author taedium
  * 
  */
-public interface EditInitAction {
+public class EditInitAction {
 
-    void initialize();
+    private EmployeeService employeeService;
+
+    private ListForm listForm;
+
+    private ConfirmForm confirmForm;
+
+    private EditForm editForm;
+
+    private EmployeeDto employeeDto;
+
+    private List<Department> deptItems;
+
+    private String crudType;
+
+    @Binding(bindingType = BindingType.MUST)
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    public void setListForm(ListForm listForm) {
+        this.listForm = listForm;
+    }
+
+    public void setEditForm(EditForm editForm) {
+        this.editForm = editForm;
+    }
+
+    public void setConfirmForm(ConfirmForm confirmForm) {
+        this.confirmForm = confirmForm;
+    }
+
+    public List<Department> getDeptItems() {
+        return deptItems;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
+    }
+
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void init() {
+        if (CrudType.UPDATE.equals(crudType) && listForm != null) {
+            int empno = Integer.valueOf(listForm.getEmpno());
+            employeeDto = employeeService.getEmployeeDto(empno);
+            Beans.copy(employeeDto, editForm).dateConverter("yyyy/MM/dd",
+                    "hiredate").execute();
+        } else if (confirmForm != null) {
+            Beans.copy(confirmForm, editForm).execute();
+        }
+        deptItems = employeeService.getDepartmentList();
+    }
 }

@@ -2,25 +2,56 @@ package org.seasar.struts.examples.web.employee;
 
 import java.util.List;
 
+import org.seasar.framework.container.annotation.tiger.Binding;
+import org.seasar.framework.container.annotation.tiger.BindingType;
+import org.seasar.struts.examples.dao.DepartmentDao;
+import org.seasar.struts.examples.dao.EmployeeDao;
 import org.seasar.struts.examples.dto.EmployeeDto;
 import org.seasar.struts.examples.dto.EmployeeSearchDto;
 import org.seasar.struts.examples.entity.Department;
 import org.seasar.struts.examples.entity.Employee;
 
-public interface EmployeeService {
+public class EmployeeService {
 
-    List<EmployeeDto> getEmployeeDtoList(EmployeeSearchDto dto);
+    private EmployeeDao employeeDao;
 
-    EmployeeDto getEmployeeDto(int empno);
+    private DepartmentDao departmentDao;
 
-    List<Department> getDepartmentList();
+    @Binding(bindingType = BindingType.MUST)
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
 
-    String getDeptno(int deptno);
+    @Binding(bindingType = BindingType.MUST)
+    public void setDepartmentDao(DepartmentDao departmentDao) {
+        this.departmentDao = departmentDao;
+    }
 
-    void insert(Employee employee);
+    public List<EmployeeDto> getEmployeeDtoList(EmployeeSearchDto dto) {
+        return employeeDao.getEmployeeDtoList(dto);
+    }
 
-    void update(Employee employee);
+    public EmployeeDto getEmployeeDto(int empno) {
+        return employeeDao.getEmployeeDto(empno);
+    }
 
-    void delete(Employee employee);
+    public List<Department> getDepartmentList() {
+        return departmentDao.getDepartmentList();
+    }
 
+    public String getDeptno(int deptno) {
+        return departmentDao.getDepartment(deptno).getDname();
+    }
+
+    public void delete(Employee employee) {
+        employeeDao.delete(employee);
+    }
+
+    public void insert(Employee employee) {
+        employeeDao.insert(employee);
+    }
+
+    public void update(Employee employee) {
+        employeeDao.update(employee);
+    }
 }

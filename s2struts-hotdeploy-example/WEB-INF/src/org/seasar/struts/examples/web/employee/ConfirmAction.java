@@ -15,27 +15,75 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import org.seasar.framework.beans.util.Beans;
+import org.seasar.framework.container.annotation.tiger.Binding;
+import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.examples.entity.Employee;
+import org.seasar.struts.examples.web.CrudType;
 
 /**
  * @author taedium
  * 
  */
 @StrutsAction(scope = ScopeType.REQUEST)
-public interface ConfirmAction {
+public class ConfirmAction {
 
-    @StrutsActionForward(path = EmployeePaths.EDIT)
-    String EDIT = "edit";
+    @StrutsActionForward(path = Paths.EDIT)
+    public static String EDIT = "edit";
 
-    @StrutsActionForward(path = EmployeePaths.SEARCH)
-    String SEARCH = "search";
+    @StrutsActionForward(path = Paths.SEARCH)
+    public static String SEARCH = "search";
 
-    @StrutsActionForward(path = EmployeePaths.LIST)
-    String LIST = "list";
+    @StrutsActionForward(path = Paths.LIST)
+    public static String LIST = "list";
 
-    String goStore();
+    private EmployeeService employeeService;
 
-    String goPrevious();
+    private ConfirmForm confirmForm;
+
+    private String crudType;
+
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
+    }
+
+    @Binding(bindingType = BindingType.MUST)
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    public void setConfirmForm(ConfirmForm confirmForm) {
+        this.confirmForm = confirmForm;
+    }
+
+    public String goStore() {
+        Employee employee = Beans.createAndCopy(Employee.class, confirmForm)
+                .excludesWhitespace().excludesNull().execute();
+        if (CrudType.CREATE.equals(crudType)) {
+            employeeService.insert(employee);
+            return SEARCH;
+        } else if (CrudType.UPDATE.equals(crudType)) {
+            employeeService.update(employee);
+            return LIST;
+        } else if (CrudType.DELETE.equals(crudType)) {
+            employeeService.delete(employee);
+            return LIST;
+        }
+        return SEARCH;
+    }
+
+    public String goPrevious() {
+        if (CrudType.CREATE.equals(crudType)
+                || CrudType.UPDATE.equals(crudType)) {
+            return EDIT;
+        }
+        return LIST;
+    }
 }

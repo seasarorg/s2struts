@@ -9,12 +9,12 @@
         <initMethod name="addCustomizer">
             <arg>traceCustomizer</arg>
         </initMethod>
-    <initMethod name="addCustomizer">
-      <arg>requiredTxCustomizer</arg>
-    </initMethod>
+        <initMethod name="addCustomizer">
+          <arg>requiredTxCustomizer</arg>
+        </initMethod>
     </component>
 
-    <component name="logicCustomizer" 
+    <component name="serviceCustomizer" 
         class="org.seasar.framework.container.customizer.CustomizerChain">
         <initMethod name="addCustomizer">
             <arg>traceCustomizer</arg>

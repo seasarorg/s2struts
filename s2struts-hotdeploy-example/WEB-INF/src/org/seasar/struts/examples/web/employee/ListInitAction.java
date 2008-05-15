@@ -15,14 +15,48 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import java.util.List;
+
+import org.seasar.framework.beans.util.Beans;
+import org.seasar.framework.container.annotation.tiger.Binding;
+import org.seasar.framework.container.annotation.tiger.BindingType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
+import org.seasar.struts.examples.dto.EmployeeDto;
+import org.seasar.struts.examples.dto.EmployeeSearchDto;
 
 /**
  * @author taedium
  * 
  */
 @StrutsAction(name = "listInitForm")
-public interface ListInitAction {
+public class ListInitAction {
 
-    void initialize();
+    private EmployeeService employeeService;
+
+    private SearchForm searchForm;
+
+    private List<EmployeeDto> empItems;
+
+    @Binding(bindingType = BindingType.MUST)
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    public void setSearchForm(SearchForm searchForm) {
+        this.searchForm = searchForm;
+    }
+
+    public List<EmployeeDto> getEmpItems() {
+        return empItems;
+    }
+
+    public void init() {
+        if (searchForm != null) {
+            EmployeeSearchDto searchDto = Beans.createAndCopy(
+                    EmployeeSearchDto.class, searchForm).excludesNull()
+                    .excludesWhitespace().dateConverter("yyyy/MM/dd",
+                            "hiredate").execute();
+            empItems = employeeService.getEmployeeDtoList(searchDto);
+        }
+    }
 }

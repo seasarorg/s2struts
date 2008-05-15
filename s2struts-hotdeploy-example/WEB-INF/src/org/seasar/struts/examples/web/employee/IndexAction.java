@@ -23,12 +23,13 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public interface IndexAction {
+@StrutsAction(scope = ScopeType.REQUEST, parameter = "method")
+public class IndexAction {
 
-    @StrutsActionForward(path = EmployeePaths.SEARCH)
-    String INDEX = "index";
+    @StrutsActionForward(path = Paths.SEARCH)
+    public static String INDEX = "index";
 
-    String index();
-
+    public String index() {
+        return INDEX;
+    }
 }

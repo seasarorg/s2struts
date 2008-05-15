@@ -1,3 +1,3 @@
 <ul>
-  <li><s2struts:link action="#{employee_indexAction.index}">Employee Management</s2struts:link></li>
+  <li><html:link action="/employee/index?method=index">Employee Management</html:link></li>
 </ul>

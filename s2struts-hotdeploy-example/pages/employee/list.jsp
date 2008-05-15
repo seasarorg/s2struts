@@ -2,7 +2,7 @@
 <tiles:insert beanName="main">
   <tiles:put name="title" value="Employee Management" />
   <tiles:put name="body" type="string">
-  <s2struts:init action="#{employee_listInitAction.initialize}"/>
+  <s2struts:init action="#{employee_listInitAction.init}"/>
   <table class="tablebg">
     <tr class="label">
       <th><bean:message key="button.edit" /><span id="labelEmpno">EmployeeNo</span></th>

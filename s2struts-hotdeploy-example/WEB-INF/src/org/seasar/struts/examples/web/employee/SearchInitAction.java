@@ -15,11 +15,32 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import java.util.List;
+
+import org.seasar.framework.container.annotation.tiger.Binding;
+import org.seasar.framework.container.annotation.tiger.BindingType;
+import org.seasar.struts.examples.entity.Department;
+
 /**
  * @author taedium
  * 
  */
-public interface SearchInitAction {
+public class SearchInitAction {
 
-    void initialize();
+    private EmployeeService employeeService;
+
+    private List<Department> deptItems;
+
+    @Binding(bindingType = BindingType.MUST)
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    public void init() {
+        deptItems = employeeService.getDepartmentList();
+    }
+
+    public List<Department> getDeptItems() {
+        return deptItems;
+    }
 }

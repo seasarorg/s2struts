@@ -1,1 +1,1 @@
-<logic:redirect action="/index/index.do" />
+<logic:redirect action="/index/index?method=index" />

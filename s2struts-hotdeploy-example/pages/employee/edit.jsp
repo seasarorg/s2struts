@@ -4,7 +4,7 @@
   <tiles:put name="body" type="string">
   <html:form action="/employee/edit">
     <s2struts:page />
-    <s2struts:init action="#{employee_editInitAction.initialize}"/>
+    <s2struts:init action="#{employee_editInitAction.init}"/>
     <bean:define id="form" name="employee_editForm" />
     <html:hidden property="crudType" value="${crudType}" />
     <table class="tablebg">

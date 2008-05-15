@@ -18,23 +18,39 @@ package org.seasar.struts.examples.web.employee;
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.examples.web.CrudType;
 
 /**
  * @author taedium
  * 
  */
 @StrutsAction(scope = ScopeType.REQUEST)
-public interface ListAction {
+public class ListAction {
 
-    @StrutsActionForward(path = EmployeePaths.EDIT)
-    String EDIT = "edit";
+    @StrutsActionForward(path = Paths.EDIT)
+    public static String EDIT = "edit";
 
-    @StrutsActionForward(path = EmployeePaths.CONFIRM)
-    String CONFIRM = "confirm";
+    @StrutsActionForward(path = Paths.CONFIRM)
+    public static String CONFIRM = "confirm";
 
-    String goEdit();
+    private String crudType;
 
-    String goDelete();
+    public String getCrudType() {
+        return crudType;
+    }
 
-    String goInquire();
+    public String goDelete() {
+        crudType = CrudType.DELETE;
+        return CONFIRM;
+    }
+
+    public String goEdit() {
+        crudType = CrudType.UPDATE;
+        return EDIT;
+    }
+
+    public String goInquire() {
+        crudType = CrudType.READ;
+        return CONFIRM;
+    }
 }

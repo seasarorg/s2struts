@@ -4,7 +4,7 @@
   <tiles:put name="body" type="string">
   <html:form action="/employee/search">
     <s2struts:page />
-    <s2struts:init action="#{employee_searchInitAction.initialize}"/>
+    <s2struts:init action="#{employee_searchInitAction.init}"/>
     <table class="tablebg">
       <tr>
         <td class="label"><span id="labelEmpno">EmployeeNo</span></td>

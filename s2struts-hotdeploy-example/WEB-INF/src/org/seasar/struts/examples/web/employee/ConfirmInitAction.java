@@ -15,11 +15,67 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import org.seasar.framework.beans.util.Beans;
+import org.seasar.framework.container.annotation.tiger.Binding;
+import org.seasar.framework.container.annotation.tiger.BindingType;
+import org.seasar.struts.examples.dto.EmployeeDto;
+import org.seasar.struts.examples.web.CrudType;
+
 /**
  * @author taedium
  * 
  */
-public interface ConfirmInitAction {
+public class ConfirmInitAction {
 
-    void initialize();
+    private EmployeeService employeeService;
+
+    private ConfirmForm confirmForm;
+
+    private ListForm listForm;
+
+    private EditForm editForm;
+
+    private String crudType;
+
+    @Binding(bindingType = BindingType.MUST)
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    public void setListForm(ListForm listForm) {
+        this.listForm = listForm;
+    }
+
+    public void setEditForm(EditForm editForm) {
+        this.editForm = editForm;
+    }
+
+    public void setConfirmForm(ConfirmForm confirmForm) {
+        this.confirmForm = confirmForm;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
+    }
+
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void init() {
+        int deptno = 0;
+        if (CrudType.READ.equals(crudType) || CrudType.DELETE.equals(crudType)) {
+            int empno = Integer.valueOf(listForm.getEmpno());
+            EmployeeDto employeeDto = employeeService.getEmployeeDto(empno);
+            Beans.copy(employeeDto, confirmForm).dateConverter("yyyy/MM/dd",
+                    "hiredate").execute();
+            deptno = employeeDto.getDeptno();
+        } else if (CrudType.CREATE.equals(crudType)
+                || CrudType.UPDATE.equals(crudType)) {
+            Beans.copy(editForm, confirmForm).execute();
+            deptno = Integer.valueOf(editForm.getDeptno());
+        }
+        String dname = employeeService.getDeptno(deptno);
+        confirmForm.setDname(dname);
+    }
 }

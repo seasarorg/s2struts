@@ -18,24 +18,44 @@ package org.seasar.struts.examples.web.employee;
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.examples.web.CrudType;
 
 /**
  * @author taedium
  * 
  */
 @StrutsAction(scope = ScopeType.REQUEST)
-public interface EditAction {
+public class EditAction {
 
-    @StrutsActionForward(path = EmployeePaths.CONFIRM)
-    String CONFIRM = "confirm";
+    @StrutsActionForward(path = Paths.CONFIRM)
+    public static String CONFIRM = "confirm";
 
-    @StrutsActionForward(path = EmployeePaths.SEARCH)
-    String SEARCH = "search";
+    @StrutsActionForward(path = Paths.SEARCH)
+    public static String SEARCH = "search";
 
-    @StrutsActionForward(path = EmployeePaths.LIST)
-    String LIST = "list";
+    @StrutsActionForward(path = Paths.LIST)
+    public static String LIST = "list";
 
-    String goConfirm();
+    private String crudType;
 
-    String goPrevious();
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
+    }
+
+    public String goConfirm() {
+        return CONFIRM;
+    }
+
+    public String goPrevious() {
+        if (CrudType.CREATE.equals(crudType)) {
+            return SEARCH;
+        } else if (CrudType.UPDATE.equals(crudType)) {
+            return LIST;
+        }
+        throw new IllegalStateException(String.valueOf(crudType));
+    }
 }

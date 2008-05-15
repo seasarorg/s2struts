@@ -18,21 +18,34 @@ package org.seasar.struts.examples.web.employee;
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.examples.web.CrudType;
 
 /**
  * @author taedium
  * 
  */
 @StrutsAction(scope = ScopeType.SESSION)
-public interface SearchAction {
+public class SearchAction {
 
-    @StrutsActionForward(path = EmployeePaths.LIST)
-    String LIST = "list";
+    @StrutsActionForward(path = Paths.LIST)
+    public static String LIST = "list";
 
-    @StrutsActionForward(path = EmployeePaths.EDIT)
-    String EDIT = "edit";
+    @StrutsActionForward(path = Paths.EDIT)
+    public static String EDIT = "edit";
 
-    String goList();
+    private String crudType;
 
-    String goEdit();
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public String goList() {
+        crudType = CrudType.READ;
+        return LIST;
+    }
+
+    public String goEdit() {
+        crudType = CrudType.CREATE;
+        return EDIT;
+    }
 }

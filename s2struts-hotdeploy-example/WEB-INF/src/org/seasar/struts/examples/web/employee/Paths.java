@@ -1,6 +1,6 @@
 package org.seasar.struts.examples.web.employee;
 
-public interface EmployeePaths {
+interface Paths {
 
     String CONFIRM = "/pages/employee/confirm.jsp";
 
