@@ -13,9 +13,8 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.employee;
+package org.seasar.struts.examples.web.add;
 
-import org.seasar.framework.aop.annotation.RemoveSession;
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
@@ -24,14 +23,26 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST, parameter = "method")
-public class IndexAction {
+@StrutsAction(scope = ScopeType.REQUEST)
+public class AddAction {
 
-    @StrutsActionForward(path = Paths.SEARCH)
-    public static String INDEX = "index";
+    @StrutsActionForward(path = Paths.ADD)
+    public static String ADD = "add";
 
-    @RemoveSession(name = "employee_searchForm")
-    public String index() {
-        return INDEX;
+    private AddForm addForm;
+
+    public AddForm getAddForm() {
+        return addForm;
+    }
+
+    public void setAddForm(AddForm addForm) {
+        this.addForm = addForm;
+    }
+
+    public String calculate() {
+        int result = Integer.valueOf(addForm.getArg1())
+                + Integer.valueOf(addForm.getArg2());
+        addForm.setResult(String.valueOf(result));
+        return ADD;
     }
 }
