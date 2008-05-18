@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.examples.web.CrudType;
 
@@ -22,7 +23,7 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-@StrutsAction
+@StrutsAction(scope=ScopeType.SESSION)
 public class SearchAction extends AbstractEmployeeAction {
 
     public String goList() {

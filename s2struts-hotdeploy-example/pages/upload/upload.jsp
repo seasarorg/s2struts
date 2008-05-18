@@ -1,4 +1,3 @@
-<%@ include file="/pages/common/tails-defs.jsp" %>
 <tiles:insert beanName="main">
   <tiles:put name="title" value="Upload" />
   <tiles:put name="body" type="string">
