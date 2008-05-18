@@ -86,7 +86,6 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
             StrutsActionConfig strutsAction) {
 
         ActionConfig actionConfig = (ActionConfig) ClassUtil.newInstance(config.getActionMappingClass());
-        actionConfig.setType(actionClass.getName());
         actionConfig.setModuleConfig(config);
         if (!StrutsActionConfig.DEFAULT_PATH.equals(strutsAction.path())) {
             actionConfig.setPath(strutsAction.path());
@@ -144,6 +143,9 @@ public class ZeroConfigActionRuleImpl implements ZeroConfigActionRule {
         }
         if (!StrutsActionConfig.DEFAULT_INHERIT.equals(strutsAction.inherit())) {
             actionConfig.setExtends(strutsAction.inherit());
+        }
+        if (actionConfig.getForward() == null && actionConfig.getInclude() == null) {
+            actionConfig.setType(actionClass.getName());
         }
 
         return actionConfig;
