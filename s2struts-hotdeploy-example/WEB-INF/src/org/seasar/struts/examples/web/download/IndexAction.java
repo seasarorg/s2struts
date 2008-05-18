@@ -21,6 +21,6 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction(forward = Paths.DOWNLOAD)
+@StrutsAction(forward = "/pages/download/download.jsp")
 public class IndexAction {
 }

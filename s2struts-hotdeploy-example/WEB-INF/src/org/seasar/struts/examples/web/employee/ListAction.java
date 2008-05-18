@@ -15,32 +15,15 @@
  */
 package org.seasar.struts.examples.web.employee;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 import org.seasar.struts.examples.web.CrudType;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public class ListAction {
-
-    @StrutsActionForward(path = Paths.EDIT)
-    public static String EDIT = "edit";
-
-    @StrutsActionForward(path = Paths.CONFIRM)
-    public static String CONFIRM = "confirm";
-
-    @StrutsActionForward(path = Paths.SEARCH)
-    public static String SEARCH = "search";
-
-    private String crudType;
-
-    public String getCrudType() {
-        return crudType;
-    }
+@StrutsAction
+public class ListAction extends AbstractEmployeeAction {
 
     public String goDelete() {
         crudType = CrudType.DELETE;

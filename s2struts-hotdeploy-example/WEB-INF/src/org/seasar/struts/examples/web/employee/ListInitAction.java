@@ -20,7 +20,6 @@ import java.util.List;
 import org.seasar.framework.beans.util.Beans;
 import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
-import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.examples.dto.EmployeeDto;
 import org.seasar.struts.examples.dto.EmployeeSearchDto;
 
@@ -28,8 +27,7 @@ import org.seasar.struts.examples.dto.EmployeeSearchDto;
  * @author taedium
  * 
  */
-@StrutsAction(name = "listInitForm")
-public class ListInitAction {
+public class ListInitAction extends AbstractEmployeeAction {
 
     private EmployeeService employeeService;
 

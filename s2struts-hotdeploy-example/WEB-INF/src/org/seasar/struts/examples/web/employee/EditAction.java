@@ -15,36 +15,15 @@
  */
 package org.seasar.struts.examples.web.employee;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 import org.seasar.struts.examples.web.CrudType;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public class EditAction {
-
-    @StrutsActionForward(path = Paths.CONFIRM)
-    public static String CONFIRM = "confirm";
-
-    @StrutsActionForward(path = Paths.SEARCH)
-    public static String SEARCH = "search";
-
-    @StrutsActionForward(path = Paths.LIST)
-    public static String LIST = "list";
-
-    private String crudType;
-
-    public String getCrudType() {
-        return crudType;
-    }
-
-    public void setCrudType(String crudType) {
-        this.crudType = crudType;
-    }
+@StrutsAction
+public class EditAction extends AbstractEmployeeAction {
 
     public String goConfirm() {
         return CONFIRM;

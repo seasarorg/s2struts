@@ -21,6 +21,6 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction(forward = Paths.INDEX)
+@StrutsAction(forward = "/pages/index/index.jsp")
 public class IndexAction {
 }

@@ -15,7 +15,6 @@
  */
 package org.seasar.struts.examples.web.add;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
@@ -23,11 +22,11 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
+@StrutsAction
 public class AddAction {
 
-    @StrutsActionForward(path = Paths.ADD)
-    public static String ADD = "add";
+    @StrutsActionForward
+    public static final String ADD = "/pages/add/add.jsp";
 
     private AddForm addForm;
 

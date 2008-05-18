@@ -25,7 +25,7 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-public class ConfirmInitAction {
+public class ConfirmInitAction extends AbstractEmployeeAction {
 
     private EmployeeService employeeService;
 
@@ -34,8 +34,6 @@ public class ConfirmInitAction {
     private ListForm listForm;
 
     private EditForm editForm;
-
-    private String crudType;
 
     @Binding(bindingType = BindingType.MUST)
     public void setEmployeeService(EmployeeService employeeService) {
@@ -52,14 +50,6 @@ public class ConfirmInitAction {
 
     public void setConfirmForm(ConfirmForm confirmForm) {
         this.confirmForm = confirmForm;
-    }
-
-    public void setCrudType(String crudType) {
-        this.crudType = crudType;
-    }
-
-    public String getCrudType() {
-        return crudType;
     }
 
     public void init() {

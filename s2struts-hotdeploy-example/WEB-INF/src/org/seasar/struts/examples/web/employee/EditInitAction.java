@@ -28,7 +28,7 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-public class EditInitAction {
+public class EditInitAction extends AbstractEmployeeAction {
 
     private EmployeeService employeeService;
 
@@ -38,11 +38,7 @@ public class EditInitAction {
 
     private EditForm editForm;
 
-    private EmployeeDto employeeDto;
-
     private List<Department> deptItems;
-
-    private String crudType;
 
     @Binding(bindingType = BindingType.MUST)
     public void setEmployeeService(EmployeeService employeeService) {
@@ -65,18 +61,10 @@ public class EditInitAction {
         return deptItems;
     }
 
-    public void setCrudType(String crudType) {
-        this.crudType = crudType;
-    }
-
-    public String getCrudType() {
-        return crudType;
-    }
-
     public void init() {
         if (CrudType.UPDATE.equals(crudType) && listForm != null) {
             int empno = Integer.valueOf(listForm.getEmpno());
-            employeeDto = employeeService.getEmployeeDto(empno);
+            EmployeeDto employeeDto = employeeService.getEmployeeDto(empno);
             Beans.copy(employeeDto, editForm).dateConverter("yyyy/MM/dd",
                     "hiredate").execute();
         } else if (confirmForm != null) {

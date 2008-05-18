@@ -15,19 +15,14 @@
  */
 package org.seasar.struts.examples.web.upload;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public class ResultAction {
-
-    @StrutsActionForward(path = Paths.UPLOAD)
-    public static String UPLOAD = "upload";
+@StrutsAction
+public class ResultAction extends AbstractUpdateAction {
 
     public String goPrevious() {
         return UPLOAD;

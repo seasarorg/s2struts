@@ -18,9 +18,7 @@ package org.seasar.struts.examples.web.employee;
 import org.seasar.framework.beans.util.Beans;
 import org.seasar.framework.container.annotation.tiger.Binding;
 import org.seasar.framework.container.annotation.tiger.BindingType;
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 import org.seasar.struts.examples.entity.Employee;
 import org.seasar.struts.examples.web.CrudType;
 
@@ -28,31 +26,12 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST)
-public class ConfirmAction {
-
-    @StrutsActionForward(path = Paths.EDIT)
-    public static String EDIT = "edit";
-
-    @StrutsActionForward(path = Paths.SEARCH)
-    public static String SEARCH = "search";
-
-    @StrutsActionForward(path = Paths.LIST)
-    public static String LIST = "list";
+@StrutsAction
+public class ConfirmAction extends AbstractEmployeeAction {
 
     private EmployeeService employeeService;
 
     private ConfirmForm confirmForm;
-
-    private String crudType;
-
-    public String getCrudType() {
-        return crudType;
-    }
-
-    public void setCrudType(String crudType) {
-        this.crudType = crudType;
-    }
 
     @Binding(bindingType = BindingType.MUST)
     public void setEmployeeService(EmployeeService employeeService) {

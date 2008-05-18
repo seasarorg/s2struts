@@ -21,6 +21,6 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction(forward = Paths.UPLOAD)
+@StrutsAction(forward = AbstractUpdateAction.UPLOAD)
 public class IndexAction {
 }

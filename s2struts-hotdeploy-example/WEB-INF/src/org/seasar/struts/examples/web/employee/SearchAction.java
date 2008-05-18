@@ -15,29 +15,15 @@
  */
 package org.seasar.struts.examples.web.employee;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 import org.seasar.struts.examples.web.CrudType;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.SESSION)
-public class SearchAction {
-
-    @StrutsActionForward(path = Paths.LIST)
-    public static String LIST = "list";
-
-    @StrutsActionForward(path = Paths.EDIT)
-    public static String EDIT = "edit";
-
-    private String crudType;
-
-    public String getCrudType() {
-        return crudType;
-    }
+@StrutsAction
+public class SearchAction extends AbstractEmployeeAction {
 
     public String goList() {
         crudType = CrudType.READ;
