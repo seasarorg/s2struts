@@ -15,21 +15,12 @@
  */
 package org.seasar.struts.examples.web.upload;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST, parameter = "method")
+@StrutsAction(forward = Paths.UPLOAD)
 public class IndexAction {
-
-    @StrutsActionForward(path = Paths.UPLOAD)
-    public static String INDEX = "index";
-
-    public String index() {
-        return INDEX;
-    }
 }

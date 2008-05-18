@@ -33,6 +33,9 @@ public class ListAction {
     @StrutsActionForward(path = Paths.CONFIRM)
     public static String CONFIRM = "confirm";
 
+    @StrutsActionForward(path = Paths.SEARCH)
+    public static String SEARCH = "search";
+
     private String crudType;
 
     public String getCrudType() {
@@ -52,5 +55,9 @@ public class ListAction {
     public String goInquire() {
         crudType = CrudType.READ;
         return CONFIRM;
+    }
+
+    public String goPrevious() {
+        return SEARCH;
     }
 }

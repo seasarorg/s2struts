@@ -15,21 +15,12 @@
  */
 package org.seasar.struts.examples.web.download;
 
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST, parameter = "method")
+@StrutsAction(forward = Paths.DOWNLOAD)
 public class IndexAction {
-
-    @StrutsActionForward(path = Paths.DOWNLOAD)
-    public static String INDEX = "index";
-
-    public String index() {
-        return INDEX;
-    }
 }

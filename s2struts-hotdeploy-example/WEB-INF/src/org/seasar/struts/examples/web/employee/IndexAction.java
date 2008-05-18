@@ -15,23 +15,12 @@
  */
 package org.seasar.struts.examples.web.employee;
 
-import org.seasar.framework.aop.annotation.RemoveSession;
-import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.REQUEST, parameter = "method")
+@StrutsAction(forward = Paths.SEARCH)
 public class IndexAction {
-
-    @StrutsActionForward(path = Paths.SEARCH)
-    public static String INDEX = "index";
-
-    @RemoveSession(name = "employee_searchForm")
-    public String index() {
-        return INDEX;
-    }
 }

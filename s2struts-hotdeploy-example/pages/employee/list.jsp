@@ -33,6 +33,6 @@
       </tr>
     </c:forEach>
   </table>
-  <s2struts:link action="#{employee_indexAction.index}"><bean:message key="button.prev" /></s2struts:link>
+  <s2struts:link action="#{employee_listAction.goPrevious}"><bean:message key="button.prev" /></s2struts:link>
   </tiles:put>
 </tiles:insert>
