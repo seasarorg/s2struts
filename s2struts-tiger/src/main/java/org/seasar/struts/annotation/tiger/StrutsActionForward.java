@@ -32,7 +32,7 @@ public @interface StrutsActionForward {
 	/**
 	 * path属性
 	 */
-	String path();
+	String path() default "";
 
 	/**
 	 * redirect属性
