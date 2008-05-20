@@ -13,14 +13,35 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.download;
+package org.seasar.struts.examples.web.iterate;
 
-import org.seasar.struts.annotation.tiger.StrutsAction;
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
 /**
  * @author taedium
  * 
  */
-@StrutsAction(forward = DownloadAction.DOWNLOAD)
-public class IndexAction {
+@StrutsActionForm
+public class ResultForm {
+
+    private String name;
+
+    private String index;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
 }

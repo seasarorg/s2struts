@@ -29,6 +29,8 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
 @StrutsAction
 public class DownloadAction {
 
+    public static final String DOWNLOAD = "/pages/add/add.jsp";
+
     private DownloadForm downloadForm;
 
     private HttpServletResponse response;

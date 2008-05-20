@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.download;
+package org.seasar.struts.examples.web.iterate;
 
 import org.seasar.struts.annotation.tiger.StrutsAction;
 
@@ -21,6 +21,36 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction(forward = DownloadAction.DOWNLOAD)
-public class IndexAction {
+@StrutsAction
+public class IterateAction extends AbstractIterateAction {
+
+    private String name;
+
+    private int index;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public String submit(int index) {
+        name = "submit";
+        this.index = index;
+        return RESULT;
+    }
+
+    public String image(int index) {
+        name = "image";
+        this.index = index;
+        return RESULT;
+    }
+
+    public String link(int index) {
+        name = "link";
+        this.index = index;
+        return RESULT;
+    }
 }
