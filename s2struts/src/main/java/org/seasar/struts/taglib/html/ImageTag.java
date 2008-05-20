@@ -15,12 +15,13 @@
  */
 package org.seasar.struts.taglib.html;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.jsp.JspException;
 
-import org.seasar.framework.util.Base64Util;
-import org.seasar.framework.util.StringUtil;
-import org.seasar.struts.taglib.TagUtil;
-import org.seasar.struts.util.S2StrutsContextUtil;
+import org.seasar.struts.Constants;
+import org.seasar.struts.util.Base64ParameterUtil;
 
 /**
  * {@link org.apache.struts.taglib.html.ImageTag}を拡張したS2Struts用のタグです。
@@ -42,8 +43,7 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
     protected boolean cancel = false;
 
     public int doEndTag() throws JspException {
-        setMethodBindingExpression();
-        setCancelAction();
+        encodeParameters();
         return super.doEndTag();
     }
 
@@ -88,20 +88,21 @@ public class ImageTag extends org.apache.struts.taglib.html.ImageTag {
         this.cancel = cancel;
     }
 
-    protected void setMethodBindingExpression() throws JspException {
-        if (StringUtil.isEmpty(super.property)) {
-            super.property = Base64Util.encode(this.action.getBytes());
+    protected void encodeParameters() throws JspException {
+        Map params = new HashMap();
+        if (action != null) {
+            StringBuffer buf = new StringBuffer();
+            buf.append(action);
+            if (indexed) {
+                prepareIndex(buf, null);
+            }
+            params.put(Constants.ACTION_EXPRESSION_KEY, buf.toString());
         }
-        String mappingName = TagUtil.getActionMappingName(this.pageContext);
-        S2StrutsContextUtil.setMethodBindingExpression(mappingName, super.property, null, this.action);
-    }
-
-    protected void setCancelAction() throws JspException {
-        if (!this.cancel) {
-            return;
+        if (cancel) {
+            params.put(Constants.CANCEL_KEY, "");
         }
-        String mappingName = TagUtil.getActionMappingName(this.pageContext);
-        S2StrutsContextUtil.setCancelAction(mappingName, super.property, null);
+        if (!params.isEmpty()) {
+            property = Base64ParameterUtil.encode(params);
+        }
     }
-
 }

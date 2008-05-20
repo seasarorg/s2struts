@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
-import org.seasar.struts.Constants;
 
 /**
  * {@link MethodBindingAction}のファクトリです。
@@ -39,14 +38,11 @@ public class MethodBindingActionFactory {
     public static MethodBindingAction createMethodBindingAction(HttpServletRequest request, ActionMapping mapping,
             ActionServlet servlet) {
 
-        String path = (String) request.getAttribute(Constants.ORIGINAL_PATH_KEY);
-        if (path != null) {
-            MethodBinding methodBinding = MethodBindingFactory.getMethodBinding(request, path);
-            if (methodBinding != null) {
-                MethodBindingAction action = new MethodBindingAction(methodBinding);
-                action.setServlet(servlet);
-                return action;
-            }
+        MethodBinding methodBinding = MethodBindingFactory.getMethodBinding(request);
+        if (methodBinding != null) {
+            MethodBindingAction action = new MethodBindingAction(methodBinding);
+            action.setServlet(servlet);
+            return action;
         }
         return null;
     }

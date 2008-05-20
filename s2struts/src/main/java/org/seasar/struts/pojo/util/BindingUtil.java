@@ -266,12 +266,14 @@ public class BindingUtil {
     }
 
     protected static String getActionFormPropertyName(S2Container container, Class clazz) {
-        if (container.hasComponentDef(SubApplicationActionFormNamingRule.class)) {
-            SubApplicationActionFormNamingRule rule = (SubApplicationActionFormNamingRule) container
-                    .getComponent(SubApplicationActionFormNamingRule.class);
-            String name = rule.toActionFormName(clazz);
-            if (rule.toComponentClass(name) != null) {
-                return name;
+        if (!clazz.isPrimitive()) {
+            if (container.hasComponentDef(SubApplicationActionFormNamingRule.class)) {
+                SubApplicationActionFormNamingRule rule = (SubApplicationActionFormNamingRule) container
+                        .getComponent(SubApplicationActionFormNamingRule.class);
+                String name = rule.toActionFormName(clazz);
+                if (rule.toComponentClass(name) != null) {
+                    return name;
+                }
             }
         }
         return null;

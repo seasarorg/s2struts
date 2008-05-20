@@ -7,7 +7,6 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.struts.Constants;
 import org.seasar.struts.mock.MockActionMapping;
 import org.seasar.struts.pojo.MethodBindingAction;
-import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * 
@@ -29,61 +28,28 @@ public class CreateMethodBindingActionTest extends S2TestCase {
 
     protected void setUpAfterContainerInit() throws Exception {
         this.mapping = new MockActionMapping();
-        this.mapping.setType(MethodBindingAction.class.getName()); // Dummy Type.
-
+        this.mapping.setType(MethodBindingAction.class.getName()); // Dummy
         this.context = new ServletActionContext(this.getServletContext(), this.getRequest(), this.getResponse());
         this.context.setFormValid(Boolean.TRUE);
         this.context.setActionConfig(this.mapping);
     }
 
     public void testCreateMethodBinding() throws Exception {
-        this.getRequest().setAttribute(Constants.ORIGINAL_PATH_KEY, "/test");
-        this.getRequest().setParameter("1234567890", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression("/test", "1234567890", "TEST", "#{bindingAction.exe}");
-
+        this.getRequest().setAttribute(Constants.ACTION_EXPRESSION_KEY, "#{bindingAction.exe}");
         boolean result = this.command.execute(this.context);
-
-        assertFalse(result);
-        assertEquals(MethodBindingAction.class, this.context.getAction().getClass());
-    }
-
-    public void testCreateMethodBindingForImageTag() throws Exception {
-        this.getRequest().setAttribute(Constants.ORIGINAL_PATH_KEY, "/test");
-        this.getRequest().setParameter("1234567890.y", "");
-        S2StrutsContextUtil.setMethodBindingExpression("/test", "1234567890", null, "#{bindingAction.exe}");
-
-        boolean result = this.command.execute(this.context);
-
         assertFalse(result);
         assertEquals(MethodBindingAction.class, this.context.getAction().getClass());
     }
 
     public void testCreateMethodBindingForIndexed() throws Exception {
-        this.getRequest().setAttribute(Constants.ORIGINAL_PATH_KEY, "/test");
-        this.getRequest().setParameter("1234567890[10]", "TEST");
-        S2StrutsContextUtil.setMethodBindingExpression("/test", "1234567890", "TEST", "#{bindingAction.exe}");
-
+        this.getRequest().setAttribute(Constants.ACTION_EXPRESSION_KEY, "#{bindingAction.exe}[10]");
         boolean result = this.command.execute(this.context);
-
         assertFalse(result);
         assertEquals(MethodBindingAction.class, this.context.getAction().getClass());
     }
 
     public void testCannotCreateMethodBindingBecauseNoRequestPrameter() throws Exception {
-        this.mapping.setPath("/test");
-
         boolean result = this.command.execute(this.context);
-
-        assertFalse(result);
-        assertNull(this.context.getAction());
-    }
-
-    public void testCannotCreateMethodBindingBecauseExpressionDoesNotRegistered() throws Exception {
-        this.mapping.setPath("/test");
-        this.getRequest().setParameter("1234567890", "TEST");
-
-        boolean result = this.command.execute(this.context);
-
         assertFalse(result);
         assertNull(this.context.getAction());
     }

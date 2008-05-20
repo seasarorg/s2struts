@@ -70,7 +70,19 @@ public interface Constants {
     String BACKUP_SESSION_FORM_KEY = "org.seasar.struts.BACKUP_SESSION_FORM";
 
     /**
-     * リクエストされたパスを{@link HttpServletRequest}に格納するためのキー
+     * Base64のフォーマットでエンコードされたことを示すプレフィックスです。
      */
-    String ORIGINAL_PATH_KEY = "org.seasar.struts.ORIGINAL_PATH";
+    String BASE64_FORMAT_PREFIX = "s2struts.BASE64_FORMAT:";
+
+    /**
+     * Actionの式を示すキー
+     */
+    String ACTION_EXPRESSION_KEY = "s2struts.ACTION_EXPRESSION";
+
+    /**
+     * 検証をキャンセルを示すキー
+     */
+    String CANCEL_KEY = "s2struts.CANCEL";
+
+    String INPUT_KEY = "s2struts.INPUT";
 }

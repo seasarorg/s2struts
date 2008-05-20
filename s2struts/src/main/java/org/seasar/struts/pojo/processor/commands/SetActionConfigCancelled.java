@@ -24,6 +24,7 @@ import org.apache.struts.chain.commands.ActionCommandBase;
 import org.apache.struts.chain.contexts.ActionContext;
 import org.apache.struts.chain.contexts.ServletActionContext;
 import org.seasar.framework.log.Logger;
+import org.seasar.struts.Constants;
 import org.seasar.struts.pojo.processor.ActionMappingWrapper;
 import org.seasar.struts.pojo.util.IndexedUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
@@ -76,6 +77,9 @@ public class SetActionConfigCancelled extends ActionCommandBase {
                     return cancel.booleanValue();
                 }
             }
+        }
+        if (request.getAttribute(Constants.CANCEL_KEY) != null) {
+            return true;
         }
         return false;
     }

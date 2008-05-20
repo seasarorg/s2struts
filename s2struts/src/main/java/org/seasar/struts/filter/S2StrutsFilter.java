@@ -16,6 +16,9 @@
 package org.seasar.struts.filter;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -25,6 +28,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.seasar.struts.pojo.util.IndexedUtil;
+import org.seasar.struts.util.Base64ParameterUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -49,15 +54,30 @@ public class S2StrutsFilter implements Filter {
             S2StrutsContextUtil.setPath(path);
         }
 
+        handleBase64Parameter(request);
+
         chain.doFilter(req, res);
     }
 
+    protected void handleBase64Parameter(HttpServletRequest req) {
+        for (Enumeration e = req.getParameterNames(); e.hasMoreElements();) {
+            String paramName = (String) e.nextElement();
+            String s = paramName.replaceFirst("(\\.x$)|(\\.y$)", "");
+            if (IndexedUtil.isIndexedParameter(s)) {
+                s = IndexedUtil.getParameter(s);
+            }
+            Map decodedParams = Base64ParameterUtil.decode(s);
+            for (Iterator i = decodedParams.entrySet().iterator(); i.hasNext();) {
+                Map.Entry entry = (Map.Entry) i.next();
+                req.setAttribute((String) entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
     public void init(FilterConfig config) throws ServletException {
-        // this.config = config;
     }
 
     public void destroy() {
-        // config = null;
     }
 
 }

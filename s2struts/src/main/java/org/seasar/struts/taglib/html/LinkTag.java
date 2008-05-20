@@ -23,8 +23,8 @@ import javax.servlet.jsp.JspException;
 
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.taglib.TagUtils;
-import org.seasar.framework.util.Base64Util;
 import org.seasar.struts.Constants;
+import org.seasar.struts.util.Base64ParameterUtil;
 import org.seasar.struts.util.MethodBindingUtil;
 import org.seasar.struts.util.ModuleConfigUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
@@ -52,7 +52,7 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
 
     protected String expression = null;
 
-    protected String encodeExpression = null;
+    protected String base64Property = null;
 
     protected String path = null;
 
@@ -121,12 +121,10 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     }
 
     public int doStartTag() throws JspException {
-        this.expression = this.action;
-        this.encodeExpression = Base64Util.encode(expression.getBytes());
-
+        encodeParameters();
         ActionMapping mapping = null;
         if (this.path == null) {
-            String componentName = MethodBindingUtil.getComponentName(this.expression);
+            String componentName = MethodBindingUtil.getComponentName(this.action);
             mapping = (ActionMapping) ModuleConfigUtil.findActionConfigForComponentName(module, componentName);
         } else {
             mapping = (ActionMapping) ModuleConfigUtil.findActionConfig(module, this.path);
@@ -134,11 +132,7 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
         if (mapping == null) {
             throw new JspException("Not found ActionMapping.");
         }
-
-        setMethodBindingExpression(mapping, this.encodeExpression, this.expression);
-        setCancelAction(mapping, this.encodeExpression, this.expression);
         this.action = mapping.getPath();
-
         return super.doStartTag();
     }
 
@@ -146,17 +140,10 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
         Map params = TagUtils.getInstance().computeParameters(pageContext, paramId, paramName, paramProperty,
                 paramScope, name, property, scope, transaction);
 
-        // MethodBindigのExpressionをurlのパラメータに追加する
         if (params == null) {
             params = new HashMap();
         }
-        params.put(this.encodeExpression, "");
-
-        if (input) {
-            String path = S2StrutsContextUtil.getCurrentInputPath();
-            path = new String(Base64Util.encode(path.getBytes()));
-            params.put(Constants.PAGE_NAME_ELEMENT_VALUE, path);
-        }
+        params.put(this.base64Property, "");
 
         if (indexed) {
             int indexValue = getIndexValue();
@@ -181,17 +168,25 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
         return (url);
     }
 
-    protected void setMethodBindingExpression(ActionMapping mapping, String encodeExpression, String expression) {
-        String mappingName = mapping.getPath();
-        S2StrutsContextUtil.setMethodBindingExpression(mappingName, encodeExpression, "", expression);
-    }
-
-    protected void setCancelAction(ActionMapping mapping, String encodeExpression, String expression) {
-        if (!this.cancel) {
-            return;
+    protected void encodeParameters() throws JspException {
+        Map params = new HashMap();
+        if (action != null) {
+            StringBuffer buf = new StringBuffer();
+            buf.append(action);
+            if (indexed) {
+                prepareIndex(buf, null);
+            }
+            params.put(Constants.ACTION_EXPRESSION_KEY, buf.toString());
         }
-        String mappingName = mapping.getPath();
-        S2StrutsContextUtil.setCancelAction(mappingName, encodeExpression, "");
+        if (cancel) {
+            params.put(Constants.CANCEL_KEY, "");
+        }
+        if (input) {
+            params.put(Constants.INPUT_KEY, S2StrutsContextUtil.getCurrentInputPath());
+        }
+        if (!params.isEmpty()) {
+            base64Property = Base64ParameterUtil.encode(params);
+        }
     }
 
 }

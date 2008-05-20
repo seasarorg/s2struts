@@ -4,6 +4,7 @@ import org.apache.struts.chain.commands.ActionCommand;
 import org.apache.struts.chain.contexts.ActionContext;
 import org.apache.struts.chain.contexts.ServletActionContext;
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.struts.Constants;
 import org.seasar.struts.mock.MockActionMapping;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
@@ -44,17 +45,6 @@ public class SetActionConfigCancelledTest extends S2TestCase {
         assertFalse(this.context.getActionConfig().getValidate());
     }
 
-    public void testCancelledValidateForImageTag() throws Exception {
-        this.mapping.setPath("/test");
-        this.getRequest().setParameter("1234567890.y", "");
-        S2StrutsContextUtil.setCancelAction(this.mapping.getPath(), "1234567890", null);
-
-        boolean result = this.command.execute(this.context);
-
-        assertFalse(result);
-        assertFalse(this.context.getActionConfig().getValidate());
-    }
-
     public void testCancelledValidateForIndexed() throws Exception {
         this.mapping.setPath("/test");
         this.getRequest().setParameter("1234567890[10]", "TEST");
@@ -86,4 +76,10 @@ public class SetActionConfigCancelledTest extends S2TestCase {
         assertTrue(this.context.getActionConfig().getValidate());
     }
 
+    public void testCancelledValidate_requestAttribute() throws Exception {
+        this.getRequest().setAttribute(Constants.CANCEL_KEY, "");
+        boolean result = this.command.execute(this.context);
+        assertFalse(result);
+        assertFalse(this.context.getActionConfig().getValidate());
+    }
 }
