@@ -84,5 +84,4 @@ public interface Constants {
      */
     String CANCEL_KEY = "s2struts.CANCEL";
 
-    String INPUT_KEY = "s2struts.INPUT";
 }

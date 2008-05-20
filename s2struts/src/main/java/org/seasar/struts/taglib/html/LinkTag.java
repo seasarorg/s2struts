@@ -27,7 +27,6 @@ import org.seasar.struts.Constants;
 import org.seasar.struts.util.Base64ParameterUtil;
 import org.seasar.struts.util.MethodBindingUtil;
 import org.seasar.struts.util.ModuleConfigUtil;
-import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
  * {@link org.apache.struts.taglib.html.LinkTag}を拡張したS2Struts用のタグです。
@@ -57,8 +56,6 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     protected String path = null;
 
     protected boolean cancel = false;
-
-    protected boolean input = false;
 
     /**
      * パスを返します。
@@ -94,24 +91,6 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
      */
     public void setCancel(boolean cancel) {
         this.cancel = cancel;
-    }
-
-    /**
-     * ActionFormの検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を返します。
-     * 
-     * @return
-     */
-    public boolean isInput() {
-        return input;
-    }
-
-    /**
-     * ActionFormの検証エラーでこのリンクを表示した画面を再表示する場合<code>true</code>を設定します。
-     * 
-     * @param input
-     */
-    public void setInput(boolean input) {
-        this.input = input;
     }
 
     public void release() {
@@ -180,9 +159,6 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
         }
         if (cancel) {
             params.put(Constants.CANCEL_KEY, "");
-        }
-        if (input) {
-            params.put(Constants.INPUT_KEY, S2StrutsContextUtil.getCurrentInputPath());
         }
         if (!params.isEmpty()) {
             base64Property = Base64ParameterUtil.encode(params);
