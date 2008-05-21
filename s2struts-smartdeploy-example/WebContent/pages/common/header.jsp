@@ -1,0 +1,1 @@
+<img src="../images/seasar.gif">
