@@ -15,8 +15,6 @@
  */
 package org.seasar.struts.pojo.processor.commands;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
@@ -24,9 +22,7 @@ import org.apache.struts.chain.commands.ActionCommandBase;
 import org.apache.struts.chain.contexts.ActionContext;
 import org.apache.struts.chain.contexts.ServletActionContext;
 import org.seasar.framework.log.Logger;
-import org.seasar.struts.Constants;
 import org.seasar.struts.pojo.processor.ActionMappingWrapper;
-import org.seasar.struts.pojo.util.IndexedUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -44,42 +40,11 @@ public class SetActionConfigCancelled extends ActionCommandBase {
         ServletActionContext saContext = (ServletActionContext) actionContext;
         HttpServletRequest request = saContext.getRequest();
 
-        if (isCancel(request, mapping)) {
+        if (S2StrutsContextUtil.isCancel(request, mapping)) {
             log.debug(" Cancelled transaction, skipping validation");
             ActionMappingWrapper wrapper = new ActionMappingWrapper(mapping);
             wrapper.setValidate(false);
             actionContext.setActionConfig(wrapper);
-        }
-        return false;
-    }
-
-    private boolean isCancel(HttpServletRequest request, ActionMapping mapping) {
-        for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
-            String key = (String) paramNames.nextElement();
-            String value = request.getParameter(key);
-            Boolean cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), key, value);
-            if (cancel != null) {
-                return cancel.booleanValue();
-            }
-
-            // image tag
-            String imageKey = key.replaceFirst("(\\.x$)|(\\.y$)", "");
-            cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), imageKey, null);
-            if (cancel != null) {
-                return cancel.booleanValue();
-            }
-
-            // indexed
-            if (IndexedUtil.isIndexedParameter(key)) {
-                String indexedKey = IndexedUtil.getParameter(key);
-                cancel = S2StrutsContextUtil.isCancelAction(mapping.getPath(), indexedKey, value);
-                if (cancel != null) {
-                    return cancel.booleanValue();
-                }
-            }
-        }
-        if (request.getAttribute(Constants.CANCEL_KEY) != null) {
-            return true;
         }
         return false;
     }
