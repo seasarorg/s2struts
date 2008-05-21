@@ -15,9 +15,15 @@
  */
 package org.seasar.struts.util;
 
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.seasar.struts.pojo.util.IndexedUtil;
 
 /**
  * {@link HttpServletRequest}のためのユーティリティです。
@@ -65,6 +71,26 @@ public class RequestUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * Base64でエンコードされたパラメータをデコードします。
+     * 
+     * @param request
+     */
+    public static void decodeBase64Parameter(HttpServletRequest request) {
+        for (Enumeration e = request.getParameterNames(); e.hasMoreElements();) {
+            String paramName = (String) e.nextElement();
+            String s = paramName.replaceFirst("(\\.x$)|(\\.y$)", "");
+            if (IndexedUtil.isIndexedParameter(s)) {
+                s = IndexedUtil.getParameter(s);
+            }
+            Map decodedParams = Base64ParameterUtil.decode(s);
+            for (Iterator i = decodedParams.entrySet().iterator(); i.hasNext();) {
+                Map.Entry entry = (Map.Entry) i.next();
+                request.setAttribute((String) entry.getKey(), entry.getValue());
+            }
+        }
     }
 
 }

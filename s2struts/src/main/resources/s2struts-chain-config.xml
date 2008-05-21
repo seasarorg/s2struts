@@ -30,54 +30,6 @@
     <!-- ========== Action Processing chain ======================== -->
     <chain name="process-action">
 
-        <!--
-             This chain attempts to emulate (most of) the standard request
-             processing in the standard org.apache.struts.action.RequestProcessor
-             class, by performing the corresponding tasks in individual Commands
-             that are composable.  The following list defines a cross reference
-             between the processXxx methods and the Commands that perform the
-             corresponding functionality:
-
-             processMultipart        Integrated into servlet and legacy classes
-
-             processPath             SelectAction (which also does processMapping)
-
-             processException        ExceptionCatcher / ExceptionHandler
-
-             processLocale           SelectLocale
-
-             processContent          SetContentType
-
-             processNoCache          RequestNoCache
-
-             processPreprocess       LookupCommand with optional="true".  Multiple
-                                     occurrences of this can easily be added, to
-                                     support additional processing hooks at any
-                                     point in the chain without modifying the
-                                     standard definition.
-
-             processCachedMessages   RemoveCachedMessages
-
-             processMapping          SelectAction (which also does processPath)
-
-             processRoles            AuthorizeAction
-
-             processActionForm       CreateActionForm
-
-             processPopulate         PopulateActionForm
-
-             processValidate         ValidateActionForm / SelectInput
-
-             processForward          SelectForward
-
-             processInclude          SelectInclude / PerformInclude
-
-             processActionCreate     CreateAction
-
-             processActionPerform    ExecuteAction
-        -->
-
-
         <!-- Look up optional preprocess command -->
         <lookup
                 catalogName="struts"
@@ -90,6 +42,10 @@
         -->
         <command
                 className="org.seasar.struts.processor.commands.SetHttpServletRequest"/>
+
+        <!-- エンコードされたパラメータをデコードします。-->
+        <command
+                className="org.seasar.struts.pojo.processor.commands.DecodeParameter"/>
 
         <!-- Identify the Locale for this request -->
         <command
