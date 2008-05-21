@@ -20,6 +20,16 @@ public class MethodBindingFactory {
     /**
      * {@link MethodBinding}を返します。
      * 
+     * @param expression
+     * @return
+     */
+    public static MethodBinding getMethodBinding(String expression) {
+        return new MethodBinding(expression);
+    }
+
+    /**
+     * {@link MethodBinding}を返します。
+     * 
      * @param request
      * @return
      */
@@ -34,10 +44,9 @@ public class MethodBindingFactory {
         }
 
         if (IndexedUtil.isIndexedParameter(expression)) {
-            String indexedKey = IndexedUtil.getParameter(expression);
             int index = IndexedUtil.getIndex(expression);
             if (expression != null) {
-                return new MethodBinding(indexedKey, index);
+                return new MethodBinding(IndexedUtil.getParameter(expression), index);
             }
         }
 

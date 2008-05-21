@@ -15,20 +15,23 @@
  */
 package org.seasar.struts.pojo.exception;
 
+import org.apache.struts.action.ActionMapping;
+import org.seasar.framework.exception.SRuntimeException;
+
 /**
  * Actionのメソッドが実行されなかった場合にスローされる実行時例外です。
  * 
  * @author Katsuhiko Nagashima
  */
-public class NotCalledActionRuntimeException extends RuntimeException {
+public class NotCalledActionRuntimeException extends SRuntimeException {
 
     private static final long serialVersionUID = 7963592157999151321L;
 
     /**
      * インスタンスを構築します。
      */
-    public NotCalledActionRuntimeException() {
-        super("Action can not be called.");
+    public NotCalledActionRuntimeException(ActionMapping actionMapping) {
+        super("ESTR0001", new Object[] { actionMapping });
     }
 
 }

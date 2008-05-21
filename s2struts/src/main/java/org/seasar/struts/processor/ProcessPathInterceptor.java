@@ -19,26 +19,26 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.seasar.framework.aop.interceptors.AbstractInterceptor;
-import org.seasar.struts.processor.support.ParameterDecoder;
+import org.seasar.struts.processor.support.ActionPathResolver;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
- * {@link ExternalRequestProcessor#processMultipart}に対するインターセプタです。
+ * {@link ExternalRequestProcessor#processPath(HttpServletRequest,
+ * javax.servlet.http.HttpServletResponse)}に対するインターセプタです。
  * <p>
- * {@link HttpServletRequest}のインスタンスをS2Strutsのコンテキストに設定します。
+ * Actionのパスを解決します。
  * </p>
  * 
- * @author Katsuhiko Nagashima
+ * @author taedium
  */
-public class ProcessMultipartInterceptor extends AbstractInterceptor {
+public class ProcessPathInterceptor extends AbstractInterceptor {
 
-    private static final long serialVersionUID = -1113473917001484741L;
+    private static final long serialVersionUID = 3408699693087684681L;
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        HttpServletRequest request = (HttpServletRequest) invocation.proceed();
-        S2StrutsContextUtil.setRequest(request);
-        ParameterDecoder.decode(request);
-        return request;
+        String path = (String) invocation.proceed();
+        HttpServletRequest request = S2StrutsContextUtil.getRequest();
+        return ActionPathResolver.resolve(request, path);
     }
 
 }

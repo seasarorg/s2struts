@@ -17,6 +17,7 @@ package org.seasar.struts.taglib;
 
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.struts.pojo.MethodBinding;
+import org.seasar.struts.pojo.MethodBindingFactory;
 
 /**
  * {{@link #setAction(String)}で指定されたメソッドバインディング式を使ってActionコンポーネントのメソッドを実行します。
@@ -55,7 +56,7 @@ public class InitializeTag extends BaseTag {
         // because of the different HttpServletRequest for JSP and Servlet.
         SingletonS2ContainerFactory.getContainer().getExternalContext().setRequest(this.pageContext.getRequest());
 
-        MethodBinding methodBinding = new MethodBinding(this.action);
+        MethodBinding methodBinding = MethodBindingFactory.getMethodBinding(action);
         methodBinding.invoke();
 
         Boolean skipPage = Boolean.valueOf(false);

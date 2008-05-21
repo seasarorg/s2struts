@@ -132,7 +132,7 @@ public class PojoInvocationImpl implements PojoInvocation {
             this.index++;
             return command.execute(this);
         }
-        throw new NotCalledActionRuntimeException();
+        throw new NotCalledActionRuntimeException(mapping);
     }
 
 }

@@ -13,26 +13,31 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.pojo.processor.commands;
+package org.seasar.struts.processor.support;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
-import org.apache.struts.chain.contexts.ServletActionContext;
-import org.seasar.struts.processor.support.ParameterDecoder;
+import org.apache.struts.upload.MultipartRequestWrapper;
+import org.seasar.struts.util.RequestUtil;
 
 /**
- * 
+ * エンコードされたリクエストパラメータをデコードします。
  * 
  * @author taedium
  */
-public class DecodeParameter implements Command {
+public class ParameterDecoder {
 
-    public boolean execute(Context context) throws Exception {
-        ServletActionContext ctx = (ServletActionContext) context;
-        HttpServletRequest request = ctx.getRequest();
-        ParameterDecoder.decode(request);
-        return false;
+    /**
+     * リクエストパラメータをデコードします。
+     * <p>
+     * リクエストがmultipart形式の場合、このメソッドは何も行いません。
+     * </p>
+     * 
+     * @param request
+     */
+    public static void decode(HttpServletRequest request) {
+        if (!MultipartRequestWrapper.class.isInstance(request)) {
+            RequestUtil.decodeBase64Parameter(request);
+        }
     }
 }

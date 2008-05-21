@@ -9,6 +9,9 @@
 		<aspect pointcut="processMultipart">
 			<component class="org.seasar.struts.processor.ProcessMultipartInterceptor"/>
 		</aspect>
+		<aspect pointcut="processPath">
+			<component class="org.seasar.struts.processor.ProcessPathInterceptor"/>
+		</aspect>
 		<aspect pointcut="processActionForm">
 			<component class="org.seasar.struts.pojo.processor.ProcessPojoFormInterceptor"/>
 		</aspect>
