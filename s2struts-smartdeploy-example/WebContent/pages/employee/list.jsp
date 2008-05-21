@@ -1,7 +1,7 @@
 <tiles:insert beanName="main">
   <tiles:put name="title" value="Employee Management" />
   <tiles:put name="body" type="string">
-  <s2struts:init action="#{employee_listInitAction.init}"/>
+  <s2struts:init action="@{employee_listInitAction.init}"/>
   <table class="tablebg">
     <tr class="label">
       <th><bean:message key="button.edit" /><span id="labelEmpno">EmployeeNo</span></th>
@@ -25,13 +25,13 @@
         <td class="number"><c:out value="${e.comm}" /></td>
         <td class="text"><c:out value="${e.dname}" /></td>
         <td>
-          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goEdit}" cancel="true"><bean:message key="button.edit" /></s2struts:link>
-          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goDelete}" cancel="true"><bean:message key="button.delete" /></s2struts:link>
-          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="#{employee_listAction.goInquire}" cancel="true"><bean:message key="button.inquire" /></s2struts:link>
+          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="@{employee_listAction.goEdit}" cancel="true"><bean:message key="button.edit" /></s2struts:link>
+          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="@{employee_listAction.goDelete}" cancel="true"><bean:message key="button.delete" /></s2struts:link>
+          <s2struts:link paramId="empno" paramName="e" paramProperty="empno" action="@{employee_listAction.goInquire}" cancel="true"><bean:message key="button.inquire" /></s2struts:link>
         </td>
       </tr>
     </c:forEach>
   </table>
-  <s2struts:link action="#{employee_listAction.goPrevious}"><bean:message key="button.prev" /></s2struts:link>
+  <s2struts:link action="@{employee_listAction.goPrevious}"><bean:message key="button.prev" /></s2struts:link>
   </tiles:put>
 </tiles:insert>

@@ -2,7 +2,7 @@
   <tiles:put name="title" value="Employee Management" />
   <tiles:put name="body" type="string">
   <html:form action="/employee/confirm">
-    <s2struts:init action="#{employee_confirmInitAction.init}"/>
+    <s2struts:init action="@{employee_confirmInitAction.init}"/>
     <bean:define id="form" name="employee_confirmForm" />
     <html:hidden property="crudType" value="${crudType}" />
     <table class="tablebg">
@@ -65,9 +65,9 @@
       </tr>
     </table>
     <c:if test="${crudType != 'r'}">
-      <s2struts:submit action="#{employee_confirmAction.goStore}" ><bean:message key="button.store" /></s2struts:submit>
+      <s2struts:submit action="@{employee_confirmAction.goStore}" ><bean:message key="button.store" /></s2struts:submit>
     </c:if>
-    <s2struts:submit action="#{employee_confirmAction.goPrevious}"><bean:message key="button.prev" /></s2struts:submit>
+    <s2struts:submit action="@{employee_confirmAction.goPrevious}"><bean:message key="button.prev" /></s2struts:submit>
   </html:form>
   </tiles:put>
 </tiles:insert>

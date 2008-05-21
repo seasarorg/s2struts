@@ -9,7 +9,7 @@
         <td><html:file property="file" styleClass="text" errorStyleClass="text-error"/></td>
       </tr>
     </table>
-    <s2struts:submit action="#{upload_uploadAction.execute}">upload</s2struts:submit>
+    <s2struts:submit action="@{upload_uploadAction.execute}">upload</s2struts:submit>
   </html:form>
   </tiles:put>
 </tiles:insert>

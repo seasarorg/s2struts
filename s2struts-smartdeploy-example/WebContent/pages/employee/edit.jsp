@@ -2,7 +2,7 @@
   <tiles:put name="title" value="Employee Management" />
   <tiles:put name="body" type="string">
   <html:form action="/employee/edit">
-    <s2struts:init action="#{employee_editInitAction.init}"/>
+    <s2struts:init action="@{employee_editInitAction.init}"/>
     <bean:define id="form" name="employee_editForm" />
     <html:hidden property="crudType" value="${crudType}" />
     <table class="tablebg">
@@ -65,8 +65,8 @@
         </td>
       </tr>
     </table>
-    <s2struts:submit action="#{employee_editAction.goConfirm}"><bean:message key="button.confirm"/></s2struts:submit>
-    <s2struts:submit action="#{employee_editAction.goPrevious}" cancel="true"><bean:message key="button.prev"/></s2struts:submit>
+    <s2struts:submit action="@{employee_editAction.goConfirm}"><bean:message key="button.confirm"/></s2struts:submit>
+    <s2struts:submit action="@{employee_editAction.goPrevious}" cancel="true"><bean:message key="button.prev"/></s2struts:submit>
   </html:form>
   </tiles:put>
 </tiles:insert>
