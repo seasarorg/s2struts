@@ -28,10 +28,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
 
+import org.apache.commons.chain.CatalogFactory;
 import org.apache.commons.chain.config.ConfigParser;
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionServlet;
 import org.seasar.framework.log.Logger;
+import org.seasar.framework.util.Disposable;
+import org.seasar.framework.util.DisposableUtil;
 import org.seasar.struts.hotdeploy.ChainConfigLoader;
 
 /**
@@ -45,6 +48,11 @@ public class ChainConfigLoaderImpl implements ChainConfigLoader {
 
     public void load() throws ServletException {
         initChain();
+        DisposableUtil.add(new Disposable() {
+            public void dispose() {
+                CatalogFactory.clear();
+            }
+        });
     }
 
     //
