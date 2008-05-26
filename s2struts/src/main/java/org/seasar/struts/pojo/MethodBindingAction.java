@@ -22,6 +22,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.seasar.struts.pojo.exception.ActionForwardNotFoundException;
 
 /**
  * {@link MethodBinding}を実行する{@link Action}です。
@@ -46,7 +47,11 @@ public class MethodBindingAction extends Action {
 
         String forward = (String) this.methodBinding.invoke(mapping);
         if (forward != null) {
-            return mapping.findForward(forward);
+            ActionForward actionForward = mapping.findForward(forward);
+            if (actionForward != null) {
+                return actionForward;
+            }
+            throw new ActionForwardNotFoundException(forward);
         } else {
             return null;
         }
