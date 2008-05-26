@@ -21,7 +21,7 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction
+@StrutsAction(input = AbstractIterateAction.ITERATE)
 public class IterateAction extends AbstractIterateAction {
 
     private String name;

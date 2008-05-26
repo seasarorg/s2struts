@@ -26,37 +26,37 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction
+@StrutsAction(input = DownloadAction.DOWNLOAD)
 public class DownloadAction {
 
-	public static final String DOWNLOAD = "/pages/download/download.jsp";
+    public static final String DOWNLOAD = "/pages/download/download.jsp";
 
-	private DownloadForm downloadForm;
+    private DownloadForm downloadForm;
 
-	private HttpServletResponse response;
+    private HttpServletResponse response;
 
-	public void setDownloadForm(DownloadForm downloadForm) {
-		this.downloadForm = downloadForm;
-	}
+    public void setDownloadForm(DownloadForm downloadForm) {
+        this.downloadForm = downloadForm;
+    }
 
-	public void setResponse(HttpServletResponse response) {
-		this.response = response;
-	}
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
 
-	public String execute() {
-		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition",
-				"attachment; filename=\"download.txt\"");
-		ServletOutputStream out = null;
-		try {
-			out = response.getOutputStream();
-			out.write(downloadForm.getText().getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-			response.reset();
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		}
-		return null;
-	}
+    public String execute() {
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition",
+                "attachment; filename=\"download.txt\"");
+        ServletOutputStream out = null;
+        try {
+            out = response.getOutputStream();
+            out.write(downloadForm.getText().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            response.reset();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        return null;
+    }
 
 }

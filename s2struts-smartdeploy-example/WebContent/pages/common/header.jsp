@@ -1,1 +1,1 @@
-<img src="../images/seasar.gif">
+<img src="${contextPath}/images/seasar.gif">

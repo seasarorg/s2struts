@@ -23,7 +23,7 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-@StrutsAction(scope=ScopeType.SESSION)
+@StrutsAction(scope = ScopeType.SESSION, input = AbstractEmployeeAction.SEARCH)
 public class SearchAction extends AbstractEmployeeAction {
 
     public String goList() {

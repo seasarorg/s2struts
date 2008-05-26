@@ -11,8 +11,7 @@
             </s2struts:submit>
           </td>
           <td>
-            <c:url value="/images/echo.jpg" var="src" />
-            <s2struts:image action="@{iterate_iterateAction.image}"  src="${src}" indexed="true" cancel="true">
+            <s2struts:image action="@{iterate_iterateAction.image}"  src="${contextPath}/images/echo.jpg" indexed="true" cancel="true">
               image <c:out value="${s.index}" />
             </s2struts:image>
           </td>

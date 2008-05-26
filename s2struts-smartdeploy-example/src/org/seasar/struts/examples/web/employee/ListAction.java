@@ -22,7 +22,7 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-@StrutsAction
+@StrutsAction(input = AbstractEmployeeAction.LIST)
 public class ListAction extends AbstractEmployeeAction {
 
     public String goDelete() {

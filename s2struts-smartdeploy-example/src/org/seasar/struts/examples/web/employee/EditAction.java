@@ -22,7 +22,7 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-@StrutsAction
+@StrutsAction(input = AbstractEmployeeAction.EDIT)
 public class EditAction extends AbstractEmployeeAction {
 
     public String goConfirm() {

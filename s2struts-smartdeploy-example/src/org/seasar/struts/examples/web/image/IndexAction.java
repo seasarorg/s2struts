@@ -13,20 +13,10 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.iterate;
+package org.seasar.struts.examples.web.image;
 
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.annotation.tiger.StrutsAction;
 
-/**
- * 
- * @author taedium
- * 
- */
-public abstract class AbstractIterateAction {
-
-    @StrutsActionForward
-    public static final String ITERATE = "/pages/iterate/iterate.jsp";
-
-    @StrutsActionForward
-    public static final String RESULT = "/pages/iterate/result.jsp";
+@StrutsAction(forward = ImageAction.IMAGE)
+public class IndexAction {
 }

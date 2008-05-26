@@ -2,7 +2,6 @@
   <tiles:put name="title" value="Add" />
   <tiles:put name="body" type="string">
   <html:form action="/add/add">
-    <s2struts:page />
     <bean:define id="form" name="add_addForm" />
     <html:text property="arg1" styleClass="number" errorStyleClass="number-error" /> + 
     <html:text property="arg2" styleClass="number" errorStyleClass="number-error" /> = 

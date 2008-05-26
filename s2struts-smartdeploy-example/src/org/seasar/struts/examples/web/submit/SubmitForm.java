@@ -13,20 +13,22 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.iterate;
+package org.seasar.struts.examples.web.submit;
 
-import org.seasar.struts.annotation.tiger.StrutsActionForward;
+import org.seasar.struts.annotation.tiger.StrutsActionForm;
+import org.seasar.struts.validator.annotation.tiger.Required;
 
-/**
- * 
- * @author taedium
- * 
- */
-public abstract class AbstractIterateAction {
+@StrutsActionForm
+public class SubmitForm {
 
-    @StrutsActionForward
-    public static final String ITERATE = "/pages/iterate/iterate.jsp";
+    private String arg;
 
-    @StrutsActionForward
-    public static final String RESULT = "/pages/iterate/result.jsp";
+    public String getArg() {
+        return arg;
+    }
+
+    @Required
+    public void setArg(String arg) {
+        this.arg = arg;
+    }
 }

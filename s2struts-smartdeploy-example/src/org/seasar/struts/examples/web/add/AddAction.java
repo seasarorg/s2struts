@@ -22,7 +22,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-@StrutsAction
+@StrutsAction(input = AddAction.ADD)
 public class AddAction {
 
     @StrutsActionForward

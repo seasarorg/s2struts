@@ -125,6 +125,7 @@
       <page-encoding>UTF-8</page-encoding>
       <scripting-invalid>false</scripting-invalid>
       <include-prelude>/pages/common/taglib-defs.jsp</include-prelude>
+      <include-prelude>/pages/common/var-defs.jsp</include-prelude>
       <include-prelude>/pages/common/tails-defs.jsp</include-prelude>
     </jsp-property-group>
   </jsp-config>

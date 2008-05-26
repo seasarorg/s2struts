@@ -2,13 +2,12 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="../css/global.css" rel="stylesheet" type="text/css" id="globalStyle"></link>
-  <script type="text/javascript" src="../js/execute.js"></script>
+  <link href="${contextPath}/css/global.css" rel="stylesheet" type="text/css" id="globalStyle"></link>
+  <script type="text/javascript" src="${contextPath}/js/execute.js"></script>
   <title><tiles:getAsString name="title" /></title>
 </head>
 
 <body>
-<s2struts:page />
 <table border="0" cellspacing="5" width="97%">
 <tr>
   <td colspan="2">
