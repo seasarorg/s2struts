@@ -14,17 +14,12 @@
 <!-- ================================= Global Exception Definitions -->
 
     <global-exceptions>
-
+        <!--
         <exception
-            key="errors.global.runtime"
-            type="java.lang.RuntimeException"
+            key="errors.global.exception"
+            type="java.lang.Exception"
             path="/pages/error/error.jsp"/>
-
-        <exception
-            key="errors.global.runtime.sql"
-            type="org.seasar.framework.exception.SQLRuntimeException"
-            path="/pages/error/error.jsp"/>
-
+        -->
     </global-exceptions>
 
 <!-- =================================== Global Forward Definitions -->
@@ -36,7 +31,6 @@
 
     <action-mappings type="org.apache.struts.action.RequestActionMapping">
     </action-mappings>
-    
 
 <!-- ===================================== Controller Configuration -->
 

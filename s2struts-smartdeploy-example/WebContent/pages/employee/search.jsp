@@ -1,49 +1,51 @@
 <tiles:insert beanName="main">
-  <tiles:put name="title" value="Employee Management" />
+  <tiles:put name="title">
+    <bean:message key="employee.title" />
+  </tiles:put>
   <tiles:put name="body" type="string">
   <html:form action="/employee/search">
     <s2struts:init action="@{employee_searchInitAction.init}"/>
     <table class="tablebg">
       <tr>
-        <td class="label"><span id="labelEmpno">EmployeeNo</span></td>
+        <td class="label"><bean:message key="employee.employeeNo" /></td>
         <td>
           <html:text property="empno" styleClass="number" errorStyleClass="number-error" />
         </td>
       </tr>
       <tr>
-        <td class="label"><span id="labelEname">EmployeeName</span></td>
+        <td class="label"><bean:message key="employee.employeeName" /></td>
         <td>
           <html:text property="ename" styleClass="text" errorStyleClass="text-error" />
         </td>
       </tr>
       <tr>
-        <td class="label"><span id="labelJob">Job</span></td>
+        <td class="label"><bean:message key="employee.job" /></td>
         <td>
           <html:text property="job" styleClass="text" errorStyleClass="text-error" />
         </td>
       </tr>
       <tr>
-        <td class="label"><span id="labelMgr">Manager</span></td>
+        <td class="label"><bean:message key="employee.manager" /></td>
         <td>
           <html:text property="mgr" styleClass="number" errorStyleClass="number-error" />
         </td>
       </tr>
       <tr>
-        <td class="label"><span id="labelHiredate">HireDate</span></td>
+        <td class="label"><bean:message key="employee.hiredate" /></td>
         <td>
           <html:text property="fromHiredate" styleClass="date" errorStyleClass="date-error" /> ～
           <html:text property="toHiredate" styleClass="date" errorStyleClass="date-error" />
         </td>
       </tr>
       <tr>
-        <td class="label"><span id="labelSal">Salary</span></td>
+        <td class="label"><bean:message key="employee.salary" /></td>
         <td>
           <html:text property="fromSal" styleClass="number" errorStyleClass="number-error" /> ～
           <html:text property="toSal" styleClass="number" errorStyleClass="number-error" />
         </td>
       </tr>
       <tr>
-        <td class="label"><span id="labelDeptno">Department</span></td>
+        <td class="label"><bean:message key="employee.department" /></td>
         <td>
           <html:select property="deptno" errorStyleClass="error">
             <html:option value="" key="messages.select.space" />

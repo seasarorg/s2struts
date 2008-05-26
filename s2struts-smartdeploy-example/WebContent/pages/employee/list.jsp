@@ -1,18 +1,20 @@
 <tiles:insert beanName="main">
-  <tiles:put name="title" value="Employee Management" />
+  <tiles:put name="title">
+    <bean:message key="employee.title" />
+  </tiles:put>
   <tiles:put name="body" type="string">
   <s2struts:init action="@{employee_listInitAction.init}"/>
   <table class="tablebg">
     <tr class="label">
-      <th><bean:message key="button.edit" /><span id="labelEmpno">EmployeeNo</span></th>
-      <th><span id="labelEname">EmployeeName</span></th>
-      <th><span id="labelJob">Job</span></th>
-      <th><span id="labelMgr">Manager</span></th>
-      <th><span id="labelHiredate">HireDate</span></th>
-      <th><span id="labelSal">Salary</span></th>
-      <th><span id="labelComm">Commission</span></th>
-      <th><span id="labelDept">Department</span></th>
-      <th><span id="labelDetail">Detail</span></th>
+      <th><bean:message key="employee.employeeNo" /></th>
+      <th><bean:message key="employee.employeeName" /></th>
+      <th><bean:message key="employee.job" /></th>
+      <th><bean:message key="employee.manager" /></th>
+      <th><bean:message key="employee.hiredate" /></th>
+      <th><bean:message key="employee.salary" /></th>
+      <th><bean:message key="employee.commission" /></th>
+      <th><bean:message key="employee.department" /></th>
+      <th><bean:message key="employee.detail" /></th>
     </tr>
     <c:forEach var="e" varStatus="s" items="${empItems}">
       <tr class="${s.index %2 == 0 ? 'row-0' : 'row-1'}">

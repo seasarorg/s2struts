@@ -14,7 +14,7 @@
         <td><bean:write name="form" property="size"/> bytes</td>
       </tr>
     </table>
-    <s2struts:submit action="@{upload_resultAction.goPrevious}"><bean:message key="button.prev" /></s2struts:submit>
+    <s2struts:submit action="@{upload_resultAction.goPrevious}">previous</s2struts:submit>
   </html:form>
   </tiles:put>
 </tiles:insert>
