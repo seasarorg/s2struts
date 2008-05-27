@@ -1,1 +1,1 @@
-<logic:redirect action="/index/index" />
+<% pageContext.forward("/index/index.do"); %>
