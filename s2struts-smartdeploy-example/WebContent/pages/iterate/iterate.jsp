@@ -7,17 +7,15 @@
         <tr>
           <td>
             <s2struts:submit action="@{iterate_iterateAction.submit}" indexed="true" cancel="true">
-              submit <c:out value="${s.index}" />
+              submit<c:out value="${s.index}" />
             </s2struts:submit>
           </td>
           <td>
-            <s2struts:image action="@{iterate_iterateAction.image}"  src="${contextPath}/images/echo.jpg" indexed="true" cancel="true">
-              image <c:out value="${s.index}" />
-            </s2struts:image>
+            <s2struts:image action="@{iterate_iterateAction.image}"  src="${contextPath}/images/image${s.index}.gif" indexed="true" cancel="true" />
           </td>
           <td>
             <s2struts:link action="@{iterate_iterateAction.link}" indexed="true" cancel="true">
-              link <c:out value="${s.index}" />
+              link<c:out value="${s.index}" />
             </s2struts:link>
           </td>
         </tr>

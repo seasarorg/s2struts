@@ -50,14 +50,7 @@
             value="/WEB-INF/validator-rules.xml"/>
     </plug-in>
     
-    <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn">
-        <set-property 
-            property="enableJar" 
-            value="false"/>
-        <set-property 
-            property="docRoot" 
-            value="/pages"/>
-    </plug-in>
+    <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn"/>
 
     <plug-in className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/>
 
