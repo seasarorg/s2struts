@@ -15,6 +15,8 @@
  */
 package org.seasar.struts.examples.web.checkbox;
 
+import java.io.Serializable;
+
 import org.seasar.struts.annotation.tiger.StrutsActionForm;
 
 /**
@@ -22,7 +24,9 @@ import org.seasar.struts.annotation.tiger.StrutsActionForm;
  * 
  */
 @StrutsActionForm
-public class CheckboxForm {
+public class CheckboxForm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private boolean arg1;
 
@@ -44,4 +48,7 @@ public class CheckboxForm {
         this.arg2 = arg2;
     }
 
+    public void reset() {
+        arg1 = false;
+    }
 }

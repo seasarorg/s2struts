@@ -34,7 +34,9 @@
 
 <!-- ===================================== Controller Configuration -->
 
-    <controller catalog="s2struts"/>
+    <controller catalog="s2struts">
+      <set-property key="ACTION_CONTEXT_CLASS" value="org.seasar.struts.processor.contexts.S2ServletActionContext"/>
+    </controller>
 
 <!-- ================================ Message Resources Definitions -->
 
