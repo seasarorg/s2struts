@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,28 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.pojo.processor.commands;
+package org.seasar.struts.processor.contexts;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
 import org.apache.struts.chain.contexts.ServletActionContext;
-import org.seasar.struts.processor.support.ParameterDecoder;
 
 /**
- * S2Struts用のパラメータをデコードします。
+ * {@link S2ServletWebContext}のラッパーです。
  * 
  * @author taedium
  */
-public class DecodeParameter implements Command {
+public class S2ServletActionContext extends ServletActionContext {
 
-    public boolean execute(Context context) throws Exception {
-        ServletActionContext ctx = (ServletActionContext) context;
-        HttpServletRequest request = ctx.getRequest();
-        ParameterDecoder.decode(request);
-        return false;
+    /**
+     * @param context
+     * @param request
+     * @param response
+     */
+    public S2ServletActionContext(ServletContext context, HttpServletRequest request, HttpServletResponse response) {
+        super(new S2ServletWebContext(context, request, response));
     }
+
 }

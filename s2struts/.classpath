@@ -8,7 +8,6 @@
 	<classpathentry kind="lib" path="lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-3.4.ga.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.13.jar"/>
-	<classpathentry kind="lib" path="lib/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-chain-1.1.jar" sourcepath="libsrc/commons-chain-1.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-digester-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
@@ -23,5 +22,6 @@
 	<classpathentry kind="lib" path="lib/ognl-2.6.9-patch-20070908.jar"/>
 	<classpathentry kind="lib" path="lib/s2-extension-2.4.23.jar" sourcepath="libsrc/s2-extension-2.4.23-sources.jar"/>
 	<classpathentry kind="lib" path="lib/s2-framework-2.4.23.jar" sourcepath="libsrc/s2-framework-2.4.23-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.0-BETA.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

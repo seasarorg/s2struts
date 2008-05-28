@@ -36,13 +36,6 @@
                 name="servlet-standard-preprocess"
                 optional="true"/>
 
-        <!-- HttpServletRequest を MultipartRequestWrapper にラップされた場合
-             MultipartRequestWrapper を S2Container に設定します。
-             この command は S2Container と連携するために必須です。
-        -->
-        <command
-                className="org.seasar.struts.processor.commands.SetHttpServletRequest"/>
-
         <!-- エンコードされたパラメータをデコードします。-->
         <command
                 className="org.seasar.struts.pojo.processor.commands.DecodeParameter"/>
