@@ -27,7 +27,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public class CheckboxAction {
 
     @StrutsActionForward
-    public static final String CHECKBOX = "/pages/checkbox/checkbox.jsp";
+    public static final String CHECKBOX = "/WEB-INF/view/checkbox/checkbox.jsp";
 
     public String execute() {
         return CHECKBOX;

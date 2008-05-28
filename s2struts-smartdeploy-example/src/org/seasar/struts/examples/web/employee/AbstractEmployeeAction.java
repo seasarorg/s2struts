@@ -25,16 +25,16 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public abstract class AbstractEmployeeAction {
 
     @StrutsActionForward
-    public static final String CONFIRM = "/pages/employee/confirm.jsp";
+    public static final String CONFIRM = "/WEB-INF/view/employee/confirm.jsp";
 
     @StrutsActionForward
-    public static final String EDIT = "/pages/employee/edit.jsp";
+    public static final String EDIT = "/WEB-INF/view/employee/edit.jsp";
 
     @StrutsActionForward
-    public static final String SEARCH = "/pages/employee/search.jsp";
+    public static final String SEARCH = "/WEB-INF/view/employee/search.jsp";
 
     @StrutsActionForward
-    public static final String LIST = "/pages/employee/list.jsp";
+    public static final String LIST = "/WEB-INF/view/employee/list.jsp";
 
     protected String crudType;
 

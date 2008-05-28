@@ -26,7 +26,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public class IndexedAction {
 
     @StrutsActionForward
-    public static final String INDEXED = "/pages/indexed/indexed.jsp";
+    public static final String INDEXED = "/WEB-INF/view/indexed/indexed.jsp";
 
     public String execute() {
         return INDEXED;

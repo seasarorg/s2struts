@@ -26,7 +26,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public class ImageAction {
 
     @StrutsActionForward
-    public static final String IMAGE = "/pages/image/image.jsp";
+    public static final String IMAGE = "/WEB-INF/view/image/image.jsp";
 
     public String execute() {
         return IMAGE;

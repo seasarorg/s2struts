@@ -26,7 +26,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public class SubmitAction {
 
     @StrutsActionForward
-    public static final String SUBMIT = "/pages/submit/submit.jsp";
+    public static final String SUBMIT = "/WEB-INF/view/submit/submit.jsp";
 
     public String execute() {
         return SUBMIT;

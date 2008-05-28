@@ -25,8 +25,8 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public abstract class AbstractIterateAction {
 
     @StrutsActionForward
-    public static final String ITERATE = "/pages/iterate/iterate.jsp";
+    public static final String ITERATE = "/WEB-INF/view/iterate/iterate.jsp";
 
     @StrutsActionForward
-    public static final String RESULT = "/pages/iterate/result.jsp";
+    public static final String RESULT = "/WEB-INF/view/iterate/result.jsp";
 }

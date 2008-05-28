@@ -29,7 +29,7 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
 @StrutsAction(input = DownloadAction.DOWNLOAD)
 public class DownloadAction {
 
-    public static final String DOWNLOAD = "/pages/download/download.jsp";
+    public static final String DOWNLOAD = "/WEB-INF/view/download/download.jsp";
 
     private DownloadForm downloadForm;
 

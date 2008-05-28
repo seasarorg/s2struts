@@ -26,7 +26,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public class LinkAction {
 
     @StrutsActionForward
-    public static final String LINK = "/pages/link/link.jsp";
+    public static final String LINK = "/WEB-INF/view/link/link.jsp";
 
     public String execute() {
         return LINK;

@@ -26,7 +26,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public class ValidateAction {
 
     @StrutsActionForward
-    public static final String VALIDATE = "/pages/validate/validate.jsp";
+    public static final String VALIDATE = "/WEB-INF/view/validate/validate.jsp";
 
     public String execute() {
         return VALIDATE;
