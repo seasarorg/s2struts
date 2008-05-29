@@ -15,9 +15,9 @@
  */
 package org.seasar.struts.context.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import org.seasar.framework.util.MapUtil;
 import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.context.S2StrutsApplContext;
 
@@ -29,15 +29,15 @@ import org.seasar.struts.context.S2StrutsApplContext;
 public class S2StrutsApplContextImpl implements S2StrutsApplContext {
     private static final long serialVersionUID = -4835702530138078142L;
 
-    private Map methodBindingExpressions = new HashMap();
+    private Map methodBindingExpressions = MapUtil.createHashMap();
 
-    private Map cancelActions = new HashMap();
+    private Map cancelActions = MapUtil.createHashMap();
 
-    public synchronized void clear(ContentsType type) {
+    public void clear(ContentsType type) {
         if (type == ContentsType.MethodBindingExpression) {
-            this.methodBindingExpressions = new HashMap();
+            this.methodBindingExpressions.clear();
         } else if (type == ContentsType.CancelAction) {
-            this.cancelActions = new HashMap();
+            this.cancelActions.clear();
         }
     }
 
