@@ -28,13 +28,12 @@ import org.apache.struts.config.ActionConfig;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
-import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.IntegerConversionUtil;
 import org.seasar.struts.bean.IndexedPropertyDesc;
 import org.seasar.struts.bean.impl.IndexedPropertyDescImpl;
-import org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionFormNamingRule;
+import org.seasar.struts.lessconfig.config.rule.ActionFormNamingRule;
 import org.seasar.struts.pojo.config.ActionPropertyConfig;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandler;
 import org.seasar.struts.pojo.factory.ActionAnnotationHandlerFactory;
@@ -97,7 +96,7 @@ public class BindingUtil {
             return;
         }
 
-        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
+        String propertyName = BindingUtil.getBindingName(container, propertyDesc);
         Object value = BindingUtil.getValue(container, propertyName);
         if (BindingUtil.isActionFormProperty(propertyName, mapping)) {
             value = ActionFormUtil.getActualForm(S2StrutsContextUtil.getRequest(container), mapping);
@@ -183,7 +182,7 @@ public class BindingUtil {
         HttpServletRequest request = S2StrutsContextUtil.getRequest(container);
         ActionAnnotationHandler annHandler = ActionAnnotationHandlerFactory.getAnnotationHandler();
         ActionPropertyConfig propertyConfig = annHandler.createActionPropertyConfig(beanDesc, propertyDesc);
-        String propertyName = BindingUtil.getComponentPropertyName(container, propertyDesc);
+        String propertyName = BindingUtil.getBindingName(container, propertyDesc);
 
         ActionMapping propertyMapping = BindingUtil.getPropertyActionMapping(propertyName, mapping);
         if (propertyMapping != null) {
@@ -241,38 +240,24 @@ public class BindingUtil {
         return propertyName.equals(mapping.getAttribute());
     }
 
-    private static String getComponentPropertyName(S2Container container, PropertyDesc propertyDesc) {
-        String propertyName = propertyDesc.getPropertyName();
-        Class propertyClass = propertyDesc.getPropertyType();
-
-        if (!container.hasComponentDef(propertyClass)) {
-            String actionFormPropertyName = getActionFormPropertyName(container, propertyClass);
-            if (actionFormPropertyName != null) {
-                return actionFormPropertyName;
-            }
-            return propertyName;
+    protected static String getBindingName(S2Container container, PropertyDesc propertyDesc) {
+        String actionFormName = getActionFormPropertyName(container, propertyDesc.getPropertyType());
+        if (actionFormName != null) {
+            return actionFormName;
         }
 
-        ComponentDef propertyDef = container.getComponentDef(propertyClass);
-        String componentName = propertyDef.getComponentName();
-        if (componentName == null) {
-            return propertyName;
-        }
-
-        if (componentName.endsWith("_" + propertyName)) {
-            return componentName;
-        }
-        return propertyName;
+        return propertyDesc.getPropertyName();
     }
 
     protected static String getActionFormPropertyName(S2Container container, Class clazz) {
         if (!clazz.isPrimitive()) {
-            if (container.hasComponentDef(SubApplicationActionFormNamingRule.class)) {
-                SubApplicationActionFormNamingRule rule = (SubApplicationActionFormNamingRule) container
-                        .getComponent(SubApplicationActionFormNamingRule.class);
+            if (container.hasComponentDef(ActionFormNamingRule.class)) {
+                ActionFormNamingRule rule = (ActionFormNamingRule) container.getComponent(ActionFormNamingRule.class);
                 String name = rule.toActionFormName(clazz);
-                if (rule.toComponentClass(name) != null) {
-                    return name;
+                if (name != null) {
+                    if (rule.toComponentClass(name) == clazz) {
+                        return name;
+                    }
                 }
             }
         }

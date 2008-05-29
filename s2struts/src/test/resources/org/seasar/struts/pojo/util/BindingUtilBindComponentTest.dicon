@@ -3,6 +3,7 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<component class="org.seasar.struts.pojo.util.TestSimpleComponentForm"/>
+	<component class="org.seasar.struts.lessconfig.config.rule.impl.DefaultActionFormNamingRule"/>
 	<component name="package_packageComponentOneForm" class="org.seasar.struts.pojo.util.TestPackageComponentOneForm"/>
 	<component name="package_packageComponentTwoForm" class="org.seasar.struts.pojo.util.TestPackageComponentTwoForm"/>
 </components>
