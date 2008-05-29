@@ -22,8 +22,8 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-@StrutsAction(input = AbstractEmployeeAction.LIST)
-public class ListAction extends AbstractEmployeeAction {
+@StrutsAction(input = AbstractAction.LIST)
+public class ListAction extends AbstractAction {
 
     public String goDelete() {
         crudType = CrudType.DELETE;

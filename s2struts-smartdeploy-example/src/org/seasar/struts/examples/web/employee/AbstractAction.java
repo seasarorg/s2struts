@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.struts.examples.web.iterate;
+package org.seasar.struts.examples.web.employee;
 
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
@@ -22,11 +22,27 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
  * @author taedium
  * 
  */
-public abstract class AbstractIterateAction {
+public abstract class AbstractAction {
 
     @StrutsActionForward
-    public static final String ITERATE = "/WEB-INF/view/iterate/iterate.jsp";
+    public static final String CONFIRM = "/WEB-INF/view/employee/confirm.jsp";
 
     @StrutsActionForward
-    public static final String RESULT = "/WEB-INF/view/iterate/result.jsp";
+    public static final String EDIT = "/WEB-INF/view/employee/edit.jsp";
+
+    @StrutsActionForward
+    public static final String SEARCH = "/WEB-INF/view/employee/search.jsp";
+
+    @StrutsActionForward
+    public static final String LIST = "/WEB-INF/view/employee/list.jsp";
+
+    protected String crudType;
+
+    public String getCrudType() {
+        return crudType;
+    }
+
+    public void setCrudType(String crudType) {
+        this.crudType = crudType;
+    }
 }

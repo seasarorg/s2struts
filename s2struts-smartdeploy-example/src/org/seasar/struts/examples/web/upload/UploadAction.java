@@ -21,8 +21,8 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction(input = AbstractUpdateAction.UPLOAD)
-public class UploadAction extends AbstractUpdateAction {
+@StrutsAction(input = AbstractAction.UPLOAD)
+public class UploadAction extends AbstractAction {
 
     public String execute() {
         return RESULT;

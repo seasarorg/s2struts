@@ -2,7 +2,7 @@ package org.seasar.struts.examples.web.upload;
 
 import org.seasar.struts.annotation.tiger.StrutsActionForward;
 
-public abstract class AbstractUpdateAction {
+abstract class AbstractAction {
 
     @StrutsActionForward
     public static final String UPLOAD = "/WEB-INF/view/upload/upload.jsp";

@@ -25,7 +25,7 @@ import org.seasar.struts.examples.entity.Department;
  * @author taedium
  * 
  */
-public class SearchInitAction extends AbstractEmployeeAction {
+public class SearchInitAction extends AbstractAction {
 
     private EmployeeService employeeService;
 

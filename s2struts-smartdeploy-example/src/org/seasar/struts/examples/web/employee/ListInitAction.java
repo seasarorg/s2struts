@@ -27,7 +27,7 @@ import org.seasar.struts.examples.dto.EmployeeSearchDto;
  * @author taedium
  * 
  */
-public class ListInitAction extends AbstractEmployeeAction {
+public class ListInitAction extends AbstractAction {
 
     private EmployeeService employeeService;
 

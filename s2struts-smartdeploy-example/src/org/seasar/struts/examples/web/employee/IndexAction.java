@@ -21,6 +21,6 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction(forward = AbstractEmployeeAction.SEARCH)
+@StrutsAction(forward = AbstractAction.SEARCH)
 public class IndexAction {
 }

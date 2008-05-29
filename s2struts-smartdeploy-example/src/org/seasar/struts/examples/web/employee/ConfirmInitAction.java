@@ -25,7 +25,7 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-public class ConfirmInitAction extends AbstractEmployeeAction {
+public class ConfirmInitAction extends AbstractAction {
 
     private EmployeeService employeeService;
 

@@ -15,6 +15,7 @@
  */
 package org.seasar.struts.examples.web.employee;
 
+import org.seasar.framework.aop.annotation.RemoveSession;
 import org.seasar.struts.annotation.tiger.ScopeType;
 import org.seasar.struts.annotation.tiger.StrutsAction;
 import org.seasar.struts.examples.web.CrudType;
@@ -23,8 +24,8 @@ import org.seasar.struts.examples.web.CrudType;
  * @author taedium
  * 
  */
-@StrutsAction(scope = ScopeType.SESSION, input = AbstractEmployeeAction.SEARCH)
-public class SearchAction extends AbstractEmployeeAction {
+@StrutsAction(scope = ScopeType.SESSION, input = AbstractAction.SEARCH)
+public class SearchAction extends AbstractAction {
 
     public String goList() {
         crudType = CrudType.READ;
@@ -34,5 +35,10 @@ public class SearchAction extends AbstractEmployeeAction {
     public String goEdit() {
         crudType = CrudType.CREATE;
         return EDIT;
+    }
+
+    @RemoveSession(name = "employee_searchForm")
+    public String clear() {
+        return SEARCH;
     }
 }
