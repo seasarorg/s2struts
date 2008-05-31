@@ -1,1 +1,0 @@
-<logic:redirect action="/index/index" />
