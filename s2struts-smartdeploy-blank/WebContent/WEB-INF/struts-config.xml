@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+<!-- ======================================== Form Bean Definitions -->
+
+    <form-beans>
+    </form-beans>
+
+<!-- ================================= Global Exception Definitions -->
+
+    <global-exceptions>
+        <!--
+        <exception
+            key="errors.global.exception"
+            type="java.lang.Exception"
+            path="/pages/error/error.jsp"/>
+        -->
+    </global-exceptions>
+
+<!-- =================================== Global Forward Definitions -->
+
+    <global-forwards>
+    </global-forwards>
+
+<!-- =================================== Action Mapping Definitions -->
+
+    <action-mappings type="org.apache.struts.action.RequestActionMapping">
+    </action-mappings>
+
+<!-- ===================================== Controller Configuration -->
+
+    <controller catalog="s2struts">
+      <set-property key="ACTION_CONTEXT_CLASS" value="org.seasar.struts.processor.contexts.S2ServletActionContext"/>
+    </controller>
+
+<!-- ================================ Message Resources Definitions -->
+
+    <message-resources parameter="application"/>
+
+<!-- ======================================= Plug Ins Configuration -->
+
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml"/>
+    </plug-in>
+    
+    <plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn"/>
+
+    <plug-in className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/>
+
+</struts-config>
+

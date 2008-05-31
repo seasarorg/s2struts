@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components namespace="s2struts">
+	<include path="convention.dicon" />
+
+	<component name="proxyAction"                  class="org.seasar.struts.action.ProxyAction"/>
+
+	<component name="messageFacade"                class="org.seasar.struts.pojo.impl.MessageFacadeImpl" instance="request"/>
+	<component name="s2strutsContext"              class="org.seasar.struts.context.impl.S2StrutsContextImpl" instance="session"/>
+	<component name="s2strutsApplContext"          class="org.seasar.struts.context.impl.S2StrutsApplContextImpl"/>
+
+	<component name="componentNameCreator"         class="org.seasar.struts.action.impl.ComponentNameCreatorImpl"/>
+	<component name="actionFactory"                class="org.seasar.struts.action.impl.ActionFactoryImpl"/>
+	<component name="classRegister"                class="org.seasar.struts.action.impl.ClassRegisterImpl"/>
+
+	<component name="pojoProcessAction"            class="org.seasar.struts.pojo.PojoProcessAction">
+		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.PropertyBindingCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.SingleMethodCommand"/></arg></initMethod>
+		<initMethod name="addPojoCommand"><arg><component class="org.seasar.struts.pojo.commands.DispatchCommand"/></arg></initMethod>
+	</component>
+
+	<!-- Lessconfig Components  -->
+	<component name="autoStrutsConfigRule"         class="org.seasar.struts.lessconfig.config.impl.AutoStrutsConfigRuleImpl"/>
+	<component name="actionPathNamingRule"         class="org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionPathNamingRule"/>
+	<component name="actionFormNamingRule"         class="org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionFormNamingRule"/>
+	<component name="zeroConfigActionRule"         class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionRuleImpl"/>
+	<component name="zeroConfigActionFormRule"     class="org.seasar.struts.lessconfig.config.rule.impl.ZeroConfigActionFormRuleImpl"/>
+
+	<component name="actionConfigCreator"          class="org.seasar.struts.lessconfig.autoregister.impl.ActionConfigCreatorImpl"/>
+	<component name="actionFormConfigCreator"      class="org.seasar.struts.lessconfig.autoregister.impl.ActionFormConfigCreatorImpl"/>
+	<component name="validatorCreator"             class="org.seasar.struts.lessconfig.autoregister.impl.ValidationCreatorImpl"/>
+	<component name="strutsConfigRegister"         class="org.seasar.struts.lessconfig.autoregister.impl.StrutsConfigRegisterImpl"/>
+
+	<!-- Validator ConfigRegister Components -->
+	<component name="argsConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.ArgsConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
+	<component name="argConfigRegister"            class="org.seasar.struts.lessconfig.validator.config.impl.ArgConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
+	<component name="messageConfigRegister"        class="org.seasar.struts.lessconfig.validator.config.impl.MessageConfigRegisterImpl">
+		<property name="bundle">null</property>
+		<property name="resource">true</property>
+	</component>
+
+	<component name="dateConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.DateConfigRegisterImpl">
+		<property name="pattern">"yyyy/MM/dd"</property>
+		<property name="strict">false</property>
+	</component>
+	<component name="maskConfigRegister"           class="org.seasar.struts.lessconfig.validator.config.impl.MaskConfigRegisterImpl"/>
+	<component name="maxlengthConfigRegister"      class="org.seasar.struts.lessconfig.validator.config.impl.MaxlengthConfigRegisterImpl"/>
+	<component name="minlengthConfigRegister"      class="org.seasar.struts.lessconfig.validator.config.impl.MinlengthConfigRegisterImpl"/>
+	<component name="maxbytelengthConfigRegister"  class="org.seasar.struts.lessconfig.validator.config.impl.MaxbytelengthConfigRegisterImpl"/>
+	<component name="minbytelengthConfigRegister"  class="org.seasar.struts.lessconfig.validator.config.impl.MinbytelengthConfigRegisterImpl"/>
+	<component name="intRangeConfigRegister"       class="org.seasar.struts.lessconfig.validator.config.impl.IntRangeConfigRegisterImpl"/>
+	<component name="longRangeConfigRegister"      class="org.seasar.struts.lessconfig.validator.config.impl.LongRangeConfigRegisterImpl"/>
+	<component name="floatRangeConfigRegister"     class="org.seasar.struts.lessconfig.validator.config.impl.FloatRangeConfigRegisterImpl"/>
+	<component name="doubleRangeConfigRegister"    class="org.seasar.struts.lessconfig.validator.config.impl.DoubleRangeConfigRegisterImpl"/>
+	<component name="validatorFieldConfigRegister" class="org.seasar.struts.lessconfig.validator.config.impl.ValidatorFieldConfigRegisterImpl"/>
+</components>
