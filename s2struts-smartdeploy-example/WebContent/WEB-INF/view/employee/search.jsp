@@ -56,6 +56,7 @@
     </table>
     <s2struts:submit action="@{employee_searchAction.goEdit}" cancel="true"><bean:message key="button.create" /></s2struts:submit>
     <s2struts:submit action="@{employee_searchAction.goList}"><bean:message key="button.search" /></s2struts:submit>
+    <s2struts:submit action="@{employee_searchAction.clear}"><bean:message key="button.clear" /></s2struts:submit>
   </html:form>
   </tiles:put>
 </tiles:insert>
