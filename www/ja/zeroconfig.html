@@ -44,7 +44,36 @@
             <li><a href="#Config">設定方法</a></li>
             <li><a href="#Notes">注意事項</a></li>
         </ul>
-    </li>	
+    </li>
+    <li><a href="#Validation">バリデーション</a>
+        <ul>
+            <li><a href="#ValidateOrder">ValidateOrder</a></li>
+            <li><a href="#Args">Args</a></li>
+            <li><a href="#Arg">Arg</a></li>
+            <li><a href="#Messages">Messages</a></li>
+            <li><a href="#Message">Message</a></li>
+            <li><a href="#Required">Required</a></li>
+            <li><a href="#Mask">Mask</a></li>
+            <li><a href="#Range">IntRange, LongRange, FloatRange, DoubleRange</a></li>
+            <li><a href="#Maxlength">Maxlength</a></li>
+            <li><a href="#Minlength">Minlength</a></li>
+            <li><a href="#Maxbytelength">Maxbytelength</a></li>
+            <li><a href="#Minbytelength">Minbytelength</a></li>
+            <li><a href="#Type">ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</a></li>
+            <li><a href="#DateType">DateType</a></li>
+            <li><a href="#CreditCardType">CreditCardType</a></li>
+            <li><a href="#EmailType">EmailType</a></li>
+            <li><a href="#UrlType">UrlType</a></li>
+            <li><a href="#NoValidate">NoValidate</a></li>
+        </ul>
+    </li>
+    <li><a href="#CustomValidator">カスタムバリデータの作成</a>
+        <ul>
+            <li><a href="#Validator">バリデータの作成と設定</a></li>
+            <li><a href="#Annotation">アノテーションの作成</a></li>
+            <li><a href="#Confirmation">動作確認</a></li>    
+        </ul>
+    </li>
 </ul>
 <h2><a name="Summary">無設定Struts概要</a></h2>
 <p>
@@ -156,7 +185,7 @@ public void setArg1(String arg1) {
 }
 </pre>
 バリデーションのアノテーションによる設定はvalidation-rule.xmlの記述に対応します。
-バリデーションのアノテーションの詳細は<a href="validation.html">バリデーション</a>を参照してください。
+バリデーションのアノテーションの詳細は<a href="#Validation">バリデーション</a>を参照してください。
 </li>
 </ul>
 <h4><a name="ActionDef">アノテーションによるActionの定義</a></h4>
@@ -253,6 +282,785 @@ ActionFromのインスタンスは、S2コンテナによって管理されません。Strutsによって管理
 </p>
 <p>
 1.3.0 RC-5以前との互換性のためにXxxFormをS2コンテナに登録する<code>FormCreator</code>というクラスが存在しますが、通常は使用しないでください。
+</p>
+
+<h2><a name="Validation">バリデーション</a></h2>
+<p>
+無設定Strutsではバリデーション用のアノテーションを提供しています。
+これらのアノテーションを利用するとvalidator-rules.xmlの記述が不要になります。
+</p>
+<p>
+バリデーション用のアノテーションは、ActionFormのプロパティに対して行います。
+ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために利用します。
+</p>
+<h3><a name="ValidateOrder">ValidateOrder</a></h3>
+<p>
+検証する順番を制御します。指定した順番でエラーメッセージを表示します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>×</center></center></td>
+      <td><center>999</center></td>
+      <td>検証する順番を指定します。</td>
+  </tr>
+</table>
+<h3><a name="Args">Args</a></h3>
+<p>
+メッセージで使用される置換パラメータを指定します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>keys</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージで使用される置換パラメータを指定します。<br>
+      ","で区切ることにより複数指定できます。<br>
+      定数アノテーションで","で区切る方法については<a href="#ConstAnnotationCodicil">「定数アノテーションの補足」</a>を参照してください。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keysで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値を置換パラメータとします。<br>
+      falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>Argアノテーションで個別に置換パラメータを指定する場合に使用します。<br>
+      個別に置換パラメータを指定する場合は、keys、bundle、resourceを指定しないで下さい。</td>
+  </tr>
+</table>
+<h3><a name="Arg">Arg</a></h3>
+<p>
+メッセージで使用される置換パラメータを個別に指定します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージで使用される置換パラメータを指定します。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>置換パラメータを使用するバリデータの名前を指定します。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keyで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値をメッセージとします。<br>
+      falseの場合はkeyで指定した値をそのままメッセージとします。</td>
+  </tr>
+  <tr>
+    <td>position</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>置換パラメータの位置を指定します。</td>
+  </tr>
+</table>
+<p></p>
+<p>
+定数アノテーションでは、以下のように プロパティー名_VALIDATOR_ARG で指定します。
+複数指定する場合は、定数名の最後にゼロからのINDEXをつけます。
+</p>
+<pre>
+    public static final String value_VALIDATOR_0 = "required";
+    public static final String value_VALIDATOR_1 = "integer";
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_0 = "form.value";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_1 = "form.value.def";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_2 = "form.value.req, name = required, position = 1";</font></b>
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+</pre>
+<h3><a name="Messages">Messages</a></h3>
+<p>
+複数のMessageアノテーションを指定したい場合に使用します。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>複数のMessageアノテーションを指定します。</td>
+  </tr>
+</table>
+<h3><a name="Message">Message</a></h3>
+<p>
+デフォルトメッセージの代わりに個別のメッセージを表示したい場合に指定します。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージのキー又はメッセージを指定します。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージを指定するバリデータの名前を指定します。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keyで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値をメッセージとします。<br>
+      falseの場合はkeyで指定した値をそのままメッセージとします。</td>
+  </tr>
+</table>
+<h3><a name="Required">Required</a></h3>
+<p>
+値に空白以外の文字が含まれてるか確認します。
+引数はありません。
+</p>
+<h3><a name="Mask">Mask</a></h3>
+<p>
+値がpatternで指定された正規表現と一致するか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>正規表現を指定します。</td>
+  </tr>
+  <tr>
+    <td>messageKey</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>メッセージを取得するキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keysで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値を置換パラメータとします。<br>
+      falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
+  </tr>
+</table>
+<h3><a name="Range">IntRange, LongRange, FloatRange, DoubleRange</a></h3>
+<p>
+値がminとmaxで指定された範囲内であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>min</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値範囲の最小値を指定します。</td>
+  </tr>
+  <tr>
+    <td>max</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値範囲の最大値を指定します。</td>
+  </tr>
+</table>
+<h3><a name="Maxlength">Maxlength</a></h3>
+<p>
+値の文字数がvalue以下であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの上限値を指定します。</td>
+  </tr>
+</table>
+<h3><a name="Minlength">Minlength</a></h3>
+<p>
+値の文字数がvalue以上であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの下限値を指定します。</td>
+  </tr>
+</table>
+<h3><a name="Maxbytelength">Maxbytelength</a></h3>
+<p>
+値のバイト数がvalue以下であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの上限値を指定します。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
+  </tr>
+</table>
+<h3><a name="Minbytelength">Minbytelength</a></h3>
+<p>
+値のバイト数がvalue以上であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの下限値を指定します。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
+  </tr>
+</table>
+<h3><a name="Type">ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</a></h3>
+<p>
+値が該当する型に変換できるか確認します。
+属性はありません。
+</p>
+<h3><a name="DateType">DateType</a></h3>
+<p>
+値が有効な日付を表すか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+      <td><center>×</center></td>
+      <td><center>s2struts.dionのdateConfigRegisterコンポーネント定義時に指定したパターン</center></td>
+      <td>日付のパターンを指定します。</td>
+  </tr>
+</table>
+<h3><a name="CreditCardType">CreditCardType</a></h3>
+<p>
+値が有効なクレジットカード番号とみなされるか確認します。
+属性はありません。
+</p>
+<h3><a name="EmailType">EmailType</a></h3>
+<p>
+値が有効なEメールアドレスとみなされるか確認します。
+属性はありません。
+</p>
+<h3><a name="UrlType">UrlType</a></h3>
+<p>
+値が有効なURLとみなされるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>allowallschemes</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>schemeを許可するかどうかを指定します。<br/>trueを設定するとすべてのschemeが許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>allow2slashes</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>ダブルスラッシュ（//）を許可するかどうかを指定します。<br/>trueを設定すると許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>nofragments</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>URLの分割を許可するかどうかを指定します。<br/>falseを設定すると許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>schemes</td>
+      <td><center>×</center></td>
+      <td><center>http,https,ftp</center></td>
+      <td>許可するschemeを,（カンマ）区切りで指定します。<br></td>
+  </tr>
+</table>
+<h3><a name="NoValidate">NoValidate</h3></a>
+<p>
+自動的にバリデーションを行わないように指定します。
+属性はありません。
+</p>
+<p />
+<h3><a name="ConstAnnotationCodicil">定数アノテーションの補足</a></h3>
+<p>
+定数アノテーションでは、属性の区切り文字として「,」(カンマ)を利用しています。
+値に「,」を指定する場合は以下のように値を「'」(シングルコーテーション)または「"」(ダブルコーテーション)で囲んでください。
+</p>
+<pre>
+ public static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
+
+ public static final String value_VALIDATOR = "mask, pattern=\"(^[0-9]{1,2}$)\", messageKey=comma";
+</pre>
+
+<h2><a name="CustomValidator">カスタムバリデータの作成</a></h2>
+<h3><a name="Validator">Strutsでの新規Validation作成</a></h3>
+<p>
+Struts（commons validator）としての新規Validationを追加するには、
+<ul>
+<li>検証用クラスの作成</li>
+<li>validator-rules.xmlへ設定情報の追加</li>
+</ul>
+を行います。
+<a href="http://struts.apache.org/1.2.9/userGuide/dev_validator.html">Struts Validator Guide</a>に、Strutsでの新規Validationを追加する方法が記述されています。
+こちらも参考にしてください。
+</p>
+<p>
+2つの入力内容が同じか検証するクラスは以下のようになります。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.validator.Field;
+import org.apache.commons.validator.GenericValidator;
+import org.apache.commons.validator.Validator;
+import org.apache.commons.validator.ValidatorAction;
+import org.apache.commons.validator.util.ValidatorUtils;
+import org.apache.struts.action.ActionMessages;
+import org.apache.struts.validator.Resources;
+
+public class MyFieldChecks {
+
+    public static boolean validateTwoFields(Object bean,
+            ValidatorAction validatorAction, Field field,
+            ActionMessages errors, Validator validator,
+            HttpServletRequest request) {
+
+        String value = ValidatorUtils.getValueAsString(bean, field.getProperty());
+        String sProperty2 = field.getVarValue("secondProperty");
+        String value2 = ValidatorUtils.getValueAsString(bean, sProperty2);
+
+        if (!GenericValidator.isBlankOrNull(value)) {
+            try {
+                if (!value.equals(value2)) {
+                    errors.add(field.getKey(), Resources.getActionMessage(
+                            validator, request, validatorAction, field));
+
+                    return false;
+                }
+            } catch (Exception e) {
+                errors.add(field.getKey(), Resources.getActionMessage(
+                        validator, request, validatorAction, field));
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+</pre>
+<p>
+最初に検証を行うプロパティの値を取得します。
+次にvalidation設定の"secondProperty"変数に指定したプロパティ名を取得しそのプロパティの値を取得します。
+最後にその2つの値を比較し、正しい値か確かめています。
+ここでは、"secondProperty"という変数が必要になるところがポイントです。
+この変数はValidationアノテーションを作成するときのプロパティとして宣言することになるからです。
+</p>
+<p>
+次に上記のクラスをvalidator-rules.xmlに追加します。
+validatorタグのname属性（validator name）に指定する内容は、アノテーション名と関連があります。
+S2Strutsでは以下の規則によりアノテーション名を変換しvalidator nameと一致するか判断して特定します。
+<ul>
+<li>アノテーション名の先頭文字を小文字にする</li>
+<li>アノテーション名の最後が"Type"で終わっている場合それを除く</li>
+</ul>
+例えば、Hogeアノテーションの場合のvalidator nameは"hoge"となり、FooTypeアノテーションの場合のvalidator nameは"foo"となります。
+</p>
+<p>
+今回はアノテーション名をTwoFieldsとするためnameは"twoFields"とします。validator-rules.xmlへは以下の内容を追加します。
+</p>
+<pre>
+      &lt;validator name=&quot;twoFields&quot;
+            classname=&quot;org.seasar.struts.examples.validator.MyFieldChecks&quot;
+               method=&quot;validateTwoFields&quot;
+         methodParams=&quot;java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest&quot;
+              depends=&quot;&quot;
+                  msg=&quot;errors.twoFields&quot;/&gt;
+</pre>
+<p>
+msg属性に"errors.twoFields"と指定したので、このメッセージKeyをapplication.propertiesに追加します。
+</p>
+<pre>
+errors.twoFields={0} has to have the same value as the confirm field.
+</pre>
+<p>
+ここまでがStrutsでの新規Validation作成作業です。
+</p>
+<h3><a name="Annotation">Validationアノテーションの作成</a></h3>
+<p>
+Validationアノテーションの作成は
+<ul>
+<li>アノテーションの定義</li>
+<li>ConfigRegisterの作成</li>
+</ul>
+を行います。
+</p>
+<p>
+S2Strutsの提供するアノテーションは、定数アノテーション、Tigerアノテーション、Backport175アノテーションの3種類があります。
+定数アノテーションとして利用する場合はアノテーションの定義は必要ありません。
+Tigerアノテーションとして利用する場合は、メタアノテーションとしてorg.seasar.struts.validator.annotation.tiger.ValidatorTargetを指定し以下のように作成します。
+</p>
+<pre>
+package org.seasar.struts.examples.validator.annotation.tiger;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@ValidatorTarget
+public @interface TwoFields {
+
+    String secondProperty();
+
+}
+</pre>
+<p>
+Backport175アノテーションとして利用する場合は、メタアノテーションとしてorg.seasar.struts.validator.annotation.backport175.ValidatorTargetを指定し以下のように作成します。
+</p>
+<pre>
+package org.seasar.struts.examples.validator.annotation.backport175;
+
+/**
+ * @org.seasar.struts.validator.annotation.backport175.ValidatorTarget
+ */
+public interface TwoFields {
+
+    String secondProperty();
+
+}
+</pre>
+<p>
+今回は検証するためにsecondPropertyが必要となるため上記のようになりました。
+validation設定で変数が必要ない場合はプロパティを定義する必要はありませんし、これから作成するConfigRegisterは必要ありません。
+</p>
+<p>
+アノテーションで取得した値はConfigRegisterを作成し設定する必要がありますので、
+TwoFieldsConfigRegisterImplを作成します。
+</p>
+<p>
+TwoFieldsConfigRegisterImplは、org.seasar.struts.lessconfig.validator.config.ConfigRegisterを実装します。
+registerメソッドの引数はfieldとparameterです。
+fieldは、フィールドに対して行う妥当性チェックとエラーメッセージの生成に使用する入れ替え可能な妥当性チェックのリストとメッセージの情報と値を内部に持ちます。
+つまりValidationの内容を格納するオブジェクトです。
+parameterは、アノテーションで定義したメソッド名をkey、メソッドの戻り値をvalueとしたMapです。
+</p>
+<pre>
+package org.seasar.struts.examples.validator.config;
+
+import java.util.Map;
+
+import org.apache.commons.validator.Field;
+import org.apache.commons.validator.Var;
+import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
+
+public class TwoFieldsConfigRegisterImpl implements ConfigRegister {
+
+    public void register(Field field, Map parameter) {
+        String secondProperty = (String) parameter.get("secondProperty");
+
+        Var var = new Var();
+        var.setName("secondProperty");
+        var.setValue(secondProperty);
+        field.addVar(var);
+    }
+
+}
+</pre>
+<p>
+作成したConfigRegisterはコンポーネントとして登録する必要があります。
+登録するときのコンポーネント名は、validator nameのときと同様のアノテーション名変換を行い"ConfigRegister"を付け加えた名前とします。
+例えば、Hogeアノテーションの場合は"hogeConfigRegister"となり、FooTypeアノテーションの場合は"fooConfigRegister"となります。
+</p>
+<p>
+今回はコンポーネントとして登録するために新規でvalidator.dionを作成します。
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+    "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+    &lt;component name="twoFieldsConfigRegister"
+            class="org.seasar.struts.examples.validator.config.TwoFieldsConfigRegisterImpl"/&gt;
+&lt;/components&gt;
+</pre>
+<p>
+そしてapp.diconにincludeを追加して、validator.dionを読み込むようにします。
+</p>
+<pre>
+    &lt;include path="validator.dicon"/&gt;
+</pre>
+<p>
+ここまでがS2Strutsでの新規アノテーションの作成作業です。
+</p>
+<p>
+これでアノテーションを使用したValidation作成作業は完了です。
+</p>
+<h3><a name="Confirmation">動作確認</a></h3>
+<p>
+作成したTwoFieldsアノテーションを試すには、
+<ul>
+<li>Viewの作成</li>
+<li>Actionの作成</li>
+<li>Formの作成</li>
+</ul>
+を行います。
+</p>
+<p>
+まずはViewの作成です。ここではJSPをViewとして利用します。確認用のため簡単な作りです。
+</p>
+<pre>
+&lt;%@ page contentType="text/html;charset=Windows-31j" language="java" %&gt;
+&lt;%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %&gt;
+&lt;%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Two Fields Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;html:errors /&gt;
+
+  &lt;html:form action="/twoFields" method="POST"&gt;
+    &lt;s2struts:page/&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;field&lt;/td&gt;
+        &lt;td&gt;&lt;html:text property="field"/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;confirm field&lt;/td&gt;
+        &lt;td&gt;&lt;html:text property="confirmField"/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;html:submit/&gt;
+  &lt;/html:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+次はActionの作成です。今回はPOJOのActionで無設定機能（詳細は<a href="s2struts.html#ZeroConfigReference">「無設定S2Strutsリファレンス」</a>を参照）を使います。
+Actionのインターフェースと実装は以下のようになります。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+public interface TwoFieldsAction {
+    
+    String execute();
+
+}
+</pre>
+<pre>
+package org.seasar.struts.examples.validator;
+
+public class TwoFieldsActionImpl implements TwoFieldsAction {
+
+    public String execute() {
+        return "success";
+    }
+
+}
+</pre>
+<p>
+Actionの処理は"success"を返すだけですがTwoFieldsアノテーションの動作確認には十分です。
+</p>
+<p>
+Actionはコンポーネントとして登録する必要があります。新規に作成したtwoFields.diconは以下のようになります。
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+    "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+    &lt;component name="twoFieldsAction"
+            class="org.seasar.struts.examples.validator.TwoFieldsActionImpl"
+            instance="request" /&gt;
+&lt;/components&gt;
+</pre>
+<p>
+そしてapp.diconにincludeを追加して、twoFields.diconを読み込むようにします。
+</p>
+<pre>
+    &lt;include path="org/seasar/struts/examples/dicon/twoFields.dicon"/&gt;
+</pre>
+<p>
+最後にFormを作成します。例として定数アノテーションの場合とTigerアノテーションの場合の2つのFormを以下に記述します。
+利用するアノテーションでFormを作成してください。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import java.io.Serializable;
+
+public class TwoFieldsForm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String field = "";
+
+    private String confirmField = "";
+    
+    public String getField() {
+        return field;
+    }
+    
+    public static final String field_VALIDATOR_0 = "required";
+
+    public static final String field_VALIDATOR_1 = "twoFields, secondProperty = confirmField";
+
+    public static final String field_VALIDATOR_ARGS = "Field, resource=false";
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getConfirmField() {
+        return confirmField;
+    }
+
+    public static final String confirmField_VALIDATOR = "required";
+
+    public static final String confirmField_VALIDATOR_ARGS = "ConfirmField, resource=false";
+
+    public void setConfirmField(String confirmField) {
+        this.confirmField = confirmField;
+    }
+
+}
+</pre>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import java.io.Serializable;
+
+import org.seasar.struts.examples.validator.tiger.TwoFields;
+import org.seasar.struts.validator.annotation.tiger.Args;
+import org.seasar.struts.validator.annotation.tiger.Required;
+
+public class TwoFieldsForm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String field = "";
+
+    private String confirmField = "";
+    
+    public String getField() {
+        return field;
+    }
+    
+    @Required
+    @TwoFields(secondProperty="confirmField")
+    @Args(keys = "Field", resource = false)
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getConfirmField() {
+        return confirmField;
+    }
+
+    @Required
+    @Args(keys = "ConfirmField", resource = false)
+    public void setConfirmField(String confirmField) {
+        this.confirmField = confirmField;
+    }
+
+}
+</pre>
+<p>
+これで確認ができます。
+Tomcatを起動して、ブラウザから<a href="http://localhost:8080/s2struts-example/pages/twoFields.jsp">http://localhost:8080/s2struts-example/pages/twoFields.jsp</a>にアクセスし動作確認してください。
+</p>
+<p>
+新規にアノテーションを使用したValidationを作成するのは通常より大変な作業かもしれませんが、一度作成すれば簡単にFormで使えるようになると思います。
+作成したときの苦労を十分回収することができるのではないでしょうか？
+</p>
+<p>
+独自のValidationを作ってみませんか？
 </p>
 <!-- document end -->
 <!-- don't edit start -->
