@@ -8,6 +8,9 @@
         <exclude name="**/target/**"/>
         <exclude name="**/.settings/**"/>
       </zipfileset>
+      <zipfileset prefix="s2struts-smartdeploy-blank" dir=".">
+        <include name="**/.settings/org.eclipse.wst*" />
+      </zipfileset>
     </zip>
   </target>
 
