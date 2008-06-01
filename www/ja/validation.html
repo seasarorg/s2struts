@@ -28,7 +28,28 @@
 <!-- document start -->
 <ul>
     <li><a href="#Summary">概要</a></li>
-    <li><a href="#AnnotationReference">アノテーションリファレンス</li>
+    <li><a href="#AnnotationReference">アノテーションリファレンス</a>
+        <ul>
+            <li><a href="#ValidateOrder">ValidateOrder</a></li>
+            <li><a href="#Args">Args</a></li>
+            <li><a href="#Arg">Arg</a></li>
+            <li><a href="#Messages">Messages</a></li>
+            <li><a href="#Message">Message</a></li>
+            <li><a href="#Required">Required</a></li>
+            <li><a href="#Mask">Mask</a></li>
+            <li><a href="#Range">IntRange, LongRange, FloatRange, DoubleRange</a></li>
+            <li><a href="#Maxlength">Maxlength</a></li>
+            <li><a href="#Minlength">Minlength</a></li>
+            <li><a href="#Maxbytelength">Maxbytelength</a></li>
+            <li><a href="#Minbytelength">Minbytelength</a></li>
+            <li><a href="#Type">ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</a></li>
+            <li><a href="#DateType">DateType</a></li>
+            <li><a href="#CreditCardType">CreditCardType</a></li>
+            <li><a href="#EmailType">EmailType</a></li>
+            <li><a href="#UrlType">UrlType</a></li>
+            <li><a href="#NoValidate">NoValidate</a></li>
+        </ul>
+    </li>
     <li><a href="#CustomValidator">カスタムバリデータの作成</a>
         <ul>
             <li><a href="#Validator">バリデータの作成と設定</a></li>
@@ -46,7 +67,7 @@ S2Strutsの無設定Strutsの一部であるバリデーション機能について説明します。
 バリデーション用のアノテーションは、ActionFormのプロパティに対して行います。
 ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために利用します。
 </p>
-<h4>ValidateOrder</h4>
+<h3><a name="ValidateOrder">ValidateOrder</a></h3>
 <p>
 検証する順番を制御します。指定した順番でエラーメッセージを表示します。
 </p>
@@ -61,7 +82,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>検証する順番を指定します。</td>
   </tr>
 </table>
-<h4>Args</h4>
+<h3><a name="Args">Args</a></h3>
 <p>
 メッセージで使用される置換パラメータを指定します。
 </p>
@@ -100,7 +121,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       個別に置換パラメータを指定する場合は、keys、bundle、resourceを指定しないで下さい。</td>
   </tr>
 </table>
-<h4>Arg</h4>
+<h3><a name="Arg">Arg</a></h3>
 <p>
 メッセージで使用される置換パラメータを個別に指定します。
 </p>
@@ -158,7 +179,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
         this.value = value;
     }
 </pre>
-<h4>Messages</h4>
+<h3><a name="Messages">Messages</a></h3>
 <p>
 複数のMessageアノテーションを指定したい場合に使用します。<br>
 </p>
@@ -173,7 +194,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>複数のMessageアノテーションを指定します。</td>
   </tr>
 </table>
-<h4>Message</h4>
+<h3><a name="Message">Message</a></h3>
 <p>
 デフォルトメッセージの代わりに個別のメッセージを表示したい場合に指定します。<br>
 </p>
@@ -209,12 +230,12 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       falseの場合はkeyで指定した値をそのままメッセージとします。</td>
   </tr>
 </table>
-<h4>Required</h4>
+<h3><a name="Required">Required</a></h3>
 <p>
 値に空白以外の文字が含まれてるか確認します。
 引数はありません。
 </p>
-<h4>Mask</h4>
+<h3><a name="Mask">Mask</a></h3>
 <p>
 値がpatternで指定された正規表現と一致するか確認します。
 </p>
@@ -243,7 +264,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
   </tr>
 </table>
-<h4>IntRange, LongRange, FloatRange, DoubleRange</h4>
+<h3><a name="Range">IntRange, LongRange, FloatRange, DoubleRange</a></h3>
 <p>
 値がminとmaxで指定された範囲内であるか確認します。
 </p>
@@ -264,7 +285,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>値範囲の最大値を指定します。</td>
   </tr>
 </table>
-<h4>Maxlength</h4>
+<h3><a name="Maxlength">Maxlength</a></h3>
 <p>
 値の文字数がvalue以下であるか確認します。
 </p>
@@ -279,7 +300,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>値の長さの上限値を指定します。</td>
   </tr>
 </table>
-<h4>Minlength</h4>
+<h3><a name="Minlength">Minlength</a></h3>
 <p>
 値の文字数がvalue以上であるか確認します。
 </p>
@@ -295,7 +316,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>値の長さの下限値を指定します。</td>
   </tr>
 </table>
-<h4>Maxbytelength</h4>
+<h3><a name="Maxbytelength">Maxbytelength</a></h3>
 <p>
 値のバイト数がvalue以下であるか確認します。
 </p>
@@ -316,7 +337,7 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
   </tr>
 </table>
-<h4>Minbytelength</h4>
+<h3><a name="Minbytelength">Minbytelength</a></h3>
 <p>
 値のバイト数がvalue以上であるか確認します。
 </p>
@@ -337,12 +358,12 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
   </tr>
 </table>
-<h4>ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</h4>
+<h3><a name="Type">ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</a></h3>
 <p>
 値が該当する型に変換できるか確認します。
 属性はありません。
 </p>
-<h4>DateType</h4>
+<h3><a name="DateType">DateType</a></h3>
 <p>
 値が有効な日付を表すか確認します。
 </p>
@@ -357,17 +378,17 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>日付のパターンを指定します。</td>
   </tr>
 </table>
-<h4>CreditCardType</h4>
+<h3><a name="CreditCardType">CreditCardType</a></h3>
 <p>
 値が有効なクレジットカード番号とみなされるか確認します。
 属性はありません。
 </p>
-<h4>EmailType</h4>
+<h3><a name="EmailType">EmailType</a></h3>
 <p>
 値が有効なEメールアドレスとみなされるか確認します。
 属性はありません。
 </p>
-<h4>UrlType</h4>
+<h3><a name="UrlType">UrlType</a></h3>
 <p>
 値が有効なURLとみなされるか確認します。
 </p>
@@ -400,12 +421,22 @@ ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために
       <td>許可するschemeを,（カンマ）区切りで指定します。<br></td>
   </tr>
 </table>
-<h4>NoValidate</h4>
+<h3><a name="NoValidate">NoValidate</h3></a>
 <p>
 自動的にバリデーションを行わないように指定します。
 属性はありません。
 </p>
 <p />
+<h3><a name="ConstAnnotationCodicil">定数アノテーションの補足</a></h3>
+<p>
+定数アノテーションでは、属性の区切り文字として「,」(カンマ)を利用しています。
+値に「,」を指定する場合は以下のように値を「'」(シングルコーテーション)または「"」(ダブルコーテーション)で囲んでください。
+</p>
+<pre>
+ public static final String value_VALIDATOR = "mask, pattern='(^[0-9]{1,2}$)', messageKey=comma";
+
+ public static final String value_VALIDATOR = "mask, pattern=\"(^[0-9]{1,2}$)\", messageKey=comma";
+</pre>
 
 <h2><a name="CustomValidator">カスタムバリデーションの作成</a></h2>
 <h3><a name="Validator">Strutsでの新規Validation作成</a></h3>
