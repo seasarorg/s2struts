@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head>
+<title>Seasar - DI Container with AOP - </title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link href="seasar_b.css" type="text/css" rel="stylesheet" media="screen">
+<link href="seasar_p.css" type="text/css" rel="stylesheet" media="print">
+<script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="740" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+	<li><a href="#Summary">無設定Struts概要</a></li>
+	<li><a href="#Usage">無設定Strutsの利用方法</a>
+		<ul>
+			<li><a href="#StrutsConfigXml">struts-config.xml</a></li>
+			<li><a href="#Annotation">アノテーション</a>
+			    <ul>
+			        <li><a href="#ActionFormDef">アノテーションによるActionFormの定義</a></li>
+			        <li><a href="#ActionDef">アノテーションによるActionの定義</a></li>
+		    </ul>
+		    </li>
+		</ul>
+	</li>
+    <li><a href="#HotDeploy">HOT deployとの組み合わせ</a>
+        <ul>
+            <li><a href="#Config">設定方法</a></li>
+            <li><a href="#Notes">注意事項</a></li>
+        </ul>
+    </li>	
+</ul>
+<h2><a name="Summary">無設定Struts概要</a></h2>
+<p>
+<b>無設定Struts</b>と呼ばれる機能を説明します。
+無設定StrutsはS2Strutsが提供する一機能です。
+</p>
+<p>
+無設定Strutsを利用すると、ActionやActionFormについての設定をstruts-config.xmlに記述する必要がなくなります。
+またバリデーションに関する設定をvalidator-rules.xmlに記述する必要がなくなります。
+S2Strutsはクラスの命名規約やクラスに指定されたアノテーションによりそれらの設定情報を組み立てます。
+</p>
+<h2><a name="Usage">無設定Strutsの利用方法</a></h2>
+<h3><a name="StrutsConfigXml">struts-config.xml</a></h3>
+<p>
+struts-config.xmlに<code>AutoStrutsConfigRegisterPlugIn</code>を登録する必要があります。
+PlugInには読み込み順があるのでValidatorPlugInより後に登録してください。
+</p>
+<pre>
+  <b>&lt;plug-in className=&quot;<font color="red">org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn</font>&quot;&gt;
+    &lt;set-property property="enableJar" value="false"/&gt;
+    &lt;set-property property="jarFilePattern" value="^My.*\.jar$"/&gt;
+    &lt;set-property property="actionClassPattern" value="foo.bar.action.*Action"/&gt;
+    &lt;set-property property="formClassPattern" value="foo.bar.form.*Form"/&gt;
+    &lt;set-property property="docRoot" value="/WEB-INF/jsp"/&gt;
+    &lt;set-property property="viewExtension" value="jsp,html,view"/&gt;
+  &lt;/plug-in&gt;</b>
+</pre>
+<p>
+プラグインのプロパティーには値をセットすることが可能です。各プロパティーの説明は以下になります。各プロパティーの記述を省略した場合にはデフォルト値が使用されます。
+</p>
+<table border="1">
+  <tr>
+    <td>プロパティー</td>
+    <td>説明</td>
+    <td>デフォルト値</td>
+  </tr>
+  <tr>
+    <td>enableJar</td>
+    <td>無設定S2Strutsに含めるクラスをクラスパスに含まれているjarファイル内からも検索するか指定します。検索する場合、true。</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>jarFilePattern</td>
+    <td>enableJarをtrueとしたときに検索するjarファイルのファイル名パターンを指定します。</td>
+    <td>なし<br>（どのjarファイルも検索対象になりません）</td>
+  </tr>
+  <tr>
+    <td>referenceClass</td>
+    <td>指定されたクラスが存在するディレクトリまたはjarファイルを基点として自動登録するクラスを検索します。</td>
+    <td>なし</td>
+  </tr>
+  <tr>
+    <td>actionClassPattern</td>
+    <td>無設定S2Strutsでactionタグの値を特定するためのActionのクラス名のパターンを指定します。</td>
+    <td>.*Action$</td>
+  </tr>
+  <tr>
+    <td>formClassPattern</td>
+    <td>無設定S2Strutsでform-beanタグの値を特定するためのActionFormのクラス名のパターンを指定します。</td>
+    <td>(.*Form$)|(.*Dto$)</td>
+  </tr>
+  <tr>
+    <td>docRoot</td>
+    <td>Viewテンプレートとなるファイルの置き場所のトップディレクトリを指定します。</td>
+    <td>なし</td>
+  </tr>
+  <tr>
+    <td>viewExtension</td>
+    <td>Viewテンプレートとなるファイルの拡張子を指定します。</td>
+    <td>jsp,html</td>
+  </tr>
+</table><br/>
+<p>
+<h3><a name="Annotation">アノテーション</a></h3>
+無設定Strutsの設定はアノテーションを用いて行います。
+アノテーションには、定数アノテーションとTigerアノテーションがあります。
+<h4><a name="ActionFormDef">アノテーションによるActionFormの定義</a></h4>
+<p>
+struts-config.xmlを記述することなくActionFormを定義するには、
+ActionFormとしてのクラスを<b>XxxForm</b>もしくは<b>XxxDto</b>という名前で作成します（Xxxは任意の名称を表します）。
+推奨は<b>XxxForm</b>です。
+StrutsのActionFormを継承する必要はありません。
+validation-rule.xmlを記述することなくバリデーションを定義するには、プロパティのsetterにバリデーション用のアノテーションを指定します。
+</p>
+<ul>
+<li>ActionFormの定義
+<p>
+ActionFormとして扱われることを示すために、クラスに@StrutsActionFormを指定します。
+</p>
+<pre>
+@StrutsActionForm
+public class AddForm {
+    ...
+}
+</pre>
+<p>
+@StrutsActionFormに指定できる属性は、struts-configのform-beanタグの属性に対応します。
+</p>
+</li>
+<li>バリデーションの定義
+<p>
+プロパティのsetterにアノテーションを指定することでバリデーションの設定ができます。
+</p>
+<pre>
+@Required
+@IntegerType
+public void setArg1(String arg1) {
+    this.arg1 = arg1;
+}
+</pre>
+バリデーションのアノテーションによる設定はvalidation-rule.xmlの記述に対応します。
+バリデーションのアノテーションの詳細は<a href="validation.html">バリデーション</a>を参照してください。
+</li>
+</ul>
+<h4><a name="ActionDef">アノテーションによるActionの定義</a></h4>
+struts-config.xmlを記述することなくActionを定義するには、<b>XxxAction</b>という名前でクラスを作成します。
+<ul>
+<li>Actionの定義
+Actionとして扱われることを示すために、クラスには@StrutsActionを指定します。
+<pre>
+@StrutsAction(input = AddAction.ADD)
+public class AddAction {
+...
+}
+</pre>
+@StrutsActionに指定できる属性は、struts-configのactionタグの属性に対応します。
+</li>
+<li>Forwardの定義
+ActionごとのForwardの設定として、Actionクラスのpublicでstaticなフィールドに@StrutsActionForwardを指定します。
+<pre>
+@StrutsActionForward
+public static final String ADD = "/WEB-INF/view/add/add.jsp";
+</pre>
+@StrutsActionForwardに指定できる属性は、struts-configのaction要素内のforwardタグの属性に対応します。path属性を指定しない場合、フィールドの値がpath属性の値とみなされます。
+</li>
+</ul>
+<h2><a name="HotDeploy">HOT deployとの組み合わせ</a></h2>
+<p>
+無設定StrutsはHOT deployと組み合わせて利用できます。
+無設定StrutsとHOT deployを組み合わせたサンプルとしてはS2StrutsExampleを参照してください。
+</p>
+<h3><a name="Config">設定方法</a></h3>
+<p>
+HOT deployを利用するには<a href="hotdeploy.html">HOT deployの設定</a>を参照してください。さらに、無設定StrutsとHOT deployをより緊密に連携させるために次の設定を行ってください。
+</p>
+<h4>s2struts.diconの修正</h4>
+<ul>
+<li>convention.diconのインクルード
+<br />新しくインクルードします。
+<pre>
+&lt;include path="convention.dicon" /&gt;
+</pre>
+</li>
+<li>actionPathNamingRuleの設定
+<br /><code>DefaultActionPathNamingRule</code>から<code>SubApplicationActionPathNamingRule</code>に変更します。
+<pre>
+&lt;component name="actionPathNamingRule"
+  class="org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionPathNamingRule"/&gt;
+</pre>
+</li>
+<li>actionFormNamingRuleの設定
+<br /><code>DefaltActionFormNamingRule</code>から<code>SubApplicationActionFormNamingRule</code>に変更します。
+<pre>
+&lt;component name="actionFormNamingRule"
+  class="org.seasar.struts.lessconfig.config.rule.impl.SubApplicationActionFormNamingRule"/&gt;
+</pre>
+</li>
+</ul>
+<p>
+この設定を行うことで、同じサブアプリケーション内にあるActionとActionFormを命名規約で自動的に結びつけることができます。
+たとえば、次のような条件があるとします。
+</p>
+<ul>
+<li>ルートパッケージ名がxxx.yyy</li>
+<li>Actionクラスの完全修飾名がxxx.yyy.web.add.AddAction</li>
+<li>ActionFormクラスの完全修飾名がxxx.yyy.web.add.AddForm</li>
+</ul>
+この条件では、「add」がサブアプリケーション名となります。
+このとき、AddActionのpathは「/add/add」でコンポーネント名は「add_addAction」となり、AddFormの名前は「add_addForm」となります。
+しかし、上記の設定により@StrutsActionのname属性を省くことができ、またActionForm用プロパティもサブアプリケーション名を除いた名前で定義できます。
+<pre>
+@StrutsAction(input = AddAction.ADD) // <b><font color="red">name属性の指定が不要</font></b>
+public class AddAction {
+...private AddForm <b><font color="red">addForm</font></b>;
+}
+</pre>
+ただし、JSPでは次のように、Actionのpath、コンポーネント名、ActionFormの名前を意識したコーディングが必要になるので注意してください。
+<pre>
+&lt;html:form action="<b><font color="red">/add/add</font></b>"&gt;
+  &lt;bean:define id="form" name="<b><font color="red">add_addForm"</font></b> /&gt;
+  &lt;html:text property="arg1" styleClass="number" errorStyleClass="number-error" /&gt; + 
+  &lt;html:text property="arg2" styleClass="number" errorStyleClass="number-error" /&gt; = 
+  &lt;bean:write name="form" property="result"/&gt;&lt;br /&gt;
+  &lt;s2struts:submit action="@{<b><font color="red">add_addAction</font></b>.calculate}"&gt;calculate&lt;/s2struts:submit&gt;
+&lt;/html:form&gt;
+</pre>
+
+<h3><a name="Notes">注意事項</a></h3>
+<h4>ActionFromの扱いについて</h4>
+<p>
+ActionFromのインスタンスは、S2コンテナによって管理されません。Strutsによって管理されます。
+したがって、creator.diconやcustomizer.diconでActionFromをHOT deployの対象にしないでください（S2コンテナに登録しないでください）。
+たとえば、ActionFormの名前をXxxDTOとし、creator.diconやcustomizer.diconでdtoCreatorやdotCustomizerを定義しないでください。
+不具合の原因になります。
+<b>推奨は、ActionFormをXxxFormという名前にすることです。</b>
+</p>
+<p>
+1.3.0 RC-5以前との互換性のためにXxxFormをS2コンテナに登録する<code>FormCreator</code>というクラスが存在しますが、通常は使用しないでください。
+</p>
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">Copyright&copy; 2004-2005, The Seasar Foundation and the others. All rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>

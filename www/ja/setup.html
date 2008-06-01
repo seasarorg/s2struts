@@ -26,49 +26,74 @@
 <tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="740" class="main">
 <!-- don't edit end -->
 <!-- document start -->
-<p>
-S2Strutsは
-</p>
 <ul>
-<li><a href="http://struts.apache.org/">Struts</a>を使用した既存アプリケーションとS2の連動を簡単に実現します</li>
-<li>テストしやすいPOJOをActionとして使えます</li>
-<li>大きなstruts-config.xmlの悩みを解消します</li>
-</ul>
-<p>
-既存のアプリケーションをS2と連動させる橋渡しだけではなく、より簡単にWebアプリケーションを構築するための機能も提供します。
-</p>
-
-<h3><a name="document">ドキュメント</a></h3>
-以下のドキュメントは、S2Struts 1.3.0-RC6を対象にしています。
-<ul>
-<li><a href="setup.html">S2Strutsのセットアップ</a></li>
-<li><a href="s2struts.html">S2Strutsリファレンス</a></li>
-<li><a href="zeroconfig.html">無設定Strutsリファレンス</a>
+    <li><a href="#Summary">S2Struts概要</a></li>
+    <li><a href="#Setup">セットアップ</a>
     <ul>
-        <li><a href="validation.html">バリデーションリファレンス</a></li>
+        <li><a href="#Blank">S2StrutsBlank</a></li>
+        <li><a href="#Example">S2StrutsExample</a></li>
     </ul>
-</li>
-<li><a href="taglib.html">S2Strutsタグライブラリリファレンス</a></li>
-<li><a href="12xTo13x.html">S2Struts1.2.x -&gt; 1.3.xへの移行ガイド</a></li>
-<li><a href="http://www.seasar.org/wiki/index.php?FAQ%2FS2Struts">FAQ</a></li>
-<li><a href="http://www.seasar.org/wiki/index.php?ChangeLog%2FS2Struts">ChangeLog</a></li>
+    </li>
 </ul>
+<h2><a name="Summary">S2Struts概要</a></h2>
+<p>
+S2Strutsを使うと、Seasar2と<a href="http://struts.apache.org/">Struts</a>を連動させられます。
+Actionクラスにサービスコンポーネントが自動的に設定されるので、
+Actionクラスの役割は適切なサービスコンポーネントを呼び出すだけになります。
+Actionクラスはコントローラに徹することで、プレゼンテーション層とサービス層の役割分担も明確になります。
+また、Actionに対して<a href="http://s2container.seasar.org/ja/aop.html">AOP</a>を適用することもできます。
+</p>
+<h2><a name="Setup">セットアップ</a></h2>
+<p>
+JDK1.4 or JDK1.5が必要です。
+稼動確認は、<a href="http://tomcat.apache.org/">Tomcat V6.0</a>とEclipse 3.3で行っています。
+あらかじめインストールし、サーバーの構成まで完了させてください。
+</p>
+<p>
+セットアップを簡単に行うには、すでに設定が整っているS2StrutsBlankもしくはS2StrutsExampleを利用するのがよいでしょう。
+</p>
+<p>
+新規にプロジェクトを作成する場合は、S2StrutsBlankを使用してください。
+サンプルを動作させるにはS2StrutsExampleを使用してください。
+どちらもEclipseにインポートしてそのまま使用できます。
+これらは、Eclipse Web Tools Project（WTP）に対応した構成になっています。
+</p>
+<h3><a name="Blank">S2StrutsBlank</a></h3>
+<p>
+S2Strutsを使ったアプリケーションを開発するための雛形です。次の特徴を持ちます。
+</p>
+<ul>
+<li>Servlet2.4を利用しています。</li>
+<li>S2Daoを利用するために必要なjarファイルと設定ファイルが含まれています。</li>
+<li>SMART deployに必要な設定ファイルが含まれています。</li>
+<li>HOT deployが有効になっているため、アプリケーションの再デプロイを行うことなくクラスの追加や修正が行えます。</li>
+<li>Tailsを使ったレイアウトが行いやすい設定がされています。</li>
+</ul>
+<p>
+不要なものは適宜削除して使ってください。
+</p>
+<p>
+動作させるには、WTPのサーバーにデプロイ後、ブラウザから<a href="http://localhost:8080/s2struts-smartdeploy-blank/">http://localhost:8080/s2struts-smartdeploy-blank/</a>にアクセスしてください。
+<p/>
+<h3><a name="Example">S2StrutsExample</a></h3>
+<p>
+S2Strutsを使ったサンプルが含まれています。次の特徴を持ちます。
+</p>
+<ul>
+<li>Servlet2.4を利用しています。</li>
+<li>S2Daoを使ってデータベースにアクセスするサンプルを含んでいます。</li>
+<li>SMART deploy（HOT deploy）を利用しています。</li>
+<li>無設定Strutsを利用しています。</li>
+<li>Tailsを使ったレイアウトを行っています。</li>
+<li>S2Strutsのタグライブラリを使用しています。</li>
+</ul>
+<p>
+適宜修正しながら使ってください。
+</p>
+<p>
+動作させるには、WTPのサーバーにデプロイ後、ブラウザから<a href="http://localhost:8080/s2struts-smartdeploy-example/">http://localhost:8080/s2struts-smartdeploy-example/</a>にアクセスしてください。
+<p/>
 
-<h3><a name="download">ダウンロード</a></h3>
-<h4>安定版</h4>
-<ul>
-<li><a href="../download/2008-02-09/S2Struts-V1.2.12.zip">S2Struts V1.2.12</a></li>
-<li><a href="../download/2008-02-09/S2StrutsTiger-V1.2.12.zip">S2StrutsTiger V1.2.12</a></li>
-<li><a href="../download/2008-02-09/S2StrutsExample-V1.2.12.zip">S2StrutsExample V1.2.12</a></li>
-<li><a href="../download/2008-02-09/S2StrutsBlank-V1.2.12.zip">S2StrutsBlank V1.2.12</a></li>
-</ul>
-<h4>開発版</h4>
-<ul>
-<li><a href="../download/2008-03-08/S2Struts-V1.3.0-RC5.zip">S2Struts V1.3.0-RC5</a></li>
-<li><a href="../download/2008-03-08/S2StrutsTiger-V1.3.0-RC5.zip">S2StrutsTiger V1.3.0-RC5</a></li>
-<li><a href="../download/2008-03-08/S2StrutsExample-V1.3.0-RC5.zip">S2StrutsExample V1.3.0-RC5</a></li>
-<li><a href="../download/2008-03-08/S2StrutsBlank-V1.3.0-RC5.zip">S2StrutsBlank V1.3.0-RC5</a></li>
-</ul>
 <!-- document end -->
 <!-- don't edit start -->
 </td>

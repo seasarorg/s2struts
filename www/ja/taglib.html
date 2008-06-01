@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head>
+<title>Seasar - DI Container with AOP - </title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link href="seasar_b.css" type="text/css" rel="stylesheet" media="screen">
+<link href="seasar_p.css" type="text/css" rel="stylesheet" media="print">
+<script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="740" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+    <li><a href="#Summary">S2Struts概要</a></li>
+    <li><a href="#TagLibReference">S2Strutsタグライブラリリファレンス</a>
+    <ul>
+        <li><a href="#TagLibButton">buttonタグ</a></li>
+        <li><a href="#TagLibSubmit">submitタグ</a></li>
+        <li><a href="#TagLibCancel">cancelタグ</a></li>
+        <li><a href="#TagLibImage">imageタグ</a></li>
+        <li><a href="#TagLibCheckbox">checkboxタグ</a></li>
+        <li><a href="#TagLibPage">pageタグ</a></li>
+        <li><a href="#TagLibInit">initタグ</a></li>
+        <li><a href="#TagLibLink">linkタグ</a></li>
+    </ul>
+    </li>
+</ul>
+<h2><a name="Summary">概要</a></h2>
+<p>
+S2Strutsで提供しているタグライブラリについて説明します。
+</p>
+<h2><a name="TagLibReference">S2Strutsタグライブラリリファレンス</a></h2>
+<h3><a name="TagLibButton">buttonタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.ButtonTag(タグ名：button)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#button">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#button</a><br>
+に加えて、追加になった属性は、以下です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>type</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>以下の値で、ボタンの種別を指定します。<br>
+        "button"：通常のボタン。<br>
+        "submit"：実行ボタン。<br>
+        "reset"：リセットボタン。<br>
+        HTML4.01 では submit が規定値と定義されていますが、<br>IE6.0 や Netscape の実装では規定値は button のようです。</td>
+  </tr>
+  <tr>
+    <td><center>indexId</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>logic:iterateタグのid属性などで指定した変数名を指定します。<br>
+      buttonのvalue属性の値に、その変数の値が設定されます。<br>
+      (変数値が、Integerの32である場合の変換されたhtmlの例：&lt;button ... value="32" ...&gt;)</td>
+  </tr>
+</table>
+<h3><a name="TagLibSubmit">submitタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.SubmitTag(タグ名：submit)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#submit</a><br>
+に加えて、追加になった属性は、以下です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>action="#{component.method}"と記述することによって、サブミット時に実行するコンポーネントとメソッドを指定する事が可能です。
+      コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。<br>
+      indexId属性を指定しない場合は、引数なしとして指定されたメソッドを呼び出します。<br>
+      例えば、&lt;s2struts:submit action="{hogeAction.create}"&gt;
+       と記述して表示されたボタンを押した場合、
+       String create()
+       メソッドが呼び出されます<br>
+      indexId属性を指定した場合は、int型のindexを引数とする指定されたメソッドを呼び出します。<br>
+      例えば、&lt;s2struts:submit action="{hogeAction.create}" indexId="index"&gt;
+       と記述して表示されたボタンを押した場合、
+       String create(int index)
+       メソッドが呼び出されます。</br></br>
+       S2Struts1.3.0-RC3以降では、指定したコンポーネントに対応するActionMappingが使用されます。
+       ActionMappingは、デフォルトではActionPathNamingRuleコンポーネントから求められるpathをキーにして決定されます。
+       明示的に指定する場合は呼び出すメソッドに<a href="#BindingMethod">BINDING_METHODアノテーション</a>を指定してください。
+      </td>
+  </tr>
+  <tr>
+    <td><center>indexId</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>logic:iterateタグのid属性などで指定した変数名を指定します。<br>
+      propertyName[変数値]の様に変換されます。<br>
+      (変数値が、Integerの32である場合の変換されたhtmlの例：&lt;... foo[32]="bar"...&gt;)</td>
+  </tr>
+  <tr>
+    <td><center>cancel</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>trueを指定した場合、フォームに関連付けされたActionFormのvalidateを無視し、
+            アクションを呼び出します。</td>
+  </tr>
+</table>
+<h3><a name="TagLibCancel">cancelタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.CancelTag(タグ名：cancel)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#cancel">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#cancel</a><br>
+を拡張し、Requestパラメーターを利用しないでCancel機能を実現したタグです。
+追加した属性はありません。
+</p>
+<h3><a name="TagLibImage">imageタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.ImageTag(タグ名：image)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#image">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#image</a><br>
+に加えて、追加になった属性は、以下です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>action="#{component.method}"と記述することによって、サブミット時に実行するコンポーネントとメソッドを指定する事が可能です。
+      コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</br></br>
+       S2Struts1.3.0-RC3以降では、指定したコンポーネントに対応するActionMappingが使用されます。
+       ActionMappingは、デフォルトではActionPathNamingRuleコンポーネントから求められるpathをキーにして決定されます。
+       明示的に指定する場合は呼び出すメソッドに<a href="#BindingMethod">BINDING_METHODアノテーション</a>を指定してください。
+      </td>
+  </tr>
+  <tr>
+    <td><center>cancel</center></td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>trueを指定した場合、フォームに関連付けされたActionFormのvalidateを無視し、
+            アクションを呼び出します。</td>
+  </tr>
+</table>
+<h3><a name="TagLibCheckbox">checkboxタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.CheckboxTag(タグ名：checkbox)</h4>
+<p>
+<a href="http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#checkbox">http://struts.apache.org//struts-doc-1.2.8/userGuide/struts-html.html#checkbox</a><br>
+を拡張し、チェックがない場合でもフォームに関連付けされたActionFormのプロパティにfalseを設定します。
+追加した属性はありません。
+</p>
+<h3><a name="TagLibPage">pageタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.PageTag(タグ名：page)</h4>
+<p>
+このタグをJSPに記述することによって、struts-configのinput属性の無設定化(エラー時に自画面を再表示)することが可能になります。
+formタグの中に記述する必要があります。複数のformが存在する場合には、それぞれに記述が必要です。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>-</center></td>
+      <td><center>-</center></td>
+      <td><center>-</center></td>
+      <td>属性はありません。</td>
+  </tr>
+</table>
+<h3><a name="TagLibLink">linkタグ</a></h3>
+<h4>org.seasar.struts.taglib.html.LinkTag(タグ名：link)</h4>
+TODO
+<h3><a name="TagLibInit">initタグ</a></h3>
+<h4>org.seasar.struts.taglib.InitializeTag(タグ名：init)</h4>
+<p>
+このタグを使用すると画面の初期化処理を行う事が可能です。action属性に記述したMethodBindingを、JSPを表示する時に実行します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性名</td><td>必須</td><td>rtexprvalue</td><td>説明</td>
+  </tr>
+  <tr>
+    <td><center>action</center></td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>action="#{component.method}"と記述することによって、JSPを表示する時に実行するコンポーネントとメソッドを指定する事が可能です。
+      コンポーネントは、この属性で指定した名前でS2Containerに登録されている必要があります。</td>
+  </tr>
+</table>
+
+<h3><a name="BindingMethod">BINDING_METHODアノテーション</a></h3>
+<p>
+S2Struts1.3.0-RC3以降で利用できます。
+</p>
+<p>
+BINDING_METHODアノテーションは、submitタグやimageタグで指定されたactionに対するActionMappingを明示的に指定するために使用します。
+</p>
+<h4>定数アノテーション</h4>
+次の形式でstaticフィールドとしてActionに定義します。
+<p>
+public static final String <i>メソッド名</i>_BINDING_METHOD = "path=<i>ActionMappingのpath</i>"
+</p>
+タグとJavaの定義例は次の通りです。
+<pre>
+&lt;s2struts:submit action="#{modAction.mod}" property="submit" value="サブミット"/&gt;
+</pre>
+<pre>
+public static final String mod_BINDING_METHOD = "path=/hoge";
+
+public String mod() {
+  ．．．
+}
+</pre>
+<h4>Tigerアノテーション</h4>
+次の形式でActionメソッドにアノテーションを指定します。
+<p>
+@BindingMethod(path = "<i>ActionMappingのパス</i>")
+</p>
+タグとJavaの定義例は次の通りです。
+<pre>
+&lt;s2struts:submit action="#{modAction.mod}" property="submit" value="サブミット"/&gt;
+</pre>
+<pre>
+@BindingMethod(path = "/hoge")
+public String mod() {
+  ．．．
+}
+</pre>
+
+
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">Copyright&copy; 2004-2005, The Seasar Foundation and the others. All rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>

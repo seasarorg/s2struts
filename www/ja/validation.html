@@ -1,9 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- don't edit start -->
-<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
-<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
-</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<head>
+<title>Seasar - DI Container with AOP - </title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link href="seasar_b.css" type="text/css" rel="stylesheet" media="screen">
+<link href="seasar_p.css" type="text/css" rel="stylesheet" media="print">
+<script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left"><tr>
 <td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
 <tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
 <tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
@@ -17,27 +22,393 @@
 <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
 <td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
 <td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
-<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
-<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<table  width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="740" class="main">
 <!-- don't edit end -->
 <!-- document start -->
 <ul>
-	<li><a href="#Summary">概要</a></li>
-	<li><a href="#Validation">Strutsでの新規Validation作成</a></li>
-	<li><a href="#Annotation">Validationアノテーションの作成</a></li>
-	<li><a href="#Confirmation">動作確認</a></li>
+    <li><a href="#Summary">概要</a></li>
+    <li><a href="#AnnotationReference">アノテーションリファレンス</li>
+    <li><a href="#CustomValidator">カスタムバリデータの作成</a>
+        <ul>
+            <li><a href="#Validator">バリデータの作成と設定</a></li>
+            <li><a href="#Annotation">アノテーションの作成</a></li>
+            <li><a href="#Confirmation">動作確認</a></li>    
+        </ul>
+    </li>
 </ul>
 <h2><a name="Summary">概要</a></h2>
 <p>
-S2Strutsで利用できるアノテーションを使用したValidationを作成するには
-<ul>
-<li><a href="#Validation">Strutsでの新規Validation作成</a></li>
-<li><a href="#Annotation">Validationアノテーションの作成</a></li>
-</ul>
-を行います。
-この作業について、2つの入力内容が同じかを検証するValidationの作成を通して説明します。
+S2Strutsの無設定Strutsの一部であるバリデーション機能について説明します。
 </p>
-<h2><a name="Validation">Strutsでの新規Validation作成</a></h2>
+<h2><a name="AnnotationReference">アノテーションリファレンス</a></h2>
+<p>
+バリデーション用のアノテーションは、ActionFormのプロパティに対して行います。
+ValidateOrder、Args、Message以外のアノテーションは基本的なバリデータを行うために利用します。
+</p>
+<h4>ValidateOrder</h4>
+<p>
+検証する順番を制御します。指定した順番でエラーメッセージを表示します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>×</center></center></td>
+      <td><center>999</center></td>
+      <td>検証する順番を指定します。</td>
+  </tr>
+</table>
+<h4>Args</h4>
+<p>
+メッセージで使用される置換パラメータを指定します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>keys</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージで使用される置換パラメータを指定します。<br>
+      ","で区切ることにより複数指定できます。<br>
+      定数アノテーションで","で区切る方法については<a href="#ConstAnnotationCodicil">「定数アノテーションの補足」</a>を参照してください。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keysで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値を置換パラメータとします。<br>
+      falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>Argアノテーションで個別に置換パラメータを指定する場合に使用します。<br>
+      個別に置換パラメータを指定する場合は、keys、bundle、resourceを指定しないで下さい。</td>
+  </tr>
+</table>
+<h4>Arg</h4>
+<p>
+メッセージで使用される置換パラメータを個別に指定します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージで使用される置換パラメータを指定します。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>置換パラメータを使用するバリデータの名前を指定します。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keyで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値をメッセージとします。<br>
+      falseの場合はkeyで指定した値をそのままメッセージとします。</td>
+  </tr>
+  <tr>
+    <td>position</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>置換パラメータの位置を指定します。</td>
+  </tr>
+</table>
+<p></p>
+<p>
+定数アノテーションでは、以下のように プロパティー名_VALIDATOR_ARG で指定します。
+複数指定する場合は、定数名の最後にゼロからのINDEXをつけます。
+</p>
+<pre>
+    public static final String value_VALIDATOR_0 = "required";
+    public static final String value_VALIDATOR_1 = "integer";
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_0 = "form.value";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_1 = "form.value.def";</font></b>
+    <b>public static final <font color="red">String value_VALIDATOR_ARG_2 = "form.value.req, name = required, position = 1";</font></b>
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+</pre>
+<h4>Messages</h4>
+<p>
+複数のMessageアノテーションを指定したい場合に使用します。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>複数のMessageアノテーションを指定します。</td>
+  </tr>
+</table>
+<h4>Message</h4>
+<p>
+デフォルトメッセージの代わりに個別のメッセージを表示したい場合に指定します。<br>
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>key</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージのキー又はメッセージを指定します。</td>
+  </tr>
+  <tr>
+    <td>name</td>
+      <td><center><center>○</center></center></td>
+      <td><center>-</center></td>
+      <td>メッセージを指定するバリデータの名前を指定します。</td>
+  </tr>
+  <tr>
+    <td>bundle</td>
+      <td><center><center>×</center></center></td>
+      <td><center>-</center></td>
+      <td>デフォルト以外のメッセージリソースを使用する場合、
+          使用するメッセージリソースのキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keyで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値をメッセージとします。<br>
+      falseの場合はkeyで指定した値をそのままメッセージとします。</td>
+  </tr>
+</table>
+<h4>Required</h4>
+<p>
+値に空白以外の文字が含まれてるか確認します。
+引数はありません。
+</p>
+<h4>Mask</h4>
+<p>
+値がpatternで指定された正規表現と一致するか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>正規表現を指定します。</td>
+  </tr>
+  <tr>
+    <td>messageKey</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>メッセージを取得するキーを指定します。</td>
+  </tr>
+  <tr>
+    <td>resource</td>
+      <td><center>×</center></td>
+      <td><center>true</center></td>
+      <td>keysで指定した値をリソースキーとして利用するかを指定します。<br>
+      trueの場合はリソースキーとして利用し該当する値を置換パラメータとします。<br>
+      falseの場合はkeysで指定した値をそのまま置換パラメータとします。</td>
+  </tr>
+</table>
+<h4>IntRange, LongRange, FloatRange, DoubleRange</h4>
+<p>
+値がminとmaxで指定された範囲内であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>min</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値範囲の最小値を指定します。</td>
+  </tr>
+  <tr>
+    <td>max</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値範囲の最大値を指定します。</td>
+  </tr>
+</table>
+<h4>Maxlength</h4>
+<p>
+値の文字数がvalue以下であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの上限値を指定します。</td>
+  </tr>
+</table>
+<h4>Minlength</h4>
+<p>
+値の文字数がvalue以上であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの下限値を指定します。</td>
+  </tr>
+</table>
+<h4>Maxbytelength</h4>
+<p>
+値のバイト数がvalue以下であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの上限値を指定します。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
+  </tr>
+</table>
+<h4>Minbytelength</h4>
+<p>
+値のバイト数がvalue以上であるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>value</td>
+      <td><center>○</center></td>
+      <td><center>-</center></td>
+      <td>値の長さの下限値を指定します。</td>
+  </tr>
+  <tr>
+    <td>charset</td>
+      <td><center>×</center></td>
+      <td><center>-</center></td>
+      <td>バイト数で検証する場合の文字セットを指定します。<br/>指定しない場合は、プラットフォームのデフォルト文字セットを使用します。</td>
+  </tr>
+</table>
+<h4>ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType</h4>
+<p>
+値が該当する型に変換できるか確認します。
+属性はありません。
+</p>
+<h4>DateType</h4>
+<p>
+値が有効な日付を表すか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>pattern</td>
+      <td><center>×</center></td>
+      <td><center>s2struts.dionのdateConfigRegisterコンポーネント定義時に指定したパターン</center></td>
+      <td>日付のパターンを指定します。</td>
+  </tr>
+</table>
+<h4>CreditCardType</h4>
+<p>
+値が有効なクレジットカード番号とみなされるか確認します。
+属性はありません。
+</p>
+<h4>EmailType</h4>
+<p>
+値が有効なEメールアドレスとみなされるか確認します。
+属性はありません。
+</p>
+<h4>UrlType</h4>
+<p>
+値が有効なURLとみなされるか確認します。
+</p>
+<table border="1">
+  <tr>
+    <td>属性</td><td>必須</td><td>デフォルト値</td><td>説明</td>
+  </tr>
+  <tr>
+    <td>allowallschemes</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>schemeを許可するかどうかを指定します。<br/>trueを設定するとすべてのschemeが許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>allow2slashes</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>ダブルスラッシュ（//）を許可するかどうかを指定します。<br/>trueを設定すると許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>nofragments</td>
+      <td><center>×</center></td>
+      <td><center>false</center></td>
+      <td>URLの分割を許可するかどうかを指定します。<br/>falseを設定すると許可されます。<br></td>
+  </tr>
+  <tr>
+    <td>schemes</td>
+      <td><center>×</center></td>
+      <td><center>http,https,ftp</center></td>
+      <td>許可するschemeを,（カンマ）区切りで指定します。<br></td>
+  </tr>
+</table>
+<h4>NoValidate</h4>
+<p>
+自動的にバリデーションを行わないように指定します。
+属性はありません。
+</p>
+<p />
+
+<h2><a name="CustomValidator">カスタムバリデーションの作成</a></h2>
+<h3><a name="Validator">Strutsでの新規Validation作成</a></h3>
 <p>
 Struts（commons validator）としての新規Validationを追加するには、
 <ul>
@@ -136,7 +507,7 @@ errors.twoFields={0} has to have the same value as the confirm field.
 <p>
 ここまでがStrutsでの新規Validation作成作業です。
 </p>
-<h2><a name="Annotation">Validationアノテーションの作成</a></h2>
+<h3><a name="Annotation">Validationアノテーションの作成</a></h3>
 <p>
 Validationアノテーションの作成は
 <ul>
@@ -250,7 +621,7 @@ public class TwoFieldsConfigRegisterImpl implements ConfigRegister {
 <p>
 これでアノテーションを使用したValidation作成作業は完了です。
 </p>
-<h2><a name="Confirmation">動作確認</a></h2>
+<h3><a name="Confirmation">動作確認</a></h3>
 <p>
 作成したTwoFieldsアノテーションを試すには、
 <ul>
@@ -325,11 +696,11 @@ Actionはコンポーネントとして登録する必要があります。新規に作成したtwoFields.dico
 <pre>
 &lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
 &lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
-	"http://www.seasar.org/dtd/components21.dtd"&gt;
+    "http://www.seasar.org/dtd/components21.dtd"&gt;
 &lt;components&gt;
-	&lt;component name="twoFieldsAction"
-			class="org.seasar.struts.examples.validator.TwoFieldsActionImpl"
-			instance="request" /&gt;
+    &lt;component name="twoFieldsAction"
+            class="org.seasar.struts.examples.validator.TwoFieldsActionImpl"
+            instance="request" /&gt;
 &lt;/components&gt;
 </pre>
 <p>
@@ -443,7 +814,7 @@ Tomcatを起動して、ブラウザから<a href="http://localhost:8080/s2struts-example/pa
 <td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
 </tr><tr>
 <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
-<td width="766" class="copyright">&copy; Copyright The Seasar Foundation and the others 2004-2005, all rights reserved.</td>
+<td width="766" class="copyright">Copyright&copy; 2004-2005, The Seasar Foundation and the others. All rights reserved.</td>
 </tr></table>
 <td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
 <td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
