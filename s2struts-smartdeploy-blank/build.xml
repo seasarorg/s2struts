@@ -1,0 +1,26 @@
+<project name="S2StrutsBlank" default="dist" basedir=".">
+  <property name="ver" value="1.3.0-RC6" />
+
+  <target name="dist">
+    <mkdir dir="target" />
+    <zip destfile="target/S2StrutsBlank-V${ver}.zip">
+      <zipfileset prefix="s2struts-smartdeploy-blank" dir=".">
+        <exclude name="**/target/**"/>
+        <exclude name="**/.settings/**"/>
+      </zipfileset>
+    </zip>
+  </target>
+
+  <target name="copy-jar">
+    <copy file="../s2struts/target/s2-struts-${ver}.jar"
+      todir="WebContent/WEB-INF/lib"/>
+    <copy file="../s2struts/target/s2-struts-${ver}-sources.jar"
+      todir="libsrc"/>
+
+    <copy file="../s2struts-tiger/target/s2-struts-tiger-${ver}.jar"
+      todir="WebContent/WEB-INF/lib"/>
+    <copy file="../s2struts-tiger/target/s2-struts-tiger-${ver}-sources.jar"
+      todir="libsrc"/>
+  </target>
+
+</project>

@@ -20,7 +20,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/jsp-api-2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/servlet-api-2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/ognl-2.6.9-patch-20070908.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils-1.8.0-BETA.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils-1.8.0-BETA.jar" sourcepath="libsrc/commons-beanutils-1.8.0-BETA-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/s2-extension-2.4.25.jar" sourcepath="libsrc/s2-extension-2.4.25-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/s2-framework-2.4.25.jar" sourcepath="libsrc/s2-framework-2.4.25-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
