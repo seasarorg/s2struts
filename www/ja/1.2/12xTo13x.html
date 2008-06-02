@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+	<li><a href="#Summary">概要</a></li>
+	<li><a href="#ToS24">S2.4への移行</a></li>
+	<li><a href="#ToS2Struts13">S2Struts1.3.xへの移行</a></li>
+	<li><a href="#S2StrutsHotdeploy">S2StrutsのHOTdeploy対応</a></li>
+	<li><a href="#LessconfigHotdeploy">無設定S2StrutsのHOTdeploy対応</a></li>
+</ul>
+<h2><a name="Summary">概要</a></h2>
+<p>
+S2Struts1.2.xから1.3.xへ移行する手順について、S2StrutsExampleの移行を通して説明します。
+移行するために必要となるファイルはS2StrutsBlank V1.3.xに含まれていますので、あらかじめダウンロードしてください。
+</p>
+<h2><a name="ToS24">S2.4への移行</a></h2>
+<p>
+S2Struts1.3.xはS2.4で動作するため、S2.3からS2.4への移行が必要です。移行は以下の手順で行います。
+</p>
+<ol>
+  <li>jarファイルの置き換え　以下のjarファイルを置き換えます</li>
+  <ul>
+    <li>s2-framework-2.4.0-rc-2-SNAPSHOT.jar</li>
+    <li>s2-extension-2.4.0-rc-2-SNAPSHOT.jar</li>
+  </ul>
+  <li>diconファイルの追加　以下のdiconファイルをWEB-INF/srcへコピーします</li>
+  <ul>
+    <li>convention.dicon</li>
+    <li>jdbc.dicon</li>
+  </ul>
+  <li>不要なdiconファイルの削除　以下のdiconファイルをWEB-INF/srcから削除します</li>
+  <ul>
+    <li>j2ee.dicon（s2-extension-2.4.0-rc-2-SNAPSHOT.jarに含まれているため削除してください）</li>
+  </ul>
+</ol>
+<h2><a name="ToS2Struts13">S2Struts1.3.xへの移行</a></h2>
+<p>
+S2Struts1.3.xへの移行は以下の手順で行います。
+</p>
+<ol>
+  <li>jarファイルの置き換え　以下のjarファイルを置き換えます</li>
+  <ul>
+    <li>s2-struts-1.3.0-beta-2.jar</li>
+<p>
+s2-struts-1.3.0-beta-2.jarでは、MessageManagerクラスのパッケージを移動したためjarを入れ替えるとコンパイルエラーが発生します。
+import文をorg.seasar.struts.MessageManagerからorg.seasar.struts.pojo.MessageManagerへ修正してください。
+</p>
+    <li>s2-struts-tiger-1.3.0-beta-2.jar（Tigerアノテーションを利用している場合、置き換えてください）</li>
+    <!--
+    <li>s2-struts-backport175-1.3.0-beta-2.jar（Backport175アノテーションを利用している場合、置き換えてください）</li>
+    -->
+  </ul>
+  <li>不要なdiconファイルの削除　以下のdiconファイルをWEB-INF/srcから削除します</li>
+  <ul>
+    <li>s2struts.dicon（s2-struts-1.3.0-beta-2.jarに含まれているため削除してください）</li>
+  </ul>
+  <li>struts-config.xmlの修正</li>
+  <ul>
+    <li>org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugInを
+        org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugInに変更します。
+    </li>
+<pre>
+&lt;struts-config&gt;
+    :
+    :
+  <b><font color="red">&lt;!-- PlugInのクラス名を修正
+  &lt;plug-in className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn"&gt;
+  --&gt;
+  &lt;plug-in className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn"&gt;</font></b>
+    &lt;set-property property="enableJar" value="false"/&gt;
+    &lt;set-property property="docRoot" value="/pages"/&gt;
+  &lt;/plug-in&gt;
+    :
+    :
+&lt;/struts-config&gt;
+</pre>
+  </ul>
+  <li>web.xmlの修正</li>
+  <ul>
+    <li>S2ActionServletを利用していたところをorg.apache.struts.action.ActionServletに戻します。
+        S2ActionServletにはActionを自動的にS2へ登録する機能が含まれていますが、この機能は使わず、
+        S2.4のHOTdeploy / COOLdeploy機能を利用しActionを登録するためです。
+    </li>
+<pre>
+&lt;web-app&gt;
+    :
+    :
+  &lt;!-- Standard Action Servlet Configuration (with debugging) --&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    <b><font color="red">&lt;!-- S2ActionServletをActionServletに戻す
+    &lt;servlet-class&gt;org.seasar.struts.servlet.S2ActionServlet&lt;/servlet-class&gt;
+    --&gt;
+    &lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;</font></b>
+    &lt;init-param&gt;
+      &lt;param-name&gt;config&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;debug&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;detail&lt;/param-name&gt;
+      &lt;param-value&gt;2&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+    :
+    :
+&lt;/web-app&gt;
+</pre>
+  </ul>
+<!-- commons-validator-1.2.0への移行は必須ではない
+  <li>commons-validatorを1.1.4から1.2.0へ移行</li>
+  <ul>
+    <li>commons-validator-1.2.0.jarへ置き換えてください。</li>
+    <li>validator-rule.xml、validation.xmlのDOCTYPEを修正してください。</li>
+<pre>
+&lt;!DOCTYPE form-validation PUBLIC
+  "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.2.0//EN"
+  "http://jakarta.apache.org/commons/dtds/validator_1_2_0.dtd"&gt;
+</pre>
+  </ul>
+-->
+  <li>S2StrutsExampleではさらに...</li>
+  <ul>
+    <li>S2ActionServletで自動登録されていたAddActionをAdd.diconファイルにコンポーネント定義を追加します。
+    </li>
+    <li>S2Struts1.3.xよりRequestProcessorの定義が変わりました。
+        そのためRequestProcessor.diconがエラーになるので、コメントアウトします。
+    </li>
+  </ul>
+</ol>
+<p>
+以上でS2Struts1.3.xへの移行は完了です。Tomcatを起動し動作に問題がないことを確認してください。
+次からは、HOTdeploy対応するための作業です。
+</p>
+<h2><a name="S2StrutsHotdeploy">S2StrutsのHOTdeploy対応</a></h2>
+<p>
+HOTdeploy化を行う場合は、FilterをFORWARDに適用するため<b>Servlet2.4</b>が必要となります。
+struts-config.xml、validation.xml、application.propertiesの変更をすぐに反映させるためには以下の修正が必要です。
+</p>
+<ol>
+  <li>diconファイルの追加　以下のdiconファイルをWEB-INF/srcへコピーします</li>
+  <ul>
+    <li>creator.dicon</li>
+    <li>customizer.dicon</li>
+    <li>s2container.dicon</li>
+  </ul>
+  <li>app.diconの修正</li>
+  <ul>
+    <li>add.diconにs2struts-hotdeploy.diconを追加します。
+        環境によりHOTdeploy / COOLdeployの切り替えを行えるようにするために条件付includeとします。
+    </li>
+<pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
+&lt;components&gt;
+  <b><font color="red">&lt;include condition="#ENV != 'ut'" path="s2struts.dicon"/&gt;
+  &lt;include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/&gt;</font></b>
+    :
+    :
+&lt;/components&gt;
+</pre>
+  </ul>
+  <li>env.txtの追加</li>
+  <ul>
+    <li>条件付includeで利用する環境名をenv.txtに書き、WEB-INF/srcへ追加します。
+        HOTdeployを利用するため環境名は「ut」とします。
+    </li>
+  </ul>
+  <li>struts-config.xmlの修正</li>
+  <ul>
+    <li>org.seasar.struts.hotdeploy.plugin.HotdeployPlugInを追加します。</li>
+<pre>
+&lt;struts-config&gt;
+    :
+    :
+  <b><font color="red">&lt;!-- HotdeployPlugInの追加 --&gt;
+  &lt;plug-in className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/&gt;</font></b>
+    :
+    :
+&lt;/struts-config&gt;
+</pre>
+  </ul>
+  <li>web.xmlへHotdeployFilterの追加</li>
+  <ul>
+    <li>HotdeployFilterは、REQUESTとFORWARDに適用します
+        （FORWARDにもFilterを適用するため<b>Servlet2.4</b>が必要となります）。
+    </li>
+<pre>
+&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                      http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+  version="2.4"&gt;
+    :
+    :
+  &lt;filter&gt;
+    &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.seasar.framework.container.hotdeploy.HotdeployFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+    :
+    :
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    <b><font color="red">&lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;</font></b>
+    <b><font color="red">&lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;</font></b>
+  &lt;/filter-mapping&gt;
+    :
+    :
+&lt;/web-app&gt;
+</pre>
+  </ul>
+</ol>
+<p>
+これでstruts-config.xml、validation.xml、application.properties（リソースファイル）の変更が即時反映されます。
+Tomcatを起動し試してください。
+</p>
+<p>
+ソースコードを編集するたびにコンテキストのリロードが実行されてしまう場合は、
+FAQ「<a href="http://www.seasar.org/wiki/index.php?FAQ%2FS2Container#e4624d2e">HOT deploy時にソースコードを編集するとコンテキストのリロードが実行されてしまう</a>」を
+参照してください。
+</p>
+<h2><a name="LessconfigHotdeploy">無設定S2StrutsのHOTdeploy対応</a></h2>
+<p>
+無設定S2StrutsのHOTdeploy化を行います。
+</p>
+<p>
+S2.4が推奨するディレクトリ構成に近い
+Employee機能（org.seasar.struts.examples.employeeパッケージ）のHOTdeploy化は以下の手順で行います。
+</p>
+<ol>
+  <li>convention.diconの修正</li>
+  <ul>
+    <li>RootPackageNameを追加します。</li>
+<pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+  "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+  &lt;component class="org.seasar.framework.convention.impl.NamingConventionImpl"&gt;
+    <b><font color="red">&lt;initMethod name="addRootPackageName"&gt;
+      &lt;arg&gt;"org.seasar.struts.examples.employee"&lt;/arg&gt;
+    &lt;/initMethod&gt;</font></b>
+  &lt;/component&gt;
+&lt;/components&gt;
+</pre>
+  </ul>
+  <li>customizer.diconの修正</li>
+  <ul>
+    <li>Employee機能では、Action/DTO/Logic/Daoを利用しています。それぞれのCustomizerが以下のように定義します。
+    </li>
+<pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
+&lt;components&gt;
+  &lt;component name="defaultCustomizer"
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
+    &lt;property name="interceptorName"&gt;"aop.traceInterceptor"&lt;/property&gt;
+  &lt;/component&gt;
+  &lt;component name="commandAspectCustomizer"
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
+    &lt;property name="interceptorName"&gt;"aop.traceInterceptor"&lt;/property&gt;
+    &lt;property name="pointcut"&gt;"do.*, go.*, initialize"&lt;/property&gt;
+  &lt;/component&gt;
+  &lt;component name="traceThrowsAspectCustomizer"
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
+    &lt;property name="interceptorName"&gt;"aop.traceThrowsInterceptor"&lt;/property&gt;
+  &lt;/component&gt;
+  <b><font color="red">&lt;component name="txAspectCustomizer"
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
+    &lt;property name="interceptorName"&gt;"j2ee.requiredTx"&lt;/property&gt;
+  &lt;/component&gt;</font></b>
+  <b><font color="red">&lt;component name="daoAspectCustomizer"
+      class="org.seasar.framework.container.customizer.AspectCustomizer"&gt;
+    &lt;property name="interceptorName"&gt;"dao.interceptor"&lt;/property&gt;
+  &lt;/component&gt;</font></b>
+
+  <b><font color="red">&lt;component name="actionCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;commandAspectCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;</font></b>
+  <b><font color="red">&lt;component name="daoCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;daoAspectCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;</font></b>
+  <b><font color="red">&lt;component name="dtoCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;/component&gt;</font></b>
+  &lt;component name="dxoCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component name="helperCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  <b><font color="red">&lt;component name="logicCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;txAspectCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;</font></b>
+  &lt;component name="pageCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;commandAspectCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component name="serviceCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;defaultCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+    &lt;initMethod name="addCustomizer"&gt;
+      &lt;arg&gt;txAspectCustomizer&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+  &lt;component name="interceptorCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;/component&gt;
+  &lt;component name="validatorCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;/component&gt;
+  &lt;component name="converterCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;/component&gt;
+  &lt;component name="connectorCustomizer"
+      class="org.seasar.framework.container.customizer.CustomizerChain"&gt;
+  &lt;/component&gt;
+&lt;/components&gt;</pre>
+  </ul>
+  <li>creator.diconの修正</li>
+  <ul>
+    <li>Action/DTO/Logic/DaoのCreatorが以下のように定義します。
+        Employee機能では、DTOをActionFormとして利用しています。
+        DTO（ActionForm）のインスタンス管理はS2ContainerではなくStrutsが行います。
+        そのため、DtoOndemandCreatorのinstanceDefをREQUEST（デフォルト）からPROTOTYPEに変更します。
+    </li>
+<pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="convention.dicon"/&gt;
+  &lt;include path="customizer.dicon"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.ActionCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.DaoCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.DtoCreator"&gt;
+    <b><font color="red">&lt;property name="instanceDef"&gt;
+      @org.seasar.framework.container.deployer.InstanceDefFactory@PROTOTYPE
+    &lt;/property&gt;</font></b>
+  &lt;/component&gt;
+  &lt;component class="org.seasar.framework.container.creator.DxoCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.HelperCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.LogicCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.PageCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.ServiceCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.InterceptorCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.ValidatorCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.ConverterCreator"/&gt;
+  &lt;component class="org.seasar.framework.container.creator.ConnectorCreator"/&gt;
+&lt;/components&gt;</pre>
+  </ul>
+  <li>s2container.diconの修正</li>
+  <ul>
+    <li>hotdeploy.diconをインクルードします。</li>
+<pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
+&lt;components&gt;
+  <b><font color="red">&lt;include condition="#ENV == 'ut'" path="hotdeploy.dicon"/&gt;</font></b>
+&lt;/components&gt;
+</pre>
+  </ul>
+  <li>app.diconの修正</li>
+  <ul>
+    <li>employee.diconは不要となるためコメントアウトし、cooldeploy.diconをインクルードします。
+        convention.dicon、aop.dicon、dao.diconをインクルードします。
+    </li>
+<pre>
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
+&lt;components&gt;
+  &lt;include path="convention.dicon"/&gt;
+  &lt;include path="aop.dicon"/&gt;
+  &lt;include path="dao.dicon"/&gt;
+
+  &lt;include condition="#ENV != 'ut'" path="s2struts.dicon"/&gt;
+  &lt;include condition="#ENV == 'ut'" path="s2struts-hotdeploy.dicon"/&gt;
+    :
+    :
+  <b><font color="red">&lt;!--
+  &lt;include path="org/seasar/struts/examples/dicon/employee.dicon"/&gt;
+  --&gt;
+  &lt;include condition="#ENV != 'ut'" path="cooldeploy.dicon"/&gt;</font></b>
+&lt;/components&gt;
+</pre>
+  </ul>
+  <li>S2StrutsExampleではさらに...</li>
+  <ul>
+    <li>HttpSessionに格納するオブジェクトはシリアライズできる必要があります。
+        Employee機能では、ProcessModeDtoをHttpSessionに格納しているため、
+        ProcessModeDtoにSerializableを実装します。
+    </li>
+    <li>Employee機能では、S2Daoを利用しているため、
+        HOTdeployに対応しているS2Daoに置き換える必要があります。
+        s2-dao-1.0.36-SNAPSHOT.jarに置き換え、dao.diconを/WEB-INF/srcから削除します。
+    </li>
+  </ul>
+</ol>
+<p>
+これでEmployee機能のHOTdeploy化は完了です。
+Tomcatを起動しHOTdeployを試してください。
+</p>
+<p>
+また、COOLdeployを試したい場合は、env.txtの内容を「it」（「ut」以外の値）等に変更後、Tomcatを起動してください。
+</p>
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Foundation and the others 2004-2005, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
