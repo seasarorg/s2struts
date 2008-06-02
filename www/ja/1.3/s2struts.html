@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head>
+<title>Seasar - DI Container with AOP - </title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link href="seasar_b.css" type="text/css" rel="stylesheet" media="screen">
+<link href="seasar_p.css" type="text/css" rel="stylesheet" media="print">
+<script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="740" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+    <li><a href="#Summary">概要</a></li>
+    <li><a href="#ActionFormAndAction">ActionFormとActionの定義</a>
+        <ul>
+            <li><a href="#PojoActionForm">POJO ActionForm</a></li>
+            <li><a href="#PojoAction">POJO Action</a></li>
+        </ul>
+    </li>
+    <li><a href="#MappingDefRegistration">Actionのマッピング定義の登録</a>
+        <ul>
+            <li><a href="#StrutsConfigXml">struts-config.xmlを記述する方法</a>
+                <ul>
+                    <li><a href="#Normal">通常の方法</a></li>
+                    <li><a href="#PathMatching">action要素のpath属性とActionコンポーネント名を一致させる方法 </a></li>
+                </ul>
+            </li>
+            <li><a href="#ZeroConfig">無設定Strutsを利用する方法</a></li>
+        </ul>
+    </li>
+    <li><a href="#ComponentRegistration">Actionコンポーネントの登録</a>
+        <ul>
+            <li><a href="#Manual">diconファイルにひとつずつ記述する方法</a></li>
+            <li><a href="#Auto">自動登録を使用する方法</a></li>
+            <li><a href="#SmartDeploy">SMART deployを使用する方法</a></li>
+        </ul>
+    </li>
+    <li><a href="#Message">メッセージの管理</a></li>
+    <li><a href="#HotDeploy">HOT deploy</a>
+        <ul>
+            <li><a href="#HotDeployRequirement">HOT deployの前提</a></li>
+            <li><a href="#HotDeployConfig">HOT deployの設定</a></li>
+        </ul>
+    </li>
+</ul>
+<h2><a name="Summary">概要</a></h2>
+<p>
+S2Strutsの機能について説明します。
+</p>
+
+<h2><a name="ActionFormAndAction">ActionFormとActionの定義</a></h2>
+<p>
+ActionFormとActionは、Strutsのクラスを継承して定義できますが、S2Strutsではそれらを継承せずにPOJOとして定義することもできます。
+</p>
+<p>
+Actionには、適切なsetterメソッドによりSeasar2のコンポーネントをDIすることができます。
+ただし、DIを行う前提として、ActionをコンポーネントとしてS2コンテナに登録しておく必要があります。
+登録の方法については、<a href="#ComponentRegistration">Actionコンポーネントの登録</a>を参照してください。
+</p>
+<p>
+ActionFormのインスタンスはStrutsで管理されるため、ActionFormにはSeasar2のコンポーネントはDIされません。
+またActionFormをS2コンテナに登録する必要はありません（原則的には登録しないでください）。
+</p>
+<h3><a name="PojoActionForm">POJO ActionForm</a></h3>
+<p>
+POJOのActionFormは、Strutsの<code>org.apache.struts.action.ActionForm</code>を継承しないだけで、役割は同じです。HTMLのフォームに対応するプロパティを持つように定義してください。
+</p>
+<pre>
+public class AddForm {
+    private String arg1;
+    private String arg2;
+    private String result;
+    public String getArg1(){ return arg1; }
+    public void setArg1(String arg1){ this.arg1 = arg1; }  
+    public String getArg1(){ return arg1; }
+    public void setArg2(String arg2){ this.arg2 = arg2; }
+    public String getArg2(){ return arg2; }
+    public void setResult(String result){ this.result = result; }
+}
+</pre>
+<h4>resetメソッド</h4>
+<p>
+次のシグネチャのメソッドが定義されている場合、ActionFormに値が設定される前に呼び出されます。
+SessionスコープのActionFormを使う場合で、プロパティのリセットが必要な場合に使用してください。
+</p>
+<pre>
+public void reset();
+</pre>
+<h3><a name="PojoAction">POJO Action</a></h3>
+<p>
+POJOのActionは、Strutsの<code>org.apache.struts.action.Action</code>を継承しないだけで、役割は同じです。
+</p>
+<pre>
+public class AddAction {
+    private AddForm addForm;
+    public void setAddForm(AddForm addForm) {
+        this.addForm = addForm;
+    }
+    public String calculate() {
+        int result = Integer.valueOf(addForm.getArg1())
+                + Integer.valueOf(addForm.getArg2());
+        addForm.setResult(String.valueOf(result));
+        return "success";
+    }
+}
+</pre>
+<h4>アクションメソッドの定義</h4>
+Actionにはリクエストに対応するメソッドを定義します。
+メソッドのシグネチャは次のようなものをサポートしています（xxxは任意の名称です）。
+Forwardが必要な場合、ActionForwardの名前を返す必要があります
+<ul>
+<li>Forwardしない場合
+<pre>
+public void xxx();
+</pre>
+</li>
+<li>インデックスつきのボタンやリンクから呼び出されForwardしない場合
+<pre>
+public void xxx(int index);
+</pre>
+</li>
+<li>Forwardする場合
+<pre>
+public String xxx();
+</pre>
+</li>
+<li>インデックスつきのボタンやリンクから呼び出されForwardする場合
+<pre>
+public String xxx(int index);
+</pre>
+</li>
+</ul>
+<h4>アクションメソッドの呼び出し</h4>
+<p>
+アクションメソッドの呼び出しは、<a href="taglib.html">S2Strutsのタグライブラリ</a>を利用して呼び出すことができます。
+</p>
+<pre>
+&lt;s2struts:submit action="@{add_addAction.calculate}"&gt;
+    calculate
+&lt;/s2struts:submit&gt;
+</pre>
+<h4>自動バインディング</h4>
+<p>
+POJO Actionにsetterメソッドがある場合、アクションのメソッドが実行される前に、プロパティ名をキーとして<code>HttpServletRequest</code>や<code>HttpSession</code>から取得した値がプロパティにインポートされます。
+値の取得を試みる優先順位は次の通りです。
+</p>
+<ol>
+<li><code>HttpServletRequest#getAttribute(プロパティ名)</code></li>
+<li><code>HttpServletRequest#getParameter(プロパティ名)</code></li>
+<li><code>HttpSession#getAttribute(プロパティ名)</code></li>
+</ol>
+
+<p>
+また、POJO Actionにgetterメソッドがある場合、アクションのメソッドが実行された後で、プロパティの値がプロパティ名をキーとして<code>HttpServletRequest</code>や<code>HttpSession</code>にエキスポートされます。<br>
+</p>
+<ol>
+<li>デフォルトで、<code>HttpServletRequest#setAttribute(プロパティ名,プロパティ値)</code>が実行されます</li>
+<li>アノテーションで指定された場合に限り、<code>HttpSession#setAttribute(プロパティ名,プロパティ値)</code>が実行されます</li>
+</ol>
+<pre>
+@ExportToSession()
+public String getFoo() {
+    return foo;
+}
+</pre>
+<p>
+ActionFormのインポートとエクスポートもこの自動バインディングの仕組みを用いて行われます。
+</p>
+
+<h2><a name="MappingRegistration">Actionのマッピング定義の登録</a></h2>
+<p>
+Actionのマッピング定義に登録する方法は大きく分けて2つあります。
+struts-config.xmlに記述する方法と、記述しない方法です。
+記述しない場合は、無設定Strutsという機能を使います。
+</p>
+<h3>struts-config.xmlに記述する方法</h3>
+<h4><a href="Normal">通常の方法</a></h4>
+通常通り、Strutsでaction-mapping要素内にaction要素を記述する方法です。
+<pre>
+&lt;action
+    path="/add"
+    type="org.seasar.struts.examples.add.AddAction"
+    name="calcForm"
+    scope="request"
+    validate="false"
+    input="/pages/addInput.html"/&gt;
+   &lt;forward name="success" path="/pages/result.html" /&gt;
+&lt;/action&gt;
+</pre>
+<h3><a name="PathMatching">action要素のpath属性とActionコンポーネント名を一致させる方法 </a></h3>
+<h4>action要素のtype属性に<code>ActionProxy</code>を指定する方法</h4>
+<pre>
+&lt;action
+    path="/add"
+    <b>type="org.seasar.struts.action.ProxyAction"</b>
+    name="calcForm"
+    scope="request"
+    validate="false"
+    input="/pages/addInput.html"/&gt;
+   &lt;forward name="success" path="/pages/result.html" /&gt;
+&lt;/action&gt;
+</pre>
+S2Strutsで管理するコンポーネントはaction要素のpath属性に指定した名前で登録しておく必要があります。
+<h4>action要素のtype属性に何も指定しない方法</h4>
+<pre>
+&lt;action
+    path="/add"
+    name="calcForm"
+    scope="request"
+    validate="false"
+   &lt;forward name="success" path="/pages/result.html" /&gt;
+&lt;/action&gt;
+</pre>
+S2Strutsで管理するコンポーネントはaction要素のpath属性に指定した名前で登録しておく必要があります。
+この方法を利用する場合、action要素のtype属性、forward属性、include属性には何も指定してはいけません。
+
+<h3><a name="ZeroConfig">無設定Strutsを利用する方法</a></h3>
+設定をアノテーションで記述します。無設定Strutsについては<a href="zeroconfig.html">無設定Sturtsリファレンス</a>を参照してください。
+<pre>@StrutsActionForm
+public class AddForm {
+    ...
+}
+</pre>
+<pre>@StrutsAction(input = AddAction.ADD)
+public class AddAction {
+...
+}
+</pre>
+<h2><a name="ComponentRegistration">Actionコンポーネントの登録</a></h2>
+<h3><a name="Manual">diconファイルにひとつずつ記述する方法</a></h3>
+Actionクラスの数だけ設定を記述します。インスタンス属性はrequestにします。
+<pre>
+&lt;component class="org.seasar.struts.examples.add.AddAction" <b>instance="request"</b>/&gt;
+</pre>
+<h3><a name="Auto">自動登録を使用する方法</h3>
+設定に従い、コンポーネントを一括で登録します。インスタンス属性はrequestにします。
+<pre>
+&lt;component
+  class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister"&gt;
+  &lt;property name="instanceDef"&gt;
+    <b>@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</b>
+  &lt;/property&gt;
+  &lt;property name="autoNaming"&gt;
+    &lt;component class="org.seasar.framework.container.autoregister.DefaultAutoNaming"/&gt;
+  &lt;/property&gt;
+  &lt;initMethod name="addClassPattern"&gt;
+    &lt;arg&gt;"examples.action"&lt;/arg&gt;
+    &lt;arg&gt;".*Action"&lt;/arg&gt;
+  &lt;/initMethod&gt;
+&lt;/component&gt;
+</pre>
+この設定は、app.diconもしくはapp.diconにインクルードされるdiconファイルで行ってください。
+詳しくは<a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#ComponentAutoRegister">コンポーネントの自動登録</a>を参照してください。
+<h3><a name="SmartDeploy">SMART deployを使用する方法</a></h3>
+<p>
+命名規約によりActionクラスのパッケージ名とクラス名を決定し、自動で登録されるようにします。
+SMART deployについては、<a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#SMARTdeploy">S2コンテナのドキュメント</a>や<a href="#HotDeploy">HOT deploy</a>を参照してください。
+HOT deployはSMART deployの1つのモードです。
+</p>
+<h2><a name="Message">メッセージの管理</a></h2>
+<p>
+<code>org.seasar.struts.pojo.MessageManager</code>クラスを利用すると任意のコンポーネントからエラーメッセージの表示を管理する事が可能になります。
+</p>
+<pre>
+MessageManager.addGlobalError("examplemessage");
+MessageManager.addGlobalError("examplemessage", "foo");
+MessageManager.addGlobalError("examplemessage", "bar", "baz", "qux");
+MessageManager.addError("property", "examplemessage");
+MessageManager.addError("property", "examplemessage", "foo");
+MessageManager.addError("property", "examplemessage", "bar", "baz", "qux");
+MessageManager.saveErrors();
+</pre>
+<p>
+これは、StrutsのActionクラスで実装する以下のコードとほぼ同意です。
+</p>
+<pre>
+ActionMessages errors = new ActionMessages();
+errors.add(ActionErrors.GLOBAL_MESSAGE,new ActionMessage("examplemessage"));
+errors.add(ActionErrors.GLOBAL_MESSAGE,new ActionMessage("examplemessage", "foo"));
+errors.add(ActionErrors.GLOBAL_MESSAGE,new ActionMessage("examplemessage", "bar", "baz", "qux"));
+errors.add("property",new ActionMessage("examplemessage"));
+errors.add("property",new ActionMessage("examplemessage", "foo"));
+errors.add("property",new ActionMessage("examplemessage", "bar", "baz", "qux"));
+if(!errors.isEmpty()) {
+    saveErrors(request,errors);
+}
+</pre>
+<p>
+"ほぼ"同意と記述した理由は、上記で利用するリソースのキーexamplemessageの中に、{4}などが含まれていた場合にそれを削除する機能がMessageManagerには備わっている為です。
+</p>
+<p>
+また、MessageManagerは、メッセージを管理するためのaddGlobalMessage()、addMessage()メソッドや、saveMessages()メソッドも備えています。
+引数などはエラーメッセージを扱う場合と同じです。
+</p>
+
+<h2><a name="HotDeploy">HOT deploy</a></h2>
+<p>
+HOT deployの説明については<a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#SMARTdeploy">SMART deploy</a>を参照してください。
+HOT deployを利用したサンプルとしてはS2StrutsExample V1.3.xやS2StrutsBlank V1.3.xを使用してください。
+これらの利用法については<a href="setup.html">S2Strutsのセットアップ</a>を参照してください。
+</p>
+<h3><a name="HotDeployRequirement">HOT deployの前提</a></h3>
+<p>
+<b>HOT deployを利用するにはServlet2.4が必要</b>です。
+S2Strutsでは、次のものをHOT deployの対象にできます。
+</p>
+<ul>
+<li>SMART deployの規約に従ったSeasar2のコンポーネント</li>
+<li>struts-config.xml</li>
+<li>validation.xml</li>
+<li>struts-config.xmlに指定するメッセージ用のプロパティファイル</li>
+</ul>
+
+<h3><a name="HotDeployConfig">HOT deployの設定</a></h3>
+<p>
+HOT deployを利用するには次の設定を確認してください。
+</p>
+<ol>
+
+  <li>必要なdiconファイル
+  <br />次のdiconファイルがクラスパス上に存在している必要があります。
+  <ul>
+    <li>s2container.dicon</li>
+    <li>creator.dicon</li>
+    <li>customizer.dicon</li>
+    <li>convention.dicon
+    <br />convention.diconには、ルートパッケージ名を指定する必要があります。
+<pre>
+&lt;components&gt;
+    &lt;component class="org.seasar.framework.convention.impl.NamingConventionImpl"&gt;
+        &lt;initMethod name="addRootPackageName"&gt;
+            <b><font color="red">&lt;arg&gt;"xxx.yyy.examples"&lt;/arg&gt;</font></b>
+        &lt;/initMethod&gt;
+    &lt;/component&gt;
+&lt;/components&gt;
+</pre>
+    </li>
+  </ul>
+  </li>
+
+  <li>env.txt
+  <ul>
+  <li>
+  <a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#ConditionalInclude">条件インクルード</a>を利用するためにenv.txtをクラスパスに追加します。
+  env.txtには「ct」と記述します。
+  運用環境ではブランクもしくは「product」と記述しHOT deployは使用しないようにしてください。
+<pre>
+ct
+</pre>
+  </li>
+  </ul>
+  </li>
+
+  <li>app.dicon
+  <ul>
+    <li>条件インクルードによりs2struts-hotdeploy.diconがインクルードされるようにします。
+<pre>
+  &lt;include condition="#ENV != 'ct'" path="s2struts.dicon"/&gt;
+  &lt;include condition="#ENV == 'ct'" path="s2struts-hotdeploy.dicon"/&gt;
+</pre>
+  </li>
+  </ul>
+  </li>
+
+  <li>struts-config.xml
+  <ul>
+  <li>
+  <code>S2RequestProcessor</code>や<code>S2TilesRequestProcessor</code>を利用している場合は、
+  controllerにcatalogを指定し、プロパティで<code>ACTION_CONTEXT_CLASS</code>にS2Strutsのクラスを指定します。
+  <code>S2RequestProcessor</code>や<code>S2TilesRequestProcessor</code>はHOT deployに完全対応していないため、Commons Chainを利用するこの設定が必要です。
+<pre>
+  &lt;controller catalog="s2struts"&gt;
+    &lt;set-property 
+      key="ACTION_CONTEXT_CLASS" 
+      value="org.seasar.struts.processor.contexts.S2ServletActionContext"/&gt;
+  &lt;/controller&gt;</pre>
+  </li>
+  <li>
+  plug-inに<code>org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn</code>を追加します。
+<pre>
+  &lt;plug-in 
+    className="org.seasar.struts.hotdeploy.plugin.HotdeployPlugIn"/&gt;
+</pre>
+  </li>
+  </ul>
+  </li>
+
+  <li>web.xml
+  <ul>
+    <li><code>HotdeployFilter</code>を追加します。dispatcherの指定を正確に行ってください。
+<pre>
+  &lt;filter&gt;
+    &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;
+      org.seasar.framework.container.hotdeploy.HotdeployFilter
+    &lt;/filter-class&gt;
+  &lt;/filter&gt;
+...
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
+    &lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
+    &lt;dispatcher&gt;INCLUDE&lt;/dispatcher&gt;
+  &lt;/filter-mapping&gt;
+</pre>
+    </li>
+    <li><code>S2StrutsHotdeployFilter</code>を追加します。
+<pre>
+  &lt;filter&gt;
+    &lt;filter-name&gt;s2strutshotdeployfilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;
+      org.seasar.struts.hotdeploy.filter.S2StrutsHotdeployFilter
+    &lt;/filter-class&gt;
+  &lt;/filter&gt;
+...
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;s2strutshotdeployfilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+</pre>
+  </li>
+  </ul>
+  
+</ol>
+
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">Copyright&copy; 2004-2005, The Seasar Foundation and the others. All rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>

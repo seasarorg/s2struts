@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head>
+<title>Seasar - DI Container with AOP - </title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link href="seasar_b.css" type="text/css" rel="stylesheet" media="screen">
+<link href="seasar_p.css" type="text/css" rel="stylesheet" media="print">
+<script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="740" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+    <li><a href="#Summary">概要</a></li>
+    <li><a href="#FromS2Struts12ToS2Struts13">S2Struts1.2.xからS2Struts1.3.xへの移行</a>
+        <ul>
+            <li><a href="#ToStruts13">Struts1.3.8への移行</a></li>
+            <li><a href="#ToS24">S2.4.xへの移行</a></li>
+            <li><a href="#ToS2Struts13">S2Struts1.3.xへの移行</a>
+                <ul>
+                    <li><a href="#Jar">jarファイルの置き換え</a></li>
+                    <li><a href="#Source">ソースコードの修正</a></li>
+                    <li><a href="#Dicon">diconファイルの削除</a></li>
+                    <li><a href="#StrutsConfigXml">struts-config.xmlの修正</a></li>
+                    <li><a href="#WebXml">web.xmlの修正</a></li>
+                    <li><a href="#AppDicon">app.diconの修正</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<h2><a name="Summary">概要</a></h2>
+<p>
+S2Struts1.2.xから1.3.xへ移行する手順について説明します。
+移行するために必要となるファイルはS2StrutsBlank V1.3.xに含まれていますので、あらかじめダウンロードしてください。
+</p>
+<p>
+以降では、S2Struts1.2.12からS2Struts1.3.0-RC6へ移行するものとして説明します。
+「S2Struts1.2.x」という表記は「S2Struts1.2.12」と、また、「S2Struts1.3.x」という表記は「S2Struts1.3.0-RC6」と読み替えてください。
+</p>
+<h2><a name="FromS2Struts12ToS2Struts13">S2Struts1.2.xからS2Struts1.3.xへの移行</a></h2>
+<p>
+S2Struts1.3はStruts1.3.8とSeasar2.4.xを組み合わせた環境で動作します。
+したがって、Struts1.2.9とSeasar2.3を使用するStruts1.2.xをS2Struts1.3.xへ移行するには、StrutsとSeasar2の移行も必須となります。移行は次の手順で行います。
+</p>
+<ol>
+  <li>Struts1.3.8への移行</li>
+  <li>Seasar2.4.xへの移行</li>
+  <li>S2Struts1.3.xへの移行</li>
+</ol>
+
+<h3><a name="ToStruts13">Struts1.3.8への移行</a></h3>
+<p>
+Struts1.3.8への移行は以下の手順で行います。
+</p>
+  <ul>
+    <li>Struts1.2.9本体のjarファイルとその依存jarファイルを削除します。</li>
+    <li>Struts1.3.8本体のjarファイルとその依存jarファイルを追加します。
+    <br />ただし、commons-beanutilsはバージョン1.7.0ではなく1.8.0-BETAを利用してください。バージョン1.7.0のcommons-beanutilsに含まれる<code>WrapDynaBean</code>クラスは、シリアライズ可能でないという問題を抱えています。
+    </li>
+  </ul>
+  
+<h3><a name="ToS24">Seasar2.4.xへの移行</a></h3>
+<p>
+Seasar2.4.xへの移行は以下の手順で行います。
+</p>
+  <ul>
+    <li>Seasar2.3.x本体のjarファイル（s2-framework-2.3.x.jarとs2-extension-2.3.x.jar）とその依存jarファイルを削除します。</li>
+    <li>Seasar2.4.x本体のjarファイル（s2-framework-2.4.x.jarとs2-extension-2.4.x.jar）とその依存jarファイルを追加します。</li>
+    <li>j2ee.diconを削除します。（このファイルはs2-extension-2.4.x.jarに含まれています。）</li>
+    <li>jdbc.diconを追加します。</li>
+  </ul>
+  
+<h3><a name="ToS2Struts13">S2Struts1.3.xへの移行</a></h3>
+<p>
+S2Struts1.3.xへの移行は以下の手順で行います。
+</p>
+<ol>
+  <li><a name="Jar">jarファイルの置き換え</a>
+  </li>
+  <ul>
+    <li>S2Struts1.2.x本体のjarファイル（s2-struts-1.2.x.jarとs2-struts-tiger-1.2.x.jar）を削除します。</li>
+    <li>S2Struts1.3.x本体のjarファイル（s2-struts-1.3.x.jarとs2-struts-tiger-1.3.x.jar）を追加します。</li>
+  </ul>
+  <p />
+  <li><a name="Source">ソースコードの修正</a>
+  <p>
+  1.2.xから1.3.xでクラスのパッケージ名やメソッドのシグネチャが一部変更されているのでコンパイルエラーが発生します。次の修正を行ってください。
+  </p>
+  <ul>
+    <li><code>org.seasar.struts.action.MessageManager</code>を変更し、<code>org.seasar.struts.pojo.MessageManager</code>とする。</li>
+    <li><code>org.seasar.struts.annotation.tiger</code>パッケージに属するアノテーションの<code>boolean</code>型の属性を<code>org.seasar.struts.annotation.tiger.BoolType</code>型に変更する。</li>
+  </ul>
+  <p />
+  <li><a name="Dicon">diconファイルの削除 </a></li>
+  <ul>
+    <li>s2struts.diconを削除します。2struts.diconはs2-struts-1.3.x.jarに含まれるようになりました。
+    <br />ただし、s2struts.diconをカスタマイズして使いたい場合は、S2Struts1.3.xのs2struts.diconを適切に修正して使ってください。
+    その場合、S2StrutsBlank V1.3.xの配布ファイルに含まれるs2struts.diconではなく、S2Struts V1.3.xの配布ファイルに含まれるs2struts.diconを使用してください。
+    2StrutsBlank V1.3.xの配布ファイルに含まれるs2struts.diconにはSMART deployで使用されるのを前提とした記述がされています。
+    </li>
+  </ul>
+  <p />
+  <li><a name="StrutsConfigXml">struts-config.xmlの修正</a></li>
+  <ul>
+    <li>DOCTYPE宣言を変更します。</li>
+<pre>
+&lt;!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd"&gt;
+</pre>
+<pre>
+<b><font color="red">&lt;!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd"&gt;</font></b>
+</pre>
+    <li>Commons Chainを利用するようにcontroller要素を変更します。
+    S2RequestProcessorを使用した既存の設定でも動作しますが、その場合は<a href="#AppDicon">app.diconの修正</a>が必要になります。
+    推奨はCommons Chainを利用する設定です。
+    </li>
+<pre>
+  &lt;controller
+     processorClass="org.seasar.struts.processor.S2RequestProcessor"/&gt;
+</pre>
+<pre>
+  <b><font color="red">&lt;controller catalog="s2struts"&gt;
+    &lt;set-property 
+        key="ACTION_CONTEXT_CLASS" 
+        value="org.seasar.struts.processor.contexts.S2ServletActionContext"/&gt;
+  &lt;/controller&gt;</font></b>
+</pre>
+    <li><code>org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn</code>を利用している場合は名前を
+        <code>org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn</code>に変更します。
+    </li>
+<pre>
+  &lt;plug-in 
+    className="org.seasar.struts.plugin.AutoStrutsConfigRegisterPlugIn"/&gt;
+</pre>
+<pre>
+  <b><font color="red">&lt;plug-in 
+    className="org.seasar.struts.lessconfig.plugin.AutoStrutsConfigRegisterPlugIn"/&gt;</font></b>
+</pre>
+  </ul>
+  <p />
+  <li><a name="WebXml">web.xmlの修正</a></li>
+  <ul>
+    <li><code>S2ActionServlet</code>をStrutsの<code>ActionServlet</code>に変更し、<code>init-param</code>でS2Struts用のchain-config.xmlを指定します。
+    </li>
+<pre>
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.seasar.struts.servlet.S2ActionServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;config&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+</pre>
+<pre>
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;action&lt;/servlet-name&gt;
+    <b><font color="red">&lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;</font></b>
+    &lt;init-param&gt;
+      &lt;param-name&gt;config&lt;/param-name&gt;
+      &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    <b><font color="red">&lt;init-param&gt;
+      &lt;param-name&gt;chainConfig&lt;/param-name&gt;
+      &lt;param-value&gt;s2struts-chain-config.xml, 
+        org/apache/struts/chain/chain-config.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;</font></b>
+    &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+</pre>
+    <p>
+    <code>S2ActionServlet</code>は、ActionのコンポーネントをS2コンテナに自動登録する機能を持っていますが、この変更を加えることで、この機能は使えなくなります。
+    S2ActionServletの自動登録機能を利用している場合は、代わりに次のいずれかの方法でコンポーネントを登録するようにしてください。
+    </p>
+    <ul>
+      <li>diconファイルで明示的にコンポーネントを定義する</li>
+      <li><a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#ComponentAutoRegister">Seasar2のコンポーネント自動登録機能</a>を使用する</li>
+      <li><a href="http://s2container.seasar.org/2.4/ja/DIContainer.html#SMARTdeploy">SMART deploy</a>を使用する<br />
+      SMART deployの規約にあわせるのが難しい場合は、無理してSMART deployを利用しようとはせず、コンポーネント自動登録機能を利用することを推奨します。</li>
+    </ul>
+  </ul>
+  <p />
+  <li><a name="AppDicon">app.diconの修正</a></li>
+  <ul>
+    <li>struts-config.xmlの修正で、S2RequestProcessorを使い続けることを選択した場合、
+    s2struts.diconの代わりにs2struts-processor.diconをインクルードするように変更します。</li>
+<pre>
+    &lt;include path="s2struts.dicon"/&gt;
+</pre>
+<pre>
+    <b><font color="red">&lt;include path="s2struts-processor.dicon"/&gt;</font></b>
+</pre>
+  </ul>
+</ol>
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">Copyright&copy; 2004-2005, The Seasar Foundation and the others. All rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>

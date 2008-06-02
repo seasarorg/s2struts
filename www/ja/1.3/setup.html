@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head>
+<title>Seasar - DI Container with AOP - </title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link href="seasar_b.css" type="text/css" rel="stylesheet" media="screen">
+<link href="seasar_p.css" type="text/css" rel="stylesheet" media="print">
+<script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="740" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+    <li><a href="#Summary">S2Struts概要</a></li>
+    <li><a href="#Setup">セットアップ</a>
+    <ul>
+        <li><a href="#Blank">S2StrutsBlank</a></li>
+        <li><a href="#Example">S2StrutsExample</a></li>
+    </ul>
+    </li>
+</ul>
+<h2><a name="Summary">S2Struts概要</a></h2>
+<p>
+S2Strutsを使うと、Seasar2と<a href="http://struts.apache.org/">Struts</a>を連動させられます。
+Actionクラスにサービスコンポーネントが自動的に設定されるので、
+Actionクラスの役割は適切なサービスコンポーネントを呼び出すだけになります。
+Actionクラスはコントローラに徹することで、プレゼンテーション層とサービス層の役割分担も明確になります。
+また、Actionに対して<a href="http://s2container.seasar.org/ja/aop.html">AOP</a>を適用することもできます。
+</p>
+<h2><a name="Setup">セットアップ</a></h2>
+<p>
+JDK1.4 or JDK1.5が必要です。
+稼動確認は、<a href="http://tomcat.apache.org/">Tomcat V6.0</a>とEclipse 3.3で行っています。
+あらかじめインストールし、サーバーの構成まで完了させてください。
+</p>
+<p>
+セットアップを簡単に行うには、すでに設定が整っているS2StrutsBlankもしくはS2StrutsExampleを利用するのがよいでしょう。
+</p>
+<p>
+新規にプロジェクトを作成する場合は、S2StrutsBlankを使用してください。
+サンプルを動作させるにはS2StrutsExampleを使用してください。
+どちらもEclipseにインポートしてそのまま使用できます。
+これらは、Eclipse Web Tools Project（WTP）に対応した構成になっています。
+</p>
+<h3><a name="Blank">S2StrutsBlank</a></h3>
+<p>
+S2Strutsを使ったアプリケーションを開発するための雛形です。次の特徴を持ちます。
+</p>
+<ul>
+<li>Servlet2.4を利用しています。</li>
+<li>S2Daoを利用するために必要なjarファイルと設定ファイルが含まれています。</li>
+<li>SMART deployに必要な設定ファイルが含まれています。</li>
+<li>HOT deployが有効になっているため、アプリケーションの再デプロイを行うことなくクラスの追加や修正が行えます。</li>
+<li>Tailsを使ったレイアウトが行いやすい設定がされています。</li>
+</ul>
+<p>
+不要なものは適宜削除して使ってください。
+</p>
+<p>
+動作させるには、WTPのサーバーにデプロイ後、ブラウザから<a href="http://localhost:8080/s2struts-smartdeploy-blank/">http://localhost:8080/s2struts-smartdeploy-blank/</a>にアクセスしてください。
+<p/>
+<h3><a name="Example">S2StrutsExample</a></h3>
+<p>
+S2Strutsを使ったサンプルが含まれています。次の特徴を持ちます。
+</p>
+<ul>
+<li>Servlet2.4を利用しています。</li>
+<li>S2Daoを使ってデータベースにアクセスするサンプルを含んでいます。</li>
+<li>SMART deploy（HOT deploy）を利用しています。</li>
+<li>無設定Strutsを利用しています。</li>
+<li>Tailsを使ったレイアウトを行っています。</li>
+<li>S2Strutsのタグライブラリを使用しています。</li>
+</ul>
+<p>
+適宜修正しながら使ってください。
+</p>
+<p>
+動作させるには、WTPのサーバーにデプロイ後、ブラウザから<a href="http://localhost:8080/s2struts-smartdeploy-example/">http://localhost:8080/s2struts-smartdeploy-example/</a>にアクセスしてください。
+<p/>
+
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">Copyright&copy; 2004-2005, The Seasar Foundation and the others. All rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
