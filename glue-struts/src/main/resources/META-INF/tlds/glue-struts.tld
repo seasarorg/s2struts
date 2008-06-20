@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+"http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+<tlibversion>1.2</tlibversion>
+<jspversion>1.2</jspversion>
+<shortname>s2struts</shortname>
+<uri>http://www.seasar.org/tags-glue-struts</uri>
+
+<tag>
+<name>init</name>
+<tagclass>org.seasar.struts.mini.tag.InitTag</tagclass>
+<attribute>
+<name>component</name>
+<required>false</required>
+<rtexprvalue>false</rtexprvalue>
+</attribute>
+<attribute>
+<name>method</name>
+<required>false</required>
+<rtexprvalue>false</rtexprvalue>
+</attribute>
+</tag>
+
+</taglib>
