@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
-    "http://www.seasar.org/dtd/components21.dtd">
-<components>
-    <component name="actionFactory" class="org.seasar.struts.glue.action.ActionFactoryImpl"/>
-    <component name="nameExtracter" class="org.seasar.struts.glue.action.NameExtracterImpl"/>
+	"http://www.seasar.org/dtd/components21.dtd">
+<components namespace="glue-struts">
+	<component name="glue" class="org.seasar.struts.glue.action.GlueImpl">
+		<property name="actionFactory">actionFactory</property>
+		<property name="methodNameExtracter">methodNameExtracter</property>
+	</component>
+	<component name="actionFactory" class="org.seasar.struts.glue.action.ActionFactoryImpl" />
+	<component name="methodNameExtracter" class="org.seasar.struts.glue.action.MethodNameExtracterImpl"/>
 </components>

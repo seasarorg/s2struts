@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.RequestProcessor;
+import org.apache.struts.tiles.TilesRequestProcessor;
 
-public class GlueRequestProcessor extends RequestProcessor {
+public class GlueTilesRequestProcessor extends TilesRequestProcessor {
 
     @Override
     protected Action processActionCreate(final HttpServletRequest request,

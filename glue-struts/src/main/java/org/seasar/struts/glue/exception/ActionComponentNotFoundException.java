@@ -1,18 +1,21 @@
 package org.seasar.struts.glue.exception;
 
-import org.apache.struts.action.ActionMapping;
+public class ActionComponentNotFoundException extends GlueRuntimeException {
 
-public class ActionComponentNotFoundException extends GlueException {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-    protected ActionMapping mapping;
+    protected String componentName;
 
-    public ActionComponentNotFoundException(ActionMapping mapping) {
-        super("Action component not found. {0}", mapping);
-        this.mapping = mapping;
+    public ActionComponentNotFoundException(final String componentName) {
+        super("Action component({0}) not found.", componentName);
+        this.componentName = componentName;
     }
 
-    public ActionMapping getMapping() {
-        return mapping;
+    public String getComponentName() {
+        return componentName;
     }
 
 }

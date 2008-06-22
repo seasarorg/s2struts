@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="glue" class="org.seasar.struts.glue.action.GlueImpl" >
+		<property name="actionFactory" ref="actionFactory" />
+		<property name="methodNameExtracter" ref="methodNameExtracter" />
+	</bean>
+	<bean id="actionFactory" class="org.seasar.struts.glue.action.ActionFactoryImpl" />
+	<bean id="methodNameExtracter" class="org.seasar.struts.glue.action.MethodNameExtracterImpl" />
+</beans>

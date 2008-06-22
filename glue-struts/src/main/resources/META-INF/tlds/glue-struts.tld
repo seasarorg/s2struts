@@ -8,15 +8,15 @@
 <uri>http://www.seasar.org/tags-glue-struts</uri>
 
 <tag>
-<name>init</name>
-<tagclass>org.seasar.struts.mini.tag.InitTag</tagclass>
+<name>prepare</name>
+<tagclass>org.seasar.struts.glue.tag.PrepareTag</tagclass>
 <attribute>
-<name>component</name>
+<name>componentName</name>
 <required>false</required>
 <rtexprvalue>false</rtexprvalue>
 </attribute>
 <attribute>
-<name>method</name>
+<name>methodName</name>
 <required>false</required>
 <rtexprvalue>false</rtexprvalue>
 </attribute>

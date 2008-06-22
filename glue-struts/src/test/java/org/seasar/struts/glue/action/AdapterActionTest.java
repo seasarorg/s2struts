@@ -6,29 +6,36 @@ import java.lang.reflect.Method;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionServlet;
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.struts.glue.action.AdapterAction;
 import org.seasar.struts.glue.annotation.Form;
 
 public class AdapterActionTest extends S2TestCase {
 
     public void testExecute() throws Exception {
-        MyAction action = new MyAction();
-        Method method = MyAction.class.getDeclaredMethod("execute");
-        AdapterAction adapterAction = new AdapterAction(action, method);
-        Field field = MyAction.class.getDeclaredField("form");
+        final MyAction action = new MyAction();
+        final Method method = MyAction.class.getDeclaredMethod("execute");
+        final AdapterAction adapterAction = new AdapterAction(
+                new ActionServlet(), action, method);
+        final Field field = MyAction.class.getDeclaredField("form");
         field.setAccessible(true);
         adapterAction.setActionFormField(field);
 
-        ActionMapping mapping = new ActionMapping() {
+        final ActionMapping mapping = new ActionMapping() {
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
             public ActionForward findForward(String name) {
                 ActionForward forward = new ActionForward();
                 forward.setName(name);
                 return forward;
             }
         };
-        MyActionForm form = new MyActionForm();
-        ActionForward forward = adapterAction.execute(mapping, form,
+        final MyActionForm form = new MyActionForm();
+        final ActionForward forward = adapterAction.execute(mapping, form,
                 getRequest(), getResponse());
 
         assertEquals("hoge", forward.getName());
@@ -47,5 +54,10 @@ public class AdapterActionTest extends S2TestCase {
     }
 
     public static class MyActionForm extends ActionForm {
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
     }
 }

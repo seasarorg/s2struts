@@ -13,12 +13,16 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionServlet;
+import org.seasar.struts.glue.annotation.Form;
 import org.seasar.struts.glue.annotation.RequestAttribute;
 import org.seasar.struts.glue.annotation.SessionAttribute;
 import org.seasar.struts.glue.util.FieldUtil;
 import org.seasar.struts.glue.util.MethodUtil;
 
 public class AdapterAction extends Action {
+
+    protected ActionServlet servlet;
 
     protected Object action;
 
@@ -30,7 +34,11 @@ public class AdapterAction extends Action {
 
     protected List<Field> sessionAttributeFields = new ArrayList<Field>();
 
-    public AdapterAction(Object action, Method actionMethod) {
+    public AdapterAction(final ActionServlet servlet, final Object action,
+            final Method actionMethod) {
+        if (servlet == null) {
+            throw new NullPointerException("servlet");
+        }
         if (action == null) {
             throw new NullPointerException("action");
         }
@@ -41,121 +49,157 @@ public class AdapterAction extends Action {
         this.actionMethod = actionMethod;
     }
 
-    public void setActionFormField(Field actionFormField) {
+    public void setActionFormField(final Field actionFormField) {
         this.actionFormField = actionFormField;
     }
 
-    public void addRequestAttributeFields(List<Field> requestAttributeFields) {
+    public void addRequestAttributeFields(
+            final List<Field> requestAttributeFields) {
         this.requestAttributeFields.addAll(requestAttributeFields);
     }
 
-    public void addSessionAttributeFields(List<Field> sessionAttributeFields) {
+    public void addSessionAttributeFields(
+            final List<Field> sessionAttributeFields) {
         this.sessionAttributeFields.addAll(sessionAttributeFields);
     }
 
     @Override
-    public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    public ActionForward execute(final ActionMapping mapping,
+            final ActionForm actionForm, final HttpServletRequest request,
+            final HttpServletResponse response) throws Exception {
 
+        bindActionServlet();
         bindActionForm(actionForm);
         impoprtRequestAttribute(request);
         impoprtSessionAttribute(request);
-        ActionForward forward = execute(mapping);
+        final ActionForward forward = execute(mapping);
+        exportActionForm(request, actionForm);
         exportRequestAttribute(request);
         exportSessionAttribute(request);
         return forward;
     }
 
-    protected ActionForward execute(ActionMapping mapping) throws Exception {
-        String forwardName = (String) MethodUtil.invoke(actionMethod, action,
-                null);
+    protected ActionForward execute(final ActionMapping mapping)
+            throws Exception {
+        final String forwardName = (String) MethodUtil.invoke(actionMethod,
+                action, null);
         if (mapping != null && forwardName != null) {
             return mapping.findForward(forwardName);
         }
         return null;
     }
 
-    protected void bindActionForm(ActionForm actionForm) {
+    protected void bindActionServlet() {
+        if (Action.class.isInstance(action)) {
+            Action.class.cast(action).setServlet(servlet);
+        }
+    }
+
+    protected void bindActionForm(final ActionForm actionForm) {
         if (actionFormField != null) {
             FieldUtil.set(actionFormField, action, actionForm);
         }
     }
 
-    protected void impoprtRequestAttribute(HttpServletRequest request) {
-        for (Field field : requestAttributeFields) {
-            RequestAttribute ra = field.getAnnotation(RequestAttribute.class);
-            if (!ra.imports() || FieldUtil.get(field, action) != null) {
+    protected void exportActionForm(final HttpServletRequest request,
+            final ActionForm actionForm) {
+        if (actionFormField == null) {
+            return;
+        }
+        final Form form = actionFormField.getAnnotation(Form.class);
+        if (!form.exportsToRequest()) {
+            return;
+        }
+        String name = null;
+        if ("".equals(form.name())) {
+            name = actionFormField.getName();
+        } else {
+            name = form.name();
+        }
+        final Object value = FieldUtil.get(actionFormField, action);
+        if (value != null) {
+            request.setAttribute(name, value);
+        }
+    }
+
+    protected void impoprtRequestAttribute(final HttpServletRequest request) {
+        for (final Field field : requestAttributeFields) {
+            final RequestAttribute attr = field
+                    .getAnnotation(RequestAttribute.class);
+            if (!attr.imports() || FieldUtil.get(field, action) != null) {
                 continue;
             }
             String name = null;
-            if ("".equals(ra.name())) {
+            if ("".equals(attr.name())) {
                 name = field.getName();
             } else {
-                name = ra.name();
+                name = attr.name();
             }
-            Object value = request.getAttribute(name);
+            final Object value = request.getAttribute(name);
             FieldUtil.set(field, action, value);
         }
     }
 
-    protected void exportRequestAttribute(HttpServletRequest request) {
-        for (Field field : requestAttributeFields) {
-            RequestAttribute ra = field.getAnnotation(RequestAttribute.class);
-            if (!ra.exports()) {
+    protected void exportRequestAttribute(final HttpServletRequest request) {
+        for (final Field field : requestAttributeFields) {
+            final RequestAttribute attr = field
+                    .getAnnotation(RequestAttribute.class);
+            if (!attr.exports()) {
                 continue;
             }
             String name = null;
-            if ("".equals(ra.name())) {
+            if ("".equals(attr.name())) {
                 name = field.getName();
             } else {
-                name = ra.name();
+                name = attr.name();
             }
-            Object value = FieldUtil.get(field, action);
+            final Object value = FieldUtil.get(field, action);
             if (value != null) {
                 request.setAttribute(name, value);
             }
         }
     }
 
-    protected void impoprtSessionAttribute(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+    protected void impoprtSessionAttribute(final HttpServletRequest request) {
+        final HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
-        for (Field field : sessionAttributeFields) {
-            SessionAttribute sa = field.getAnnotation(SessionAttribute.class);
-            if (!sa.imports() || FieldUtil.get(field, action) != null) {
+        for (final Field field : sessionAttributeFields) {
+            final SessionAttribute attr = field
+                    .getAnnotation(SessionAttribute.class);
+            if (!attr.imports() || FieldUtil.get(field, action) != null) {
                 continue;
             }
             String name = null;
-            if ("".equals(sa.name())) {
+            if ("".equals(attr.name())) {
                 name = field.getName();
             } else {
-                name = sa.name();
+                name = attr.name();
             }
-            Object value = session.getAttribute(name);
+            final Object value = session.getAttribute(name);
             FieldUtil.set(field, action, value);
         }
     }
 
-    protected void exportSessionAttribute(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+    protected void exportSessionAttribute(final HttpServletRequest request) {
+        final HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
-        for (Field field : sessionAttributeFields) {
-            SessionAttribute sa = field.getAnnotation(SessionAttribute.class);
-            if (!sa.exports()) {
+        for (final Field field : sessionAttributeFields) {
+            final SessionAttribute attr = field
+                    .getAnnotation(SessionAttribute.class);
+            if (!attr.exports()) {
                 continue;
             }
             String name = null;
-            if ("".equals(sa.name())) {
+            if ("".equals(attr.name())) {
                 name = field.getName();
             } else {
-                name = sa.name();
+                name = attr.name();
             }
-            Object value = FieldUtil.get(field, action);
+            final Object value = FieldUtil.get(field, action);
             if (value != null) {
                 session.setAttribute(name, value);
             }

@@ -1,10 +1,8 @@
 package org.seasar.struts.glue;
 
-import org.seasar.struts.glue.registry.Seasar2Registry;
-
 public class RegistryLocator {
 
-    protected static Registry instance = new Seasar2Registry();
+    protected static Registry instance;
 
     private RegistryLocator() {
     }
@@ -13,7 +11,7 @@ public class RegistryLocator {
         return instance;
     }
 
-    public static void setInstance(Registry instance) {
+    public static void setInstance(final Registry instance) {
         RegistryLocator.instance = instance;
     }
 

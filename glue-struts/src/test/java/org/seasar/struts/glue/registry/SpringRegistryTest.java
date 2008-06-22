@@ -1,28 +1,30 @@
 package org.seasar.struts.glue.registry;
 
-import org.seasar.extension.unit.S2TestCase;
+import junit.framework.TestCase;
+
 import org.seasar.struts.glue.ActionFactory;
 import org.seasar.struts.glue.Glue;
 import org.seasar.struts.glue.MethodNameExtracter;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
-public class Seasar2RegistryTest extends S2TestCase {
+public class SpringRegistryTest extends TestCase {
 
-    @Override
-    protected void setUp() {
-        include("glue-struts.dicon");
-    }
-
-    public void testHasComponent() throws Exception {
-        final Seasar2Registry registry = new Seasar2Registry();
-        registry.setContainer(getContainer());
+    public void testHasComponent() {
+        final XmlBeanFactory beanFactory = new XmlBeanFactory(
+                new ClassPathResource("glue-struts.xml"));
+        final SpringRegistry registry = new SpringRegistry();
+        registry.setBeanFactory(beanFactory);
         assertTrue(registry.hasComponent("glue"));
         assertTrue(registry.hasComponent("actionFactory"));
         assertTrue(registry.hasComponent("methodNameExtracter"));
     }
 
-    public void testGetComponent() throws Exception {
-        final Seasar2Registry registry = new Seasar2Registry();
-        registry.setContainer(getContainer());
+    public void testGetComponent() {
+        final XmlBeanFactory beanFactory = new XmlBeanFactory(
+                new ClassPathResource("glue-struts.xml"));
+        final SpringRegistry registry = new SpringRegistry();
+        registry.setBeanFactory(beanFactory);
         final Glue glue = registry.getComponent("glue");
         assertNotNull(glue);
         final ActionFactory actionFactory = registry
@@ -32,4 +34,5 @@ public class Seasar2RegistryTest extends S2TestCase {
                 .getComponent("methodNameExtracter");
         assertNotNull(methodNameExtracter);
     }
+
 }

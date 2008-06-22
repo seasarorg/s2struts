@@ -108,33 +108,20 @@
       <artifactId>s2-extension</artifactId>
       <version>2.3.23</version>
       <type>jar</type>
-    </dependency>
-    <!--
-    <dependency>
-      <groupId>commons-beanutils</groupId>
-      <artifactId>commons-beanutils</artifactId>
-      <version>1.7.0</version>
-      <type>jar</type>
+      <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>commons-validator</groupId>
-      <artifactId>commons-validator</artifactId>
-      <version>1.1.4</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>1.2.9</version>
       <type>jar</type>
+      <optional>true</optional>
     </dependency>
-    -->
     <!-- provided -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.3</version>
-      <type>jar</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xercesImpl</artifactId>
-      <version>2.5.0</version>
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
