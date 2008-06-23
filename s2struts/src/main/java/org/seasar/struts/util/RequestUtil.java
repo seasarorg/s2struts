@@ -23,7 +23,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts.upload.MultipartRequestWrapper;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.struts.Constants;
 import org.seasar.struts.pojo.util.IndexedUtil;
+import org.seasar.struts.servlet.http.S2ServletRequestWrapper;
 
 /**
  * {@link HttpServletRequest}のためのユーティリティです。
@@ -79,6 +83,12 @@ public class RequestUtil {
      * @param request
      */
     public static void decodeBase64Parameter(HttpServletRequest request) {
+        if (!request.getParameterNames().hasMoreElements()) {
+            return;
+        }
+        if (request.getAttribute(Constants.BASE64_FORMAT_DECODED) != null) {
+            return;
+        }
         for (Enumeration e = request.getParameterNames(); e.hasMoreElements();) {
             String paramName = (String) e.nextElement();
             String s = paramName.replaceFirst("(\\.x$)|(\\.y$)", "");
@@ -90,7 +100,47 @@ public class RequestUtil {
                 Map.Entry entry = (Map.Entry) i.next();
                 request.setAttribute((String) entry.getKey(), entry.getValue());
             }
+            if (decodedParams.containsKey(Constants.PROPERTY_KEY)) {
+                String property = (String) decodedParams.get(Constants.PROPERTY_KEY);
+                if (property != null) {
+                    String value = request.getParameter(paramName);
+                    if (request instanceof MultipartRequestWrapper) {
+                        MultipartRequestWrapper wrapper = (MultipartRequestWrapper) request;
+                        wrapper.setParameter(property, value);
+                    } else if (request instanceof S2ServletRequestWrapper) {
+                        S2ServletRequestWrapper wrapper = (S2ServletRequestWrapper) request;
+                        wrapper.addParameterValue(property, value);
+                    } else {
+                        S2ServletRequestWrapper wrapper = new S2ServletRequestWrapper(request);
+                        wrapper.addParameterValue(property, value);
+                        SingletonS2ContainerFactory.getContainer().getExternalContext().setRequest(wrapper);
+                    }
+                }
+            }
         }
+        request.setAttribute(Constants.BASE64_FORMAT_DECODED, "");
+    }
+
+    /**
+     * actionの式を返します。
+     * 
+     * @param request
+     * @return
+     */
+    public static String getActionExpression(HttpServletRequest request) {
+        decodeBase64Parameter(request);
+        return (String) request.getAttribute(Constants.ACTION_EXPRESSION_KEY);
+    }
+
+    /**
+     * 検証がキャンセルされている場合に<code>true</code>を返します。
+     * 
+     * @param request
+     * @return
+     */
+    public static boolean isValidationCanceled(HttpServletRequest request) {
+        decodeBase64Parameter(request);
+        return request.getAttribute(Constants.CANCEL_KEY) != null;
     }
 
 }

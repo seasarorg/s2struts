@@ -132,6 +132,9 @@ public class SubmitTag extends org.apache.struts.taglib.html.SubmitTag {
 
     protected void encodeParameters() throws JspException {
         Map params = new HashMap();
+        if (property != null) {
+            params.put(Constants.PROPERTY_KEY, property);
+        }
         if (action != null) {
             StringBuffer buf = new StringBuffer();
             buf.append(action);

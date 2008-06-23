@@ -70,6 +70,11 @@ public interface Constants {
     String BACKUP_SESSION_FORM_KEY = "org.seasar.struts.BACKUP_SESSION_FORM";
 
     /**
+     * Base64のフォーマットでエンコードされたデータがすでにデコードされていることを表します。。
+     */
+    String BASE64_FORMAT_DECODED = "org.seasar.struts.BASE64_FORMAT_DECODED";
+
+    /**
      * Base64のフォーマットでエンコードされたことを示すプレフィックスです。
      */
     String BASE64_FORMAT_PREFIX = "s2struts.BASE64_FORMAT:";
@@ -84,4 +89,8 @@ public interface Constants {
      */
     String CANCEL_KEY = "s2struts.CANCEL";
 
+    /**
+     * リクエストパラメータの名前を示すキー
+     */
+    String PROPERTY_KEY = "s2struts.PROPERTY";
 }

@@ -26,7 +26,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ForwardConfig;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
-import org.seasar.struts.Constants;
 import org.seasar.struts.context.ContentsType;
 import org.seasar.struts.context.S2StrutsApplContext;
 import org.seasar.struts.context.S2StrutsContext;
@@ -118,6 +117,15 @@ public abstract class S2StrutsContextUtil {
     }
 
     /**
+     * メソッドバインディング式を返します。
+     * 
+     * @return
+     */
+    public static String getMethodBindingExpression() {
+        return RequestUtil.getActionExpression(getRequest());
+    }
+
+    /**
      * 検証がキャンセルされたかどうかを返します。
      * 
      * @param request
@@ -125,7 +133,7 @@ public abstract class S2StrutsContextUtil {
      * @return
      */
     public static boolean isCancel(HttpServletRequest request, ActionMapping mapping) {
-        if (request.getAttribute(Constants.CANCEL_KEY) != null) {
+        if (RequestUtil.isValidationCanceled(request)) {
             return true;
         }
         for (Enumeration paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
