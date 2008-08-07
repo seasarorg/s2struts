@@ -1,1 +1,4 @@
-<c:set value="${pageContext.request.contextPath}" var="contextPath" />
+<%
+String contextPath = request.getContextPath();
+pageContext.setAttribute("contextPath", contextPath);
+%>
