@@ -98,6 +98,7 @@ public abstract class S2StrutsContextUtil {
      * @param key
      * @param value
      * @param methodBindingExpression
+     * @deprecated
      */
     public static void setMethodBindingExpression(String mappingName, String key, String value,
             String methodBindingExpression) {
@@ -111,6 +112,7 @@ public abstract class S2StrutsContextUtil {
      * @param key
      * @param value
      * @return
+     * @deprecated {@link #getMethodBindingExpression()}を使用してください。
      */
     public static String getMethodBindingExpression(String mappingName, String key, String value) {
         return getApplContext().getMethodBindingExpression(mappingName, key, value);
