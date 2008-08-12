@@ -28,4 +28,13 @@ public class Base64ParameterUtilTest extends TestCase {
         assertTrue(map.isEmpty());
     }
 
+    public void testDecodeIllegalArgument() throws Exception {
+        try {
+            Base64ParameterUtil
+                    .decode("czJzdHJ1dHMuQkFTRTY0X0ZPUk1BVDpjY2M9JmFhYT0xMjMmZGRkPUFCQyZiYmI9JTNDJTNFJTI2JTNE=");
+            fail();
+        } catch (URLDecodeFailedRuntimeException ignore) {
+        }
+    }
+
 }

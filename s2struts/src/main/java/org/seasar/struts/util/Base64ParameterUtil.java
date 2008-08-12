@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.Base64Util;
 import org.seasar.framework.util.URLUtil;
 import org.seasar.struts.Constants;
@@ -14,6 +15,8 @@ import org.seasar.struts.Constants;
  * @author taedium
  */
 public class Base64ParameterUtil {
+
+    protected static Logger logger = Logger.getLogger(Base64ParameterUtil.class);
 
     protected static int PREFIX_LENGTH = Base64Util.encode(Constants.BASE64_FORMAT_PREFIX.getBytes()).length();
 
@@ -35,15 +38,22 @@ public class Base64ParameterUtil {
         buf.append(Constants.BASE64_FORMAT_PREFIX);
         for (Iterator it = params.entrySet().iterator(); it.hasNext();) {
             Map.Entry e = (Map.Entry) it.next();
-            buf.append(e.getKey());
+            String key = (String) e.getKey();
+            String value = (String) e.getValue();
+            String urlEncoded = URLUtil.encode(value, "UTF-8");
+            logger.log("DSTR0002", new Object[] { key, value, urlEncoded });
+            buf.append(key);
             buf.append('=');
-            buf.append(URLUtil.encode((String) e.getValue(), "UTF-8"));
+            buf.append(urlEncoded);
             buf.append('&');
         }
         if (buf.length() > 1) {
             buf.setLength(buf.length() - 1);
         }
-        return Base64Util.encode(buf.toString().getBytes());
+        String value = buf.toString();
+        String base64Encoded = Base64Util.encode(value.getBytes());
+        logger.log("DSTR0004", new Object[] { value, base64Encoded });
+        return base64Encoded;
     }
 
     /**
@@ -56,14 +66,24 @@ public class Base64ParameterUtil {
     public static Map decode(String s) {
         Map params = new HashMap();
         if (s != null && s.length() >= PREFIX_LENGTH) {
-            String decoded = new String(Base64Util.decode(s));
-            if (decoded.startsWith(Constants.BASE64_FORMAT_PREFIX)) {
-                String value = decoded.substring(Constants.BASE64_FORMAT_PREFIX.length());
+            String base64Decoded = new String(Base64Util.decode(s));
+            logger.log("DSTR0005", new Object[] { s, base64Decoded });
+            if (base64Decoded.startsWith(Constants.BASE64_FORMAT_PREFIX)) {
+                String value = base64Decoded.substring(Constants.BASE64_FORMAT_PREFIX.length());
                 String[] pairs = value.split("&");
                 for (int i = 0; i < pairs.length; i++) {
                     String[] pair = pairs[i].split("=");
                     if (pair.length == 2) {
-                        params.put(pair[0], URLUtil.decode(pair[1], "UTF-8"));
+                        String key = pair[0];
+                        String urlEncoded = pair[1];
+                        String urlDecoded = null;
+                        try {
+                            urlDecoded = URLUtil.decode(urlEncoded, "UTF-8");
+                        } catch (Exception e) {
+                            throw new URLDecodeFailedRuntimeException(key, urlEncoded, e);
+                        }
+                        logger.log("DSTR0003", new Object[] { key, urlEncoded, urlDecoded });
+                        params.put(key, urlDecoded);
                     } else if (pair.length == 1) {
                         params.put(pair[0], "");
                     } else {
