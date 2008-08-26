@@ -25,6 +25,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.seasar.struts.util.RequestUtil;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -35,19 +36,24 @@ import org.seasar.struts.util.S2StrutsContextUtil;
  */
 public class S2StrutsFilter implements Filter {
 
-    // private FilterConfig config;
+    private static final String KEY = S2StrutsFilter.class.getName();
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
             ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
-        String path = request.getPathInfo();
-        if (path == null) {
-            path = request.getServletPath();
+        if (request.getAttribute(KEY) == null) {
+            String path = request.getPathInfo();
+            if (path == null) {
+                path = request.getServletPath();
+            }
+            if (path != null) {
+                S2StrutsContextUtil.setPath(path);
+            }
+            request.setAttribute(KEY, "");
         }
-        if (path != null) {
-            S2StrutsContextUtil.setPath(path);
-        }
+
+        RequestUtil.removeActionExpression(request);
 
         chain.doFilter(req, res);
     }

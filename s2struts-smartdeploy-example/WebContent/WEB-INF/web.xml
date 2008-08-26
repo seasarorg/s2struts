@@ -66,6 +66,9 @@
   <filter-mapping>
     <filter-name>s2strutsfilter</filter-name>
     <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
 
   <filter-mapping>

@@ -133,6 +133,15 @@ public class RequestUtil {
     }
 
     /**
+     * actionの式を除去します。
+     * 
+     * @param request
+     */
+    public static void removeActionExpression(HttpServletRequest request) {
+        request.removeAttribute(Constants.ACTION_EXPRESSION_KEY);
+    }
+
+    /**
      * 検証がキャンセルされている場合に<code>true</code>を返します。
      * 
      * @param request

@@ -26,7 +26,7 @@ import org.seasar.struts.annotation.tiger.StrutsActionForward;
 public class AddAction {
 
     @StrutsActionForward
-    public static final String ADD = "/WEB-INF/view/add/add.jsp";
+    public static final String ADD = "/index/index.do";
 
     private AddForm addForm;
 
