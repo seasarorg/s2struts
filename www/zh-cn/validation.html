@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- don't edit start -->
+<head><title>Seasar - DI Container with AOP - </title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="seasar_b.css" type="text/css" rel="stylesheet"><script src="seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
+</head><body onload="preload('ja')"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
+<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
+<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_en.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_en.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_en.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_en.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
+<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
+<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td><td width="752" class="main">
+<!-- don't edit end -->
+<!-- document start -->
+<ul>
+	<li><a href="#Summary">概要</a></li>
+	<li><a href="#Validation">使用Struts生成一个新的Validation</a></li>
+	<li><a href="#Annotation">生成Validation注释</a></li>
+	<li><a href="#Confirmation">动作的确认</a></li>
+</ul>
+<h2><a name="Summary">概要</a></h2>
+<p>
+在S2Struts中生成一个可以使用注释的Validation，需要完成以下的处理。
+<ul>
+<li><a href="#Validation">使用Struts生成一个新的Validation</a></li>
+<li><a href="#Annotation">生成Validation注释</a></li>
+</ul>
+我们将通过生成一个Validation来检验2个输入值是否相同的处理步骤中，对这一工作进行说明。
+</p>
+<h2><a name="Validation">用Struts生成一个新的Validation</a></h2>
+<p>
+追加一个新的Struts（commons validator）的Validation，需要进行以下处理。
+<ul>
+<li>生成一个检验用的类</li>
+<li>向validator-rules.xml文件中追加设定信息</li>
+</ul>
+在<a href="http://struts.apache.org/1.2.9/userGuide/dev_validator.html">Struts Validator Guide</a>资料里，有记载使用Struts追加一个新的Validation的方法，也可以作为参考。
+</p>
+<p>
+检验2个输入值是否相同的类如下所示。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.validator.Field;
+import org.apache.commons.validator.GenericValidator;
+import org.apache.commons.validator.Validator;
+import org.apache.commons.validator.ValidatorAction;
+import org.apache.commons.validator.util.ValidatorUtils;
+import org.apache.struts.action.ActionMessages;
+import org.apache.struts.validator.Resources;
+
+public class MyFieldChecks {
+
+    public static boolean validateTwoFields(Object bean,
+            ValidatorAction validatorAction, Field field,
+            ActionMessages errors, Validator validator,
+            HttpServletRequest request) {
+
+        String value = ValidatorUtils.getValueAsString(bean, field.getProperty());
+        String sProperty2 = field.getVarValue("secondProperty");
+        String value2 = ValidatorUtils.getValueAsString(bean, sProperty2);
+
+        if (!GenericValidator.isBlankOrNull(value)) {
+            try {
+                if (!value.equals(value2)) {
+                    errors.add(field.getKey(), Resources.getActionMessage(
+                            validator, request, validatorAction, field));
+
+                    return false;
+                }
+            } catch (Exception e) {
+                errors.add(field.getKey(), Resources.getActionMessage(
+                        validator, request, validatorAction, field));
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+</pre>
+<p>
+首先，取得用于检验的属性值。
+其次，取得在validation设定中的"secondProperty"变量里指定的属性名，从而取得其值。
+最后对2个值进行比较以便确认是否是正确的值。
+在这里，关键的是必须有一个"secondProperty"变量。
+这个变量，在生成Validation注释的时候声明为属性值。
+</p>
+<p>
+然后将上述的类追加到validator-rules.xml文件中。
+validator标签的name属性（validator name）里指定的内容，是注释名及其相关。
+在S2Struts中，按以下的规则变换注释名，判断其是否和validator name相一致，从而取得其值。
+<ul>
+<li>注释名的开头字母为小写字母</li>
+<li>注释名以"Type"结尾的场合则将"Type"除去</li>
+</ul>
+例如，Hoge注释的场合，validator name为"hoge"，FooType注释的场合，validator name则为"foo"。
+</p>
+<p>
+因为这回的注释名是TwoFields，所以name就是"twoFields"。在validator-rules.xml文件中追加以下的内容。
+</p>
+<pre>
+      &lt;validator name=&quot;twoFields&quot;
+            classname=&quot;org.seasar.struts.examples.validator.MyFieldChecks&quot;
+               method=&quot;validateTwoFields&quot;
+         methodParams=&quot;java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest&quot;
+              depends=&quot;&quot;
+                  msg=&quot;errors.twoFields&quot;/&gt;
+</pre>
+<p>
+msg属性中因为指定了"errors.twoFields"，这个信息Key追加到application.properties中。
+</p>
+<pre>
+errors.twoFields={0} has to have the same value as the confirm field.
+</pre>
+<p>
+到此为止，是用Struts生成一个新的Validation的过程。
+</p>
+<h2><a name="Annotation">生成Validation注释</a></h2>
+<p>
+生成Validation注释，需要进行以下的处理。
+<ul>
+<li>定义一个注释</li>
+<li>生成ConfigRegister</li>
+</ul>
+</p>
+<p>
+S2Struts可以提供的注释有3种，也即常量注释，Tiger注释，Backport175注释。
+作为常量注释利用的场合，不必定义注释。
+作为Tiger注释利用的场合，需要指定org.seasar.struts.validator.annotation.tiger.ValidatorTarget作为meta注释，按如下方法作成。
+</p>
+<pre>
+package org.seasar.struts.examples.validator.annotation.tiger;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.seasar.struts.validator.annotation.tiger.ValidatorTarget;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@ValidatorTarget
+public @interface TwoFields {
+
+    String secondProperty();
+
+}
+</pre>
+<p>
+作为Backport175注释利用的场合，需要指定org.seasar.struts.validator.annotation.backport175.ValidatorTarget作为meta注释，按如下方法作成。
+</p>
+<pre>
+package org.seasar.struts.examples.validator.annotation.backport175;
+
+/**
+ * @org.seasar.struts.validator.annotation.backport175.ValidatorTarget
+ */
+public interface TwoFields {
+
+    String secondProperty();
+
+}
+</pre>
+<p>
+这回为了进行值的检验，需要指定secondProperty，所以如上述记载的那样。
+在validation设定中如果不需要变量，就没必要定义属性，也没必要做成以下的ConfigRegister。
+</p>
+<p>
+注释中取得的值，需要生成ConfigRegister类并作设定，因此生成一个TwoFieldsConfigRegisterImpl。
+</p>
+<p>
+TwoFieldsConfigRegisterImpl类是org.seasar.struts.lessconfig.validator.config.ConfigRegister的实装类。
+register方法的参数为field和parameter。
+field是一个对象，在其内部，对字段进行妥当性检查以及生成错误信息时，拥有可以替换的妥当性检查名单和信息名及信息值。
+也即收藏Validation内容的对象。
+parameter是一个Map，以注释中定义的方法名为key，方法的返回值为value。
+</p>
+<pre>
+package org.seasar.struts.examples.validator.config;
+
+import java.util.Map;
+
+import org.apache.commons.validator.Field;
+import org.apache.commons.validator.Var;
+import org.seasar.struts.lessconfig.validator.config.ConfigRegister;
+
+public class TwoFieldsConfigRegisterImpl implements ConfigRegister {
+
+    public void register(Field field, Map parameter) {
+        String secondProperty = (String) parameter.get("secondProperty");
+
+        Var var = new Var();
+        var.setName("secondProperty");
+        var.setValue(secondProperty);
+        field.addVar(var);
+    }
+
+}
+</pre>
+<p>
+生成的ConfigRegister需要作为组件进行登记。
+登记时的组件名，遵循与validator name的时候同样的注释名变换规则，在注释名之后加"ConfigRegister"作为组件名。
+例如，Hoge注释的场合为"hogeConfigRegister"，FooType注释的场合则是"fooConfigRegister"。
+</p>
+<p>
+因为这回作为组件进行登记，生成一个新的validator.dion。
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+    "http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+    &lt;component name="twoFieldsConfigRegister"
+            class="org.seasar.struts.examples.validator.config.TwoFieldsConfigRegisterImpl"/&gt;
+&lt;/components&gt;
+</pre>
+<p>
+然后在app.dicon里追加include，读取validator.dion的内容。
+</p>
+<pre>
+    &lt;include path="validator.dicon"/&gt;
+</pre>
+<p>
+到此为止，是用S2Struts生成新的注释的过程。
+</p>
+<p>
+至此，生成一个使用注释的Validation的过程就完成了。
+</p>
+<h2><a name="Confirmation">动作的确认</a></h2>
+<p>
+为了验证生成的TwoFields注释，做以下的处理。
+<ul>
+<li>生成View</li>
+<li>生成Action</li>
+<li>生成Form</li>
+</ul>
+</p>
+<p>
+首先生成一个View。这里是把JSP用作一个View。这是为了确认结果简单做成的一个JSP。
+</p>
+<pre>
+&lt;%@ page contentType="text/html;charset=Windows-31j" language="java" %&gt;
+&lt;%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %&gt;
+&lt;%@ taglib uri="http://www.seasar.org/tags-s2struts" prefix="s2struts" %&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Two Fields Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;html:errors /&gt;
+
+  &lt;html:form action="/twoFields" method="POST"&gt;
+    &lt;s2struts:page/&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;field&lt;/td&gt;
+        &lt;td&gt;&lt;html:text property="field"/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;confirm field&lt;/td&gt;
+        &lt;td&gt;&lt;html:text property="confirmField"/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;html:submit/&gt;
+  &lt;/html:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+然后生成一个Action。这回用的是无设定功能的POJO的Action（详细内容请参考<a href="s2struts.html#ZeroConfigReference">「无设定S2Struts指南」</a>）。
+Action的接口和实装类如下所示。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+public interface TwoFieldsAction {
+    
+    String execute();
+
+}
+</pre>
+<pre>
+package org.seasar.struts.examples.validator;
+
+public class TwoFieldsActionImpl implements TwoFieldsAction {
+
+    public String execute() {
+        return "success";
+    }
+
+}
+</pre>
+<p>
+虽然Action的处理仅仅是返回"success"值，但用于TwoFields注释的动作确认已经足够了。
+</p>
+<p>
+Action作为组件需要登记。新生成的twoFields.dicon如下所示。
+</p>
+<pre>
+&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd"&gt;
+&lt;components&gt;
+	&lt;component name="twoFieldsAction"
+			class="org.seasar.struts.examples.validator.TwoFieldsActionImpl"
+			instance="request" /&gt;
+&lt;/components&gt;
+</pre>
+<p>
+然后在app.dicon里追加include以读取twoFields.dicon。
+</p>
+<pre>
+    &lt;include path="org/seasar/struts/examples/dicon/twoFields.dicon"/&gt;
+</pre>
+<p>
+最后生成Form。作为例子，以下记述了常量注释和Tiger注释时的2个Form。
+请用所使用到的注释来生成Form。
+</p>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import java.io.Serializable;
+
+public class TwoFieldsForm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String field = "";
+
+    private String confirmField = "";
+    
+    public String getField() {
+        return field;
+    }
+    
+    public static final String field_VALIDATOR_0 = "required";
+
+    public static final String field_VALIDATOR_1 = "twoFields, secondProperty = confirmField";
+
+    public static final String field_VALIDATOR_ARGS = "Field, resource=false";
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getConfirmField() {
+        return confirmField;
+    }
+
+    public static final String confirmField_VALIDATOR = "required";
+
+    public static final String confirmField_VALIDATOR_ARGS = "ConfirmField, resource=false";
+
+    public void setConfirmField(String confirmField) {
+        this.confirmField = confirmField;
+    }
+
+}
+</pre>
+<pre>
+package org.seasar.struts.examples.validator;
+
+import java.io.Serializable;
+
+import org.seasar.struts.examples.validator.tiger.TwoFields;
+import org.seasar.struts.validator.annotation.tiger.Args;
+import org.seasar.struts.validator.annotation.tiger.Required;
+
+public class TwoFieldsForm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String field = "";
+
+    private String confirmField = "";
+    
+    public String getField() {
+        return field;
+    }
+    
+    @Required
+    @TwoFields(secondProperty="confirmField")
+    @Args(keys = "Field", resource = false)
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getConfirmField() {
+        return confirmField;
+    }
+
+    @Required
+    @Args(keys = "ConfirmField", resource = false)
+    public void setConfirmField(String confirmField) {
+        this.confirmField = confirmField;
+    }
+
+}
+</pre>
+<p>
+这样就可以进行确认了。
+启动Tomcat，从浏览器访问<a href="http://localhost:8080/s2struts-example/pages/twoFields.jsp">http://localhost:8080/s2struts-example/pages/twoFields.jsp</a>进行动作确认。
+</p>
+<p>
+生成一个新的使用注释的Validation，与通常的处理相比，也许是一件很麻烦的事情，不过一旦完成的话，在Form中就很容易使用了。
+如此说来，生成注释时的辛苦也有了足够的回报。
+</p>
+<p>
+你是否愿意尝试做一个自己用的Validation呢？
+</p>
+<!-- document end -->
+<!-- don't edit start -->
+</td>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
+</tr><tr>
+<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+<td width="766" class="copyright">&copy; Copyright The Seasar Foundation and the others 2004-2005, all rights reserved.</td>
+</tr></table>
+<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
+<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
+<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
+</tr></table></body>
+<!-- don't edit end -->
+</html>
