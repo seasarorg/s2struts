@@ -21,6 +21,6 @@ import org.seasar.struts.annotation.tiger.StrutsAction;
  * @author taedium
  * 
  */
-@StrutsAction(forward = "/WEB-INF/view/add/add.jsp")
+@StrutsAction(forward = AddAction.ADD)
 public class IndexAction {
 }
