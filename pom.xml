@@ -87,17 +87,12 @@
       <name>The Seasar Foundation Maven2 Repository</name>
       <url>http://maven.seasar.org/maven2</url>
     </repository>
-    <repository>
-      <id>codelibs.org</id>
-      <name>CodeLibs Repository</name>
-      <url>http://maven.codelibs.org/</url>
-    </repository>
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>org.codelibs.struts</groupId>
-      <artifactId>cl-struts</artifactId>
-      <version>1.2.9.1</version>
+      <groupId>struts</groupId>
+      <artifactId>struts</artifactId>
+      <version>1.2.9</version>
       <type>jar</type>
     </dependency>
     <dependency>
