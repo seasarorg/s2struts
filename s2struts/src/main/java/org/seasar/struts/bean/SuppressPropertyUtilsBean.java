@@ -17,6 +17,7 @@ package org.seasar.struts.bean;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,7 +35,8 @@ import org.apache.commons.collections.FastHashMap;
  */
 public class SuppressPropertyUtilsBean extends PropertyUtilsBean {
 
-    private static final String DEFAULT_PROPERTY_TO_SUPPRESS = "class";
+    private static final List DEFAULT_PROPERTIES_TO_SUPPRESS = Arrays
+            .asList(new String[] { "class", "declaringClass" });
 
     private final Collection propertiesToSuppress;
 
@@ -43,11 +45,12 @@ public class SuppressPropertyUtilsBean extends PropertyUtilsBean {
     /**
      * インスタンスを構築します。
      * <p>
-     * このコンストラクタの呼び出しは、デフォルトで<code>class</code>プロパティへのアクセスを抑制します。
+     * このコンストラクタの呼び出しは、デフォルトで <code>class</code> と <code>declaringClass</code>
+     * プロパティへのアクセスを抑制します。
      * </p>
      */
     public SuppressPropertyUtilsBean() {
-        this(DEFAULT_PROPERTY_TO_SUPPRESS);
+        this(DEFAULT_PROPERTIES_TO_SUPPRESS);
     }
 
     /**
