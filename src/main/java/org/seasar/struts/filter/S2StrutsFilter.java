@@ -25,6 +25,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.seasar.struts.beans.SuppressPropertyUtilsBean;
 import org.seasar.struts.util.S2StrutsContextUtil;
 
 /**
@@ -51,11 +54,12 @@ public class S2StrutsFilter implements Filter {
     }
 
     public void init(FilterConfig config) throws ServletException {
-        // this.config = config;
+        BeanUtilsBean beanUtilsBean = new BeanUtilsBean(new ConvertUtilsBean(),
+                new SuppressPropertyUtilsBean());
+        BeanUtilsBean.setInstance(beanUtilsBean);
     }
 
     public void destroy() {
-        // config = null;
     }
 
 }
