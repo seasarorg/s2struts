@@ -15,7 +15,9 @@
  */
 package org.seasar.struts.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -31,7 +33,9 @@ import org.apache.commons.beanutils.PropertyUtilsBean;
 public class SuppressPropertyUtilsBeanTest extends TestCase {
 
     public void testGetProperty() throws Exception {
-        PropertyUtilsBean propertyUtils = new SuppressPropertyUtilsBean("fullName");
+        List classes = new ArrayList();
+        classes.add(FullName.class);
+        PropertyUtilsBean propertyUtils = new SuppressPropertyUtilsBean(classes);
         Person person = new Person();
         person.getFullName().setFirstName("aaa");
         person.getFullName().setLastName("bbb");
@@ -50,13 +54,15 @@ public class SuppressPropertyUtilsBeanTest extends TestCase {
     }
 
     public void testDescribe() throws Exception {
-        PropertyUtilsBean propertyUtils = new SuppressPropertyUtilsBean("fullName");
+        List classes = new ArrayList();
+        classes.add(FullName.class);
+        PropertyUtilsBean propertyUtils = new SuppressPropertyUtilsBean(classes);
         Person person = new Person();
         Map properties = propertyUtils.describe(person);
         assertEquals(3, properties.size());
         assertTrue(properties.containsKey("address"));
         assertTrue(properties.containsKey("age"));
-        assertTrue(properties.containsKey("class"));
+        assertTrue(properties.containsKey("fullName"));
     }
 
     public void testBeanUtilsBean_default_populate() throws Exception {
@@ -75,7 +81,9 @@ public class SuppressPropertyUtilsBeanTest extends TestCase {
     }
 
     public void testBeanUtilsBean_suppressed_populate() throws Exception {
-        BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new SuppressPropertyUtilsBean("fullName"));
+        List classes = new ArrayList();
+        classes.add(FullName.class);
+        BeanUtilsBean beanUtils = new BeanUtilsBean(new ConvertUtilsBean(), new SuppressPropertyUtilsBean(classes));
         Person person = new Person();
         Map properties = new HashMap();
         properties.put("fullName.firstName", "aaa");
