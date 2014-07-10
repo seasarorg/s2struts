@@ -16,11 +16,13 @@
 package org.seasar.struts.beans;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -28,62 +30,59 @@ import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.collections.FastHashMap;
 
 /**
- * 特定のプロパティへのアクセスを抑制します。
+ * 特定のクラスに属するプロパティへのアクセスを抑制します。
+ * <p>
+ * {@link Object} クラスに属するプロパティへのアクセスは必ず抑制されます。
  * 
  * @author nakamura-to
  *
  */
 public class SuppressPropertyUtilsBean extends PropertyUtilsBean {
 
-    private static final List DEFAULT_PROPERTIES_TO_SUPPRESS = Arrays
-            .asList(new String[] { "class", "declaringClass" });
+    private static final List DEFAULT_CLASSES_TO_SUPPRESS = Arrays
+            .asList(new Class[] { Class.class, ClassLoader.class });
 
-    private final Collection propertiesToSuppress;
+    private final Set suppressedBeanClasses;
 
     private final FastHashMap descriptorsCache;
 
     /**
      * インスタンスを構築します。
      * <p>
-     * このコンストラクタの呼び出しは、デフォルトで <code>class</code> と <code>declaringClass</code>
-     * プロパティへのアクセスを抑制します。
-     * </p>
+     * このコンストラクタを呼び出すと、以下のクラスまたはそのサブクラスに属するプロパティへのアクセスが抑制されます。
+     * <ul>
+     * <li>{@link Class}</li>
+     * <li>{@link ClassLoader}</li>
+     * </ul>
      */
     public SuppressPropertyUtilsBean() {
-        this(DEFAULT_PROPERTIES_TO_SUPPRESS);
+        this(DEFAULT_CLASSES_TO_SUPPRESS);
     }
 
     /**
-     * 抑制対象のプロパティを1つ指定してインスタンスを構築します。
+     * 抑制対象のプロパティを持つクラスのコレクションを指定してインスタンスを構築します。
      * 
-     * @param propertyToSuppress
-     *            抑制対象のプロパティ
+     * @param suppressedBeanClasses
+     *            抑制対象のプロパティを持つクラスのコレクション
      */
-    public SuppressPropertyUtilsBean(String propertyToSuppress) {
-        this(toCollection(propertyToSuppress));
-    }
-
-    /**
-     * 抑制対象のプロパティのコレクションを指定してインスタンスを構築します。
-     * 
-     * @param propertiesToSuppress
-     *            抑制対象のプロパティのコレクション
-     */
-    public SuppressPropertyUtilsBean(Collection propertiesToSuppress) {
-        if (propertiesToSuppress == null) {
-            this.propertiesToSuppress = Collections.EMPTY_SET;
+    public SuppressPropertyUtilsBean(Collection suppressedBeanClasses) {
+        if (suppressedBeanClasses == null) {
+            this.suppressedBeanClasses = Collections.EMPTY_SET;
         } else {
-            this.propertiesToSuppress = Collections
-                    .unmodifiableCollection(new HashSet(propertiesToSuppress));
+            this.suppressedBeanClasses = Collections
+                    .unmodifiableSet(new HashSet(suppressedBeanClasses));
         }
         descriptorsCache = new FastHashMap();
         descriptorsCache.setFast(true);
     }
 
-    private static Collection toCollection(String propertyToSuppress) {
-        Set set = new HashSet();
-        set.add(propertyToSuppress);
-        return set;
+    /**
+     * 抑制対象のプロパティを持つクラスのセットを返します。
+     * 
+     * @return 抑制対象のプロパティを持つクラスのセット
+     */
+    public Set getSuppressedBeanClasses() {
+        return suppressedBeanClasses;
     }
 
     public PropertyDescriptor[] getPropertyDescriptors(Class beanClass) {
@@ -100,15 +99,42 @@ public class SuppressPropertyUtilsBean extends PropertyUtilsBean {
     private PropertyDescriptor[] filter(PropertyDescriptor[] descriptors) {
         List validDescriptors = new ArrayList();
         for (int i = 0; i < descriptors.length; i++) {
-            if (descriptors[i] == null) {
+            PropertyDescriptor descriptor = descriptors[i];
+            if (descriptor == null) {
                 continue;
             }
-            if (propertiesToSuppress.contains(descriptors[i].getName())) {
+            if (isSuppressedProperty(descriptor)) {
                 continue;
             }
-            validDescriptors.add(descriptors[i]);
+            validDescriptors.add(descriptor);
         }
         return (PropertyDescriptor[]) validDescriptors
                 .toArray(new PropertyDescriptor[validDescriptors.size()]);
+    }
+
+    private boolean isSuppressedProperty(PropertyDescriptor descriptor) {
+        Method readMethod = descriptor.getReadMethod();
+        if (readMethod != null && isSuppressedMethod(readMethod)) {
+            return true;
+        }
+        Method writeMethod = descriptor.getWriteMethod();
+        if (writeMethod != null && isSuppressedMethod(writeMethod)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isSuppressedMethod(Method method) {
+        Class clazz = method.getDeclaringClass();
+        if (clazz == Object.class) {
+            return true;
+        }
+        for (Iterator it = suppressedBeanClasses.iterator(); it.hasNext();) {
+            Class beanClass = (Class) it.next();
+            if (beanClass.isAssignableFrom(clazz)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
