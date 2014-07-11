@@ -1,10 +1,15 @@
 <project name="S2Struts" default="dist" basedir=".">
-	<property name="ver" value="1.2.13-SNAPSHOT"/>
+	<property name="ver" value="1.2.13"/>
 
 	<target name="dist">
 		<mkdir dir="target"/>
 		<zip zipfile="target/S2Struts-V${ver}.zip">
 			<zipfileset prefix="s2struts" dir=".">
+				<include name="lib/**"/>
+				<include name="libsrc/**"/>
+				<include name="licenses/**"/>
+				<include name="src/**"/>
+				<include name="*.*"/>
 				<exclude name="**/target/**"/>
 				<exclude name="**/.settings/**"/>
 			</zipfileset>
@@ -20,7 +25,7 @@
 				<include name="app.dicon"/>
 				<include name="log4j.properties"/>
 			</zipfileset>
-			<zipfileset prefix="s2struts/doc" dir="../s2struts-www">
+			<zipfileset prefix="s2struts/doc" dir="www">
 				<exclude name="**/download/**"/>
 				<exclude name=".project"/>
 			</zipfileset>
