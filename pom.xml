@@ -8,7 +8,7 @@
   <artifactId>s2-struts</artifactId>
   <packaging>jar</packaging>
   <name>s2-struts</name>
-  <version>1.2.13</version>
+  <version>1.2.14</version>
   <description></description>
   <url>http://s2struts.seasar.org/</url>
   <inceptionYear>2004-2007</inceptionYear>
