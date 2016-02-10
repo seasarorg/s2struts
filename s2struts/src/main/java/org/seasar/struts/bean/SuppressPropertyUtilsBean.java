@@ -9,7 +9,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
@@ -25,22 +25,25 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.servlet.Servlet;
 
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.collections.FastHashMap;
+import org.apache.commons.validator.ValidatorResults;
+import org.apache.struts.upload.MultipartRequestHandler;
 
 /**
  * 特定のクラスに属するプロパティへのアクセスを抑制します。
  * <p>
  * {@link Object} クラスに属するプロパティへのアクセスは必ず抑制されます。
- * 
+ *
  * @author nakamura-to
  *
  */
 public class SuppressPropertyUtilsBean extends PropertyUtilsBean {
 
     private static final List DEFAULT_CLASSES_TO_SUPPRESS = Arrays
-            .asList(new Class[] { Class.class, ClassLoader.class });
+            .asList(new Class[] { Class.class, ClassLoader.class, Servlet.class, MultipartRequestHandler.class, ValidatorResults.class });
 
     private final Set suppressedBeanClasses;
 
@@ -61,7 +64,7 @@ public class SuppressPropertyUtilsBean extends PropertyUtilsBean {
 
     /**
      * 抑制対象のプロパティを持つクラスのコレクションを指定してインスタンスを構築します。
-     * 
+     *
      * @param suppressedBeanClasses
      *            抑制対象のプロパティを持つクラスのコレクション
      */
@@ -77,7 +80,7 @@ public class SuppressPropertyUtilsBean extends PropertyUtilsBean {
 
     /**
      * 抑制対象のプロパティを持つクラスのセットを返します。
-     * 
+     *
      * @return 抑制対象のプロパティを持つクラスのセット
      */
     public Set getSuppressedBeanClasses() {
